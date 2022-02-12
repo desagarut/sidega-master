@@ -35,9 +35,14 @@
     </div>
   </section>
 </div>
-<h2><i class="ri-map-2-fill" style="color:#60C;"></i> DAFTAR OBJEK WISATA <strong class="color:#60C">
-  <?= $desa['nama'] ?>
-  </strong></h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="member" data-aos="fade-up">
+      <h4><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Wisata <strong style="color:#606"> <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+        </strong></h4>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-lg-3 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">

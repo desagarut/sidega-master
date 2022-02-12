@@ -36,6 +36,14 @@
   </section>
 </div>
 <div class="row">
+  <div class="col-md-12">
+    <div class="member" data-aos="fade-up">
+      <h4><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Tukang Warga <strong style="color:#C30"> <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+        </strong></h4>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-lg-3 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">
       <div class="member-img"> <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/tukang.png" ) ?>" class="img-fluid" alt="" style="width:100%; height:225px"> </div>
