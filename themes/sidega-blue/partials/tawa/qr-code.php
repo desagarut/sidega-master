@@ -14,7 +14,7 @@ body img:hover {
   <div class="row" data-aos="fade-left" data-aos-delay="300">
   <div class="col-lg-12 col-md-4 mt-0">
     <h2><i class="ri-store-2-fill" style="color:#e80368;"></i> UMKM <strong style="color:#C00">TRANSPORTASI WARGA</strong></h2>
-    <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/transport.png" ) ?>" class="img-fluid" alt="<?= $album['nama'] ?>"> </div>
+   <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/transport.png" ) ?>" class="img-fluid" alt="<?= $album['nama'] ?>"></div>
   <div class="col-lg-12 col-md-4 mt-1">
     <div class="icon-box">
       <marquee behavior="alternate" scrollamount="1">

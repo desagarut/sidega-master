@@ -37,6 +37,9 @@
         <path d="m9 6.882-7-3.5v13.236l7 3.5 6-3 7 3.5V7.382l-7-3.5-6 3zM15 15l-6 3V9l6-3v9z"></path>
         </svg><br/>
         Peta</a></small> </li>
+      <li class="nav-item"> <small><a href="<?= site_url('first/toko_show') ?>" class="nav-link" title="Map"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+        <path d="M15.7497 6.75V7.5C15.7497 9.57107 14.0707 11.25 11.9997 11.25C9.9286 11.25 8.24966 9.57107 8.24966 7.5V6.75M5.39221 20.25H18.6071C19.4892 20.25 20.1808 19.4926 20.101 18.6142L18.8737 5.1142C18.8034 4.34158 18.1556 3.75 17.3798 3.75H6.61948C5.84368 3.75 5.19588 4.34158 5.12564 5.1142L3.89837 18.6142C3.81852 19.4926 4.51016 20.25 5.39221 20.25Z" stroke="#3A52EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><br/>
+        UMKM</a></small> </li>
       <li class="nav-item"><small> <a href="<?= site_url('mandiri_web') ?>" class="nav-link" title="Login"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
         <path d="m10.998 16 5-4-5-4v3h-9v2h9z"></path>
         <path d="M12.999 2.999a8.938 8.938 0 0 0-6.364 2.637L8.049 7.05c1.322-1.322 3.08-2.051 4.95-2.051s3.628.729 4.95 2.051S20 10.13 20 12s-.729 3.628-2.051 4.95-3.08 2.051-4.95 2.051-3.628-.729-4.95-2.051l-1.414 1.414c1.699 1.7 3.959 2.637 6.364 2.637s4.665-.937 6.364-2.637C21.063 16.665 22 14.405 22 12s-.937-4.665-2.637-6.364a8.938 8.938 0 0 0-6.364-2.637z"></path>
