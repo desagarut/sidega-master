@@ -67,11 +67,20 @@ class Config_model extends CI_Model {
 		$data['kode_kabupaten'] = bilangan($post['kode_kabupaten']);
 		$data['nama_propinsi'] = nama_terbatas($post['nama_propinsi']);
 		$data['kode_propinsi'] = bilangan($post['kode_propinsi']);
-		$data['profil_singkat'] = alamat($post['profil_singkat']);
-		$data['batas_utara'] = nama_terbatas($post['batas_utara']);
-		$data['batas_selatan'] = nama_terbatas($post['batas_selatan']);
-		$data['batas_timur'] = nama_terbatas($post['batas_timur']);
-		$data['batas_barat'] = nama_terbatas($post['batas_barat']);
+		$data['batas_utara'] = $post['batas_utara'];
+		$data['batas_selatan'] = $post['batas_selatan'];
+		$data['batas_timur'] = $post['batas_timur'];
+		$data['batas_barat'] = $post['batas_barat'];
+		$data['mdpl'] = $post['mdpl'];
+		$data['luas_wilayah'] = $post['luas_wilayah'];
+		$data['terluar_id'] = $post['terluar_id'];
+		$data['terluar_prov'] = $post['terluar_prov'];
+		$data['terluar_kab'] = $post['terluar_kab'];
+		$data['terluar_kec'] = $post['terluar_kec'];
+		$data['profil_singkat'] = $post['profil_singkat'];
+		$data['visi'] = $post['visi'];
+		$data['misi'] = $post['misi'];
+		$data['strategi'] = $post['strategi'];
 		return $data;
 	}
 

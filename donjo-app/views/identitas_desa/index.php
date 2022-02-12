@@ -211,6 +211,55 @@ BATAS WILAYAH</strong></th>
                   <td><?= $main['batas_barat']; ?></td>
                 </tr>
                 <tr>
+                  <td>Luas Wilayah
+                    <?= $desa; ?></td>
+                  <td>:</td>
+                  <td><?= $main['luas_wilayah']; ?> Ha</td>
+                </tr>
+                <tr>
+                  <td>Koordinat Bujur (Lang)
+                    <?= $desa; ?></td>
+                  <td>:</td>
+                  <td><?= $main['lng']; ?></td>
+                </tr>
+                <tr>
+                  <td>Koordinat Lintang (lat)
+                    <?= $desa; ?></td>
+                  <td>:</td>
+                  <td><?= $main['lat']; ?></td>
+                </tr>
+                <!--<tr>
+                  <td>Koordinat Wilayah 
+                    <?= $desa; ?></td>
+                  <td>:</td>
+                  <td><?= $main['path']; ?></td>
+                </tr>-->
+                <tr>
+                  <td>Ketinggian Diatas Permukaan Laut</td>
+                  <td>:</td>
+                  <td><?= $main['mdpl']; ?> mdpl</td>
+                </tr>
+                <tr>
+                  <td><?= $desa; ?> Terluar di Indonesia</td>
+                  <td>:</td>
+                  <td><?= $main['terluar_id']; ?></td>
+                </tr>
+                <tr>
+                  <td><?= $desa; ?> Terluar di Provinsi</td>
+                  <td>:</td>
+                  <td><?= $main['terluar_prov']; ?></td>
+                </tr>
+                <tr>
+                  <td><?= $desa; ?> Terluar di Kabupaten</td>
+                  <td>:</td>
+                  <td><?= $main['terluar_kab']; ?></td>
+                </tr>
+                <tr>
+                  <td><?= $desa; ?> Terluar di Kecamatan</td>
+                  <td>:</td>
+                  <td><?= $main['terluar_kec']; ?></td>
+                </tr>
+                <tr>
                   <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>
                   PROFIL SINGKAT</strong></th>
                 </tr>
@@ -219,6 +268,21 @@ BATAS WILAYAH</strong></th>
                     <?= $desa; ?></td>
                   <td>:</td>
                   <td><?= $main['profil_singkat']; ?></td>
+                </tr>
+                <tr>
+                  <td>Visi</td>
+                  <td>:</td>
+                  <td><?= $main['visi']; ?></td>
+                </tr>
+                <tr>
+                  <td>Misi </td>
+                  <td>:</td>
+                  <td><?= $main['misi']; ?></td>
+                </tr>
+                <tr>
+                  <td>Strategi</td>
+                  <td>:</td>
+                  <td><?= $main['strategi']; ?></td>
                 </tr>
               </tbody>
             </table>

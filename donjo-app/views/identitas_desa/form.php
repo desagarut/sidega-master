@@ -186,9 +186,63 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Luas Wilayah </label>
+								<div class="col-sm-8">
+									<input id="luas_wilayah" name="luas_wilayah" class="form-control input-sm" maxlength="10" type="text" placeholder="" value="<?= $main["luas_wilayah"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Ketinggian Diatas Permukaan Laut (mdpl)</label>
+								<div class="col-sm-8">
+									<input id="mdpl" name="mdpl" class="form-control input-sm" maxlength="50" type="text" placeholder="" value="<?= $main["mdpl"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Terluar di Indonesia</label>
+								<div class="col-sm-8">
+									<input id="terluar_id" name="terluar_id" class="form-control input-sm" maxlength="50" type="text" placeholder="" value="<?= $main["terluar_id"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Terluar di Provinsi</label>
+								<div class="col-sm-8">
+									<input id="terluar_prov" name="terluar_prov" class="form-control input-sm" maxlength="50" type="text" placeholder="" value="<?= $main["terluar_prov"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Terluar di Kabupaten</label>
+								<div class="col-sm-8">
+									<input id="terluar_kab" name="terluar_kab" class="form-control input-sm" maxlength="50" type="text" placeholder="" value="<?= $main["terluar_kab"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="batas_barat">Terluar di Kecamatan</label>
+								<div class="col-sm-8">
+									<input id="terluar_kec" name="terluar_kec" class="form-control input-sm" maxlength="50" type="text" placeholder="" value="<?= $main["terluar_kec"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-3 control-label" for="profil_singkat">Profil Singkat <?= $desa; ?></label>
 								<div class="col-sm-8">
-									<textarea id="alamat_kantor" name="profil_singkat" class="form-control input-sm alamat required" placeholder="Profil Singkat <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["profil_singkat"]; ?></textarea>
+									<textarea id="profil_singkat" name="profil_singkat" class="form-control input-sm alamat" placeholder="Profil Singkat <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["profil_singkat"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="visi">Visi <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="visi" name="visi" class="form-control input-sm" placeholder="Visi <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["visi"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="misi">Misi <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="misi" name="misi" class="form-control input-sm" placeholder="Misi <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["misi"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="strategi">Strategi <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="strategi" name="strategi" class="form-control input-sm" placeholder="strategi <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["strategi"]; ?></textarea>
 								</div>
 							</div>
 						</div>

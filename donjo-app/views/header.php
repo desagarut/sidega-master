@@ -106,7 +106,7 @@
     <div class="wrapper">
     <header class="main-header"> 
     	<a href="<?=site_url()?>first"  target="_blank" class="logo"> 
-    	<span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'assets/files/logo/sidega.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"></span> <span class="logo-lg logo-text"><img src="<?php echo base_url().'assets/files/logo/sidega.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"><b> SIDeGa</b></span> </a>
+    	<span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'assets/files/logo/sidega.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"></span> <span class="logo-lg logo-text"><img src="<?php echo base_url().'assets/files/logo/sidega.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"><b> SIDeSCi</b></span> </a>
         <nav class="navbar navbar-static-top"> 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><span class="sr-only">Toggle navigation</span> </a>
             <div class="navbar-custom-menu">
