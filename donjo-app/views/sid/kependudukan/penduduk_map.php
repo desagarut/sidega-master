@@ -41,7 +41,5 @@ function initMap() {
 </style>
 
 <div class='body'>
-            <div id="map_penduduk"></div>
-            <input type="hidden" name="lat" id="lat" value="<?= $lokasi['lat']?>"/>
-            <input type="hidden" name="lng" id="lng" value="<?= $lokasi['lng']?>" />
+    <div id="map_penduduk"></div>
 </div>

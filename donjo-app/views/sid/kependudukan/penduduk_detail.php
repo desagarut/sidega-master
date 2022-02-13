@@ -563,12 +563,15 @@
                       <ul class="timeline timeline-inverse">
                         <!-- timeline time label -->
                         <li> <i class="fa fa-map-marker bg-red"></i>
-                          <div class="timeline-item"> <span class="time"><a class="btn btn-success btn-xs" href="<?=site_url()?>gis/clear"><i class="fa fa-map-marker"></i> Peta Besar</a></span>
+                          <div class="timeline-item"> <span class="time"><a class="btn btn-success btn-xs" href="<?=site_url()?>gis/clear"><i class="fa fa-map-marker"></i> Peta Desa</a></span>
                             <h3 class="timeline-header"><a href="#">Lokasi Rumah</a> </h3>
                             <div class="timeline-body">
                               <?php $this->load->view($folder_themes .'/sid/kependudukan/penduduk_map.php') ?>
                             </div>
                             <div class="timeline-footer" align="right"> 
+            <label>Lat: </label><input type="text" disabled="disabled" name="lat" id="lat" value="<?= $penduduk_map['lat']?>"/>
+            <label>Lng: </label><input type="text" disabled="disabled" name="lng" id="lng" value="<?= $penduduk_map['lng']?>" />
+
                             <a href="<?=site_url("penduduk/ajax_penduduk_maps_koordinat/$p/$o/$penduduk[id]/1")?>" title="Lokasi <?= $penduduk['nama']?>" class="btn btn-social btn-box bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Input Koordinat Rumah : <?= strtoupper($penduduk['nama'])?>"><i class='fa fa-map-marker'></i> Ubah Koordinat</a> 
                             <a href="<?=site_url("penduduk/ajax_penduduk_maps_openstreet/$p/$o/$penduduk[id]/1")?>" title="Lokasi <?= $penduduk['nama']?>" class="btn btn-social btn-box bg-navy btn-sm"><i class='fa fa-map-o'></i> Ubah di Openstreet</a> 
                             <a href="<?=site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$penduduk[id]/1")?>" title="Lokasi <?= $penduduk['nama']?>" class="btn btn-social btn-box btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Lokasi Rumah"><i class='fa fa-google'></i> Ubah di GoogleMap</a> </div>
@@ -636,11 +639,11 @@
                         </li>
                         <li> <i class="fa fa-clock-o bg-green"></i>
                           <div class="timeline-item">
-                            <h3 class="timeline-header"><a href="#">Data Awal : <i class="fa fa-clock-o"></i>
+                            <h3 class="timeline-header"><small>Data Awal : <i class="fa fa-clock-o"></i>
                               <?= tgl_indo2($penduduk['created_at']);?>
-                              -- <i class="fa fa-user"></i>Oleh:
-                              <?= $penduduk['nama_pendaftar']?>
-                              </a></h3>
+                              -- <i class="fa fa-user"></i> 
+                              <?= $penduduk['nama_pengubah']?>
+                              </small></h3>
                             <span class="bg-green"> </span> </div>
                         </li>
                         <!-- /.timeline-label --> 
