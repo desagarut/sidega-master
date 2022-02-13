@@ -12,7 +12,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxsKE9ArOZcaNtsfXIMFqr4N-
 
 function initMap() {
 	var myLatlng = new google.maps.LatLng(center.lat, center.lng);
-	var mapOptions = { zoom: 17, center, mapTypeId:google.maps.MapTypeId.HYBRID }
+	var mapOptions = { zoom:<?=$wil_ini['zoom']?>, center, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> }
 	var map = new google.maps.Map(document.getElementById("map_lokasi"), mapOptions);
 
 	// Place a draggable marker on the map
@@ -62,20 +62,38 @@ function initMap() {
                         <div class="row">
                             <div class="col-sm-12">
                                 <div id="map_lokasi"></div>
-                                <input type="hidden" name="lat" id="lat" value="<?= $wil_ini['lat']?>"/>
-                                <input type="hidden" name="lng" id="lng" value="<?= $wil_ini['lng']?>" />
                                 <input type="hidden" name="id" id="id"  value="<?= $wil_ini['id']?>"/>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class='col-xs-12'>
-                            <a href="<?= site_url('identitas')?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
+                        <div class='col-sm-12'>
+                        <div class="row col-sm-7">
+                          <div class="form-group">
+                                <div class="col-md-6">
+                                <label class="col-sm-4 control-label "  for="lat">Lat: </label>
+                                <input type="text" class="col-md-6" name="lat" id="lat" value="<?= $wil_ini['lat']?>"/><br/>
+                                <label class="col-sm-4 control-label "  for="lng"> Lng: </label>
+                                
+                                <input type="text" class="col-md-6" name="lng" id="lng" value="<?= $wil_ini['lng']?>" /></div>
+                                <div class="col-sm-6">
+                                <label class="col-sm-4"  for="zoom"> Zoom: </label>
+                               
+                                <input type="text" class="col-md-6" width="5px" name="zoom" id="zoom" value="<?= $wil_ini['zoom']?>" /><br/>
+                                <label class="col-sm-4"  for="map_tipe"> Map Tipe: </label>
+                                
+                                 <input type="text" class="col-md-6" width="5px" name="map_tipe" id="map_tipe" value="<?= $wil_ini['map_tipe']?>" /></div>
+							</div>
+                        </div>
+                            
+                        <div class="row col-sm-5">
+                            <a href="<?= site_url('identitas_desa')?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
                             <?php if ($this->CI->cek_hak_akses('h')): ?>
                             <a href="#" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" download="SIDeGa_Lokasi_Wilayah_<?php echo ucwords($desa['nama_desa'])?>.gpx" id="exportGPX"><i class='fa fa-download'></i> Export ke GPX</a>
                             <button type="reset" class="btn btn-social btn-box btn-danger btn-sm" data-dismiss="modal"><i class='fa fa-sign-out'></i> Tutup</button>
                             <button type="submit" class="btn btn-social btn-box btn-info btn-sm"><i class='fa fa-check'></i> Simpan</button>
                             <?php endif; ?>
+                        </div>
                         </div>
                     </div>
                 </form>

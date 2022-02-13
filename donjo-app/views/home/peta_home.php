@@ -24,7 +24,7 @@
     var posisi = [<?=$desa['lat'].",".$desa['lng']?>];
     var zoom = <?=$desa['zoom'] ?: 10?>;
   <?php else: ?>
-    var posisi = [-1.0546279422758742,116.71875000000001];
+    var posisi = [-7.34298008144879,107.217667252986];
     var zoom = 10;
   <?php endif; ?>
   //Style polygon

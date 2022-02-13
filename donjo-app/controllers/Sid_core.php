@@ -361,7 +361,7 @@ class Sid_Core extends Admin_Controller {
 		{
 			$_SESSION['success'] = -1;
 			$_SESSION['error_msg'] = "Lokasi Kantor $sebutan_deskel $nama_deskel Belum Dilengkapi";
-			redirect("sid_core");
+			redirect("sid_core", $data);
 		}
 	}
 

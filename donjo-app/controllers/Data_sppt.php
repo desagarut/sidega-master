@@ -238,7 +238,7 @@ class Data_sppt extends Admin_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
 
 //		$this->tab_ini = empty($mode) ? 21 : 21;
 
@@ -279,14 +279,41 @@ class Data_sppt extends Admin_Controller {
 		$this->form_validation->set_rules('data_sppt','Nomor Objek Pajak','required|trim|numeric');
 		$this->form_validation->set_rules('data_sppt', 'Username', 'callback_cek_nomor');
 
+//		if ($this->form_validation->run() != false)
+//		{
+//			status_sukses($outp); //Tampilkan Pesan
+//			$id_sppt = $this->data_sppt_model->simpan_tagihan();
+//			$this->input->post('id_tagih');
+//			redirect("data_sppt/tagihan_daftar");
+//		}
+//		
 		if ($this->form_validation->run() != false)
 		{
-			status_sukses($outp); //Tampilkan Pesan
 			$id_sppt = $this->data_sppt_model->simpan_tagihan();
 			$this->input->post('id_tagih');
 			redirect("data_sppt/tagihan_daftar");
 		}
-
+		else
+		{
+			$_SESSION["success"] = -1;
+			$_SESSION["error_msg"] = trim(strip_tags(validation_errors()));
+			$jenis_wp = $this->input->post('jenis_wp');
+			$id	= $this->input->post('id');
+			if ($jenis_wp == 1)
+			{
+				if ($data)
+					redirect('data_sppt/tagihan_tambah', $data);
+				else
+					redirect('data_sppt/tagihan_daftar');
+			}
+			else
+			{
+				if ($data)
+					redirect('data_sppt/tagihan_tambah', $data);
+				else
+					redirect("data_sppt/tagihan_daftar");
+			}
+		}
 	}
 	
 	public function tagihan_ubah($id)
@@ -298,7 +325,7 @@ class Data_sppt extends Admin_Controller {
 		$data['ubah_tagih'] = $this->data_sppt_model->get_data_tagih($id);
 
 		$this->load->view('data_sppt/tagihan_ubah', $data);
-				status_sukses($outp); //Tampilkan Pesan
+		//		status_sukses($outp); //Tampilkan Pesan
 
 	}
 
@@ -313,7 +340,7 @@ class Data_sppt extends Admin_Controller {
 		{
 			$id_sppt = $this->data_sppt_model->update_tagihan();
 			$this->input->post('id_tagih');
-							status_sukses($outp); //Tampilkan Pesan
+			//				status_sukses($outp); //Tampilkan Pesan
 
 			redirect("data_sppt/tagihan_daftar");
 		}
@@ -324,7 +351,7 @@ class Data_sppt extends Admin_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$validation=$this->form_validation;
+		//$validation=$this->form_validation;
 
 		$data['ubah_tagih'] = $this->data_sppt_model->get_data_tagih($id);
 
@@ -352,120 +379,6 @@ class Data_sppt extends Admin_Controller {
 		$this->data_sppt_model->hapus_tagih($id);
 		redirect("data_sppt/tagihan_daftar");
 	}
-
-// End Controller Tagihan
-
-// Start Controller Pembayaran
-/*
-	public function clear_bayar()
-	{
-		$this->session->unset_userdata($this->list_session);
-		$this->session->per_page = $this->set_page[0];
-		redirect('data_sppt/pembayaran_daftar');
-	}
-	
-		public function autocomplete_bayar()
-	{
-		$data = $this->data_sppt_model->autocomplete_bayar($this->input->post('cari_bayar'));
-		echo json_encode($data);
-	}
-
-	public function search_bayar(){
-		$this->session->cari_bayar = $this->input->post('cari_bayar') ?: NULL;
-		redirect('data_sppt/pembayaran_daftar');
-	}
-	
-	public function pembayaran_daftar($page=1, $o=0)
-	{
-		$this->tab_ini = 22;
-		$this->set_minsidebar(1);
-
-		$data['cari_bayar'] = isset($_SESSION['cari_bayar']) ? $_SESSION['cari_bayar'] : '';
-		$_SESSION['per_page'] = $_POST['per_page'] ?: null;
-		$data['per_page'] = $_SESSION['per_page'];
-
-		$data['set_page'] = $this->set_page;
-		$data['paging']  = $this->data_sppt_model->paging_bayar($page);
-		$data["list_pembayaran"] = $this->data_sppt_model->list_pembayaran($data['paging']->offset, $data['paging']->per_page);
-		
-		$data['rupiah'] = function($angka){
-            $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
-            return $hasil_rupiah;
-        };
-
-
-		$this->render('data_sppt/pembayaran_daftar', $data);
-	}
-	
-	public function pembayaran_tambah($mode=0, $id=0)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
-
-		$post = $this->input->post();
-		$data = array();
-		$data["mode"] = $mode;
-		if ($mode === 'bayar')
-		{
-			$data['data_tagih'] = $this->data_sppt_model->get_data_tagih($id);
-		}
-		$this->load->view('data_sppt/pembayaran_tambah', $data);
-	}
-	
-	public function simpan_pembayaran($page=1)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('data_tagih','Nomor Objek Pajak','required|trim|numeric');
-		$this->form_validation->set_rules('data_tagih', 'Username', 'callback_cek_nomor');
-
-		if ($this->form_validation->run() != false)
-		{
-			$id_sppt = $this->data_sppt_model->simpan_pembayaran();
-			$this->input->post('id_bayar');
-			$this->input->post('id_tagih');
-			redirect("data_sppt/pembayaran_daftar");
-		}
-	}
-	
-	
-	public function pembayaran_ubah($id)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$validation=$this->form_validation;
-
-		$data['ubah_bayar'] = $this->data_sppt_model->get_data_bayar($id);
-
-		$this->load->view('data_sppt/pembayaran_ubah', $data);
-	}
-
-	public function update_pembayaran_save()
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('tahun_tagih','Tahun Tagih','required|trim|numeric');
-		$this->form_validation->set_rules('data_sppt', 'Username', 'callback_cek_nomor');
-
-		if ($this->form_validation->run() != false)
-		{
-			$id_sppt = $this->data_sppt_model->update_pembayaran();
-			$this->input->post('id_bayar');
-			redirect("data_sppt/pembayaran_daftar");
-		}
-	}
-	
-	public function hapus_pembayaran($id)
-	{
-		//$this->redirect_hak_akses('h', "data_tagih");
-		$this->data_sppt_model->hapus_bayar($id);
-		redirect("data_sppt/pembayaran_daftar");
-	}
-
-*/
-// -- End Controller Pembayaran
-
 
 
 // TODO: gunakan pada waktu validasi SPPT

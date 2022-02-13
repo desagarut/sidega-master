@@ -19,14 +19,14 @@ function initMap() {
         }
     <?php else: ?>
         var center = {
-            lat: -7.229426071233562,
-            lng: 107.88959092620838
+            lat: -7.202686,
+            lng: 107.8866398,
         }
     <?php endif; ?>
 
     var zoom = 14
     //Jika posisi kantor desa belum ada, maka posisi peta akan menampilkan seluruh Indonesia
-    PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), { center, zoom, mapTypeId:google.maps.MapTypeId.HYBRID });
+    PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), { center, zoom:<?=$wil_ini['zoom']?>, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> });
 
     kantorDesa = new google.maps.Marker({
         position: center,

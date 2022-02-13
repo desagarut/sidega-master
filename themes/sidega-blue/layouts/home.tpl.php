@@ -27,7 +27,7 @@
 <?php $this->load->view($folder_themes .'/partials/gallery') ?>
 <?php $this->load->view($folder_themes .'/partials/sinergi') ?>
 
-<?php $this->load->view($folder_themes. '/partials/apbdesa-tema.php');?>
+<?php //$this->load->view($folder_themes. '/partials/apbdesa-tema.php');?>
 
 <?php // if ($this->setting->covid_data) $this->load->view($folder_themes."/partials/covid.php")?>
 <?php // if ($this->setting->covid_desa) $this->load->view($folder_themes."/partials/covid_local.php");?>
