@@ -82,7 +82,12 @@ function initMap() {
                                 <input type="text" class="col-md-6" width="5px" name="zoom" id="zoom" value="<?= $wil_ini['zoom']?>" /><br/>
                                 <label class="col-sm-4"  for="map_tipe"> Map Tipe: </label>
                                 
-                                 <input type="text" class="col-md-6" width="5px" name="map_tipe" id="map_tipe" value="<?= $wil_ini['map_tipe']?>" /></div>
+                             <select class="input-sm pull-left" name="map_tipe" id="map_tipe">
+                                <option value="ROADMAP" <?php selected($map_tipe, 'ROADMAP'); ?>>ROADMAP</option>
+                                <option value="SATELLITE" <?php selected($map_tipe, 'SATELLITE'); ?>>SATELLITE</option>
+                                <option value="HYBRID" <?php selected($map_tipe, 'HYBRID'); ?>>HYBRID</option>
+                            </select>
+                                <!-- <input type="text" class="col-md-6" width="5px" name="map_tipe" id="map_tipe" value="<?= $wil_ini['map_tipe']?>" />--></div>
 							</div>
                         </div>
                             

@@ -98,7 +98,7 @@ class Gis extends Admin_Controller {
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
 		$data['list_ref'] = $this->referensi_model->list_ref(STAT_PENDUDUK);
 		$this->set_minsidebar(1);
-		$this->render('gis/maps', $data);
+		$this->render('gis/maps-openstreet', $data);
 	}
 
 	public function search()

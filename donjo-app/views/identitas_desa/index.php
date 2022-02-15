@@ -43,7 +43,7 @@
             <?php $this->load->view('identitas_desa/peta.php');?>
             <div class="pull-right">
             <?php if ($this->CI->cek_hak_akses('h')): ?>
-            <a href="<?= site_url('identitas_desa/form'); ?>" class="btn btn-social btn-box btn-warning btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Ubah Biodata" ><i class="fa fa-edit"></i> Ubah Data
+            <a href="<?= site_url('identitas_desa/form'); ?>" class="btn btn-social btn-box btn-warning btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Ubah Data" ><i class="fa fa-edit"></i> Ubah Data
             <?= $desa; ?>
             </a> 
             <!--<a href="<?= site_url('identitas_desa/maps/kantor'); ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-map-marker'></i> Lokasi Kantor <?= $desa; ?></a>--> 
