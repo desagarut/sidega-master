@@ -38,12 +38,12 @@
       
       <div class="box box-warning collapsed-box">
         <div class="box-header"> <i class="fa fa-calendar"></i>
-          <h3 class="box-title"><strong>INFO UMKM</strong></h3>
+          <h3 class="box-title"><strong>INFO WISATA</strong></h3>
           <!-- tools box -->
           <div class="pull-right box-tools"> 
             <!-- button with a dropdown -->
             <div class="btn-group"> </div>
-            <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
+            <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-plus"></i> </button>
             <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
           </div>
           <!-- /. tools --> 
