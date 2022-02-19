@@ -8,11 +8,11 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
   <div class="container d-md-flex py-4">
     <div class="mr-md-auto text-center text-md-left">
-      <div><strong><a href="https://desagarut.net" target="_blank">SIDeSCi
-        <?= AmbilVersi()?> | Tema SIDeGa Blue <?= THEME_VERSION ?>
+      <div><strong><a href="https://desagarut.net" target="_blank"><?= $this->setting->website_title ?>
+        <?= AmbilVersi()?> | Tema <?= $this->setting->web_theme ?> <?= THEME_VERSION ?>
         </span></strong></a> | By <a href="https://desagarut.net/"> Komunitas Desa Garut</a></div>
       <div class="copyright"><?= ucfirst($this->setting->sebutan_kecamatan).' '.ucwords($desa['nama_kecamatan']) ?> &copy;
-        <?= date('Y') ?> | Diberdayakan Oleh Rakhmat Alamsyah
+        <?= date('Y') ?> | Diberdayakan Oleh <?= $this->setting->pemberdaya ?>
       </div>
     </div>
     <br />
