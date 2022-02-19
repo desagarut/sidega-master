@@ -18,8 +18,8 @@ function initMap() {
 	var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			draggable: false,
-			title: "Lokasi <?=$sub['nama']?>"
+			draggable: true,
+			title: "Lokasi <?=$toko['nama']?>"
 	});
 
 	marker.addListener('dragend', (e) => {
@@ -43,7 +43,7 @@ function initMap() {
 </style>
 
 <div class="col-sm-3">
-  <div class="box box-warning">
+  <div class="box box-primary">
     <div class="box-body box-profile"> <img class="img-responsive img-circle" src=<?= AmbilGaleri($sub['gambar'], 'kecil') ?>>
       <h3 class="profile-username text-center">
         <?= strtoupper($sub['nama'])?>
@@ -53,13 +53,13 @@ function initMap() {
           <?= $sub['nama_pengelola']?>
           </a> </li>
           
-      </ul><a href="https://wa.me/+62<?= $data['no_hp_wisata'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20produk%20anda%20yang%20ditawarkan%20di%20website%20desa.%20Apakah%20produknya%20masih%20tersedia%3F" class="btn bg-green btn-box btn-sm"  target="_blank" title="Hubungi"><i class="fa fa-whatsapp"></i> Hubungi</a> 
-      <a href="<?= site_url("first/layanan/".$sub['id'])?>" target="_blank" class="btn bg-blue btn-box btn-sm"  target="_blank" title="Lihat Wisata"><i class="fa fa-whatsapp"></i> Lihat Wisata</a>
+      </ul><a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20desa.%20Apakah%20layanannya%20masih%20tersedia%3F" class="btn bg-green btn-box btn-sm"  target="_blank" title="Hubungi"><i class="fa fa-whatsapp"></i> Hubungi</a> 
+      <a href="<?= site_url("first/layanan_show/".$sub['id'])?>" target="_blank" class="btn bg-blue btn-box btn-sm"  target="_blank" title="Hubungi"><i class="fa fa-whatsapp"></i> Lihat Toko</a>
     </div>
   </div>
 </div>
 <div class="col-sm-9">
-  <div class="box box-warning">
+  <div class="box box-primary">
     <div class="box-body">
       <div id="map_penduduk"></div>
     </div>

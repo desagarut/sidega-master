@@ -6,8 +6,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxsKE9ArOZcaNtsfXIMFqr4N-
 
 
 <script>
-<?php if (!empty($tukang['lat'] && !empty($tukang['lng']))): ?>
-	var center = { lat: <?= $tukang['lat'].", lng: ".$tukang['lng']; ?> };
+<?php if (!empty($wisata['lat'] && !empty($wisata['lng']))): ?>
+	var center = { lat: <?= $wisata['lat'].", lng: ".$wisata['lng']; ?> };
 <?php else: ?>
 	var center = { lat: <?=$desa['lat'].", lng: ".$desa['lng']?> };
 <?php endif; ?>
@@ -22,7 +22,7 @@ function initMap() {
 			position: myLatlng,
 			map: map,
 			draggable: true,
-			title: "Lokasi, <?= $tukang['nama'];?>"
+			title: "Lokasi, <?= $wisata['nama'];?>"
 	});
 
 	marker.addListener('dragend', (e) => {
@@ -48,11 +48,11 @@ function initMap() {
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Lokasi : <?=$tukang['nama']?></h1>
+		<h1>Lokasi : <?=$wisata['nama']?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('tukang') ?>"> Wisata</a></li>
-			<li class="active">Lokasi <?=$tukang['nama']?></li>
+			<li><a href="<?= site_url('wisata') ?>"> Wisata</a></li>
+			<li class="active">Lokasi <?=$wisata['nama']?></li>
 		</ol>
 	</section>
 	<section class="content">
@@ -68,9 +68,9 @@ function initMap() {
                     </div>
                     <div class="modal-footer">
                         <div class='col-xs-12'>
-                           <a href="<?= site_url("tukang")?>" class="pull-left"> <button type="#" class="btn btn-social btn-box btn-primary btn-sm"><i class='fa fa-arrow-left'></i> Kembali</button></a>
-                            <input type="text" name="lat" id="lat" value="<?= $tukang['lat']?>"/>
-                            <input type="text" name="lng" id="lng" value="<?= $tukang['lng']?>" />
+                           <a href="<?= site_url("wisata")?>" class="pull-left"> <button type="#" class="btn btn-social btn-box btn-primary btn-sm"><i class='fa fa-arrow-left'></i> Kembali</button></a>
+                            <input type="text" name="lat" id="lat" value="<?= $wisata['lat']?>"/>
+                            <input type="text" name="lng" id="lng" value="<?= $wisata['lng']?>" />
                             <button type="reset" class="btn btn-social btn-box btn-danger btn-sm" data-dismiss="modal"><i class='fa fa-refresh'></i> Reset</button>
                             <button type="submit" class="btn btn-social btn-box btn-success btn-sm"><i class='fa fa-check'></i> Simpan</button>
                         </div>
