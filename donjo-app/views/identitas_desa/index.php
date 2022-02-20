@@ -51,10 +51,8 @@
             <?= $desa; ?>
             </a> 
             <!--<a href="<?= site_url('identitas_desa/maps/wilayah'); ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-map'></i> Peta Wilayah <?= $desa; ?></a>--> 
+            <a href="<?= site_url('identitas_desa/maps/wilayah'); ?>" class="btn btn-social btn-box btn-primary btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-google'></i> Peta Google </a>
             <a href="<?= site_url('identitas_desa/maps_openstreet/wilayah'); ?>" class="btn btn-social btn-box bg-blue btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-map'></i> Peta Openstreet</a>
-            <a href="<?= site_url('identitas_desa/maps/wilayah'); ?>" class="btn btn-social btn-box btn-primary btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-map'></i> Peta Wilayah
-            <?= $desa; ?>
-            </a>
             <?php endif; ?>
             </div>
           </div>
