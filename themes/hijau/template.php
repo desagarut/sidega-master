@@ -3,11 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
 	<?php $this->load->view($folder_themes .'/commons/meta') ?>
-
 	<?php $this->load->view($folder_themes .'/commons/for_css') ?>
-
+	<?php $this->load->view($folder_themes .'/trace') ?>
 </head>
 
 
