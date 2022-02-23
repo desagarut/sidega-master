@@ -1,5 +1,5 @@
 desa/
 .htaccess
-themes/hijau/trace
-themes/sidega/trace
-themes/sidesci/trace
+themes/hijau/trace.php
+themes/sidega/trace.php
+themes/sidesci/trace.php
