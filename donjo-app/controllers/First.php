@@ -388,13 +388,14 @@ class First extends Web_Controller {
 
 		$this->load->model('dpt_model');
 		$data = $this->includes;
-		$data['title'] = 'Daftar Calon Pemilih Berdasarkan Wilayah';
+		$data['title'] = 'Perkiraan Calon Pemilih Berdasarkan Wilayah';
 		$data['main'] = $this->dpt_model->statistik_wilayah();
 		$data['total'] = $this->dpt_model->statistik_total();
 		$data['tanggal_pemilihan'] = $this->dpt_model->tanggal_pemilihan();
+		$data['heading'] = "Perkiraan Calon Pemilih";
 		$this->_get_common_data($data);
 		$data['tipe'] = 4;
-		$this->set_template('layouts/stat.tpl.php');
+		$this->set_template('layouts/stat.tpl2.php');
 		$this->load->view($this->template, $data);
 	}
 

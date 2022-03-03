@@ -31,7 +31,7 @@
             <?= $desa['telepon']; ?>
             <br>
             <strong>Email:</strong>
-            <?= $desa['email_deskel']; ?>
+            <?= $desa['email_desa']; ?>
             <br>
           </p>
         </div>
@@ -43,6 +43,15 @@
             <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/status_idm') ?>">Status IDM</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/statistik/0') ?>">Statistik</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('peta') ?>">Peta</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>UMKM <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/toko_show') ?>">Toko Warga</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/tukang') ?>">Tukang Warga</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/tawa') ?>">Transportasi Warga</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('first/wisata') ?>">Wisata Desa</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-6 footer-links">
@@ -63,26 +72,18 @@
               </a></li>
           </ul>
         </div>
-        <div class="col-lg-2 col-md-6 footer-links">
-          <h4>Kementerian</h4>
-          <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="https://kemendesa.go.id/">Kemendesa PDTDT RI</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="https://www.kemendagri.go.id/">Kemendag RI</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="https://www.kemenkeu.go.id/">Kemenkeu RI</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="https://kemensos.go.id/">Kemensos RI</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="https://www.kemkes.go.id/">Kemenkes RI</a></li>
-          </ul>
-        </div>
         <div class="col-lg-2 col-md-6 footer-newsletter">
-          <h4 align="center">Sosial Media</h4>
-          <div class="social-links text-center text-md-right pt-3 pt-md-0">
+          <h4 align="center">Desa Garut</h4>
+          <div class="col-md-12">
+            <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/Desa_Garut.png" ) ?>" alt="Logo Desa Garut" class="img-fluid" width="350px" height="350px">          </div>
+          <!--<div class="social-links text-center text-md-right pt-3 pt-md-0">
             <?php foreach($sosmed as $data) : ?>
             <?php if(!empty($data['link'])) : ?>
             <?php $brand = strtolower(str_replace(' ', '-', $data['nama'])) ?>
             <a href="<?= $data['link'] ?>" class="social-media__link"><i class="bx bxl-<?= $brand == 'youtube' ? 'youtube-play' : $brand ?>"></i></a>
             <?php endif ?>
             <?php endforeach ?>
-          </div>
+          </div>-->
         </div>
         <br/>
       </div>

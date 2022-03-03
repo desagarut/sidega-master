@@ -11,7 +11,7 @@
     </div>
     <div class="row">
       <div class="col-md-8">
-        <div class="portfolio-details-container" data-aos="fade-right" data-aos-delay="300">
+        <div class="portfolio-details-container" data-aos="fade-right">
           <div class="owl-carousel portfolio-details-carousel">
             <?php $active = true; ?>
             <?php foreach ($slider_gambar['gambar'] as $gambar) : ?>

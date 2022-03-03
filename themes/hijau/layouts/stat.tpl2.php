@@ -38,17 +38,17 @@
     					<?php elseif ($tipe == 3): ?>
     						<?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistics/wilayah.php')); ?>
     					<?php elseif ($tipe == 4): ?>
-    						<?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/dpt.php')); ?>
+    						<?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistics/dpt.php')); ?>
     					<?php else: ?>
     					<?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistik.php')); ?>
     					<?php endif; ?>
             </div>
-            <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
+            <?php $this->load->view($folder_themes .'/partials/sidebar_statistik.php') ?>
         </div>
     </div>
 </section>
 	<?php $this->load->view($folder_themes .'/commons/footer') ?>
-	<?php $this->load->view($folder_themes . '/commons/for_js') ?>
+	<?php $this->load->view($folder_themes .'/commons/for_js') ?>
     
 </body>
 </html>

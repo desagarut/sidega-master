@@ -10,9 +10,9 @@
         <div class="portfolio-details-container" data-aos="fade-right" data-aos-delay="300">
           <div class="owl-carousel portfolio-details-carousel">
             <?php foreach($main as $data) : ?>
-            <?php if(is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])) : ?>
+            <?php if(is_file(LOKASI_GALERI . "sedang_" . $data['gambar'])) : ?>
             <?php $link = site_url('first/wisata_fasilitas/'.$data['id']) ?>
-            <div class="portfolio-description"> <a class="" href="<?= site_url('first/wisata_fasilitas/'.$data['id']) ?>"> <img src="<?= AmbilGaleri($data['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $data['nama'] ?>"> </a>
+            <div class="portfolio-description"> <a class="" href="<?= site_url('first/wisata_fasilitas/'.$data['id']) ?>"> <img src="<?= AmbilGaleri($data['gambar'],'sedang') ?>" class="img-fluid" alt="<?= $data['nama'] ?>"> </a>
               <div class="portfolio-info">
                 <h3> <a class="" href="<?= site_url('first/wisata_fasilitas/'.$data['id']) ?>">
                   <button class="btn btn-warning"><i class="ri-store-2-fill" style="color:#fff;"></i> WISATA:

@@ -40,7 +40,7 @@
                         $page = '/partials/statistics/default';
                         break;
                     case '2':
-                        $page = '/partials/statistics/default';
+                        $page = '/partials/statistics/wilayah';
                         break;
                     case '3':
                         $page = '/partials/statistics/regions';
@@ -54,7 +54,7 @@
             ?>
             <?php $this->load->view($folder_themes . $page) ?>
             </div>
-            <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
+            <?php $this->load->view($folder_themes .'/partials/sidebar_statistik.php') ?>
         </div>
     </div>
 </section>

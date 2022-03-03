@@ -10,9 +10,9 @@
       <div class="owl-carousel portfolio-details-carousel">
         <?php if($fasilitas_data) : ?>
         <?php foreach($fasilitas_data as $album) : ?>
-        <?php if(is_file(LOKASI_GALERI . "kecil_" . $album['gambar'])) : ?>
+        <?php if(is_file(LOKASI_GALERI . "sedang_" . $album['gambar'])) : ?>
         <?php $link = site_url('first/wisata_fasilitas/'.$album['id']) ?>
-        <div class="portfolio-description"> <a class="archive__link" href="#"> <img src="<?= AmbilGaleri($album['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $album['nama'] ?>"> </a>
+        <div class="portfolio-description"> <a class="archive__link" href="#"> <img src="<?= AmbilGaleri($album['gambar'],'sedang') ?>" class="img-fluid" alt="<?= $album['nama'] ?>"> </a>
           <div class="portfolio-info">
             <h3 style="color:#FFF">
               <?= $album['nama'] ?>
