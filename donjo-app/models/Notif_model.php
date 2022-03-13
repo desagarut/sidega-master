@@ -8,7 +8,7 @@ class Notif_model extends CI_Model {
 		$tracker_host = (ENVIRONMENT == 'development') ? $this->setting->dev_tracker : $this->setting->tracker;
 		if ( ! $this->data_publik->has_internet_connection()) return;
 
-		$this->data_publik->set_api_url($tracker_host . '/index.php/api/pelanggan/customer?token=' . $this->setting->api_key_opensid, 'status_pelanggan')
+		$this->data_publik->set_api_url($tracker_host . '/index.php/api/pelanggan/customer?token=' . $this->setting->api_key_sidega, 'status_pelanggan')
 				->set_interval(1)
 				->set_cache_folder(FCPATH.'desa');
 		$status = $this->data_publik->get_url_content();

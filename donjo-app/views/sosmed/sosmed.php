@@ -55,11 +55,11 @@
 		{
 			if (tipe == 1)
 			{
-				$('#link').attr('placeholder', ' Personal / Halaman, contoh : https://web.facebook.com/tokoopendesa \n\n Isi kolom ini dengan username : tokoopendesa');
+				$('#link').attr('placeholder', ' Personal / Halaman, contoh : https://web.facebook.com/desagarut.net \n\n Isi kolom ini dengan username : desagarut.net');
 			}
 			else
 			{
-				$('#link').attr('placeholder', ' Group, contoh : https://web.facebook.com/groups/opensid \n\n Isi kolom ini dengan username : opensid');
+				$('#link').attr('placeholder', ' Group, contoh : https://web.facebook.com/groups/desagarut.net \n\n Isi kolom ini dengan username : desagarut.net');
 			}
 		};
 	<?php endif ?>
@@ -69,7 +69,7 @@
 		{
 			if (tipe == 1)
 			{
-				$('#link').attr('placeholder', ' Personal chat, contoh : 0851234567890 (Nomor HP)) \n\n Isi kolom ini dengan nomor HP : 0851234567890');
+				$('#link').attr('placeholder', ' Personal chat, contoh : 082317883161 (Nomor HP)) \n\n Isi kolom ini dengan nomor HP : 082317883161');
 			}
 			else
 			{
@@ -83,7 +83,7 @@
 		{
 			if (tipe == 1)
 			{
-				$('#link').attr('placeholder', ' Personal chat, contoh  : https://t.me/OpenDesa \n\n Isi kolom ini dengan username : OpenDesa');
+				$('#link').attr('placeholder', ' Personal chat, contoh  : https://t.me/DesaGarut \n\n Isi kolom ini dengan username : DesaGarut');
 			}
 			else
 			{

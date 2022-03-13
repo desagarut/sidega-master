@@ -36,10 +36,11 @@
         <div class='row'>
             <?php $this->load->view('home/umkm.php');?>
             <?php $this->load->view('home/warga_login.php');?>
-			<?php $this->load->view('home/pengunjung.php');?>
 			<?php $this->load->view('home/aparat_login.php');?>
-            <?php // $this->load->view('home/pbb.php');?>
-            <?php //$this->load->view('home/chart.php');?>
+			<?php $this->load->view('home/pengunjung.php');?>
+		</div>
+        <div class='row'>
+            <?php $this->load->view('home/helpdesk.php');?>
         </div>
 	</section>
 </div>

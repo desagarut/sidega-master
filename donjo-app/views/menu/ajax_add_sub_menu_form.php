@@ -77,7 +77,7 @@
 			</select>
 			<span id="eksternal" class="jenis_link" style="<?php ($submenu['link_tipe'] != 99) and print('display:none;'); ?>">
 				<input name="<?= jecho($submenu['link_tipe'], 99, 'link'); ?>" class="form-control input-sm" type="text" value="<?=$submenu['link']?>" ></input>
-				<span class="text-sm text-red">(misalnya: https://opendesa.id)</span>
+				<span class="text-sm text-red">(misalnya: https://desagarut.id)</span>
 			</span>
 		</div>
 	</div>

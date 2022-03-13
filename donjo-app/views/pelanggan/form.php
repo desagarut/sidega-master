@@ -138,7 +138,7 @@
 var tracker_host = '<?= (ENVIRONMENT == 'development') ? $this->setting->dev_tracker : $this->setting->tracker ?>';
 async function getPelanggan() {
 	await axios
-	.get(tracker_host + '/index.php/api/pelanggan/customer?token=<?=$this->setting->api_key_opensid?>')
+	.get(tracker_host + '/index.php/api/pelanggan/customer?token=<?=$this->setting->api_key_sidega?>')
 	.then(response => {
 		let info = response.data.PELANGGAN_PREMIUM[0];
 		let id = info.id;
@@ -190,7 +190,7 @@ getPelanggan();
 async function getDesa() {
 	var input = document.getElementById("id_desa").value;
 
-	let response = await axios.get(tracker_host + '/index.php/api/wilayah/desa?token=<?=$this->setting->api_key_opensid?>&id_desa=' + input);
+	let response = await axios.get(tracker_host + '/index.php/api/wilayah/desa?token=<?=$this->setting->api_key_sidega?>&id_desa=' + input);
 	let infodesa = response.data.KODE_WILAYAH[0];
 	let nama_desa = infodesa.nama_desa;
 	let kode_desa = infodesa.kode_desa;
