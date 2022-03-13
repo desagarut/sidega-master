@@ -9,7 +9,7 @@
       </div>
       <div class="row portfolio-container" data-aos="fade-up">
         <?php foreach ($w_gal As $data): ?>
-        <?php if (is_file(LOKASI_GALERI . "sedang_" . $data['gambar'])): ?>
+        <?php if (is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])): ?>
             <div class="col-lg-4 col-md-6 portfolio-item filter-app"> 
             	<a href="<?= site_url("first/sub_gallery/{$data['id']}") ?>"><img src="<?= AmbilGaleri($data['gambar'],'kecil')?>" class="img-fluid" alt="" width="350"></a>
               <div class="portfolio-info">
