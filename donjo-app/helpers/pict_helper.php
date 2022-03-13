@@ -248,7 +248,7 @@ function UploadGallery($fupload_name, $old_foto='', $tipe_file='')
 	if (!empty($old_foto)) $old_foto_hapus = "kecil_".$old_foto;
 	$nama_simpan = "kecil_".$fupload_name;
 	$hasil1 = UploadResizeImage(LOKASI_GALERI, $dimensi, "gambar", $fupload_name, $nama_simpan, $old_foto_hapus, $tipe_file);
-	$dimensi = array("width"=>880, "height"=>880);
+	$dimensi = array("width"=>1280, "height"=>720);
 	if (!empty($old_foto)) $old_foto_hapus = "sedang_".$old_foto;
 	$nama_simpan = "sedang_".$fupload_name;
 	$hasil2 = UploadResizeImage(LOKASI_GALERI, $dimensi, "gambar", $fupload_name, $nama_simpan, $old_foto_hapus, $tipe_file);
@@ -316,7 +316,7 @@ function UploadArtikel($fupload_name, $gambar, $fp, $tipe_file, $old_foto='')
 // Tidak perlu buat gambar sedang, jika jenis file sudah salah
 	if ($hasil1)
 	{
-		$dimensi = array("width"=>880, "height"=>880);
+		$dimensi = array("width"=>1280, "height"=>720);
 		if (!empty($old_foto)) $old_foto_hapus = "sedang_".$old_foto;
 		$nama_simpan = "sedang_".$fupload_name;
 		$hasil2 = UploadResizeImage(LOKASI_FOTO_ARTIKEL, $dimensi, $gambar, $fupload_name, $nama_simpan, $old_foto_hapus, $tipe_file);
