@@ -47,7 +47,7 @@ class Beranda extends Admin_Controller {
 			$data['release_body'] = $this->release->get_release_body();
 			*/
 	//	}
-
+		$data['setting_desa'] = $this->config_model->get_data();
 		// Pengambilan data penduduk untuk ditampilkan widget Halaman Dashboard (modul Home SID)
 		$data['penduduk'] = $this->header_model->penduduk_total();
 		$data['keluarga'] = $this->header_model->keluarga_total();
