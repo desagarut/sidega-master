@@ -10,10 +10,10 @@
                         </div>
 					</div>
 					<div class="box-body text-center">
-                        <a href="<?=site_url('toko_warga')?>"><img src="<?= base_url("desa/logo/toko.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
-                        <a href="<?=site_url('tawa')?>"><img src="<?= base_url("desa/logo/transport.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
-                        <a href="<?=site_url('tukang')?>"><img src="<?= base_url("desa/logo/tukang.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
-                        <a href="<?=site_url('wisata')?>"><img src="<?= base_url("desa/logo/wisata.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
+                        <a href="<?=site_url('toko_warga')?>"><img src="<?= base_url("assets/files/logo/toko.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
+                        <a href="<?=site_url('tawa')?>"><img src="<?= base_url("assets/files/logo/transport.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
+                        <a href="<?=site_url('tukang')?>"><img src="<?= base_url("assets/files/logo/tukang.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
+                        <a href="<?=site_url('wisata')?>"><img src="<?= base_url("assets/files/logo/wisata.png" ) ?>" class="img-fluid responsive" width="70px" height="70px" alt=""></a>
                         <div class="box-footer text-center">
                         </div>
                     </div>
