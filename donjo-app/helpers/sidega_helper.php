@@ -1,10 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-
-
-
-define("VERSION", '5.1');
+define("VERSION", '5.2');
 
 /**
 

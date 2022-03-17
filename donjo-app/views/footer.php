@@ -1,7 +1,7 @@
 
 <footer class="main-footer">
   <div class="pull-right hidden-xs"> <b>Version</b>
-    <?= AmbilVersi()?> <span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'assets/files/logo/desagarut.jpg'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"></span>
+    <?= AmbilVersi()?> <span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'assets/files/logo/neosidega.fw.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"></span>
   </div>
   <span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'assets/files/logo/sidega.png'; ?>" class="img-circle logo-desa" alt="User Image" width="30px"></span> <a href="https://desagarut.net" target="_blank">SIDeGa - </a> Inspirasi untuk desa & kelurahan di <strong><a href="https://garutkab.go.id" target="_blank">Kabupaten Garut</a></a>.</strong> </footer>
 

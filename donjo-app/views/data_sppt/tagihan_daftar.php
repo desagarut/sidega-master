@@ -92,11 +92,22 @@
                 <td align="center" >
                 <div class="btn-group">
 				<?php if ($item['status'] == "Lunas"): ?>
-                  <button type="button" href="<?= site_url("data_sppt/tagihan_ubah_bayar/".$item["id_tagih"])?>" class="btn btn-default btn-sm" disabled title="Pembayaran Selesai" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Pembayaran Selesai"><i class="fa fa-key"></i> Lunas </a></button>
-                  <?php elseif ($item['status'] == "Belum Bayar"):  ?>
-				  <button type="button" href="<?= site_url("data_sppt/tagihan_ubah_bayar/".$item["id_tagih"])?>" class="btn btn-success btn-sm"  title="Terima Pembayaran Pajak" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Terima Pembayaran Pajak"><i class="fa fa-dollar"></i> Bayar</a></button>
+                  <button type="button" href="<?= site_url("data_sppt/tagihan_ubah_bayar/".$item["id_tagih"])?>" class="btn btn-success btn-sm" disabled title="Pembayaran Selesai" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Pembayaran Selesai"><i class="fa fa-key"></i> Lunas </a></button>
+                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                        <!--<li><a href="<?= site_url("data_sppt/tagihan_ubah_bayar/".$item["id_tagih"])?>" class="btn btn-social bg-green btn-box btn-block btn-sm"  title="Terima Pembayaran Pajak" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Terima Pembayaran Pajak"><i class="fa fa-dollar"></i> Bayar</a> </li>-->
+                        <li><a href="<?= site_url("data_sppt/tagihan_ubah/".$item["id_tagih"])?>" class="btn btn-social bg-yellow btn-box btn-block btn-sm"  title="Ubah Data" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Tagihan"><i class="fa fa-edit"></i>Ubah</a> </li>
+                        <li><a href="#" data-href="<?= site_url("data_sppt/hapus_tagih/".$item["id_tagih"])?>" class="btn btn-social bg-red btn-box btn-block btn-sm"  title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>Hapus</a> </li>
+                  </ul>
                   
-                  <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
+                  
+                  <?php elseif ($item['status'] == "Belum Bayar"):  ?>
+				  <button type="button" href="<?= site_url("data_sppt/tagihan_ubah_bayar/".$item["id_tagih"])?>" class="btn btn-danger btn-sm"  title="Terima Pembayaran Pajak" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Terima Pembayaran Pajak"><i class="fa fa-dollar"></i> Bayar</a></button>
+                  
+                  <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
