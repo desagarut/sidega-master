@@ -1608,7 +1608,8 @@ section {
   max-height: 400px;
   margin: -30px -30px 20px -30px;
   overflow: hidden;
-}
+	box-shadow: 2px 2px 35px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;}
 
 .blog .entry .entry-title {
   font-size: 28px;

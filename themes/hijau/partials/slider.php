@@ -5,7 +5,7 @@
 <div class="container">
   <section id="portfolio-details" class="portfolio-details">
     <div class="row">
-      <div class="col-md-12" style="padding-top:50px">
+      <div class="col-md-12" style="padding-top:10px">
         <?php $this->load->view($folder_themes .'/partials/running_text') ?>
       </div>
     </div>
@@ -17,7 +17,7 @@
             <?php foreach ($slider_gambar['gambar'] as $gambar) : ?>
             <?php $file_gambar = $slider_gambar['lokasi'] . 'sedang_' . $gambar['gambar']; ?>
             <?php if(is_file($file_gambar)) : ?>
-            <div class="portfolio-description"> <a class="archive__link" href="<?='artikel/'.buat_slug($gambar); ?>"> <img src="<?php echo base_url().$slider_gambar['lokasi'].'sedang_'.$gambar['gambar']?>" class="img-fluid" alt="<?= $gambar['judul'] ?>"> </a>
+            <div class="portfolio-description img-fluid"> <a class="archive__link" href="<?='artikel/'.buat_slug($gambar); ?>"> <img src="<?php echo base_url().$slider_gambar['lokasi'].'sedang_'.$gambar['gambar']?>" class="entry-image" alt="<?= $gambar['judul'] ?>"> </a>
               <div class="portfolio-info">
                 <h3> <a class="archive__link" href="<?='artikel/'.buat_slug($gambar); ?>">
                   <?= $gambar['judul'] ?>

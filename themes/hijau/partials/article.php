@@ -36,7 +36,7 @@
               <?= $article['isi'] ?>
               <?php for($i = 1; $i <= 3; $i++) : ?>
               <?php if($article['gambar'.$i] && is_file(LOKASI_FOTO_ARTIKEL.'sedang_'.$article['gambar'.$i])) : ?>
-              <img src="<?= AmbilFotoArtikel($article['gambar'.$i],'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="content__image">
+              <img src="<?= AmbilFotoArtikel($article['gambar'.$i],'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="img-fluid" width="100%" style="padding:10px 10px 10px 10px">
               <?php endif ?>
               <?php endfor ?>
               <?php if($article['dokumen']) : ?>
@@ -53,12 +53,12 @@
                   <?= $article['kategori'] ?>
                   </a></li>
               </ul>
-              <i class="icofont-tags"></i>
+              <!--<i class="icofont-tags"></i>
               <ul class="tags">
                 <li><a href="#">Creative</a></li>
                 <li><a href="#">Tips</a></li>
                 <li><a href="#">Marketing</a></li>
-              </ul>
+              </ul>-->
             </div>
             <div class="float-right share"> <a href="http://twitter.com/share?url=<?= site_url('artikel/'.buat_slug($article)) ?>" title="Share on Twitter"><i class="icofont-twitter"></i></a> <a href="http://www.facebook.com/sharer.php?u=<?= site_url('artikel/'.buat_slug($article))?>" title="Share on Facebook"><i class="icofont-facebook"></i></a> <a href="https://telegram.me/share/url?url=<?= site_url('artikel/'.buat_slug($article))?>&text=<?= $article["judul"]; ?>" title="Share on Telegram"><i class="icofont-telegram"></i></a> <a href="https://api.whatsapp.com/send?text=<?= site_url('artikel/'.buat_slug($article))?>" title="Share on Whatsapp"><i class="icofont-whatsapp"></i></a> </div>
           </div>

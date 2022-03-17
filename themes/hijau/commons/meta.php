@@ -1,6 +1,6 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<?php defined('THEME_VERSION') or define('THEME_VERSION', 'V4.5') ?>
+<?php defined('THEME_VERSION') or define('THEME_VERSION', 'V4.6') ?>
 
 <?php $desa_title = trim(ucwords($this->setting->sebutan_desa) . ' ' . $desa['nama_desa'].' '.$this->setting->sebutan_kecamatan_singkat . ' ' . $desa['nama_kecamatan'].' '.$this->setting->sebutan_kabupaten_singkat . ' ' . $desa['nama_kabupaten']); ?>
 
@@ -33,7 +33,7 @@
 
 <?php if(isset($single_artikel)): ?>
 
-	<title><marquee><?= $single_artikel["judul"] . " - $desa_title" ?></marquee></title>
+	<title><?= $single_artikel["judul"] . " - $desa_title" ?></title>
 
 	<meta name='description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
 
