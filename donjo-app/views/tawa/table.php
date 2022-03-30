@@ -31,7 +31,7 @@
   <form id="mainform" name="mainform" action="" method="post">
     <div class="row">
       <div class="col-sm-6">
-        <select class="form-control input-sm " name="filter" onchange="formAction('mainform', '<?= site_url('toko_warga/filter')?>')">
+        <select class="form-control input-sm " name="filter" onchange="formAction('mainform', '<?= site_url('tawa/filter')?>')">
           <option value="">Semua</option>
           <option value="1" <?php if ($filter==1): ?>selected<?php endif ?>>Aktif</option>
           <option value="2" <?php if ($filter==2): ?>selected<?php endif ?>>Tidak Aktif</option>
