@@ -67,6 +67,7 @@
 									<label class="control-label col-sm-4" for="nama"></label>
 									<div class="col-sm-6">
 										<input type="hidden" name="old_gambar" value="<?=  $tukang['gambar']?>">
+                                        <input type="hidden" name="old_gambar" value="<?=  $tukang['no_hp_pengelola']?>">
 									  <img class="attachment-img img-responsive img-circle" src="<?= AmbilGaleri($tukang['gambar'], 'sedang') ?>" alt="Gambar Album" width="200px">
 									</div>
 								</div>
