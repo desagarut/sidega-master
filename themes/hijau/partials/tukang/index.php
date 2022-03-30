@@ -53,9 +53,6 @@
           <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
           </strong> yang <strong>memiliki keahlian dibidang jasa</strong>.<br/> <strong>Melalui aplikasi Tukang</strong> diharapkan setiap individu warga dapat mempromosikan keahliannya kepada publik, sehingga dapat mempermudah para Tukang dalam memperoleh pekerjaan, serta membuka peluang kerja bagi angkatan kerja baru. <br/>Melalui aplikasi ini, <strong>Para Pemberi Kerja</strong> dapat dengan <strong>mudah memilih tenaga kerja</strong> sesuai dengan kebutuhkan pekerjaan, <strong>dengan cara menghubungi langsung kepada Para Tukang</strong> yang ada di wilayah desa kami.<br/>
           Dengan adanya aplikasi ini diharapkan dapat membantu meningkatkan pertumbuhan ekonomi masyarakat desa.</p>
-        <!--<a href="https://wa.me/+62<?= $data['no_hp_tukang'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20produk%20anda%20yang%20ditawarkan%20di%20website%20desa.%20Apakah%20produknya%20masih%20tersedia%3F" target="_blank" title="pesan"><button class="btn btn-success"><i class="icofont-whatsapp"></i> Pesan</button></a>
-            
-            <a href="<?= site_url('first/tukang_layanan/'.$data['id']) ?>"  title="Produk"><button class="btn btn-primary"><i class="icofont-info"></i> Produk</button></a>--> 
       </div>
     </div>
   </div>
