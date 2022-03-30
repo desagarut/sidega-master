@@ -73,7 +73,7 @@
   <?php if($layanan_data) : ?>
   <?php foreach($layanan_data as $album) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $album['gambar'])) : ?>
-  <?php $link = site_url('first/produk_show/'.$album['id']) ?>
+  <?php $link = site_url('first/tukang_layanan/'.$album['id']) ?>
   <div class="col-lg-3 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">
       <div class="member-img"> <img src="<?= AmbilGaleri($album['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $album['nama'] ?>" style="width:100%; height:225px">
