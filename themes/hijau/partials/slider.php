@@ -3,10 +3,10 @@
 <!-- ======= Portfolio Slider ======= -->
 
 <div class="container">
-  <section id="portfolio-details" class="portfolio-details">
+  <section id="portfolio-details">
     <div class="row">
       <div class="col-md-8">
-        <div class="portfolio-details-container" data-aos="fade-right">
+        <div class="portfolio-details-container">
           <div class="owl-carousel portfolio-details-carousel">
             <?php $active = true; ?>
             <?php foreach ($slider_gambar['gambar'] as $gambar) : ?>
