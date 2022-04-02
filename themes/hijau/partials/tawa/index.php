@@ -60,7 +60,7 @@
           </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 align-items-stretch">
     <div class="row">
 	<?php if($main) : ?>
     <?php foreach($main as $data) : ?>
