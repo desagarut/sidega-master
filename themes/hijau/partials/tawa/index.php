@@ -46,7 +46,7 @@
 </div>
 <div class="col-md-12">
 <div class="row">
-  <div class="col-lg-3 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
+  <div class="col-md-3 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">
       <div class="member-img"> <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/transport.png" ) ?>" class="img-fluid" alt="" style="width:100%; height:225px"> </div>
       <div class="member-info" style="background-color:#B7FFDB">
@@ -65,7 +65,7 @@
   <?php foreach($main as $data) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])) : ?>
   <?php $link = site_url('first/tawa_layanan/'.$data['id']) ?>
-  <div class="col-lg-4 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
+  <div class="col-md-4 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">
       <div class="member-img"><a href="<?= site_url('first/tawa_layanan/'.$data['id']) ?>"  title="Layanan"> <img src="<?= AmbilGaleri($data['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $data['nama'] ?>" style="width:100%; height:225px"></a>
         <div class="social"> <a href="https://youtube.com/channel/<?= $data['youtube'] ?>" target="_blank"><i class="icofont-youtube"></i></a> <a href="<?= $data['website'] ?>" target="_blank"><i class="icofont-globe"></i></a> <a href="https://facebook.com/<?= $data['fb'] ?>" target="_blank"><i class="icofont-facebook"></i></a> <a href="https://instagram.com/<?= $data['ig'] ?>" target="_blank"><i class="icofont-instagram"></i></a> <a href="phone:<?= $data['no_hp_pengelola'] ?>" target="_blank"><i class="icofont-phone"></i></a> </div>
