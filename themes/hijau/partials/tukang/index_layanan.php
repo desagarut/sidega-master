@@ -38,10 +38,12 @@
   </section>
 </div>
 <div class="row">
-  <div class="col-md-12" data-aos="fade-left">
-    <h5 align="center"><i class="ri-map-2-fill" style="color:#F90;"></i> SPESIALISASI <strong class="color:#60C">
-      <?= $sub['nama'] ?>
-      </strong></h5>
+  <div class="col-md-12">
+    <div class="member" data-aos="fade-up">
+      <h4><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong style="color:#060">
+        <?= $sub['nama'] ?>
+        </strong></h4>
+    </div>
   </div>
 </div>
 <div class="row">
