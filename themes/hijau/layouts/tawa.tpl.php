@@ -10,6 +10,17 @@
 
 	<?php $this->load->view($folder_themes .'/commons/header') ?>
     
+<section id="breadcrumbs2" class="breadcrumbs2">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>Transportasi Warga</h5>
+      <ol>
+        <li><a href="<?= site_url("first"); ?>">Home</a></li>
+        <li><a href="<?= site_url("first/tawa"); ?>">Transportasi Warga</a></li>
+      </ol>
+    </div>
+  </div>
+</section><!-- End Breadcrumbs -->
 <section id="team" class="team section-bg" style="padding-top:60px">
   <div class="container">
         	<div class="row">
