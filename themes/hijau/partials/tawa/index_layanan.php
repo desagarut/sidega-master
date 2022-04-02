@@ -18,7 +18,7 @@
               <?= $album['nama'] ?>
               | <small style="color:#FFC; font-size:12px"><?= $album['sebutan_biaya'] ?>:</small>
               <?= $rupiah($album['harga']) ?>
-              <a href="https://wa.me/+62<?= $sub['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20yang%20anda%20tawarkan%20di%20website%20<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>.%20Apakah%20layanannya%20masih%20tersedia%3F" target="_blank" title="pesan">
+              <a href="https://wa.me/+62<?= $sub['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20yang%20anda%20tawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20layanannya%20masih%20tersedia%3F%20<?= site_url('first/tawa_layanan/'.$sub['id']) ?>" target="_blank" title="pesan">
               <button class="btn btn-success"><i class="icofont-whatsapp"></i> Hubungi</button>
               </a></h3>
           </div>
@@ -86,7 +86,7 @@
 
         </p>
         <br/>
-        <a href="https://wa.me/+62<?= $sub['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20<?= $album['nama'] ?>%20yang%20ditawarkan%20di%20website%20<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>.%20Apakah%20layanannya%20masih%20tersedia%3F" target="_blank" title="pesan">
+        <a href="https://wa.me/+62<?= $sub['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20*<?= $album['nama'] ?>*%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20layanannya%20masih%20tersedia%3F%20<?= site_url('first/tawa_layanan/'.$sub['id']) ?>" target="_blank" title="pesan">
         <button class="btn btn-success"><i class="icofont-whatsapp"></i> Hubungi</button>
         </a> </div>
     </div>

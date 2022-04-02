@@ -18,7 +18,7 @@
                   <button class="btn btn-warning"><i class="ri-store-2-fill" style="color:#fff;"></i> UMKM:
                   <?= $data['nama'] ?>
                   </button>
-                  </a> <a href="https://wa.me/+62<?= $data['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F" target="_blank" title="pesan">
+                  </a> <a href="https://wa.me/+62<?= $data['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20<?= site_url('first/tawa_layanan/'.$data['id']) ?>" target="_blank" title="pesan">
                   <button class="btn btn-success"><i class="icofont-whatsapp"></i> Pesan</button>
                   </a> </h3>
               </div>
@@ -56,9 +56,6 @@
           selain itu melalui aplikasi ini dapat memberikan peluang bagi masyarakat untuk meningkatkan penghasilan keluarga serta sebagai salah satu upaya dalam mengurangi angka pengangguran di desa, dengan demikian diharapkan dapat membantu meningkatkan pertumbuhan ekonomi masyarakat <strong>
           <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
           </strong>.</p>
-        <!--<a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20produk%20anda%20yang%20ditawarkan%20di%20website%20desa.%20Apakah%20produknya%20masih%20tersedia%3F" target="_blank" title="pesan"><button class="btn btn-success"><i class="icofont-whatsapp"></i> Pesan</button></a>
-            
-            <a href="<?= site_url('first/tawa_layanan/'.$data['id']) ?>"  title="Produk"><button class="btn btn-primary"><i class="icofont-info"></i> Produk</button></a>--> 
       </div>
     </div>
   </div>
@@ -89,7 +86,7 @@
           <?= $data['lokasi'] ?>
           </span> <br/>
         </p>
-        <a href="https://wa.me/+62<?= $data['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%" target="_blank" title="pesan">
+        <a href="https://wa.me/+62<?= $data['no_hp_pengelola'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20*<?= $data['nama'] ?>*%20masih%20buka%3F%%20<?= site_url('first/tawa_layanan/'.$data['id']) ?>" target="_blank" title="pesan">
         <button class="btn btn-success"><i class="icofont-whatsapp"></i> Hubungi</button>
         </a> <a href="<?= site_url('first/tawa_layanan/'.$data['id']) ?>"  title="Layanan">
         <button class="btn btn-primary"><i class="icofont-info"></i> Layanan</button>

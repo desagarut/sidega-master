@@ -78,7 +78,7 @@
         </span> <span style="color:#F09"><i class="icofont-location-pin"></i>
         <?= $data['lokasi'] ?>
         </span> <br/>
-        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20produk%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20%20<?= site_url('first/produk_show/'.$data['id']) ?>" target="_blank" title="pesan">
+        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20produk%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20*<?= $data['nama'] ?>*%20masih%20buka%3F%20%20<?= site_url('first/produk_show/'.$data['id']) ?>" target="_blank" title="pesan">
         <button class="btn btn-success"><i class="icofont-whatsapp"></i> Hubungi</button>
         </a> <a href="<?= site_url('first/produk_show/'.$data['id']) ?>"  title="Produk">
         <button class="btn btn-danger"><i class="icofont-info"></i> Produk</button>
