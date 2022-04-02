@@ -37,7 +37,9 @@
 <h2><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong class="color:#e80368">
   <?= $sub['nama'] ?>
   </strong></h2>
+<div class="col-md-12">
 <div class="row">
+<div class="col-md-3">
   <div class="col-lg-3 col-md-6 align-items-stretch">
     <div class="member" data-aos="fade-right">
       <div class="member-img"> <img src="<?= AmbilGaleri($sub['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $sub['nama'] ?>" style="width:100%; height:225px">
@@ -60,6 +62,8 @@
       </div>
     </div>
   </div>
+  </div>
+<div class="col-md-9">
   <?php if($produk_data) : ?>
   <?php foreach($produk_data as $album) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $album['gambar'])) : ?>
@@ -94,5 +98,7 @@
   <?php endif ?>
   <?php endforeach ?>
   <?php endif ?>
+  </div>
+</div>
 </div>
 <!-- End Our Team Section --> 
