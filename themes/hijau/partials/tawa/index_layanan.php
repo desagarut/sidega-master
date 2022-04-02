@@ -2,11 +2,11 @@
 
 <!-- ======= Portfolio Details Section ======= -->
 
-<div class="section-title" data-aos="fade-up">
+<div class="section-title">
 <section id="portfolio-details" class="portfolio-details">
   <div class="row">
   <div class="col-md-8">
-    <div class="portfolio-details-container" data-aos="fade-right" data-aos-delay="300">
+    <div class="portfolio-details-container">
       <div class="owl-carousel portfolio-details-carousel">
         <?php if($produk_data) : ?>
         <?php foreach($produk_data as $album) : ?>
