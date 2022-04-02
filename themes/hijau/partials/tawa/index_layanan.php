@@ -39,8 +39,7 @@
   </strong></h2>
 <div class="col-md-12">
 <div class="row">
-<div class="col-md-3">
-  <div class="col-lg-3 col-md-6 align-items-stretch">
+<div class="col-lg-3 col-md-6 align-items-stretch">
     <div class="member" data-aos="fade-right">
       <div class="member-img"> <img src="<?= AmbilGaleri($sub['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $sub['nama'] ?>" style="width:100%; height:225px">
         <div class="member-info" style="background-color:#AEFFAE">
@@ -61,7 +60,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 <div class="col-md-9">
   <?php if($produk_data) : ?>
