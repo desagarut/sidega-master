@@ -21,7 +21,7 @@
     </div>
   </div>
 </section><!-- End Breadcrumbs -->
-<section id="team" class="team section-bg" style="padding-top:60px">
+<section id="team" class="team section-bg">
   <div class="container">
         	<div class="row">
             <div class="col-lg-12 entries">
