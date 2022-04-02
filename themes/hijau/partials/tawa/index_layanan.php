@@ -37,8 +37,8 @@
 <h2><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong class="color:#e80368">
   <?= $sub['nama'] ?>
   </strong></h2>
-<div class="col-md-12">
 <div class="row">
+<div class="col-md-12">
 <div class="col-lg-3 col-md-6 align-items-stretch">
     <div class="member" data-aos="fade-right">
       <div class="member-img"> <img src="<?= AmbilGaleri($sub['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $sub['nama'] ?>" style="width:100%; height:225px">
@@ -66,7 +66,7 @@
   <?php foreach($produk_data as $album) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $album['gambar'])) : ?>
   <?php $link = site_url('first/produk_show/'.$album['id']) ?>
-  <div class="col-lg-4 col-md-6 align-items-stretch  owl-carousel portfolio-details-carousel">
+  <div class="col-lg-4 col-md-6 align-items-stretch owl-carousel portfolio-details-carousel">
     <div class="member" data-aos="fade-up">
       <div class="member-img"> <img src="<?= AmbilGaleri($album['gambar'],'kecil') ?>" class="img-fluid" alt="<?= $album['nama'] ?>" style="width:100%; height:225px">
         <div class="social"> <a href="https://youtube.com/channel/<?= $sub['youtube'] ?>" target="_blank"><i class="icofont-youtube"></i></a> <a href="<?= $sub['website'] ?>"><i class="icofont-globe" target="_blank"></i></a> <a href="https://facebook.com/<?= $sub['fb'] ?>" target="_blank"><i class="icofont-facebook"></i></a> <a href="https://instagram.com/<?= $sub['ig'] ?>" target="_blank"><i class="icofont-instagram"></i></a> <a href="phone:<?= $sub['no_hp_pengelola'] ?>" target="_blank"><i class="icofont-phone"></i></a> </div>
