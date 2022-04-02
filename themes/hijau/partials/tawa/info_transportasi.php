@@ -1,6 +1,6 @@
 <!-- ======= Features Section ======= -->
 
-<div class="row" data-aos="fade-left" data-aos-delay="300">
+<div class="row" style="border:10px 10px 10px 10px">
   <?php $this->load->view($folder_themes .'/partials/toko_warga/peta_view.php') ?>
 </div>
 <style type='text/css'>
