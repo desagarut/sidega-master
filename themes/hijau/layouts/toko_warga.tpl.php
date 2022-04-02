@@ -10,6 +10,17 @@
 
 	<?php $this->load->view($folder_themes .'/commons/header') ?>
     
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>Artikel</h5>
+      <ol>
+        <li><a href="<?= site_url("first"); ?>">Home</a></li>
+        <li><?= $heading ?></li>
+      </ol>
+    </div>
+  </div>
+</section><!-- End Breadcrumbs -->
 <section id="team" class="team section-bg" style="padding-top:60px">
   <div class="container">
         	<div class="row">
