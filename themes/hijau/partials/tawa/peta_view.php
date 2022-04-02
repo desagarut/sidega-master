@@ -39,12 +39,11 @@ function initMap() {
 	height: 350px;
 	border: none;
 	margin-top: auto;
-	padding-top:20px;
 }
 </style>
 
-<div class="col-sm-12">
-  <div id="map_penduduk" style="padding-top:10px"></div>
+<div class="col-sm-12" style="padding-top:20px">
+  <div id="map_penduduk"></div>
   <div class="col-lg-12 col-md-4 mt-1">
     <div class="icon-box">
       <marquee behavior="alternate" scrollamount="0.5">
