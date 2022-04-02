@@ -1,7 +1,7 @@
 <!-- ======= Features Section ======= -->
 
 <div class="row" data-aos="fade-left" data-aos-delay="300">
-  <?php $this->load->view($folder_themes .'/partials/toko_warga/peta_view.php') ?>
+  <?php $this->load->view($folder_themes .'/partials/wisata/peta_view.php') ?>
 </div>
 <style type='text/css'>
 body img{
