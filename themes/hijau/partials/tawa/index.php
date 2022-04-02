@@ -47,7 +47,7 @@
 <div class="row">
 <div class="col-md-3">
 </div>
-<div class="col-md-9 portfolio-details">
+<div class="col-md-9">
   <?php if($main) : ?>
   <?php foreach($main as $data) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])) : ?>
