@@ -15,6 +15,7 @@
 		$this->load->view($folder_themes .'/partials/slider');
 	}*/
 ?>
+<?php $this->load->view($folder_themes .'/partials/running_text') ?>
 <?php $this->load->view($folder_themes .'/partials/slider') ?>
 <?php // $this->load->view($folder_themes .'/partials/toko_warga/slider') ?>
 <?php $this->load->view($folder_themes .'/partials/tentang') ?>

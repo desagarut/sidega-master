@@ -645,6 +645,62 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Running Text
+--------------------------------------------------------------*/
+.runningtext {
+  padding: 5px 0;
+  background: none;
+  min-height: 40px;
+  margin-top: 60px;
+}
+
+.runningtext h2 {
+  font-size: 26px;
+  font-weight: 300;
+  color:#666;
+}
+
+.runningtext ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #666;
+}
+
+.runningtext ol a {
+  color: #666;
+}
+
+.runningtext ol li + li {
+  padding-left: 10px;
+}
+
+.runningtext ol li + li::before {
+  display: inline-block;
+  padding-right: 10px;
+  color: #666;
+  content: "|";
+}
+
+@media (max-width: 991px) {
+  .runningtext {
+    margin-top: 58px;
+  }
+  .runningtext .d-flex {
+    display: block !important;
+  }
+  .runningtext ol {
+    display: block;
+  }
+  .runningtext ol li {
+    display: inline-block;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
 .services .icon-box {

@@ -5,11 +5,6 @@
 <div class="container">
   <section id="portfolio-details" class="portfolio-details">
     <div class="row">
-      <div class="col-md-12" style="padding-top:10px">
-        <?php $this->load->view($folder_themes .'/partials/running_text') ?>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-md-8">
         <div class="portfolio-details-container" data-aos="fade-right">
           <div class="owl-carousel portfolio-details-carousel">
