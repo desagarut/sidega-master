@@ -2,7 +2,7 @@
 
 <!-- ======= Portfolio Details Section ======= -->
 
-<div class="section-title" data-aos="fade-up">
+<div class="section-title">
   <section id="portfolio-details" class="portfolio-details">
     <div class="row">
       <div class="col-md-8">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-    <div class="col-md-4" style="padding-top:10px;">
+      <div class="col-md-4" style="padding-top:10px;">
         <?php $this->load->view($folder_themes .'/partials/tukang/info_tukang.php') ?>
       </div>
     </div>
