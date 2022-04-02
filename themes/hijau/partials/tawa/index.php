@@ -59,7 +59,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-9">
+  <div class="row">
   <?php if($main) : ?>
   <?php foreach($main as $data) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])) : ?>
