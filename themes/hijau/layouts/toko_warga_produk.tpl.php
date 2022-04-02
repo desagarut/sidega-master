@@ -16,7 +16,8 @@
       <h5>Toko Warga</h5>
       <ol>
         <li><a href="<?= site_url("first"); ?>">Home</a></li>
-        <li>Toko Warga Produk</li>
+        <li><a href="<?= site_url("first/toko_show"); ?>">Home</a></li>
+        <li>Produk</li>
       </ol>
     </div>
   </div>
