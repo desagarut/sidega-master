@@ -47,7 +47,7 @@
 
 <div class="row">
     <div class="col-md-3 align-items-stretch owl-carousel portfolio-details-carousel">
-         <div class="member" data-aos="fade-up">
+         <div class="member">
           <div class="member-img"> <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/transport.png" ) ?>" class="img-fluid" alt="" style="width:100%; height:225px"> </div>
           <div class="member-info" style="background-color:#B7FFDB">
             <h4> <strong style="color:#C00">TAWA</strong>: TRANSPORTASI WARGA </h4>
