@@ -47,7 +47,7 @@
 <div class="row">
 <div class="col-md-3">
 </div>
-<div class="col-md-9 align-items-stretch owl-carousel portfolio-details-carousel">
+<div class="col-md-9 align-items-stretch portfolio-details-carousel">
   <?php if($main) : ?>
   <?php foreach($main as $data) : ?>
   <?php if(is_file(LOKASI_GALERI . "kecil_" . $data['gambar'])) : ?>
