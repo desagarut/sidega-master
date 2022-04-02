@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="padding-top:10px;">
       <?php $this->load->view($folder_themes .'/partials/toko_warga/info_towa.php') ?>
     </div>
   </div>
