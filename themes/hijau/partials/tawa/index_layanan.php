@@ -34,6 +34,16 @@
     </div>
   </div>
 </section>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="member" data-aos="fade-up">
+      <h4><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong style="color:#060"> <?= $sub['nama'] ?>
+        </strong></h4>
+    </div>
+  </div>
+</div>
+
 <h2><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong class="color:#e80368">
   <?= $sub['nama'] ?>
   </strong></h2>
