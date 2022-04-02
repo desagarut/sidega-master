@@ -44,10 +44,6 @@
   </div>
 </div>
 
-<h2><i class="ri-store-2-fill" style="color:#e80368;"></i> Daftar Layanan <strong class="color:#e80368">
-  <?= $sub['nama'] ?>
-  </strong></h2>
-  
 <div class="row">
     <div class="col-md-3 align-items-stretch owl-carousel portfolio-details-carousel">
         <div class="member">
