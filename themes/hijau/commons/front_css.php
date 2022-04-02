@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/boxicons/css/boxicons.min.css"  ) ?>">
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/owl.carousel/assets/owl.carousel.min.css" ) ?>">
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/venobox/venobox.css"  ) ?>">
-<link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/aos/aos.css"  ) ?>">
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/animate.css/animate.min.css" ) ?>" >
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/swiper/swiper-bundle.min.css" ) ?>" >
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/vendor/glightbox/css/glightbox.min.css" ) ?>" >
@@ -24,4 +23,4 @@
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/bootstrap.min.css")?> />
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/LineIcons.3.0.css")?> />
 <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/tiny-slider.css")?> />
-<link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/glightbox.min.css")?> />
+<link rel="stylesheet" href=""<?= base_url("$this->theme_folder/$this->theme/assets/css/glightbox.min.css")?> />

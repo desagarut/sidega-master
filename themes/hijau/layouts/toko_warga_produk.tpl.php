@@ -10,18 +10,18 @@
 
 	<?php $this->load->view($folder_themes .'/commons/header') ?>
     
-<section id="breadcrumbs" class="breadcrumbs">
+<section id="breadcrumbs2" class="breadcrumbs2">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
-      <h5>Artikel</h5>
+      <h5>Toko Warga</h5>
       <ol>
         <li><a href="<?= site_url("first"); ?>">Home</a></li>
-        <li><?= $heading ?></li>
+        <li>Toko Warga Produk</li>
       </ol>
     </div>
   </div>
 </section><!-- End Breadcrumbs -->
-<section id="team" class="team section-bg" style="padding-top:60px">
+<section id="team" class="team">
   <div class="container">
         	<div class="row">
             <div class="col-lg-12 entries">

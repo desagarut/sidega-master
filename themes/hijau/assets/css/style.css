@@ -643,6 +643,61 @@ section {
     display: inline-block;
   }
 }
+/*--------------------------------------------------------------
+# Breadcrumbs2
+--------------------------------------------------------------*/
+.breadcrumbs2 {
+  padding: 15px 0;
+  background: none;
+  min-height: 40px;
+  margin-top: 70px;
+}
+
+.breadcrumbs2 h2 {
+  font-size: 26px;
+  font-weight: 300;
+  color:#666;
+}
+
+.breadcrumbs2 ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #666;
+}
+
+.breadcrumbs2 ol a {
+  color: #666;
+}
+
+.breadcrumbs2 ol li + li {
+  padding-left: 10px;
+}
+
+.breadcrumbs2 ol li + li::before {
+  display: inline-block;
+  padding-right: 10px;
+  color: #666;
+  content: "|";
+}
+
+@media (max-width: 991px) {
+  .breadcrumbs2 {
+    margin-top: 58px;
+  }
+  .breadcrumbs2 .d-flex {
+    display: block !important;
+  }
+  .breadcrumbs2 ol {
+    display: block;
+  }
+  .breadcrumbs2 ol li {
+    display: inline-block;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Running Text
