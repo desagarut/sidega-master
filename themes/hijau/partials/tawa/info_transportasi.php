@@ -1,6 +1,6 @@
 <!-- ======= Features Section ======= -->
 
-<div class="row" style="border:10px 10px 10px 10px">
+<div class="row">
   <?php $this->load->view($folder_themes .'/partials/toko_warga/peta_view.php') ?>
 </div>
 <style type='text/css'>

@@ -43,7 +43,7 @@ function initMap() {
 </style>
 
 <div class="col-sm-12">
-  <div id="map_penduduk"></div>
+  <div id="map_penduduk" style="padding-top:10px"></div>
   <div class="col-lg-12 col-md-4 mt-1">
     <div class="icon-box">
       <marquee behavior="alternate" scrollamount="0.5">
