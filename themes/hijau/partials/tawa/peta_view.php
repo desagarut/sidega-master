@@ -39,6 +39,7 @@ function initMap() {
 	height: 350px;
 	border: none;
 	margin-top: auto;
+	padding-top:20px;
 }
 </style>
 
