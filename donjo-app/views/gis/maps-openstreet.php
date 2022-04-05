@@ -205,7 +205,7 @@
 					'<td style="padding-left:2px"><font size="2.5" style="bold">Nama : '+penduduk[x].nama+'</font> - '+penduduk[x].sex+
 					'<p>'+penduduk[x].umur+' Tahun '+penduduk[x].agama+'</p>'+
 					'<p>'+penduduk[x].alamat+'</p>'+
-					'<p><a href="<?=site_url("penduduk/detail/1/0/")?>'+penduduk[x].id+'" target="ajax-modalx" rel="content" header="Rincian Data '+penduduk[x].nama+'" >Data Rincian</a></p></td>'+
+					'<p><a href="<?=site_url("penduduk/detail/1/0/")?>'+penduduk[x].id+'" target="ajax-modalx" rel="content" header="Rincian Data '+penduduk[x].nama+'" >LIHAT DETAIL</a></p></td>'+
 					'</tr></table>';
 					//Menambahkan point ke marker
 					semua_marker.push(turf.point([Number(penduduk[x].lng), Number(penduduk[x].lat)], {content: content, style: point_style}));
