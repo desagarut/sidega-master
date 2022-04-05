@@ -161,7 +161,7 @@
 		cetakPeta(peta_wilayah);
 
 		//Menambahkan Legenda Ke Peta
-		var legenda_desa = L.control({position: 'bottomright'});
+/*		var legenda_desa = L.control({position: 'bottomright'});
 		var legenda_dusun = L.control({position: 'bottomright'});
 		var legenda_rw = L.control({position: 'bottomright'});
 		var legenda_rt = L.control({position: 'bottomright'});
@@ -195,7 +195,7 @@
 		    peta_wilayah.removeControl(legenda_rt);
 		  }
 		});
-
+*/
 		//Menampilkan baseLayers dan overlayLayers
 		L.control.layers(baseLayers, overlayLayers, {position: 'topleft', collapsed: true}).addTo(peta_wilayah);
 
