@@ -26,19 +26,19 @@ window.onload = function()
 	<?php endif; ?>
 
 	//WILAYAH DUSUN
-  <?php if (!empty($dusun_gis)): ?>
-    set_marker(marker_dusun, '<?=addslashes(json_encode($dusun_gis))?>', '#FFFF00', '<?=ucwords($this->setting->sebutan_dusun)?>', 'dusun');
-  <?php endif; ?>
+	<?php if (!empty($dusun_gis)): ?>
+		set_marker(marker_dusun, '<?=addslashes(json_encode($dusun_gis))?>', '<?=ucwords($this->setting->sebutan_dusun)?>', 'dusun', "<?= favico_desa()?>");
+	<?php endif; ?>
 
-  //WILAYAH RW
-  <?php if (!empty($rw_gis)): ?>
-    set_marker(marker_rw, '<?=addslashes(json_encode($rw_gis))?>', '#8888dd', 'RW', 'rw');
-  <?php endif; ?>
+	//OVERLAY WILAYAH RW
+	<?php if (!empty($rw_gis)): ?>
+		set_marker(marker_rw, '<?=addslashes(json_encode($rw_gis))?>', 'RW', 'rw', "<?= favico_desa()?>");
+	<?php endif; ?>
 
-  //WILAYAH RT
-  <?php if (!empty($rt_gis)): ?>
-    set_marker(marker_rt, '<?=addslashes(json_encode($rt_gis))?>', '#008000', 'RT', 'rt');
-  <?php endif; ?>
+	//OVERLAY WILAYAH RT
+	<?php if (!empty($rt_gis)): ?>
+		set_marker(marker_rt, '<?=addslashes(json_encode($rt_gis))?>', 'RT', 'rt', "<?= favico_desa()?>");
+	<?php endif; ?>
 
 	//2. Menampilkan overlayLayers Peta Semua Wilayah
   <?php if (!empty($wil_atas['path'])): ?>
