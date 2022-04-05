@@ -69,7 +69,7 @@
 		cetakPeta(mymap);
 
     //Menambahkan Legenda Ke Peta
-    var legenda_desa = L.control({position: 'bottomright'});
+   /* var legenda_desa = L.control({position: 'bottomright'});
     var legenda_dusun = L.control({position: 'bottomright'});
     var legenda_rw = L.control({position: 'bottomright'});
     var legenda_rt = L.control({position: 'bottomright'});
@@ -103,7 +103,7 @@
         mymap.removeControl(legenda_rt);
       }
     });
-
+*/
     // Menampilkan OverLayer Area, Garis, Lokasi
     layerCustom = tampilkan_layer_area_garis_lokasi(mymap, '<?=addslashes(json_encode($area))?>', '<?=addslashes(json_encode($garis))?>', '<?=addslashes(json_encode($lokasi))?>', '<?= base_url().LOKASI_SIMBOL_LOKASI?>', '<?= base_url().LOKASI_FOTO_AREA?>', '<?= base_url().LOKASI_FOTO_GARIS?>', '<?= base_url().LOKASI_FOTO_LOKASI?>');
 
