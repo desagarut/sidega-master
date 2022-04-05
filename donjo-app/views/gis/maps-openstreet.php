@@ -12,7 +12,7 @@
 			var posisi = wilayah_desa[0][0];
 			var zoom = <?=$desa['zoom'] ?: 10?>;
 		<?php else: ?>
-			var posisi = [-1.8785136045360042,78.05561483728009];
+			var posisi = [-7.2025712,107.8852316];
 			var zoom   = 10;
 		<?php endif; ?>
 
