@@ -1,22 +1,28 @@
 <script>
-	$( function() {
-		$( "#cari" ).autocomplete( {
-			source: function( request, response ) {
-				$.ajax( {
-					type: "POST",
-					url: '<?= site_url("penduduk/autocomplete"); ?>',
-					dataType: "json",
-					data: {
-						cari: request.term
-					},
-					success: function( data ) {
-						response( JSON.parse( data ));
-					}
-				} );
-			},
-			minLength: 2,
-		} );
+<script>
+$(document).ready(function()
+{
+	$('#cari').focus();
+});
+
+$( function() {
+	$( "#cari" ).autocomplete( {
+		source: function( request, response ) {
+			$.ajax( {
+				type: "POST",
+				url: '<?= site_url("penduduk/autocomplete"); ?>',
+				dataType: "json",
+				data: {
+					cari: request.term
+				},
+				success: function( data ) {
+					response( JSON.parse( data ));
+				}
+			} );
+		},
+		minLength: 2,
 	} );
+} );
 </script>
 
 <style>
@@ -197,7 +203,9 @@
 														<td class="padat">
 															<div class="user-panel">
 																<div class="image2">
-																	<img src="<?= ! empty($data['foto']) ? AmbilFoto($data['foto']) : base_url('assets/files/user_pict/kuser.png') ?>" style="width:40px; height:45px" class="img-circle" alt="Foto Penduduk"/>
+																	<img class="img-circle" alt="Foto Penduduk"
+																		src="<?= AmbilFoto($data['foto'], '', $data['id_sex']) ?>"
+																	/>
 																</div>
 															</div>
 														</td>
