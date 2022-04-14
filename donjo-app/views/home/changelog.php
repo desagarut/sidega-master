@@ -10,6 +10,8 @@
                         </div>
 					</div>
 					<div class="box-body text-center scroller">
+                    <p>Sistem menggunakan Versi <?= AmbilVersi()?>
+                    </p>
                     </div>
                     <div class="box-footer text-center">
                     	
