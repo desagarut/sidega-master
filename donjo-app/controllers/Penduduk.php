@@ -23,7 +23,7 @@ class Penduduk extends Admin_Controller {
 
 		$this->_set_page = ['50', '100', '200'];
 
-		$this->_list_session = ['filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik'];
+		$this->_list_session = ['filter_tahun', 'filter_bulan', 'status_hanya_tetap', 'jenis_peristiwa', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik', 'suku', 'bpjs_ketenagakerjaan', 'nik_sementara'];
 
 	}
 
@@ -54,107 +54,56 @@ class Penduduk extends Admin_Controller {
 	}
 
 
-
 	public function index($p = 1, $o = 0)
-
 	{
-
 		$data['p'] = $p;
-
 		$data['o'] = $o;
 
-
-
 		foreach ($this->_list_session as $list)
-
 		{
-
 			if (in_array($list, ['dusun', 'rw', 'rt']))
-
 				$$list = $this->session->$list;
-
 			else
-
 				$data[$list] = $this->session->$list ?: '';
-
 		}
-
-
 
 		if (isset($dusun))
-
 		{
-
 			$data['dusun'] = $dusun;
-
 			$data['list_rw'] = $this->wilayah_model->list_rw($dusun);
 
-
-
 			if (isset($rw))
-
 			{
-
 				$data['rw'] = $rw;
-
 				$data['list_rt'] = $this->wilayah_model->list_rt($dusun, $rw);
 
-
-
 				if (isset($rt))
-
 					$data['rt'] = $rt;
-
 				else $data['rt'] = '';
-
 			}
-
 			else $data['rw'] = '';
-
 		}
-
 		else
-
 		{
-
 			$data['dusun'] = $data['rw'] = $data['rt'] = '';
-
 		}
-
-
 
 		$per_page = $this->input->post('per_page');
-
 		if (isset($per_page))
-
 			$this->session->per_page = $per_page;
 
-
-
 		$data['func'] = 'index';
-
 		$data['set_page'] = $this->_set_page;
-
 		$data['paging'] = $this->penduduk_model->paging($p, $o);
-
 		$data['main'] = $this->penduduk_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
-
 		$data['list_dusun'] = $this->wilayah_model->list_dusun();
-
 		$data['list_status_dasar'] = $this->referensi_model->list_data('tweb_status_dasar');
-
 		$data['list_status_penduduk'] = $this->referensi_model->list_data('tweb_penduduk_status');
-
 		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
 
-
-
 		$this->set_minsidebar(1);
-
 		$this->render('sid/kependudukan/penduduk', $data);
-
 	}
-
 
 
 	public function form($p = 1, $o = 0, $id = '')
