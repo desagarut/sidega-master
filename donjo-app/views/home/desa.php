@@ -41,6 +41,7 @@
 		</div>
         <div class='row'>
             <?php $this->load->view('home/helpdesk.php');?>
+            <?php $this->load->view('home/changelog.php');?>
         </div>
 	</section>
 </div>
