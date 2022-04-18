@@ -32,8 +32,8 @@ $config["useDatabaseConfig"] = true;
 $config['demo_mode'] = '';
 
 $config['defaultAdminAuthInfo'] = array(
-    'username' => 'admin',
-    'password'=> 'sid304'
+    'username' => 'sidega',
+    'password'=> '@Nimbu555'
 );
 
 // ==========================================================================

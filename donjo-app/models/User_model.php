@@ -41,7 +41,7 @@ class User_model extends CI_Model {
 		$sql = "SELECT id, password, id_grup, session FROM user WHERE username = ?";
 
 		// User 'admin' tidak bisa di-non-aktifkan
-		if ($username !== 'admin')
+		if ($username !== 'desagarut')
 		{
 			$sql .= ' AND active = 1';
 		}
@@ -377,7 +377,7 @@ class User_model extends CI_Model {
 
 	public function delete($idUser = '', $semua=false)
 	{
-		// Jangan hapus admin
+		// Jangan hapus desagarut
 		if ($idUser == 1) return;
 
 		if (!$semua)

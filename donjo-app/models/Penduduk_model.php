@@ -259,7 +259,9 @@ class Penduduk_model extends MY_Model {
 		LEFT JOIN tweb_sakit_menahun j ON u.sakit_menahun_id = j.id
 		LEFT JOIN log_penduduk log ON u.id = log.id_pend and log.id_detail in (2,3,4)
 		LEFT JOIN covid19_pemudik c ON c.id_terdata = u.id
-		LEFT JOIN ref_status_covid rc ON c.status_covid = rc.nama";
+		LEFT JOIN ref_status_covid rc ON c.status_covid = rc.nama
+		LEFT JOIN user ux ON u.updated_by = ux.id
+		LEFT JOIN user ucreate ON u.created_by = ucreate.id";
 
 		// TODO: ubah ke query builder
 		// Yg berikut hanya untuk menampilkan peserta bantuan
@@ -329,7 +331,7 @@ class Penduduk_model extends MY_Model {
 			$select_sql .= 'rcb.id as penerima_bantuan,';
 		}
 
-		$select_sql .= "u.id, u.nik, u.tanggallahir, u.tempatlahir, u.foto, u.status, u.status_dasar, u.id_kk, u.nama, u.nama_ayah, u.nama_ibu, a.dusun, a.rw, a.rt, d.alamat, d.no_kk AS no_kk, u.kk_level, u.tag_id_card, u.created_at, rc.id as status_covid,
+		$select_sql .= "u.id, u.nik, u.tanggallahir, u.tempatlahir, u.foto, u.status, u.status_dasar, u.id_kk, u.nama, u.nama_ayah, u.nama_ibu, a.dusun, a.rw, a.rt, d.alamat, d.no_kk AS no_kk, u.kk_level, u.tag_id_card, u.created_at, u.created_at, rc.id as status_covid,
 			(CASE
 				when u.status_kawin IS NULL then ''
 				when u.status_kawin <> 2 then k.nama
@@ -341,7 +343,7 @@ class Penduduk_model extends MY_Model {
 			end) as kawin,
 			(SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`tanggallahir`)), '%Y')+0 FROM tweb_penduduk WHERE id = u.id) AS umur,
 			(SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(log.tgl_peristiwa)-TO_DAYS(u.tanggallahir)), '%Y')+0) AS umur_pada_peristiwa,
-			x.nama AS sex, sd.nama AS pendidikan_sedang, n.nama AS pendidikan, p.nama AS pekerjaan, g.nama AS agama, m.nama AS gol_darah, hub.nama AS hubungan, b.no_kk AS no_rtm, b.id AS id_rtm
+			x.nama AS sex, sd.nama AS pendidikan_sedang, n.nama AS pendidikan, p.nama AS pekerjaan, g.nama AS agama, m.nama AS gol_darah, hub.nama AS hubungan, b.no_kk AS no_rtm, b.id AS id_rtm, ux.nama as nama_pengubah, ucreate.nama as nama_pendaftar
 		";
 		//Main Query
 		$list_data_sql = $this->list_data_sql();
@@ -360,6 +362,8 @@ class Penduduk_model extends MY_Model {
 			case 8: $order_sql = ' ORDER BY umur DESC'; break;
 			case 9: $order_sql = ' ORDER BY created_at'; break;
 			case 10: $order_sql = ' ORDER BY created_at DESC'; break;
+			case 11: $order_sql = ' ORDER BY created_by'; break;
+			case 12: $order_sql = ' ORDER BY created_by DESC'; break;
 			default:$order_sql = ' ORDER BY CONCAT(d.no_kk, u.kk_level)';
 		}
 

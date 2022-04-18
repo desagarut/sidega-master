@@ -142,7 +142,7 @@ $( function() {
 												<th>Pendidikan</th>
 												<th >Pekerjaan</th>
 												<th>Perkawinan</th>
-												<!--<th><? //= url_order($o, "{$this->controller}/{$func}/$p", 9, 'Tgl Terdaftar'); ?></th>-->
+												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 11, 'Di Input Oleh'); ?></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -233,7 +233,7 @@ $( function() {
 														<td><?= $data['pendidikan']; ?></td>
 														<td><?= $data['pekerjaan']; ?></td>
 														<td nowrap><?= $data['kawin']; ?></td>
-														<!--<td><?= tgl_indo($data['created_at']); ?></td>-->
+														<td><?= $data['nama_pendaftar']; ?><br/><?= $data['created_at']; ?></td>
 													</tr>
 												<?php endforeach; ?>
 											<?php else: ?>
