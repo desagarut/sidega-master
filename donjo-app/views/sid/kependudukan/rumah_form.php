@@ -45,7 +45,8 @@ $(document).ready(function() {
 									<button type="button" class="btn btn-info btn-box"  id="file_browser"><i class="fa fa-search"></i> Browse</button>
 								</span>
 							</div>
-							<p class="help-block">Kosongkan jika tidak ingin mengubah dokumen.</p>
+							<p class="help-block">Kosongkan jika tidak ingin mengubah dokumen.<br/>
+                            Batas maksimal pengunggahan berkas <strong><?= max_upload() ?> MB.</strong></p>
 						</div>
 						<div class="form-group" id="rumah_penduduk">
 							<div class="input-group input-group-sm">
