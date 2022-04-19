@@ -525,7 +525,7 @@
                                   <th width="10%">Aksi</th>
                                   <th width="20%">Nama </th>
                                   <th width="40%">Foto</th>
-                                  <th width="15%">File</th>
+                                  <!--<th width="15%">File</th>-->
                                   <th width="15%">Tanggal Upload</th>
                                 </tr>
                                 <?php foreach ($list_rumah as $key => $data): ?>
@@ -538,9 +538,9 @@
                                     <?php endif ?></td>
                                   <td><?= $data['nama']?></td>
                                   <td><img class="img-responsive img-circle" src="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" alt="Foto Rumah Penduduk"></td>
-                                  <td><a href="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" >
+                                  <!--<td><a href="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" >
                                     <?= $data['satuan']; ?>
-                                    </a></td>
+                                    </a></td>-->
                                   <td><?= tgl_indo2($data['tgl_upload']); ?></td>
                                 </tr>
                                 <?php endforeach;?>
