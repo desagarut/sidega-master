@@ -221,7 +221,7 @@ class Data_sppt extends Admin_Controller {
 		$_SESSION['per_page'] = $_POST['per_page'] ?: null;
 		$data['per_page'] = $_SESSION['per_page'];
 
-		$data['func'] = 'index';
+		$data['func'] = 'tagihan_daftar';
 		$data['set_page'] = $this->set_page;
 		$data['paging']  = $this->data_sppt_model->paging_data_tagihan($page);
 		$data["list_tagihan"] = $this->data_sppt_model->list_tagihan($data['paging']->offset, $data['paging']->per_page);
