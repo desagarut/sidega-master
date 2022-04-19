@@ -523,10 +523,10 @@
                                 <tr>
                                   <th class="padat">No</th>
                                   <th width="10%">Aksi</th>
-                                  <th width="20%">Nama </th>
-                                  <th width="40%">Foto</th>
-                                  <!--<th width="15%">File</th>-->
-                                  <th width="15%">Tanggal Upload</th>
+                                  <th width="40%">Nama </th>
+                                  <th width="50%">Foto</th>
+                                  <!--<th width="15%">File</th>
+                                  <th width="15%">Tanggal Upload</th>-->
                                 </tr>
                                 <?php foreach ($list_rumah as $key => $data): ?>
                                 <tr>
@@ -536,12 +536,13 @@
                                     <a href="<?= site_url("penduduk/rumah_form/$penduduk[id]/$data[id]")?>" class="btn bg-orange btn-box btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data" title="Ubah Data"  title="Ubah Data"><i class="fa fa-edit"></i></a></br>
                                     <a href="#" data-href="<?= site_url("penduduk/delete_rumah/$penduduk[id]/$data[id]")?>" class="btn bg-maroon btn-box btn-sm"  title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                     <?php endif ?></td>
-                                  <td><?= $data['nama']?></td>
+                                  <td><?= $data['nama']?><br/>
+                                  Tanggal Upload: <?= tgl_indo2($data['tgl_upload']); ?></td>
                                   <td><img class="img-responsive img-circle" src="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" alt="Foto Rumah Penduduk"></td>
                                   <!--<td><a href="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" >
                                     <?= $data['satuan']; ?>
-                                    </a></td>-->
-                                  <td><?= tgl_indo2($data['tgl_upload']); ?></td>
+                                    </a></td>
+                                  <td><?= tgl_indo2($data['tgl_upload']); ?></td>-->
                                 </tr>
                                 <?php endforeach;?>
                               </table>
@@ -585,10 +586,10 @@
                                 <tr>
                                   <th class="padat">No</th>
                                   <th width="10%">Aksi</th>
-                                  <th width="20%">Nama </th>
-                                  <th width="40%">Foto</th>
-                                  <th width="15%">File</th>
-                                  <th width="15%">Tanggal Upload</th>
+                                  <th width="40%">Nama </th>
+                                  <th width="50%">Foto</th>
+                                  <!--<th width="15%">File</th>
+                                  <th width="15%">Tanggal Upload</th>-->
                                 </tr>
                                 <?php foreach ($list_rumah as $key => $data): ?>
                                 <tr>
@@ -598,12 +599,13 @@
                                     <a href="<?= site_url("penduduk/rumah_form/$penduduk[id]/$data[id]")?>" class="btn bg-orange btn-box btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data" title="Ubah Data"  title="Ubah Data"><i class="fa fa-edit"></i></a></br>
                                     <a href="#" data-href="<?= site_url("penduduk/delete_rumah/$penduduk[id]/$data[id]")?>" class="btn bg-maroon btn-box btn-sm"  title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                     <?php endif ?></td>
-                                  <td><?= $data['nama']?></td>
+                                  <td><?= $data['nama']?><br/>
+                                  Tanggal Upload: <?= tgl_indo2($data['tgl_upload']); ?></td>
                                   <td><img class="img-responsive img-circle" src="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" alt="Foto Rumah Penduduk"></td>
-                                  <td><a href="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" >
+                                  <!--<td><a href="<?= base_url().LOKASI_RUMAH?><?= urlencode($data['satuan']); ?>" >
                                     <?= $data['satuan']; ?>
                                     </a></td>
-                                  <td><?= tgl_indo2($data['tgl_upload']); ?></td>
+                                  <td><?= tgl_indo2($data['tgl_upload']); ?></td>-->
                                 </tr>
                                 <?php endforeach;?>
                               </table>
