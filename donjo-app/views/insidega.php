@@ -47,7 +47,7 @@
           <div class="col-md-4">
             <div class="card-body">
               <div class="brand-wrapper" align="center">
-                <a href="<?=site_url('first'); ?>"><img src="<?=gambar_desa($header['logo']);?>" alt="<?=$header['nama_desa']?>" class="img-responsive"/></a>
+                <a href="<?=site_url('first'); ?>"><img src="<?=gambar_desa($header['logo']);?>" alt="<?=$header['nama_desa']?>" class="img-responsive" style="max-width: 80px; max-height: 80px"/></a>
               </div>
               <h1 align="center" style="font-size:18px">Manajemen <?=ucwords($this->setting->sebutan_desa)?> <?=$header['nama_desa']?></h1>
                 <form id="validasi" class="login-form" action="<?=site_url('insidega/auth')?>" method="post" >
