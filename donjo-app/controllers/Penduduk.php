@@ -80,7 +80,6 @@ class Penduduk extends Admin_Controller {
 		$this->render('sid/kependudukan/penduduk', $data);
 	}
 
-
 	public function form($p = 1, $o = 0, $id = '')
 	{
 		// Reset kalau dipanggil dari luar pertama kali ($_POST kosong)

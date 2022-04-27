@@ -253,8 +253,10 @@ $( function() {
 		</div>
 	</section>
 </div>
+
 <?php $this->load->view('global/confirm_delete'); ?>
 <?php $this->load->view('global/konfirmasi'); ?>
+
 <div class='modal fade' id='confirm-status' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>

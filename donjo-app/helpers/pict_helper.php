@@ -65,6 +65,8 @@ define ('EXT_TOKO_PRODUK', serialize(array(
 	".jpg", ".jpeg", ".png", "application/x-download",	"application/pdf",
 )));
 
+// include 2D barcode class
+require_once 'vendor/html2pdf/vendor/tecnickcom/tcpdf/tcpdf_barcodes_2d_include.php';
 
 /**
 * Tambahkan suffix unik ke nama file
@@ -698,6 +700,7 @@ function UploadSimbol($fupload_name)
 	move_uploaded_file($_FILES["simbol"]["tmp_name"], $vfile_upload);
 }
 
+// Upload umum. Parameter lokasi dan file di $_FILES
 function AmbilDokumen($dokumen)
 {
 	$file_dokumen = base_url() . LOKASI_DOKUMEN . $dokumen;
