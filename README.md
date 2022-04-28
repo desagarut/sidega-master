@@ -1,4 +1,3 @@
 # SIDeGa
-Sistem Informasi Desa Garut
-Merupakan aplikasi sistem informasi desa yang dikembangkan menggunakan codeigniter3
-Tujuan pengembangan SIDeGa adalah untuk menginspirasi desa dan kelurahan di Kabupaten Garut agar memiliki sistem pencatatan dan pelaporan yang baik melalui memanfaatkan teknologi.
+SIDeGa atau Sistem Informasi Desa Garut, Merupakan sebuah aplikasi yang dikembangkan oleh komumitas desa garut dengan menggunakan framework codeigniter3.
+Tujuan pengembangan SIDeGa adalah untuk menginspirasi desa dan kelurahan di Kabupaten Garut agar memiliki data yang mudah dikelola, sehingga dapat membantu mempermudah pekerjaan administrasi desa baik dalam kegiatan pencatatan maupun pelaporan, serta memudahkan desa dalam menyusun perencanaan, pelaksanaan dan evaluasi suatu program atau kegiatan.
