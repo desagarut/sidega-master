@@ -1,5 +1,5 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-<script
+<script async
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVUVWZSy8N0A9brJyoe_3UiwBzUB9j8vE&callback=initMap">
 </script>
 
