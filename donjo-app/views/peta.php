@@ -1,7 +1,6 @@
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxsKE9ArOZcaNtsfXIMFqr4N-UCsmp-Ng&callback=initMap">
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVUVWZSy8N0A9brJyoe_3UiwBzUB9j8vE&callback=initMap">
 </script>
-
 
 <script>
 <?php if (!empty($wil_ini['lat'] && !empty($wil_ini['lng']))): ?>

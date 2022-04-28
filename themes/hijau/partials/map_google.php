@@ -1,10 +1,8 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-    async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxsKE9ArOZcaNtsfXIMFqr4N-UCsmp-Ng&callback=initMap"
-    defer
-></script>
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVUVWZSy8N0A9brJyoe_3UiwBzUB9j8vE&callback=initMap">
+</script>
 <script>
 
 var LokasiKantorDesa
