@@ -11,7 +11,7 @@ class Plan extends Admin_Controller {
 		$this->load->model('plan_lokasi_model');
 		$this->load->model('plan_area_model');
 		$this->load->model('plan_garis_model');
-		$this->modul_ini = 9;
+		$this->modul_ini = 305;
 		$this->sub_modul_ini = 8;
 	}
 

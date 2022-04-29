@@ -1,6 +1,4 @@
-<script async
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVUVWZSy8N0A9brJyoe_3UiwBzUB9j8vE&callback=initMap">
-</script>
+<script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v5.7/mapsJavaScriptAPI.js" async defer></script>
 
 <script>
 <?php if (!empty($wil_ini['lat'] && !empty($wil_ini['lng']))): ?>
