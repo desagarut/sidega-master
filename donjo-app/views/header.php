@@ -43,6 +43,7 @@
 		<link rel="stylesheet" href="<?= base_url()?>assets/css/skins/_all-skins.min.css">
 		<!-- Style Admin Modification Css -->
 		<link rel="stylesheet" href="<?= base_url()?>assets/css/admin-style.css">
+		
 		<!-- OpenStreetMap Css -->
 		<link rel="stylesheet" href="<?= base_url()?>assets/css/leaflet.css" />
 		<link rel="stylesheet" href="<?= base_url()?>assets/css/leaflet-geoman.css" />
