@@ -17,8 +17,7 @@ class Web extends Admin_Controller {
 
 		$this->load->model(['web_artikel_model', 'web_kategori_model']);
 		$this->_set_page = ['20', '50', '100'];
-		$this->modul_ini = 15;
-		$this->sub_modul_ini = 301;
+		$this->modul_ini = 13;
 	}
 
 	public function clear()
@@ -56,6 +55,7 @@ class Web extends Admin_Controller {
 		$data = $this->security->xss_clean($data);
 		$data['paging'] = $paging;
 
+		$this->sub_modul_ini = 47;
 		$this->set_minsidebar(1);
 		$this->render('web/artikel/table', $data);
 	}
