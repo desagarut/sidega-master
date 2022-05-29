@@ -177,7 +177,8 @@ class Penduduk extends Admin_Controller {
 		$data['penduduk_map'] = $this->penduduk_model->get_penduduk_map($id);
 		$data['desa'] = $this->config_model->get_data();
 		$sebutan_desa = ucwords($this->setting->sebutan_desa);
-
+		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
+		
 		$this->set_minsidebar(1);
 		$this->render('sid/kependudukan/penduduk_detail', $data);
 	}

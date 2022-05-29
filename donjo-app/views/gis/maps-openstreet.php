@@ -190,21 +190,22 @@
 				var content;
 				var point_style = L.icon({
 					iconUrl: '<?= base_url(LOKASI_SIMBOL_LOKASI) ?>penduduk.png',
-					iconSize: [25, 36],
+				//	iconUrl: '<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>',
+					iconSize: [27, 36],
 					iconAnchor: [13, 36],
 					popupAnchor: [0, -28],
 				});
 				for (var x = 0; x < jml; x++) {
 					if (penduduk[x].lat || penduduk[x].lng) {
-						foto = '<td><img src="' + AmbilFoto(penduduk[x].foto, "kecil_", penduduk[x].id_sex) + '" class="foto_pend"/></td>';
+						foto = '<td><img src="' + AmbilFoto(penduduk[x].foto, "kecil_", penduduk[x].id_sex) + '" class="foto_pend" style="width:150px; height="150px""/></td>';
 
 						//Konten yang akan ditampilkan saat marker diklik
 						content =
 							'<table border=0><tr>' + foto +
-							'<td style="padding-left:2px"><font size="2.5" style="bold">Nama : ' + penduduk[x].nama + '</font> - ' + penduduk[x].sex +
+							'<td style="padding-left:2px"><font size="2.5" style="bold">' + penduduk[x].nama + '</font> - ' + penduduk[x].sex +
 							'<p>' + penduduk[x].umur + ' Tahun ' + penduduk[x].agama + '</p>' +
 							'<p>' + penduduk[x].alamat + '</p>' +
-							'<p><a href="<?= site_url("penduduk/detail/1/0/") ?>' + penduduk[x].id + '" target="ajax-modalx" rel="content" header="Rincian Data ' + penduduk[x].nama + '" >LIHAT DETAIL</a></p></td>' +
+							'<p><a href="<?= site_url("penduduk/detail/1/0/") ?>' + penduduk[x].id + '" class="btn btn-box btn-default" target="ajax-modalx" rel="content" header="Rincian Data ' + penduduk[x].nama + '" >Lihat Detail</a></p></td>' +
 							'</tr></table>';
 						//Menambahkan point ke marker
 						semua_marker.push(turf.point([Number(penduduk[x].lng), Number(penduduk[x].lat)], {
@@ -412,9 +413,16 @@
 		formAction('mainform_map', '<?= site_url('gis') ?>/layer_keluarga');
 	}
 
-	function AmbilFoto(foto, ukuran = "kecil_") {
-		ukuran_foto = ukuran || null
-		file_foto = '<?= base_url() . LOKASI_USER_PICT; ?>' + ukuran_foto + foto;
+	function AmbilFoto(foto, ukuran = "kecil_", sex) {
+		//Jika penduduk ada foto, maka pakai foto tersebut
+		//Jika tidak, pakai foto default
+		if (foto) {
+			ukuran_foto = ukuran || null
+			file_foto = '<?= base_url() . LOKASI_USER_PICT; ?>' + ukuran_foto + foto;
+		} else {
+			file_foto = sex == '2' ? '<?= FOTO_DEFAULT_WANITA ?>' : '<?= FOTO_DEFAULT_PRIA ?>';
+		}
+
 		return file_foto;
 	}
 
@@ -424,6 +432,7 @@
 		return file_foto;
 	}
 </script>
+
 <div class="modal fade" id="modalKecil" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
 	<div class="modal-dialog modal-sm">
 		<div class='modal-content'>

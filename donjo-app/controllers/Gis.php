@@ -84,7 +84,6 @@ class Gis extends Admin_Controller {
 		}
 
 		$data['list_status_penduduk'] = $this->referensi_model->list_data('tweb_penduduk_status');
-		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
 		$data['list_dusun'] = $this->penduduk_model->list_dusun();
 		$data['wilayah'] = $this->penduduk_model->list_wil();
 		$data['desa'] = $this->config_model->get_data();
@@ -97,6 +96,8 @@ class Gis extends Admin_Controller {
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
 		$data['list_ref'] = $this->referensi_model->list_ref(STAT_PENDUDUK);
+		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
+		
 		$this->set_minsidebar(1);
 		$this->render('gis/maps-openstreet', $data);
 	}
@@ -130,6 +131,7 @@ class Gis extends Admin_Controller {
 	public function layer_penduduk()
 	{
 		$layer_penduduk = $this->input->post('layer_penduduk');
+
 		if ($layer_penduduk == "")
 			$_SESSION['layer_penduduk'] = 0;
 		else
@@ -137,6 +139,9 @@ class Gis extends Admin_Controller {
 			$_SESSION['layer_penduduk'] = 1;
 			$_SESSION['layer_keluarga'] = 0;
 		}
+		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
+		$data['penduduk'] = $this->penduduk_model->get_penduduk($id);
+
 		redirect('gis');
 	}
 
