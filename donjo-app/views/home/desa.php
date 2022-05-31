@@ -24,7 +24,7 @@
 	<section class='content' id="maincontent">
         <div class='row'>
 			<?php $this->load->view('home/peta.php');?>
-            <?php $this->load->view('home/rekap_sppt.php');?>
+            <?php $this->load->view('home/umkm.php');?>
             <?php //$this->load->view('home/program_bantuan.php');?>
 			<?php $this->load->view('home/layanan.php');?>
             
@@ -34,7 +34,7 @@
 			<?php //$this->load->view('home/layanan.php');?>
         </div>
         <div class='row'>
-            <?php $this->load->view('home/umkm.php');?>
+		<?php $this->load->view('home/rekap_sppt.php');?>
             <?php $this->load->view('home/warga_login.php');?>
 			<?php $this->load->view('home/aparat_login.php');?>
 			<?php $this->load->view('home/pengunjung.php');?>
