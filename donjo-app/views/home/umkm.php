@@ -1,4 +1,4 @@
-            <div class='col-md-3'>
+            <div class='col-md-4'>
 				<div class="box box-primary box-solid">
 					<div class="box-header with-border">
 						<h3 class="box-title">UMKM</h3>
