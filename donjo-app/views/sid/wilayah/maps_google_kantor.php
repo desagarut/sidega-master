@@ -9,7 +9,7 @@
 
 function initMap() {
 	var myLatlng = new google.maps.LatLng(center.lat, center.lng);
-	var mapOptions = { zoom:<?=$wil_ini['zoom']?>, center, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> }
+	var mapOptions = { zoom:14, center, mapTypeId:google.maps.MapTypeId.HYBRID }
 	var map = new google.maps.Map(document.getElementById("map_lokasi"), mapOptions);
 
 	// Place a draggable marker on the map
