@@ -34,7 +34,7 @@
                 <a href="<?= site_url("toko_warga")?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"  title="Kembali Ke Daftar Album"> <i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Toko </a> </div>
               </div>
               <div class="row">
-                <?php $this->load->view($folder_themes .'/toko_warga/peta_view.php') ?>
+                <?php $this->load->view($folder_themes .'/toko_warga/peta.php') ?>
               </div>
           </div>
       </div>

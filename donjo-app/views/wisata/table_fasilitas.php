@@ -31,7 +31,7 @@
               </div>
               
               <div class="row">
-                <?php $this->load->view($folder_themes .'/wisata/peta_view.php') ?>
+                <?php $this->load->view($folder_themes .'/wisata/peta.php') ?>
               </div>
           </div>
       </div>
