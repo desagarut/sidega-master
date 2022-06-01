@@ -2044,14 +2044,14 @@ class User_model extends CI_Model {
 				'status_desa' => array('b'),
 
 				// kependudukan
-				'penduduk' => array('b'),
-				'penduduk_detail_keluarga' => array('b'),
+				'penduduk' => array('b','u'),
+				'penduduk_detail_keluarga' => array('b','u'),
 				
 				// Penduduk
-				'penduduk_log' => array('b'),
-				'keluarga' => array('b'),
-				'rtm' => array('b'),
-				'kelompok' => array('b'),
+				'penduduk_log' => array('b','u'),
+				'keluarga' => array('b','u'),
+				'rtm' => array('b','u'),
+				'kelompok' => array('b,'u'),
 
 				// kelompok
 				'kelompok_master' => array('b'),
@@ -2078,7 +2078,7 @@ class User_model extends CI_Model {
 
 				// pertanahan
 				'data_persil' => array('b','u','h'),
-				'cdesa/clear' => array('b','u','h'),
+				'leterc/clear' => array('b','u','h'),
 				
 				// SPPT PBB
 				'data_sppt' => array('b','u','h'),
