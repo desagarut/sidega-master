@@ -788,7 +788,7 @@ class User_model extends CI_Model {
 
 				// pertanahan
 				'data_persil' => array('b','u','h'),
-				'cdesa/clear' => array('b','u','h'),
+				'leterc/clear' => array('b','u','h'),
 				
 				// SPPT PBB
 				'data_sppt' => array('b','u','h'),
@@ -2051,7 +2051,7 @@ class User_model extends CI_Model {
 				'penduduk_log' => array('b','u'),
 				'keluarga' => array('b','u'),
 				'rtm' => array('b','u'),
-				'kelompok' => array('b,'u'),
+				'kelompok' => array('b','u'),
 
 				// kelompok
 				'kelompok_master' => array('b'),
