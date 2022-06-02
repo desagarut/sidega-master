@@ -2044,7 +2044,7 @@ class User_model extends CI_Model {
 				'status_desa' => array('b'),
 
 				// kependudukan
-				'penduduk' => array('b','u'),
+				'penduduk' => array('b','u','h'),
 				'penduduk_detail_keluarga' => array('b','u'),
 				
 				// Penduduk
