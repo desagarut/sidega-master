@@ -1,0 +1,78 @@
+#!/usr/bin/php
+<?php
+
+$options = getopt('', array('root:'));
+
+while (strpos($argv[1], '--') === 0) {
+    unset($argv[1]);
+}
+$argv = array_values($argv);
+
+$in_filename = $argv[1];
+$out_filename = $argv[2];
+
+if (!$in_filename || !$out_filename) {
+    print "Usage: ./php2pdf [--root=/path/to/website/root] <filename.php> <outfile.pdf>\n";
+    exit(1);
+}
+
+ob_start();
+require_once($in_filename);
+$content = ob_get_clean();
+print "Loaded $in_filename\n";
+
+require_once(dirname(__FILE__).'/../html2pdf.class.php');
+
+try {
+    $orientation = 'P'; // portrait
+    $page_size = 'A4';
+    $display_mode = 'fullpage';
+
+    $initial_dir = getcwd();
+
+    $dir = dirname($in_filename);
+    if (!chdir($dir)) {
+        print "Failed to change current directory to '$dir'\n";
+        exit(2);
+    }
+
+    // First pass (calculating the number of pages)
+    print "Rendering (pass 1 of 2)...\n";
+    $html2pdf = new HTML2PDF($orientation, $page_size, 'en', true, 'UTF-8', 0);
+    $html2pdf->pdf->SetDisplayMode($display_mode);
+    $html2pdf->_isCalculationPass = true;
+    if (isset($options['root'])) {
+        $html2pdf->_rootPathForURLs = $options['root'];
+    }
+    $html2pdf->writeHTML($content);
+
+    $firstPages = $html2pdf->_firstPageInSet;
+    $maxPage = $html2pdf->_maxPage;
+
+    // Second pass
+    print "Rendering (pass 2 of 2)...\n";
+    $html2pdf = new HTML2PDF($orientation, $page_size, 'en', true, 'UTF-8', 0);
+    $html2pdf->pdf->SetDisplayMode($display_mode);
+
+    $html2pdf->_isCalculationPass = false;
+    if (isset($options['root'])) {
+        $html2pdf->_rootPathForURLs = $options['root'];
+    }
+
+    $html2pdf->_firstPageInSet = $firstPages;
+    $html2pdf->_maxPage = $maxPage;
+
+    $html2pdf->writeHTML($content);
+
+    if (!chdir($initial_dir)) {
+        print "Failed to change current directory to '$initial_dir'\n";
+        exit(2);
+    }
+
+    $html2pdf->Output($out_filename, 'F');
+    print "Saved PDF to $out_filename\n";
+
+} catch (HTML2PDF_exception $e) {
+    echo $e;
+    exit(3);
+}
