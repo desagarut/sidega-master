@@ -36,7 +36,6 @@
 						<th>No. Anggota</th>
 						<th>Nama</th>
 						<th>Alamat</th>
-						<th>Jenis Kelamin</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,7 +45,6 @@
 						<td><?= $data['no_anggota'] ?:'-'; ?></td>
 						<td nowrap><?= $data['nama']; ?></td>
 						<td><?= $data['alamat']; ?></td>
-						<td><?= $data['sex']; ?></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>
