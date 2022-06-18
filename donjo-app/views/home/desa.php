@@ -21,6 +21,7 @@
 			<li><a href='<?=site_url()?>beranda'><i class='fa fa-home'></i> Home</a></li>
 		</ol>
 	</section>
+    
 	<section class='content' id="maincontent">
         <div class='row'>
 			<?php $this->load->view('home/peta.php');?>
