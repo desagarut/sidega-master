@@ -114,6 +114,8 @@ class First extends Web_Controller {
 
 		$data['headline'] = $this->first_artikel_m->get_headline();
 		$data['cari'] = htmlentities($this->input->get('cari'));
+		$data['main'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		
 		$cari = trim($this->input->get('cari'));
 		if ( ! empty($cari))

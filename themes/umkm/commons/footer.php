@@ -77,18 +77,14 @@
                             <!-- Single Widget -->
                             <div class="single-footer f-contact">
                                 <h3>Alamat Kantor</h3>
-                                <p class="phone">Phone: <?= $desa['telepon_kecamatan']; ?></p>
-                                <p>
-                                	<?= $desa['alamat_kantor_kecamatan']; ?><br/>
-                                    Kecamatan <?= $desa['nama_kecamatan']; ?><br/>
-                                    Kabupaten <?= $desa['nama_kabupaten']; ?><br/>
-                                    Provinsi <?= $desa['nama_propinsi']; ?><br/>
+                                <p class="phone">Phone: <?= $desa['telepon']; ?></p>
+                                <p class="mail">Email: 
+                                    <a href="mailto:<?= $desa['email_desa']; ?>"><?= $desa['email_desa']; ?></a>
                                 </p>
-                                <p class="mail">
-                                    <a href="mailto:support@shopgrids.com"><?= $desa['email_kecamatan']; ?></a>
-                                </p>
-                                <?= $desa['alamat_kantor']; ?>
-                            </div>
+                                <p>Alamat:<br/>
+                                	<?= $desa['alamat_kantor']; ?>
+                                </p>                            
+                        </div>
                             <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
@@ -155,8 +151,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
-                                <span>We Accept:</span>
-                                <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+                                <span>Our Partner:</span>
+                                <img src="" alt="#">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">

@@ -1437,7 +1437,7 @@ top: -1px;
 
 .header .topbar {
   /*background-color: #081828;*/
-  background-color: #0167F3;
+  background-color: #00509F;
   padding: 18px 0;
 }
 
@@ -4901,4 +4901,16 @@ top: 2px;
     text-shadow: 4px 4px 4px #000;
     -webkit-text-stroke: 1px #fff;
 }  
+
+/* Special Offer */
+.special-offer .offer-content {
+    text-align: left;
+    background-color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 20px #00000012;
+    box-shadow: 0 0 20px #00000012;
+    padding: 12px;
+    margin-top: 30px;
+}
 }
