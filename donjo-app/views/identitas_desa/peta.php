@@ -23,7 +23,7 @@ function initMap() {
 
     var zoom = 14
     //Jika posisi kantor desa belum ada, maka posisi peta akan menampilkan seluruh Indonesia
-    PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), { center, zoom:<?=$wil_ini['zoom']?>, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> });
+    PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), { center, zoom:12, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> });
 
     kantorDesa = new google.maps.Marker({
         position: center,
