@@ -1015,8 +1015,8 @@ top: -1px;
 }
 
 .section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative;
 }
 
@@ -4913,4 +4913,13 @@ top: 2px;
     padding: 12px;
     margin-top: 30px;
 }
+/* Kop */
+.kop_header{overflow:hidden;}
+
+.header-title{overflow: hidden;}
+.header-title h1{font-family: 'Humanst531 UBlk BT'; overflow:hidden;font-size:230%;text-transform:uppercase;padding:0;line-height:1;margin:0 auto;font-weight:bold !important;background: linear-gradient(90deg, white, #FFFF00, #ADFF2F);background-repeat: no-repeat;background-size: 80%;animation: animate 5s linear infinite;-webkit-background-clip: text;-webkit-text-fill-color: rgba(255, 255, 255, 0);-webkit-text-stroke-width: 0.5px;-webkit-text-stroke-color: rgba(19, 100, 0);}
+
+@keyframes animate {
+0% {background-position: -500%;}
+100% {background-position: 500%;}
 }

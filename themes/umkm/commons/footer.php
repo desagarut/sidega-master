@@ -41,9 +41,13 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
-                                <a href="<?= site_url('first') ?>">
-                                    <img src="<?= gambar_desa($desa['logo']) ?>" style="width:50px" alt="Logo">
-                                </a>
+                            <a href="<?= site_url('first') ?>">
+                                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:38px;" alt="Logo">
+                            </a>&nbsp;
+                            <a href="<?= site_url('first') ?>" style="color:white; text-shadow: 2px 1px 2px #000; -webkit-text-stroke: 1px transparent; font-size: 25px; font-weight: normally; text-transform: normally; font-family: candara">
+                        <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+                        </a>                        
+
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-8 col-12">
@@ -127,14 +131,8 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Shop Departments</h3>
-                                <ul>
-                                    <li><a href="javascript:void(0)">Computers & Accessories</a></li>
-                                    <li><a href="javascript:void(0)">Smartphones & Tablets</a></li>
-                                    <li><a href="javascript:void(0)">TV, Video & Audio</a></li>
-                                    <li><a href="javascript:void(0)">Cameras, Photo & Video</a></li>
-                                    <li><a href="javascript:void(0)">Headphones</a></li>
-                                </ul>
+                                <h3>Statistik Pengunjung</h3>
+                                <?php $this->load->view($folder_themes .'/widgets/statistik_pengunjung.php') ?>
                             </div>
                             <!-- End Single Widget -->
                         </div>
@@ -159,7 +157,7 @@
                             <div class="copyright">
                                 <p><strong><a href="https://desagarut.net" target="_blank"><?= $this->setting->website_title ?>
         <?= AmbilVersi()?> | Tema <?= $this->setting->web_theme ?> <?= THEME_VERSION ?></a> </strong></div>
-      <div class="copyright"><?= ucfirst($this->setting->sebutan_kecamatan).' '.ucwords($desa['nama_kecamatan']) ?> Kabupaten Garut &copy;
+      <div class="copyright"><?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?> <?= ucfirst($this->setting->sebutan_kecamatan).' '.ucwords($desa['nama_kecamatan']) ?> Kabupaten Garut &copy;
         <?= date('Y') ?> <br/> Diberdayakan Oleh <?= $this->setting->pemberdaya ?></p>
                             </div>
                         </div>

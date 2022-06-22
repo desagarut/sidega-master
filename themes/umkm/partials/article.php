@@ -1,43 +1,51 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <?php $article = $single_artikel ?>
 
-      <div class="col-lg-8 entries">
-        <article class="entry entry-single" data-aos="fade-up">
-          <div class="entry-img">
-            <?php if($article['gambar'] && is_file(LOKASI_FOTO_ARTIKEL.'sedang_'.$article['gambar'])) : ?>
-            <img src="<?= AmbilFotoArtikel($article['gambar'],'sedang') ?>" alt="<?= $article['judul'] ?>" class="img-fluid">
-            <?php endif ?>
+<div class="col-md-12 col-12">
+  <div class="product-images">
+    <main id="gallery">
+      <div class="main-img">
+        <?php if($article['gambar'] && is_file(LOKASI_FOTO_ARTIKEL.'sedang_'.$article['gambar'])) : ?>
+        <img src="<?= AmbilFotoArtikel($article['gambar'],'sedang') ?>" alt="<?= $article['judul'] ?>" id="current">
+        <?php endif ?>
+      </div>
+      <div class="images">
+        <?php if($article['gambar'.$i] && is_file(LOKASI_FOTO_ARTIKEL.'sedang_'.$article['gambar'.$i])) : ?>
+        <img src="<?= AmbilFotoArtikel($article['gambar'.$i],'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="img">
+        <?php endif ?>
+      </div>
+    </main>
+  </div>
+  <div class="product-details-info">
+    <div class="single-block">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info-body custom-responsive-margin">
+            <h4> <a href="#">
+              <?= $article['judul'] ?>
+              </a> </h4>
           </div>
-          <h2 class="entry-title"> <a href="#">
-            <?= $article['judul'] ?>
-            </a> </h2>
-          <div class="entry-meta">
-            <ul>
-              <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">
-                <?= $article['owner'] ?>
-                </a></li>
-              <li class="d-flex align-items-center"> <i class="icofont-wall-clock"></i> <a href="#">
-                <time datetime="2020-01-01">
-                  <?= tgl_indo($article['tgl_upload']) ?>
-                </time>
-                </a> </li>
+          <div class="row align-items-center">
+          <div class="nav-social">
+             <a href="#">
+                Penulis: <?= $article['owner'] ?>
+                </a> - <a href="#">
+                  Terbit: <?= tgl_indo($article['tgl_upload']) ?>
+                </a> - 
               <?php if($article['kategori']) : ?>
-              <li class="d-flex align-items-center"> <i class="icofont-folder"></i> <a href="<?= site_url('first/kategori/'.$article['kat_slug']) ?>">
-                <?= $article['kategori'] ?>
-                </a> </li>
+              <a href="<?= site_url('first/kategori/'.$article['kat_slug']) ?>">
+                Kategori: <?= $article['kategori'] ?>
+                </a> -
               <?php endif ?>
-              <li class="d-flex align-items-center"><i class="icofont-eye"></i> <a href="#">
-                <?= hit($article['hit']) ?>
-                </a></li>
-            </ul>
+              <a href="#">
+                dilihat: <?= hit($article['hit']) ?>
+                </a>
+          </div>
           </div>
           <div class="entry-content">
             <p>
               <?= $article['isi'] ?>
               <?php for($i = 1; $i <= 3; $i++) : ?>
-              <?php if($article['gambar'.$i] && is_file(LOKASI_FOTO_ARTIKEL.'sedang_'.$article['gambar'.$i])) : ?>
-              <img src="<?= AmbilFotoArtikel($article['gambar'.$i],'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="img-fluid" width="100%" style="padding:10px 10px 10px 10px">
-              <?php endif ?>
               <?php endfor ?>
               <?php if($article['dokumen']) : ?>
             <div class="content__attachment --mt-4"> <strong>Dokumen Lampiran</strong> <a href="<?= base_url(LOKASI_DOKUMEN.$article['dokumen']) ?>" class="content__attachment__link"> <i class="fa fa-cloud-download content__attachment__icon"></i> <span>
@@ -53,18 +61,14 @@
                   <?= $article['kategori'] ?>
                   </a></li>
               </ul>
-              <!--<i class="icofont-tags"></i>
-              <ul class="tags">
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
-              </ul>-->
             </div>
             <div class="float-right share"> <a href="http://twitter.com/share?url=<?= site_url('artikel/'.buat_slug($article)) ?>" title="Share on Twitter"><i class="icofont-twitter"></i></a> <a href="http://www.facebook.com/sharer.php?u=<?= site_url('artikel/'.buat_slug($article))?>" title="Share on Facebook"><i class="icofont-facebook"></i></a> <a href="https://telegram.me/share/url?url=<?= site_url('artikel/'.buat_slug($article))?>&text=<?= $article["judul"]; ?>" title="Share on Telegram"><i class="icofont-telegram"></i></a> <a href="https://api.whatsapp.com/send?text=<?= site_url('artikel/'.buat_slug($article))?>" title="Share on Whatsapp"><i class="icofont-whatsapp"></i></a> </div>
           </div>
-        </article>
+        </div>
       </div>
-<!-- End blog entry --> 
+    </div>
+  </div>
+</div>
 
 <!--
 <?php $article = $single_artikel ?>

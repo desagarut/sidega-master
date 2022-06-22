@@ -1,11 +1,8 @@
 <!-- widget Menu Statistik-->
 
-<div class="box box-primary box-solid">
-  <div class="box-header">
-    <h3 class="sidebar-title"><i class="fa fa-bar-chart-o"></i> Menu Statistik</h3>
-  </div>
-  <div class="box-body">
-    <ul id="ul-menu" class="sidebar-latest">
+    <h4> Menu Statistik</h4><br/>
+  <div class="info-body custom-responsive-margin">
+    <ul id="ul-menu" class="features">
       <li><a href="<?= site_url("first/wilayah")?>"> Populasi per Wilayah</a></li>
       <li><a href="<?= site_url("first/statistik/0")?>"> Tingkat Pendidikan</a></li>
       <li><a href="<?= site_url("first/statistik/14")?>"> Pendidikan Sedang Ditempuh</a></li>
@@ -20,4 +17,3 @@
       <li><a href="<?= site_url("first/statistik/bantuan_keluarga")?>"> Program Bantuan Keluarga</a></li>
     </ul>
   </div>
-</div>

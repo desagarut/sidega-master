@@ -24,4 +24,4 @@
 	<?php $this->load->view($folder_themes .'/partials/headline') ?>
 <?php endif ?>
 <?php $this->load->view($folder_themes .'/partials/tentang') ?>
-
+<?php $this->load->view($folder_themes .'/partials/gallery') ?>

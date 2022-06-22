@@ -10,25 +10,43 @@
 <?php if($single_artikel['id']) : ?>
 <?php $this->load->view($folder_themes .'/commons/header') ?>
 <?php // $this->load->view($folder_themes .'/partials/newsticker') ?>
-<section id="breadcrumbs" class="breadcrumbs">
+<div class="breadcrumbs">
   <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h5>Artikel</h5>
-      <ol>
-        <li><a href="<?= site_url("first"); ?>">Home</a></li>
-        <li>artikel</li>
-      </ol>
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Artikel</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="<?= site_url("first"); ?>"><i class="lni lni-home"></i> Home</a></li>
+          <li>artikel</li>
+        </ul>
+      </div>
     </div>
   </div>
-</section><!-- End Breadcrumbs -->
+</div>
 
-<!-- ======= Blog Section ======= -->
-<section id="blog" class="blog">
+<!-- ======= Section ======= -->
+<section class="item-details section">
   <div class="container">
-    <div class="row">
-        <?php $this->load->view($folder_themes .'/partials/article.php') ?>
-        <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
-    </div>
+      <div class="product-details-info">
+        <div class="row">
+          <div class="col-lg-8 col-12 custom-padding-left">
+            <div class="single-block">
+              <div class="row">
+                <?php $this->load->view($folder_themes .'/partials/article.php') ?>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12 custom-padding-left">
+              <div class="row">
+                <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 <?php $this->load->view($folder_themes .'/commons/footer') ?>

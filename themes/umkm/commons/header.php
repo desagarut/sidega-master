@@ -7,7 +7,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-left">
-                         <!--   <ul class="menu-top-link">
+                            <a href="<?= site_url('first') ?>">
+                                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:38px;" alt="Logo">
+                            </a>&nbsp;
+                            <a href="<?= site_url('first') ?>" style="color:white; text-shadow: 2px 1px 2px #000; -webkit-text-stroke: 1px transparent; font-size: 25px; font-weight: normally; text-transform: normally; font-family: candara">
+                        <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+                        </a>                        
+                            <!--   <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
                                         <select id="select4">
@@ -66,20 +72,18 @@
         </div>
         <!-- End Topbar -->
         <!-- Start Header Middle -->
-        <div class="header-middle">
+      <!--  <div class="header-middle">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-3 col-7">
-                        <!-- Start Header Logo -->
-                        <a class="navbar-brand" href="<?= site_url('first') ?>">
-                            <img src="<?= gambar_desa($desa['logo']) ?>" style="width:50px" alt="Logo">
-                        </a>
-                        <!-- End Header Logo -->
+                    <div class="col-lg-4 col-md-4 col-7">
+                        <a class="navbar-brand" href="<?= site_url('first') ?>" style="color:#0C0; text-shadow: 2px 1px 2px #000; -webkit-text-stroke: 1px transparent; font-size: 40px; font-weight: normally; text-transform: normally; font-family: Brush Script MT">
+                        <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+                        </a><br/>
+                        <?= ucfirst($this->setting->sebutan_kecamatan_singkat).' '.ucwords($desa['nama_kecamatan']) ?>
                     </div>
+                    
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <!-- Start Main Menu Search -->
                         <div class="main-menu-search">
-                            <!-- navbar search start -->
                             <div class="navbar-search search-style-5">
                                 <div class="search-select">
                                     <div class="select-position">
@@ -100,16 +104,14 @@
                                     <button><i class="lni lni-search-alt"></i></button>
                                 </div>
                             </div>
-                            <!-- navbar search Ends -->
                         </div>
-                        <!-- End Main Menu Search -->
                     </div>
-                    <div class="col-lg-4 col-md-2 col-5">
+                    <div class="col-lg-3 col-md-2 col-5">
                         <div class="middle-right-area">
                             <div class="nav-hotline">
                                 <i class="lni lni-phone"></i>
-                                <h3>Phone:
-                                    <span><?= $desa['telepon_kecamatan']; ?></span>
+                                <h3>Nomor pelayanan:
+                                    <span><?= $desa['telepon']; ?></span>
                                 </h3>
                             </div>
                             <div class="navbar-cart">
@@ -124,7 +126,6 @@
                                         <i class="lni lni-cart"></i>
                                         <span class="total-items">2</span>
                                     </a>
-                                    <!-- Shopping Item -->
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
                                             <span>2 Items</span>
@@ -168,14 +169,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--/ End Shopping Item -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End Header Middle -->
         
                 <!-- Start Header Bottom -->
@@ -192,7 +192,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- Start Nav Social -->
                     <div class="nav-social">
-                        <h5 class="title">Follow Us:</h5>
+                        
                         <ul>
                             <li>
                                 <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
