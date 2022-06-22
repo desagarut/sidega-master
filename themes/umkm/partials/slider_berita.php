@@ -50,9 +50,9 @@
           <!-- Start Small Banner -->
           <div class="hero-small-banner style2">
             <div class="content">
-              <h2>Weekly Sale!</h2>
-              <p>Saving up to 50% off all online store items this week.</p>
-              <div class="button"> <a class="btn" href="#">Shop Now</a> </div>
+              <h2>Cek Bantuan!</h2>
+              <p>Akses menuju halaman cek bantuan Kementerian Sosial</p>
+              <div class="button"> <a class="btn" href="https://cekbansos.kemensos.go.id/">Cek Bansos</a> </div>
             </div>
           </div>
           <!-- Start Small Banner --> 
