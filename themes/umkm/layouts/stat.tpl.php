@@ -17,13 +17,13 @@
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-12">
         <div class="breadcrumbs-content">
-          <h1 class="page-title">Artikel</h1>
+          <h1 class="page-title">Statistik</h1>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <ul class="breadcrumb-nav">
           <li><a href="<?= site_url("first"); ?>"><i class="lni lni-home"></i> Home</a></li>
-          <li>artikel</li>
+          <li>statistik</li>
         </ul>
       </div>
     </div>

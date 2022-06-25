@@ -10,17 +10,24 @@
 
 	<?php $this->load->view($folder_themes .'/commons/header') ?>
     
-<section id="breadcrumbs2" class="breadcrumbs2">
+<div class="breadcrumbs">
   <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h5>Toko Warga</h5>
-      <ol>
-        <li><a href="<?= site_url("first"); ?>">Home</a></li>
-        <li><a href="<?= site_url("first/wisata"); ?>">Wisata Desa</a></li>
-      </ol>
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Wisata Desa</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="<?= site_url("first"); ?>"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="#">UMKM</a></li>
+          <li>Wisata</li>
+        </ul>
+      </div>
     </div>
   </div>
-</section><!-- End Breadcrumbs -->
+</div>
 
 <section id="team" class="team section-bg">
   <div class="container">

@@ -5,10 +5,9 @@
     <div class="row">
       <div class="col-12">
         <div class="section-title">
-          <h2>Potensi UMKM
-            <?= ucfirst($this->setting->sebutan_kecamatan).' '.ucwords($desa['nama_kecamatan']) ?>
+          <h2>Informasi Usaha Perdagangan
           </h2>
-          <p>Informasi Usaha Kecil Menengah masyarakat yang tersebar seluruh desa</p>
+          <p>Informasi toko, kios & warung yang tersebar seluruh wilayah <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
         </div>
       </div>
     </div>

@@ -8,31 +8,23 @@
 </head>
 <body>
 <?php $this->load->view($folder_themes .'/commons/header') ?>
-<section id="breadcrumbs2" class="breadcrumbs2">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h5>Tukang Warga</h5>
-      <ol>
-        <li><a href="<?= site_url("first"); ?>">Home</a></li>
-        <li><a href="<?= site_url("first/tukang"); ?>">Tukang Warga</a></li>
-        <li>Layanan</li>
-      </ol>
-    </div>
-  </div>
-</section>
-<!-- End Breadcrumbs -->
-
-<section id="team" class="team section-bg">
+<section class="trending-product section" style="margin-top: 12px;">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 entries">
-        <?php $this->load->view($folder_themes . '/partials/tukang/index_layanan.php') ?>
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Informasi Usaha Jasa Pertukangan
+          </h2>
+          <p>Informasi usaha jasa pertukangan yang ada di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
+        </div>
       </div>
-      <?php // $this->load->view($folder_themes .'/partials/sidebar.php') ?>
     </div>
-  </div>
-</section>
-<?php $this->load->view($folder_themes .'/commons/footer') ?>
-<?php $this->load->view($folder_themes . '/commons/for_js') ?>
+<!-- End Breadcrumbs -->
+
+	<?php $this->load->view($folder_themes . '/partials/tukang/index_layanan.php') ?>
+    <?php $this->load->view($folder_themes .'/partials/umkm_list') ?>
+
+	<?php $this->load->view($folder_themes .'/commons/footer') ?>
+    <?php $this->load->view($folder_themes . '/commons/for_js') ?>
 </body>
 </html>
