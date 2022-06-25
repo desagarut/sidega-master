@@ -22,7 +22,7 @@
                   :</small>
                   <?= $rupiah($album['harga']) ?>
                   <a href="https://wa.me/+62<?= $sub['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20ingin%20membeli%20produk%20<?= $album['nama'] ?>%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $album['nama'] ?>%20masih%20tersedia%3F%20<?= site_url('first/produk_show/'.$sub['id']) ?>" target="_blank" title="Beli Sekarang">
-                  <button class="btn btn-danger"><i class="icofont-whatsapp"></i> Beli Langsung</button>
+                  <button class="btn btn-danger"><i class="icofont-whatsapp"></i> Beli </button>
                   </a></h3>
                 <div class="button"> <a class="" href="<?= site_url('first/produk_show/'.$data['id']) ?>">
                   <button class="btn btn-warning"><i class="ri-store-2-fill" style="color:#fff;"></i> Produk:
