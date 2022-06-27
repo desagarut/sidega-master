@@ -11,7 +11,7 @@ class Garis extends Admin_Controller {
 		$this->load->model('plan_lokasi_model');
 		$this->load->model('plan_area_model');
 		$this->load->model('plan_garis_model');
-		$this->modul_ini = 9;
+		$this->modul_ini = 305;
 		$this->sub_modul_ini = 8;
 	}
 
@@ -83,7 +83,7 @@ class Garis extends Admin_Controller {
 		$this->render('garis/form', $data);
 	}
 
-	public function ajax_garis_maps($p=1, $o=0, $id='')
+	public function ajax_garis_osm_maps($p=1, $o=0, $id='')
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
@@ -103,8 +103,32 @@ class Garis extends Admin_Controller {
 		$data['all_area'] = $this->plan_area_model->list_data();
 		$data['form_action'] = site_url("garis/update_maps/$p/$o/$id");
 
-		$this->render("garis/maps", $data);
+		$this->render("garis/maps_osm", $data);
 	}
+
+	public function ajax_garis_google_maps($p=1, $o=0, $id='')
+	{
+		$data['p'] = $p;
+		$data['o'] = $o;
+		if ($id)
+			$data['garis'] = $this->plan_garis_model->get_garis($id);
+		else
+			$data['garis'] = null;
+
+		$data['desa'] = $this->config_model->get_data();
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['all_lokasi'] = $this->plan_lokasi_model->list_data();
+		$data['all_garis'] = $this->plan_garis_model->list_data();
+		$data['all_area'] = $this->plan_area_model->list_data();
+		$data['form_action'] = site_url("garis/update_maps/$p/$o/$id");
+
+		$this->render("garis/maps_google", $data);
+	}
+
 
 	public function update_maps($p=1, $o=0, $id='')
 	{

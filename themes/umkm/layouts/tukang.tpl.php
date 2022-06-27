@@ -28,6 +28,7 @@
 </div>
 
 	<?php $this->load->view($folder_themes . '/partials/tukang/index.php') ?>
+  <?php $this->load->view($folder_themes .'/partials/umkm_list') ?>
 	<?php $this->load->view($folder_themes .'/commons/footer') ?>
     <?php $this->load->view($folder_themes . '/commons/for_js') ?>
 </body>

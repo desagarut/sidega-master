@@ -1,7 +1,9 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php $this->load->view($folder_themes . '/partials/tukang/tukang_slide.php') ?>
+<?php $this->load->view($folder_themes . '/partials/tukang/tukang_show.php') ?>
 
 <!-- ======= Portfolio Details Section ======= -->
-
+<!--
 <div class="section-title" data-aos="fade-up">
   <section id="portfolio-details" class="portfolio-details">
     <div class="row">
@@ -29,7 +31,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <?php $this->load->view($folder_themes .'/partials/tukang/qr-code.php') ?>
+        <?php //$this->load->view($folder_themes .'/partials/tukang/qr-code.php') ?>
       </div>
       <?php endif ?>
     </div>
@@ -97,5 +99,5 @@
       <?php endif ?>
     </div>
   </div>
-</div>
+</div>-->
 <!-- End Our Team Section --> 

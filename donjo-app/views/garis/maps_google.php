@@ -24,7 +24,7 @@
   var map
   var gmaps
 
-  var daerah_desa = <?=$area['path'] ?: 'null' ?>
+  var daerah_desa = <?=$garis['path'] ?: 'null' ?>
 
   daerah_desa && daerah_desa[0].map((arr, i) => {
     daerah_desa[i] = { lat: arr[0], lng: arr[1] }
@@ -46,7 +46,7 @@
       streetViewControl: false
     })
     
-    <?php if (!empty($area['path'])): ?>
+    <?php if (!empty($garis['path'])): ?>
       //Style polygon
       batasWilayah = new gmaps.Polygon({
         paths: daerah_desa,
@@ -56,7 +56,9 @@
         fillColor: '#0028ea',
         fillOpacity: 0.15,
         editable: true,
-        draggable: true
+        draggable: false,
+        scaleControl: true,
+        streetViewControl: true,
       });
 
       batasWilayah.setMap(map)
@@ -102,7 +104,9 @@
       fillColor: '#0028ea',
       fillOpacity: 0.15,
       editable: true,
-      draggable: true
+      draggable: false,
+      scaleControl: true,
+      streetViewControl: true,
     });
 
     batasWilayah.setMap(map)
@@ -123,7 +127,9 @@
       fillColor: '#0028ea',
       fillOpacity: 0.15,
       editable: true,
-      draggable: true
+      draggable: false,
+      scaleControl: true,
+      streetViewControl: true,
     });
 
     batasWilayah.setMap(map)
@@ -163,11 +169,11 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-		<h1>Peta <?= $area['nama']?></h1>
+		<h1>Peta <?= $garis['nama']?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url("area")?>"> Pengaturan Area </a></li>
-			<li class="active">Peta <?= $area['nama']?></li>
+			<li><a href="<?= site_url("garis")?>"> Pengaturan Garis </a></li>
+			<li class="active">Peta <?= $garis['nama']?></li>
 		</ol>
 	</section>
   <section class="content">
@@ -182,12 +188,12 @@
             <button type="button" onclick="polygonReset()">Reset</button>
           </div>
           <div id="map"></div>
-          <input type="hidden" id="path" name="path" value="<?= $area['path']?>">
+          <input type="hidden" id="path" name="path" value="<?= $garis['path']?>">
         </div>
       </div>
     </div>
     <div class="modal-footer">
-        <a href="<?= site_url('area')?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>  
+        <a href="<?= site_url('garis')?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>  
         <a href="#" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" download="SIDeGa.gpx" id="exportGPX"><i class='fa fa-download'></i> Export ke GPX</a>    
         <button type="reset" class="btn btn-social btn-box btn-danger btn-sm" data-dismiss="modal"><i class='fa fa-sign-out'></i> Tutup</button>
         <button type="submit" class="btn btn-social btn-box btn-info btn-sm" data-dismiss="modal" id="simpan_wilayah"><i class='fa fa-check'></i> Simpan</button>

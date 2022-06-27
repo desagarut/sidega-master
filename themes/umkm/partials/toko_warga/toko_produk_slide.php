@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> 
             <!-- Start Small Banner -->
-            <div class="hero-small-banner" style="background-image: url('<?php $this->load->view($folder_themes . "/partials/toko_warga/peta_view.php") ?>
+            <div class="hero-small-banner text-center" style="background-image: url('<?php $this->load->view($folder_themes . "/partials/toko_warga/peta_view.php") ?>
                   <div class="content"> </div>
           </div>
         </div>

@@ -1,7 +1,10 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<!-- ======= Portfolio Details Section ======= -->
+<?php $this->load->view($folder_themes . '/partials/tukang/tukang_layanan_slide.php') ?>
+<?php $this->load->view($folder_themes . '/partials/tukang/tukang_layanan_show.php') ?>
 
+<!-- ======= Portfolio Details Section ======= -->
+<!--
 <div class="section-title">
   <section id="portfolio-details" class="portfolio-details">
     <div class="row">
@@ -32,7 +35,7 @@
         </div>
       </div>
       <div class="col-md-4" style="padding-top:10px;">
-        <?php $this->load->view($folder_themes .'/partials/tukang/info_tukang.php') ?>
+        <?php //$this->load->view($folder_themes .'/partials/tukang/info_tukang.php') ?>
       </div>
     </div>
   </section>
@@ -118,5 +121,5 @@
       <?php endif ?>
     </div>
   </div>
-</div>
+</div> -->
 <!-- End Our Team Section --> 

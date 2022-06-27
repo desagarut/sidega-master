@@ -1,30 +1,39 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php $this->load->view($folder_themes . '/commons/meta') ?>
-<?php $this->load->view($folder_themes . '/commons/for_css') ?>
+  <?php $this->load->view($folder_themes . '/commons/meta') ?>
+  <?php $this->load->view($folder_themes . '/commons/for_css') ?>
 </head>
+
 <body>
-<?php $this->load->view($folder_themes .'/commons/header') ?>
-<section class="trending-product section" style="margin-top: 12px;">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title">
-          <h2>Informasi Usaha Jasa Pertukangan
-          </h2>
-          <p>Informasi usaha jasa pertukangan yang ada di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
+  <?php $this->load->view($folder_themes . '/commons/header') ?>
+
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="breadcrumbs-content">
+            <h1 class="page-title">Layanan Tukang Warga</h1>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <ul class="breadcrumb-nav">
+            <li><a href="<?= site_url("first"); ?>"><i class="lni lni-home"></i> Home</a></li>
+            <li><a href="#">UMKM</a></li>
+            <li>Layanan Tukang Warga</li>
+          </ul>
         </div>
       </div>
     </div>
-<!-- End Breadcrumbs -->
+  </div>
 
-	<?php $this->load->view($folder_themes . '/partials/tukang/index_layanan.php') ?>
-    <?php $this->load->view($folder_themes .'/partials/umkm_list') ?>
-
-	<?php $this->load->view($folder_themes .'/commons/footer') ?>
-    <?php $this->load->view($folder_themes . '/commons/for_js') ?>
+  <?php $this->load->view($folder_themes . '/partials/tukang/index_layanan.php') ?>
+  <?php $this->load->view($folder_themes . '/partials/umkm_list') ?>
+  <?php $this->load->view($folder_themes . '/commons/footer') ?>
+  <?php $this->load->view($folder_themes . '/commons/for_js') ?>
 </body>
+
 </html>

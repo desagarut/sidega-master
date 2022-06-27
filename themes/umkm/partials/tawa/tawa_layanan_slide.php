@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <?php if($produk_data) : ?>
-      <div class="col-lg-12 col-12 custom-padding-right">
+      <div class="col-lg-8 col-12 custom-padding-right">
         <div class="slider-head"> 
           <div class="hero-slider">
             <?php foreach($produk_data as $album) : ?>
@@ -13,8 +13,7 @@
             <div class="single-slider"
                                 style="background-image: url(<?= AmbilGaleri($album['gambar'],'sedang') ?>);">
               <div class="content">
-                <h2 style="color:#FFF; text-shadow: 5px 5px 5px #081828;
-    -webkit-text-stroke: 0.25px #081828;"><span></span> Nama usaha :
+                <h2 style="color:#FFF; text-shadow: 5px 5px 5px #081828; -webkit-text-stroke: 0.25px #081828;"><span></span> Nama usaha :
                   <?= $sub['nama'] ?>
                 </h2>
                 <div class="button"> <a class="" href="<?= site_url('first/tawa_layanan/'.$album['id']) ?>">
@@ -32,6 +31,16 @@
         </div>
       </div>
       <?php endif ?>
+      <div class="col-lg-4 col-12">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> 
+            <!-- Start Small Banner -->
+            <div class="hero-small-banner text-center" style="background-image: url('<?php $this->load->view($folder_themes . "/partials/tawa/peta_view.php") ?>
+                  <div class="content"> </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

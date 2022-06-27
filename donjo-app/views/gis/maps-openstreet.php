@@ -66,42 +66,6 @@
 			//Mencetak peta ke PNG
 			cetakPeta(mymap);
 
-			//Menambahkan Legenda Ke Peta
-			/* var legenda_desa = L.control({position: 'bottomright'});
-    var legenda_dusun = L.control({position: 'bottomright'});
-    var legenda_rw = L.control({position: 'bottomright'});
-    var legenda_rt = L.control({position: 'bottomright'});
-
-    mymap.on('overlayadd', function (eventLayer) {
-      if (eventLayer.name === 'Peta Wilayah Desa') {
-        setlegendPetaDesa(legenda_desa, mymap, <?= json_encode($desa) ?>, '<?= ucwords($this->setting->sebutan_desa) ?>', '<?= $desa['nama_desa'] ?>');
-      }
-      if (eventLayer.name === 'Peta Wilayah Dusun') {
-        setlegendPeta(legenda_dusun, mymap, '<?= addslashes(json_encode($dusun_gis)) ?>', '<?= ucwords($this->setting->sebutan_dusun) ?>', 'dusun', '', '');
-      }
-      if (eventLayer.name === 'Peta Wilayah RW') {
-        setlegendPeta(legenda_rw, mymap, '<?= addslashes(json_encode($rw_gis)) ?>', 'RW', 'rw', '<?= ucwords($this->setting->sebutan_dusun) ?>');
-      }
-      if (eventLayer.name === 'Peta Wilayah RT') {
-        setlegendPeta(legenda_rt, mymap, '<?= addslashes(json_encode($rt_gis)) ?>', 'RT', 'rt', 'RW');
-      }
-    });
-
-    mymap.on('overlayremove', function (eventLayer) {
-      if (eventLayer.name === 'Peta Wilayah Desa') {
-        mymap.removeControl(legenda_desa);
-      }
-      if (eventLayer.name === 'Peta Wilayah Dusun') {
-        mymap.removeControl(legenda_dusun);
-      }
-      if (eventLayer.name === 'Peta Wilayah RW') {
-        mymap.removeControl(legenda_rw);
-      }
-      if (eventLayer.name === 'Peta Wilayah RT') {
-        mymap.removeControl(legenda_rt);
-      }
-    });
-*/
 			// Menampilkan OverLayer Area, Garis, Lokasi
 			layerCustom = tampilkan_layer_area_garis_lokasi(mymap, '<?= addslashes(json_encode($area)) ?>', '<?= addslashes(json_encode($garis)) ?>', '<?= addslashes(json_encode($lokasi)) ?>', '<?= base_url() . LOKASI_SIMBOL_LOKASI ?>', '<?= base_url() . LOKASI_FOTO_AREA ?>', '<?= base_url() . LOKASI_FOTO_GARIS ?>', '<?= base_url() . LOKASI_FOTO_LOKASI ?>');
 
