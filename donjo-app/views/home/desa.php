@@ -43,6 +43,7 @@
         <div class='row'>
             <?php $this->load->view('home/helpdesk.php');?>
             <?php $this->load->view('home/changelog.php');?>
+			<?php $this->load->view('home/youtube.php');?>
         </div>
 	</section>
 </div>
