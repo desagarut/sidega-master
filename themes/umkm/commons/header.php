@@ -59,10 +59,10 @@
                             </div>-->
                             <ul class="user-login">
                                 <li>
-                                    <a href="<?= site_url('insidega') ?>">Sign In</a>
+                                    <a href="<?= site_url('insidega') ?>">Login Desa</a>
                                 </li>
                                 <li>
-                                    <a href="#">Register</a>
+                                    <a href="<?= site_url('mandiri_web') ?>">Login Warga</a>
                                 </li>
                             </ul>
                         </div>
@@ -204,7 +204,10 @@
                                 <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                                <a href="javascript:void(0)"><i class="lni lni-youtube"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-whatsapp"></i></a>
                             </li>
                         </ul>
                     </div>
