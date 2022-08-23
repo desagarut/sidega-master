@@ -283,8 +283,10 @@ class Wilayah_model extends MY_Model {
 		$data = $this->bersihkan_data($this->input->post());
 		$temp = $this->cluster_by_id($dusun);
 		$data['dusun']= $temp['dusun'];
+		
 		$wil = array('dusun' => $data['dusun'], 'rw' => $data['rw']);
 		$cek_data = $this->cek_data('tweb_wil_clusterdesa', $wil);
+		
 		if ($cek_data)
 		{
 			$_SESSION['success'] = -2;
@@ -344,10 +346,13 @@ class Wilayah_model extends MY_Model {
 		$data = $this->bersihkan_data($this->input->post());
 		$temp = $this->cluster_by_id($id_dusun);
 		$data['dusun']= $temp['dusun'];
+		
 		$data_rw = $this->cluster_by_id($id_rw);
 		$data['rw'] = $data_rw['rw'];
+		
 		$wil = array('dusun' => $data['dusun'], 'rw' => $data['rw'], 'rt' => $data['rt']);
 		$cek_data = $this->cek_data('tweb_wil_clusterdesa', $wil);
+		
 		if ($cek_data)
 		{
 			$_SESSION['success'] = -2;

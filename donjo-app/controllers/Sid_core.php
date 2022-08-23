@@ -257,6 +257,7 @@ class Sid_Core extends Admin_Controller {
 		$data_rw = $this->wilayah_model->cluster_by_id($id_rw);
 		$data['rw'] = $data_rw['rw'];
 		$data['id_rw'] = $data_rw['id'];
+		
 		$data['penduduk'] = $this->wilayah_model->list_penduduk();
 
 		if ($rt)
