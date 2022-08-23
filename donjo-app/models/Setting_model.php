@@ -95,7 +95,7 @@ class Setting_model extends CI_Model {
 			$this->setting->token_sidega = config_item('token_sidega');
 		}
 		// Ambil dev_tracker dari desa/config/config.php kalau tidak ada di database
-		$this->setting->tracker = "https://desagarut.net";
+		$this->setting->tracker = "https://desagarut.id";
 		if (empty($this->setting->dev_tracker))
 		{
 			$this->setting->dev_tracker = config_item('dev_tracker');
