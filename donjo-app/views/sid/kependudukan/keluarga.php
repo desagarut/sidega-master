@@ -172,6 +172,7 @@
 												<a href="<?= site_url("keluarga/anggota/$p/$o/$data[id]")?>" class="btn bg-purple btn-box btn-sm" title="Rincian Anggota Keluarga (KK)"><i class="fa fa-search"></i></a>
 												<?php if ($this->CI->cek_hak_akses('h')): ?><a href="<?= site_url("keluarga/form_a/$p/$o/$data[id]")?>" class="btn btn-success btn-box btn-sm " title="Tambah Anggota Keluarga" ><i class="fa fa-plus"></i> </a>
 												<a href="<?= site_url("keluarga/edit_nokk/$p/$o/$data[id]")?>" title="Ubah Data" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data KK" class="btn bg-orange btn-box btn-sm"><i class="fa fa-edit"></i></a>
+                                                
                                                 <a href="#" data-href="<?= site_url("keluarga/delete/$p/$o/$data[id]")?>" class="btn bg-maroon btn-box btn-sm" title="Hapus/Keluar Dari Daftar Keluarga" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 												<?php endif; ?>
 											</td>
