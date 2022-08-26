@@ -2133,12 +2133,12 @@ class User_model extends CI_Model {
 
 				// info desa
 				//'identitas_desa' => array('b'),
-				//'sid_core' => array('b'),
+				'sid_core' => array('b'),
 				//'pengurus' => array('b'),
 				//'status_desa' => array('b'),
 
 				// kependudukan
-				'penduduk' => array('b'),
+				'penduduk' => array('b','u','h'),
 				'keluarga' => array('b','u','h'),
 				'rtm' => array('b'),
 				'kelompok' => array('b'),
@@ -2162,7 +2162,7 @@ class User_model extends CI_Model {
 				//'gis' => array('b'),
 
 				// wilayah
-				//'wilayah' => array('b')
+				'wilayah' => array('b')
 			),
 			
 			// Ketua RT
