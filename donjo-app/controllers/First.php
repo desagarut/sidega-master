@@ -175,8 +175,8 @@ class First extends Web_Controller {
 		{
 			$data['feed1'] = array(
 				'items1' => $this->first_artikel_m->get_feed1(),
-				'title' => 'Kabar Kecamatan Cisompet',
-				'url' => 'https://www.kecamatancisompet.id'
+				'title' => 'Landing Desa Garut',
+				'url' => 'https://www.desagarut.id'
 			);
 		}
 		
@@ -184,25 +184,6 @@ class First extends Web_Controller {
 		$this->load->view($this->template, $data);
 	}
 	
-	public function rss_info_pendidikan()
-	{
-		$data = $this->includes;
-
-		$this->set_template('layouts/rss_info_pendidikan.php');
-		
-		if ($this->setting->feed_sthg)
-		{
-			$data['feed_sthg'] = array(
-				'items_sthg' => $this->first_artikel_m->get_feed_sthg(),
-				'title' => 'Info Sekolah Tinggi Hukum Garut',
-				'url' => 'https://www.sthgarut.ac.id'
-			);
-		}
-		
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
-
 	/*
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
 	| Kalau menggunakan slug, dipanggil menggunakan url artikel/:thn/:bln/:hri/:slug
