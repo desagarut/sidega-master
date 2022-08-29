@@ -1,5 +1,0 @@
-*******************************
-Folder: sidega/upload/pengesahan
-*******************************
-
-Folder ini tempat menyimpan semua gambar yang diunggah sebagai pengesahan analisis.
