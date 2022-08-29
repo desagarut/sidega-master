@@ -1,0 +1,5 @@
+*******************************
+Folder: deskel/upload/dokumen
+*******************************
+
+Folder ini tempat menyimpan semua gambar yang diunggah sebagai foto/file penyimpanan dokumen.

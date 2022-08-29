@@ -42,12 +42,12 @@ class Main extends CI_Controller {
 				case 9 : redirect('beranda'); break;
 				case 10 : redirect('beranda'); break;
 				case 11 : redirect('beranda'); break;
-				case 12 : redirect('beranda'); break;
-				case 13 : redirect('beranda'); break;
-				case 14 : redirect('beranda'); break;
-				case 15 : redirect('beranda'); break;
-				case 16 : redirect('beranda'); break;
-				case 17 : redirect('beranda'); break;
+				case 12 : redirect('covid19'); break;
+				case 13 : redirect('covid19'); break;
+				case 14 : redirect('covid19'); break;
+				case 15 : redirect('covid19'); break;
+				case 16 : redirect('web'); break;
+				case 17 : redirect('web'); break;
 				default : redirect('insidega');
 			}
 		}

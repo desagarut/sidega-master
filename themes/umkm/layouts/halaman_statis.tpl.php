@@ -10,24 +10,18 @@
 
 	<?php $this->load->view($folder_themes .'/commons/header') ?>
 	<?php // $this->load->view($folder_themes .'/partials/newsticker') ?>
-<div class="breadcrumbs">
+<section id="breadcrumbs" class="breadcrumbs">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 col-md-6 col-12">
-        <div class="breadcrumbs-content">
-          <h1 class="page-title"><?= $heading ?></h1>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-12">
-        <ul class="breadcrumb-nav">
-          <li><a href="<?= site_url("first"); ?>"><i class="lni lni-home"></i> Home</a></li>
-          <li><?= $heading ?></li>
-        </ul>
-      </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <h5><?= $heading ?></h5>
+      <ol>
+        <li><a href="<?= site_url("first"); ?>">Home</a></li>
+        <li><?= $heading ?></li>
+      </ol>
     </div>
   </div>
-</div>
-    
+</section><!-- End Breadcrumbs -->
+
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog">
     <div class="container">
@@ -43,11 +37,7 @@
             
                 </article>
             </div>
-            <div class="col-lg-4 col-12 custom-padding-left">
-              <div class="row">
-                <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
-                </div>
-                </div>
+            <?php $this->load->view($folder_themes .'/partials/sidebar.php') ?>
         </div>
     </div>
 </section>

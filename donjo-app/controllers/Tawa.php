@@ -152,18 +152,18 @@ class Tawa extends Admin_Controller {
 		redirect("tawa/index/$p/$o");
 	}
 
-	public function tawa_lock($id='', $gallery='')
+	public function toko_lock($id='', $gallery='')
 	{
-		$this->tawa_model->tawa_lock($id, 1);
+		$this->tawa_model->toko_lock($id, 1);
 		if ($gallery != '')
 			redirect("tawa/layanan/$gallery/$p");
 		else
 			redirect("tawa/index/$p/$o");
 	}
 
-	public function tawa_unlock($id='', $gallery='')
+	public function toko_unlock($id='', $gallery='')
 	{
-		$this->tawa_model->tawa_lock($id, 2);
+		$this->tawa_model->toko_lock($id, 2);
 		if ($gallery != '')
 			redirect("tawa/layanan/$gallery/$p");
 		else
@@ -280,13 +280,13 @@ class Tawa extends Admin_Controller {
 
 	public function toko_lock_layanan($gallery='', $id='')
 	{
-		$this->tawa_model->tawa_lock($id, 1);
+		$this->tawa_model->toko_lock($id, 1);
 		redirect("tawa/layanan/$gallery");
 	}
 
 	public function toko_unlock_layanan($gallery='', $id='')
 	{
-		$this->tawa_model->tawa_lock($id, 2);
+		$this->tawa_model->toko_lock($id, 2);
 		redirect("tawa/layanan/$gallery");
 	}
 

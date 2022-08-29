@@ -1,0 +1,7 @@
+*******************************
+Folder: deskel/logo
+*******************************
+
+Folder ini tempat menyimpan file logo yang diunggah oleh deskel.
+
+Logo yang ditampilkan adalah yang tersimpan di folder ini.

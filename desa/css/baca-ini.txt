@@ -1,0 +1,9 @@
+*******************************
+Folder: deskel/css
+*******************************
+
+Folder ini tempat menyimpan semua perubahan stylesheets/css dan image yang dilakukan
+deskel untuk mengubah penampilan aplikasi SIDeGa web maupun modul administrasi.
+
+Styles/css yang ada di folder ini akan menggantikan css yang sama di file css
+asli SIDeGa.

@@ -2132,17 +2132,17 @@ class User_model extends CI_Model {
 				'beranda' => array('b'),
 
 				// info desa
-				//'identitas_desa' => array('b'),
+				'identitas_desa' => array('b'),
 				'sid_core' => array('b'),
-				//'pengurus' => array('b'),
-				//'status_desa' => array('b'),
+				'pengurus' => array('b'),
+				'status_desa' => array('b'),
 
 				// kependudukan
-				'penduduk' => array('b','u','h'),
-				'keluarga' => array('b','u','h'),
+				'penduduk' => array('b'),
+				'keluarga' => array('b'),
 				'rtm' => array('b'),
 				'kelompok' => array('b'),
-				//'dpt' => array('b','u'),
+				'dpt' => array('b','u'),
 				
 				// statistik
 				'statistik' => array('b'),
@@ -2150,16 +2150,16 @@ class User_model extends CI_Model {
 				'laporan_rentan' => array('b'),
 
 				// input data analisis
-				//'analisis_respon' => array('b'),
+				'analisis_respon' => array('b'),
 
 				// bantuan
-				//'program_bantuan' => array('b'),
+				'program_bantuan' => array('b'),
 
 				// SPPT PBB
-				//'data_sppt' => array('b'),
+				'data_sppt' => array('b'),
 
 				// pemetaan
-				//'gis' => array('b'),
+				'gis' => array('b'),
 
 				// wilayah
 				'wilayah' => array('b')
