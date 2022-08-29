@@ -2,7 +2,7 @@
 
 class Program_bantuan_model extends MY_Model {
 
-	// Untuk datatables peserta bantuan di themes/klasik/partials/statistik.php (web)
+	// Untuk datatables peserta bantuan di themes/hijau/partials/statistik.php (web)
 	var $column_order = array(null, 'program', 'peserta', null); //set column field database for datatable orderable
 	var $column_search = array('p.nama', 'pend.nama'); //set column field database for datatable searchable
 	var $order = array('peserta' => 'asc'); // default order
@@ -1038,7 +1038,7 @@ class Program_bantuan_model extends MY_Model {
 	}
 
 	/* ====================================
-	 * Untuk datatable #peserta_program di themes/klasik/partials/statistik.php
+	 * Untuk datatable #peserta_program di themes/hijau/partials/statistik.php
 	 * ==================================== */
 
 	private function get_all_peserta_bantuan_query()
