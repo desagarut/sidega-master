@@ -19,6 +19,8 @@
       		  <th>Tanggal Upload</th>
 					</tr>
 				</thead>
+                <tbody>
+                </tbody>
 	      <tfoot>
 	      </tfoot>
 			</table>
