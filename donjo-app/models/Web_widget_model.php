@@ -343,7 +343,7 @@
 		{
 			$tema = str_replace('desa/', '', $tema);
 
-			if($tema !== 'klasik' OR $tema !== 'hadakewa')
+			if($tema !== 'hijau' OR $tema !== 'umkm')
 				$list = $this->widget('desa/themes/'.$tema.'/widgets/*.php');
 
 			$list_widget = array_merge($list_widget, $list);

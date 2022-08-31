@@ -119,6 +119,7 @@
                     <?php if (ENVIRONMENT == 'development'): ?>
                     <li> <a> <i class="fa fa-cog fa-lg" title="Development"></i><span class="badge">Development</span> </a> </li>
                     <?php endif; ?>
+                    <li><span><?php $this->load->view('jam.php');?></span></li>
                     <?php if ($this->CI->cek_hak_akses('b', 'permohonan_surat_admin')): ?>
                     <li> <a href="<?= site_url('permohonan_surat_admin/clear'); ?>"> <span><i class="fa fa-print fa-lg" title="Permohonan Surat"></i>&nbsp;</span> <span class="badge" id="b_permohonan_surat" style="display: none;"></span> </a> </li>
                     <?php endif; ?>
@@ -147,6 +148,7 @@
             </div>
         </nav>
     </header>
+    <code>$(document).ajaxStart(function() { Pace.restart(); });</code>
     <input id="success-code" type="hidden" value="<?= $_SESSION['success']?>">
     <!-- Untuk menampilkan modal bootstrap umum -->
     <div class="modal fade" id="modalBox" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

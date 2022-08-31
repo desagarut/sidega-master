@@ -52,7 +52,7 @@
 <?php $this->load->view($folder_themes .'/commons/footer') ?>
 <?php $this->load->view($folder_themes . '/commons/for_js') ?>
 <?php else : ?>
-<?php $this->load->view($folder_themes . '/commons/404.php') ?>
+<?php $this->load->view($folder_themes . '/commons/404') ?>
 <?php endif ?>
 </body>
 </html>

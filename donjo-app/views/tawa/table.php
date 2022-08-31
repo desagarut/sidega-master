@@ -40,7 +40,7 @@
       <div class="col-sm-6">
         <div class="box-tools">
           <div class="input-group input-group-sm pull-right">
-            <input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" value="<?=html_escape($cari)?>" onkeypress="if (event.keyCode == 13):$('#'+'mainform').attr('action', '<?= site_url('tawa/search')?>');$('#'+'mainform').submit();endif">
+            <input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" value="<?=html_escape($cari)?>" onkeypress="if (event.keyCode == 13):$('#'+'mainform').attr('action', '<?= site_url('toko_warga/search')?>');$('#'+'mainform').submit();endif">
             <div class="input-group-btn">
               <button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("tawa/search")?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
             </div>
@@ -109,9 +109,9 @@
                     <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20halo%20saya%20tertarik%20dengan%20layanan%20anda%20yang%20ditawarkan%20di%20website%20desa.%20Apakah%20layanannya%20masih%20tersedia%3F" class="btn bg-green btn-box btn-sm"  target="_blank" title="Hubungi"><i class="fa fa-whatsapp"></i></a>
                     <a href="<?= site_url("tawa/lokasi_maps/".$data['id']); ?>" data-href="#" class="btn bg-primary btn-box btn-sm" title="Lokasi"><i class="fa fa-map"></i></a>
 				  <?php if ($data['enabled'] == '2'): ?>
-                  <a href="<?= site_url("tawa/tawa_lock/".$data['id'])?>" class="btn bg-orange btn-box btn-sm"  title="Aktifkan"><i class="fa fa-lock"></i></a>
+                  <a href="<?= site_url("tawa/toko_lock/".$data['id'])?>" class="btn bg-orange btn-box btn-sm"  title="Aktifkan Album"><i class="fa fa-lock"></i></a>
                   <?php elseif ($data['enabled'] == '1'): ?>
-                  <a href="<?= site_url("tawa/tawa_unlock/".$data['id'])?>" class="btn bg-aqua btn-box btn-sm"  title="Non Aktifkan"><i class="fa fa-unlock"></i></a>
+                  <a href="<?= site_url("tawa/toko_unlock/".$data['id'])?>" class="btn bg-aqua btn-box btn-sm"  title="Non Aktifkan Album"><i class="fa fa-unlock"></i></a>
                   <?php endif ?>
                   </td>
                 <td align="center"><label data-rel="popover" data-content="<img width=200 height=200 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>"> <strong style="color:#03C"><?= $data['nama']?></strong><br/><img width=50 height=50 class="img-circle" src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>></label></td>
@@ -136,7 +136,7 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="dataTables_length">
-        <form id="paging" action="<?= site_url("tawa")?>" method="post" class="form-horizontal">
+        <form id="paging" action="<?= site_url("toko_warga")?>" method="post" class="form-horizontal">
           <label> Tampilkan
             <select name="per_page" class="form-control input-sm" onchange="$('#paging').submit()">
               <option value="20" <?php selected($per_page, 20); ?> >20</option>

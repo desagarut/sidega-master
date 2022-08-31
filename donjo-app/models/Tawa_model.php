@@ -333,7 +333,7 @@
 		}
 	}
 
-	public function tawa_lock($id='', $val=0)
+	public function toko_lock($id='', $val=0)
 	{
 		// Jangan kunci jika digunakan untuk slider
 		if ($val == 2)

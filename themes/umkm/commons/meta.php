@@ -61,9 +61,9 @@
 
     <meta property='og:url' content="<?= current_url(); ?>" />
 
-<?php if(is_file(LOKASI_LOGO_DESA . "favicon.ico")): ?>
+<?php if(is_file(LOKASI_LOGO_INSTANSI . "favicon.ico")): ?>
 
-    <link rel="shortcut icon" href="<?= base_url() . LOKASI_LOGO_DESA?>favicon.ico" />
+    <link rel="shortcut icon" href="<?= base_url() . LOKASI_LOGO_INSTANSI?>favicon.ico" />
 
 <?php else: ?>
 
