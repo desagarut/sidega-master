@@ -1,0 +1,87 @@
+#============
+# Di server yg ada Apache, gunakan file ini untuk menghapus index.php dari url OpenSID,
+# dan untuk mengamankan folder desa.
+# Untuk mengaktifkan, ubah nama file ini menjadi .htaccess,
+# Sesudah aktif, misalnya, modul Web bisa dipanggil dengan http://localhost/first.
+# Untuk menggunakan fitur ini, pastikan konfigurasi Apache di server SID
+# mengizinkan penggunaan .htaccess
+#============
+RewriteEngine on
+RewriteBase /
+# Apabila menggunakan sub-domain atau sub-folder gunakan bentuk berikut
+# RewriteBase /nama-sub-folder/
+
+# Prevent index dirs
+RewriteCond $1
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# General dirs / files
+RewriteCond $1 !^(index\.php|resources|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# Protect Folder Not Index
+Options All -Indexes
+
+# Paksa menggunakan https
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Periksa apakah full-path perlu disesuaikan untuk server anda
+# Contoh berikut untuk path seperti /home/opensidm/demo.opensid.my.id/desa/upload
+<Directory /home/*/*/desa/upload>
+	php_flag engine off
+	<FilesMatch "(?i)\.(php|php3?|phtml|phpjpeg)$">
+		Order Deny,Allow
+		Deny from All
+	</FilesMatch>
+</Directory>
+
+# Periksa apakah full-path perlu disesuaikan untuk server anda
+# Contoh berikut untuk path seperti /home/opensidm/demo.opensid.my.id/desa-contoh
+<Directory /home/*/*/desa-contoh>
+	php_flag engine off
+	<FilesMatch "(?i)\.(php|php3?|phtml|phpjpeg)$">
+		Order Deny,Allow
+		Deny from All
+	</FilesMatch>
+</Directory>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit -1
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php73"
+   php_value upload_max_filesize 5M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit -1
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php73"
+   php_value upload_max_filesize 5M
+   php_flag zlib.output_compression On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php70” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php70 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
