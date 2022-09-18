@@ -157,12 +157,12 @@ $(document).ready(function () {
 </style>
 
 <div class="content-wrapper">
-	<?php if (empty($halaman_statis)): ?>
-		<section class="content-header">
-			<h1>Status IDM <?= ucwords($this->setting->sebutan_desa)?></h1>
+<?php if (empty($halaman_statis)): ?>
+	<section class="content-header">
+			<h1>Status IDM <?= ucwords($this->setting->sebutan_desa) . ' ' . $tahun; ?></h1>
 			<ol class="breadcrumb">
-				<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-				<li class="active">Status IDM <?= ucwords($this->setting->sebutan_desa)?></li>
+				<li><a href="<?= site_url('hom_sid')?>"><i class="fa fa-home"></i> Home</a></li>
+				<li class="active">Status IDM <?= ucwords($this->setting->sebutan_desa). ' ' . $tahun; ?></li>
 			</ol>
 		</section>
 	<?php endif; ?>
@@ -247,6 +247,10 @@ $(document).ready(function () {
 																<th class="horizontal"><?= strtoupper($this->setting->sebutan_desa) ?></th>
 																<td> : <?= $idm->IDENTITAS[0]->nama_desa ?></td>
 															</tr>
+															<tr>
+																<th class="horizontal">Tahun</th>
+																<td> : <?= $tahun ?></td>
+															</tr>
 													</tr>
 												</tbody>
 											</table>
@@ -302,7 +306,7 @@ $(document).ready(function () {
 											<td><?= $data->KAB ?></td>
 											<td><?= $data->DESA ?></td>
 											<td><?= $data->CSR ?></td>
-											<td><?= $data->SKOR[INDIKATOR['IKS 2020']] ?></td>
+											<td><?= $data->SKOR[INDIKATOR['IKS 2022']] ?></td>
 										</tr>
 									<?php endforeach; ?>
 								</tbody>

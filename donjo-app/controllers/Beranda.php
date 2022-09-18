@@ -74,7 +74,11 @@ class Beranda extends Admin_Controller {
 		//last login
 	    $data['last_login'] = $this->first_m->last_login();
 	    $data['last_login_operator'] = $this->user_model->list_data(7, 0, 5);
-		$header = $this->header_model->get_data();
+		//$header = $this->header_model->get_data();
+
+		//Perencanaan Desa
+		$data['rkpdes_total'] = $this->header_model->rkpdes_total();
+		$data['durkpdes_total'] = $this->header_model->durkpdes_total();
 
 		//Rekapitulasi SPPT PBB
 		$data['pbb_terhutang'] = $this->data_sppt_model->rekapitulasi('');
@@ -83,8 +87,6 @@ class Beranda extends Admin_Controller {
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
         };
-		
-		
 		
 		$this->set_minsidebar(1);
 		$this->render('home/desa', $data);

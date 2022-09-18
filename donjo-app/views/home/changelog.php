@@ -1,5 +1,5 @@
 
-<div class='col-md-4'>
+<div class='col-md-3'>
   <div class="box box-warning pull-right">
     <div class="box-header with-border">
       <h3 class="box-title">Changelog</h3>
@@ -12,10 +12,10 @@
       <p><strong>Perubahan pada versi
         <?= AmbilVersi()?></strong>
               <ul class="text-left">
-        <li>Penambahan Foto Penduduk berdasarkan jenis kelamin</li>
-        <li>Penambahan kolom informasi user & waktu input data pada tabel daftar penduduk</li>
-        <li>Penambahan link akses ke dashboard kecamatan</li>
-        <li>Fix bugs nomor halaman data tagihan sppt</li>
+        Penambahan Modul Perencanaan Desa:
+        <li>Modul Musyawarah Dusun: Usulan Masyarakat, Program kegiatan masuk desa, rencana pembiayaan, kerjasama antar desa, kerjasama pihak ketiga</li>
+        <li>Modul Penentuan Prioritas Desa: Daftar usulan program kegiatan hasil musyawarah dusun, Penentuan prioritas rencana kerja pemerintah desa melalui metode polling, Hasil penentuan prioritas rencana kerja</li>
+        <li>Modul RKP Desa: Daftar program kegiatan yang akan ditetapkan dalam RKP Desa & DU-RKP Desa, Daftar Program yang masuk dalam RKP Desa, Daftar Program yang masuk dalam Usulan Desa (DU-RKP Desa)</li>
       </ul>
       </p>
     </div>

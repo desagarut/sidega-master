@@ -184,7 +184,7 @@
                 <div class="col-lg-8 col-md-6 col-12">
                     <div class="nav-inner">
                         <!-- Start Mega Category Menu -->
-                         <?php $this->load->view($folder_themes .'/widgets/menu_kategori') ?>
+                         <?php //$this->load->view($folder_themes .'/widgets/menu_kategori') ?>
                         <!-- End Mega Category Menu -->
                          <?php $this->load->view($folder_themes .'/commons/nav') ?>
                     </div>

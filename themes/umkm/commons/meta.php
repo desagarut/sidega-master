@@ -33,7 +33,11 @@
 
 <?php if(isset($single_artikel)): ?>
 
-	<title><?= $single_artikel["judul"] . " - $desa_title" ?></title>
+	<title><?php if ($single_artikel["judul"] == ""): ?>
+	<?= $this->setting->website_title . ' '.  $desa_title; ?>
+<?php else: ?>
+	<?= $single_artikel["judul"].' - '.ucwords($this->setting->sebutan_desa) . ' ' . $desa['nama_desa']; ?>
+<?php endif; ?></title>
 
 	<meta name='description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
 
@@ -48,8 +52,6 @@
 	<meta property='og:description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
 
 <?php else: ?>
-
-	<title><?php $tmp = ltrim(get_dynamic_title_page_from_path(), ' -'); echo (trim($tmp)=='') ? $desa_title : "$tmp - $desa_title"; ?></title>
 
 	<meta name='description' content="<?= $this->setting->website_title . ' ' . $desa_title; ?>" />
 

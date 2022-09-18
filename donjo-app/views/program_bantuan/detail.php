@@ -76,10 +76,11 @@
 															<th rowspan="2" nowrap class="text-center"><?= $detail["judul_peserta_plus"]?></th>
 														<?php endif ;?>
 														<th rowspan="2" nowrap><?= $detail["judul_peserta_info"]?></th>
-														<th colspan="7">Identitas di Kartu Peserta</th>
+														<th colspan="8">Identitas di Kartu Peserta</th>
 													</tr>
 													<tr>
 														<th rowspan="2" class="padat">No. Kartu Peserta</th>
+														<th>FOTO</th>
 														<th>NIK</th>
 														<th>Nama</th>
 														<th>Tempat Lahir</th>
@@ -105,6 +106,15 @@
 																<?php endif; ?>
 																<td nowrap><?= $item["peserta_info"]?></td>
 																<td nowrap class="padat"><a href="<?= site_url("program_bantuan/data_peserta/$item[id]")?>" title="Data peserta"><?= $item['no_id_kartu'];?></a></td>
+																<td  class="padat">
+																	<div class="user-panel">
+																		<div class="image2">
+																			<img class="img-circle" alt="Foto Penduduk"
+																				src="<?= AmbilFoto($item['foto'], '', $item['id_sex']) ?>"
+																			/>
+																		</div>
+																	</div><?= $item["kartu_foto"];?>
+																</td>
 																<td nowrap><?= $item["kartu_nik"];?></td>
 																<td nowrap><?= $item["kartu_nama"];?></td>
 																<td nowrap><?= $item["kartu_tempat_lahir"];?></td>

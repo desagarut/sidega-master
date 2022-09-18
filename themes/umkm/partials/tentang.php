@@ -51,6 +51,9 @@
             </p>
           </div>
         </div>
+        <div class="col-md-12" style="padding-top: -40px;">
+        <?php $this->load->view($folder_themes .'/partials/statistik') ?>
+        </div>
       </div>
     </div>
   </div>

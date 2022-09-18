@@ -1,55 +1,61 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 $penduduk = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1')->result_array()[0]['jumlah'];
+$penduduk_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1')->result_array()[0]['jumlah'];
+$penduduk_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2')->result_array()[0]['jumlah'];
 $keluarga = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_keluarga')->result_array()[0]['jumlah'];
+$keluarga_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1 and kk_level = 1')->result_array()[0]['jumlah'];
+$keluarga_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2 and kk_level = 1')->result_array()[0]['jumlah'];
 $rtm = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_rtm')->result_array()[0]['jumlah'];
 $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_array()[0]['jumlah'];
 ?>
 
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" style="padding-top:30px">
-        <div class="section-title" data-aos="fade-up" data-aos-delay="300">
-          <h2>Statistik <?=ucwords($this->setting->sebutan_desa)?></strong></h2>
+<section class="shipping-info">
+  <div class="container">
+    <ul>
+
+      <li style="background-color: #071dff1f;"><a href="#first/statistik/4">
+        <div class="media-icon" >
+        <h3 style="color: blue;"><?= number_format($penduduk, 0, '', '.') ?></h3>
         </div>
-        <div class="row">
-          <div class="col-xl-12 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-down" data-aos-delay="300">
-            <div class="content d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-md-3 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="icofont-users-social"></i>
-                    <span data-toggle="counter-up"><?= number_format($penduduk,0,'', '.')?></span>
-                    <p>Jumlah<strong> Seluruh Penduduk</strong> tercatat di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?> </p>
-                  </div>
-                </div>
+        <div class="media-body">
+          <span>Jumlah Penduduk</span>
+          <h5>Laki-laki : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</h5>
+          <h5>Perempuan : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)</h5>
+        </div></a>
+      </li>
 
-                <div class="col-md-3 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="icofont-autism"></i>
-                    <span data-toggle="counter-up"><?= number_format($keluarga,0,'', '.')?></span>
-                    <p>Jumlah <strong>Kepala Keluarga</strong> total tercatat di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
-                  </div>
-                </div>
-
-                <div class="col-md-3 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="icofont-group-students"></i>
-                    <span data-toggle="counter-up"><?= number_format($rtm,0,'', '.')?></span>
-                    <p>Jumlah <strong>Rumah Tangga </strong> bahagia tercatat di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
-                  </div>
-                </div>
-
-                <div class="col-md-3 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="icofont-paper"></i>
-                    <span data-toggle="counter-up"><?= number_format($id,0,'', '.')?></span>
-                    <p>Jumlah <strong>Surat </strong> terlayani di <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
+      <li style="background-color: #071dff1f;"><a href="#">
+      <div class="media-icon">
+        <h3 style="color: blue;"><?= number_format($keluarga, 0, '', '.') ?></h3>
         </div>
+        <div class="media-body">
+          <span>Jumlah Kepala Keluarga</span>
+          <h5>Laki-laki : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</h5>
+          <h5>Perempuan : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)</h5>
+        </div></a>
+      </li>
 
-      </div>
-    </section><!-- End Counts Section -->
+      <li style="background-color: #071dff1f;"><a href="#">
+      <div class="media-icon">
+        <h3 style="color: blue;"><?= number_format($rtm, 0, '', '.') ?></h3>
+        </div>
+        <div class="media-body">
+          <span>Bangunan Rumah Tangga</span>
+          <h5>Layak huni : <?= number_format($rtm, 0, '', '.') ?> ( <?= number_format($rtm / $rtm * 100, 0, '', '.') ?>% )</h5>
+          <h5>Tidak Layak huni : <?= number_format($rtm_no, 0, '', '.') ?> ( <?= number_format($rtm_no / $rtm * 100, 0, '', '.') ?>%)</h5>
+        </div></a>
+      </li>
+
+      <li style="background-color: #071dff1f;"><a href="#">
+      <div class="media-icon">
+        <h3 style="color: blue;"><?= number_format($id, 0, '', '.') ?></h3>
+        </div>
+        <div class="media-body">
+          <span>Pelayanan Surat Menyurat</span>
+          <h5>Surat Warga : <?= number_format($id, 0, '', '.') ?> ( <?= number_format($id / $id * 100, 0, '', '.') ?>% )</h5>
+          <h5>Surat Non Warga : <?= number_format($id_no, 0, '', '.') ?> ( <?= number_format($id_no / $id * 100, 0, '', '.') ?>%)</h5>
+        </div></a>
+      </li>
+    </ul>
+  </div>
+</section>

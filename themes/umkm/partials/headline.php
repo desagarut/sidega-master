@@ -58,7 +58,9 @@
       </div>
       <?php endforeach ?>
       <?php endif ?>
-      <?php //$this->load->view($folder_themes .'/commons/paging') ?>
+      <div class="row">
+      <?php $this->load->view($folder_themes .'/commons/paging') ?>
+      </div>
     </div>
   </div>
 </section>

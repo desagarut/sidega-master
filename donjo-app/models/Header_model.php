@@ -114,4 +114,21 @@ class Header_model extends CI_Model {
 
 		return $outp;
 	}
+
+	public function rkpdes_total()
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_perencanaan_desa WHERE status = 1 and status_rkpdes = 1";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+	public function durkpdes_total()
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_perencanaan_desa WHERE status = 1 and status_rkpdes = 0";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+	
 }
