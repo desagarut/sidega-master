@@ -674,17 +674,21 @@ class First extends Web_Controller {
 		$this->load->library('data_publik');
 		$this->_get_common_data($data);
 		$kode_desa = $data['desa']['kode_desa'];
+		$tahun     = $this->session->flashdata('tahun') ?? ($this->input->post('tahun') ?? date('Y'));
+		$cache     = 'idm_' . $tahun . '_' . $kode_desa;
+
 		if ($this->data_publik->has_internet_connection())
 		{
-			$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/2020", "idm_$kode_desa")
-				->set_interval(7)
+		//	$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/2022", "idm_$kode_desa")
+			$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/$tahun", $cache)
+			->set_interval(7)
 				->set_cache_folder(FCPATH.'desa');
 
 			$idm = $this->data_publik->get_url_content();
 			if ($idm->body->error)
 			{
 				$idm->body->mapData->error_msg = $idm->body->message . " : " . $idm->header->url . "<br><br>" .
-					"Periksa Kode Desa di Identitas Desa. Masukkan kode lengkap, contoh '3205282001'<br>";
+					"Periksa Kode Desa di Identitas Desa. Masukkan kode lengkap, contoh '3205052001'<br>";
 			}
 			$data['idm'] = $idm->body->mapData;
 		}
@@ -692,7 +696,63 @@ class First extends Web_Controller {
 		$this->set_template('layouts/halaman_statis_idm.tpl.php');
 		$this->load->view($this->template, $data);
 	}
-	
+
+
+/*
+public function status_idm()
+{
+	$this->load->model('header_model');
+	$this->load->library('data_publik');
+
+	$header = $this->header_model->get_data();
+	$kode_desa = $header['desa']['kode_desa'];
+	$tahun     = $this->session->flashdata('tahun') ?? ($this->input->post('tahun') ?? date('Y'));
+	$cache     = 'idm_' . $tahun . '_' . $kode_desa;
+
+	if ($this->data_publik->has_internet_connection())
+	{
+		//$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/$tahun", "idm_$tahun_$kode_desa")
+		$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/$tahun", $cache)
+		->set_interval(7)
+			->set_cache_folder(FCPATH.'desa');
+
+		$idm = $this->data_publik->get_url_content();
+		if ($idm->body->error)
+		{
+			$idm->body->mapData->error_msg = $idm->body->message . " : " . $idm->header->url . "<br><br>" .
+				"Periksa Kode Desa di Identitas Desa. Masukkan kode lengkap, contoh '3205052001'<br>";
+		}
+		$data = [
+			'idm'   => $idm->body->mapData,
+			'tahun' => $tahun,];
+	}
+
+//	$this->load->view('header', $header);
+//	$this->load->view('nav', $nav);
+//	$this->load->view('home/idm', ['idm' => $idm->body->mapData]);
+//	$this->load->view('footer');
+// $this->render('home/idm', $data);
+
+$this->set_template('layouts/halaman_statis_idm.tpl.php');
+$this->load->view($this->template, $data);
+
+}
+
+public function perbaharui($tahun)
+{
+	if (cek_koneksi_internet() && $tahun) {
+		$kode_desa = $this->header['desa']['kode_desa'];
+		$cache     = 'idm_' . $tahun . '_' . $kode_desa . '.json';
+
+		$this->cache->file->delete($cache);
+		$this->session->set_flashdata('tahun', $tahun);
+		$this->session->success = 1;
+	}
+
+	redirect('status_desa');
+}
+*/
+
 	// Halaman Toko Warga
 /*	public function clear_toko_show()
 	{

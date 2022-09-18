@@ -20,6 +20,5 @@
 	</section>
 	<?php $this->load->view($folder_themes .'/commons/footer') ?>
 	<?php $this->load->view($folder_themes . '/commons/source_js') ?>
-	<?php $this->load->view($folder_themes . '/partials/tawkto') ?>
 </body>
 </html>
