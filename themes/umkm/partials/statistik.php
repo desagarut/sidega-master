@@ -19,8 +19,8 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div>
         <div class="media-body">
           <span>Jumlah Penduduk</span>
-          <h5>Laki-laki : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</h5>
-          <h5>Perempuan : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)</h5>
+          <h5>L : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</h5>
+          <h5>P : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)</h5>
         </div></a>
       </li>
 
@@ -30,8 +30,8 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div>
         <div class="media-body">
           <span>Jumlah Kepala Keluarga</span>
-          <h5>Laki-laki : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</h5>
-          <h5>Perempuan : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)</h5>
+          <h5>L : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</h5>
+          <h5>P : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)</h5>
         </div></a>
       </li>
 
@@ -41,8 +41,8 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div>
         <div class="media-body">
           <span>Bangunan Rumah Tangga</span>
-          <h5>Layak huni : <?= number_format($rtm, 0, '', '.') ?> ( <?= number_format($rtm / $rtm * 100, 0, '', '.') ?>% )</h5>
-          <h5>Tidak Layak huni : <?= number_format($rtm_no, 0, '', '.') ?> ( <?= number_format($rtm_no / $rtm * 100, 0, '', '.') ?>%)</h5>
+          <h5>Layak : <?= number_format($rtm, 0, '', '.') ?> ( <?= number_format($rtm / $rtm * 100, 0, '', '.') ?>% )</h5>
+          <h5>Tidak Layak : <?= number_format($rtm_no, 0, '', '.') ?> ( <?= number_format($rtm_no / $rtm * 100, 0, '', '.') ?>%)</h5>
         </div></a>
       </li>
 
@@ -52,8 +52,8 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div>
         <div class="media-body">
           <span>Pelayanan Surat Menyurat</span>
-          <h5>Surat Warga : <?= number_format($id, 0, '', '.') ?> ( <?= number_format($id / $id * 100, 0, '', '.') ?>% )</h5>
-          <h5>Surat Non Warga : <?= number_format($id_no, 0, '', '.') ?> ( <?= number_format($id_no / $id * 100, 0, '', '.') ?>%)</h5>
+          <h5>Warga : <?= number_format($id, 0, '', '.') ?> ( <?= number_format($id / $id * 100, 0, '', '.') ?>% )</h5>
+          <h5>Non Warga : <?= number_format($id_no, 0, '', '.') ?> ( <?= number_format($id_no / $id * 100, 0, '', '.') ?>%)</h5>
         </div></a>
       </li>
     </ul>
