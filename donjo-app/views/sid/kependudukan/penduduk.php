@@ -1,27 +1,26 @@
 <script>
-$(document).ready(function()
-{
-	$('#cari').focus();
-});
+	$(document).ready(function() {
+		$('#cari').focus();
+	});
 
-$( function() {
-	$( "#cari" ).autocomplete( {
-		source: function( request, response ) {
-			$.ajax( {
-				type: "POST",
-				url: '<?= site_url("penduduk/autocomplete"); ?>',
-				dataType: "json",
-				data: {
-					cari: request.term
-				},
-				success: function( data ) {
-					response( JSON.parse( data ));
-				}
-			} );
-		},
-		minLength: 2,
-	} );
-} );
+	$(function() {
+		$("#cari").autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					type: "POST",
+					url: '<?= site_url("penduduk/autocomplete"); ?>',
+					dataType: "json",
+					data: {
+						cari: request.term
+					},
+					success: function(data) {
+						response(JSON.parse(data));
+					}
+				});
+			},
+			minLength: 2,
+		});
+	});
 </script>
 
 <style>
@@ -30,8 +29,7 @@ $( function() {
 	}
 
 	@media (max-width:780px) {
-		.btn-group-vertical
-		{
+		.btn-group-vertical {
 			display: block;
 		}
 	}
@@ -40,6 +38,18 @@ $( function() {
 		min-height: 400px;
 	}
 </style>
+
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+$penduduk = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1')->result_array()[0]['jumlah'];
+$penduduk_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1')->result_array()[0]['jumlah'];
+$penduduk_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2')->result_array()[0]['jumlah'];
+$keluarga = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_keluarga')->result_array()[0]['jumlah'];
+$keluarga_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1 and kk_level = 1')->result_array()[0]['jumlah'];
+$keluarga_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2 and kk_level = 1')->result_array()[0]['jumlah'];
+$rtm = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_rtm')->result_array()[0]['jumlah'];
+$id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_array()[0]['jumlah'];
+?>
+
 
 <div class="content-wrapper">
 	<section class="content-header">
@@ -51,11 +61,44 @@ $( function() {
 	</section>
 	<section class="content" id="maincontent">
 		<div class="row">
+						<div class="col-md-3">
+							<div class="info-box bg-green">
+								<span class="info-box-icon"><h3><?= number_format($penduduk, 0, '', '.') ?></h3></span>
+								<div class="info-box-content">
+									<span >L : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</span><br/>
+									<span >P : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)</span>
+									<div class="progress">
+										<div class="progress-bar" style="width: <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>%"></div>
+									</div>
+									<span class="progress-description">
+										Jumlah Penduduk
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="info-box bg-orange">
+								<span class="info-box-icon"><?= $data['jumlah'] ?></span>
+								<div class="info-box-content">
+									<span class="info-box-text">Total DU-RKP Desa</span>
+									<span class="info-box-number"><?= $data['jumlah'] ?> <small>Kegiatan</small></span>
+									<div class="progress">
+										<div class="progress-bar" style="width: 35%"></div>
+									</div>
+									<span class="progress-description">
+										Proporsi Usulan = 50% DU-RKP Desa
+									</span>
+								</div>
+							</div>
+						</div>
+		</div>
+		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<?php if ($this->CI->cek_hak_akses('h')): ?>
-                        	<a href="<?= site_url('penduduk/form'); ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Data"><i class="fa fa-plus"></i> Penduduk Domisili</a>
+						<?php if ($this->CI->cek_hak_akses('h')) : ?>
+							<a href="<?= site_url('penduduk/form'); ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Data"><i class="fa fa-plus"></i> Penduduk Domisili</a>
 							<a href="#confirm-delete" title="Hapus Data Terpilih" onclick="deleteAllBox('mainform', '<?= site_url("penduduk/delete_all/$p/$o"); ?>')" class="btn btn-social btn-box btn-danger btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block hapus-terpilih"><i class='fa fa-trash-o'></i> Hapus Data Terpilih</a>
 						<?php endif; ?>
 						<div class="btn-group-vertical">
@@ -87,19 +130,19 @@ $( function() {
 									<div class="col-sm-9">
 										<select class="form-control input-sm" name="filter" onchange="formAction('mainform', '<?= site_url('penduduk/filter/filter'); ?>')">
 											<option value="">Status Penduduk</option>
-											<?php foreach ($list_status_penduduk AS $data): ?>
+											<?php foreach ($list_status_penduduk as $data) : ?>
 												<option value="<?= $data['id']; ?>" <?= selected($filter, $data['id']); ?>><?= set_ucwords($data['nama']); ?></option>
 											<?php endforeach; ?>
 										</select>
 										<select class="form-control input-sm" name="status_dasar" onchange="formAction('mainform', '<?= site_url('penduduk/filter/status_dasar'); ?>')">
 											<option value="">Status Dasar</option>
-											<?php foreach ($list_status_dasar AS $data): ?>
+											<?php foreach ($list_status_dasar as $data) : ?>
 												<option value="<?= $data['id']; ?>" <?= selected($status_dasar, $data['id']); ?>><?= set_ucwords($data['nama']); ?></option>
 											<?php endforeach; ?>
 										</select>
 										<select class="form-control input-sm" name="sex" onchange="formAction('mainform', '<?= site_url('penduduk/filter/sex'); ?>')">
 											<option value="">Jenis Kelamin</option>
-											<?php foreach ($list_jenis_kelamin AS $data): ?>
+											<?php foreach ($list_jenis_kelamin as $data) : ?>
 												<option value="<?= $data['id']; ?>" <?= selected($sex, $data['id']); ?>><?= set_ucwords($data['nama']); ?></option>
 											<?php endforeach; ?>
 										</select>
@@ -107,7 +150,7 @@ $( function() {
 									</div>
 									<div class="col-sm-3">
 										<div class="input-group input-group-sm pull-right">
-											<input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" title="Pencarian berdasarkan nama penduduk" value="<?=html_escape($cari); ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("penduduk/filter/cari"); ?>');$('#'+'mainform').submit();}">
+											<input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" title="Pencarian berdasarkan nama penduduk" value="<?= html_escape($cari); ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("penduduk/filter/cari"); ?>');$('#'+'mainform').submit();}">
 											<div class="input-group-btn">
 												<button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("penduduk/filter/cari"); ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
 											</div>
@@ -115,72 +158,74 @@ $( function() {
 									</div>
 								</div>
 								<div class="table-responsive table-min-height">
-									<?php if ($judul_statistik): ?>
+									<?php if ($judul_statistik) : ?>
 										<h5 class="box-title text-center"><b><?= $judul_statistik; ?></b></h5>
 									<?php endif; ?>
 									<table class="table table-bordered dataTable table-striped table-hover tabel-daftar">
 										<thead class="bg-gray disabled color-palette">
 											<tr>
-												<th><input type="checkbox" id="checkall"/></th>
+												<th><input type="checkbox" id="checkall" /></th>
 												<th>No</th>
 												<th>Aksi</th>
 												<th>Foto</th>
-                                                <th><?= url_order($o, "{$this->controller}/{$func}/$p", 5, 'No. KK'); ?></th>
+												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 5, 'No. KK'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 1, 'NIK'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 3, 'Nama'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 7, 'Umur'); ?></th>
-                                                <!--<th>Tag ID Card</th>												
+												<!--<th>Tag ID Card</th>												
 												<!-- tambah kolom orang tua-->
 												<!--<th>Nama Ayah</th>
 												<th>Nama Ibu</th>
 												<!-- tambah kolom orang tua-->
 												<!--<th>No. Rumah Tangga</th>-->
 												<th>Alamat</th>
-												<!--<th><? //= ucwords($this->setting->sebutan_dusun); ?></th>
+												<!--<th><? //= ucwords($this->setting->sebutan_dusun); 
+														?></th>
 												<th>RW</th>
 												<th>RT</th>-->
 												<th>Pendidikan</th>
-												<th >Pekerjaan</th>
+												<th>Pekerjaan</th>
 												<th>Perkawinan</th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 11, 'Di Input Oleh'); ?></th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php if($main): ?>
-												<?php foreach ($main as $key => $data): ?>
+											<?php if ($main) : ?>
+												<?php foreach ($main as $key => $data) : ?>
 													<tr>
 														<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']; ?>" /></td>
 														<td class="padat"><?= ($key + $paging->offset + 1); ?></td>
 														<td class="aksi">
-                                                        	<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-green btn-box btn-sm" title="Lihat Detail"><i class="fa fa-search"></i></a>
-                                                        	<!--<a href="<? //= site_url("penduduk/form/$p/$o/$data[id]"); ?>" class="btn bg-orange btn-box btn-sm" title="Ubah Data Penduduk"><i class="fa fa-pencil"></i></a>-->
-                                                            <div class="btn-group">
-                                                                <a href="#" class="btn bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail"><i class="fa fa-list-ol"></i>Aksi</a>
+															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-green btn-box btn-sm" title="Lihat Detail"><i class="fa fa-search"></i></a>
+															<!--<a href="<? //= site_url("penduduk/form/$p/$o/$data[id]"); 
+																			?>" class="btn bg-orange btn-box btn-sm" title="Ubah Data Penduduk"><i class="fa fa-pencil"></i></a>-->
+															<div class="btn-group">
+																<a href="#" class="btn bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail"><i class="fa fa-list-ol"></i>Aksi</a>
 																<!-- <button type="button" class="btn btn-social btn-box btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-arrow-circle-down'></i> Pilih Aksi</button>-->
 																<ul class="dropdown-menu" role="menu">
 																	<li>
 																		<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-list-ol"></i> Lihat Detail Biodata Penduduk</a>
 																	</li>
-																	<?php if ($data['status_dasar']==9): ?>
+																	<?php if ($data['status_dasar'] == 9) : ?>
 																		<li>
 																			<a href="#" data-href="<?= site_url("penduduk/kembalikan_status/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm" data-remote="false" data-toggle="modal" data-target="#confirm-status"><i class="fa fa-undo"></i> Kembalikan ke Status HIDUP</a>
 																		</li>
 																	<?php endif; ?>
-																	<?php if ($data['status_dasar']==1): ?>
+																	<?php if ($data['status_dasar'] == 1) : ?>
 																		<li>
-                                                                        <?php if ($this->CI->cek_hak_akses('u')): ?>
-																			<a href="<?= site_url("penduduk/form/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-edit"></i> Ubah Biodata Penduduk</a>
-																		<?php endif; ?>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Lokasi <?= $data['nama']?> " data-title="Lokasi <?= $data['nama']?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>
-                                                                            <!--<a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" title="Lokasi <?= $data['nama']?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>-->
-                                                                        </li>
+																			<?php if ($this->CI->cek_hak_akses('u')) : ?>
+																				<a href="<?= site_url("penduduk/form/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-edit"></i> Ubah Biodata Penduduk</a>
+																			<?php endif; ?>
+																		</li>
 																		<li>
-                                                                        <?php if ($this->CI->cek_hak_akses('h')): ?>
-																			<a href="<?= site_url("penduduk/edit_status_dasar/$p/$o/$data[id]"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Status Dasar" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-sign-out'></i> Ubah Status Dasar</a>
-																		<?php endif; ?>
-                                                                        </li>
+																			<a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Lokasi <?= $data['nama'] ?> " data-title="Lokasi <?= $data['nama'] ?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>
+																			<!--<a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" title="Lokasi <?= $data['nama'] ?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>-->
+																		</li>
+																		<li>
+																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
+																				<a href="<?= site_url("penduduk/edit_status_dasar/$p/$o/$data[id]"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Status Dasar" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-sign-out'></i> Ubah Status Dasar</a>
+																			<?php endif; ?>
+																		</li>
 																		<li>
 																			<a href="<?= site_url("penduduk/dokumen/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-upload"></i> Upload Dokumen Penduduk</a>
 																		</li>
@@ -190,7 +235,7 @@ $( function() {
 																		<li>
 																			<a href="<?= site_url("penduduk/cetak_biodata/$data[id]"); ?>" target="_blank" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-print"></i> Cetak Biodata Penduduk</a>
 																		</li>
-																		<?php if ($this->CI->cek_hak_akses('h')): ?>
+																		<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																			<li>
 																				<a href="#" data-href="<?= site_url("penduduk/delete/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i> Hapus</a>
 																			</li>
@@ -202,9 +247,7 @@ $( function() {
 														<td class="padat">
 															<div class="user-panel">
 																<div class="image2">
-																	<img class="img-circle" alt="Foto Penduduk"
-																		src="<?= AmbilFoto($data['foto'], '', $data['id_sex']) ?>"
-																	/>
+																	<img class="img-circle" alt="Foto Penduduk" src="<?= AmbilFoto($data['foto'], '', $data['id_sex']) ?>" />
 																</div>
 															</div>
 														</td>
@@ -214,29 +257,36 @@ $( function() {
 														</td>
 														<td nowrap>
 															<strong><?= strtoupper($data['nama']); ?></strong></br>
-                                                            Ayah : <?= $data['nama_ayah']; ?></br>
-                                                            Ibu	: <?= $data['nama_ibu']; ?>
-                                                        </td>
-														<td align="center"><strong><?= $data['umur']; ?></strong> <small>tahun</small><br/><small style="color:#F60"><?= $data['sex']; ?></small><br/><small style="color:#03F"><?= $data['tempatlahir']; ?>, <?= strtoupper($data['tanggallahir']); ?></small></td>
-														<!--<td nowrap><? //= $data['tag_id_card']; ?></td>
+															Ayah : <?= $data['nama_ayah']; ?></br>
+															Ibu : <?= $data['nama_ibu']; ?>
+														</td>
+														<td align="center"><strong><?= $data['umur']; ?></strong> <small>tahun</small><br /><small style="color:#F60"><?= $data['sex']; ?></small><br /><small style="color:#03F"><?= $data['tempatlahir']; ?>, <?= strtoupper($data['tanggallahir']); ?></small></td>
+														<!--<td nowrap><? //= $data['tag_id_card']; 
+																		?></td>
 														<!-- tambah kolom orang tua-->
-														<!--<td nowrap><? //= $data['nama_ayah']; ?></td>
-														<td nowrap><? //= $data['nama_ibu']; ?></td>
+														<!--<td nowrap><? //= $data['nama_ayah']; 
+																		?></td>
+														<td nowrap><? //= $data['nama_ibu']; 
+																	?></td>
 														<!-- tambah kolom orang tua-->
-														<!--<td><a href="<? //= site_url("rtm/anggota/$data[id_rtm]"); ?>"><? //= $data['no_rtm']; ?></a></td>-->
+														<!--<td><a href="<? //= site_url("rtm/anggota/$data[id_rtm]"); 
+																			?>"><? //= $data['no_rtm']; 
+																				?></a></td>-->
 														<td>
 															<?= strtoupper($data['alamat']); ?>, RT <?= $data['rt']; ?> / RW <?= $data['rw']; ?> Dusun <?= strtoupper($data['dusun']); ?>
-                                                        </td>
+														</td>
 														<!--<td nowrap><?= strtoupper($data['dusun']); ?></td>
-														<td><? //= $data['rw']; ?></td>
-														<td><? //= $data['rt']; ?></td>-->
+														<td><? //= $data['rw']; 
+															?></td>
+														<td><? //= $data['rt']; 
+															?></td>-->
 														<td><?= $data['pendidikan']; ?></td>
 														<td><?= $data['pekerjaan']; ?></td>
 														<td nowrap><?= $data['kawin']; ?></td>
-														<td><?= $data['nama_pendaftar']; ?><br/><?= $data['created_at']; ?></td>
+														<td><?= $data['nama_pendaftar']; ?><br /><?= $data['created_at']; ?></td>
 													</tr>
 												<?php endforeach; ?>
-											<?php else: ?>
+											<?php else : ?>
 												<tr>
 													<td class="text-center" colspan="20">Data Tidak Tersedia</td>
 												</tr>
