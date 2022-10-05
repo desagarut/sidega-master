@@ -117,6 +117,7 @@ class First extends Web_Controller {
 		$data['main'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['pamong'] = $this->pamong_model->get_data();
+		$data['setting_desa'] = $this->config_model->get_data();
 
 		$cari = trim($this->input->get('cari'));
 		if ( ! empty($cari))

@@ -81,6 +81,7 @@ class Config_model extends CI_Model {
 		$data['visi'] = $post['visi'];
 		$data['misi'] = $post['misi'];
 		$data['strategi'] = $post['strategi'];
+		$data['video'] = $post['video'];
 		return $data;
 	}
 

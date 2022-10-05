@@ -38,7 +38,7 @@
         <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> 
           <!-- Start Small Banner -->
           <div class="hero-small-banner">
-            <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/7APs5ZduJ-0?list=PL6qi86mr3dAlNMWiYIhpqwSKZ9K41hdJq" title="Expose SIDeSCi oleh Camat Cisompet" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <!-- End Small Banner --> 
         </div>

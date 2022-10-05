@@ -47,6 +47,13 @@
 							</div>
 						</div>
 					</div>
+					<div class="box box-primary">
+						<div class="box-body box-profile">
+						<iframe height="200px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $main["channel_youtube"]; ?>" title="Profile Desa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<br/>
+							<p class="text-center text-bold">Channel Youtube <?= $desa; ?></p>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-9">
 					<div class="box box-primary">
@@ -106,6 +113,13 @@
 								<label class="col-sm-3 control-label" for="website">Website <?= $desa; ?></label>
 								<div class="col-sm-8">
 									<input id="website" name="website" class="form-control input-sm url" maxlength="50" type="text" placeholder="Website <?= $desa; ?>" value="<?= $main["website"]; ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="channel_youtube">Video Youtube <?= $desa; ?></label>
+								<div class="col-sm-4">
+									<input id="video" name="video" class="form-control input-sm" maxlength="50" type="text" placeholder="contoh: 7APs5ZduJ-0" value="<?= $main["video"]; ?>"></input>
+									<small>Ex: https://www.youtube.com/watch?v=<strong style="color: red;">7APs5ZduJ-0</strong></small>
 								</div>
 							</div>
 							<div class="form-group">
