@@ -50,9 +50,7 @@
               <a class="button btn btn-warning" href="<?= $url ?>"> <i class="lni lni-pen"></i> Selengkapnya</a> </div>
             </p>
           </div>
-        </div>
-        <div class="col-md-12" style="padding-top: -40px;">
-        <?php $this->load->view($folder_themes .'/partials/statistik') ?>
+          <?php $this->load->view($folder_themes .'/partials/statistik') ?>
         </div>
       </div>
     </div>

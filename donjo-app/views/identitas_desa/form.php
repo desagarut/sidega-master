@@ -49,7 +49,7 @@
 					</div>
 					<div class="box box-primary">
 						<div class="box-body box-profile">
-						<iframe height="200px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $main["channel_youtube"]; ?>" title="Profile Desa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<iframe height="200px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $main["video"]; ?>" title="Profile Desa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							<br/>
 							<p class="text-center text-bold">Channel Youtube <?= $desa; ?></p>
 						</div>

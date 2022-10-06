@@ -42,13 +42,13 @@
           </div>
           <!-- End Small Banner --> 
         </div>
-        <div class="col-lg-12 col-md-6 col-12"> 
+        <div class="col-lg-12 col-md-6 col-12" style="padding-top: 11px;"> 
           <!-- Start Small Banner -->
-          <div class="hero-small-banner style2">
+          <div class="hero-small-banner" style="background-image: url('<?= gambar_desa($setting_desa['kantor_desa'], TRUE); ?>');">
             <div class="content">
-              <h2>Cek Bantuan!</h2>
-              <p>Akses menuju halaman cek bantuan Kementerian Sosial</p>
-              <div class="button"> <a class="btn" href="https://cekbansos.kemensos.go.id/">Cek Bansos</a> </div>
+              <div class="button"> <a class="btn" href="https://cekbansos.kemensos.go.id/">Cek Bantuan Sosial</a> </div><br/>
+              <div class="button"> <a class="btn" href="https://ereg.pajak.go.id/ceknpwp">Cek NPWP</a> </div><br/>
+              <div class="button"> <a class="btn" href="https://ereg.pajak.go.id/daftar">Pendaftaran NPWP</a> </div>
             </div>
           </div>
           <!-- Start Small Banner --> 

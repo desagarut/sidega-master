@@ -1008,8 +1008,8 @@ ol {
 }
 
 .section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   position: relative
 }
 
@@ -3169,7 +3169,7 @@ ol {
 
 .shipping-info {
   background-color: #f9f9f9;
-  padding: 50px 0
+  padding: 20px 0
 }
 
 .shipping-info ul {
@@ -4975,7 +4975,7 @@ blockquote span {
 }
 
 .brands {
-  padding: 80px 0;
+  padding: 50px 0;
   background-color: #f9f9f9
 }
 
@@ -5608,16 +5608,16 @@ blockquote span {
 
 .product-details-info .single-block {
   background-color: #fff;
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
-  margin-top: 30px
+  margin-top: 10px
 }
 
 @media only screen and (min-width:768px) and (max-width:991px),
 (max-width:767px) {
   .product-details-info .info-body.custom-responsive-margin {
-    margin-bottom: 30px
+    margin-bottom: 10px
   }
 }
 
@@ -5701,7 +5701,7 @@ blockquote span {
 }
 
 .product-details-info .give-review .review-btn {
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 12px 30px;
   width: 100%;
   background-color: #ffa000;
@@ -5936,7 +5936,7 @@ blockquote span {
 @media only screen and (min-width:768px) and (max-width:991px),
 (max-width:767px) {
   .product-grids .product-grid-topbar {
-    margin-top: 30px
+    margin-top: 10px
   }
 }
 
