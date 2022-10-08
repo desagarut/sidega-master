@@ -64,7 +64,7 @@ function initMap() {
 
 <!-- widget Peta Wilayah Kelurahan -->
 
-<div class="map-section" style="padding-top:58px">
+<div class="map-section">
     <div class="col-sm-12">
       <div id="peta_wilayah_desa" style="height: 500px"></div>
     </div>

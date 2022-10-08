@@ -4,20 +4,18 @@
 
 	if( ! isset($_SESSION['mandiri']) OR $_SESSION['mandiri']<>1) {
 
-
-
 		if($_SESSION['mandiri_wait'] == 1) { ?>
 
-<h4>Layanan
+<h5>Layanan
   <?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?>
-</h4>
+</h5>
 <p>Silakan datang atau hubungi operator <?php echo $this->setting->sebutan_desa?> untuk mendapatkan kode PIN anda.</p>
-<h4>Gagal 3 kali, silakan coba kembali dalam <?php echo waktu_ind((time()- $_SESSION['mandiri_timeout'])*(-1));?> detik lagi</h4>
+<h5>Gagal 3 kali, silakan coba kembali dalam <?php echo waktu_ind((time()- $_SESSION['mandiri_timeout'])*(-1));?> detik lagi</h5>
 <div id="note"> Login Gagal. Username atau Password yang anda masukkan salah! </div>
 <?php } else { ?>
-<h4>Layanan
+<h5>Layanan
   <?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?>
-</h4>
+</h5>
 <p>Silakan datang atau hubungi operator <?php echo $this->setting->sebutan_desa?> untuk mendapatkan kode PIN anda. atau klik link di bawah untuk login</p>
 <a href="<?=site_url('mandiri_web'); ?>" class="btn btn-box btn-success btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"  title="Masuk Layanan Mandiri">Login Layanan</a>
 <?php }
@@ -64,7 +62,7 @@
 </h5>
 <br />
 Untuk keamanan silahkan ubah kode PIN Anda.
-<h4>Masukkan PIN Baru</h4>
+<h5>Masukkan PIN Baru</h5>
 <form action="<?php echo site_url('ganti')?>" method="post">
   <input name="pin1" type="password" placeholder="PIN" value="" style="margin-left:0px">
   <input name="pin2" type="password" placeholder="Ulangi PIN" value="" style="margin-left:0px">

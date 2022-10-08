@@ -1,4 +1,4 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +10,9 @@
 
 <body>
 	<?php $this->load->view($folder_themes . '/commons/header') ?>
-		<?php $this->load->view($folder_themes . '/partials/map_google') ?>
-	<?php $this->load->view($folder_themes . '/commons/footer_min') ?>
+	<?php $this->load->view($folder_themes . '/partials/map_google') ?>
+	<?php if (!is_null($transparansi)) $this->load->view("$folder_themes/partials/apbdesa-tema", $transparansi); ?>
+	<?php $this->load->view($folder_themes . '/commons/footer') ?>
 	<?php $this->load->view($folder_themes . '/commons/for_js') ?>
 </body>
 

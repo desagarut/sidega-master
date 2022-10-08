@@ -6,7 +6,7 @@
 
 <div class="box box-primary box-solid">
 	<div class="box-header">
-        <h4><a href="<?= site_url('first/kategori/1000')?>">Agenda</a></h3>
+        <h5><a href="<?= site_url('first/kategori/1000')?>">Agenda</a></h5>
 	</div>
 	<div id="agenda" class="box-body">
 		<ul class="nav nav-tabs">

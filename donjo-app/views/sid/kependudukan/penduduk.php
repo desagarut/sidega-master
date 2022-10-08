@@ -1,3 +1,5 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
 <script>
 	$(document).ready(function() {
 		$('#cari').focus();
@@ -39,17 +41,6 @@
 	}
 </style>
 
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-$penduduk = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1')->result_array()[0]['jumlah'];
-$penduduk_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1')->result_array()[0]['jumlah'];
-$penduduk_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2')->result_array()[0]['jumlah'];
-$keluarga = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_keluarga')->result_array()[0]['jumlah'];
-$keluarga_laki = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 1 and kk_level = 1')->result_array()[0]['jumlah'];
-$keluarga_perempuan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHERE status_dasar = 1 and sex = 2 and kk_level = 1')->result_array()[0]['jumlah'];
-$rtm = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_rtm')->result_array()[0]['jumlah'];
-$id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_array()[0]['jumlah'];
-?>
-
 
 <div class="content-wrapper">
 	<section class="content-header">
@@ -60,39 +51,6 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<div class="row">
-						<div class="col-md-3">
-							<div class="info-box bg-green">
-								<span class="info-box-icon"><h3><?= number_format($penduduk, 0, '', '.') ?></h3></span>
-								<div class="info-box-content">
-									<span >L : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</span><br/>
-									<span >P : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)</span>
-									<div class="progress">
-										<div class="progress-bar" style="width: <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>%"></div>
-									</div>
-									<span class="progress-description">
-										Jumlah Penduduk
-									</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="info-box bg-orange">
-								<span class="info-box-icon"><?= $data['jumlah'] ?></span>
-								<div class="info-box-content">
-									<span class="info-box-text">Total DU-RKP Desa</span>
-									<span class="info-box-number"><?= $data['jumlah'] ?> <small>Kegiatan</small></span>
-									<div class="progress">
-										<div class="progress-bar" style="width: 35%"></div>
-									</div>
-									<span class="progress-description">
-										Proporsi Usulan = 50% DU-RKP Desa
-									</span>
-								</div>
-							</div>
-						</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-info">

@@ -10,3 +10,5 @@
 <?php $this->load->view($folder_themes .'/partials/tentang') ?>
 <?php $this->load->view($folder_themes .'/partials/gallery') ?>
 <?php $this->load->view($folder_themes .'/partials/sinergi') ?>
+<?php if (!is_null($transparansi)) $this->load->view("$folder_themes/partials/apbdesa-tema", $transparansi); ?>
+

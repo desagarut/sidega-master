@@ -11,10 +11,10 @@
 	<section class="content" id="maincontent">
 		<form id="mainform" name="mainform" action="" method="post">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<?php $this->load->view('statistik/side_menu.php'); ?>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<div class="box box-info">
 						<div class="box-header with-border">
 							<a href="<?=site_url("statistik/dialog/cetak"); ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Laporan" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Laporan"><i class="fa fa-print "></i>Cetak

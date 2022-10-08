@@ -71,34 +71,6 @@ class First extends Web_Controller {
 		$this->load->library('upload');
 	}
 
-	// public function auth()
-	// {
-	// 	if ($_SESSION['mandiri_wait'] != 1)
-	// 	{
-	// 		$this->first_m->insidega();
-	// 	}
-	// 	if ($_SESSION['mandiri'] == 1)
-	// 	{
-	// 		redirect('mandiri_web/mandiri/1/1');
-	// 	}
-	// 	else
-	// 	{
-	// 		redirect();
-	// 	}
-	// }
-
-	// public function logout()
-	// {
-	// 	$this->first_m->logout();
-	// 	redirect();
-	// }
-
-	// public function ganti()
-	// {
-	// 	$this->first_m->ganti();
-	// 	redirect();
-	// }
-
 	public function index($p=1)
 	{
 		$data = $this->includes;
@@ -118,6 +90,12 @@ class First extends Web_Controller {
 		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['pamong'] = $this->pamong_model->get_data();
 		$data['setting_desa'] = $this->config_model->get_data();
+
+		if ($this->setting->apbdes_footer) {
+            $data['transparansi'] = $this->setting->apbdes_manual_input
+                ? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
+                : $this->keuangan_grafik_model->grafik_keuangan_tema();
+        }
 
 		$cari = trim($this->input->get('cari'));
 		if ( ! empty($cari))
@@ -165,44 +143,7 @@ class First extends Web_Controller {
 		$this->_get_common_data($data);
 		$this->load->view($this->template, $data);
 	}
-	
-	public function rss_info_mitra()
-	{
-		$data = $this->includes;
-
-		$this->set_template('layouts/rss_info_mitra.php');
 		
-		if ($this->setting->feed_kecamatan)
-		{
-			$data['feed1'] = array(
-				'items1' => $this->first_artikel_m->get_feed1(),
-				'title' => 'Kabar Kecamatan Cisompet',
-				'url' => 'https://www.kecamatancisompet.id'
-			);
-		}
-		
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
-	
-	public function rss_info_pendidikan()
-	{
-		$data = $this->includes;
-
-		$this->set_template('layouts/rss_info_pendidikan.php');
-		
-		if ($this->setting->feed_sthg)
-		{
-			$data['feed_sthg'] = array(
-				'items_sthg' => $this->first_artikel_m->get_feed_sthg(),
-				'title' => 'Info Sekolah Tinggi Hukum Garut',
-				'url' => 'https://www.sthgarut.ac.id'
-			);
-		}
-		
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
 
 	/*
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
@@ -680,7 +621,6 @@ class First extends Web_Controller {
 
 		if ($this->data_publik->has_internet_connection())
 		{
-		//	$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/2022", "idm_$kode_desa")
 			$this->data_publik->set_api_url("https://idm.kemendesa.go.id/open/api/desa/rumusan/$kode_desa/$tahun", $cache)
 			->set_interval(7)
 				->set_cache_folder(FCPATH.'desa');
@@ -700,13 +640,7 @@ class First extends Web_Controller {
 
 
 	// Halaman Toko Warga
-/*	public function clear_toko_show()
-	{
-		unset($_SESSION['cari']);
-		unset($_SESSION['filter']);
-		redirect('toko_show');
-	}
-*/
+
 	public function toko_show($p=1, $o=0)
 	{
 		$data = $this->includes;
@@ -714,14 +648,6 @@ class First extends Web_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-	/*	if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-	*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -737,52 +663,12 @@ class First extends Web_Controller {
 
 	}
 
-/*	public function search_toko($gallery='')
-	{
-		$cari = $this->input->post('cari');
-		if ($cari != '')
-			$_SESSION['cari'] = $cari;
-		else unset($_SESSION['cari']);
-		if ($gallery != '')
-		{
-			redirect("toko_show/produk_show/$gallery");
-		}
-		else
-		{
-			redirect('toko_show');
-		}
-	}
-
-	public function filter_toko($gallery='')
-	{
-		$filter = $this->input->post('filter');
-		if ($filter != 0)
-			$_SESSION['filter'] = $filter;
-		else unset($_SESSION['filter']);
-		if ($gallery != '')
-		{
-			redirect("toko_show/produk/$gallery");
-		}
-		else
-		{
-			redirect('toko_warga');
-		}
-	}
-*/
 	public function produk_show($gal=0, $p=1, $o=0)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-/*		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -805,13 +691,7 @@ class First extends Web_Controller {
 	}
 //-------------------------------------------------------------------
 	// Halaman Transportasi Warga
-/*	public function clear_tawa()
-	{
-		unset($_SESSION['cari']);
-		unset($_SESSION['filter']);
-		redirect('daftar_tawa');
-	}
-*/
+
 	public function tawa($p=1, $o=0)
 	{
 		$data = $this->includes;
@@ -819,14 +699,6 @@ class First extends Web_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-	/*	if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-	*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -842,52 +714,12 @@ class First extends Web_Controller {
 
 	}
 
-/*	public function search_toko($gallery='')
-	{
-		$cari = $this->input->post('cari');
-		if ($cari != '')
-			$_SESSION['cari'] = $cari;
-		else unset($_SESSION['cari']);
-		if ($gallery != '')
-		{
-			redirect("toko_show/tawa/$gallery");
-		}
-		else
-		{
-			redirect('toko_show');
-		}
-	}
-
-	public function filter_toko($gallery='')
-	{
-		$filter = $this->input->post('filter');
-		if ($filter != 0)
-			$_SESSION['filter'] = $filter;
-		else unset($_SESSION['filter']);
-		if ($gallery != '')
-		{
-			redirect("toko_show/produk/$gallery");
-		}
-		else
-		{
-			redirect('toko_warga');
-		}
-	}
-*/
 	public function tawa_layanan($gal=0, $p=1, $o=0)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-/*		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -910,13 +742,7 @@ class First extends Web_Controller {
 	}
 //-------------------------------------------------------------------
 	// Halaman Wisata Desa
-/*	public function clear_wisata()
-	{
-		unset($_SESSION['cari']);
-		unset($_SESSION['filter']);
-		redirect('wisata');
-	}
-*/
+
 	public function wisata($p=1, $o=0)
 	{
 		$data = $this->includes;
@@ -924,14 +750,6 @@ class First extends Web_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-	/*	if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-	*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -947,52 +765,12 @@ class First extends Web_Controller {
 
 	}
 
-/*	public function search_wisata($gallery='')
-	{
-		$cari = $this->input->post('cari');
-		if ($cari != '')
-			$_SESSION['cari'] = $cari;
-		else unset($_SESSION['cari']);
-		if ($gallery != '')
-		{
-			redirect("wisata/tawa/$gallery");
-		}
-		else
-		{
-			redirect('wisata');
-		}
-	}
-
-	public function filter_wisata($gallery='')
-	{
-		$filter = $this->input->post('filter');
-		if ($filter != 0)
-			$_SESSION['filter'] = $filter;
-		else unset($_SESSION['filter']);
-		if ($gallery != '')
-		{
-			redirect("wisata/fasilitas/$gallery");
-		}
-		else
-		{
-			redirect('toko_warga');
-		}
-	}
-*/
 	public function wisata_fasilitas($gal=0, $p=1, $o=0)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-/*		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -1016,13 +794,7 @@ class First extends Web_Controller {
 
 //-------------------------------------------------------------------
 	// Halaman Tukang Warga
-/*	public function clear_wisata()
-	{
-		unset($_SESSION['cari']);
-		unset($_SESSION['filter']);
-		redirect('wisata');
-	}
-*/
+
 	public function tukang($p=1, $o=0)
 	{
 		$data = $this->includes;
@@ -1030,14 +802,6 @@ class First extends Web_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-	/*	if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-	*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
@@ -1053,52 +817,12 @@ class First extends Web_Controller {
 
 	}
 
-/*	public function search_wisata($gallery='')
-	{
-		$cari = $this->input->post('cari');
-		if ($cari != '')
-			$_SESSION['cari'] = $cari;
-		else unset($_SESSION['cari']);
-		if ($gallery != '')
-		{
-			redirect("wisata/tawa/$gallery");
-		}
-		else
-		{
-			redirect('wisata');
-		}
-	}
-
-	public function filter_wisata($gallery='')
-	{
-		$filter = $this->input->post('filter');
-		if ($filter != 0)
-			$_SESSION['filter'] = $filter;
-		else unset($_SESSION['filter']);
-		if ($gallery != '')
-		{
-			redirect("wisata/fasilitas/$gallery");
-		}
-		else
-		{
-			redirect('toko_warga');
-		}
-	}
-*/
 	public function tukang_layanan($gal=0, $p=1, $o=0)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-/*		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-*/
 		if (isset($_POST['per_page']))
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];

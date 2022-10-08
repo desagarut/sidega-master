@@ -74,7 +74,7 @@
           </ul>
         </div>
         <div class="col-lg-2 col-md-6 footer-newsletter">
-          <h4 align="center">Sosial Media</h4>
+          <h4 class="text-center">Sosial Media</h4>
           <div class="social-links text-center text-md-right pt-3 pt-md-0">
             <?php foreach($sosmed as $data) : ?>
             <?php if(!empty($data['link'])) : ?>

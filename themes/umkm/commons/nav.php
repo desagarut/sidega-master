@@ -12,7 +12,6 @@
             <li class="nav-item">
                 <a href="<?= site_url('first') ?>" class="active" aria-label="Toggle navigation">Beranda</a>
             </li>
-
             <?php if (menu_atas) : ?>
                 <?php foreach ($menu_atas as $menu) : ?>
                     <li class="nav-item">
@@ -20,7 +19,6 @@
                             <?php if (count($menu['submenu']) > 0) : ?>
                             <?php endif ?>
                         </a>
-
                         <?php if (count($menu['submenu']) > 0) : ?>
                             <ul class="sub-menu collapse" id="submenu-1-2">
                                 <?php foreach ($menu['submenu'] as $submenu) : ?>
@@ -34,6 +32,6 @@
                 <?php endforeach ?>
             <?php endif ?>
         </ul>
-    </div> <!-- navbar collapse -->
+    </div>
 </nav>
 <!-- End Navbar -->

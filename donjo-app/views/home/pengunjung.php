@@ -69,7 +69,7 @@
 
 <div class='col-md-3'>
     <div class="box box-success box-solid">
-        <div class="box-header with-border">
+        <div class="box-header">
             <h3 class="box-title">Pengunjung Web </h3>
             <div class="box-tools pull-right">
                 <a href="<?=site_url("pengunjung")?>"><span class="label label-default"> Detail</span></a>

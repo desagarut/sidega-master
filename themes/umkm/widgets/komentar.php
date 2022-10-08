@@ -1,6 +1,6 @@
 <!-- widget Komentar-->
   <div class="box-header">
-       <h4>Komentar</h4>
+       <h5>Komentar</h5>
   </div>
   <div class="box-body">
     <marquee onmouseover="this.stop()" onmouseout="this.start()" scrollamount="2" direction="up" width="100%" height="100" align="center" behavior=”alternate”>

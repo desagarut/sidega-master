@@ -7,7 +7,6 @@
 </div>
 <div class="single-block">
   <div class="row">
-    <?php //$this->load->view($folder_themes .'/widgets/aparatur_desa.php') ?>
     <?php $this->load->view($folder_themes .'/widgets/agenda.php') ?>
   </div>
 </div>
