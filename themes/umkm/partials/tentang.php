@@ -1,6 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<section class="item-details section">
+<section class="item-details">
   <div class="container">
     <div class="row">
       <div class="col-12">

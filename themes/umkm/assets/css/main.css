@@ -3447,7 +3447,7 @@ ol {
 }
 
 .trending-product .section-title {
-  margin-bottom: 20px
+  margin-bottom: 5px
 }
 
 .single-banner {
@@ -5098,7 +5098,7 @@ blockquote span {
 
 .item-details .top-area {
   background-color: #fff;
-  padding: 30px;
+  padding: 5px;
   border: 1px solid #eee;
   border-radius: 4px
 }
