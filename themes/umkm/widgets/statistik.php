@@ -7,7 +7,7 @@
 </style>
 <div class="box box-primary box-solid">
 	<div class="box-header">
-		<h3 class="box-title"><a href="<?= site_url("first/statistik/4")?>"><i class="fa fa-bar-chart"></i> Statistik <?= ucwords($this->setting->sebutan_desa),' ', $desa["nama_desa"];?></a></h3>
+		<h5 class="box-title"><a href="<?= site_url("first/statistik/4")?>"><i class="fa fa-bar-chart"></i> Statistik <?= ucwords($this->setting->sebutan_desa),' ', $desa["nama_desa"];?></a></h5>
 	</div>
 	<div class="box-body">
 		<script type="text/javascript">
