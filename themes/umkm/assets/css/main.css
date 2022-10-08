@@ -1008,22 +1008,22 @@ ol {
 }
 
 .section {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   position: relative
 }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
   .section {
-    padding-top: 5px;
-    padding-bottom: 5px
+    padding-top: 20px;
+    padding-bottom: 20px
   }
 }
 
 @media(max-width:767px) {
   .section {
-    padding-top: 5px;
-    padding-bottom: 5px
+    padding-top: 20px;
+    padding-bottom: 20px
   }
 }
 
@@ -3447,6 +3447,7 @@ ol {
 }
 
 .trending-product .section-title {
+  margin-top: 5px;
   margin-bottom: 5px
 }
 
@@ -5098,7 +5099,8 @@ blockquote span {
 
 .item-details .top-area {
   background-color: #fff;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border: 1px solid #eee;
   border-radius: 4px
 }
