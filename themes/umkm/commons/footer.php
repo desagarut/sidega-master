@@ -116,8 +116,10 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-12">
                         <div class="payment-gateway">
-                            <span>Our Partner:</span>
-                            <img src="" alt="#">
+                            <span>Mitra:</span>
+                            <a href="https://member.ardetamedia.com/aff.php?aff=7199" ><img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/ardetamedia.png" ) ?>" alt="#" style="height: 50px; width:auto"></a>&nbsp;
+                            <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/ceriateam.png" ) ?>"alt="#" style="height: 50px; width:50px">&nbsp;
+                            <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/neosidega.png" ) ?>"alt="#" style="height: 50px; width:50px">&nbsp;
                         </div>
                     </div>
                     <div class="col-lg-4 col-12">

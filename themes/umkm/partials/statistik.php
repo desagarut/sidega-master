@@ -11,9 +11,9 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
 
 <section class="shipping-info">
   <div class="container">
-    <ul>
+    <ul style="background-color: #c8daf7;">
 
-      <li style="background-color: #071dff1f;"><a href="#first/statistik/4">
+      <li ><a href="#first/statistik/4">
         <div class="media-icon" >
         <h3 style="color: blue;"><?= number_format($penduduk, 0, '', '.') ?></h3>
         </div>
@@ -24,7 +24,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div></a>
       </li>
 
-      <li style="background-color: #071dff1f;"><a href="#">
+      <li><a href="#">
       <div class="media-icon">
         <h3 style="color: blue;"><?= number_format($keluarga, 0, '', '.') ?></h3>
         </div>
@@ -35,7 +35,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div></a>
       </li>
 
-      <li style="background-color: #071dff1f;"><a href="#">
+      <li><a href="#">
       <div class="media-icon">
         <h3 style="color: blue;"><?= number_format($rtm, 0, '', '.') ?></h3>
         </div>
@@ -46,7 +46,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
         </div></a>
       </li>
 
-      <li style="background-color: #071dff1f;"><a href="#">
+      <li><a href="#">
       <div class="media-icon">
         <h3 style="color: blue;"><?= number_format($id, 0, '', '.') ?></h3>
         </div>

@@ -1,7 +1,7 @@
  <!-- Start Shipping Info -->
     <section class="shipping-info">
         <div class="container">
-            <ul>
+            <ul style="background-color:#c8daf7;">
                 <!-- Free Shipping -->
                 <li><a href="<?= site_url('first/tawa') ?>">
                     <div class="media-icon">

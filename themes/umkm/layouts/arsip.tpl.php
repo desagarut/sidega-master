@@ -37,14 +37,14 @@
     <div class="container">
       <div class="product-details-info">
         <div class="row">
-          <div class="col-lg-8 col-sm-12 col-12">
-            <div class="row">
+          <aside class="col-lg-8 col-md-12 col-12">
               <?php $this->load->view($folder_themes . '/partials/arsip.php') ?>
+          </aside>
+          <aside class="col-lg-4 col-md-12 col-12">
+            <div class="sidebar blog-grid-page">
+              <?php $this->load->view($folder_themes . '/partials/sidebar.php') ?>
             </div>
-          </div>
-          <div class="col-lg-4 col-12">
-            <?php $this->load->view($folder_themes . '/partials/sidebar.php') ?>
-          </div>
+          </aside>
         </div>
       </div>
     </div>

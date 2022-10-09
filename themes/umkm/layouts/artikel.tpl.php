@@ -32,23 +32,16 @@
     </div>
 
     <!-- ======= Section ======= -->
-    <section class="item-details section">
+    <section class="section blog-single">
       <div class="container">
-        <div class="product-details-info">
-          <div class="row">
-            <div class="col-lg-8 col-12 custom-padding-left">
-              <div class="single-block">
-                <div class="row">
-                  <?php $this->load->view($folder_themes . '/partials/article.php') ?>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-12 custom-padding-left">
-              <div class="row">
-                <?php $this->load->view($folder_themes . '/partials/sidebar.php') ?>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-lg-8 col-md-12 col-12">
+            <?php $this->load->view($folder_themes . '/partials/article.php') ?>
           </div>
+          <aside class="col-lg-4 col-md-12 col-12">
+            <div class="sidebar blog-grid-page">
+              <?php $this->load->view($folder_themes . '/partials/sidebar.php') ?>
+            </div>
         </div>
       </div>
     </section>
