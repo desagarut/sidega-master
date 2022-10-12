@@ -15,9 +15,9 @@
                 <h4 style="color:#FFF; text-shadow: 4px 4px 4px #081828; -webkit-text-stroke: 0.25px #081828;">
                   <?= $gambar['kategori_toko'] ?>
                 </h4>
-                <h2 style="color:#FFF; text-shadow: 5px 5px 5px #081828; -webkit-text-stroke: 0.25px #081828;">
+                <!--<h2 style="color:#FFF; text-shadow: 5px 5px 5px #081828; -webkit-text-stroke: 0.25px #081828;">
                   <?= $gambar['judul'] ?>
-                </h2>
+                </h2>-->
                 <div class="row"> <a class="" href="<?='artikel/'.buat_slug($gambar); ?>">
                   <button class="button btn btn-warning"><i class="ri-store-2-fill" style="color:#fff;"></i>
                   <?= $gambar['judul'] ?>

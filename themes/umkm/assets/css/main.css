@@ -2918,7 +2918,8 @@ ol {
   background-position: center;
   background-repeat: no-repeat;
   height: 500px;
-  position: relative
+  position: relative;
+  border-radius: 7px 7px 7px 7px;
 }
 
 @media(max-width:767px) {
@@ -2956,7 +2957,7 @@ ol {
   padding: 20px 365px 20px 50px;
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 75%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%)
 }
@@ -3072,7 +3073,7 @@ ol {
 }
 
 .hero-area .hero-slider .single-slider .content .button {
-  margin-top: 30px
+  margin-top: 10px
 }
 
 .hero-area .hero-small-banner {
@@ -3080,7 +3081,8 @@ ol {
   position: relative;
   background-repeat: no-repeat;
   background-size: contain;
-  background-size: cover
+  background-size: cover;
+  border-radius: 5px 5px 5px 5px;
 }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
