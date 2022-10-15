@@ -273,7 +273,7 @@
 				<td class="tengah <?= $class?>"><?= $i+1; ?></td>
 				<?php if ($i < count($anggota)): ?>
 					<td class="tengah <?= $class?>"><?= $anggota[$i]['nama']?></td>
-					<td class="tengah <?= $class?>"><?= $anggota[$i]['nik']?></td>
+					<td class="tengah <?= $class?>"><?= get_nik($anggota[$i]['nik'])?></td>
 					<td class="tengah <?= $class?>"><?= $anggota[$i]['alamat_sebelumnya']?></td>
 					<td class="tengah <?= $class?>"><?= $anggota[$i]['dokumen_pasport']?></td>
 					<td class="tengah <?= $class?>"><?= tgl_indo_out($anggota[$i]['tanggal_akhir_paspor'])?></td>
@@ -477,7 +477,7 @@
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td class="left" style="padding-left: 20px;"><div>Nama Lengkap:<?= str_pad("",390,"&nbsp;")?></div></td>
-			<td class="left"><div>Nama Lengkap:<?= padded_string_fixed_length(strtoupper($kepala_desa['pamong_nama']),3,50)?></div></td>
+			<td class="left"><div>Nama Lengkap:<?= padded_string_fixed_length(strtoupper($kepala_desa['nama']),3,50)?></div></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>

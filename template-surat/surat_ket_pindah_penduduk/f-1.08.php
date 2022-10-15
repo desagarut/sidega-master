@@ -1,8 +1,9 @@
+<?php defined('BASEPATH') || exit('No direct script access allowed'); ?>
+
 <style type="text/css">
 	table.disdukcapil {
 		font-size: 9pt;
 		width: 100%;
-		/*border-collapse: collapse;*/
 	}
 
 	table.disdukcapil td {
@@ -59,8 +60,6 @@
 		font-size: 12pt;
 		padding: 5px 20px;
 		border: solid 1px black;
-		"
-
 	}
 
 	table.ttd {
@@ -377,7 +376,7 @@
 			$nomor = $i + 1;
 			if ($i < count($input['id_cb'])) :
 				$id = trim($input['id_cb'][$i], "'");
-				$penduduk = $this->penduduk_model->get_penduduk($id); ?>
+				$penduduk = $this->penduduk_model->get_penduduk($id, TRUE); ?>
 				<tr>
 					<td class="tengah"><?= $nomor; ?></td>
 					<?php for ($j = 0; $j < 16; $j++) : ?>
@@ -426,7 +425,7 @@
 		<tr class="pendek">
 			<td><?= str_replace(" ", "&nbsp;", "No                           .., tgl.       ., 20") ?></td>
 			<td>&nbsp;</td>
-			<td><?= str_replace(" ", "&nbsp;", "No                           .., tgl.       ., 20") ?></td>
+			<td><?= str_replace(" ", "&nbsp;", "No                           .., tgl." . tgl_indo(date("Y m d"))) ?></td>
 		</tr>
 		<tr style="font-size: 8mm; line-height: normal;">
 			<td>&nbsp;</td>
@@ -436,7 +435,7 @@
 		<tr>
 			<td>(.........................................................)</td>
 			<td><strong>(<?= padded_string_center(strtoupper($individu['kepala_kk']), 30) ?>)</strong></td>
-			<td><strong>(<?= padded_string_center(strtoupper($kepala_desa['pamong_nama']), 30) ?>)</strong></td>
+			<td><strong>(<?= padded_string_center(strtoupper($kepala_desa['nama']), 30) ?>)</strong></td>
 		</tr>
 		<tr>
 			<td>NIP.</td>
@@ -613,7 +612,7 @@
 			$nomor = $i + 1;
 			if ($i < count($input['id_cb'])) :
 				$id = trim($input['id_cb'][$i], "'");
-				$penduduk = $this->penduduk_model->get_penduduk($id); ?>
+				$penduduk = $this->penduduk_model->get_penduduk($id, TRUE); ?>
 
 				<tr>
 					<td class="tengah"><?= $nomor; ?></td>
@@ -681,5 +680,4 @@
 			<td>NIP.</td>
 		</tr>
 	</table>
-
 </page>
