@@ -47,7 +47,7 @@
                         <ul class="useful-links">
                             <li><a href="<?= site_url('first') ?>">Home</a></li>
                             <li><a href="<?= site_url('arsip') ?>">Blog</a></li>
-                            <li><a href="<?= site_url('insidega') ?>">Hubungi Kami</a></li>
+                            <li><a href="<?= site_url('peta') ?>">Peta Desa</a></li>
                         </ul>
                     </div>
                 </div>
