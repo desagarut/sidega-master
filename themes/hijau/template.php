@@ -1,38 +1,40 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<?php $this->load->view($folder_themes .'/commons/meta') ?>
-	<?php $this->load->view($folder_themes .'/commons/for_css') ?>
+	<?php $this->load->view($folder_themes . '/commons/meta') ?>
+	<?php $this->load->view($folder_themes . '/commons/for_css') ?>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1823410826720847" crossorigin="anonymous"></script>
 </head>
 
 
 <body>
 
-	<?php $this->load->view($folder_themes .'/commons/header') ?>
+	<?php $this->load->view($folder_themes . '/commons/header') ?>
 
-	<?php if($this->uri->segment(2) == 'kategori' && empty($judul_kategori)) : ?>
+	<?php if ($this->uri->segment(2) == 'kategori' && empty($judul_kategori)) : ?>
 
-		<?php $this->load->view($folder_themes .'/commons/404') ?>
+		<?php $this->load->view($folder_themes . '/commons/404') ?>
 
 	<?php else : ?>
 
-        <main id="main">
+		<main id="main">
 
-        <?php $this->load->view($folder_themes .'/layouts/home.tpl.php') ?>
+			<?php $this->load->view($folder_themes . '/layouts/home.tpl.php') ?>
 
-        </main><!-- End #main -->
+		</main><!-- End #main -->
 
-	<?php endif;?>
+	<?php endif; ?>
 
-  
 
-	<?php $this->load->view($folder_themes .'/commons/footer') ?>
 
-	<?php $this->load->view($folder_themes .'/commons/for_js') ?>
+	<?php $this->load->view($folder_themes . '/commons/footer') ?>
 
-	<?php //$this->load->view($folder_themes . '/widgets/chat') ?>
+	<?php $this->load->view($folder_themes . '/commons/for_js') ?>
+
+	<?php //$this->load->view($folder_themes . '/widgets/chat') 
+	?>
 
 
 </body>
