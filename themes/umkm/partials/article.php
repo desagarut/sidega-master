@@ -38,6 +38,13 @@
 			</div>
 			<div class="detail-inner">
 				<?= $article['isi'] ?>
+				<!-- Start Ads -->
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1823410826720847" crossorigin="anonymous"></script>
+				<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1823410826720847" data-ad-slot="4336226139"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+				<!-- End Ads -->
 				<?php for ($i = 1; $i <= 3; $i++) : ?>
 				<?php endfor ?>
 				<?php if ($article['dokumen']) : ?>
@@ -101,22 +108,22 @@
 	<div class="post-comments">
 		<h3 class="comment-title"><span>Komentar</span></h3>
 		<ul class="comments-list">
-		<?php foreach ($komentar as $comment) : ?>
-			<li>
-				<div class="comment-img">
-					<img src="#" alt="img">
-				</div>
-				<div class="comment-desc">
-					<div class="desc-top">
-						<h6><?= $comment['owner'] ?></h6>
-						<span class="date"><?= $comment['tgl_upload'] ?></span>
-						<a href="javascript:void(0)" class="reply-link"><i class="lni lni-reply"></i>Reply</a>
+			<?php foreach ($komentar as $comment) : ?>
+				<li>
+					<div class="comment-img">
+						<img src="#" alt="img">
 					</div>
-					<p>
-					<?= $comment['komentar'] ?>
-					</p>
-				</div>
-			</li>
+					<div class="comment-desc">
+						<div class="desc-top">
+							<h6><?= $comment['owner'] ?></h6>
+							<span class="date"><?= $comment['tgl_upload'] ?></span>
+							<a href="javascript:void(0)" class="reply-link"><i class="lni lni-reply"></i>Reply</a>
+						</div>
+						<p>
+							<?= $comment['komentar'] ?>
+						</p>
+					</div>
+				</li>
 			<?php endforeach ?>
 			<!--<li class="children">
 				<div class="comment-img">
@@ -142,7 +149,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-12">
 					<div class="form-box form-group">
-					<input type="text" name="owner" class="form-control form-control-custom" placeholder="Nama lengkap" required value="<?= !empty($_SESSION['post']['owner']) ? $_SESSION['post']['owner'] : $_SESSION['nama'] ?>" />
+						<input type="text" name="owner" class="form-control form-control-custom" placeholder="Nama lengkap" required value="<?= !empty($_SESSION['post']['owner']) ? $_SESSION['post']['owner'] : $_SESSION['nama'] ?>" />
 					</div>
 				</div>
 				<div class="col-lg-6 col-12">
@@ -152,7 +159,7 @@
 				</div>
 				<div class="col-lg-6 col-12">
 					<div class="form-box form-group">
-						<input class="form-control form-control-custom"  type="text" required placeholder="Nomor HP" name="no_hp" maxlength="30" value="<?= $_SESSION['post']['no_hp']; ?>">
+						<input class="form-control form-control-custom" type="text" required placeholder="Nomor HP" name="no_hp" maxlength="30" value="<?= $_SESSION['post']['no_hp']; ?>">
 					</div>
 				</div>
 				<div class="col-12">
@@ -162,23 +169,23 @@
 				</div>
 
 				<div class="row">
-						<div class="offset-lg-3 col-lg-9">
-							<img id="captcha" src="<?= base_url('securimage/securimage_show.php') ?>" alt="CAPTCHA Image"/ class="img-fluid border border-black">
-						</div>
+					<div class="offset-lg-3 col-lg-9">
+						<img id="captcha" src="<?= base_url('securimage/securimage_show.php') ?>" alt="CAPTCHA Image" / class="img-fluid border border-black">
 					</div>
-					<div class="row mb-2">
-						<div class="offset-lg-3 col-lg-9">
-							<a href="#!" onclick="document.getElementById('captcha').src = '<?= base_url("securimage/securimage_show.php?") ?>'+Math.random(); return false"><small>[ Ganti Gambar ]</small></a>
-						</div>
+				</div>
+				<div class="row mb-2">
+					<div class="offset-lg-3 col-lg-9">
+						<a href="#!" onclick="document.getElementById('captcha').src = '<?= base_url("securimage/securimage_show.php?") ?>'+Math.random(); return false"><small>[ Ganti Gambar ]</small></a>
 					</div>
-					<div class="row">
-						<div class="offset-lg-3 col-lg-9">
-							<input class="form-control input-sm" type="text" required name="captcha_code" maxlength="6" value="<?= $_SESSION['post']['captcha_code'] ?>"/>
-							<span class="d-block">
-								Isikan kode di gambar
-							</span>
-						</div>
+				</div>
+				<div class="row">
+					<div class="offset-lg-3 col-lg-9">
+						<input class="form-control input-sm" type="text" required name="captcha_code" maxlength="6" value="<?= $_SESSION['post']['captcha_code'] ?>" />
+						<span class="d-block">
+							Isikan kode di gambar
+						</span>
 					</div>
+				</div>
 
 
 				<div class="col-12" style="text-align:right ;">
@@ -222,4 +229,3 @@
 			</ul>
 		<?php endif ?>
 	<?php endif ?>-->
-	
