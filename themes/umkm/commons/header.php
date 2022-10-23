@@ -64,6 +64,9 @@
                             <li>
                                 <a href="<?= site_url('mandiri_web') ?>">Login Warga</a>
                             </li>
+                            <li>
+                            <a href="https://wa.me/+62<?= $desa['telepon'] ?>?text=Hallo%2C%20Saya%20pengunjung%20website%20Desa%20<?= $desa['nama_desa'] ?>" target="_blank" title="Hubungi via whatsapp">Hubungi</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -98,7 +101,7 @@
                             <a href="javascript:void(0)"><i class="lni lni-youtube"></i></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)"><i class="lni lni-whatsapp"></i></a>
+                            <a href="https://wa.me/+62<?= $desa['telepon'] ?>?text=Hallo%2C%20Saya%20pengunjung%20website%20Desa%20<?= $desa['nama_desa'] ?>" target="_blank" title="Hubungi via whatsapp"><i class="lni lni-whatsapp"></i></a>
                         </li>
                     </ul>
                 </div>
