@@ -22,10 +22,10 @@
           <div class="col-lg-6 col-12">
             <div class="info-body custom-responsive-margin">
               <p>
-                <?= ucfirst($this->setting->sebutan_kecamatan) . ' ' . ucwords($desa['nama_kecamatan']) ?>
-                adalah salah satu
-                <?= ucfirst($this->setting->sebutan_kecamatan); ?>
-                yang terletak di
+                <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
+                adalah salah satu 
+                <?= ucfirst($this->setting->sebutan_desa); ?>
+                yang terletak di <?= ucwords($this->setting->sebutan_kecamatan . " " . $desa['nama_kecamatan']) ?>
                 <?= ucwords($this->setting->sebutan_kabupaten . " " . $desa['nama_kabupaten']) ?>
                 Provinsi
                 <?= ucwords($this->setting->sebutan_propinsi . " " . $desa['nama_propinsi']) ?>
@@ -46,7 +46,7 @@
               </ul>
               <br />
               <?= ucwords($this->setting->profil_singkat . " " . $desa['profil_singkat']) ?>
-              <br />
+              <br /><br/>
               <a class="button btn btn-warning" href="<?= $url ?>"> <i class="lni lni-pen"></i> Selengkapnya</a>
             </div>
             </p>

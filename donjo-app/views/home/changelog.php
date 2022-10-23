@@ -12,9 +12,7 @@
           <?= AmbilVersi() ?></strong>
       <ul class="text-left">
         Penambahan Modul Perencanaan Desa:
-        <li>Modul Musyawarah Dusun: Usulan Masyarakat, Program kegiatan masuk desa, rencana pembiayaan, kerjasama antar desa, kerjasama pihak ketiga</li>
-        <li>Modul Penentuan Prioritas Desa: Daftar usulan program kegiatan hasil musyawarah dusun, Penentuan prioritas rencana kerja pemerintah desa melalui metode polling, Hasil penentuan prioritas rencana kerja</li>
-        <li>Modul RKP Desa: Daftar program kegiatan yang akan ditetapkan dalam RKP Desa & DU-RKP Desa, Daftar Program yang masuk dalam RKP Desa, Daftar Program yang masuk dalam Usulan Desa (DU-RKP Desa)</li>
+        <li>Tambah Tombol Whatsapp di Halaman Depan dan Layanan Masyarakat</li>
       </ul>
       </p>
     </div>
