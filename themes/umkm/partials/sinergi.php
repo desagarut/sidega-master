@@ -1,6 +1,6 @@
 
 
-<div class="brands">
+<div class="brands lazy">
   <div class="container">
     <?php foreach ($sinergi_program as $key => $program) : ?>
       <?php $baris[$program['baris']][$program['kolom']] = $program; ?>
