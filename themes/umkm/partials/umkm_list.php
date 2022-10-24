@@ -1,5 +1,5 @@
  <!-- Start Shipping Info -->
-    <section class="shipping-info">
+    <section class="shipping-info lazy">
         <div class="container">
             <ul style="background-color:#c8daf7;">
                 <!-- Free Shipping -->
