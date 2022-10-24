@@ -1,6 +1,16 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <header class="header navbar-area">
+
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Start Topbar -->
     <div class="topbar">
         <div class="container">
@@ -65,7 +75,7 @@
                                 <a href="<?= site_url('mandiri_web') ?>">Login Warga</a>
                             </li>
                             <li>
-                            <a href="https://wa.me/+62<?= $desa['telepon'] ?>?text=Hallo%2C%20Saya%20pengunjung%20website%20Desa%20<?= $desa['nama_desa'] ?>" target="_blank" title="Hubungi via whatsapp">Hubungi</a>
+                                <a href="https://wa.me/+62<?= $desa['telepon'] ?>?text=Hallo%2C%20Saya%20pengunjung%20website%20Desa%20<?= $desa['nama_desa'] ?>" target="_blank" title="Hubungi via whatsapp">Hubungi</a>
                             </li>
                         </ul>
                     </div>
@@ -111,14 +121,3 @@
     </div>
     <!-- End Header Bottom -->
 </header>
-
-<!--
-<div class="preloader">
-    <div class="preloader-inner">
-        <div class="preloader-icon">
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</div>
--->
