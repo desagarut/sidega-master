@@ -17,15 +17,6 @@
 <meta property="og:site_name" content="<?= $desa_title ?>" />
 <meta property="og:type" content="article" />
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-<title>
-<?php if ($single_artikel["judul"] == ""): ?>
-	<?= $this->setting->website_title . ' '.  $desa_title; ?>
-<?php else: ?>
-	<?= $single_artikel["judul"].' - '.ucwords($this->setting->sebutan_desa) . ' ' . $desa['nama_desa']; ?>
-<?php endif; ?>
-</title>
-
 <?php if(isset($single_artikel)): ?>
 	<meta property="og:title" content="<?= htmlspecialchars($single_artikel["judul"]); ?>"/>
 	<meta property="og:url" content="<?= site_url('artikel/'.buat_slug($single_artikel))?>"/>
@@ -67,5 +58,11 @@ owa_cmds.push(['trackClicks']);
 //]]>
 </script>
 <!-- End Open Web Analytics Code -->
-
+<title>
+<?php if ($single_artikel["judul"] == ""): ?>
+	<?= $this->setting->website_title . ' '.  $desa_title; ?>
+<?php else: ?>
+	<?= $single_artikel["judul"].' - '.ucwords($this->setting->sebutan_desa) . ' ' . $desa['nama_desa']; ?>
+<?php endif; ?>
+</title>
         
