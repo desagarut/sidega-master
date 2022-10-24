@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<section class="item-details" style="padding-top: 50px;">
+<section class="item-details lazy" style="padding-top: 50px;">
   <div class="container">
     <div class="row">
       <div class="col-12">
