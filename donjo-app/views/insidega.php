@@ -68,34 +68,36 @@
 										<input name="username" type="text" placeholder="" <?php jecho($this->session->insidega_wait, 1, "disabled") ?> value="" class="form-username form-control required">
 									</div>
 									<div class="form-group">
-									<div class="form-group mb-4">
-										<label class="floating-label" for="password">Password</label>
-										<input name="password" id="password" type="password" placeholder="" <?php jecho($this->session->insidega_wait, 1, "disabled") ?> value="" class="form-username form-control required">
-									</div>
-									<div class="form-group">
-										<input type="checkbox" id="checkbox" class="form-checkbox"> Tampilkan kata sandi
-									</div>
-									<hr />
-									<button type="submit" class="btn btn-block btn-success">MASUK</button>
-									<?php if ($this->session->insidega == -1 && $this->session->insidega_try < 4) : ?>
-										<div class="error">
-											<p style="color:red; text-transform:uppercase">Login Gagal.<br />Nama pengguna atau kata sandi yang Anda masukkan salah!<br />
-												<?php if ($this->session->insidega_try) : ?>
-													Kesempatan mencoba <?= ($this->session->insidega_try - 1); ?> kali lagi.</p>
+										<div class="form-group mb-4">
+											<label class="floating-label" for="password">Password</label>
+											<input name="password" id="password" type="password" placeholder="" <?php jecho($this->session->insidega_wait, 1, "disabled") ?> value="" class="form-username form-control required">
+										</div>
+										<div class="form-group">
+											<input type="checkbox" id="checkbox" class="form-checkbox"> Tampilkan kata sandi
+										</div>
+										<hr />
+										<button type="submit" class="btn btn-block btn-success">MASUK</button>
+										<?php if ($this->session->insidega == -1 && $this->session->insidega_try < 4) : ?>
+											<div class="error">
+												<p style="color:red; text-transform:uppercase">Login Gagal.<br />Nama pengguna atau kata sandi yang Anda masukkan salah!<br />
+													<?php if ($this->session->insidega_try) : ?>
+														Kesempatan mencoba <?= ($this->session->insidega_try - 1); ?> kali lagi.</p>
+											<?php endif; ?>
+											</div>
+										<?php elseif ($this->session->insidega == -2) : ?>
+											<div class="error">
+												Redaksi belum boleh masuk, SID belum memiliki sambungan internet!
+											</div>
 										<?php endif; ?>
-										</div>
-									<?php elseif ($this->session->insidega == -2) : ?>
-										<div class="error">
-											Redaksi belum boleh masuk, SID belum memiliki sambungan internet!
-										</div>
 									<?php endif; ?>
-								<?php endif; ?>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="credit pull-center" style="color:black">
-					<marquee><a href="https://desagarut.id" target="_blank">SIDeGa <?= AmbilVersi() ?> </a>Inspirasi untuk desa & kelurahan di <a href="https://garutkab.go.id" target="_blank">Kabupaten Garut</a></marquee>
+				<div class="col-md-12">
+					<div class="card-footer">
+						<marquee><a href="https://desagarut.id" target="_blank">SIDeGa <?= AmbilVersi() ?> </a>Inspirasi untuk desa & kelurahan di <a href="https://garutkab.go.id" target="_blank">Kabupaten Garut</a></marquee>
+					</div>
 				</div>
 			</div>
 		</div>
