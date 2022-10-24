@@ -5,7 +5,7 @@
 	AmbilFotoArtikel($headline['gambar'],'kecil') :
 	base_url($this->theme_folder.'/'.$this->theme .'/assets/images/placeholder.png') ?>
 
-<section class="trending-product section" style="margin-top: 12px;">
+<section class="trending-product section lazy" style="margin-top: 12px;">
   <div class="container">
     <div class="row">
       <div class="col-12">
