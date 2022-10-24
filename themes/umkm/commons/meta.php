@@ -16,7 +16,8 @@
 <meta name="keywords" content="sidega, SIDEGA, SIDeGa, sistem informasi desa garut, web, blog, informasi, website, tema sidega-blue, desa garut, kelurahan garut, kecamatan garut, kabupaten garut, Jawa Barat, indonesia" />
 <meta property="og:site_name" content="<?= $desa_title ?>" />
 <meta property="og:type" content="article" />
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta property='og:url' content="<?= current_url(); ?>" />
+
 <?php if(isset($single_artikel)): ?>
 	<meta property="og:title" content="<?= htmlspecialchars($single_artikel["judul"]); ?>"/>
 	<meta property="og:url" content="<?= site_url('artikel/'.buat_slug($single_artikel))?>"/>
@@ -27,8 +28,6 @@
 	<meta property="og:url" content="<?= site_url() ?>"/>
 	<meta property="og:description" content="<?= $this->setting->website_title . ' '.  $desa_title; ?>"/>
 <?php endif; ?>
-
-<meta property='og:url' content="<?= current_url(); ?>" />
 
 <?php if (is_file(LOKASI_LOGO_DESA . "favicon.ico")) : ?>
     <link rel="shortcut icon" href="<?= base_url() . LOKASI_LOGO_DESA ?>favicon.ico" />
