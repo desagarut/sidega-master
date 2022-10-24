@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <header class="header navbar-area">
-
+<!--
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-
+-->
     <!-- Start Topbar -->
     <div class="topbar">
         <div class="container">
