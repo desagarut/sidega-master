@@ -44,56 +44,6 @@
 
 <body>
 
-	<!--<div class="auth-wrapper">
-		<div class="auth-content">
-			<div class="card">
-				<div class="row align-items-center text-center">
-					<div class="col-md-8">
-						<?php $this->load->view('peta') ?>
-					</div>
-					<div class="col-md-4">
-						<div class="card-body">
-							<img src="<?= gambar_desa($header['logo']); ?>" style="max-width: 40px; max-height: 40px" alt="<?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?>" class="img-fluid mb-4">
-							<h4 class="mb-2 f-w-300"><?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?></h4>
-							<form id="validasi" class="login-form" action="<?= site_url('insidega/auth') ?>" method="post">
-								<?php if ($this->session->insidega_wait == 1) : ?>
-									<div class="error login-footer-top">
-										<p id="countdown" style="color:red; text-transform:uppercase"></p>
-									</div>
-								<?php else : ?>
-									<div class="form-group mb-3">
-										<label class="floating-label" for="username">Username</label>
-										<input type="text" class="form-control required" id="username" <?php jecho($this->session->insidega_wait, 1, "disabled") ?> value="" placeholder="">
-									</div>
-									<div class="form-group mb-4">
-										<label class="floating-label" for="password">Password</label>
-										<input type="password" class="form-control required" id="password" <?php jecho($this->session->insidega_wait, 1, "disabled") ?> value="" placeholder="">
-									</div>
-									<div class="form-group">
-										<input type="checkbox" id="checkbox" class="form-checkbox"> Show
-									</div>
-									<button type="submit" class="btn btn-block btn-primary mb-4">Masuk</button>
-									<?php if ($this->session->insidega == -1 && $this->session->insidega_try < 4) : ?>
-										<div class="error">
-											<p style="color:red; text-transform:uppercase">Login Gagal.<br />Nama pengguna atau kata sandi yang Anda masukkan salah!<br />
-												<?php if ($this->session->insidega_try) : ?>
-													Kesempatan mencoba <?= ($this->session->insidega_try - 1); ?> kali lagi.</p>
-										<?php endif; ?>
-										</div>
-									<?php elseif ($this->session->insidega == -2) : ?>
-										<div class="error">
-											Redaksi belum boleh masuk, SID belum memiliki sambungan internet!
-										</div>
-									<?php endif; ?>
-								<?php endif; ?>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>-->
-
 	<div class="auth-wrapper">
 		<div class="auth-content">
 			<div class="card">
