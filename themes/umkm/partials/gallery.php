@@ -1,5 +1,5 @@
 <!-- ======= Portfolio Section ======= -->
-<section class="trending-product" style="padding-top: 20px;">
+<section class="trending-product lazy" style="padding-top: 20px;">
   <div class="container">
     <div class="row">
       <div class="col-12">
