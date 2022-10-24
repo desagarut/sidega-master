@@ -10,7 +10,7 @@
             <?php foreach ($slider_gambar['gambar'] as $gambar) : ?>
             <?php $file_gambar = $slider_gambar['lokasi'] . 'sedang_' . $gambar['gambar']; ?>
             <?php if(is_file($file_gambar)) : ?>
-            <div class="single-slider" style="background-image: url('<?php echo base_url().$slider_gambar['lokasi'].'sedang_'.$gambar['gambar']?>" alt="<?= $gambar['judul'] ?>');">
+            <div class="single-slider lazy" style="background-image: url('<?php echo base_url().$slider_gambar['lokasi'].'sedang_'.$gambar['gambar']?>" alt="<?= $gambar['judul'] ?>');">
               <div class="content">
                 <h4 style="color:#FFF; text-shadow: 4px 4px 4px #081828; -webkit-text-stroke: 0.25px #081828;">
                   <?= $gambar['kategori_toko'] ?>
