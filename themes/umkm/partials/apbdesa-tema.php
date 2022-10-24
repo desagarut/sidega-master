@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<section class="featured-categories section">
+<section class="featured-categories section lazy">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
