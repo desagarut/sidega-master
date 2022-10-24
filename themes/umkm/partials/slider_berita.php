@@ -37,14 +37,14 @@
       <div class="row">
         <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> 
           <!-- Start Small Banner -->
-          <div class="hero-small-banner">
+          <div class="hero-small-banner lazy">
             <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <!-- End Small Banner --> 
         </div>
         <div class="col-lg-12 col-md-6 col-12" style="padding-top: 11px;"> 
           <!-- Start Small Banner -->
-          <div class="hero-small-banner" style="background-image: url('<?= gambar_desa($setting_desa['kantor_desa'], TRUE); ?>');">
+          <div class="hero-small-banner lazy" style="background-image: url('<?= gambar_desa($setting_desa['kantor_desa'], TRUE); ?>');">
             <div class="content">
               <div class="button"> <a class="btn" href="https://cekbansos.kemensos.go.id/">Cek Bantuan Sosial</a> </div><br/>
               <div class="button"> <a class="btn" href="https://ereg.pajak.go.id/ceknpwp">Cek NPWP</a> </div><br/>
