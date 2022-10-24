@@ -108,7 +108,7 @@ class First extends Web_Controller {
 		//$this->track_model->track_desa('first');
 		$this->load->view($this->template, $data);
 	}
-	
+/*	
 	public function rss_covid()
 	{
 		$data = $this->includes;
@@ -144,7 +144,7 @@ class First extends Web_Controller {
 		$this->load->view($this->template, $data);
 	}
 		
-
+*/
 	/*
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
 	| Kalau menggunakan slug, dipanggil menggunakan url artikel/:thn/:bln/:hri/:slug
