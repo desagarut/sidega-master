@@ -702,11 +702,11 @@ class User_model extends CI_Model {
 				'status_desa' => array('b','u'),
 
 				// kependudukan
-				'penduduk' => array('b','u'),
+				'penduduk' => array('b','u','h'),
 
 				// Penduduk
 				'penduduk_log' => array('b','u'),
-				'keluarga' => array('b','u'),
+				'keluarga' => array('b','u','h'),
 				'rtm' => array('b','u'),
 				'kelompok' => array('b','u'),
 
