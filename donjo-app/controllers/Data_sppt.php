@@ -426,6 +426,17 @@ class Data_sppt extends Admin_Controller {
 		$this->load->view('data_sppt/import', $data);
 	}
 
+	public function import_proses()
+
+	{
+
+		$this->data_sppt_model->impor_sppt_master();
+
+		redirect("Data_sppt");
+
+	}
+
+
 	public function cetak($o=0)
 	{
 		$data['data_sppt'] = $this->data_sppt_model->list_data_sppt();

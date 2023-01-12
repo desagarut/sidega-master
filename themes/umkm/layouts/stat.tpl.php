@@ -44,7 +44,7 @@
                 <?php
                 switch ($tipe) {
                   case '0':
-                    $page = '/partials/statistics/default';
+                    $page = '/partials/statistics/statistik';
                     break;
                   case '2':
                     $page = '/partials/statistics/wilayah';

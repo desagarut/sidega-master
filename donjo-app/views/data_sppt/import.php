@@ -30,7 +30,7 @@
 							<label class="control-label" for="upload">Upload Fil XLS</label>
 							<div class="input-group input-group-sm">
 								<input type="text" class="form-control required" id="file_path">
-								<input id="file" type="file" class="hidden" name="persil">
+								<input id="file" type="file" class="hidden" name="sppt_master">
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-info btn-box"  id="file_browser"><i class="fa fa-search"></i> Browse</button>
 								</span>

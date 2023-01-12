@@ -340,7 +340,7 @@ class First extends Web_Controller {
 		$data['heading'] = "Perkiraan Calon Pemilih";
 		$this->_get_common_data($data);
 		$data['tipe'] = 4;
-		$this->set_template('layouts/stat.tpl2.php');
+		$this->set_template('layouts/stat.tpl.php');
 		$this->load->view($this->template, $data);
 	}
 
