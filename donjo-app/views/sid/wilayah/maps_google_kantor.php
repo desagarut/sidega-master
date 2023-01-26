@@ -1,4 +1,6 @@
-<script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v5.7/mapsJavaScriptAPI.js" async defer></script>
+<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<script src="<?= base_url()?>assets/js/mapsJavaScriptAPI.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <script>
 <?php if (!empty($wil_ini['lat'] && !empty($wil_ini['lng']))): ?>
