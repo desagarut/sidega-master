@@ -11,8 +11,8 @@
       <p><strong>Perubahan pada versi
           <?= AmbilVersi() ?></strong>
       <ul class="text-left">
-        Penambahan Modul Perencanaan Desa:
-        <li>Tambah Tombol Whatsapp di Halaman Depan dan Layanan Masyarakat</li>
+        Update peta Google:
+        <li>Peta Wilayah Desa, Dusun, RW, RT, Lokasi dll</li>
       </ul>
       </p>
     </div>
