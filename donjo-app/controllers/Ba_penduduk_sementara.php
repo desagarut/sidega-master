@@ -13,7 +13,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 	{
 		parent::__construct();
 
-		$this->load->model(['pamong_model', 'penduduk_model', 'referensi_model']);
+		$this->load->model(['pamong_model', 'penduduk_model_ba', 'referensi_model']);
 
 		$this->modul_ini = 2;
 		$this->sub_modul_ini = 303;
@@ -43,11 +43,12 @@ class Ba_penduduk_sementara extends Admin_Controller {
 			'tahun' => (! isset($this->session->filter_tahun)) ? : $this->session->filter_tahun,
 			'func' => 'index',
 			'set_page' => $this->_set_page,
-			'paging' => $this->penduduk_model->paging($page_number),
+			//'paging' => $this->penduduk_model_ba->paging($page_number),
+            'paging'       => $list_data['paging'],
 			'list_tahun' => $this->penduduk_log_model->list_tahun()
 		];
 
-		$data['main'] = $this->penduduk_model->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
+		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
 		$this->set_minsidebar(1);
 		$this->render('bumindes/penduduk/main', $data);
@@ -86,7 +87,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 	{
 		$data = [
 			'aksi' => $aksi,
-			'main' => $this->penduduk_model->list_data($o, 0),
+			'main' => $this->penduduk_model_ba->list_data($o, 0),
 			'config' => $this->header['desa'],
 			'pamong_ketahui' => $this->pamong_model->get_ttd(),
 			'pamong_ttd' => $this->pamong_model->get_ub(),
@@ -106,7 +107,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 
 	public function autocomplete()
 	{
-		$data = $this->penduduk_model->autocomplete($this->input->post('cari'));
+		$data = $this->penduduk_model_ba->autocomplete($this->input->post('cari'));
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
