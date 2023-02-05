@@ -16,7 +16,7 @@
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div class="col-md-3">
-				<?php $this->load->view('bumindes/penduduk/side') ?>
+				<?php $this->load->view('ba/penduduk/side') ?>
 			</div>
 			<div class="col-md-9">
 				<?php $this->load->view($main_content) ?>

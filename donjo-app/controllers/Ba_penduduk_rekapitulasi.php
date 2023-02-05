@@ -27,7 +27,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 			$this->session->per_page = $per_page;
 
 		$data = [
-			'main_content' => "bumindes/penduduk/rekapitulasi/content_rekapitulasi",
+			'main_content' => "ba/penduduk/rekapitulasi/content_rekapitulasi",
 			'subtitle' => "Buku Rekapitulasi Jumlah Penduduk",
 			'selected_nav' => 'rekapitulasi',
 			'p' => $page_number,
@@ -47,7 +47,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 		$data['main'] = $this->laporan_bulanan_model->rekapitulasi_list($data['paging']->offset, $data['paging']->per_page);
 
 		$this->set_minsidebar(1);
-		$this->render('bumindes/penduduk/main', $data);
+		$this->render('ba/penduduk/main', $data);
 	}
 
 	private function clear_session()
@@ -70,8 +70,8 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 		$data = [
 			'aksi' => $aksi,
 			'list_tahun' => $this->penduduk_log_model->list_tahun(),
-			'form_action' => site_url("bumindes_penduduk_rekapitulasi/cetak/$aksi"),
-			'isi' => "bumindes/penduduk/rekapitulasi/ajax_dialog_rekapitulasi",
+			'form_action' => site_url("ba_penduduk_rekapitulasi/cetak/$aksi"),
+			'isi' => "ba/penduduk/rekapitulasi/ajax_dialog_rekapitulasi",
 		];
 
 		$this->load->view('global/dialog_cetak', $data);
@@ -89,7 +89,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 			'tahun' => $this->session->filter_tahun,
 			'tgl_cetak' => $_POST['tgl_cetak'],
 			'file' => "Buku Rekapitulasi Jumlah Penduduk",
-			'isi' => "bumindes/penduduk/rekapitulasi/content_rekapitulasi_cetak",
+			'isi' => "ba/penduduk/rekapitulasi/content_rekapitulasi_cetak",
 			'letak_ttd' => ['1', '2', '28'],
 		];
 		$this->load->view('global/format_cetak', $data);

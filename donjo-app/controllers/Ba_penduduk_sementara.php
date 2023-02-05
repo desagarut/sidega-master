@@ -31,7 +31,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 		if ($this->input->post('per_page')) $this->session->per_page = $this->input->post('per_page');
 
 		$data = [
-			'main_content' => "bumindes/penduduk/sementara/content_sementara",
+			'main_content' => "ba/penduduk/sementara/content_sementara",
 			'subtitle' => "Buku Penduduk Sementara",
 			'selected_nav' => 'sementara',
 			'p' => $page_number,
@@ -51,7 +51,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
 		$this->set_minsidebar(1);
-		$this->render('bumindes/penduduk/main', $data);
+		$this->render('ba/penduduk/main', $data);
 	}
 
 	private function clear_session()
@@ -75,9 +75,9 @@ class Ba_penduduk_sementara extends Admin_Controller {
 		$data = [
 			'o' => $o,
 			'aksi' => $aksi,
-			'form_action' => site_url("bumindes_penduduk_sementara/cetak/$o/$aksi"),
-			'form_action_privasi' => site_url("bumindes_penduduk_sementara/cetak/$o/$aksi/1"),
-			'isi' => "bumindes/penduduk/sementara/ajax_cetak_sementara"
+			'form_action' => site_url("ba_penduduk_sementara/cetak/$o/$aksi"),
+			'form_action_privasi' => site_url("ba_penduduk_sementara/cetak/$o/$aksi/1"),
+			'isi' => "ba/penduduk/sementara/ajax_cetak_sementara"
 		];
 
 		$this->load->view('global/dialog_cetak', $data);
@@ -96,7 +96,7 @@ class Ba_penduduk_sementara extends Admin_Controller {
 			'tgl_cetak' => $_POST['tgl_cetak'],
 			// pengaturan data untuk format cetak/unduh
 			'file' => "Buku Penduduk Sementara",
-			'isi' => "bumindes/penduduk/sementara/content_sementara_cetak",
+			'isi' => "ba/penduduk/sementara/content_sementara_cetak",
 			'letak_ttd' => ['2', '2', '9']
 		];
 

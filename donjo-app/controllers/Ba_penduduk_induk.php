@@ -21,42 +21,8 @@ class Ba_penduduk_induk extends Admin_Controller {
 		$this->_list_session = ['filter_tahun', 'filter_bulan', 'status_hanya_tetap', 'jenis_peristiwa', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik'];
 
 	}
-/*
-	public function index($page_number = 1, $order_by = 0)
-	{
-		$per_page = $this->input->post('per_page');
-		if (isset($per_page))
-			$this->session->per_page = $per_page;
 
-		// Hanya menampilkan data status_dasar HIDUP, HILANG
-		$this->session->status_dasar = array(1, 4);
-
-		// Menampilkan hanya status penduduk TETAP
-		$this->session->status_penduduk = 1;
-
-		$data = [
-			'main_content' => "bumindes/penduduk/induk/content_induk",
-			'subtitle' => "Buku Induk Penduduk",
-			'selected_nav' => 'induk',
-			'order_by' => $order_by,
-			'cari' => $this->session->cari ?: '',
-			'filter' => $this->session->filter ?: '',
-			'bulan' => $this->session->filter_bulan,
-			'tahun' => $this->session->filter_tahun,
-			'func' => 'index',
-			'set_page' => $this->_set_page,
-			'paging' => $this->penduduk_model_ba->paging($page_number),
-			'list_tahun' => $this->penduduk_log_model->list_tahun(),
-		];
-
-		// TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
-		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
-
-		$this->set_minsidebar(1);
-		$this->render('bumindes/penduduk/main', $data);
-	}
-*/
-	public function index($page_number = 1, $order_by = 0)
+    public function index($page_number = 1, $order_by = 0)
     {
         $per_page = $this->input->post('per_page');
         if (isset($per_page)) {
@@ -69,9 +35,8 @@ class Ba_penduduk_induk extends Admin_Controller {
         // Menampilkan hanya status penduduk TETAP
         $this->session->status_penduduk = 1;
 
-       // $list_data = $this->penduduk_model_ba->list_data($order_by, $page_number);
         $data      = [
-            'main_content' => 'bumindes/penduduk/induk/content_induk',
+            'main_content' => 'ba/penduduk/induk/content_induk',
             'subtitle'     => 'Buku Induk Penduduk',
             'selected_nav' => 'induk',
             'order_by'     => $order_by,
@@ -86,14 +51,11 @@ class Ba_penduduk_induk extends Admin_Controller {
         ];
 
         // TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
-       // $data['main'] = $list_data['main'];
-
-	   $this->set_minsidebar(1);
 		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
-        $this->render('bumindes/penduduk/main', $data);
-    }
 
+        $this->render('ba/penduduk/main', $data);
+    }
 
 	private function clear_session()
 	{
@@ -116,9 +78,9 @@ class Ba_penduduk_induk extends Admin_Controller {
 		$data = [
 			'o' => $o,
 			'aksi' => $aksi,
-			'form_action' => site_url("bumindes_penduduk_induk/cetak/$o/$aksi"),
-			'form_action_privasi' => site_url("bumindes_penduduk_induk/cetak/$o/$aksi/1"),
-			'isi' => "bumindes/penduduk/induk/ajax_dialog_induk",
+			'form_action' => site_url("ba_penduduk_induk/cetak/$o/$aksi"),
+			'form_action_privasi' => site_url("ba_penduduk_induk/cetak/$o/$aksi/1"),
+			'isi' => "ba/penduduk/induk/ajax_dialog_induk",
 		];
 
 		$this->load->view('global/dialog_cetak', $data);
@@ -137,7 +99,7 @@ class Ba_penduduk_induk extends Admin_Controller {
 			'tgl_cetak' => $_POST['tgl_cetak'],
 			'privasi_nik' => $privasi_nik == 1 ? true : false,
 			'file' => "Buku Induk Kependudukan",
-			'isi' => "bumindes/penduduk/induk/content_induk_cetak",
+			'isi' => "ba/penduduk/induk/content_induk_cetak",
 			'letak_ttd' => ['2', '2', '9'],
 		];
 		$this->load->view('global/format_cetak', $data);

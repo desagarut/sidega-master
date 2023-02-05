@@ -34,7 +34,7 @@ class Ba_penduduk_mutasi extends Admin_Controller {
 		$this->session->status_penduduk = 1;
 
 		$data = [
-			'main_content' => "bumindes/penduduk/mutasi/content_mutasi",
+			'main_content' => "ba/penduduk/mutasi/content_mutasi",
 			'subtitle' => "Buku Mutasi Penduduk",
 			'selected_nav' => 'mutasi',
 			'p' => $page_number,
@@ -59,7 +59,7 @@ class Ba_penduduk_mutasi extends Admin_Controller {
 			$this->session->tgl_lengkap = $data['tgl_lengkap'];
 
 		$this->set_minsidebar(1);
-		$this->render('bumindes/penduduk/main', $data);
+		$this->render('ba/penduduk/main', $data);
 	}
 
 	private function clear_session()
@@ -84,8 +84,8 @@ class Ba_penduduk_mutasi extends Admin_Controller {
 			'o' => $o,
 			'aksi' => $aksi,
 			'list_tahun' => $this->penduduk_log_model->list_tahun(),
-			'form_action' => site_url("bumindes_penduduk_mutasi/cetak/$o/$aksi"),
-			'isi' => "bumindes/penduduk/mutasi/ajax_dialog_mutasi",
+			'form_action' => site_url("ba_penduduk_mutasi/cetak/$o/$aksi"),
+			'isi' => "ba/penduduk/mutasi/ajax_dialog_mutasi",
 		];
 
 		$this->load->view('global/dialog_cetak', $data);
@@ -103,7 +103,7 @@ class Ba_penduduk_mutasi extends Admin_Controller {
 			'tahun' => $this->session->filter_tahun,
 			'tgl_cetak' => $_POST['tgl_cetak'],
 			'file' => "Buku Mutasi Penduduk",
-			'isi' => "bumindes/penduduk/mutasi/content_mutasi_cetak",
+			'isi' => "ba/penduduk/mutasi/content_mutasi_cetak",
 			'letak_ttd' => ['1', '2', '8'],
 		];
 

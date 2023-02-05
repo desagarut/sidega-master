@@ -11,7 +11,7 @@ SIDEGA
 			source: function( request, response ) {
 				$.ajax( {
 					type: "POST",
-					url: '<?= site_url("bumindes_penduduk_rekapitulasi/autocomplete"); ?>',
+					url: '<?= site_url("ba_penduduk_rekapitulasi/autocomplete"); ?>',
 					dataType: "json",
 					data: {
 						cari: request.term
@@ -50,9 +50,9 @@ SIDEGA
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group input-group-sm pull-right">
-							<input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" title="Pencarian berdasarkan nama penduduk" value="<?=html_escape($cari); ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("bumindes_penduduk_rekapitulasi/filter/cari"); ?>');$('#'+'mainform').submit();}">
+							<input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" title="Pencarian berdasarkan nama penduduk" value="<?=html_escape($cari); ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("ba_penduduk_rekapitulasi/filter/cari"); ?>');$('#'+'mainform').submit();}">
 							<div class="input-group-btn">
-								<button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("bumindes_penduduk_rekapitulasi/filter/cari"); ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
+								<button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("ba_penduduk_rekapitulasi/filter/cari"); ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
 							</div>
 						</div>
 					</div>
