@@ -1339,12 +1339,19 @@ class Penduduk_model extends MY_Model {
 				case 'covid': $table = 'ref_status_covid'; break;
 				case 'bantuan_penduduk': $table = 'program'; break;
 				case 'hubungan_kk' : $table = 'tweb_penduduk_hubungan'; break;
+				case 'suku': $table = 'tweb_penduduk'; break;
+                case 'hamil': $table = 'ref_penduduk_hamil'; break;
+
 			}
 
 			if ($tipe == 13 OR $tipe == 17) $this->db->where('STATUS', 1);
 			if ($tipe == 15) $this->db->where('STATUS', 0);
 
 			$judul = $this->db->get_where($table, ['id' => $nomor])->row_array();
+			
+			if ($tipe == 'suku') {
+                $judul['nama'] = rawurldecode($nomor);
+            }
 		}
 
 		if ($sex == 1) $judul['nama'] .= " - LAKI-LAKI";
@@ -1461,5 +1468,55 @@ class Penduduk_model extends MY_Model {
 		$data = $query->row_array();
 		return $data;
 	}
+
+	// Add Versi 5.5.5
+	public function get_suku()
+    {
+        $suku = [];
+        // ref pendduduk
+        $suku['ref'] = $this->db->select('suku')
+            ->order_by('suku')
+            ->get('ref_penduduk_suku')
+            ->result_array();
+
+        // dari penduduk
+        $suku['penduduk'] = $this->db
+            ->distinct()
+            ->select('suku')
+            ->where('suku IS NOT NULL')
+            ->where('suku <>', '')
+            ->order_by('suku')
+            ->get('tweb_penduduk')->result_array();
+
+        return $suku;
+    }
+
+	public function nik_sementara()
+    {
+        $digit = $this->db
+            ->select('RIGHT(nik, 5) as digit')
+            ->order_by('RIGHT(nik, 5) DESC')
+            ->like('nik', '0', 'after')
+            ->where('nik !=', '0')
+            ->get('tweb_penduduk')
+            ->row()->digit ?? 0;
+
+        // NIK Sementara menggunakan format 0[kode-desa][nomor-urut]
+        $desa = $this->config_model->get_data();
+
+        return '0' . $desa['kode_desa'] . sprintf('%05d', $digit + 1);
+    }
+
+    public function cekTagIdCard($cek = null, $kecuali = null)
+    {
+        // Cek duplikasi Tag ID Card
+        if ($kecuali) {
+            $this->db->where('id !=', $kecuali);
+        }
+
+        $tag_id_card = $this->db->select('tag_id_card')->get_where('tweb_penduduk', ['tag_id_card !=' => null])->result_array();
+
+        return (bool) (in_array($cek, array_column($tag_id_card, 'tag_id_card')));
+    }
 
 }

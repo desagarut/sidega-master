@@ -26,6 +26,8 @@ $route['bumindes_umum/([a-z_]+)/(:any)'] = "buku_umum/bumindes_umum/$1/$2";
 $route['bumindes_umum/([a-z_]+)'] = "buku_umum/bumindes_umum/$1";
 $route['bumindes_umum'] = "buku_umum/bumindes_umum";*/
 
+$route['penduduk_induk'] = "buku_umum/bumindes_umum";
+
 $buku_umum = ['ekspedisi', 'lembaran_desa', 'pengurus', 'surat_keluar', 'surat_masuk'];
 foreach ($buku_umum as $menu)
 {

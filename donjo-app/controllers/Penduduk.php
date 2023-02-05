@@ -80,6 +80,15 @@ class Penduduk extends Admin_Controller {
 		$this->render('sid/kependudukan/penduduk', $data);
 	}
 
+	public function form_peristiwa($peristiwa = '')
+    {
+        $this->redirect_hak_akses('u');
+        // Acuan jenis peristiwa berada pada ref_peristiwa
+        $this->session->jenis_peristiwa = $peristiwa;
+        $this->form();
+    }
+
+
 	public function form($p = 1, $o = 0, $id = '')
 	{
 		// Reset kalau dipanggil dari luar pertama kali ($_POST kosong)
@@ -158,6 +167,13 @@ class Penduduk extends Admin_Controller {
 		$data['jenis_kelahiran'] = $this->referensi_model->list_ref_flip(JENIS_KELAHIRAN);
 		$data['penolong_kelahiran'] = $this->referensi_model->list_ref_flip(PENOLONG_KELAHIRAN);
 		$data['pilihan_asuransi'] = $this->referensi_model->list_data('tweb_penduduk_asuransi');
+
+		// Start Update 5.5.5
+		$data['kehamilan']          = $this->referensi_model->list_data('ref_penduduk_hamil');
+        $data['suku']               = $this->penduduk_model->get_suku();
+        $data['nik_sementara']      = $this->penduduk_model->nik_sementara();
+        $data['keluarga']           = $this->keluarga_model->get_kepala_kk($data['penduduk']['id_kk']);
+		// End Update 5.5.5
 		$data['status_penduduk'] = $this->referensi_model->list_data('tweb_penduduk_status');
 
 		unset($_SESSION['dari_internal']);
