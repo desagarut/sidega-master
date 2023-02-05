@@ -1,4 +1,3 @@
-<?php if ($this->CI->cek_hak_akses('u')): ?>
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>Biodata Penduduk</h1>
@@ -16,4 +15,3 @@
 		</form>
 	</section>
 </div>
-<?php endif; ?>
