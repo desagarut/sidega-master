@@ -174,25 +174,38 @@
 		return $str;
 	}
 
-	function bulan($bln)
+	function bulan()
 	{
 		$bulan = array(1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember');
+		return $bulan;
+	}
+
+	function getBulan(int $bln)
+	{
+		$bulan = bulan();
 		return $bulan[(int)$bln];
 	}
 
-	function getBulan($bln)
+	function tahun(int $awal = 2018)
 	{
-		return bulan($bln);
-	}
+		$akhir = date('Y');
+		$tahun = [];
+		for ($i = $awal; $i <= $akhir; $i++)
+		{
+			$tahun[] = $i;
+		}
 
+		return $tahun;
+	}
+	
 	function nama_bulan($tgl)
 	{
 		$ar = explode('-', $tgl);
-		$nm = bulan($ar[1]);
-		$o = $ar[0] .' '. $nm .' '. $ar[2];
-		return $o;
+		$nm = getBulan($ar[1]);
+	
+		return $ar[0] . ' ' . $nm . ' ' . $ar[2];
 	}
-
+	
 	function hari($tgl){
 		$hari = array(
 			0 => 'Minggu', 1 => 'Senin', 2 => 'Selasa', 3 => 'Rabu', 4 => 'Kamis', 5 => 'Jumat', 6 => 'Sabtu'

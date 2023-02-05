@@ -10,18 +10,18 @@ class Ba_penduduk_induk extends Admin_Controller {
 	{
 		parent::__construct();
 
-		$this->load->model(['pamong_model', 'penduduk_model']);
+		$this->load->model(['pamong_model', 'penduduk_model_ba']);
 
-		$this->modul_ini = 301;
+		$this->modul_ini = 2;
 		$this->sub_modul_ini = 303;
 
 		$this->_set_page = ['10', '20', '50', '100'];
 
-		// Samakan dengan donjo-app/controllers/Penduduk.php, karena memanggil penduduk_model
+		// Samakan dengan donjo-app/controllers/Penduduk.php, karena memanggil penduduk_model_ba
 		$this->_list_session = ['filter_tahun', 'filter_bulan', 'status_hanya_tetap', 'jenis_peristiwa', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik'];
 
 	}
-
+/*
 	public function index($page_number = 1, $order_by = 0)
 	{
 		$per_page = $this->input->post('per_page');
@@ -45,16 +45,55 @@ class Ba_penduduk_induk extends Admin_Controller {
 			'tahun' => $this->session->filter_tahun,
 			'func' => 'index',
 			'set_page' => $this->_set_page,
-			'paging' => $this->penduduk_model->paging($page_number),
+			'paging' => $this->penduduk_model_ba->paging($page_number),
 			'list_tahun' => $this->penduduk_log_model->list_tahun(),
 		];
 
 		// TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
-		$data['main'] = $this->penduduk_model->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
+		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
 		$this->set_minsidebar(1);
 		$this->render('bumindes/penduduk/main', $data);
 	}
+*/
+	public function index($page_number = 1, $order_by = 0)
+    {
+        $per_page = $this->input->post('per_page');
+        if (isset($per_page)) {
+            $this->session->per_page = $per_page;
+        }
+
+        // Hanya menampilkan data status_dasar HIDUP, HILANG
+        $this->session->status_dasar = [1, 4];
+
+        // Menampilkan hanya status penduduk TETAP
+        $this->session->status_penduduk = 1;
+
+       // $list_data = $this->penduduk_model_ba->list_data($order_by, $page_number);
+        $data      = [
+            'main_content' => 'bumindes/penduduk/induk/content_induk',
+            'subtitle'     => 'Buku Induk Penduduk',
+            'selected_nav' => 'induk',
+            'order_by'     => $order_by,
+            'cari'         => $this->session->cari ?: '',
+            'filter'       => $this->session->filter ?: '',
+            'bulan'        => $this->session->filter_bulan,
+            'tahun'        => $this->session->filter_tahun,
+            'func'         => 'index',
+            'set_page'     => $this->_set_page,
+            'paging'       => $list_data['paging'],
+            'list_tahun'   => $this->penduduk_log_model->list_tahun(),
+        ];
+
+        // TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
+       // $data['main'] = $list_data['main'];
+
+	   $this->set_minsidebar(1);
+		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
+
+        $this->render('bumindes/penduduk/main', $data);
+    }
+
 
 	private function clear_session()
 	{
@@ -92,7 +131,7 @@ class Ba_penduduk_induk extends Admin_Controller {
 			'config' => $this->header['desa'],
 			'pamong_ketahui' => $this->pamong_model->get_ttd(),
 			'pamong_ttd' => $this->pamong_model->get_ub(),
-			'main' => $this->penduduk_model->list_data($o, NULL, NULL),
+			'main' => $this->penduduk_model_ba->list_data($o, NULL, NULL),
 			'bulan' => $this->session->filter_bulan,
 			'tahun' => $this->session->filter_tahun,
 			'tgl_cetak' => $_POST['tgl_cetak'],
@@ -106,7 +145,7 @@ class Ba_penduduk_induk extends Admin_Controller {
 
 	public function autocomplete()
 	{
-		$data = $this->penduduk_model->autocomplete($this->input->post('cari'));
+		$data = $this->penduduk_model_ba->autocomplete($this->input->post('cari'));
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
