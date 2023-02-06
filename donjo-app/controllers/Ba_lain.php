@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bumindes_lain extends Admin_Controller {
+class Ba_lain extends Admin_Controller {
 
 	public function __construct()
 	{
@@ -43,7 +43,7 @@ class Bumindes_lain extends Admin_Controller {
 
 		$this->load->view('header', $header);
 		$this->load->view('nav');
-		$this->load->view('bumindes/lain/main', $data);
+		$this->load->view('ba/lain/main', $data);
 		$this->load->view('footer');
 	}
 
@@ -65,7 +65,7 @@ class Bumindes_lain extends Admin_Controller {
 
 	private function load_inventaris_data_tables($page_number=1, $offset=0)
 	{
-		$data['main_content'] = "bumindes/lain/content_inventaris";
+		$data['main_content'] = "ba/lain/content_inventaris";
 		$data['subtitle'] = "Buku Inventaris dan Kekayaan Desa";
 
 		return $data;

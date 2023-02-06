@@ -211,7 +211,7 @@
 		return $data;
 	}
 
-	/**
+	/*
 		Kelahiran penduduk berdasarkan tanggal lahir penduduk.
 		Keluarga baru berdasarkan tgl_peristiwa di log_keluarga. Log keluarga mencatat keluarga baru pada:
 		(1) tambah keluarga dari penduduk lepas

@@ -1,10 +1,7 @@
 <div class="box box-info">
-	<div class="box-header with-border">
-
-	</div>
 	<div class="box-body">
 		<div class="alert alert-warning">
-			Modul sedang dalam proses pengembangan.
+			Akan dikembangkan di rilis Premium. Hubungi OpenDesa untuk informasi lebih lanjut.
 		</div>
 	</div>
 </div>

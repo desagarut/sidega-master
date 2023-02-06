@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bumindes_keuangan extends Admin_Controller {
+class Ba_keuangan extends Admin_Controller {
 
 	public function __construct()
 	{
@@ -9,7 +9,7 @@ class Bumindes_keuangan extends Admin_Controller {
 		$this->load->library('session');
 		$this->load->model('header_model');
 
-		$this->modul_ini = 201;
+		$this->modul_ini = 300;
 	}
 
 	public function index()

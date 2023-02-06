@@ -10,7 +10,7 @@ class Lembaran_desa extends Admin_Controller {
 		parent::__construct();
 
 		$this->load->model(['web_dokumen_model', 'referensi_model', 'pamong_model']);
-		$this->modul_ini = 15;
+		$this->modul_ini = 300;
 		$this->sub_modul_ini = 301;
 		$this->_list_session = ['filter', 'cari', 'jenis_peraturan'];
 		$this->_set_page = ['20', '50', '100'];
@@ -54,7 +54,7 @@ class Lembaran_desa extends Admin_Controller {
 
 		$this->load->view('header', $this->header);
 		$this->load->view('nav', $nav);
-		$this->load->view('bumindes/umum/main', $data);
+		$this->load->view('ba/umum/main', $data);
 		$this->load->view('footer');
 	}
 

@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bumindes_umum extends Admin_Controller {
+class ba_umum extends Admin_Controller {
 
 	public function __construct()
 	{
@@ -9,7 +9,7 @@ class Bumindes_umum extends Admin_Controller {
 		$this->load->library('session');
 		$this->load->model('header_model');
 
-		$this->modul_ini = 301;
+		$this->modul_ini = 300;
 	}
 
 	public function index()
@@ -44,7 +44,7 @@ class Bumindes_umum extends Admin_Controller {
 
 		$this->load->view('header', $header);
 		$this->load->view('nav');
-		$this->load->view('bumindes/umum/main', $data);
+		$this->load->view('ba/umum/main', $data);
 		$this->load->view('footer');
 	}
 
@@ -70,7 +70,7 @@ class Bumindes_umum extends Admin_Controller {
 
 	private function load_ekspedisi_data_tables($page_number=1, $offset=0)
 	{
-		$data['main_content'] = "bumindes/umum/content_ekspedisi";
+		$data['main_content'] = "ba/umum/content_ekspedisi";
 		$data['subtitle'] = "Buku Ekspedisi";
 
 		return $data;
@@ -78,7 +78,7 @@ class Bumindes_umum extends Admin_Controller {
 
 	private function load_berita_data_tables($page_number=1, $offset=0)
 	{
-		$data['main_content'] = "bumindes/umum/content_berita";
+		$data['main_content'] = "ba/umum/content_berita";
 		$data['subtitle'] = "Buku Lembaran Desa dan Berita Desa";
 
 		return $data;
@@ -98,7 +98,7 @@ class Bumindes_umum extends Admin_Controller {
 
 		$this->load->view('header', $header);
 		$this->load->view('nav',$nav);
-		$this->load->view('bumindes/umum/main', $data);
+		$this->load->view('ba/umum/main', $data);
 		$this->load->view('footer');
 	}
 

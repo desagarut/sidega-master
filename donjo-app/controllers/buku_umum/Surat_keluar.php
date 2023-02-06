@@ -13,7 +13,7 @@ class Surat_keluar extends Admin_Controller {
 		$this->load->model('pamong_model');
 
 		$this->load->model('penomoran_surat_model');
-		$this->modul_ini = 15;
+		$this->modul_ini = 300;
 		$this->sub_modul_ini = 301;
 	}
 
@@ -53,7 +53,7 @@ class Surat_keluar extends Admin_Controller {
 
 		$this->load->view('header', $this->header);
 		$this->load->view('nav', $nav);
-		$this->load->view('bumindes/umum/main', $data);
+		$this->load->view('ba/umum/main', $data);
 		$this->load->view('footer');
 	}
 

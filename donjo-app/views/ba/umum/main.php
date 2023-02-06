@@ -16,7 +16,7 @@
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div id="umum-sidebar" class="col-sm-3">
-				<?php $this->load->view('bumindes/umum/side') ?>
+				<?php $this->load->view('ba/umum/side') ?>
 			</div>
 			<div id="umum-content" class="col-sm-9">
 				<?php $this->load->view($main_content) ?>

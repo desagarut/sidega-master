@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bumindes_pembangunan extends Admin_Controller {
+class Ba_pembangunan extends Admin_Controller {
 
 	public function __construct()
 	{
@@ -9,7 +9,8 @@ class Bumindes_pembangunan extends Admin_Controller {
 		$this->load->library('session');
 		$this->load->model('header_model');
 
-		$this->modul_ini = 301;
+		$this->modul_ini = 300;
+
 	}
 
 	public function index()
@@ -39,11 +40,11 @@ class Bumindes_pembangunan extends Admin_Controller {
 		$data = array_merge($data, $this->load_data_tables($page, $page_number, $offset));
 
 		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
+		$header['minsidebar'] = 0;
 
 		$this->load->view('header', $header);
 		$this->load->view('nav');
-		$this->load->view('bumindes/pembangunan/main', $data);
+		$this->load->view('ba/pembangunan/main', $data);
 		$this->load->view('footer');
 	}
 
@@ -69,7 +70,7 @@ class Bumindes_pembangunan extends Admin_Controller {
 
 	private function load_tanah_data_tables($page_number=1, $offset=0)
 	{
-		$data['main_content'] = "bumindes/pembangunan/content_tanah";
+		$data['main_content'] = "ba/pembangunan/content_tanah";
 		$data['subtitle'] = "Buku Tanah di Desa";
 
 		return $data;
@@ -77,7 +78,7 @@ class Bumindes_pembangunan extends Admin_Controller {
 
 	private function load_tanah_kas_data_tables($page_number=1, $offset=0)
 	{
-		$data['main_content'] = "bumindes/pembangunan/content_tanah_kas";
+		$data['main_content'] = "ba/pembangunan/content_tanah_kas";
 		$data['subtitle'] = "Buku Tanah Kas Desa";
 
 		return $data;
