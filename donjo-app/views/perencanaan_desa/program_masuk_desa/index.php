@@ -8,7 +8,7 @@
 		<ol class="breadcrumb float-sm-right">
 			<li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
 			<li class="breadcrumb-item"><a href="#!">Perencanaan Desa</a></li>
-			<li class="breadcrumb-item active"><a href="#!">Musdus</a></li>
+			<li class="breadcrumb-item"><a href="#!">Musdus</a></li>
 			<li class="breadcrumb-item active"><a href="#!">Program Masuk Desa</a></li>
 		</ol>
 	</section>
@@ -49,7 +49,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="table-responsive">
-										<table id="tabel-isi" class="table table-bordered table-hover">
+									<table id="tabel-isi" class="table table-bordered table-striped">
 											<thead>
 												<tr>
 													<th class="text-center">No</th>
@@ -117,14 +117,13 @@
 				{
 					'data': function(data) {
 						return `
-						<div class="btn-group mb-2 mr-2">
-						<a href="<?= site_url('perencanaan_desa_program_masuk_desa/detail_program/'); ?>${data.id}" title="Lihat Detail Program Kegiatan"><button type="button" class="btn btn-info">Lihat</button></a>
-							<button type="button" class="btn  btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<?= site_url('perencanaan_desa_program_masuk_desa/form/'); ?>${data.id}">Ubah</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-href="<?= site_url('perencanaan_desa_program_masuk_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a>
-							</div>
+						<div class="btn-group">
+							<a href="#" class="btn btn-success btn-box btn-sm" data-toggle="dropdown" title="Pilih Aksi">Aksi <i class="fa fa-circle-o"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="<?= site_url('perencanaan_desa_program_masuk_desa/detail_program/'); ?>${data.id}">Detail</a></li>
+								<li><a href="<?= site_url('perencanaan_desa_program_masuk_desa/form/'); ?>${data.id}">Ubah</a></li>
+								<li><a href="#" data-href="<?= site_url('perencanaan_desa_program_masuk_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a></li>
+							</ul>
 						</div>
 							`
 					}

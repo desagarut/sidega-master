@@ -3,7 +3,7 @@
         <div class="box-header">
             <h3 class="box-title">Perencanaan</h3>
             <div class="box-tools pull-right">
-                <span class="label label-danger"> Modul Baru</span>
+                <span class="label label-danger"> New</span>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
@@ -19,10 +19,10 @@
                             <span class="info-box-text">Total RKP Desa</span>
                             <span class="info-box-number"><?= $data['jumlah'] ?> <small>Kegiatan</small></span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 65%"></div>
+                                <div class="progress-bar" style="width: 0%"></div>
                             </div>
                             <span class="progress-description">
-                                Proporsi Usulan = 50% RKP Desa
+                                <small> Usulan = RKP Desa</small>
                             </span>
                         </div>
                     </div>
@@ -36,10 +36,10 @@
                             <span class="info-box-text">Total DU-RKP Desa</span>
                             <span class="info-box-number"><?= $data['jumlah'] ?> <small>Kegiatan</small></span>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 35%"></div>
+                                <div class="progress-bar" style="width: 0%"></div>
                             </div>
                             <span class="progress-description">
-                                Proporsi Usulan = 50% DU-RKP Desa
+                               <small> Proporsi Usulan = DU-RKP Desa</small>
                             </span>
                         </div>
                     </div>

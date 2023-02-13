@@ -10,7 +10,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 	const ORDER_ABLE = [
 		1  => 'p.status',
 		2  => 'p.tahun',
-		3  => 'p.desa',
+		3  => 'p.dusun',
 		4  => 'p.bidang_desa',
 		5  => 'p.nama_program_kegiatan',
 		6  => 'p.pades',
@@ -41,7 +41,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		} else {
 			$search = $builder->group_start()
 				->like('p.tahun', $search)
-				->or_like('p.desa', $search)
+				->or_like('p.dusun', $search)
 				->or_like('p.bidang_desa', $search)
 				->or_like('p.nama_program_kegiatan', $search)
 				->or_like('p.pades', $search)
@@ -82,7 +82,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		} else {
 			$search = $builder->group_start()
 				->like('p.tahun', $search)
-				->or_like('p.desa', $search)
+				->or_like('p.dusun', $search)
 				->or_like('p.bidang_desa', $search)
 				->or_like('p.nama_program_kegiatan', $search)
 				->or_like('p.pades', $search)
@@ -111,7 +111,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 				(CASE WHEN w.rt != '0' THEN CONCAT('RT ', w.rt, ' / ') ELSE '' END),
 				(CASE WHEN w.rw != '0' THEN CONCAT('RW ', w.rw, ' - ') ELSE '' END),
 				(CASE WHEN w.dusun != '0' THEN CONCAT('Dusun ', w.rw, ' - ') ELSE '' END),
-				w.desa
+				w.dusun
 			) ELSE p.lokasi END) AS alamat",
 		])
 			->from('tbl_perencanaan_desa_pembiayaan p')
@@ -128,7 +128,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		$post = $this->input->post();
 
 		$data['tahun']       					= $post['tahun'];
-		$data['desa']              				= $post['desa'];
+		$data['dusun']              			= $post['dusun'];
 		$data['bidang_desa']             		= $post['bidang_desa'];
 		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
 		$data['pades']             				= $post['pades'] ?: null;
@@ -154,7 +154,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		$post = $this->input->post();
 
 		$data['tahun']       					= $post['tahun'];
-		$data['desa']              				= $post['desa'];
+		$data['dusun']              			= $post['dusun'];
 		$data['bidang_desa']             		= $post['bidang_desa'];
 		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
 		$data['pades']             				= $post['pades'] ?: null;

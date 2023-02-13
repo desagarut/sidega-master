@@ -27,7 +27,7 @@
                       <label class="col-sm-5 control-label" for="id_pilihan" style="text-align:left;">Tanggapan anda </label>
                       <div class="col-sm-7">
                         <div class="form-group">
-                          <select class="form-control input-sm required" name="id_pilihan" >
+                          <select class="form-control select2 input-sm required" name="id_pilihan" >
                             <option value="">Pilih Tanggapan Anda</option>
                             <option value="1" <?php //selected($main['id_pilihan'], '1'); ?>>Kurang Penting</option>
                             <option value="2" <?php //selected($main['id_pilihan'], '2'); ?> >Penting</option>

@@ -38,8 +38,8 @@ class Ba_penduduk_induk extends Admin_Controller {
         $data      = [
             'main_content' => 'ba/penduduk/induk/content_induk',
             'subtitle'     => 'Buku Induk Penduduk',
-            'selected_nav' => 'induk',
-            'order_by'     => $order_by,
+            'selected_nav' => 'penduduk_induk',
+            //'order_by'     => $order_by,
             'cari'         => $this->session->cari ?: '',
             'filter'       => $this->session->filter ?: '',
             'bulan'        => $this->session->filter_bulan,
@@ -48,10 +48,11 @@ class Ba_penduduk_induk extends Admin_Controller {
             'set_page'     => $this->_set_page,
             'paging'       => $list_data['paging'],
             'list_tahun'   => $this->penduduk_log_model->list_tahun(),
-        ];
+			'main'			=>$this->penduduk_model_ba->list_data($order_by,  $page_number, $data['paging']->offset, $data['paging']->per_page),
+		];
 
         // TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
-		$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
+		//$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
 
         $this->render('ba/penduduk/main', $data);

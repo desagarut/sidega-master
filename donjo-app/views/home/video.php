@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="box-body text-center">
-          <iframe height="180px" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe height="160px" width="200px" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="box-footer text-center scroller">
       <a href="<?= site_url('identitas_desa/form'); ?>" class="btn btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Ubah Data"><i class="fa fa-edit"></i> Ubah Video</a>

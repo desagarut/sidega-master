@@ -27,49 +27,46 @@
                   </div>
                   <div class="box-body">
                     <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group row">
-                          <label class="col-sm-3 control-label" style="text-align:left;" for="tahun">Tahun Anggaran</label>
-                          <div class="col-sm-3">
-                            <select class="custom-select" id="tahun" name="tahun" style="width:100%;">
-                              <option value="">Pilih Tahun</option>
-                              <?php for ($i = date('Y') + 5; $i >= date('Y') - 3; $i--) : ?>
-                                <option value="<?= $i ?>">
-                                  <?= $i ?>
-                                </option>
-                              <?php endfor; ?>
-                            </select>
-                            <script>
-                              $('#tahun').val("<?= $main->tahun ?>");
-                            </script>
-                          </div>
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-sm-3 control-label" style="text-align:left;" for="tahun">Tahun Anggaran</label>
+                        <div class="col-sm-3">
+                          <select class="form-control select2 required" id="tahun" name="tahun" style="width:100%;">
+                            <option value="">Pilih Tahun</option>
+                            <?php for ($i = date('Y') + 5; $i >= date('Y') - 2; $i--) : ?>
+                              <option value="<?= $i ?>">
+                                <?= $i ?>
+                              </option>
+                            <?php endfor; ?>
+                          </select>
+                          <script>
+                            $('#tahun').val("<?= $main->tahun ?>");
+                          </script>
                         </div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 control-label" style="text-align:left;" for="desa">Nama Desa</label>
-                          <div class="col-sm-6">
-                            <select class="custom-select required" id="desa" name="desa" style="width:100%">
-                              <option value=''>-- Pilih Desa --</option>
-                              <?php foreach ($list_lokasi as $key => $item) : ?>
-                                <option value="<?= $item["desa"] ?>" <?php selected($item["desa"], $main->desa) ?>>
-                                  <?= strtoupper($item["desa"]) ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Pilih Dusun</label>
+                        <div class="col-sm-6">
+                          <select name="dusun" class="form-control select2 input-sm required">
+                            <option value="">Pilih <?= ucwords($this->setting->sebutan_dusun) ?></option>
+                            <?php foreach ($dusun as $data) : ?>
+                              <option value="<?= $data['dusun'] ?>" <?php selected($data['dusun'], $data['dusun']) ?>><?= $data['dusun'] ?></option>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Bidang</label>
-                          <div class="col-sm-6">
-                            <select class="custom-select" id="bidang_desa" name="bidang_desa" style="width:100%;">
-                              <option value=''>-- Pilih Bidang --</option>
-                              <?php foreach ($bidang_desa as $value) : ?>
-                                <option <?= $value === $main->bidang_desa ? 'selected' : '' ?> value="<?= $value ?>">
-                                  <?= $value ?>
-                                </option>
-                              <?php endforeach; ?>
-                            </select>
-                          </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Bidang/Sub Bidang</label>
+                        <div class="col-sm-6">
+                          <select class="form-control select2 input-sm required" name="bidang_desa">
+                            <option value="">- Pilih Sub Bidang Desa -</option>
+                            <?php foreach ($bidang_desa as $data) : ?>
+                              <option value="<?= $data['nama'] ?>" <?php selected($data['nama'], $data['nama']); ?>><?= $data['nama'] ?></option>
+                            <?php endforeach; ?>
+                          </select>
                         </div>
+                      </div>
+
                         <div class="form-group row">
                           <label class="col-sm-3 control-label" style="text-align:left;">Nama Program/Kegiatan</label>
                           <div class="col-sm-9">
@@ -158,3 +155,4 @@
     pilih_lokasi(<?= is_null($main->lokasi) ? 1 : 2 ?>);
   });
 </script>
+

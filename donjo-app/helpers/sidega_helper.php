@@ -1,15 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-define("VERSION", '5.5.4');
-
-/**
-
- * Untuk migrasi database. Simpan nilai ini di tabel migrasi untuk menandakan sudah migrasi ke versi ini
-
- * Versi database = [yyyymmdd][nomor urut dua digit]. Ubah setiap kali mengubah struktur database.
-
- */
+define("VERSION", '5.5.5');
 
 define('VERSI_DATABASE', '2022090101');
 

@@ -238,34 +238,7 @@ class Penduduk_model_ba extends MY_Model {
 		$alamat_wilayah= trim("$data[alamat] RT $data[rt] / RW $data[rw] ".ikut_case($data['dusun'],$this->setting->sebutan_dusun)." $data[dusun]");
 		return $alamat_wilayah;
 	}
-/*
-	public function paging($page_number = 1)
-	{
-		$this->db->select('COUNT(u.id) as jml');
-		$this->list_data_sql();
-		$jml_data = $this->db->get()->row()->jml;
 
-		return $this->paginasi($page_number, $jml_data);
-	}
-
-		public function paging($p = 1)
-	{
-		$list_data_sql = $this->list_data_sql();
-		$sql = "SELECT COUNT(u.id) AS id ".$list_data_sql;
-		$query = $this->db->query($sql);
-		$row = $query->row_array();
-		$jml_data = $row['id'];
-
-		$this->load->library('paging');
-		$cfg['page'] = $p;
-		$cfg['per_page'] = $_SESSION['per_page'];
-		$cfg['num_rows'] = $jml_data;
-		$this->paging->init($cfg);
-
-		return $this->paging;
-	}
-
-*/
 	public function paging($p = 1)
 	{
 		$list_data_sql = $this->list_data_sql();

@@ -1,27 +1,14 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h5>Detail Rencana Pembiayaan Pembanguanan Desa</h5>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?= site_url() ?>perencanaan_desa">Perencanaan Desa</a></li>
-            <li class="breadcrumb-item active"><a href="<?= site_url() ?>perencanaan_desa_pembiayaan">Rencana Pembiayaan</a></li>
-            <li class="breadcrumb-item active">Detail</li>
-          </ol>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
+  <section class="content-header">
+    <h1>Detail Rencana Pembiayaan Pembangunan Desa</h1>
+    <ol class="breadcrumb float-sm-right">
+      <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
+      <li class="breadcrumb-item"><a href="<?= site_url() ?>perencanaan_desa">Perencanaan Desa</a></li>
+      <li class="breadcrumb-item active"><a href="<?= site_url() ?>perencanaan_desa_pembiayaan">Rencana Pembiayaan</a></li>
+      <li class="breadcrumb-item active">Detail</li>
+    </ol>
+  </section>
 
   <!-- Main content -->
   <section class="content">
@@ -127,33 +114,3 @@
   </section>
 </div>
 
-<?php foreach ($dokumentasi as $key => $value) : ?>
-  <div class="modal fade" id="<?= $value->id ?>">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">
-            <?= 'Gambar Progres Usulan Masyarakat ' . $value->persentase ?>
-          </h4>
-        </div>
-        <div class="modal-body">
-          <div class="text-center"> <img src="<?= base_url() . LOKASI_GALERI . $value->gambar ?>" width="700px" height="500px"> </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<?php endforeach; ?>
-<div class="modal fade" id="sampul<?= $musdus->id ?>">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Gambar</h4>
-      </div>
-      <div class="modal-body">
-        <div class="text-center"> <img src="<?= base_url() . LOKASI_GALERI . $musdus->foto ?>" width="800px" height="500px"> </div>
-      </div>
-    </div>
-  </div>
-</div>

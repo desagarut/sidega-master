@@ -32,7 +32,7 @@ class Ba_tanah_kas_desa extends Admin_Controller
 
         $this->render('ba/umum/main', [
             'subtitle'     => 'Buku Tanah Kas Desa',
-            'selected_nav' => 'tanah_kas',
+            //'selected_nav' => 'tanah_kas',
             'main_content' => 'ba/pembangunan/tanah_kas_desa/content_tanah_kas_desa',
         ]);
     }

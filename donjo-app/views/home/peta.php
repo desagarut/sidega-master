@@ -60,7 +60,6 @@
 
 <!-- widget Peta Wilayah Desa -->
 
-<div class='col-md-8'>
   <div class="box box-primary box-solid no-padding">
     <div class="box-header">
       <h3 class="box-title">Kependudukan</h3>
@@ -71,7 +70,7 @@
     <div class="box-body">
       <div class='row'>
         <div class="pad">
-          <div id="map-wilayah-desa" style="height: 280px"></div>
+          <div id="map-wilayah-desa" style="height: 275px"></div>
         </div>
       </div>
       &nbsp;
@@ -80,4 +79,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -6,7 +6,7 @@ class Perencanaan_desa extends Admin_Controller
 	{
 		parent::__construct();
 
-		$this->modul_ini = 700;
+		$this->modul_ini = 305;
 		$this->set_minsidebar(1);
 
 		$this->load->library('upload');
@@ -25,7 +25,7 @@ class Perencanaan_desa extends Admin_Controller
 	public function index()
 	{
 		$this->tab_ini = 1;
-		$this->sub_modul_ini = 701;
+		$this->sub_modul_ini = 700;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -53,7 +53,7 @@ class Perencanaan_desa extends Admin_Controller
 	public function form_usulan_masyarakat($id = '')
 	{
 		$this->tab_ini = 1;
-		$this->sub_modul_ini = 701;
+		$this->sub_modul_ini = 700;
 
 		if ($id) {
 			$data['main'] = $this->model->find($id);
@@ -415,7 +415,7 @@ class Perencanaan_desa extends Admin_Controller
 	public function penetapan_rkpdes()
 	{
 		$this->tab_ini = 9;
-		$this->sub_modul_ini = 703;
+		$this->sub_modul_ini = 700;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -444,7 +444,7 @@ class Perencanaan_desa extends Admin_Controller
 	public function rkpdes()
 	{
 		$this->tab_ini = 10;
-		$this->sub_modul_ini = 703;
+		$this->sub_modul_ini = 700;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -502,7 +502,7 @@ class Perencanaan_desa extends Admin_Controller
 	public function durkpdes()
 	{
 		$this->tab_ini = 11;
-		$this->sub_modul_ini = 703;
+		$this->sub_modul_ini = 700;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');

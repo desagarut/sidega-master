@@ -6,7 +6,7 @@ class Perencanaan_desa_program_masuk_desa extends Admin_Controller
 	{
 		parent::__construct();
 
-		$this->modul_ini = 700;
+		$this->modul_ini = 305;
 		$this->set_minsidebar(1);
 
 		$this->load->library('upload');
@@ -24,7 +24,7 @@ class Perencanaan_desa_program_masuk_desa extends Admin_Controller
 	public function index()
 	{
 		$this->tab_ini = 2;
-		$this->sub_modul_ini = 701;
+		$this->sub_modul_ini = 700;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -51,20 +51,22 @@ class Perencanaan_desa_program_masuk_desa extends Admin_Controller
 
 	public function form($id = '')
 	{
-		$this->tab_ini = 1;
-		$this->sub_modul_ini = 701;
+		$this->tab_ini = 2;
+		$this->sub_modul_ini = 700;
 
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
+			$data['dusun'] = $this->wilayah_model->list_dusun();
 			$data['form_action'] = site_url("perencanaan_desa_program_masuk_desa/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
+			$data['dusun'] = $this->wilayah_model->list_dusun();
 			$data['form_action'] = site_url("perencanaan_desa_program_masuk_desa/insert");
 		}
 

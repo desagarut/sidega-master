@@ -50,7 +50,7 @@
                         <div class="col-sm-3">
                           <select class="form-control select2" id="tahun" name="tahun" style="width:100%;">
                             <option value="">Pilih Tahun</option>
-                            <?php for ($i = date('Y') + 5; $i >= date('Y') - 3; $i--) : ?>
+                            <?php for ($i = date('Y') + 5; $i >= date('Y') - 2; $i--) : ?>
                               <option value="<?= $i ?>">
                                 <?= $i ?>
                               </option>
@@ -63,12 +63,12 @@
                       </div>
 
                       <div class="form-group row">
-                        <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Bidang/Sub Bidang</label>
+                        <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Pilih Dusun</label>
                         <div class="col-sm-6">
-                          <select name="dusun" class="form-control input-sm required" onchange="ubah_dusun($(this).val())">
+                          <select name="dusun" class="form-control select2 input-sm required" onchange="ubah_dusun($(this).val())">
                             <option value="">Pilih <?= ucwords($this->setting->sebutan_dusun) ?></option>
                             <?php foreach ($dusun as $data) : ?>
-                              <option value="<?= $data['dusun'] ?>" <?php selected($penduduk['dusun'], $data['dusun']) ?>><?= $data['dusun'] ?></option>
+                              <option value="<?= $data['dusun'] ?>" <?php selected($data['dusun'], $data['dusun']) ?>><?= $data['dusun'] ?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
@@ -77,10 +77,10 @@
                       <div class="form-group row">
                         <label class="col-sm-3 control-label" style="text-align:left;" for="bidang_desa">Bidang/Sub Bidang</label>
                         <div class="col-sm-6">
-                          <select class="form-control input-sm required" name="bidang_desa">
+                          <select class="form-control select2 input-sm required" name="bidang_desa">
                             <option value="">- Pilih Sub Bidang Desa -</option>
                             <?php foreach ($bidang_desa as $data) : ?>
-                              <option value="<?= $data['nama'] ?>" <?php selected($data['bidang_desa'], $data['nama']); ?>><?= $data['nama'] ?></option>
+                              <option value="<?= $data['nama'] ?>" <?php selected($data['nama'], $data['nama']); ?>><?= $data['nama'] ?></option>
                             <?php endforeach; ?>
                           </select>
                         </div>
