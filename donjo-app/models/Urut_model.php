@@ -102,7 +102,5 @@ class Urut_model extends CI_Model {
 			update($this->tabel, array('urut' => $unsur2['urut']));		
 		return (int)$unsur2['urut'];
 	}
-
 }
-
 ?>

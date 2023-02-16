@@ -91,7 +91,6 @@
 				$data[$i]['aktif'] = "Ya";
 			else
 				$data[$i]['aktif'] = "Tidak";
-
 			$j++;
 		}
 		return $data;
@@ -427,6 +426,5 @@
   	$subset = !empty($gallery) ? array('parrent' => $gallery) : array('parrent' => 0);
   	$this->urut_model->urut($id, $arah, $subset);
 	}
-
 }
 ?>

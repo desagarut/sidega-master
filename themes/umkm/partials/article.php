@@ -9,14 +9,9 @@
 					<img src="<?= AmbilFotoArtikel($article['gambar'], 'sedang') ?>" alt="<?= $article['judul'] ?>" id="current">
 				<?php endif ?>
 			</div>
-			<div class="images" style="height:150px;width:150px; padding-top:30px">
-				<?php if ($article['gambar' . $i] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $article['gambar' . $i])) : ?>
-					<img src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="img">
-				<?php endif ?>
-			</div>
 			<div class="meta-information">
 				<h2 class="post-title">
-					<a href="blog-single.html"><?= $article['judul'] ?></a>
+					<a href="#"><?= $article['judul'] ?></a>
 				</h2>
 
 				<ul class="meta-info">
@@ -38,6 +33,12 @@
 			</div>
 			<div class="detail-inner">
 				<?= $article['isi'] ?>
+				<div class="images" style="height:150px;width:150px; padding-top:30px">
+					<?php if ($article['gambar' . $i] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $article['gambar' . $i])) : ?>
+						<img src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['nama'] ?>" title="<?= $article['nama'] ?>" class="img">
+					<?php endif ?>
+				</div>
+
 				<!-- Start Ads -->
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1823410826720847" crossorigin="anonymous"></script>
 				<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1823410826720847" data-ad-slot="4336226139"></ins>
@@ -55,11 +56,9 @@
 			</div>
 
 			<div class="post-bottom-area">
-
 				<div class="post-tag">
 					<ul>
 						<li><a href="<?= site_url('first/kategori/' . $article['kat_slug']) ?>">#<?= $article['kategori'] ?>,</a></li>
-
 					</ul>
 				</div>
 

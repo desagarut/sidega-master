@@ -1,5 +1,5 @@
 <div class="col-md-3">
-    <div class="box box-info box-solid">
+    <div class="box box-info">
         <div class="box-header">
             <h3 class="box-title">Perencanaan</h3>
             <div class="box-tools pull-right">

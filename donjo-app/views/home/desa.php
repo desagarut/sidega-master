@@ -28,12 +28,12 @@
 	<section class='content' id="maincontent">
 		<div class='row'>
 			<div class="col-md-8">
-			<?php $this->load->view('home/peta.php'); ?>
+				<?php $this->load->view('home/peta.php'); ?>
 			</div>
 			<div class="col-md-4">
-			<?php $this->load->view('home/buku_administrasi.php');?>
-			<?php $this->load->view('home/umkm.php'); ?>
-			<?php $this->load->view('home/layanan.php'); ?>
+				<?php $this->load->view('home/buku_administrasi.php'); ?>
+				<?php $this->load->view('home/umkm.php'); ?>
+				<?php $this->load->view('home/layanan.php'); ?>
 			</div>
 		</div>
 		<div class='row'>
@@ -43,20 +43,28 @@
 			?>
 		</div>
 		<div class='row'>
-		<div class="col-md-12">
-			<?php $this->load->view('home/rekap_sppt.php'); ?>
-			<?php $this->load->view('home/aparat_login.php'); ?>
-			<?php $this->load->view('home/perencanaan.php'); ?>
-			<?php $this->load->view('home/video.php'); ?>
-		</div>
+			<div class="col-md-12">
+				<?php $this->load->view('home/rekap_sppt.php'); ?>
+				<?php $this->load->view('home/aparat_login.php'); ?>
+				<?php $this->load->view('home/perencanaan.php'); ?>
+				<?php $this->load->view('home/video.php'); ?>
+			</div>
 		</div>
 		<div class='row'>
-		<div class="col-md-12">
-			<?php $this->load->view('home/helpdesk.php'); ?>
-			<?php $this->load->view('home/changelog.php'); ?>
-			<?php $this->load->view('home/warga_login.php'); ?>
-			<?php $this->load->view('home/pengunjung.php'); ?>
+			<div class="col-md-12">
+				<?php $this->load->view('home/helpdesk.php'); ?>
+				<?php $this->load->view('home/changelog.php'); ?>
+				<?php $this->load->view('home/warga_login.php'); ?>
+				<?php $this->load->view('home/pengunjung.php'); ?>
+				<?php //$this->load->view('home/artikel.php'); 
+				?>
+			</div>
 		</div>
+		<div class='row'>
+			<div class="col-md-12">
+				<?php $this->load->view('home/gallery.php'); ?>
+				<?php $this->load->view('home/gallery_youtube.php'); ?>
+			</div>
 		</div>
 	</section>
 </div>

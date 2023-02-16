@@ -4,8 +4,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-title">
-          <h2>Gallery Kegiatan
-            <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>
+          <h2><a href="<?= site_url("first/gallery") ?>" alt="Gallery Video">Gallery Foto</a>
           </h2>
         </div>
       </div>

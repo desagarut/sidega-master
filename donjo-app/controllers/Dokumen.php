@@ -10,8 +10,6 @@ class Dokumen extends Admin_Controller {
 		$this->load->model('pamong_model');
 		$this->load->model('referensi_model');
 		$this->load->helper('download');
-		$this->modul_ini = 15;
-		$this->sub_modul_ini = 52;
 	}
 
 	public function clear()
@@ -43,6 +41,9 @@ class Dokumen extends Admin_Controller {
 		$data['paging'] = $this->web_dokumen_model->paging($kat, $p, $o);
 		$data['main'] = $this->web_dokumen_model->list_data($kat, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->web_dokumen_model->autocomplete();
+
+		$this->modul_ini = 15;
+		$this->sub_modul_ini = 52;
 
 		$this->render('dokumen/table_dokumen', $data);
 	}
@@ -201,4 +202,35 @@ class Dokumen extends Admin_Controller {
 		else
 			$this->output->set_status_header('404');
 	}
+
+	public function dokumen_lainnya($kat=1, $p=1, $o=0)
+	{
+		$data['p'] = $p;
+		$data['o'] = $o;
+		$data['kat'] = $kat;
+
+		if (isset($_SESSION['cari']))
+			$data['cari'] = $_SESSION['cari'];
+		else $data['cari'] = '';
+
+		if (isset($_SESSION['filter']))
+			$data['filter'] = $_SESSION['filter'];
+		else $data['filter'] = '';
+
+		if (isset($_POST['per_page']))
+			$_SESSION['per_page'] = $_POST['per_page'];
+		$data['per_page'] = $_SESSION['per_page'];
+
+		$data['kat_nama'] = $this->web_dokumen_model->kat_nama($kat);
+		$data['paging'] = $this->web_dokumen_model->paging($kat, $p, $o);
+		$data['main'] = $this->web_dokumen_model->list_data($kat, $o, $data['paging']->offset, $data['paging']->per_page);
+		$data['keyword'] = $this->web_dokumen_model->autocomplete();
+
+		$this->modul_ini = 300;
+		$this->sub_modul_ini = 301;
+		$this->set_minsidebar(1);
+
+		$this->render('dokumen/table_dokumen_lainnya', $data);
+	}
+
 }

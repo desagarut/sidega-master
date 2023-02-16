@@ -4,7 +4,10 @@
 <?php if (count($farsip) > 0) : ?>
   <?php foreach ($farsip as $data) : ?>
       <div class="single-product">
-        <div class="product-image"> <img src="<?= AmbilFotoArtikel($data['gambar' . $i], 'sedang') ?>" alt="#">
+        <div class="product-image"> 
+        <a href="<?= site_url('artikel/' . buat_slug($data)) ?>">
+        <img src="<?= AmbilFotoArtikel($data['gambar' . $i], 'sedang') ?>" alt="#" href="<?= site_url('artikel/' . buat_slug($data)) ?>">
+        </a>
         </div>
         <div class="product-info">
           <h4 class="title"> <a href="<?= site_url('artikel/' . buat_slug($data)) ?>" alt="<?= $data['judul'] ?>">

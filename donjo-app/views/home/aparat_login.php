@@ -1,5 +1,5 @@
 <div class='col-md-3'>
-    <div class="box box-warning box-solid">
+    <div class="box box-warning">
         <div class="box-header with-border">
             <h3 class="box-title">User Login</h3>
             <div class="box-tools pull-right">

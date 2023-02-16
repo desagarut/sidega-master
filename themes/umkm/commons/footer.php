@@ -7,14 +7,13 @@
             <div class="inner-content">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-12">
-                        <div class="footer-logo">
+                        <div class="footer-logo text-center">
                             <a href="<?= site_url('first') ?>">
                                 <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:38px;" alt="Logo">
-                            </a>&nbsp;
+                            </a></br>
                             <a href="<?= site_url('first') ?>" style="color:white; text-shadow: 2px 1px 2px #000; -webkit-text-stroke: 1px transparent; font-size: 25px; font-weight: normally; text-transform: normally; font-family: candara">
                                 <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
                             </a>
-
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-8 col-12">
@@ -127,7 +126,7 @@
                             <p><strong><a href="https://desagarut.net" target="_blank"><?= $this->setting->website_title ?>
                                         <?= AmbilVersi() ?> | Tema <?= $this->setting->web_theme ?> <?= THEME_VERSION ?></a> </strong>
                         </div>
-                        <div class="copyright"><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?> <?= ucfirst($this->setting->sebutan_kecamatan) . ' ' . ucwords($desa['nama_kecamatan']) ?> Kabupaten Garut &copy;
+                        <div class="copyright"><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>  &copy;
                             <?= date('Y') ?> <br /> Diberdayakan Oleh <?= $this->setting->pemberdaya ?></p>
                         </div>
                     </div>

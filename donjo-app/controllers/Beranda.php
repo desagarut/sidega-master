@@ -27,8 +27,11 @@ class Beranda extends Admin_Controller {
 		$this->load->model('config_model');
 		$this->load->model('dpt_model');
 
-		
-		
+		//Update 5.5.5
+		$this->load->model('first_gallery_youtube');
+		$this->load->model('first_gallery_m');
+		$this->load->model('first_artikel_m');
+
 		$this->modul_ini = 1;
 	}
 
@@ -87,6 +90,13 @@ class Beranda extends Admin_Controller {
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
         };
+
+		//Update 5.5.5
+		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show();
+		$data['gallery'] = $this->first_gallery_m->gallery_show();
+		$data['artikel'] = $this->first_artikel_m->artikel_show($data['paging']->offset, $data['paging']->per_page);
+
+
 		
 		$this->set_minsidebar(1);
 		$this->render('home/desa', $data);

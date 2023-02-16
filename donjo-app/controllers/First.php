@@ -67,6 +67,10 @@ class First extends Web_Controller {
 		$this->load->model('web_widget_model');
 		$this->load->model('web_gallery_model');
 		$this->load->model('web_dokumen_model');
+
+		//update v 5.5.5
+		$this->load->model('first_gallery_youtube');
+
 		
 		$this->load->library('upload');
 	}
@@ -90,6 +94,9 @@ class First extends Web_Controller {
 		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['pamong'] = $this->pamong_model->get_data();
 		$data['setting_desa'] = $this->config_model->get_data();
+
+		$data['gallery'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
+
 
 		if ($this->setting->apbdes_footer) {
             $data['transparansi'] = $this->setting->apbdes_manual_input
@@ -240,6 +247,46 @@ class First extends Web_Controller {
 		$this->load->view($this->template, $data);
 	}
 
+		// Halaman arsip album galeri youtube
+		public function gallery_youtube($p=1)
+		{
+			$data = $this->includes;
+			$data['p'] = $p;
+			$data['paging'] = $this->first_gallery_youtube->paging($p);
+			$data['paging_range'] = 3;
+			$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+			$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+			$data['pages'] = range($data['start_paging'], $data['end_paging']);
+			$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
+	
+			$this->_get_common_data($data);
+	
+			$this->set_template('layouts/gallery_youtube.tpl.php');
+			$this->load->view($this->template, $data);
+		}
+	
+		// halaman rincian tiap album galeri
+		public function sub_gallery_youtube($gal=0, $p=1)
+		{
+			$data = $this->includes;
+			$data['p'] = $p;
+			$data['gal'] = $gal;
+			$data['paging'] = $this->first_gallery_youtube->paging2($gal, $p);
+			$data['paging_range'] = 3;
+			$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+			$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+			$data['pages'] = range($data['start_paging'], $data['end_paging']);
+			$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
+			$data['gallery'] = $this->first_gallery_youtube->sub_gallery_show($gal,$data['paging']->offset, $data['paging']->per_page);
+			$data['parrent'] = $this->first_gallery_youtube->get_parrent($gal);
+			$data['mode'] = 1;
+	
+			$this->_get_common_data($data);
+	
+			$this->set_template('layouts/sub_gallery_youtube.tpl.php');
+			$this->load->view($this->template, $data);
+		}
+	
 	public function statistik($stat=0, $tipe=0)
 	{
 		if (!$this->web_menu_model->menu_aktif('statistik/'.$stat)) show_404();

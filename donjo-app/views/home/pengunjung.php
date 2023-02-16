@@ -68,7 +68,7 @@
 <script src="<?= base_url()?>assets/js/highcharts/highcharts-more.js"></script>
 
 <div class='col-md-3'>
-    <div class="box box-success box-solid">
+    <div class="box box-success">
         <div class="box-header">
             <h3 class="box-title">Pengunjung Web </h3>
             <div class="box-tools pull-right">
