@@ -53,7 +53,7 @@
 							<tr>
 								<td align="center"><?= ($key + 1)?></td>
 								<td class="textx" align="center"><?= $data['no_anggota']?></td>
-								<td><?= $this->referensi_model->list_ref(JABATAN_lembaga)[$data['jabatan']]?></td>
+								<td><?= $this->referensi_model->list_ref(JABATAN_KELOMPOK)[$data['jabatan']]?></td>
 								<td><?= $data['no_sk_jabatan']?></td>
 								<td class="textx"><?= $data['nik']?></td>
 								<td><?= $data['nama']?></td>
