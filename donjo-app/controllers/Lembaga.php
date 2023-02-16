@@ -104,10 +104,10 @@ class Lembaga extends Admin_Controller {
 			$data['form_action'] = site_url("lembaga/update_a/$id/$id_a");
 		}
 
-		$data['list_jabatan'] = $this->referensi_model->list_ref(JABATAN_lembaga);
+		$data['list_jabatan'] = $this->referensi_model->list_ref(JABATAN_KELOMPOK);
 
 		$this->set_minsidebar(1);
-		$data['list_jabatan'] = $this->referensi_model->list_ref(JABATAN_lembaga);
+		$data['list_jabatan'] = $this->referensi_model->list_ref(JABATAN_KELOMPOK);
 		$this->render('lembaga/anggota/form', $data);
 	}
 

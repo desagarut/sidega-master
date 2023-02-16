@@ -109,7 +109,7 @@
 														</div>
 													</td>
 													<td class="padat"><?= $data['no_anggota']?></td>
-													<td><?= $this->referensi_model->list_ref(JABATAN_lembaga)[$data['jabatan']]?></td>
+													<td><?= $this->referensi_model->list_ref(JABATAN_KELOMPOK)[$data['jabatan']]?></td>
 													<td><?= $data['no_sk_jabatan']?>
 													<td><?= $data['nik']; ?></td>
 													<td><?= $data['nama']; ?></td>
