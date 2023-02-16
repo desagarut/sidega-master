@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td align="center" >
-				<h4><u>Daftar Anggota Kelopok <?= ucwords($lembaga['nama']); ?></u></h4>
+				<h4><u>Daftar Anggota Lembaga <?= ucwords($lembaga['nama']); ?></u></h4>
 			</td>
 		</tr>
 		<tr>
