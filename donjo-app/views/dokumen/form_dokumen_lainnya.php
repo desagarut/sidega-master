@@ -1,12 +1,12 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Form Peraturan Lainnya <?= $kat_nama?></h1>
+		<h1>Form <?= $kat_nama?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
 			<?php if (in_array($kat, array('2', '3'))): ?>
-				<li><a href="<?= $kembali_ke ?: site_url("$this->controller/peraturan_desa/$kat"); ?>"><i class="fa fa-dashboard"></i> Daftar <?= $kat_nama?></a></li>
+				<li><a href="<?= $kembali_ke ?: site_url("$this->controller/dokumen/dokumen_lainnya/$kat"); ?>"><i class="fa fa-dashboard"></i> Daftar <?= $kat_nama?></a></li>
 			<?php else: ?>
-				<li><a href="<?= site_url("$this->controller/index/$kat"); ?>"><i class="fa fa-dashboard"></i> Daftar <?= $kat_nama?></a></li>
+				<li><a href="<?= site_url("$this->controller/dokumen_lainnya/$kat"); ?>"><i class="fa fa-dashboard"></i> Daftar <?= $kat_nama?></a></li>
 			<?php endif; ?>
 			<li class="active">Pengaturan <?= $kat_nama?></li>
 		</ol>
@@ -20,7 +20,7 @@
 							<i class="fa fa-arrow-circle-left "></i>Kembali Ke Daftar <?= $kat_nama?>
 						</a>
 					<?php else: ?>
-						<a href="<?= site_url("$this->controller/index/$kat"); ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"  title="Tambah Artikel">
+						<a href="<?= site_url("$this->controller/dokumen_lainnya/$kat"); ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"  title="Tambah Artikel">
 							<i class="fa fa-arrow-circle-left "></i>Kembali Ke Daftar <?= $kat_nama?>
 						</a>
 					<?php endif; ?>

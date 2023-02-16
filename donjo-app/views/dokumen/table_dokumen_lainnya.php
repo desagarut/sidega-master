@@ -43,7 +43,7 @@
 								<?php endif; ?>
 								<div class="box box-info">
 									<div class="box-header with-border">
-										<a href="<?= site_url("{$this->controller}/form/$kat") ?>" class="btn btn-social btn-box btn-success btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Menu Baru">
+										<a href="<?= site_url("{$this->controller}/form_dokumen_lainnya/$kat") ?>" class="btn btn-social btn-box btn-success btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Menu Baru">
 											<i class="fa fa-plus"></i>Tambah <?= $kat_nama ?> Baru
 										</a>
 										<?php if ($this->CI->cek_hak_akses('h')) : ?>
@@ -96,11 +96,11 @@
 																				<th>No</th>
 																				<th>Aksi</th>
 																				<?php if ($o == 2) : ?>
-																					<th><a href="<?= site_url("{$this->controller}/index/$kat/$p/1") ?>">Judul <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																					<th><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/1") ?>">Judul <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																				<?php elseif ($o == 1) : ?>
-																					<th><a href="<?= site_url("{$this->controller}/index/$kat/$p/2") ?>">Judul <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																					<th><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/2") ?>">Judul <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																				<?php else : ?>
-																					<th><a href="<?= site_url("{$this->controller}/index/$kat/$p/1") ?>">Judul <i class='fa fa-sort fa-sm'></i></a></th>
+																					<th><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/1") ?>">Judul <i class='fa fa-sort fa-sm'></i></a></th>
 																				<?php endif; ?>
 																				<?php if ($kat == 1) : ?>
 																					<th>Kategori Info Publik</th>
@@ -113,18 +113,18 @@
 																					<th nowrap>Uraian Singkat</th>
 																				<?php endif; ?>
 																				<?php if ($o == 4) : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																				<?php elseif ($o == 3) : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																				<?php else : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
 																				<?php endif; ?>
 																				<?php if ($o == 6) : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																				<?php elseif ($o == 5) : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																				<?php else : ?>
-																					<th nowrap><a href="<?= site_url("{$this->controller}/index/$kat/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
+																					<th nowrap><a href="<?= site_url("{$this->controller}/dokumen_lainnya/$kat/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
 																				<?php endif; ?>
 																			</tr>
 																		</thead>
@@ -134,7 +134,7 @@
 																					<td><input type="checkbox" name="id_cb[]" value="<?= $data['id'] ?>" /></td>
 																					<td><?= $data['no'] ?></td>
 																					<td nowrap>
-																						<a href="<?= site_url("{$this->controller}/form/$kat/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
+																						<a href="<?= site_url("{$this->controller}/form_dokumen_lainnya/$kat/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
 																						<?php if ($data['enabled'] == '2') : ?>
 																							<a href="<?= site_url($this->controller . '/dokumen_lock/' . $kat . '/' . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan"><i class="fa fa-lock">&nbsp;</i></a>
 																						<?php elseif ($data['enabled'] == '1') : ?>

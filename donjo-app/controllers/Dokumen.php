@@ -203,7 +203,7 @@ class Dokumen extends Admin_Controller {
 			$this->output->set_status_header('404');
 	}
 
-	public function dokumen_lainnya($kat=1, $p=1, $o=0)
+	public function dokumen_lainnya($kat=4, $p=1, $o=0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
@@ -228,9 +228,40 @@ class Dokumen extends Admin_Controller {
 
 		$this->modul_ini = 300;
 		$this->sub_modul_ini = 301;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->render('dokumen/table_dokumen_lainnya', $data);
+	}
+
+	public function form_dokumen_lainnya($kat=4, $p=1, $o=0, $id='')
+	{
+		$data['p'] = $p;
+		$data['o'] = $o;
+		$data['kat'] = $kat;
+
+		if ($id)
+		{
+			$data['dokumen'] = $this->web_dokumen_model->get_dokumen($id);
+			$data['form_action'] = site_url("dokumen/update/$kat/$id/$p/$o");
+		}
+		else
+		{
+			$data['dokumen'] = null;
+			$data['form_action'] = site_url("dokumen/insert");
+		}
+		$data['kat_nama'] = $this->web_dokumen_model->kat_nama($kat);
+		$data['list_kategori_publik'] = $this->referensi_model->list_ref_flip(KATEGORI_PUBLIK);
+
+		$this->render('dokumen/form_dokumen_lainnya', $data);
+	}
+
+	public function insert_dokumen_lainnya()
+	{
+		$_SESSION['success'] = 1;
+		$kat = $this->input->post('kategori');
+		$outp = $this->web_dokumen_model->insert();
+		if (!$outp) $_SESSION['success'] = -1;
+		redirect("dokumen/dokumen_lainnya/$kat");
 	}
 
 }
