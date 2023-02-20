@@ -7,3 +7,4 @@
 <?php $this->load->view($folder_themes .'/partials/team') ?>
 <?php $this->load->view($folder_themes .'/partials/umkm') ?>
 <?php $this->load->view($folder_themes .'/partials/sinergi') ?>
+<?php $this->load->view($folder_themes .'/partials/gallery_youtube_front') ?>

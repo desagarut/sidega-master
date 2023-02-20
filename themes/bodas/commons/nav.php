@@ -7,6 +7,7 @@
         <h2 class="m-0 text-primary">
             <a href="<?= site_url('first') ?>" >
                 <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:58px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>"> 
+                <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
             </a>
         </h2>
     </div>

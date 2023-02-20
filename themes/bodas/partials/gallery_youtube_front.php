@@ -1,36 +1,29 @@
-<!-- ======= Portfolio Section ======= -->
-<section class="trending-product lazy" style="padding-top: 20px;">
+<!-- ======= Gallery Youtube ======= -->
+
+<div class="container-xxl py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title">
-          <h2><a href="<?= site_url("first/gallery_youtube") ?>" alt="Gallery Video">Gallery Video</a>
-          </h2>
-        </div>
-      </div>
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+      <h6 class="section-title bg-white text-center text-primary px-3">Gallery</h6>
+      <h1 class="mb-5"><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?></h1>
     </div>
-    <div class="row">
-		<?php foreach ($gallery As $data): ?>
-        <?php if ($data['link']): ?>
-      <div class="col-lg-4 col-md-6 col-12"> 
-        <!-- Start Single Product -->
-        <div class="single-product">
-          <div class="product-image"> 
-          <iframe height="250px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $data["link"]; ?>" title="<?= $data['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="button">
-                <a href="<?= site_url("first/sub_gallery_youtube/{$data['id']}") ?>" class="btn"><i class="lni lni-eye"></i> Lihat</a>
+    <div class="row g-4 justify-content-center">
+      <?php foreach ($gallery as $data) : ?>
+        <?php if ($data['link']) : ?>
+
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="course-item bg-light">
+              <div class="position-relative overflow-hidden text-center">
+                <iframe height="200px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $data["link"]; ?>" title="<?= $data['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                  <a href="<?= site_url("first/sub_gallery_youtube/{$data['id']}") ?>" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;"> Playlist <i class="fa fa-list"></i></a>
+                  <!--<a href="<?= site_url('first/tawa') ?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Putar</a>-->
+                </div>
+              </div>
             </div>
           </div>
-          <div class="product-info">
-            <h4 class="title"> <a href="<?= site_url("first/sub_gallery_youtube/{$data['id']}") ?>" alt="<?= $article['nama'] ?>">
-              <?= "Video : $data[nama]" ?>
-              </a> </h4>
-            </div>
-        </div>
-        <!-- End Single Product --> 
-      </div>
         <?php endif; ?>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
+
     </div>
   </div>
-</section>
+</div>

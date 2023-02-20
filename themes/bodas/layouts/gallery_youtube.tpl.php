@@ -2,33 +2,25 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <?php $this->load->view($folder_themes . '/commons/meta') ?>
-  <?php $this->load->view($folder_themes . '/commons/for_css') ?>
-</head>
+<?php $this->load->view($folder_themes . '/commons/head') ?>
 
 <body>
+  <?php $this->load->view($folder_themes . '/commons/spinner.php') ?>
+  <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
 
-  <?php $this->load->view($folder_themes . '/commons/header') ?>
-  <section id="portfolio" class="portfolio blog">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 entries">
-          <?php $this->load->view($folder_themes . '/partials/gallery_youtube') ?>
-        </div>
-        <div class="col-md-4">
-          <div class="sidebar blog-grid-page">
-            <?php $this->load->view($folder_themes . '/partials/sidebar_gallery_youtube.php') ?>
-          </div>
+  <div class="container-xxl py-5">
+    <div class="row">
+      <div class="col-md-8 entries">
+        <?php $this->load->view($folder_themes . '/partials/gallery_youtube') ?>
+      </div>
+      <div class="col-md-4">
+        <div class="sidebar blog-grid-page">
+          <?php $this->load->view($folder_themes . '/partials/sidebar_gallery_youtube.php') ?>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
   <?php $this->load->view($folder_themes . '/commons/footer') ?>
-  <?php $this->load->view($folder_themes . '/commons/for_js') ?>
-
 </body>
 
 </html>

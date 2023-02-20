@@ -1,48 +1,29 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-    <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center">
-                <h6 class="section-title bg-white text-center text-primary px-3">Program</h6>
-                <h1 class="mb-5">Mitra Sinergi </h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel position-relative">
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/testimonial-1.jpg")?>" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+<!-- Testimonial Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center text-primary px-3">Program</h6>
+            <h1 class="mb-5">Mitra Sinergi </h1>
+        </div>
+        <?php foreach ($sinergi_program as $key => $program) : ?>
+            <?php $baris[$program['baris']][$program['kolom']] = $program; ?>
+        <?php endforeach; ?>
+
+        <div class="owl-carousel testimonial-carousel position-relative">
+            <?php foreach ($baris as $baris_program) : ?>
+                <?php $width = 100 / count($baris_program) - count($baris_program) ?>
+                <?php foreach ($baris_program as $key => $program) : ?>
+
+                    <div class="testimonial-item text-center">
+                        <img class="border rounded-circle p-2 mx-auto mb-3" src="<?= base_url() . LOKASI_GAMBAR_WIDGET . $program['gambar'] ?>" style="width: 80px; height: 80px;">
+                        <h5 class="mb-0"><?= $program['judul'] ?></h5>
                     </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/testimonial-2.jpg")?>" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/testimonial-3.jpg")?>" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/testimonial-4.jpg")?>" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+
         </div>
     </div>
-    <!-- Testimonial End -->
-        
-
+</div>
+<!-- Testimonial End -->

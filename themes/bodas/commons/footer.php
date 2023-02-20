@@ -4,17 +4,17 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Quick Link</h4>
-                    <a class="btn btn-link" href="http://portal.sthgarut.ac.id:8060">Siakad</a>
-                    <a class="btn btn-link" href="https://sister.lldikti4.id">Sister</a>
-                    <a class="btn btn-link" href="http://portal.sthgarut.ac.id:8100">Neo Feeder</a>
-                    <a class="btn btn-link" href="https://pddikti.kemdikbud.go.id">PDDIKTI</a>
-                    <a class="btn btn-link" href="https://pin.kemdikbud.go.id">P I N</a>
+                    <a class="btn btn-link" href="<?= site_url('arsip') ?>">Berita</a>
+                    <a class="btn btn-link" href="<?= site_url('statistik') ?>">Statistik</a>
+                    <a class="btn btn-link" href="<?= site_url('maps') ?>">Peta</a>
+                    <a class="btn btn-link" href="<?= site_url('first/gallery_youtube') ?>">Video</a>
+                    <a class="btn btn-link" href="<?= site_url('insidega') ?>">Login</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?= $desa['alamat_kantor']; ?></p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><?= $desa['telepon']; ?></p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><?= $desa['email']; ?></p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><?= $desa['email_desa']; ?></p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Gallery</h4>
+                    <h4 class="text-white mb-3"><a class="btn btn-link" href="<?= site_url('first/gallery') ?>">Gallery Foto</a></h4>
                     <div class="row g-2 pt-2">
                         <div class="col-4">
                             <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg")?>" alt="">
@@ -46,11 +46,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Dapatkan update terbaru dari kami</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                <h4 class="text-white mb-3">Pengunjung</h4>
+                    <div class="row g-2 pt-2">
+
+                <?php $this->load->view($folder_themes . '/widgets/statistik_pengunjung') ?>
                     </div>
                 </div>
             </div>
@@ -59,14 +58,17 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#"><?= $this->setting->website_title ?></a>, All Right Reserved.
+                        &copy; <a class="border-bottom" href="#"><?= $this->setting->website_title ?> Versi <?= AmbilVersi() ?> | Tema <?= $this->setting->web_theme ?> <?= THEME_VERSION ?></a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
                             <a href="<?= site_url('') ?>">Home</a>
-                            <a href="http://portal.sthgarut.ac.id">Siakad</a>
-                            <a href="<?= site_url('peta') ?>">Maps</a>
-                            <a href="">FQAs</a>
+                            <a href="<?= site_url('arsip') ?>">Berita</a>
+                            <a href="<?= site_url('statistik') ?>">Statistik</a>
+                            <a href="<?= site_url('maps') ?>">Peta</a>
+                            <a href="<?= site_url('first/gallery_youtube') ?>">Video</a>
+                            <a href="<?= site_url('first/gallery') ?>">Foto</a>
+                            <a href="<?= site_url('insidega') ?>">Login</a>
                         </div>
                     </div>
                 </div>

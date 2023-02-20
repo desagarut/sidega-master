@@ -366,6 +366,79 @@
     border-color: var(--primary);
 }
 
+/*** umkm ***/
+.umkm-carousel::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+}
+
+.umkm-carousel::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .umkm-carousel::before,
+    .umkm-carousel::after {
+        width: 200px;
+    }
+}
+
+@media (min-width: 992px) {
+    .umkm-carousel::before,
+    .umkm-carousel::after {
+        width: 300px;
+    }
+}
+
+.umkm-carousel .owl-item .umkm-text,
+.umkm-carousel .owl-item.center .umkm-text * {
+    transition: .5s;
+}
+
+.umkm-carousel .owl-item.center .umkm-text {
+    background: var(--primary) !important;
+}
+
+.umkm-carousel .owl-item.center .umkm-text * {
+    color: #FFFFFF !important;
+}
+
+.umkm-carousel .owl-dots {
+    margin-top: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.umkm-carousel .owl-dot {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #CCCCCC;
+    transition: .5s;
+}
+
+.umkm-carousel .owl-dot.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+
 
 /*** Footer ***/
 .footer .btn.btn-social {
