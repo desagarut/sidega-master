@@ -9,16 +9,19 @@
       <div class="brands-logo-carousel d-flex align-items-center justify-content-between">
 
         <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>
+          <div class="col-lg-3 col-md-6 col-12">
+
           <div class="row" style="padding:10px 10px 10px 10px">
-            <div class="single-product product-image">
-              <div class="text-center " style="height:250px;">
+            <div class="single-product">
+              <div class="text-center product-image" style="height:270px;">
                 <img src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
               </div>
-              <div class="text-center p-0">
+              <div class="text-center p-0 product-info" >
                 <h6 class="mb-0"><?= $data['nama'] ?></h6>
                 <small><?= strtoupper($data['jabatan']) ?></small>
               </div>
             </div>
+          </div>
           </div>
         <?php endforeach; ?>
       </div>
