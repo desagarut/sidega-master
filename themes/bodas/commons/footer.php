@@ -4,9 +4,9 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Quick Link</h4>
-                    <a class="btn btn-link" href="<?= site_url('arsip') ?>">Berita</a>
-                    <a class="btn btn-link" href="<?= site_url('statistik') ?>">Statistik</a>
-                    <a class="btn btn-link" href="<?= site_url('maps') ?>">Peta</a>
+                    <a class="btn btn-link" href="<?= site_url('first/arsip') ?>">Berita</a>
+                    <a class="btn btn-link" href="<?= site_url('first/statistik') ?>">Statistik</a>
+                    <a class="btn btn-link" href="<?= site_url('first/maps') ?>">Peta</a>
                     <a class="btn btn-link" href="<?= site_url('first/gallery_youtube') ?>">Video</a>
                     <a class="btn btn-link" href="<?= site_url('insidega') ?>">Login</a>
                 </div>
@@ -63,9 +63,9 @@
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
                             <a href="<?= site_url('') ?>">Home</a>
-                            <a href="<?= site_url('arsip') ?>">Berita</a>
-                            <a href="<?= site_url('statistik') ?>">Statistik</a>
-                            <a href="<?= site_url('maps') ?>">Peta</a>
+                            <a href="<?= site_url('first/arsip') ?>">Berita</a>
+                            <a href="<?= site_url('first/statistik') ?>">Statistik</a>
+                            <a href="<?= site_url('first/peta') ?>">Peta</a>
                             <a href="<?= site_url('first/gallery_youtube') ?>">Video</a>
                             <a href="<?= site_url('first/gallery') ?>">Foto</a>
                             <a href="<?= site_url('insidega') ?>">Login</a>
