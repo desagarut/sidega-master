@@ -16,7 +16,7 @@
               <div class="text-center product-image" style="height:270px;">
                 <img src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
               </div>
-              <div class="text-center p-0 product-info" >
+              <div class="text-center p-2 product-info">
                 <h6 class="mb-0"><?= $data['nama'] ?></h6>
                 <small><?= strtoupper($data['jabatan']) ?></small>
               </div>
