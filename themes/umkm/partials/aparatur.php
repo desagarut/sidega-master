@@ -1,14 +1,13 @@
-
-<!-- ======= Our Team Section ======= 
-
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<!--
 <section id="team" class="team section-bg">
   <div class="container">
     <div class="section-title" data-aos="fade-up">
-      <h2>Aparatur <?= ucfirst($this->setting->sebutan_desa)?></h2>
+      <h2>Aparatur <?= ucfirst($this->setting->sebutan_desa) ?></h2>
       <p><i>kami dengan ikhlas mengabdi</i></p>
     </div>
     <div class="row">
-      <?php foreach($aparatur_desa['daftar_perangkat'] as $data) : ?>
+      <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch pull-center owl-carousel">
         <div class="member" data-aos="fade-up" style="width:250px">
           <div class="member-img"> <img src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" width="250px">
@@ -27,10 +26,10 @@
     </div>
   </div>
 </section>
-<!-- End Our Team Section --> 
-
-<link type='text/css' href="<?= base_url()?>assets/front/css/slider.css" rel='Stylesheet' />
-<script src="<?= base_url()?>assets/front/js/jquery.cycle2.caption2.min.js"></script>
+<!-- End Our Team Section -->
+<!--
+<link type='text/css' href="<?= base_url() ?>assets/front/css/slider.css" rel='Stylesheet' />
+<script src="<?= base_url() ?>assets/front/js/jquery.cycle2.caption2.min.js"></script>
 <style type="text/css">
 #aparatur_desa .cycle-pager span
 {
@@ -48,7 +47,7 @@
 	mix-blend-mode: difference;
 }
 </style>
-<!-- widget Aparatur Desa -->
+
 <section>
     <div class="container">
     <div class="row" style="padding-top:30px">
@@ -56,7 +55,7 @@
             <div class="box box-primary box-solid">
             
                 <div class="section-title" style="padding-top:20px">
-                    <h2> Aparatur <?= ucwords($this->setting->sebutan_desa)?></h2></br>
+                    <h2> Aparatur <?= ucwords($this->setting->sebutan_desa) ?></h2></br>
                 </div>
             
                 <div class="box-body">
@@ -70,11 +69,11 @@
                     data-cycle-auto-height=<?= $aparatur_desa['foto_pertama'] ?>
                     >
             
-                    <?php if ($this->web_widget_model->get_setting('aparatur_desa', 'overlay') == true): ?>
+                    <?php if ($this->web_widget_model->get_setting('aparatur_desa', 'overlay') == true) : ?>
                         <div class="cycle-caption"></div>
                         <div class="cycle-overlay"></div>
-                    <?php else: ?>
-                        <span class="cycle-pager"></span>  <!-- Untuk membuat tanda bulat atau link pada slider -->
+                    <?php else : ?>
+                        <span class="cycle-pager"></span>  
                     <?php endif; ?>
             
                     <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>
@@ -89,9 +88,36 @@
             </div>
             </div>
         </div>
-        <div class="col-md-8" data-aos="fade-right" data-aos-delay="300">
-			<?php $this->load->view($folder_themes .'/partials/visimisi') ?>
-        </div>
-    </div>
     </div>
 </section>
+                    -->
+
+<!-- Team Start -->
+<div id="team" class="team section-bg">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2 style="padding-top:20px">Aparatur <?= ucfirst($this->setting->sebutan_desa) ?></h2>
+    </div>
+    <div class="brands-logo-wrapper">
+      <div class="brands-logo-carousel d-flex align-items-center justify-content-between">
+
+        <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="brand-logo text-center" style="padding-top:10px; height:270px;">
+                <img src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="width:auto; max-height:250px">
+              </div>
+              <div class="text-center p-0">
+                <h6 class="mb-0"><?= $data['nama'] ?></h6>
+                <small><?= strtoupper($data['jabatan']) ?></small>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Team End -->
