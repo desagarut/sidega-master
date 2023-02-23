@@ -1,6 +1,9 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v5.7/mapsJavaScriptAPI.js" async defer></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=<?= $this->setting->google_key; ?>&callback=initMap&v=weekly"
+      defer
+    ></script>
 
 <script>
 var PetaDesa

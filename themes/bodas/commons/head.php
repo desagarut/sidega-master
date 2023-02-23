@@ -7,7 +7,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V4.7') ?>
+    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V4.8') ?>
 
     <?php $kampus_title = trim(ucwords($this->setting->website_title)); ?>
 
@@ -39,7 +39,7 @@
 
     <?php else : ?>
         <title><?php $tmp = ltrim(get_dynamic_title_page_from_path(), ' -');
-                echo (trim($tmp) == '') ? $kampus_title : "$tmp - $kampus_title"; ?></title>
+                echo (trim($tmp) == '') ? $website_title : "$tmp - $website_title"; ?></title>
         <meta name='description' content="<?= $this->setting->website_title . ' ' . $kampus_title; ?>" />
         <meta property="og:title" content="<?= $kampus_title; ?>" />
         <meta property='og:description' content="<?= $this->setting->website_title . ' ' . $kampus_title; ?>" />

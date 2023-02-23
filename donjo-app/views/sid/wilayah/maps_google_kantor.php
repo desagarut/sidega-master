@@ -1,6 +1,12 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-<script src="<?= base_url()?>assets/js/mapsJavaScriptAPI.js"></script>
+
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=<?= $this->setting->google_key; ?>&callback=initMap&v=weekly"
+      defer
+    ></script>
+
 
 <script>
 <?php if (!empty($wil_ini['lat'] && !empty($wil_ini['lng']))): ?>
