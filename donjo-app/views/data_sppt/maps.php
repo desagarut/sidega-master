@@ -1,9 +1,10 @@
+<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<!--<script src="<?= base_url()?>assets/js/mapsJavaScriptAPI.js"></script>-->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=<?= $this->setting->google_key; ?>&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly"
       defer
     ></script>
-
 
 <script>
 <?php if (!empty($lokasi_op['lat'] && !empty($lokasi_op['lng']))): ?>
