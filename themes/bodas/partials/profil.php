@@ -83,7 +83,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                             <div class="service-item text-center pt-3">
                                 <div class="p-4">
                                     <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
-                                    <h5 class="mb-3"><?= number_format($penduduk, 0, '', '.') ?></h5>
+                                    <h5 class="mb-3"><?= number_format($keluarga, 0, '', '.') ?></h5>
                                     <p>Kepala Keluarga</br>
                                         L : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</br>
                                         P : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)
