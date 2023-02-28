@@ -3,8 +3,8 @@
 <div class="container-xxl py-5">
   <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-      <h6 class="section-title bg-white text-center text-primary px-3">Gallery Video</h6>
-      <h1 class="mb-5"><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?></h1>
+      <h6 class="section-title bg-white text-center text-primary px-3">Gallery</h6>
+      <h1 class="mb-5">Video</h1>
     </div>
     <div class="row g-4 justify-content-center">
       <?php foreach ($gallery as $data) : ?>

@@ -4,7 +4,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4 owl-carousel testimonial-carousel position-relative">
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.1s">
                 <a href="https://siskeudes-garutkab.simdacloud.id/" target="_blank">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -14,7 +14,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.3s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.3s">
                 <a href="https://sisalsa-garutkab.smartvillage.info/index.php/auth/login">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -24,7 +24,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.5s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.5s">
                 <a href="https://sitanti-garutkab.smartvillage.info/">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -34,7 +34,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="https://djponline.pajak.go.id/account/login">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -44,7 +44,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="https://djponline.pajak.go.id/account/login">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -54,7 +54,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="https://djponline.pajak.go.id/account/login">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -64,7 +64,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="<?= site_url('first/tawa') ?>">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -74,7 +74,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="<?= site_url('first/tukang') ?>">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -84,7 +84,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="<?= site_url('first/wisata') ?>">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
@@ -94,7 +94,7 @@
                     </div>
                 </a>
             </div>
-            <div class="wow fadeInUp testimonial-item text-center" data-wow-delay="0.7s">
+            <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
                 <a href="<?= site_url('first/toko_warga') ?>">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
