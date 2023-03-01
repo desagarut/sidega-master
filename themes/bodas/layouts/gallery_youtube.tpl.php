@@ -11,6 +11,10 @@
   <div class="container-xxl py-5">
     <div class="row">
       <div class="col-md-8 entries">
+        <div class="text-start wow fadeInUp" data-wow-delay="0.1s">
+          <h1 class="mb-5">video</h1>
+        </div>
+
         <?php $this->load->view($folder_themes . '/partials/gallery_youtube') ?>
       </div>
       <div class="col-md-4">

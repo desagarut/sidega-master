@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<?php $abstract = potong_teks($headline['isi'], 150); ?>
+<?php $abstract = potong_teks($headline['isi'], 250); ?>
 <?php $url = site_url('artikel/' . buat_slug($headline)); ?>
 <?php $image = ($headline['gambar'] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $headline['gambar'])) ?
     AmbilFotoArtikel($headline['gambar'], 'sedang') :
@@ -24,7 +24,7 @@
                 <h6 class="section-title bg-white text-start text-primary pe-3">Sorotan</h6>
                 <h1 class="mb-4"><?= $headline['judul'] ?></h1>
                 <p class="mb-4"><?= $abstract ?></p>
-                <div class="row gy-2 gx-4 mb-4">
+                <!--<div class="row gy-2 gx-4 mb-4">
                     <div class="col-sm-6">
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
                     </div>
@@ -43,10 +43,10 @@
                     <div class="col-sm-6">
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
                     </div>
-                </div>
+                </div>-->
                 <?= tgl_indo($article['tgl_upload']) ?> - <?= $article['owner'] ?><br />
-                <a class="btn btn-primary py-3 px-5 mt-2" href="<?= $url ?>">Selengkapnya</a>
-                <a class="btn btn-warning py-3 px-5 mt-2" href="<?= site_url('arsip') ?>">Semua Berita</a>
+                <a class="btn btn-warning py-3 px-5 mt-2" style="border-radius: 30px 0 0 30px;" href="<?= $url ?>">Baca</a>
+                <a class="btn btn-primary py-3 px-5 mt-2" style="border-radius: 0 30px 30px 0;" href="<?= site_url('arsip') ?>">Semua Berita</a>
 
             </div>
         </div>
