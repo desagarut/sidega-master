@@ -11,7 +11,7 @@
                 <div class="col-md-10 wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" style="object-fit: cover; height:500px" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
+                            <img class="img-fluid" style="object-fit: cover; max-height:500px" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
