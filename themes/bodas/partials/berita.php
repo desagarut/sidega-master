@@ -15,9 +15,9 @@
         </div>
 
         <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp shadow" data-wow-delay="0.1s" style="min-height: 400px;">
+            <div class="col-lg-6 wow fadeInUp shadow" data-wow-delay="0.1s" style="height: 300px;">
                 <div class="position-relative h-100">
-                    <img class="img-fluid position-absolute w-100 h-100" src="<?= $image ?>" alt="" style="object-fit: cover;">
+                    <img class="img-fluid position-absolute w-100 h-100" src="<?= $image ?>" alt="<?= $headline['judul'] ?>" style="object-fit: content;">
                 </div>
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -50,8 +50,7 @@
 
             </div>
         </div>
-        <div class="row g-5">
-
+        <div class="row py-2">
             <?php $this->load->view($folder_themes . '/partials/artikel_single') ?>
         </div>
     </div>
