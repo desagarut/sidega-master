@@ -95,7 +95,7 @@
                 </a>
             </div>
             <div class="wow fadeInUp testimonial-item text-center shadow" data-wow-delay="0.7s">
-                <a href="<?= site_url('first/toko_warga') ?>">
+                <a href="<?= site_url('first/toko_show') ?>">
                     <div class="service-item text-center pt-3">
                         <div class="p-4">
                         <img src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/toko.png")?>" class="p-0 mx-auto mb-0" style="width: 100px; height: 100px;"><br>
