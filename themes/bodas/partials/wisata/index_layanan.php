@@ -4,7 +4,7 @@
 <div class="container-xxl py-5">
   <div class="container">
   <div class="text-start wow fadeInUp" data-wow-delay="0.1s">
-      <h3 class="mb-5"><a href="<?= site_url('first/tukang')?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">
+      <h3 class="mb-5"><a href="<?= site_url('first/wisata')?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">
       <i class="fa fa-backward"></i>   Kembali</a></h3>
     </div>
     <div class="row shadow">
@@ -22,7 +22,7 @@
 
       <div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
         <div class="product-info">
-          <h4 class="title"> <a href="<?= site_url('first/tawa_layanan/' . $sub['id']) ?>">
+          <h4 class="title"> <a href="<?= site_url('first/wisata_fasilitas/' . $sub['id']) ?>">
               <?= $sub['nama'] ?>
             </a> </h4>
           <!--<ul class="review">
@@ -74,7 +74,7 @@
           <?php foreach ($tawa_layanan as $album) : ?>
             <?php if (is_file(LOKASI_GALERI . "sedang_" . $album['gambar'])) : ?>
               <?php $link = site_url('first/tawa_layanan/' . $album['id']) ?>
-              <div class="col-lg-3 col-md-3 col-sm-2 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="col-lg-3 col-md-3 col-sm-2 wow fadeInUp shadow" data-wow-delay="0.1s">
                 <div class="course-item bg-light">
                   <div class="position-relative overflow-hidden">
                     <img class="img-fluid" src="<?= AmbilGaleri($album['gambar'], 'sedang') ?>" alt="<?= $album['nama'] ?>">
