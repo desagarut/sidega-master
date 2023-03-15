@@ -6,7 +6,7 @@
                     <h4 class="text-white mb-3">Quick Link</h4>
                     <a class="btn btn-link" href="<?= site_url('first/arsip') ?>">Berita</a>
                     <a class="btn btn-link" href="<?= site_url('first/statistik') ?>">Statistik</a>
-                    <a class="btn btn-link" href="<?= site_url('first/maps') ?>">Peta</a>
+                    <a class="btn btn-link" href="<?= site_url('first/peta') ?>">Peta</a>
                     <a class="btn btn-link" href="<?= site_url('first/gallery_youtube') ?>">Video</a>
                     <a class="btn btn-link" href="<?= site_url('insidega') ?>">Login</a>
                 </div>
@@ -94,3 +94,7 @@
     <script src="<?= base_url("$this->theme_folder/$this->theme/assets/lib/lightbox/js/lightbox.min.js")?>"></script>
     <!-- Template Javascript -->
     <script src="<?= base_url("$this->theme_folder/$this->theme/assets/js/main.js")?>"></script>
+
+    <script src="<?= base_url('assets/bootstrap/js/jquery.min.js')?>"></script>
+    <script src="<?= base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
+   <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/bootstrap.min.css")?>">

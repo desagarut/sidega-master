@@ -178,6 +178,9 @@ class First extends Web_Controller {
 		$data['title'] = ucwords($data['single_artikel']['judul']);
 		$data['detail_agenda'] = $this->first_artikel_m->get_agenda($id);//Agenda
 		$data['komentar'] = $this->first_artikel_m->list_komentar($id);
+		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show();
+		$data['gallery'] = $this->first_gallery_m->gallery_show();
+
 		$this->_get_common_data($data);
 
 		// Validasi pengisian komentar di add_comment()
@@ -200,6 +203,9 @@ class First extends Web_Controller {
 		$data['p'] = $p;
 		$data['paging'] = $this->first_artikel_m->paging_arsip($p);
 		$data['farsip'] = $this->first_artikel_m->full_arsip($data['paging']->offset,$data['paging']->per_page);
+		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
+		$data['gallery'] = $this->first_gallery_m->gallery_show($data['paging']->offset, $data['paging']->per_page);
+
 
 		$this->_get_common_data($data);
 

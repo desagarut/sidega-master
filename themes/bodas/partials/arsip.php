@@ -1,12 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!-- Courses Start -->
-<div class="container-xxl py-5">
-	<div class="container">
-		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			<h6 class="section-title bg-white text-center text-primary px-3">Blog</h6>
-			<h1 class="mb-5">Arsip Artikel</h1>
-		</div>
+<!--<div class="container-xxl py-5">
+	<div class="container">-->
+		<!--<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			<h6 class="section-title bg-white text-center text-primary px-3">artikel</h6>
+			<h1 class="mb-5">Arsip</h1>
+		</div>-->
+
 		<div class="row g-4 justify-content-center">
 			<?php if (count($farsip) > 0) : ?>
 				<?php foreach ($farsip as $data) : ?>
@@ -38,5 +39,5 @@
 			<?php endif; ?>
 
 		</div>
-	</div>
-</div>
+<!--	</div>
+</div>-->

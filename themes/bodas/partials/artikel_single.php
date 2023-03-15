@@ -16,9 +16,9 @@
 				<div class="course-item bg-light">
 					<div class="position-relative overflow-hidden text-center">
 						<?php if ($article['gambar']) : ?>
-							<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['judul'] ?>">
-						<?php else : ?>
-							<img class="img-fluid" src="<?= base_url() ?>themes/kampus/assets/img/noimage.png" alt="Belum Ada Gambar">
+							<img class="img-fluid" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Belum Ada Gambar">
+							<?php else : ?>
+								<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['judul'] ?>">
 						<?php endif; ?>
 
 						<div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">

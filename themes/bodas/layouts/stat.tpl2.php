@@ -33,37 +33,26 @@
 
       <div class="row g-5 justify-content-center">
         <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.3s">
-          <?php
-          switch ($tipe) {
-            case '0':
-              $page = '/partials/statistics/statistik';
-              break;
-            case '2':
-              $page = '/partials/statistics/wilayah';
-              break;
-            case '3':
-              $page = '/partials/statistics/regions';
-              break;
-            case '4':
-              $page = '/partials/statistics/dpt';
-            default:
-              $page = '/commons/404';
-              break;
-          }
-          ?>
-          <?php $this->load->view($folder_themes . $page) ?>
+          <?php if ($tipe == 2) : ?>
+            <?php $this->load->view($folder_themes . '/partials/statistik_sos.php'); ?>
+          <?php elseif ($tipe == 3) : ?>
+            <?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistics/wilayah.php')); ?>
+          <?php elseif ($tipe == 4) : ?>
+            <?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistics/dpt.php')); ?>
+          <?php else : ?>
+            <?php $this->load->view(Web_Controller::fallback_default($this->theme, '/partials/statistik.php')); ?>
+          <?php endif; ?>
         </div>
-        <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.7s">
+
+        <div class="col-lg-4 col-md-4 custom-padding-left">
           <div class="row">
             <?php $this->load->view($folder_themes . '/widgets/sidebar_statistik.php') ?>
           </div>
         </div>
       </div>
     </div>
+    <?php $this->load->view($folder_themes . '/commons/footer') ?>
   </div>
-  </div>
-  <?php $this->load->view($folder_themes . '/commons/footer') ?>
-
 </body>
 
 </html>

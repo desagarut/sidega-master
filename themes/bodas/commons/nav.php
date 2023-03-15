@@ -6,7 +6,7 @@
     
         <h2 class="m-0 text-primary">
             <a href="<?= site_url('first') ?>" >
-                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:58px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>"> 
+                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:30px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>"> 
                 <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
             </a>
         </h2>
@@ -16,7 +16,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="<?= site_url('first') ?>" class="nav-item nav-link active">Home</a>
+            <!--<a href="<?= site_url('first') ?>" class="nav-item nav-link active">Home</a>-->
             <?php if (menu_atas) : ?>
                 <?php foreach ($menu_atas as $menu) : ?>
 
