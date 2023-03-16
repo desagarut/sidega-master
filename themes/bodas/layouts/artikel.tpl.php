@@ -34,9 +34,8 @@
                 </div>
             </div>
         </div>
-
-        <?php $this->load->view($folder_themes . '/commons/footer') ?>
     </div>
+    <?php $this->load->view($folder_themes . '/commons/footer') ?>
 </body>
 
 </html>
