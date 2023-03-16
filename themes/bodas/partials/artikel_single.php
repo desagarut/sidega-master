@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="text-center p-4 pb-0">
-						<h5 class="mb-4"><?= $article['judul'] ?></h5>
+						<h5 class="mb-4"><a href="<?= site_url('artikel/' . buat_slug($article)) ?>"><?= $article['judul'] ?></a></h5>
 					</div>
 					<div class="text-justify" style="padding-left: 15px; padding-right:15px;">
 						<p><?= potong_teks($article['isi'], 100) ?></p>
