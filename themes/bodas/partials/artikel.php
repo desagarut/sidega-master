@@ -5,10 +5,10 @@
 		<main id="gallery">
 			<div class="main-img text-center">
 				<?php if ($article['gambar']) : ?>
-					<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar'], 'sedang') ?>" alt="<?= $article['judul'] ?>" id="current">
+					<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['judul'] ?>">
 				<?php else : ?>
-					<img class="img-fluid" src="<?= base_url() ?>themes/kampus/assets/img/noimage.png" alt="Belum Ada Gambar">
-				<?php endif ?>
+					<img class="img-fluid" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Belum Ada Gambar">
+				<?php endif; ?>
 			</div>
 		</main>
 	</div>
