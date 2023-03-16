@@ -10,7 +10,7 @@ fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- Your share button code -->
-<div class="fb-share-button" 
-data-href="<?= $link; ?>" 
-data-layout="button_count">
+<div class="row"><h6>Bagikan artikel di: </h6>
+<div class="fb-share-button" data-href="<?= $link; ?>" data-layout="button_count"></div>
+<a href="https://api.whatsapp.com/send?text=<?= $link; ?>" target="_blank" rel="nofollow noopener" class="button btn-default"><i class="fab fa-whatsapp" style="color:green"></i>&nbsp;WhatsApp</a>
 </div>
