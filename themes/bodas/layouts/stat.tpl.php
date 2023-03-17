@@ -5,7 +5,7 @@
 <?php $this->load->view($folder_themes . '/commons/head') ?>
 
 <body>
-  <?php $this->load->view($folder_themes . '/commons/spinner.php')
+  <?php //$this->load->view($folder_themes . '/commons/spinner.php')
   ?>
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
 
@@ -33,7 +33,20 @@
 
       <div class="row g-5 justify-content-center">
         <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.3s">
-          <?php
+
+        <?php if ($tipe == 2): ?>
+          <?php $this->load->view("$folder_themes/partials/statistik_sos"); ?>
+        <?php elseif ($tipe == 3): ?>
+          <?php $this->load->view("$folder_themes/partials/statistik/wilayah"); ?>
+        <?php elseif ($tipe == 4): ?>
+          <?php $this->load->view("$folder_themes/partials/statistik/dpt"); ?>
+        <?php else: ?>
+          <?php $this->load->view("$folder_themes/partials/statistik/statistik"); ?>
+        <?php endif; ?>
+
+
+
+          <?php /*
           switch ($tipe) {
             case '0':
               $page = '/partials/statistics/statistik';
@@ -50,8 +63,8 @@
               $page = '/commons/404';
               break;
           }
-          ?>
-          <?php $this->load->view($folder_themes . $page) ?>
+         */ ?>
+          <?php //$this->load->view($folder_themes . $page) ?>
         </div>
         <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.7s">
           <div class="row">
