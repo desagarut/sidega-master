@@ -199,7 +199,6 @@ class First extends Web_Controller
 		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
 		$data['gallery'] = $this->first_gallery_m->gallery_show($data['paging']->offset, $data['paging']->per_page);
 
-
 		$this->_get_common_data($data);
 
 		$this->set_template('layouts/arsip.tpl.php');

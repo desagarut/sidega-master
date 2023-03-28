@@ -1,10 +1,6 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-<!--<script src="<?= base_url()?>assets/js/mapsJavaScriptAPI.js"></script>-->
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly"
-      defer
-    ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly" defer></script>
 
 <script>
   var map
@@ -65,22 +61,22 @@
 
 <!-- widget Peta Wilayah Desa -->
 
-  <div class="box box-primary box-solid no-padding">
-    <div class="box-header">
-      <h3 class="box-title">Kependudukan</h3>
-      <div class="box-tools pull-right"> <a href="<?= site_url() ?>gis/clear"><span class="label label-danger">Buka peta</span></a>
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
-    </div>
-    <div class="box-body">
-      <div class='row'>
-        <div class="pad">
-          <div id="map-wilayah-desa" style="height: 275px"></div>
-        </div>
-      </div>
-      &nbsp;
-      <div class="row">
-        <?php $this->load->view('home/kependudukan.php'); ?>
-      </div>
+<div class="box box-primary box-solid no-padding">
+  <div class="box-header">
+    <h3 class="box-title">Kependudukan</h3>
+    <div class="box-tools pull-right"> <a href="<?= site_url() ?>gis/clear"><span class="label label-danger">Buka peta</span></a>
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
   </div>
+  <div class="box-body">
+    <div class='row'>
+      <div class="pad">
+        <div id="map-wilayah-desa" style="height: 275px"></div>
+      </div>
+    </div>
+    &nbsp;
+    <div class="row">
+      <?php $this->load->view('home/kependudukan.php'); ?>
+    </div>
+  </div>
+</div>

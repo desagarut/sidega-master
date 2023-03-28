@@ -22,8 +22,6 @@
 
                     <div class="nav-item dropdown">
                         <a href="<?= $menu['link'] ?>" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?= $menu['nama'] ?></a>
-                        <?php if (count($menu['submenu']) > 0) : ?>
-                        <?php endif ?>
 
                         <?php if (count($menu['submenu']) > 0) : ?>
                             <div class="dropdown-menu fade-down m-0">
