@@ -22,7 +22,7 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="nama">Nama Video</label>
 								<div class="col-sm-6">
-									<input name="nama" class="form-control input-sm nomor_sk" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
+									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">

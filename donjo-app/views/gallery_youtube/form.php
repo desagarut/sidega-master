@@ -21,7 +21,7 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="nama">Nama Playlist</label>
 								<div class="col-sm-6">
-									<input name="nama" class="form-control input-sm nomor_sk" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
+									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">
@@ -30,7 +30,7 @@
 									<div class="box-body text-center">
 										<iframe height="160px" width="250px" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $gallery["link"]; ?>" title="<?= $gallery['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 									</div>
-									<input name="link" class="form-control input-sm nomor_sk" maxlength="100" type="text" value="<?= $gallery['link'] ?>"></input>
+									<input name="link" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['link'] ?>"></input>
 									<code>masukan kode embed video, Contoh: 7APs5ZduJ-0</code>
 								</div>
 							</div>
