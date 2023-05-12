@@ -2,7 +2,6 @@
 
 <head>
     <meta charset="utf-8">
-    <!--<title>eLEARNING - eLearning HTML Template</title>-->
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -26,21 +25,44 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 
-    <title>
-        <?php if ($single_artikel["judul"] == "") : ?>
-            <?= $this->setting->website_title . ' ' .  $desa_title; ?>
-        <?php else : ?>
-            <?= $single_artikel["judul"] . ' - ' . ucwords($this->setting->sebutan_desa) . ' ' . $desa['nama_desa']; ?>
+    <?php if (isset($single_artikel)) : ?>
+
+        <title><?= $single_artikel["judul"] ?> - <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></title>
+
+        <meta name='description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
+
+        <meta property="og:title" content="<?= $single_artikel["judul"]; ?>" />
+
+        <?php if (trim($single_artikel['gambar']) != '') : ?>
+
+            <meta property="og:image" content="<?= base_url() ?><?= LOKASI_FOTO_ARTIKEL ?>sedang_<?= $single_artikel['gambar']; ?>" />
+
         <?php endif; ?>
-    </title>
-    
-    <?php $favicon = LOKASI_LOGO_DESA . 'favicon.ico'; ?>
-    <link rel="shortcut icon" href="<?= base_url(is_file($favicon) ? $favicon : 'favicon.ico') ?>" />
+
+        <meta property='og:description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
+
+    <?php else : ?>
+
+        <title><?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?> <?= ucfirst($this->setting->sebutan_kecamatan_singkat).' '.ucwords($desa['nama_kecamatan']) ?> <?= ucfirst($this->setting->sebutan_kabupaten_singkat).' '.ucwords($desa['nama_kabupaten']) ?></title>
+
+        <meta name='description' content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+
+        <meta property="og:title" content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+
+        <meta property='og:description' content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+
+    <?php endif; ?>
+
+
+    <?php if (is_file(LOKASI_LOGO_DESA . "favicon.ico")) : ?>
+        <link rel="shortcut icon" href="<?= base_url() . LOKASI_LOGO_DESA ?>favicon.ico" />
+    <?php else : ?>
+        <link rel="shortcut icon" href="<?= base_url('favicon.ico') ?>" />
+    <?php endif; ?>
 
     <script>
         const BASE_URL = '<?= base_url() ?>';
     </script>
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
