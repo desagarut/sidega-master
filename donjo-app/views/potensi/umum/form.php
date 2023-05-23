@@ -27,7 +27,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;">Tahun Pembentukan</label>
 										<div class="col-sm-2">
-											<input maxlength="4" class="form-control input-sm required" name="tahun_pembentukan" id="tahun_pembentukan" value="<?= $main->tahun_pembentukan ?>" type="text" placeholder="" />
+											<input maxlength="10" class="form-control input-sm required" name="tahun_pembentukan" id="tahun_pembentukan" value="<?= $main->tahun_pembentukan ?>" type="text" placeholder="" />
 										</div>
 									</div>
 									<div class="form-group">

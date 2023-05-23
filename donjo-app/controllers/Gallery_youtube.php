@@ -96,7 +96,7 @@ class Gallery_youtube extends Admin_Controller {
 	public function insert()
 	{
 		$this->web_gallery_youtube_model->insert();
-		redirect('gallery');
+		redirect('gallery_youtube');
 	}
 
 	public function update($id='', $p=1, $o=0)
