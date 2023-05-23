@@ -8,7 +8,7 @@
         <?php if (is_file(LOKASI_GALERI . "sedang_" . $album['gambar'])) : ?>
           <?php $link = AmbilGaleri($album['gambar'], 'sedang') ?>
           <div class="portfolio-description shadow" style="padding:10px 10px 10px 10px">
-            <img src="<?= AmbilGaleri($album['gambar'], 'sedang') ?>" class="img-fluid" alt="<?= $album['nama'] ?>" style="width:100%; height:100%">
+            <img src="<?= AmbilGaleri($album['gambar'], 'sedang') ?>" class="img-fluid" alt="<?= $album['nama'] ?>" style="width:100%; max-height: 550px; fit:content">
             <div class="portfolio-info container">
               <h3>
                 <small>Judul:</small> <?= $album['nama'] ?>
