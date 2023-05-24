@@ -60,7 +60,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                     <?= ucwords($this->setting->profil_singkat . " " . $desa['profil_singkat']) ?>
                 </div>
                 <?php if ($setting_desa['video']) : ?>
-                <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.7s" style="height: 350px;">
+                <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.7s" style="height: 350px; padding-top:20px">
                     <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <?php endif ?>
