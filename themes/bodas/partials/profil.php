@@ -58,68 +58,70 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                     </ul>
                     <br />
                     <?= ucwords($this->setting->profil_singkat . " " . $desa['profil_singkat']) ?>
-                    <br /><br />
-                    <a class="button btn btn-warning" href="<?= $url ?>"> <i class="lni lni-pen"></i> Selengkapnya</a>
                 </div>
-            </div>
+                <?php if ($setting_desa['video']) : ?>
+                <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.7s" style="height: 350px;">
+                    <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/<?= $setting_desa["video"]; ?>" title="Profil Desa" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <?php endif ?>
 
-            <!-- Service Start -->
-            <div class="container-xxl py-5">
-                <div class="container">
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="service-item text-center pt-3">
-                                <div class="p-4">
-                                    <i class="fa fa-3x fa-users text-primary mb-4"></i>
-                                    <h5 class="mb-3"><?= number_format($penduduk, 0, '', '.') ?></h5>
-                                    <p> Penduduk</br>
-                                        L : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</br>
-                                        P : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)
-                                    </p>
+                <!-- Service Start -->
+                <div class="container-xxl py-5">
+                    <div class="container">
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="service-item text-center pt-3">
+                                    <div class="p-4">
+                                        <i class="fa fa-3x fa-users text-primary mb-4"></i>
+                                        <h5 class="mb-3"><?= number_format($penduduk, 0, '', '.') ?></h5>
+                                        <p> Penduduk</br>
+                                            L : <?= number_format($penduduk_laki, 0, '', '.') ?> ( <?= number_format($penduduk_laki / $penduduk * 100, 0, '', '.') ?>% )</br>
+                                            P : <?= number_format($penduduk_perempuan, 0, '', '.') ?> ( <?= number_format($penduduk_perempuan / $penduduk * 100, 0, '', '.') ?>%)
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="service-item text-center pt-3">
-                                <div class="p-4">
-                                    <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
-                                    <h5 class="mb-3"><?= number_format($keluarga, 0, '', '.') ?></h5>
-                                    <p>Kepala Keluarga</br>
-                                        L : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</br>
-                                        P : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)
-                                    </p>
+                            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="service-item text-center pt-3">
+                                    <div class="p-4">
+                                        <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
+                                        <h5 class="mb-3"><?= number_format($keluarga, 0, '', '.') ?></h5>
+                                        <p>Kepala Keluarga</br>
+                                            L : <?= number_format($keluarga_laki, 0, '', '.') ?> ( <?= number_format($keluarga_laki / $keluarga * 100, 0, '', '.') ?>% )</br>
+                                            P : <?= number_format($keluarga_perempuan, 0, '', '.') ?> ( <?= number_format($keluarga_perempuan / $keluarga * 100, 0, '', '.') ?>%)
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="service-item text-center pt-3">
-                                <div class="p-4">
-                                    <i class="fa fa-3x fa-home text-primary mb-4"></i>
-                                    <h5 class="mb-3"><?= number_format($rtm, 0, '', '.') ?></h5>
-                                    <p>Bangunan Rumah Tangga</br>
-                                        Layak : <?= number_format($rtm, 0, '', '.') ?> ( <?= number_format($rtm / $rtm * 100, 0, '', '.') ?>% )</br>
-                                        Tidak Layak : <?= number_format($rtm_no, 0, '', '.') ?> ( <?= number_format($rtm_no / $rtm * 100, 0, '', '.') ?>%)
-                                    </p>
+                            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="service-item text-center pt-3">
+                                    <div class="p-4">
+                                        <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                                        <h5 class="mb-3"><?= number_format($rtm, 0, '', '.') ?></h5>
+                                        <p>Bangunan Rumah Tangga</br>
+                                            Layak : <?= number_format($rtm, 0, '', '.') ?> ( <?= number_format($rtm / $rtm * 100, 0, '', '.') ?>% )</br>
+                                            Tidak Layak : <?= number_format($rtm_no, 0, '', '.') ?> ( <?= number_format($rtm_no / $rtm * 100, 0, '', '.') ?>%)
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                            <div class="service-item text-center pt-3">
-                                <div class="p-4">
-                                    <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
-                                    <h5 class="mb-3"><?= number_format($id, 0, '', '.') ?></h5>
-                                    <p>Pelayanan Surat Menyurat</br>
-                                        Warga : <?= number_format($id, 0, '', '.') ?> ( <?= number_format($id / $id * 100, 0, '', '.') ?>% )</br>
-                                        Non Warga : <?= number_format($id_no, 0, '', '.') ?> ( <?= number_format($id_no / $id * 100, 0, '', '.') ?>%)
-                                    </p>
+                            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                                <div class="service-item text-center pt-3">
+                                    <div class="p-4">
+                                        <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                                        <h5 class="mb-3"><?= number_format($id, 0, '', '.') ?></h5>
+                                        <p>Pelayanan Surat Menyurat</br>
+                                            Warga : <?= number_format($id, 0, '', '.') ?> ( <?= number_format($id / $id * 100, 0, '', '.') ?>% )</br>
+                                            Non Warga : <?= number_format($id_no, 0, '', '.') ?> ( <?= number_format($id_no / $id * 100, 0, '', '.') ?>%)
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Service End -->
             </div>
-            <!-- Service End -->
         </div>
     </div>
-</div>
-<!-- Categories Start -->
+    <!-- Categories Start -->
