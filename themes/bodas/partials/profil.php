@@ -67,7 +67,6 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
 
                 <!-- Service Start -->
                 <div class="container-xxl py-5">
-                    <div class="container">
                         <div class="row g-4">
                             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="service-item text-center pt-3">
@@ -118,7 +117,6 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <!-- Service End -->
             </div>
