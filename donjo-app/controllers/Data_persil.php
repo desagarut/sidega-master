@@ -1,35 +1,20 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-
-
 class Data_persil extends Admin_Controller {
 
-
-
 	private $set_page;
-
 	private $list_session;
-
-
 
 	public function __construct()
 
 	{
 
 		parent::__construct();
-
-
-
 		$this->load->model(['config_model', 'data_persil_model', 'letterc_model', 'penduduk_model', 'pamong_model']);
-
 		$this->controller = 'data_persil';
-
 		$this->modul_ini = 7;
-
 		$this->sub_modul_ini = 213;
-
 		$this->set_page = ['20', '50', '100'];
-
 		$this->list_session = ['lokasi', 'tipe', 'kelas', 'dusun', 'rw', 'rt', 'cari'];
 
 	}
@@ -78,7 +63,7 @@ class Data_persil extends Admin_Controller {
 
 	{
 
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->tab_ini = 13;
 
@@ -214,7 +199,7 @@ class Data_persil extends Admin_Controller {
 
 	{
 
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->tab_ini = 13;
 

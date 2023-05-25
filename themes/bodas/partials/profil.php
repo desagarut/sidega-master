@@ -122,4 +122,5 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
             </div>
         </div>
     </div>
+</div>
     <!-- Categories Start -->

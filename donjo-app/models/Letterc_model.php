@@ -214,6 +214,9 @@ class Letterc_model extends CI_Model {
 		$data['jenis_pemilik'] = $this->input->post('jenis_pemilik');
 		$data['nama_pemilik_luar'] = nama($this->input->post('nama_pemilik_luar'));
 		$data['alamat_pemilik_luar'] = strip_tags($this->input->post('alamat_pemilik_luar'));
+		/* Upload Dokumen Letter C */
+		$data['dokumen'] = $this->input->post('dokumen');
+		
 		if ($id_letterc = $this->input->post('id'))
 		{
 			$data_lama = $this->db->where('id', $id_letterc)

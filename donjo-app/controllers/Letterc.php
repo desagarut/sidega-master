@@ -42,7 +42,7 @@ class Letterc extends Admin_Controller {
 	{
 		$this->sub_modul_ini = 12;
 		$this->tab_ini = 12;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$data['cari'] = isset($_SESSION['cari']) ? $_SESSION['cari'] : '';
 		$_SESSION['per_page'] = $_POST['per_page'] ?: null;
@@ -61,7 +61,8 @@ class Letterc extends Admin_Controller {
 
 	public function rincian($id)
 	{
-		$this->tab_ini = 13;
+		$this->sub_modul_ini = 12;
+		$this->tab_ini = 12;
 		$data = array();
 		$data['letterc'] = $this->letterc_model->get_letterc($id);
 		$data['pemilik'] = $this->letterc_model->get_pemilik($id);
@@ -88,8 +89,9 @@ class Letterc extends Admin_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
 
-		$this->set_minsidebar(1);		
-		$this->tab_ini = empty($mode) ? 10 : 12;
+		$this->set_minsidebar(0);		
+		$this->tab_ini = 12;
+		//$this->tab_ini = empty($mode) ? 10 : 12;
 
 		$post = $this->input->post();
 		$data = array();
@@ -192,7 +194,9 @@ class Letterc extends Admin_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
 
-		$this->set_minsidebar(1);
+		$this->sub_modul_ini = 12;
+		$this->tab_ini = 12;
+		$this->set_minsidebar(0);
 		if (empty($id_persil)) $id_persil = $this->input->post('id_persil');
 
 		if ($id_persil)
@@ -267,7 +271,7 @@ class Letterc extends Admin_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 		$this->tab_ini = 15;
 		$nav['act'] = 7;
 		$this->render('data_persil/panduan');
