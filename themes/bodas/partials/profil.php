@@ -22,7 +22,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                     <a class="position-relative d-block overflow-hidden" href="">
                         <img class="img-fluid" src="<?= gambar_desa($desa['kantor_desa']) ?>" style="height:350px; width:100%" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>">
                         <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                            <h5 class="m-0">Wilayah</h5>
+                            <h5 class="m-0">Kantor</h5>
                             <small class="text-primary"><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?></small>
                         </div>
                     </a>
