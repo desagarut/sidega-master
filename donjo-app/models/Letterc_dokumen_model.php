@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pembangunan_dokumentasi_model extends CI_Model
+class Letterc_dokumen_model extends CI_Model
 {
-	protected $table = 'pembangunan_ref_dokumentasi';
+	protected $table = 'letterc_dokumen';
 
 	const ORDER_ABLE = [
 		3 => 'CAST(d.persentase as UNSIGNED INTEGER)',
@@ -16,8 +16,8 @@ class Pembangunan_dokumentasi_model extends CI_Model
 			'd.*',
 		])
 		->from("{$this->table} d")
-		->join('pembangunan p', 'd.id_pembangunan = p.id')
-		->where('d.id_pembangunan', $id);
+		->join('letterc p', 'd.id_letterc = p.id')
+		->where('d.id_letterc', $id);
 
 		if (empty($search))
 		{
@@ -34,12 +34,12 @@ class Pembangunan_dokumentasi_model extends CI_Model
 		return $condition;
 	}
 
-	public function insert($id_pembangunan = 0)
+	public function insert($id_letterc = 0)
 	{
 		$post = $this->input->post();
 
-		$data['id_pembangunan'] = $id_pembangunan;
-		$data['gambar']         = $this->upload_gambar_pembangunan('gambar');
+		$data['id_letterc'] = $id_letterc;
+		$data['gambar']         = $this->upload_gambar_letterc('gambar');
 		$data['persentase']     = $post['persentase'] ? $post['persentase'] : $post['id_persentase'];
 		$data['keterangan']     = $post['keterangan'];
 		$data['created_at']     = date('Y-m-d H:i:s');
@@ -50,18 +50,18 @@ class Pembangunan_dokumentasi_model extends CI_Model
 		unset($data['file_gambar']);
 		unset($data['old_gambar']);
 
-		$outp = $this->db->insert('pembangunan_ref_dokumentasi', $data);
+		$outp = $this->db->insert('letterc_dokumen', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
 	}
 
-	public function update($id = 0, $id_pembangunan = 0)
+	public function update($id = 0, $id_letterc = 0)
 	{
 		$post = $this->input->post();
 
-		$data['id_pembangunan'] = $id_pembangunan;
-		$data['gambar']         = $this->upload_gambar_pembangunan('gambar');
+		$data['id_letterc'] = $id_letterc;
+		$data['gambar']         = $this->upload_gambar_letterc('gambar');
 		$data['persentase']     = $post['persentase'] ? $post['persentase'] : $post['id_persentase'];
 		$data['keterangan']     = $post['keterangan'];
 		$data['created_at']     = date('Y-m-d H:i:s');
@@ -73,13 +73,13 @@ class Pembangunan_dokumentasi_model extends CI_Model
 		unset($data['old_gambar']);
 
 		$this->db->where('id', $id);
-		$outp = $this->db->update('pembangunan_ref_dokumentasi', $data);
+		$outp = $this->db->update('letterc_dokumen', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
 	}
 
-	private function upload_gambar_pembangunan($jenis)
+	private function upload_gambar_letterc($jenis)
 	{
 		$this->load->library('upload');
 		$this->uploadConfig = array(
@@ -141,9 +141,9 @@ class Pembangunan_dokumentasi_model extends CI_Model
 			->row();
 	}
 
-	public function find_dokumentasi($id_pembangunan)
+	public function find_dokumentasi($id_letterc)
 	{
-		return $this->db->where('id_pembangunan', $id_pembangunan)
+		return $this->db->where('id_letterc', $id_letterc)
 			->order_by('CAST(persentase as UNSIGNED INTEGER)')
 			->get($this->table)
 			->result();

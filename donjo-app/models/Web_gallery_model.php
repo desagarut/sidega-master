@@ -106,8 +106,8 @@
 			return;
 		}
 
-	  $lokasi_file = $_FILES['gambar']['tmp_name'];
-	  $tipe_file = TipeFile($_FILES['gambar']);
+		$lokasi_file = $_FILES['gambar']['tmp_name'];
+		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => 0)) + 1;

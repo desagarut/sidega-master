@@ -209,14 +209,16 @@ class Letterc_model extends CI_Model {
 	public function simpan_letterc()
 	{
 		$data = array();
-		$data['nomor'] = bilangan_spasi($this->input->post('letterc'));
-		$data['nama_kepemilikan'] = nama($this->input->post('nama_kepemilikan'));
+		$data['nomor'] = $this->input->post('letterc');
+		$data['nama_kepemilikan'] = $this->input->post('nama_kepemilikan');
 		$data['jenis_pemilik'] = $this->input->post('jenis_pemilik');
 		$data['nama_pemilik_luar'] = nama($this->input->post('nama_pemilik_luar'));
 		$data['alamat_pemilik_luar'] = strip_tags($this->input->post('alamat_pemilik_luar'));
+		
 		/* Upload Dokumen Letter C */
 		$data['dokumen'] = $this->input->post('dokumen');
-		
+		$data['link_dokumen'] = $this->input->post('link_dokumen');			
+
 		if ($id_letterc = $this->input->post('id'))
 		{
 			$data_lama = $this->db->where('id', $id_letterc)
@@ -226,6 +228,7 @@ class Letterc_model extends CI_Model {
 			$data['updated_by'] = $this->session->user;
 			$this->db->where('id', $id_letterc)
 				->update('letterc', $data);
+
 		}
 		else
 		{
@@ -233,6 +236,7 @@ class Letterc_model extends CI_Model {
 			$data['updated_by'] = $this->session->user;
 			$this->db->insert('letterc', $data);
 			$id_letterc = $this->db->insert_id();
+
 		}
 
 		if ($this->input->post('jenis_pemilik') == 1)
@@ -516,6 +520,21 @@ class Letterc_model extends CI_Model {
 		return $hasil2;
 	}
 
+	/*public function find($id)
+	{
+		return $this->db->select([
+			'p.*',
+			"(CASE WHEN p.id_lokasi IS NOT NULL THEN CONCAT(
+				(CASE WHEN w.rt != '0' THEN CONCAT('RT ', w.rt, ' / ') ELSE '' END),
+				(CASE WHEN w.rw != '0' THEN CONCAT('RW ', w.rw, ' - ') ELSE '' END),
+				w.dusun
+			) ELSE p.lokasi END) AS alamat",
+		])
+		->from("{$this->table} p")
+		//->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
+		//->where('p.id', $id)
+		->get()
+		->row();
+	}*/
 
 }
-?>

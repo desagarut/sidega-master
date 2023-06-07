@@ -213,7 +213,7 @@
 								<?php if ($artikel['dokumen']): ?>
 									<div class="form-group">
 										<div class="mailbox-attachment-info">
-											<a href="<?= base_url().LOKASI_DOKUMEN.$artikel['dokumen']?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Unduh Dokumen</a>
+											<a href="<?= base_url().LOKASI_DOKUMEN.$artikel['dokumen']?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"> </i> <?= $artikel['link_dokumen']?> <div class="btn btn-sm btn-box btn-success pull-right">Unduh Dokumen</div></a>
 										</div>
 									</div>
 								<?php endif; ?>

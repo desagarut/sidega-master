@@ -77,6 +77,7 @@
 																	<th>Nama Pemilik</th>
 																	<th>NIK</th>
 																	<th nowrap>Jumlah Persil</th>
+																	<!--<th>Dokumen</th>-->
 																</tr>
 															</thead>
 															<tbody>
@@ -86,6 +87,9 @@
 																		<td nowrap>
 																			<a href="<?= site_url("letterc/rincian/" . $item["id_letterc"]) ?>" class="btn bg-purple btn-box btn-sm" title="Rincian"><i class="fa fa-bars"></i></a>
 																			<a href="<?= site_url("letterc/create_mutasi/" . $item["id_letterc"]) ?>" class="btn bg-green btn-box btn-sm" title="Tambah Data"><i class="fa fa-plus"></i></a>
+																			<!--<a href="<?= site_url("letterc/create_dokumen/" . $item["id_letterc"]) ?>" class="btn bg-navy btn-box btn-sm" title="Tambah Data"><i class="fa fa-folder"></i></a>-->
+																			<!--<a href="<?= site_url("letterc/form_dokumen/" . $item["id_letterc"]) ?>"  data-remote="false" data-toggle="modal" data-target="#modalBox" data-title=" Upload Dokumen" class="btn bg-navy btn-box btn-sm"><i class='fa fa-sign-out'></i> Upload</a>-->
+																			<!--<a href="<?= site_url("letterc/rincian_dokumen/" . $item["id_letterc"]) ?>" class="btn bg-primary btn-box btn-sm" title="Ubah Data">Dokumen</a>-->
 																			<a href="<?= site_url("letterc/create/edit/" . $item["id_letterc"]) ?>" class="btn bg-yellow btn-box btn-sm" title="Ubah Data"><i class="fa fa-edit"></i></a>
 																			<a href="#" data-href="<?= site_url("letterc/hapus/" . $item["id_letterc"]) ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																		</td>
@@ -94,6 +98,7 @@
 																		<td><?= strtoupper($item["namapemilik"]) ?></td>
 																		<td><a href='<?= site_url("penduduk/detail/1/0/$item[id_pend]") ?>'><?= $item["nik"] ?></a></td>
 																		<td><?= $item["jumlah"] ?></td>
+																		<!--<td><iframe src="<?= base_url() ?>desa/upload/dokumen/<?= $item['link_dokumen'] ?>" width=250px height=200px></iframe></a>-->
 																	</tr>
 																<?php endforeach; ?>
 															</tbody>

@@ -8,7 +8,7 @@ class Pembangunan extends Admin_Controller
 
 		$this->modul_ini = 305;
 		$this->sub_modul_ini = 317;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->load->library('upload');
 		$this->load->model('pembangunan_model', 'model');

@@ -59,6 +59,7 @@
 																	<th><input type="checkbox" id="checkall" /></th>
 																	<th>No</th>
 																	<th>Aksi</th>
+																	<th>Gambar</th>
 																	<?php if ($o == 2) : ?>
 																		<th><a href="<?= site_url("gallery/index/$p/1") ?>">Nama Album <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 1) : ?>
@@ -91,6 +92,7 @@
 																			<a href="<?= site_url("gallery/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
 																			<a href="<?= site_url("gallery/urut/$data[id]/2") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
 																			<a href="<?= site_url("gallery/sub_gallery/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Album"><i class="fa fa-bars"></i></a>
+																			<br/>
 																			<a href="<?= site_url("gallery/form/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
 																			<?php if ($data['slider'] == '1') : ?>
 																				<a href="<?= site_url("gallery/slider_off/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
@@ -105,6 +107,13 @@
 																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																				<a href="#" data-href="<?= site_url("gallery/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																			<?php endif; ?>
+																		</td>
+																		<td class="padat">
+																			<div class="user-panel">
+																				<div class="image2">
+																				<img class="img-circle" alt="Foto Penduduk" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" />
+																				</div>
+																			</div>
 																		</td>
 																		<td width="60%">
 																			<label data-rel="popover" data-content="<img width=200 height=134 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>"><?= $data['nama'] ?></label>

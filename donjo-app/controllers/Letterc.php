@@ -67,6 +67,7 @@ class Letterc extends Admin_Controller {
 		$data['letterc'] = $this->letterc_model->get_letterc($id);
 		$data['pemilik'] = $this->letterc_model->get_pemilik($id);
 		$data['persil'] = $this->letterc_model->get_list_persil($id);
+
 		$this->render('data_persil/rincian', $data);
 	}
 
@@ -85,7 +86,9 @@ class Letterc extends Admin_Controller {
 
 	public function create($mode=0, $id=0)
 	{
+		$this->load->library('upload');
 		$this->load->helper('form');
+
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
 
@@ -322,6 +325,63 @@ class Letterc extends Admin_Controller {
 		$this->data_persil_model->awal_persil($id_letterc, $id_persil, $hapus);
 		redirect("letterc/mutasi/$id_letterc/$id_persil");
 	}
+
+	public function form_dokumen($id)
+	{
+		$this->load->helper('form');
+		//$this->load->library('form_validation');
+		//$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
+
+		//$this->set_minsidebar(0);		
+		//$this->tab_ini = 12;
+		//$this->tab_ini = empty($mode) ? 10 : 12;
+
+		$post = $this->input->post();
+		$data = array();
+		$data["mode"] = $mode;
+		$data["penduduk"] = $this->letterc_model->list_penduduk();
+		if ($mode === 'edit')
+		{
+			$data['letterc'] = $this->letterc_model->get_letterc($id);
+			$this->ubah_pemilik($id, $data, $post);
+		}
+		else
+		{
+			switch ($post['jenis_pemilik'])
+			{
+				case '1':
+					# Pemilik desa
+					if (!empty($post['nik']))
+					{
+						$data['pemilik'] = $this->letterc_model->get_penduduk($post['nik'], $nik=true);
+					}
+					break;
+				case '2':
+					# Pemilik luar desa
+					$data['letterc']['jenis_pemilik'] = 2;
+					break;
+			}
+		}
+
+		$this->load->view('data_persil/form_dokumen', $data);
+		//$this->render('data_persil/form_dokumen', $data);
+
+	}
+
+	public function create_dokumen($mode=0, $id=0)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('nama', 'Nama Jenis Tanah', 'required');
+
+		$this->set_minsidebar(0);		
+		$this->tab_ini = 12;
+		//$this->tab_ini = empty($mode) ? 10 : 12;
+
+		$post = $this->input->post();
+		$data = array();
+		$this->render('data_persil/create', $data);
+	}
+
 }
 
-?>
