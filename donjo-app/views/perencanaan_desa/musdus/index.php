@@ -149,8 +149,8 @@
 				{
 					'data': function(data) {
 						return `<div class="user-panel">
-									<div class="image2">
-										<img src="<?= base_url(LOKASI_GALERI) ?>${data.foto}" class="img-logo" style="width:150px; height:150px" alt="Gambar 0%">
+									<div class="image1">
+										<img src="<?= base_url(LOKASI_GALERI) ?>${data.foto}" class="img-" style="width:120px; height:70px" alt="Gambar 0%">
 									</div>
 								</div>`
 					}

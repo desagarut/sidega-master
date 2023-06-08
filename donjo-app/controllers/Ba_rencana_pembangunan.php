@@ -11,7 +11,7 @@ class Ba_rencana_pembangunan extends Admin_Controller
         $this->load->model('pamong_model');
         $this->modul_ini     = 300;
         $this->sub_modul_ini = 330;
-        $this->model->set_tipe($this->tipe);
+        //$this->model->set_tipe($this->tipe);
     }
 
     public function index()

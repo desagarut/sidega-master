@@ -45,9 +45,9 @@
 		<div class='row'>
 			<div class="col-md-12">
 				<?php $this->load->view('home/rekap_sppt.php'); ?>
+				<?php $this->load->view('home/pertanahan.php'); ?>
 				<?php $this->load->view('home/aparat_login.php'); ?>
 				<?php $this->load->view('home/perencanaan.php'); ?>
-				<?php $this->load->view('home/video.php'); ?>
 			</div>
 		</div>
 		<div class='row'>
@@ -64,6 +64,7 @@
 			<div class="col-md-12">
 				<?php $this->load->view('home/gallery.php'); ?>
 				<?php $this->load->view('home/gallery_youtube.php'); ?>
+				<?php $this->load->view('home/video.php'); ?>
 			</div>
 		</div>
 	</section>

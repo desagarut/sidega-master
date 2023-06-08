@@ -58,30 +58,51 @@
 													<h3 class="box-title">Rincian Letter-C</h3>
 												</div>
 												<div class="box-body">
-													<table class="table table-bordered  table-striped table-hover">
-														<tbody>
-															<tr>
-																<th class="horizontal">Nama Pemilik</td>
-																<td> : <?= $pemilik["namapemilik"] ?></td>
-															</tr>
-															<tr>
-																<th class="horizontal">NIK</td>
-																<td> : <?= $pemilik["nik"] ?></td>
-															</tr>
-															<tr>
-																<th class="horizontal">Alamat</td>
-																<td> : <?= $pemilik["alamat"] ?></td>
-															</tr>
-															<tr>
-																<th class="horizontal">Nomor Letter-C</td>
-																<td> : <?= sprintf("%04s", $letterc['nomor']) ?></td>
-															</tr>
-															<tr>
-																<th class="horizontal">Nama Pemilik Tertulis di Letter-C</td>
-																<td> : <?= $letterc["nama_kepemilikan"] ?></td>
-															</tr>
-														</tbody>
-													</table>
+													<div class="col-md-8">
+														<table class="table table-bordered  table-striped table-hover">
+															<tbody>
+																<tr>
+																	<th class="horizontal">Nama Pemilik</td>
+																	<td> : <?= $pemilik["namapemilik"] ?></td>
+																</tr>
+																<tr>
+																	<th class="horizontal">NIK</td>
+																	<td> : <?= $pemilik["nik"] ?></td>
+																</tr>
+																<tr>
+																	<th class="horizontal">Alamat</td>
+																	<td> : <?= $pemilik["alamat"] ?></td>
+																</tr>
+																<tr>
+																	<th class="horizontal">Nomor Letter-C</td>
+																	<td> : <?= sprintf("%04s", $letterc['nomor']) ?></td>
+																</tr>
+																<tr>
+																	<th class="horizontal">Nama Pemilik Tertulis di Letter-C</td>
+																	<td> : <?= $letterc["nama_kepemilikan"] ?></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="col-md-3">
+														<div class="box box-primary">
+															<div class="box-body box-profile">
+																<img class="img-responsive" src="<?= gambar_desa($main['kantor_desa'], TRUE); ?>" alt="Kantor <?= $desa; ?>">
+																<br />
+																<p class="text-center text-bold">Kantor <?= $desa; ?></p>
+																<p class="text-muted text-center text-red">(Kosongkan, jika kantor <?= $desa; ?> tidak berubah)</p>
+																<br />
+																<div class="input-group input-group-sm">
+																	<input type="text" class="form-control" id="file_path2">
+																	<input type="file" class="hidden" id="file2" name="kantor_desa">
+																	<input type="hidden" name="old_kantor_desa" value="<?= $main['kantor_desa']; ?>">
+																	<span class="input-group-btn">
+																		<button type="button" class="btn btn-info btn-box" id="file_browser2"><i class="fa fa-search"></i> Browse</button>
+																	</span>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 											<div class="col-sm-12">

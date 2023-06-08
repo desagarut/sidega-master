@@ -110,8 +110,8 @@
 																		</td>
 																		<td class="padat">
 																			<div class="user-panel">
-																				<div class="image2">
-																				<img class="img-circle" alt="Foto Penduduk" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" />
+																				<div class="image1">
+																				<img class="img" style="width:100px; height:70px" alt="Gambar" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" />
 																				</div>
 																			</div>
 																		</td>

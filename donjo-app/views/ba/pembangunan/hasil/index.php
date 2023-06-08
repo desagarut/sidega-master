@@ -1,47 +1,4 @@
-<?php
-
-defined('BASEPATH') || exit('No direct script access allowed');
-
-/*
- * File ini:
- *
- * View untuk modul Buku Pembangunan Desa > Buku Inventaris Hasil Pembangunan
- *
- * donjo-app/views/bumindes/pembangunan/hasil/index.php,
- */
-
-/*
- * File ini bagian dari:
- *
- * OpenSID
- *
- * Sistem informasi desa sumber terbuka untuk memajukan desa
- *
- * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
- *
- * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
- *
- * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
- * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
- * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
- * asal tunduk pada syarat berikut:
- *
- * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
- * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
- * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
- *
- * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
- * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
- * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
- *
- * @copyright	  Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * @copyright	  Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
- * @license	http://www.gnu.org/licenses/gpl.html	GPL V3
- *
- * @see 	https://github.com/OpenSID/OpenSID
- */
-?>
+<?php defined('BASEPATH') || exit('No direct script access allowed');?>
 
 <form id="mainformexcel" name="mainformexcel"method="post" class="form-horizontal">
 	<div class="box box-info">
@@ -97,7 +54,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 				{ 'className' : 'padat', 'targets': [0, 3] },
 			],
 			'ajax': {
-				'url': SITE_URL + 'bumindes_hasil_pembangunan',
+				'url': SITE_URL + 'Ba_hasil_pembangunan',
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -114,7 +71,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 					'data': 'volume'
 				},
 				{
-					'data': 'jml_anggaran',
+					'data': 'anggaran',
 					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
 				},
 				{

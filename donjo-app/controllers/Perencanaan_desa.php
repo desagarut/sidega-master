@@ -7,7 +7,7 @@ class Perencanaan_desa extends Admin_Controller
 		parent::__construct();
 
 		$this->modul_ini = 305;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->load->library('upload');
 		$this->load->model('perencanaan_desa_model', 'model');

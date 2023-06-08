@@ -65,7 +65,7 @@
 				{ 'className' : 'padat', 'targets': [0, 3, 4, 5, 6, 7] },
 			],
 			'ajax': {
-				'url': SITE_URL + 'bumindes_kegiatan_pembangunan',
+				'url': SITE_URL + 'ba_kegiatan_pembangunan',
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
