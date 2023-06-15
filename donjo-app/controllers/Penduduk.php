@@ -76,7 +76,7 @@ class Penduduk extends Admin_Controller {
 		$data['list_status_penduduk'] = $this->referensi_model->list_data('tweb_penduduk_status');
 		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
 
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->render('sid/kependudukan/penduduk', $data);
 	}

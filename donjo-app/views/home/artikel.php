@@ -18,13 +18,13 @@
           <ul class="products-list product-list-in-box">
             <li class="item">
               <div class="product-img">
-              <!--<img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>-->
-              <?php if ($article['gambar'] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $data['gambar'])) : ?>
-					<img src="<?= AmbilFotoArtikel($data['gambar'], 'sedang') ?>" alt="<?= $data['judul'] ?>" id="current">
-				<?php endif ?>
+              <img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>
+              <?php //if ($article['gambar'] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $data['gambar'])) : ?>
+					<!--<img src="<?= AmbilFotoArtikel($data['gambar'], 'sedang') ?>" alt="<?= $data['judul'] ?>" id="current">-->
+				<?php //endif ?>
               </div>
               <div class="product-info">
-                <a href="<?= site_url("gallery/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
+                <a href="#" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
                  <!-- <span class="label label-warning pull-right">$1800</span>-->
                 </a>
                 <span class="product-description">
@@ -39,7 +39,7 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer text-center">
-      <a href="<?= site_url("first/gallery_youtube/{$data['id']}") ?>" class="uppercase">View All Foto</a>
+      <a href="<?= site_url("web") ?>" class="uppercase">Semua Artikel</a>
     </div>
     <!-- /.box-footer -->
   </div>

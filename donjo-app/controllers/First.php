@@ -111,43 +111,7 @@ class First extends Web_Controller
 		//$this->track_model->track_desa('first');
 		$this->load->view($this->template, $data);
 	}
-	/*	
-	public function rss_covid()
-	{
-		$data = $this->includes;
 
-		$this->set_template('layouts/rss_covid.php');
-		
-		if ($this->setting->covid_rss)
-		{
-			$data['feed'] = array(
-				'items' => $this->first_artikel_m->get_feed(),
-				'title' => 'BERITA COVID-19',
-				'url' => 'https://www.covid19.go.id'
-			);
-		}
-		
-		if ($this->setting->apbdes_footer)
-		{
-			$data['transparansi'] = $this->setting->apbdes_manual_input
-				? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
-				: $this->keuangan_grafik_model->grafik_keuangan_tema();
-		}
-		
-		$data['covid'] = $this->laporan_penduduk_model->list_data('covid');
-
-		$cari = trim($this->input->get('cari'));
-		if ( ! empty($cari))
-		{
-			// Judul artikel bisa digunakan untuk serangan XSS
-			$data["judul_kategori"] = htmlentities("Hasil pencarian : ". substr($cari, 0, 50));
-		}
-
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
-		
-*/
 	/*
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
 	| Kalau menggunakan slug, dipanggil menggunakan url artikel/:thn/:bln/:hri/:slug

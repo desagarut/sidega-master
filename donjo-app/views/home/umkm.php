@@ -10,11 +10,11 @@ $wisata = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_wisata WHERE par
             <div class="row">
                 <div class="col-md-6 col-sm-3 col-xs-3">
                     <a href="<?= site_url('toko_warga') ?>" class="small-box-footer" title="Lihat Toko Warga">
-                        <div class="small-box bg-danger">
+                        <div class="small-box bg-red">
                             <div class="inner">
 
                                 <h4>
-                                Toko: <?= number_format($towa, 0, '', '.') ?>
+                                Toko : <?= number_format($towa, 0, '', '.') ?>
                                 </h4>
 
                                 <p></p>
@@ -25,11 +25,11 @@ $wisata = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_wisata WHERE par
                 </div>
                 <div class="col-md-6 col-sm-3 col-xs-3">
                     <a href="<?= site_url('tawa') ?>" class="small-box-footer" title="Lihat Transportasi Warga">
-                        <div class="small-box bg-success">
+                        <div class="small-box bg-green">
                             <div class="inner">
 
                                 <h4>
-                                Transport: <?= number_format($tawa, 0, '', '.') ?>
+                                Transport : <?= number_format($tawa, 0, '', '.') ?>
                                 </h4>
                             </div>
                             <div class="icon"> <img src="<?= base_url("assets/files/logo/transport.png") ?>" class="img-fluid responsive" width="40px" height="40px" alt=""> </div>
@@ -38,11 +38,11 @@ $wisata = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_wisata WHERE par
                 </div>
                 <div class="col-md-6 col-sm-3 col-xs-3">
                     <a href="<?= site_url('tukang') ?>" class="small-box-footer" title="Lihat Pertukangan Warga">
-                        <div class="small-box bg-warning">
+                        <div class="small-box bg-yellow">
                             <div class="inner">
 
                                 <h4>
-                                Tukang: <strong><?= number_format($tukang, 0, '', '.') ?></strong>
+                                Tukang : <strong><?= number_format($tukang, 0, '', '.') ?></strong>
                                 </h4>
                             </div>
                             <div class="icon"> <img src="<?= base_url("assets/files/logo/tukang.png") ?>" class="img-fluid responsive" width="40px" height="40px" alt=""> </div>
@@ -51,11 +51,11 @@ $wisata = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_wisata WHERE par
                 </div>
                 <div class="col-md-6 col-sm-3 col-xs-3">
                     <a href="<?= site_url('wisata') ?>" class="small-box-footer" title="Lihat Wisata Desa">
-                        <div class="small-box bg-info">
+                        <div class="small-box bg-blue">
                             <div class="inner">
 
                                 <h4>
-                                Wisata <?= number_format($wisata, 0, '', '.') ?>
+                                Wisata : <?= number_format($wisata, 0, '', '.') ?>
                                 </h4>
                             </div>
                             <div class="icon"> <img src="<?= base_url("assets/files/logo/wisata.png") ?>" class="img-fluid responsive" width="40px" height="40px" alt=""> </div>

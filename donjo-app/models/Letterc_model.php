@@ -217,7 +217,13 @@ class Letterc_model extends CI_Model {
 		
 		/* Upload Dokumen Letter C */
 		$data['dokumen'] = $this->input->post('dokumen');
-		$data['link_dokumen'] = $this->input->post('link_dokumen');			
+		$data['link_dokumen'] = $this->input->post('link_dokumen');		
+		
+		$file_gambar = $this->_upload_gambar();
+		if ($file_gambar) $data['dokumen'] = $file_gambar;
+			$outp = $this->db->insert('letterc', $data);
+		status_sukses($outp, true);
+
 
 		if ($id_letterc = $this->input->post('id'))
 		{
@@ -520,21 +526,22 @@ class Letterc_model extends CI_Model {
 		return $hasil2;
 	}
 
-	/*public function find($id)
+	private function _upload_gambar($old_document = '')
 	{
-		return $this->db->select([
-			'p.*',
-			"(CASE WHEN p.id_lokasi IS NOT NULL THEN CONCAT(
-				(CASE WHEN w.rt != '0' THEN CONCAT('RT ', w.rt, ' / ') ELSE '' END),
-				(CASE WHEN w.rw != '0' THEN CONCAT('RW ', w.rw, ' - ') ELSE '' END),
-				w.dusun
-			) ELSE p.lokasi END) AS alamat",
-		])
-		->from("{$this->table} p")
-		//->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
-		//->where('p.id', $id)
-		->get()
-		->row();
-	}*/
+		if ($_FILES['dokumen']['error'] == UPLOAD_ERR_NO_FILE) return null;
+
+		$error = periksa_file('dokumen', unserialize(MIME_TYPE_GAMBAR), unserialize(EXT_GAMBAR));
+		if ($error != '')
+		{
+			$this->session->set_userdata('success', -1);
+			$this->session->set_userdata('error_msg', $error);
+			return null;
+		}
+		$nama_file = $_FILES['dokumen']['name'];
+		$nama_file   = time().'-'.urlencode($nama_file); 	 // normalkan nama file
+		UploadDocument($nama_file, $old_document);
+
+		return $nama_file;
+	}
 
 }

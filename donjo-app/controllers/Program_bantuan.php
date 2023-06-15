@@ -92,7 +92,7 @@ class Program_bantuan extends Admin_Controller {
 		$data['func'] = "detail/$program_id";
 		$data['per_page'] = $this->session->per_page;
 		$data['set_page'] = $this->_set_page;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->render('program_bantuan/detail', $data);
 	}

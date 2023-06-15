@@ -105,7 +105,7 @@
 							<div class="brand-wrapper" align="center">
 								<a href="<?= site_url('first'); ?>"><img src="<?= gambar_desa($header['logo']); ?>" alt="<?= $header['nama_desa'] ?>" class="img-responsive" /></a>
 							</div>
-							<h1 align="center" style="font-size:18px">Layanan Masyarakat <?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?> </h1>
+							<h1 align="center" style="font-size:18px">Login Warga <?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?> </h1>
 
 							<form id="validasi" class="login-form" action="<?= site_url('mandiri_web/auth'); ?>" method="post">
 								<?php if ($this->session->mandiri_wait == 1) : ?>

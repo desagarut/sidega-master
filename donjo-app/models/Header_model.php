@@ -131,4 +131,62 @@ class Header_model extends CI_Model {
 		return $data;
 	}
 	
+	public function letterc_total()
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM letterc";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+	public function letterc_warga_total()
+	{
+		$sql = "SELECT COUNT(id) AS letterc_warga FROM letterc WHERE jenis_pemilik = 1";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+	public function letterc_nonwarga_total()
+	{
+		$sql = "SELECT COUNT(id) AS letterc_non FROM letterc WHERE jenis_pemilik = 2";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+	public function persil_total()
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM persil";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+    public function rekap_ktp(){
+        $query = $this->db->query("SELECT (SELECT count(ktp_el) FROM `tweb_penduduk` WHERE ktp_el = 1 AND status_dasar = 1) as ktp_el_ya,
+        (SELECT count(ktp_el) FROM `tweb_penduduk` WHERE ktp_el = 2 AND status_dasar = 1) as ktp_el_no,
+		(SELECT count(*) FROM `tweb_penduduk` where ktp_el = 1 AND status_dasar = 1)/(SELECT count(*) FROM `tweb_penduduk` WHERE status_dasar = 1)*100 as persentase_ktp_el,
+		(SELECT count(*) FROM `tweb_penduduk` where status_dasar = 1) as penduduk_total,
+        (SELECT count(*) FROM `tweb_penduduk`where foto <> '' and status_dasar = 1) as foto_y,
+		(SELECT count(*) FROM `tweb_penduduk`where foto = '' and status_dasar = 1) as foto_n,
+		(SELECT count(*) FROM `tweb_penduduk` where foto <> '' and status_dasar = 1)/(SELECT count(*) FROM `tweb_penduduk` WHERE foto = '' and status_dasar = 1)*100 as persentase_foto,
+        (SELECT count(*) FROM `rumah`) as rumah_y,
+		(SELECT count(*) FROM `rumah`)/(SELECT count(*) FROM `tweb_penduduk` WHERE status_dasar = 1)*100 as persentase_rumah,
+        (SELECT count(*) FROM `tweb_penduduk_map`) as lokasi_y,
+		(SELECT count(*) FROM `tweb_penduduk_map`)/(SELECT count(*) FROM `tweb_penduduk` WHERE status_dasar = 1)*100 as persentase_lokasi,
+
+		(SELECT count(*) FROM `tbl_data_sppt`) as jumlah_nop,
+        (SELECT sum(pbb_terhutang) FROM `tbl_data_sppt`) as pbb_terhutang,
+        (SELECT sum(total_tagih) FROM `tbl_data_sppt_tagih`) as total_tagih,
+        (SELECT count(*) FROM `tbl_data_sppt_tagih`) as jml_kuitansi,
+        (SELECT count(*) FROM `tbl_data_sppt_tagih` where status = 'Lunas') as lunas,
+        (SELECT sum(pbb_terhutang) FROM `tbl_data_sppt_tagih` where status = 'Lunas') as pajak_lunas,
+        (SELECT count(*) FROM `tbl_data_sppt_tagih` where status = 'Belum Bayar') as terhutang,
+        (SELECT sum(pbb_terhutang) FROM `tbl_data_sppt_tagih` where status = 'Belum Bayar') as pajak_terhutang,
+        (SELECT count(*) FROM `tbl_data_sppt_tagih` where status = 'Lunas')/(SELECT count(*) FROM `tbl_data_sppt_tagih`)*100 as presentase");
+
+        return $query;
+    }
+
 }

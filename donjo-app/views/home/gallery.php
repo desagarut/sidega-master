@@ -36,7 +36,7 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer text-center">
-      <a href="<?= site_url("gallery") ?>" class="uppercase">View All Foto</a>
+      <a href="<?= site_url("gallery") ?>" class="uppercase">Semua Foto</a>
     </div>
     <!-- /.box-footer -->
   </div>

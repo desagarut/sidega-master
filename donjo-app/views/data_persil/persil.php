@@ -23,7 +23,7 @@
 	<section class="content-header">
 		<h1>Daftar Persil <?= ucwords($this->setting->sebutan_deskel)?> <?= $kelurahan["nama_deskel"];?></h1>
 		<ol class="breadcrumb">
-			<li><a href="<?= site_url('home')?>"><i class="fa fa-home"></i> Home</a></li>
+			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
 			<li class="active">Daftar Persil</li>
 		</ol>
 	</section>

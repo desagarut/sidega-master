@@ -37,8 +37,6 @@
 			</div>
 		</div>
 		<div class='row'>
-			<?php //$this->load->view('home/info.php');
-			?>
 			<?php //$this->load->view('home/layanan.php');
 			?>
 		</div>
@@ -46,14 +44,14 @@
 			<div class="col-md-12">
 				<?php $this->load->view('home/rekap_sppt.php'); ?>
 				<?php $this->load->view('home/pertanahan.php'); ?>
-				<?php $this->load->view('home/aparat_login.php'); ?>
+				<?php $this->load->view('home/kependudukan_2.php'); ?>
 				<?php $this->load->view('home/perencanaan.php'); ?>
 			</div>
 		</div>
 		<div class='row'>
 			<div class="col-md-12">
 				<?php $this->load->view('home/helpdesk.php'); ?>
-				<?php $this->load->view('home/changelog.php'); ?>
+				<?php $this->load->view('home/aparat_login.php'); ?>
 				<?php $this->load->view('home/warga_login.php'); ?>
 				<?php $this->load->view('home/pengunjung.php'); ?>
 				<?php //$this->load->view('home/artikel.php'); 
@@ -62,9 +60,11 @@
 		</div>
 		<div class='row'>
 			<div class="col-md-12">
+				<?php $this->load->view('home/artikel.php'); ?>
 				<?php $this->load->view('home/gallery.php'); ?>
 				<?php $this->load->view('home/gallery_youtube.php'); ?>
 				<?php $this->load->view('home/video.php'); ?>
+				<?php $this->load->view('home/changelog.php'); ?>
 			</div>
 		</div>
 	</section>

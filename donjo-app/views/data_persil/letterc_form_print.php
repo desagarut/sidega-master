@@ -106,7 +106,7 @@
 									<br>
 									<br>
 									<br>
-									<?= strtoupper($kelurahan['nama_lurah']) ?>
+									<?= strtoupper($desa['nama_kepala_desa']) ?>
 								</p>
 							</td>
 						</tr>

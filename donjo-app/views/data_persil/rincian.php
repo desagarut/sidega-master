@@ -85,7 +85,7 @@
 														</table>
 													</div>
 													<div class="col-md-3">
-														<div class="box box-primary">
+														<!--<div class="box box-primary">
 															<div class="box-body box-profile">
 																<img class="img-responsive" src="<?= gambar_desa($main['kantor_desa'], TRUE); ?>" alt="Kantor <?= $desa; ?>">
 																<br />
@@ -101,7 +101,7 @@
 																	</span>
 																</div>
 															</div>
-														</div>
+														</div>-->
 													</div>
 												</div>
 											</div>

@@ -125,14 +125,15 @@
 									</div>
 								</div>
 							<?php endif; ?>
-							<?php if ($letterc['dokumen']) : ?>
+							<!--
+							<?php //if ($letterc['dokumen']) : ?>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="link_dokumen">Nama File</label>
 								<div class="input-group input-group-sm col-sm-8">
 									<input id="dokumen" name="dokumen" class="form-control input-sm" type="text" value="<?= $letterc['dokumen'] ?>"></input>
 								</div>
 							</div>
-							<?php endif; ?>
+							<?php //endif; ?>
 							
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="dokumen">Dokumen Lampiran</label>
@@ -144,14 +145,15 @@
 									</span>
 								</div>
 							</div>
-							<div class="form-group">
+							-->
+							<!--<div class="form-group">
 								<label class="control-label col-sm-3" for="link_dokumen">Nama Dokumen</label>
 								<div class="input-group input-group-sm col-sm-8">
 									<input id="link_dokumen" name="link_dokumen" class="form-control input-sm" type="text" value="<?= $letterc['link_dokumen'] ?>"></input>
 									<span class="help-block"><code>(Nantinya akan menjadi link unduh/download)</code></span>
 									<iframe src="<?= base_url() ?>desa/upload/dokumen/<?= $letterc['link_dokumen'] ?>" width=100% height=400></iframe>
 								</div>
-							</div>
+							</div>-->
 							<!-- Lampiran Dokumen-->
 
 						</div>

@@ -92,15 +92,22 @@ class Beranda extends Admin_Controller {
         };
 
 		//Update 5.5.5
-		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show();
-		$data['gallery'] = $this->first_gallery_m->gallery_show();
-		$data['artikel'] = $this->first_artikel_m->artikel_show($data['paging']->offset, $data['paging']->per_page);
+		$data['gallery_youtube'] = $this->first_gallery_youtube->gallery_show(0,5,0);
+		$data['gallery'] = $this->first_gallery_m->gallery_show(0,5,0);
+		$data['artikel'] = $this->first_artikel_m->artikel_show(0,5,0);
 
+		//Pertanahan
+		$data['letterc_total'] = $this->header_model->letterc_total();
+		$data['letterc_warga_total'] = $this->header_model->letterc_warga_total();
+		$data['letterc_nonwarga_total'] = $this->header_model->letterc_nonwarga_total();
+		$data['persil_total'] = $this->header_model->persil_total();
 
-		
+		//progres kependudukan
+		$data['rekap_ktp'] = $this->header_model->rekap_ktp('');
+        $data['data_ktp'] = $this->header_model->rekap_ktp();
+	
 		$this->set_minsidebar(1);
 		$this->render('home/desa', $data);
-
 	}
 	
 	public function dialog_pengaturan()
