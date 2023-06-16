@@ -22,7 +22,7 @@
         <div class="progress-group">
           <span class="progress-text">KTP Elektronik </span>
           <span class="progress-number">
-            <?= $d->ktp_el_ya ?>/<?= $d->penduduk_total ?> (<?= $d->persentase_ktp_el ?>%) </span>
+            <?= $d->ktp_el_ya ?>/<?= $d->penduduk_total ?> <b>(<?= $d->persentase_ktp_el ?>%)</b> </span>
 
           <div class="progress sm">
             <div class="progress-bar progress-bar-red" style="width: <?= $d->persentase_ktp_el ?>%"></div>
@@ -31,15 +31,15 @@
 
         <div class="progress-group">
           <span class="progress-text">Foto Penduduk</span>
-          <span class="progress-number"><?= $d->foto_y ?>/<?= $d->penduduk_total ?> (<?= $d->persentase_foto ?>%)</span>
+          <span class="progress-number"><?= $d->foto_y ?>/<?= $d->penduduk_total ?> <b>(<?= $d->persentase_foto ?>%)</b></span>
           <div class="progress sm">
             <div class="progress-bar progress-bar-aqua" style="width: <?= $d->persentase_foto ?>%"></div>
           </div>
         </div>
         <!-- /.progress-group -->
         <!--<div class="progress-group">
-          <span class="progress-text">Arsip Dokumen (<?= $d->persentase_ktp_el ?>%)</span>
-          <span class="progress-number"><b><?= $d->ktp_el_ya ?></b>/<?= $d->penduduk_total ?></span>
+          <span class="progress-text">Arsip Dokumen </span>
+          <span class="progress-number"><b><?= $d->ktp_el_ya ?></b>/<?= $d->penduduk_total ?> <b>(<?= $d->persentase_ktp_el ?>%)</b></span>
 
           <div class="progress sm">
             <div class="progress-bar progress-bar-green" style="width: 80%"></div>
@@ -48,7 +48,7 @@
         <!-- /.progress-group -->
         <div class="progress-group">
           <span class="progress-text">Foto Rumah </span>
-          <span class="progress-number"><b><?= $d->rumah_y ?></b>/<?= $d->penduduk_total ?> (<?= $d->persentase_rumah ?>%)</span>
+          <span class="progress-number"><?= $d->rumah_y ?>/<?= $d->penduduk_total ?> <b>(<?= $d->persentase_rumah ?>%)</b></span>
 
           <div class="progress sm">
             <div class="progress-bar progress-bar-green" style="width: <?= $d->persentase_rumah ?>%"></div>
@@ -57,8 +57,8 @@
         <!-- /.progress-group -->
         <!-- /.progress-group -->
         <div class="progress-group">
-          <span class="progress-text">Peta Lokasi Rumah (<?= $d->persentase_lokasi ?>%)</span>
-          <span class="progress-number"><?= $d->lokasi_y ?>/<?= $d->penduduk_total ?></span>
+          <span class="progress-text">Peta Lokasi Rumah </span>
+          <span class="progress-number"><?= $d->lokasi_y ?>/<?= $d->penduduk_total ?> <b>(<?= $d->persentase_lokasi ?>%)</b></span>
 
           <div class="progress sm">
             <div class="progress-bar progress-bar-yellow" style="width: <?= $d->persentase_lokasi ?>%"></div>
