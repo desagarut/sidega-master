@@ -30,7 +30,7 @@
         </div>
 
         <div class="progress-group">
-          <span class="progress-text">Foto Profil</span>
+          <span class="progress-text">Foto Penduduk</span>
           <span class="progress-number"><?= $d->foto_y ?>/<?= $d->penduduk_total ?> (<?= $d->persentase_foto ?>%)</span>
           <div class="progress sm">
             <div class="progress-bar progress-bar-aqua" style="width: <?= $d->persentase_foto ?>%"></div>

@@ -170,7 +170,7 @@ class Header_model extends CI_Model {
 		(SELECT count(*) FROM `tweb_penduduk` where status_dasar = 1) as penduduk_total,
         (SELECT count(*) FROM `tweb_penduduk`where foto <> '' and status_dasar = 1) as foto_y,
 		(SELECT count(*) FROM `tweb_penduduk`where foto = '' and status_dasar = 1) as foto_n,
-		(SELECT count(*) FROM `tweb_penduduk` where foto <> '' and status_dasar = 1)/(SELECT count(*) FROM `tweb_penduduk` WHERE foto = '' and status_dasar = 1)*100 as persentase_foto,
+		(SELECT count(*) FROM `tweb_penduduk` where foto <> '' and status_dasar = 1)/(SELECT count(*) FROM `tweb_penduduk` WHERE status_dasar = 1)*100 as persentase_foto,
         (SELECT count(*) FROM `rumah`) as rumah_y,
 		(SELECT count(*) FROM `rumah`)/(SELECT count(*) FROM `tweb_penduduk` WHERE status_dasar = 1)*100 as persentase_rumah,
         (SELECT count(*) FROM `tweb_penduduk_map`) as lokasi_y,
