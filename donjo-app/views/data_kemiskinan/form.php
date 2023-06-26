@@ -2,11 +2,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Form Data Kategori</h1>
+		<h1>Form DTKS</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('data_kemiskinan')?>"> Data Kemiskinan</a></li>
-			<li class="active">Form Data Kategori</li>
+			<li><a href="<?= site_url('data_kemiskinan')?>"> Program Bantuan</a></li>
+			<li class="active">Form DTKS</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -32,6 +32,12 @@
 								<?php endif; ?>
 							<?php endforeach; ?>
 							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="tahun">Tahun</label>
+						<div class="col-sm-1">
+							<input class="form-control input-sm" maxlength="4" type="text" placeholder="Tahun" name="tahun" id="tahun" value="<?= $data_kemiskinan['tahun']?>">
 						</div>
 					</div>
 					<div class="form-group">

@@ -11,6 +11,11 @@
 					<td><?= strtoupper($data_kemiskinan["nama"]); ?></td>
 				</tr>
 				<tr>
+					<td>Tahun</td>
+					<td>:</td>
+					<td><?= $data_kemiskinan["tahun"]; ?></td>
+				</tr>
+				<tr>
 					<td>Sasaran Terdata</td>
 					<td>:</td>
 					<td><?= $sasaran[$data_kemiskinan["sasaran"]]; ?></td>

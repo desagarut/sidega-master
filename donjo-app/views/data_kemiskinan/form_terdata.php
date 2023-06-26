@@ -47,11 +47,24 @@
 							<?php include("donjo-app/views/data_kemiskinan/konfirmasi_terdata.php"); ?>
 						<?php endif; ?>
 						<div class="form-group">
-							<label class="col-sm-3 control-label" for="keterangan">Keterangan</label>
+							<label class="col-sm-3 control-label" for="id_dtks">ID DTKS</label>
 							<div class="col-sm-8">
-								<textarea name="keterangan" id="keterangan" class="form-control input-sm" maxlength="100" placeholder="Keterangan" rows="5"></textarea>
+								<input name="id_dtks" id="id_dtks" class="form-control input-sm" maxlength="100" placeholder="ID DTKS" ></input>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="keterangan_padan">Keterangan Padan</label>
+							<div class="col-sm-8">
+								<input name="keterangan_padan" id="keterangan_padan" class="form-control input-sm" placeholder="Keterangan Padan" rows="5"></input>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="keterangan_bantuan">Keterangan Bantuan</label>
+							<div class="col-sm-8">
+								<input name="keterangan_bantuan" id="keterangan_bantuan" class="form-control input-sm" placeholder="Keterangan Bantuan" rows="5"></input>
+							</div>
+						</div>
+
 					</form>
 				</div>
 			</div>

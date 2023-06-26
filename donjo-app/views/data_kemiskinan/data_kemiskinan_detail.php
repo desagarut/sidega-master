@@ -51,14 +51,20 @@
 										<th>No</th>
 										<th>Aksi</th>
 										<th><?= $judul['judul_terdata_foto']; ?></th>
+										<th>ID DTKS</th>
+										<th>Alamat</th>
 										<th><?= $judul['judul_terdata_info']; ?></th>
 										<th><?= $judul['judul_terdata_plus']; ?> </th>
 										<th><?= $judul['judul_terdata_nama']; ?></th>
 										<th>Tempat Lahir</th>
 										<th>Tanggal Lahir</th>
 										<th>Jenis-kelamin</th>
-										<th>Alamat</th>
-										<th>Keterangan</th>
+										<th>Pekerjaan</th>
+										<th>Ibu Kandung</th>
+										<th>Hub Keluarga</th>
+										<th>Keterangan Padan</th>
+										<th>Keterangan Bantuan</th>
+
 									</tr>
 								</thead>
 								<tbody>
@@ -66,7 +72,7 @@
 										<?php foreach ($terdata as $key => $item) : ?>
 											<tr>
 												<td class="padat"><?= ($key + $paging->offset + 1); ?></td>
-												<td class="aksi">
+												<td class="aksi" align="center">
 													<?php if ($this->CI->cek_hak_akses('h')) : ?>
 														<a href="<?= site_url("data_kemiskinan/data_terdata/$item[id]"); ?>" class="btn bg-green btn-box btn-sm" title="Lihat Detail"><i class="fa fa-search"></i></a>
 														<a href="<?= site_url("data_kemiskinan/edit_terdata_form/$item[id]"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Terdata" title="Ubah Terdata" class="btn btn-warning btn-box btn-sm"><i class="fa fa-edit"></i></a>
@@ -80,14 +86,22 @@
 														</div>
 													</div>
 												</td>
+												<td nowrap>
+												<label data-rel="popover" data-content="<img width=200 height=200 src=<?= AmbilFoto($item['terdata_foto'], '', $item['id_sex']) ?>>"><?= $item["id_dtks"]; ?></label></td>
+												<td nowrap><?= $item["info"]; ?></td>
 												<td nowrap><?= $item["terdata_info"]; ?></td>
 												<td nowrap><a href="<?= site_url("data_kemiskinan/terdata/$data_kemiskinan[sasaran]/$item[id_terdata]"); ?>" title="Daftar Data Kemiskinan untuk terdata"><?= $item["terdata_plus"]; ?></a></td>
-												<td nowrap><a href="<?= site_url("data_kemiskinan/data_terdata/$item[id]"); ?>" title="Data Individu terdata"><?= $item['terdata_nama']; ?></a></td>
+												<td nowrap>
+													<label data-rel="popover" data-content="<img width=200 height=200 src=<?= AmbilFoto($item['terdata_foto'], '', $item['id_sex']) ?>>"><a href="<?= site_url("data_kemiskinan/data_terdata/$item[id]"); ?>" title="Data Individu terdata"><?= $item['terdata_nama']; ?></a></label>
+												</td>
 												<td><?= $item["tempat_lahir"]; ?></td>
 												<td nowrap><?= $item["tanggal_lahir"]; ?></td>
 												<td nowrap><?= $item["sex"]; ?></td>
-												<td nowrap><?= $item["info"]; ?></td>
-												<td width="25%"><?= $item["keterangan"]; ?></td>
+												<td nowrap><?= $item["pekerjaan_id"]; ?></td>
+												<td nowrap><?= $item["nama_ibu"]; ?></td>
+												<td nowrap><?= $item["kk_level"]; ?></td>
+												<td width="25%"><?= $item["keterangan_padan"]; ?></td>
+												<td width="25%"><?= $item["keterangan_bantuan"]; ?></td>
 											</tr>
 										<?php endforeach; ?>
 									<?php else : ?>

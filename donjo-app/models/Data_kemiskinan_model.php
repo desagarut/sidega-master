@@ -20,6 +20,7 @@ class Data_kemiskinan_model extends MY_Model {
 		// Ambil dan bersihkan data input
 		$data['sasaran'] = $post['sasaran'];
 		$data['nama'] = nomor_surat_keputusan($post['nama']);
+		$data['tahun'] = $post['tahun'];
 		$data['keterangan'] = htmlentities($post['keterangan']);
 		return $data;
 	}
@@ -33,7 +34,7 @@ class Data_kemiskinan_model extends MY_Model {
 			->select('COUNT(st.id) AS jml')
 			->from('data_kemiskinan s')
 			->join('data_kemiskinan_detail st', "s.id = st.id_data_kemiskinan", 'left')
-			->order_by('s.nama')
+			->order_by('s.tahun')
 			->group_by('s.id')
 			->get()
 			->result_array();
@@ -227,7 +228,7 @@ class Data_kemiskinan_model extends MY_Model {
 	{
 		$hasil = [];
 		$get_terdata_sql = $this->get_penduduk_terdata_sql($data_kemiskinan_id);
-		$select_sql = "SELECT s.*, s.id_terdata, o.nik, o.nama, o.tempatlahir, o.tanggallahir, o.sex, o.foto, k.no_kk, w.rt, w.rw, w.dusun,
+		$select_sql = "SELECT s.*, s.id_terdata, o.nik, o.nama, o.tempatlahir, o.tanggallahir, o.sex, o.foto, k.no_kk, o.pekerjaan_id, o.nama_ibu, o.kk_level, w.rt, w.rw, w.dusun,
 			(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
 		 ";
 		$sql = $select_sql.$get_terdata_sql;
@@ -253,6 +254,9 @@ class Data_kemiskinan_model extends MY_Model {
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
 				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
+				$data[$i]['pekerjaan_id'] = $data[$i]['pekerjaan_id'];
+				$data[$i]['nama_ibu'] = $data[$i]['nama_ibu'];
+				$data[$i]['kk_level'] = $data[$i]['kk_level'];
 			}
 			$hasil['terdata'] = $data;
 		}
@@ -276,7 +280,7 @@ class Data_kemiskinan_model extends MY_Model {
 	{
 		$hasil = [];
 		$get_terdata_sql = $this->get_kk_terdata_sql($data_kemiskinan_id);
-		$select_sql = "SELECT s.*, s.id_terdata, o.no_kk, s.id_data_kemiskinan, o.nik_kepala, o.alamat, q.nik, q.nama, q.tempatlahir, q.tanggallahir, q.sex, q.foto, w.rt, w.rw, w.dusun ";
+		$select_sql = "SELECT s.*, s.id_terdata, o.no_kk, s.id_data_kemiskinan, o.nik_kepala, o.alamat, q.nik, q.nama, q.tempatlahir, q.tanggallahir, q.sex, q.foto, q.pekerjaan_id, w.rt, w.rw, w.dusun ";
 		$sql = $select_sql.$get_terdata_sql;
 		$sql .= $this->search_sql('2');
 		if ( ! empty($_SESSION['per_page']) and $_SESSION['per_page'] > 0)
@@ -300,6 +304,9 @@ class Data_kemiskinan_model extends MY_Model {
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
 				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
+				$data[$i]['pekerjaan_id'] = $data[$i]['pekerjaan_id'];
+				$data[$i]['nama_ibu'] = $data[$i]['nama_ibu'];
+				$data[$i]['kk_level'] = $data[$i]['kk_level'];
 			}
 			$hasil['terdata'] = $data;
 		}
@@ -320,7 +327,7 @@ class Data_kemiskinan_model extends MY_Model {
 				u.tempatlahir AS tempatlahir, u.tanggallahir AS tanggallahir, u.foto AS foto,
 				(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 				from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur,
-				w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik AS nik, c.rt AS rt, c.rw AS rw, c.dusun AS dusun, k.no_kk AS no_kk, k.alamat,
+				w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan_id, u.nik AS nik, c.rt AS rt, c.rw AS rw, c.dusun AS dusun, k.no_kk AS no_kk, k.alamat,
 				(select tweb_penduduk.nama AS nama from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS kepala_kk
 				from tweb_penduduk u
 				left join tweb_penduduk_sex x on u.sex = x.id
@@ -383,6 +390,8 @@ class Data_kemiskinan_model extends MY_Model {
 	public function add_terdata($post, $id)
 	{
 		$id_terdata = $post['id_terdata'];
+		$id_dtks = $post['id_dtks'];
+
 		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('data_kemiskinan')->row()->sasaran;
 		$hasil = $this->db->where('id_data_kemiskinan', $id)->where('id_terdata', $id_terdata)->get('data_kemiskinan_detail');
 		if ($hasil->num_rows() > 0)
@@ -393,9 +402,12 @@ class Data_kemiskinan_model extends MY_Model {
 		{
 			$data = array(
 				'id_data_kemiskinan' => $id,
+				'id_dtks' => $id_dtks,
 				'id_terdata' => $id_terdata,
 				'sasaran' => $sasaran,
-				'keterangan' => substr(htmlentities($post['keterangan']), 0, 100) // Batasi 100 karakter
+				'keterangan_padan' => substr(htmlentities($post['keterangan_padan']), 0, 50), // Batasi 100 karakter
+				'keterangan_bantuan' => substr(htmlentities($post['keterangan_bantuan']), 0, 100) // Batasi 100 karakter
+
 			);
 			return $this->db->insert('data_kemiskinan_detail', $data);
 		}
@@ -412,7 +424,10 @@ class Data_kemiskinan_model extends MY_Model {
 	// $id = data_kemiskinan_detail.id
 	public function edit_terdata($post, $id)
 	{
-		$data['keterangan'] = substr(htmlentities($post['keterangan']), 0, 100); // Batasi 100 karakter
+		$data['keterangan_padan'] = substr(htmlentities($post['keterangan_padan']), 0, 50); // Batasi 100 karakter
+		$data['keterangan_bantuan'] = substr(htmlentities($post['keterangan_bantuan']), 0, 100); // Batasi 100 karakter
+
+		$data['id_dtks'] = $post['id_dtks'];
 		$this->db->where('id', $id);
 		$this->db->update('data_kemiskinan_detail', $data);
 	}
@@ -428,16 +443,21 @@ class Data_kemiskinan_model extends MY_Model {
 		switch ($data['sasaran'])
 		{
 			case 1:
+				$data['id_dtks'] = $terdata['id_dtks'];
 				$data['judul_terdata_nama'] = 'NIK';
 				$data['judul_terdata_info'] = 'Nama Terdata';
 				$data['terdata_nama'] = $terdata['nik'];
 				$data['terdata_info'] = $terdata['nama'];
+				$data['pekerjaan_id'] = $terdata['pekerjaan_id'];
+
 				break;
 			case 2:
+				$data['id_dtks'] = $terdata['id_dtks'];
 				$data['judul_terdata_nama'] = 'No. KK';
 				$data['judul_terdata_info'] = 'Kepala Keluarga';
 				$data['terdata_nama'] = $terdata['no_kk'];
 				$data['terdata_info'] = $terdata['nama'];
+				$data['pekerjaan_id'] = $terdata['pekerjaan_id'];
 				break;
 			default:
 		}
@@ -449,12 +469,12 @@ class Data_kemiskinan_model extends MY_Model {
 	{
 		$list_data_kemiskinan = [];
 		/*
-		 * Menampilkan keterlibatan $id_terdata dalam data suplemen yang ada
+		 * Menampilkan keterlibatan $id_terdata dalam data data_kemiskinan yang ada
 		 *
 		 * */
-		$strSQL = "SELECT p.id as id, o.id_terdata as nik, p.nama as nama, p.keterangan
+		$strSQL = "SELECT p.id as id, o.id_terdata as nik, p.nama as nama
 			FROM data_kemiskinan_detail o
-			LEFT JOIN suplemen p ON p.id = o.id_data_kemiskinan
+			LEFT JOIN data_kemiskinan p ON p.id = o.id_data_kemiskinan
 			WHERE ((o.id_terdata='".$id_terdata."') AND (o.sasaran='".$sasaran."'))";
 		$query = $this->db->query($strSQL);
 		if ($query->num_rows() > 0)
@@ -468,7 +488,7 @@ class Data_kemiskinan_model extends MY_Model {
 				/*
 				 * Rincian Penduduk
 				 * */
-				$strSQL = "SELECT o.nama, o.foto, o.nik, w.rt, w.rw, w.dusun,
+				$strSQL = "SELECT o.nama, o.foto, o.nik, o.pekerjaan_id, o.nama_ibu, w.rt, w.rw, w.dusun,
 				(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
 					FROM tweb_penduduk o
 					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
@@ -491,7 +511,7 @@ class Data_kemiskinan_model extends MY_Model {
 				/*
 				 * KK
 				 * */
-				$strSQL = "SELECT o.nik_kepala, o.no_kk, o.alamat, p.nama, w.rt, w.rw, w.dusun
+				$strSQL = "SELECT o.nik_kepala, o.no_kk, o.alamat, p.nama, w.rt, w.rw, w.dusun, w.pekerjaan_id
 					FROM tweb_keluarga o
 					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
 					LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster
@@ -514,7 +534,7 @@ class Data_kemiskinan_model extends MY_Model {
 		}
 		if ( ! empty($list_data_kemiskinan))
 		{
-			$hasil = array("daftar_suplemen" => $list_data_kemiskinan, "profil" => $data_profil);
+			$hasil = array("daftar_data_kemiskinan" => $list_data_kemiskinan, "profil" => $data_profil);
 			return $hasil;
 		}
 		else

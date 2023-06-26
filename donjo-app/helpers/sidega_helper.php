@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-define("VERSION", '5.5.6');
+define("VERSION", '5.6.0');
 
-define('VERSI_DATABASE', '2022090101');
+define('VERSI_DATABASE', '2023062801');
 
 define("LOKASI_LOGO_DESA", 'desa/logo/');
 

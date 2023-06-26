@@ -17,10 +17,20 @@
 			</tbody>
 		</table>
 		<div class="form-group">
-			<label for="keterangan">Keterangan</label>
-			<input type="hidden" name="id_data_kemiskinan" value="<?= $id_data_kemiskinan?>"/>
-			<textarea name="keterangan" id="keterangan" class="form-control input-sm" maxlength="100" placeholder="Keterangan" rows="5"><?= $keterangan?></textarea>
+			<label for="id_dtks">ID DTKS</label>
+			<input name="id_dtks" id="id_dtks" class="form-control input-sm" maxlength="100" placeholder="ID DTKS"><?= $id_dtks?></input>
 		</div>
+		<div class="form-group">
+			<label for="keterangan_padan">Keterangan Padan</label>
+			<input name="keterangan_padan" id="keterangan_padan" class="form-control input-sm" maxlength="100" placeholder="Keterangan Padan"><?= $keterangan_padan?></input>
+		</div>
+
+		<div class="form-group">
+			<label for="keterangan_bantuan">Keterangan Bantuan</label>
+			<input type="hidden" name="id_data_kemiskinan" value="<?= $id_data_kemiskinan?>"/>
+			<textarea name="keterangan_bantuan" id="keterangan_bantuan" class="form-control input-sm" maxlength="100" placeholder="Keterangan Bantuan" rows="5"><?= $keterangan_bantuan?></textarea>
+		</div>
+
 	</div>
 	<div class="modal-footer">
 		<button type="reset" class="btn btn-social btn-box btn-danger btn-sm pull-left"><i class="fa fa-times"></i> Batal</button>

@@ -6,8 +6,8 @@ class Data_kemiskinan extends Admin_Controller {
 	{
 		parent::__construct();
 		$this->load->model(['data_kemiskinan_model', 'pamong_model']);
-		$this->modul_ini = 2;
-		$this->sub_modul_ini = 811;
+		$this->modul_ini = 6;
+		$this->sub_modul_ini = 812;
 	}
 
 	public function index()

@@ -2,10 +2,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Pengelolaan Data Kemiskinan <?= ($set_sasaran == 0)? '' : "Sasaran $sasaran[$set_sasaran]"; ?></h1>
+		<h1>Pengelolaan DTKS</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda'); ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li class="active">Pengelolaan Data Kemiskinan</li>
+			<li><a href="<?= site_url('data_kemiskinan')?>"> Program Bantuan</a></li>
+			<li class="active">Pengelolaan DTKS</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -13,7 +14,7 @@
 			<div class="box box-info">
 				<div class="box-header with-border">
 					<a href="<?=site_url('data_kemiskinan/form')?>" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah data_kemiskinan Baru"><i class="fa fa-plus"></i> Tambah Kategori Data</a>
-					<a href="<?=site_url('data_kemiskinan/panduan')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Program Bantuan Baru"><i class="fa fa-question-circle"></i> Panduan</a>
+					<!--<a href="<?=site_url('data_kemiskinan/panduan')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Program Bantuan Baru"><i class="fa fa-question-circle"></i> Panduan</a>-->
 				</div>
 				<div class="box-body">
 					<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -33,6 +34,7 @@
 									<tr>
 										<th>No</th>
 										<th>Aksi</th>
+										<th>Tahun</th>
 										<th>Nama Kelompok Data</th>
 										<th>Jumlah Terdata</th>
 										<th>Sasaran</th>
@@ -54,6 +56,7 @@
 														class="btn bg-maroon btn-box btn-sm" title="Hapus" <?= jecho($item['jml'] > 0, true, 'disabled'); ?>><i class="fa fa-trash-o"></i>
 													</a>
 												</td>
+												<td class="padat"><?= $item['tahun']?></td>
 												<td width="20%"><a href="<?= site_url("data_kemiskinan/rincian/$item[id]"); ?>"><?= $item["nama"] ?></a></td>
 												<td class="padat"><?= $item['jml']?></td>
 												<td class="nostretch"><?= $sasaran[$item["sasaran"]]?></td>

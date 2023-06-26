@@ -26,6 +26,13 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="keperluan"  class="col-sm-3 control-label">Pekerjaan</label>
+		<div class="col-sm-8">
+			<input class="form-control input-sm" type="text" value="<?= $individu['pekerjaan']?>" disabled="">
+		</div>
+	</div>
+
+	<div class="form-group">
 		<label for="keperluan"  class="col-sm-3 control-label">Warga Negara /Agama</label>
 		<div class="col-sm-4">
 			<input class="form-control input-sm" type="text" value="<?= $individu['warganegara']?>" disabled="">
@@ -59,6 +66,13 @@
 			<input class="form-control input-sm" type="text" value="<?= $individu['pendidikan']?>" disabled="">
 		</div>
 	</div>
+	<div class="form-group">
+		<label for="keperluan"  class="col-sm-3 control-label">Pekerjaan KK</label>
+		<div class="col-sm-8">
+			<input class="form-control input-sm" type="text" value="<?= $individu['pekerjaan']?>" disabled="">
+		</div>
+	</div>
+
 	<div class="form-group">
 		<label for="keperluan"  class="col-sm-3 control-label">Warga Negara /Agama KK</label>
 		<div class="col-sm-4">
