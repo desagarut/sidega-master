@@ -214,7 +214,10 @@
 															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" id="test" name="<?= $data['id']; ?>"><?= $data['nik']; ?></a>
 														</td>
 														<td nowrap>
-															<strong><?= strtoupper($data['nama']); ?></strong></br>
+															<label data-rel="popover" data-content="<img width=200 height=230 src=<?= AmbilFoto($data['foto'], '', $data['id_sex']) ?>>">
+																<strong><?= strtoupper($data['nama']); ?></strong>
+															</label>
+															</br>
 															Ayah : <?= $data['nama_ayah']; ?></br>
 															Ibu : <?= $data['nama_ibu']; ?>
 														</td>

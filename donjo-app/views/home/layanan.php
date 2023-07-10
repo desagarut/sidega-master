@@ -10,9 +10,14 @@
       <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('h')): ?><?=site_url('surat_masuk')?><?php endif;?>" title="Surat Masuk"><span class="badge bg-aqua"></span><i class="fa fa-envelope text-green"></i> Surat Masuk </a> 
       <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('h')): ?><?=site_url('surat_keluar')?><?php endif;?>" title="Surat Keluar"> <i class="fa fa-envelope-o text-orange"></i> Surat Keluar </a> <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('h')): ?><?=site_url('permohonan_surat_admin')?><?php endif;?>"> <i class="fa fa-paper-plane-o text-aqua"></i> Surat Online <span class="badge bg-green">
       -->
-      <?=$permohonan_surat?>
+      <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('u')): ?><?=site_url('permohonan_surat_admin')?><?php endif;?>"> <i class="fa fa-envelope-o text-maroon"></i> Surat Online <span class="badge bg-maroon">
+        <?=$permohonan_surat?>
+      </span></a> 
+      
       </span> </a> 
-      <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('h')): ?><?=site_url('mandiri')?><?php endif;?>" title="Buat PIN Layanan Mandiri Warga "> <i class="fa fa-key"></i> Buat PIN </a> <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('u')): ?><?=site_url('mailbox')?><?php endif;?>"> <i class="fa fa-commenting-o text-maroon"></i> Pesan Warga <span class="badge bg-maroon">
+      <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('h')): ?><?=site_url('mandiri')?><?php endif;?>" title="Buat PIN Layanan Mandiri Warga "> <i class="fa fa-key"></i> Buat PIN </a> 
+      
+        <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('u')): ?><?=site_url('mailbox')?><?php endif;?>"> <i class="fa fa-commenting-o text-maroon"></i> Pesan Warga <span class="badge bg-maroon">
       <?=$status?>
       </span></a> 
       <a class="btn btn-app" href="<?php if ($this->CI->cek_hak_akses('u')): ?><?=site_url('komentar')?><?php endif;?>"><i class="fa fa-comments-o text-blue"></i> <span class="badge bg-blue">

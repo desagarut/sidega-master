@@ -109,6 +109,7 @@ class Data_sppt_model extends CI_Model {
 		return $this->paging;
 	}
 
+/*
 	public function list_data_sppt($offset=0, $per_page='', $kecuali=[])
 	{
 		$kecuali = sql_in_list($kecuali);
@@ -135,6 +136,35 @@ class Data_sppt_model extends CI_Model {
 		}
 		return $data;
 	}
+	*/
+
+	public function list_data_sppt($offset=0, $per_page='', $kecuali=[])
+	{
+		$kecuali = sql_in_list($kecuali);
+		$data = [];
+		$this->main_sql_sppt_daftar();
+		$this->db
+			->select('c.*, c.id as id_sppt, c.created_at as tanggal_daftar, cu.id_pend')
+			->select('u.nik AS nik, u.nama as namatertagih, w.*')
+			->select('(CASE WHEN c.jenis_wp = 1 THEN u.nama ELSE c.nama_wp_luar END) AS namatertagih')
+			->select('(CASE WHEN c.jenis_wp = 1 THEN CONCAT("RT ", w.rt, " / RW ", w.rw, " - ", w.dusun) ELSE c.alamat_wp_luar END) AS alamat')
+			->select('COUNT(DISTINCT c.id) AS jumlah')
+			->order_by('cast(c.nomor as unsigned)')
+			->group_by('c.id, cu.id');
+		if ($per_page) $this->db->limit($per_page, $offset);
+  	if ($kecuali)	$this->db->where("c.id not in ($kecuali)");
+		$data = $this->db
+			->get()
+			->result_array();
+		$j = $offset;
+		for ($i=0; $i<count($data); $i++)
+		{
+			$data[$i]['no'] = $j + 1;
+			$j++;
+		}
+		return $data;
+	}
+
 
 
 	public function get_data_sppt($id)
