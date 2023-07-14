@@ -112,13 +112,13 @@ table.table th {
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li ><a href="#biodata" data-toggle="tab">Biodata</a></li>
-              <li><a href="#keluarga" data-toggle="tab">Keluarga</a></li>
-              <li><a href="#kelompok" data-toggle="tab">Kelompok</a></li>
+              <li class="active"><a href="#biodata" data-toggle="tab">Biodata</a></li>
+              <!--<li><a href="#keluarga" data-toggle="tab">Keluarga</a></li>
+              <li><a href="#kelompok" data-toggle="tab">Kelompok</a></li>-->
               <li><a href="#dok" data-toggle="tab">Dokumen</a></li>
               <li><a href="#bantuan" data-toggle="tab">Bantuan</a></li>
               <li><a href="#rumah" data-toggle="tab">Foto Rumah</a></li>
-              <li class="active"><a href="#resume" data-toggle="tab">Resume</a></li>
+              <li><a href="#resume" data-toggle="tab">Peta</a></li>
             </ul>
             <div class="tab-content"> 
               <!-- /Profile Biodata-->

@@ -1,4 +1,4 @@
-<!-- ======= Gallery Youtube ======= -->
+<!-- ======= Artikel ======= -->
 <div class="col-md-3">
 
   <div class="box box-primary">
@@ -18,15 +18,15 @@
           <ul class="products-list product-list-in-box">
             <li class="item">
               <div class="product-img">
-              <img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>
-              <?php //if ($article['gambar'] && is_file(LOKASI_FOTO_ARTIKEL . 'sedang_' . $data['gambar'])) : ?>
-					<!--<img src="<?= AmbilFotoArtikel($data['gambar'], 'sedang') ?>" alt="<?= $data['judul'] ?>" id="current">-->
-				<?php //endif ?>
+              <img width=50 height=80 src=<?= AmbilFotoArtikel($data['gambar'], 'kecil') ?>>
               </div>
               <div class="product-info">
-                <a href="#" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
-                 <!-- <span class="label label-warning pull-right">$1800</span>-->
+              <?php if ($this->CI->cek_hak_akses('u')): ?>
+                <a href="<?= site_url("web/form/$data[id]")?>" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
                 </a>
+                <?php else: ?>
+                  <?= $data['judul'] ?>
+                <?php endif; ?>
                 <span class="product-description">
                   <?= $data['tgl_upload'] ?> | <?= $data['owner'] ?>
                 </span>

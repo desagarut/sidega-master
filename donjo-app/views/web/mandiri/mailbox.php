@@ -1,11 +1,11 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!-- Content Wrapper. Contains page content -->
 
-<div class="content-wrapper"> 
-  
+<div class="content-wrapper">
+
   <!-- Content Header (Page header) -->
-  
+
   <section class="content-header">
     <h1> Mailbox </h1>
     <ol class="breadcrumb">
@@ -13,79 +13,67 @@
       <li class="active">Mailbox</li>
     </ol>
   </section>
-  
+
   <!-- Main content -->
-  
+
   <section class="content">
     <div class="row">
-    <div class="col-md-3">
-      <?php $this->load->view('web/mandiri/mailbox_menu.php');?>
-    </div>
-    
-    <!-- /.col -->
-    
-    <div class="col-md-9">
-      <div class="box box-info">
-        <div class="box-header">
-          <h3 class="box-title">Pesan</h3>
-          <div class="box-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+      <div class="col-md-3">
+        <?php $this->load->view('web/mandiri/mailbox_menu.php'); ?>
+      </div>
+
+      <!-- /.col -->
+
+      <div class="col-md-9">
+        <div class="box box-info">
+          <div class="box-header">
+            <h3 class="box-title">Pesan</h3>
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- /.box-header -->
+
+          <div class="box-body table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <th>No</th>
+                <th>Aksi</th>
+                <th>Subyek</th>
+                <th>Status</th>
+                <th>Waktu</th>
+              </tr>
+              <?php foreach ($main_list as $data) : ?>
+                <tr class="<?php ($data['status'] != 1) and print('unread') ?>">
+                  <td><?= $data['no'] ?></td>
+                  <td nowrap><a href="<?= site_url("mailbox_web/baca_pesan/{$kat}/{$data['id']}") ?>" class="btn btn-social bg-navy btn-box btn-sm" title="Baca pesan"><i class="fa fa-envelope-o"></i> Baca</a>
+                    <?php if ($kat != 2) : ?>
+                      <?php if ($data['status'] == 1) : ?>
+                        <a href="<?= site_url('mailbox_web/pesan_unread/' . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai belum dibaca"><i class="fa fa-envelope-o"></i></a>
+                      <?php else : ?>
+                        <a href="<?= site_url('mailbox_web/pesan_read/' . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai sudah dibaca"><i class="fa fa-envelope-open-o"></i></a>
+                      <?php endif; ?>
+                    <?php endif ?>
+                  </td>
+                  <td width="40%"><?= $data['subjek'] ?></td>
+                  <td><?= $data['status'] == 1 ? 'Sudah Dibaca' : 'Belum Dibaca' ?></td>
+                  <td nowrap><?= tgl_indo2($data['tgl_upload']) ?></td>
+                </tr>
+              <?php endforeach ?>
+            </table>
+          </div>
         </div>
-        
-        <!-- /.box-header -->
-        
-        <div class="box-body table-responsive">
-          <table class="table table-hover">
-            <tr>
-              <th>ID</th>
-              <th>Aksi</th>
-              <th>Subyek</th>
-              <th>Status</th>
-              <th>Waktu</th>
-            </tr>
-            <?php foreach($main_list as $data) : ?>
-            <tr class="<?php ($data['status']!=1) and print('unread')?>">
-              <td><?=$data['no']?></td>
-              <td nowrap><a href="<?=site_url("mailbox_web/baca_pesan/{$kat}/{$data['id']}")?>" class="btn btn-social bg-navy btn-box btn-sm" title="Baca pesan"><i class="fa fa-envelope-o"></i> Baca</a>
-                <?php if($kat != 2) : ?>
-                <?php if ($data['status'] == 1): ?>
-                <a href="<?=site_url('mailbox_web/pesan_unread/'.$data['id'])?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai belum dibaca"><i class="fa fa-envelope-o"></i></a>
-                <?php else : ?>
-                <a href="<?=site_url('mailbox_web/pesan_read/'.$data['id'])?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai sudah dibaca"><i class="fa fa-envelope-open-o"></i></a>
-                <?php endif; ?>
-                <?php endif ?></td>
-              <td width="40%"><?=$data['subjek']?></td>
-              <td><?=$data['status'] == 1 ? 'Sudah Dibaca' : 'Belum Dibaca' ?></td>
-              <td nowrap><?=tgl_indo2($data['tgl_upload'])?></td>
-            </tr>
-            <?php endforeach ?>
-          </table>
-        </div>
-        
-        <!-- /.box-body --> 
-        
       </div>
-      
-      <!-- /.box --> 
-      
-    </div>
-    <!-- /.col --> 
-    
-    <!-- /.row --> 
-    
   </section>
-  
-  <!-- /.content --> 
-  
 </div>
 
-<!-- /.content-wrapper --> 
+<!-- /.content-wrapper -->
 
 <!--
 
@@ -105,7 +93,7 @@
 
 				<ul class="nav nav-tabs">
 
-					<?php foreach($submenu as $id => $nama_menu) : ?>
+					<?php foreach ($submenu as $id => $nama_menu) : ?>
 
 						<li class="<?php ($_SESSION['mailbox'] == $id) and print('active') ?>">
 
@@ -149,25 +137,25 @@
 
 						<tbody>
 
-							<?php foreach($main_list as $data) : ?>
+							<?php foreach ($main_list as $data) : ?>
 
-								<tr class="<?php ($data['status']!=1) and print('unread')?>">
+								<tr class="<?php ($data['status'] != 1) and print('unread') ?>">
 
-									<td><?=$data['no']?></td>
+									<td><?= $data['no'] ?></td>
 
 									<td nowrap>
 
-										<a href="<?=site_url("mailbox_web/baca_pesan/{$kat}/{$data['id']}")?>" class="btn bg-navy btn-box btn-sm" title="Baca pesan"><i class="fa fa-list">&nbsp;</i></a>
+										<a href="<?= site_url("mailbox_web/baca_pesan/{$kat}/{$data['id']}") ?>" class="btn bg-navy btn-box btn-sm" title="Baca pesan"><i class="fa fa-list">&nbsp;</i></a>
 
-										<?php if($kat != 2) : ?>
+										<?php if ($kat != 2) : ?>
 
-											<?php if ($data['status'] == 1): ?>
+											<?php if ($data['status'] == 1) : ?>
 
-												<a href="<?=site_url('mailbox_web/pesan_unread/'.$data['id'])?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai belum dibaca"><i class="fa fa-envelope-o"></i></a>
+												<a href="<?= site_url('mailbox_web/pesan_unread/' . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai belum dibaca"><i class="fa fa-envelope-o"></i></a>
 
 												<?php else : ?>
 
-													<a href="<?=site_url('mailbox_web/pesan_read/'.$data['id'])?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai sudah dibaca"><i class="fa fa-envelope-open-o"></i></a>
+													<a href="<?= site_url('mailbox_web/pesan_read/' . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Tandai sebagai sudah dibaca"><i class="fa fa-envelope-open-o"></i></a>
 
 											<?php endif; ?>
 
@@ -175,11 +163,11 @@
 
 									</td>
 
-									<td width="40%"><?=$data['subjek']?></td>
+									<td width="40%"><?= $data['subjek'] ?></td>
 
-									<td><?=$data['status'] == 1 ? 'Sudah Dibaca' : 'Belum Dibaca' ?></td>
+									<td><?= $data['status'] == 1 ? 'Sudah Dibaca' : 'Belum Dibaca' ?></td>
 
-									<td nowrap><?=tgl_indo2($data['tgl_upload'])?></td>
+									<td nowrap><?= tgl_indo2($data['tgl_upload']) ?></td>
 
 								</tr>
 

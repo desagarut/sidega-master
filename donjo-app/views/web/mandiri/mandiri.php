@@ -23,7 +23,7 @@ table.table th {
           <div class="box box-primary">
             <div class="box-body box-profile">
               <div align="center">
-                <p class="text-muted text-center"> <small> Hai <?= strtoupper($penduduk['nama'])?>, selamat datang di layanan <?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?>, anda login sebagai </small> </p>
+                <p class="text-muted text-center"> <small> Assalamu'alaikum,<br/> selamat datang di layanan <?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?>, anda login sebagai </small> </p>
                 <?php if ($penduduk['foto']): ?>
                 <img class="img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'])?>" alt="Foto Penduduk">
                 <?php else: ?>

@@ -1,6 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mandiri_model extends CI_Model {
+class Mandiri_model extends CI_Model
+{
 
 	public function __construct()
 	{
@@ -12,7 +13,7 @@ class Mandiri_model extends CI_Model {
 		$data = $this->db
 			->select('p.nama')
 			->from('tweb_penduduk_mandiri pm')
-			->join('penduduk_hidup p','p.id = pm.id_pend', 'left')
+			->join('penduduk_hidup p', 'p.id = pm.id_pend', 'left')
 			->get()
 			->result_array();
 
@@ -22,13 +23,12 @@ class Mandiri_model extends CI_Model {
 	private function search_sql()
 	{
 		$cari = $this->session->cari;
-		if ($cari)
-		{
+		if ($cari) {
 			$cari = $this->db->escape_like_str($cari);
 			$this->db
 				->group_start()
-					->like('p.nik', $cari)
-					->or_like('p.nama', $cari)
+				->like('p.nik', $cari)
+				->or_like('p.nama', $cari)
 				->group_end();
 		}
 	}
@@ -64,17 +64,33 @@ class Mandiri_model extends CI_Model {
 
 		$this->list_data_sql();
 
-		switch ($o)
-		{
-			case 1: $this->db->order_by('p.nik'); break;
-			case 2: $this->db->order_by('p.nik', DESC); break;
-			case 3: $this->db->order_by('p.nama'); break;
-			case 4: $this->db->order_by('p.nama', DESC); break;
-			case 5: $this->db->order_by('pm.tanggal_buat'); break;
-			case 6: $this->db->order_by('pm.tanggal_buat', DESC); break;
-			case 7: $this->db->order_by('pm.last_login'); break;
-			case 8: $this->db->order_by('pm.last_login', DESC); break;
-			default: '';
+		switch ($o) {
+			case 1:
+				$this->db->order_by('p.nik');
+				break;
+			case 2:
+				$this->db->order_by('p.nik', DESC);
+				break;
+			case 3:
+				$this->db->order_by('p.nama');
+				break;
+			case 4:
+				$this->db->order_by('p.nama', DESC);
+				break;
+			case 5:
+				$this->db->order_by('pm.tanggal_buat');
+				break;
+			case 6:
+				$this->db->order_by('pm.tanggal_buat', DESC);
+				break;
+			case 7:
+				$this->db->order_by('pm.last_login');
+				break;
+			case 8:
+				$this->db->order_by('pm.last_login', DESC);
+				break;
+			default:
+				'';
 		}
 
 		$this->db->limit($limit, $offset);
@@ -129,7 +145,7 @@ class Mandiri_model extends CI_Model {
 
 	public function delete($id_pend = '', $semua = FALSE)
 	{
-		if ( ! $semua) $this->session->success = 1;
+		if (!$semua) $this->session->success = 1;
 
 		$outp = $this->db->where('id_pend', $id_pend)->delete('tweb_penduduk_mandiri');
 
@@ -142,8 +158,7 @@ class Mandiri_model extends CI_Model {
 		$this->session->success = 1;
 
 		$id_cb = $_POST['id_cb'];
-		foreach ($id_cb as $id)
-		{
+		foreach ($id_cb as $id) {
 			$this->delete($id, $semua = TRUE);
 		}
 	}
@@ -152,16 +167,15 @@ class Mandiri_model extends CI_Model {
 	private function list_data_ajax_sql($cari = '')
 	{
 		$this->db
-			->select('u.*, n.nama AS nama, n.nik AS nik')
 			->from('tweb_penduduk_mandiri u')
 			->join('penduduk_hidup n', 'u.id_pend = n.id', 'left')
 			->join('tweb_wil_clusterdesa w', 'n.id_cluster = w.id', 'left');
 
-		if ($cari)
-		{
+		if ($cari) {
 			$this->db->where("(nik like '%{$cari}%' or nama like '%{$cari}%')");
 		}
 	}
+
 
 	// TODO : Digunakan dimana ?
 	public function list_data_ajax($cari, $page)
@@ -174,7 +188,7 @@ class Mandiri_model extends CI_Model {
 			->jml;
 
 		$result_count = 25;
-		$offset = ($page - 1) * $result_count;
+		$offset       = ($page - 1) * $result_count;
 
 		$this->list_data_ajax_sql($cari);
 		$this->db
@@ -183,28 +197,25 @@ class Mandiri_model extends CI_Model {
 			->limit($result_count, $offset);
 		$data = $this->db->get()->result_array();
 
-		foreach ($data as $row )
-		{
-			$nama = addslashes($row['nama']);
-			$alamat = addslashes("Alamat: RT-{$row['rt']}, RW-{$row['rw']} {$row['dusun']}");
-			$outp = "{$row['nik']} - {$nama} \n {$alamat}";
-			$pendaftar_mandiri[] = array(
-				'id' => $row['nik'],
-				'text' => $outp
-			);
+		foreach ($data as $row) {
+			$nama                = addslashes($row['nama']);
+			$alamat              = addslashes("Alamat: RT-{$row['rt']}, RW-{$row['rw']} {$row['dusun']}");
+			$outp                = "{$row['nik']} - {$nama} \n {$alamat}";
+			$pendaftar_mandiri[] = [
+				'id'   => $row['nik'],
+				'text' => $outp,
+			];
 		}
 
-		$end_count = $offset + $result_count;
+		$end_count  = $offset + $result_count;
 		$more_pages = $end_count < $jml;
 
-		$result = array(
-			'results' => $pendaftar_mandiri,
-			"pagination" => array(
-				"more" => $more_pages
-			)
-		);
-
-		return $result;
+		return [
+			'results'    => $pendaftar_mandiri,
+			'pagination' => [
+				'more' => $more_pages,
+			],
+		];
 	}
 
 	public function get_pendaftar_mandiri($nik)
@@ -220,41 +231,35 @@ class Mandiri_model extends CI_Model {
 
 	public function list_penduduk()
 	{
-		$data = $this->db
+		return $this->db
 			->select('id, nik, nama')
 			->where('nik <>', '')
 			->where('nik <>', 0)
 			->where('id NOT IN (SELECT id_pend FROM tweb_penduduk_mandiri)')
 			->get('penduduk_hidup')
 			->result_array();
-
-		return $data;
 	}
 
-	public function get_penduduk($id_pend, $id_nik = FALSE)
+	public function get_penduduk($id_pend, $id_nik = false)
 	{
-		($id_nik === TRUE) ? $this->db->where('nik', $id_pend) : $this->db->where('id', $id_pend);
+		($id_nik === true) ? $this->db->where('nik', $id_pend) : $this->db->where('id', $id_pend);
 
-		$data = $this->db
+		return $this->db
 			->select('id, nik, nama, telepon')
 			->get('penduduk_hidup')
 			->row_array();
-
-		return $data;
 	}
 
-	public function get_mandiri($id_pend, $id_nik = FALSE)
+	public function get_mandiri($id_pend, $id_nik = false)
 	{
-		($id_nik === TRUE) ? $this->db->where('p.nik', $id_pend) : $this->db->where('pm.id_pend', $id_pend);
+		($id_nik === true) ? $this->db->where('p.nik', $id_pend) : $this->db->where('pm.id_pend', $id_pend);
 
-		$data = $this->db
+		return $this->db
 			->select('pm.*, p.nama, p.nik, p.email, p.telepon')
 			->from('tweb_penduduk_mandiri pm')
 			->join('penduduk_hidup p', 'pm.id_pend = p.id', 'LEFT')
 			->get()
 			->row_array();
-
-		return $data;
 	}
 
 	#Login Layanan Mandiri
@@ -274,8 +279,7 @@ class Mandiri_model extends CI_Model {
 			->row();
 		$lg = $row->last_login;
 
-		if ($hash_pin == $row->pin)
-		{
+		if ($hash_pin == $row->pin) {
 			$sql = "SELECT nama,nik,p.id,k.no_kk
 			FROM tweb_penduduk p
 			LEFT JOIN tweb_keluarga k ON p.id_kk = k.id
@@ -283,10 +287,9 @@ class Mandiri_model extends CI_Model {
 			$query = $this->db->query($sql, array($nik));
 			$row = $query->row();
 			// Kosong jika NIK penduduk ybs telah berubah
-			if (!empty($row))
-			{
+			if (!empty($row)) {
 				// Kalau pertama kali login, pengguna perlu mengganti PIN ($_SESSION['lg'] == 1)
-				$this->session->lg = ($lg == NULL OR $lg == "0000-00-00 00:00:00") ? 1 : 2;
+				$this->session->lg = ($lg == NULL or $lg == "0000-00-00 00:00:00") ? 1 : 2;
 
 				$_SESSION['nama'] = $row->nama;
 				$_SESSION['nik'] = $row->nik;
@@ -296,20 +299,16 @@ class Mandiri_model extends CI_Model {
 			}
 			return;
 		}
-		if ($_SESSION['mandiri_try'] > 2)
-		{
+		if ($_SESSION['mandiri_try'] > 2) {
 			$_SESSION['mandiri_try'] = $_SESSION['mandiri_try'] - 1;
-		}
-		else
-		{
+		} else {
 			$_SESSION['mandiri_wait'] = 1;
 		}
 	}
 
 	public function logout()
 	{
-		if (isset($_SESSION['nik']))
-		{
+		if (isset($_SESSION['nik'])) {
 			$nik = $_SESSION['nik'];
 			$sql = "UPDATE tweb_penduduk_mandiri SET last_login = NOW()
 			WHERE id_pend = (SELECT id FROM tweb_penduduk WHERE strcmp(nik, ?) = 0)";
@@ -332,32 +331,25 @@ class Mandiri_model extends CI_Model {
 		$pin2 = hash_pin($this->input->post('pin2'));
 
 		// Ganti password
-		if ($pin_lama != ''	|| $pin1 != '' || $pin2 != '')
-		{
+		if ($pin_lama != ''	|| $pin1 != '' || $pin2 != '') {
 			$row = $this->db->select('pin, last_login')
 				->where('p.nik', $nik)
 				->from('tweb_penduduk_mandiri m')
 				->join('tweb_penduduk p', 'm.id_pend = p.id', 'left')
 				->get()->row();
 
-			if ($pin_lama != $row->pin)
-			{
+			if ($pin_lama != $row->pin) {
 				$this->session->error_msg .= 'PIN lama salah<br />';
 			}
-			if (empty($pin1))
-			{
+			if (empty($pin1)) {
 				$this->session->error_msg .= 'PIN baru tidak boleh kosong<br />';
 			}
-			if ($pin1 != $pin2)
-			{
+			if ($pin1 != $pin2) {
 				$this->session->error_msg .= 'Ulang PIN baru tidak cocok<br />';
 			}
-			if ( ! empty($this->session->error_msg))
-			{
+			if (!empty($this->session->error_msg)) {
 				$this->session->success = -1;
-			}
-			else
-			{
+			} else {
 				$hash_pin = $pin1;
 				$data['pin'] = $hash_pin;
 				$this->db->where("id_pend = (SELECT id FROM tweb_penduduk WHERE strcmp(nik, {$_SESSION['nik']}) = 0)");
@@ -366,5 +358,4 @@ class Mandiri_model extends CI_Model {
 			}
 		}
 	}
-
 }

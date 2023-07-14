@@ -1,15 +1,15 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="tab-pane" id="biodata"> 
+<div class="active tab-pane" id="biodata"> 
   <!-- Post -->
   <div class="post">
     <div class="user-block">
       <div class="box-header with-border"><strong>BIODATA PENDUDUK</strong>
         <div class="text-right">
           <a href="<?= site_url("mandiri_web/cetak_biodata/$penduduk[id]"); ?>" target="_blank">
-            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-print"></i> BIODATA</button>
+            <button type="button" class="btn btn-success btn-sm">Cetak Biodata</button>
             </a><a href="<?= site_url("mandiri_web/cetak_kk/$penduduk[id]"); ?>" target="_blank">
-            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-print"></i> KK</button>
+            <button type="button" class="btn btn-success btn-sm">Cetak KK</button>
             </a>
         </div>
         <div class="table-responsive"><small>

@@ -6,8 +6,6 @@
       defer
     ></script>
 <script>
-
-<script>
 <?php if (!empty($penduduk_map['lat'] && !empty($penduduk_map['lng']))): ?>
 	var center = { lat: <?= $penduduk_map['lat'].", lng: ".$penduduk_map['lng']; ?> };
 <?php else: ?>
@@ -16,7 +14,7 @@
 
 function initMap() {
 	var myLatlng = new google.maps.LatLng(center.lat, center.lng);
-	var mapOptions = { zoom: 17, center, mapTypeId:google.maps.MapTypeId.HYBRID  }
+	var mapOptions = { zoom: 17, center, mapTypeId:google.maps.MapTypeId.HYBRID }
 	var map = new google.maps.Map(document.getElementById("map_penduduk"), mapOptions);
 
 	// Place a draggable marker on the map
@@ -24,8 +22,7 @@ function initMap() {
 			position: myLatlng,
 			map: map,
 			draggable: false,
-			title: 'Lokasi Rumah <?=$penduduk['nama']?>',
-            animation: google.maps.Animation.BOUNCE,
+			title: "Lokasi Rumah <?=$penduduk_map['nama']?>"
 	});
 
 	marker.addListener('dragend', (e) => {
@@ -40,9 +37,11 @@ function initMap() {
 	z-index: 1;
     width: 100%;
     height: 300px;
-    border: 1px solid #FC0;
+    border: 1px solid #F90;
 	margin-top:auto;
   }
 </style>
 
-<div id="map_penduduk"></div>
+<div class='body'>
+    <div id="map_penduduk"></div>
+</div>

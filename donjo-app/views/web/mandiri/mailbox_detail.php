@@ -5,7 +5,7 @@
     <section class="content-header">
       <h1>
         Mailbox
-        <small>13 new messages</small>
+        <small>#</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,7 +21,7 @@
             <div class="col-md-9">
               <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">Layanan Surat</h3>
+                    <h3 class="box-title">Balas Pesan</h3>
                     <?php if($pesan) : ?>
                         <form action="<?= site_url('mailbox_web/form') ?>" class="form-horizontal" method="post">
                             <div class="row">
