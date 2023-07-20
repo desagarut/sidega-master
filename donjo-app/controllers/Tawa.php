@@ -29,6 +29,7 @@ class Tawa extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'transportasi'];
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -51,7 +52,7 @@ class Tawa extends Admin_Controller {
         };
 		$data['keyword'] = $this->tawa_model->autocomplete();
 
-		$this->render('tawa/table', $data);
+		$this->render('umkm/tawa/table', $data);
 	}
 
 	public function form($p=1, $o=0, $id='')
@@ -90,7 +91,7 @@ class Tawa extends Admin_Controller {
             return $hasil_rupiah;
         };
 
-		$this->render('tawa/form', $data);
+		$this->render('umkm/tawa/form', $data);
 	}
 
 	public function search($gallery='')
@@ -216,7 +217,7 @@ class Tawa extends Admin_Controller {
             return $hasil_rupiah;
         };
 
-		$this->render('tawa/table_layanan', $data);
+		$this->render('umkm/tawa/table_layanan', $data);
 	}
 
 	public function form_layanan($gallery=0, $id=0)
@@ -248,7 +249,7 @@ class Tawa extends Admin_Controller {
         };
 		$data['album']=$gallery;
 
-		$this->render('tawa/form_layanan', $data);
+		$this->render('umkm/tawa/form_layanan', $data);
 	}
 
 	public function insert_layanan($gallery='')
@@ -318,7 +319,7 @@ class Tawa extends Admin_Controller {
 		$data['toko'] = $this->tawa_model->get_usaha($id);
 		$data['desa'] = $this->config_model->get_data($id);
 
-		$this->render('tawa/peta',$data);
+		$this->render('umkm/tawa/peta',$data);
 	}
 	
 	public function update_map($id = '')

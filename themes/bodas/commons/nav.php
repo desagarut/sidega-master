@@ -16,7 +16,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <!--<a href="<?= site_url('first') ?>" class="nav-item nav-link active">Home</a>-->
+            <a href="<?= site_url('first') ?>" class="nav-item nav-link active">Home</a>
             <?php if (menu_atas) : ?>
                 <?php foreach ($menu_atas as $menu) : ?>
 

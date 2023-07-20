@@ -15,7 +15,7 @@ class Web extends Admin_Controller {
 			exit;
 		}
 
-		$this->load->model(['web_artikel_model', 'web_kategori_model']);
+		$this->load->model(['web_artikel_model', 'web_kategori_model']); 
 		$this->_set_page = ['20', '50', '100'];
 		$this->modul_ini = 13;
 	}

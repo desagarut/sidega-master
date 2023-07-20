@@ -1,5 +1,4 @@
 
-<div class="col-md-3">
   <div class="box box-success">
     <div class="box-header with-border">
       <h3 class="box-title">Rekapitulasi Total PBB</h3>
@@ -48,7 +47,6 @@
 		?>
     </div>
   </div>
-</div>
 
 
 <script src="<?= base_url()?>assets/js/Chart.js"></script> 

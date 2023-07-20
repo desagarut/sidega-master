@@ -29,6 +29,7 @@ class Tukang extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'pertukangan'];
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -51,7 +52,7 @@ class Tukang extends Admin_Controller {
         };
 		$data['keyword'] = $this->tukang_model->autocomplete();
 
-		$this->render('tukang/table', $data);
+		$this->render('umkm/tukang/table', $data);
 	}
 
 	public function form($p=1, $o=0, $id='')
@@ -90,7 +91,7 @@ class Tukang extends Admin_Controller {
             return $hasil_rupiah;
         };
 
-		$this->render('tukang/form', $data);
+		$this->render('umkm/tukang/form', $data);
 	}
 
 	public function search($gallery='')
@@ -210,13 +211,14 @@ class Tukang extends Admin_Controller {
 		$data['gallery'] = $gal;
 		$data['sub'] = $this->tukang_model->get_tukang($gal);
 		$data['keyword'] = $this->tukang_model->autocomplete();
+		$data['tukang'] = $this->tukang_model->get_tukang($id);
 
 		$data['rupiah'] = function($angka){
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
         };
 
-		$this->render('tukang/table_layanan', $data);
+		$this->render('umkm/tukang/table_layanan', $data);
 	}
 
 	public function form_layanan($gallery=0, $id=0)
@@ -242,7 +244,7 @@ class Tukang extends Admin_Controller {
         };
 		$data['album']=$gallery;
 
-		$this->render('tukang/form_layanan', $data);
+		$this->render('umkm/tukang/form_layanan', $data);
 	}
 
 	public function insert_layanan($gallery='')
@@ -312,7 +314,7 @@ class Tukang extends Admin_Controller {
 		$data['tukang'] = $this->tukang_model->get_tukang($id);
 		$data['desa'] = $this->config_model->get_data($id);
 
-		$this->render('tukang/peta',$data);
+		$this->render('umkm/tukang/peta',$data);
 	}
 	
 	public function update_map($id = '')

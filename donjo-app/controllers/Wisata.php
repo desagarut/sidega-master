@@ -29,6 +29,7 @@ class Wisata extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'wisata'];
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -51,29 +52,27 @@ class Wisata extends Admin_Controller {
         };
 		$data['keyword'] = $this->wisata_model->autocomplete();
 
-		$this->render('wisata/table', $data);
+		$this->render('umkm/wisata/table', $data);
 	}
 
-	public function form($p=1, $o=0, $id='')
+	public function form($id='')
 	{
-		$data['p'] = $p;
-		$data['o'] = $o;
 
 		if ($id)
 		{
 			$data['wisata'] = $this->wisata_model->get_wisata($id);
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_MODAL_WISATA);
 			$data['jenis_wisata'] = $this->referensi_model->list_ref(JENIS_WISATA);
-			$data['status'] = $this->referensi_model->list_ref(STATUS_AKTIF);
+			//$data['status'] = $this->referensi_model->list_ref(STATUS_AKTIF);
 			$data['kepemilikan_tempat_wisata'] = $this->referensi_model->list_ref(KEPEMILIKAN_TEMPAT_WISATA);
-			$data['form_action'] = site_url("wisata/update/$id/$p/$o");
+			$data['form_action'] = site_url("wisata/update/$id");
 		}
 		else
 		{
 			$data['wisata'] = null;
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_MODAL_WISATA);
 			$data['jenis_wisata'] = $this->referensi_model->list_ref(JENIS_WISATA);
-			$data['status'] = $this->referensi_model->list_ref(STATUS_AKTIF);
+			//$data['status'] = $this->referensi_model->list_ref(STATUS_AKTIF);
 			$data['kepemilikan_tempat_wisata'] = $this->referensi_model->list_ref(KEPEMILIKAN_TEMPAT_WISATA);
 			$data['form_action'] = site_url("wisata/insert");
 		}
@@ -82,7 +81,7 @@ class Wisata extends Admin_Controller {
             return $hasil_rupiah;
         };
 
-		$this->render('wisata/form', $data);
+		$this->render('umkm/wisata/form', $data);
 	}
 
 	public function search($gallery='')
@@ -202,13 +201,14 @@ class Wisata extends Admin_Controller {
 		$data['gallery'] = $gal;
 		$data['sub'] = $this->wisata_model->get_wisata($gal);
 		$data['keyword'] = $this->wisata_model->autocomplete();
+		$data['wisata'] = $this->wisata_model->get_wisata($id);
 
 		$data['rupiah'] = function($angka){
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
         };
 
-		$this->render('wisata/table_fasilitas', $data);
+		$this->render('umkm/wisata/table_fasilitas', $data);
 	}
 
 	public function form_fasilitas($gallery=0, $id=0)
@@ -234,7 +234,7 @@ class Wisata extends Admin_Controller {
         };
 		$data['album']=$gallery;
 
-		$this->render('wisata/form_fasilitas', $data);
+		$this->render('umkm/wisata/form_fasilitas', $data);
 	}
 
 	public function insert_fasilitas($gallery='')
@@ -304,7 +304,7 @@ class Wisata extends Admin_Controller {
 		$data['wisata'] = $this->wisata_model->get_wisata($id);
 		$data['desa'] = $this->config_model->get_data($id);
 
-		$this->render('wisata/peta',$data);
+		$this->render('umkm/wisata/peta',$data);
 	}
 	
 	public function update_map($id = '')

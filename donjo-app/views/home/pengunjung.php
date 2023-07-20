@@ -53,23 +53,21 @@
 <script src="<?= base_url() ?>assets/js/highcharts/exporting.js"></script>
 <script src="<?= base_url() ?>assets/js/highcharts/highcharts-more.js"></script>
 
-<div class='col-md-3'>
-	<div class="box box-success">
-		<div class="box-header">
-			<h3 class="box-title">Pengunjung Web </h3>
-			<div class="box-tools pull-right">
-				<a href="<?= site_url("pengunjung") ?>"><span class="label label-default"> Detail</span></a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-				<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-			</div>
+<div class="box box-success">
+	<div class="box-header">
+		<h3 class="box-title">Pengunjung Web </h3>
+		<div class="box-tools pull-right">
+			<a href="<?= site_url("pengunjung") ?>"><span class="label label-default"> Detail</span></a>
+			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 		</div>
-		<div class='box-body'>
-			<div class="box-group" id="accordion">
-				<div class="col-md-12">
-					<!-- Ini Grafik -->
-					<br>
-					<div id="chart" style="height:150px"> </div>
-				</div>
+	</div>
+	<div class='box-body'>
+		<div class="box-group" id="accordion">
+			<div class="col-md-12">
+				<!-- Ini Grafik -->
+				<br>
+				<div id="chart" style="height:150px"> </div>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,3 @@
-<div class="col-md-3">
     <div class="box box-info">
         <div class="box-header">
             <h3 class="box-title">Pertanahan</h3>
@@ -49,4 +48,3 @@
             </a>
         </div>
     </div>
-</div>

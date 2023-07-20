@@ -204,7 +204,6 @@
 		}
 
 		// Upload dokumen lampiran
-
 		$lokasi_file = $_FILES['dokumen']['tmp_name'];
 		$tipe_file = TipeFile($_FILES['dokumen']);
 		$nama_file = $_FILES['dokumen']['name'];

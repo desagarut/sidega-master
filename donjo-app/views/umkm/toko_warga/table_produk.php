@@ -1,5 +1,4 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-<!--<script src="<?= base_url() ?>assets/js/mapsJavaScriptAPI.js"></script>-->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly" defer></script>
 
@@ -15,10 +14,10 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>Detail UMKM</h1>
+    <h1>Detail Toko</h1>
     <ol class="breadcrumb">
       <li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="<?= site_url('toko_warga') ?>">Detail UMKM</a></li>
+      <li><a href="<?= site_url('toko_warga') ?>">Detail Toko</a></li>
       <li class="active">
         <?= $sub['nama'] ?>
       </li>
@@ -40,9 +39,9 @@
           <div class="row">
 
             <script>
-              <?php if (!empty($toko['lat'] && !empty($toko['lng']))) : ?>
+              <?php if (!empty($sub['lat'] && !empty($sub['lng']))) : ?>
                 var center = {
-                  lat: <?= $toko['lat'] . ", lng: " . $toko['lng']; ?>
+                  lat: <?= $sub['lat'] . ", lng: " . $sub['lng']; ?>
                 };
               <?php else : ?>
                 var center = {
@@ -57,7 +56,7 @@
                   center,
                   mapTypeId: google.maps.MapTypeId.HYBRID
                 }
-                var map = new google.maps.Map(document.getElementById("map_penduduk"), mapOptions);
+                var map = new google.maps.Map(document.getElementById("map_umkm"), mapOptions);
 
                 // Place a draggable marker on the map
                 var marker = new google.maps.Marker({
@@ -78,7 +77,7 @@
               }
             </script>
             <style>
-              #map_penduduk {
+              #map_umkm {
                 z-index: 1;
                 width: 100%;
                 height: 400px;
@@ -87,130 +86,145 @@
               }
             </style>
 
-            <div class="col-md-12">
-              <div class="box box-info">
+            <div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header"> <i class="fa fa-map"></i>
+                  <h3 class="box-title"><strong>Lokasi</strong></h3>
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group"> </div>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-plus"></i> </button>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
+                  </div>
+                  <!-- /. tools -->
+                </div>
                 <form id="validasi1" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
                   <div class='modal-body'>
                     <div class="row">
                       <div class="col-sm-12">
-                        <div id="map_penduduk"></div>
+                        <div id="map_umkm"></div>
                       </div>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+            <div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header"> <i class="fa fa-calendar"></i>
+                  <h3 class="box-title"><strong>Info</strong></h3>
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group"> </div>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
+                  </div>
+                  <!-- /. tools -->
+                </div>
 
-      <div class="box box-warning collapsed-box">
-        <div class="box-header"> <i class="fa fa-calendar"></i>
-          <h3 class="box-title"><strong>INFO UMKM</strong></h3>
-          <!-- tools box -->
-          <div class="pull-right box-tools">
-            <!-- button with a dropdown -->
-            <div class="btn-group"> </div>
-            <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-            <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
-          </div>
-          <!-- /. tools -->
-        </div>
+                <div class="box-body no-padding">
+                  <!--The calendar -->
+                  <div class="col-sm-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped dataTable table-hover">
+                        <thead class="bg-gray disabled color-palette">
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td width="8%">Nama Toko</td>
+                            <td width="17%"> <strong><?= $sub['nama'] ?></strong></td>
+                            <td width="8%">Nomor Telepon</td>
+                            <td width="17%"> 0<?= $sub['no_hp_toko'] ?></td>
+                            <td width="8%">Jumlah Karyawan</td>
+                            <td width="17%"> <?= $sub['jumlah_karyawan'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">Kepemilikan Tempat Usaha</td>
+                            <td width="17%"> <?= $sub['kepemilikan_tempat_usaha'] ?></td>
+                            <td width="8%">Lokasi Usaha</td>
+                            <td width="17%"> <?= $sub['lokasi'] ?></td>
+                            <td width="8%">Keterangan Lokasi Usaha</td>
+                            <td width="17%"> <?= $sub['keterangan_lokasi'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">Sumber Modal</td>
+                            <td width="17%"> <?= $sub['sumber_modal'] ?></td>
+                            <td width="8%">Taksiran Modal/Aset</td>
+                            <td width="17%"> <?= $sub['taksiran_modal'] ?></td>
+                            <td width="8%">Taksiran Omset</td>
+                            <td width="17%"> <?= $sub['taksiran_omset'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">Kelompok Usaha Perdagangan</td>
+                            <td width="17%"> <?= $sub['kelompok_usaha_perdagangan'] ?></td>
+                            <td width="8%">Sarana Berdagang</td>
+                            <td width="17%"> <?= $sub['sarana_berdagang'] ?></td>
+                            <td width="8%">Area/Kawasan Usaha</td>
+                            <td width="17%"> <?= $sub['area_usaha'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">Kategori Toko</td>
+                            <td width="17%"> <?= $sub['kategori_toko'] ?></td>
+                            <td width="8%">Website</td>
+                            <td width="17%"> <?= $sub['website'] ?></td>
+                            <td width="8%">Facebook</td>
+                            <td width="17%"> <?= $sub['fb'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">Instagram</td>
+                            <td width="17%"> <?= $sub['ig'] ?></td>
+                            <td width="8%">Channel Youtube</td>
+                            <td width="17%"> <?= $sub['youtube'] ?></td>
+                            <td width="8%">-</td>
+                            <td width="17%"> <?= $sub[''] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">SKDU</td>
+                            <td width="17%"> <?= $sub['skdu'] ?></td>
+                            <td width="8%">IUD</td>
+                            <td width="17%"> <?= $sub['iud'] ?></td>
+                            <td width="8%">NPWP</td>
+                            <td width="17%"> <?= $sub['npwp'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">SITU</td>
+                            <td width="17%"> <?= $sub['situ'] ?></td>
+                            <td width="8%">SIUI</td>
+                            <td width="17%"> <?= $sub['siui'] ?></td>
+                            <td width="8%">SIP</td>
+                            <td width="17%"> <?= $sub['sip'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">SIUP</td>
+                            <td width="17%"> <?= $sub['siup'] ?></td>
+                            <td width="8%">TDP</td>
+                            <td width="17%"> <?= $sub['tdp'] ?></td>
+                            <td width="8%">TDI</td>
+                            <td width="17%"> <?= $sub['tdi'] ?></td>
+                          </tr>
+                          <tr>
+                            <td width="8%">IMB</td>
+                            <td width="17%"> <?= $sub['imb'] ?></td>
+                            <td width="8%">BPOM</td>
+                            <td width="17%"> <?= $sub['bpom'] ?></td>
+                            <td width="8%">HO</td>
+                            <td width="17%"> <?= $sub['ho'] ?></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-        <div class="box-body no-padding">
-          <!--The calendar -->
-          <div class="col-sm-12">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped dataTable table-hover">
-                <thead class="bg-gray disabled color-palette">
-                </thead>
-                <tbody>
-                  <tr>
-                    <td width="8%">Nama Toko</td>
-                    <td width="17%"> <?= $sub['nama'] ?></td>
-                    <td width="8%">Nomor Telepon</td>
-                    <td width="17%"> 0<?= $sub['no_hp_toko'] ?></td>
-                    <td width="8%">Jumlah Karyawan</td>
-                    <td width="17%"> <?= $sub['jumlah_karyawan'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">Kepemilikan Tempat Usaha</td>
-                    <td width="17%"> <?= $sub['kepemilikan_tempat_usaha'] ?></td>
-                    <td width="8%">Lokasi Usaha</td>
-                    <td width="17%"> <?= $sub['lokasi'] ?></td>
-                    <td width="8%">Keterangan Lokasi Usaha</td>
-                    <td width="17%"> <?= $sub['keterangan_lokasi'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">Sumber Modal</td>
-                    <td width="17%"> <?= $sub['sumber_modal'] ?></td>
-                    <td width="8%">Taksiran Modal/Aset</td>
-                    <td width="17%"> <?= $sub['taksiran_modal'] ?></td>
-                    <td width="8%">Taksiran Omset</td>
-                    <td width="17%"> <?= $sub['taksiran_omset'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">Kelompok Usaha Perdagangan</td>
-                    <td width="17%"> <?= $sub['kelompok_usaha_perdagangan'] ?></td>
-                    <td width="8%">Sarana Berdagang</td>
-                    <td width="17%"> <?= $sub['sarana_berdagang'] ?></td>
-                    <td width="8%">Area/Kawasan Usaha</td>
-                    <td width="17%"> <?= $sub['area_usaha'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">Kategori Toko</td>
-                    <td width="17%"> <?= $sub['kategori_toko'] ?></td>
-                    <td width="8%">Website</td>
-                    <td width="17%"> <?= $sub['website'] ?></td>
-                    <td width="8%">Facebook</td>
-                    <td width="17%"> <?= $sub['fb'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">Instagram</td>
-                    <td width="17%"> <?= $sub['ig'] ?></td>
-                    <td width="8%">Channel Youtube</td>
-                    <td width="17%"> <?= $sub['youtube'] ?></td>
-                    <td width="8%">-</td>
-                    <td width="17%"> <?= $sub[''] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">SKDU</td>
-                    <td width="17%"> <?= $sub['skdu'] ?></td>
-                    <td width="8%">IUD</td>
-                    <td width="17%"> <?= $sub['iud'] ?></td>
-                    <td width="8%">NPWP</td>
-                    <td width="17%"> <?= $sub['npwp'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">SITU</td>
-                    <td width="17%"> <?= $sub['situ'] ?></td>
-                    <td width="8%">SIUI</td>
-                    <td width="17%"> <?= $sub['siui'] ?></td>
-                    <td width="8%">SIP</td>
-                    <td width="17%"> <?= $sub['sip'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">SIUP</td>
-                    <td width="17%"> <?= $sub['siup'] ?></td>
-                    <td width="8%">TDP</td>
-                    <td width="17%"> <?= $sub['tdp'] ?></td>
-                    <td width="8%">TDI</td>
-                    <td width="17%"> <?= $sub['tdi'] ?></td>
-                  </tr>
-                  <tr>
-                    <td width="8%">IMB</td>
-                    <td width="17%"> <?= $sub['imb'] ?></td>
-                    <td width="8%">BPOM</td>
-                    <td width="17%"> <?= $sub['bpom'] ?></td>
-                    <td width="8%">HO</td>
-                    <td width="17%"> <?= $sub['ho'] ?></td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
+
           </div>
         </div>
       </div>
+
 
       <div class="box box-warning">
         <div class="box-header with-border"><i class="fa fa-list"></i>

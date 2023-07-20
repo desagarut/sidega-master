@@ -96,6 +96,7 @@ class Beranda extends Admin_Controller {
 		$data['gallery'] = $this->first_gallery_m->gallery_show(0,5,0);
 		$data['artikel'] = $this->first_artikel_m->artikel_show(0,5,0);
 
+
 		//Pertanahan
 		$data['letterc_total'] = $this->header_model->letterc_total();
 		$data['letterc_warga_total'] = $this->header_model->letterc_warga_total();

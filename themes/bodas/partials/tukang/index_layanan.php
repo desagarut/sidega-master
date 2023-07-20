@@ -3,12 +3,16 @@
 <!-- Start -->
 <div class="container-xxl py-5">
   <div class="container">
-  <div class="text-start wow fadeInUp" data-wow-delay="0.1s">
-      <h3 class="mb-5"><a href="<?= site_url('first/tukang')?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">
-      <i class="fa fa-backward"></i>   Kembali</a></h3>
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+      <h5 class="mb-5">LAYANAN DI <?= $sub['nama'] ?></h5>
+    </div>
+
+    <div class="text-end wow fadeInUp" data-wow-delay="0.1s">
+      <h3 class="mb-5"><a href="<?= site_url('first/tukang') ?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">
+          <i class="fa fa-backward"></i> Kembali</a></h3>
     </div>
     <div class="row shadow">
-      <div class="col-md-2 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="col-md-3 wow fadeInUp" data-wow-delay="0.1s">
         <div class="course-item bg-light">
           <div class="position-relative overflow-hidden">
             <img src="<?= AmbilGaleri($sub['gambar'], 'kecil') ?>" alt="<?= $sub['nama'] ?>" style="width:100%; height:200px">
@@ -62,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+      <div class="col-md-3 wow fadeInUp" data-wow-delay="0.5s">
         <?php $this->load->view($folder_themes . "/partials/tawa/peta.php") ?>
       </div>
     </div>

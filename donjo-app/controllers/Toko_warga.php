@@ -25,10 +25,12 @@ class Toko_warga extends Admin_Controller {
 		redirect('toko_warga');
 	}
 
-	public function index($p=1, $o=0)
+	public function index()
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'toko_warga'];
+
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -51,13 +53,13 @@ class Toko_warga extends Admin_Controller {
         };
 		$data['keyword'] = $this->toko_warga_model->autocomplete();
 
-		$this->render('toko_warga/table', $data);
+		$this->render('umkm/toko_warga/table', $data);
 	}
 
-	public function form($p=1, $o=0, $id='')
+	public function form($id='')
 	{
-		$data['p'] = $p;
-		$data['o'] = $o;
+		//$data['p'] = $p;
+		//$data['o'] = $o;
 
 		if ($id)
 		{
@@ -88,7 +90,7 @@ class Toko_warga extends Admin_Controller {
             return $hasil_rupiah;
         };
 
-		$this->render('toko_warga/form', $data);
+		$this->render('umkm/toko_warga/form', $data);
 	}
 
 	public function search($gallery='')
@@ -129,10 +131,10 @@ class Toko_warga extends Admin_Controller {
 		redirect('toko_warga');
 	}
 
-	public function update($id='', $p=1, $o=0)
+	public function update($id)
 	{
 		$this->toko_warga_model->update($id);
-		redirect("toko_warga/index/$p/$o");
+		redirect("toko_warga");
 	}
 
 	public function delete($p=1, $o=0, $id='')
@@ -208,13 +210,14 @@ class Toko_warga extends Admin_Controller {
 		$data['gallery'] = $gal;
 		$data['sub'] = $this->toko_warga_model->get_toko($gal);
 		$data['keyword'] = $this->toko_warga_model->autocomplete();
+		$data['toko'] = $this->toko_warga_model->get_toko($id);
 
 		$data['rupiah'] = function($angka){
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
         };
 
-		$this->render('toko_warga/table_produk', $data);
+		$this->render('umkm/toko_warga/table_produk', $data);
 	}
 
 	public function form_produk($gallery=0, $id=0)
@@ -240,7 +243,7 @@ class Toko_warga extends Admin_Controller {
         };
 		$data['album']=$gallery;
 
-		$this->render('toko_warga/form_produk', $data);
+		$this->render('umkm/toko_warga/form_produk', $data);
 	}
 
 	public function insert_produk($gallery='')
@@ -310,7 +313,7 @@ class Toko_warga extends Admin_Controller {
 		$data['toko'] = $this->toko_warga_model->get_toko($id);
 		$data['desa'] = $this->config_model->get_data($id);
 
-		$this->render('toko_warga/peta',$data);
+		$this->render('umkm/toko_warga/peta',$data);
 	}
 	
 	public function update_map($id = '')

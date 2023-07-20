@@ -17,15 +17,15 @@
                         <div class="col-lg-3 col-md-3 col-sm-2 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="course-item bg-light">
                                 <div class="position-relative overflow-hidden">
-                                    <a href="<?= site_url('first/produk_show/' . $data['id']) ?>"><img class="img-fluid" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" alt="<?= $data['nama'] ?>"></a>
+                                    <a href="<?= site_url('first/tukang_layanan/' . $data['id']) ?>"><img class="img-fluid" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" alt="<?= $data['nama'] ?>"></a>
                                     <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                        <a href="<?= site_url('first/produk_show/' . $data['id']) ?>" class="flex-shrink-0 btn btn-sm btn-warning px-3 border-end" style="border-radius: 30px 0 0 30px;">Lihat</a>
-                                        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20layanan%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20<?= site_url('first/produk_show/' . $data['id']) ?>" target="_blank" title="Hubungi via whatsapp" class="flex-shrink-0 btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">
-                                            Hubungi <i class="fa fa-comments"></i></a>
+                                        <a href="<?= site_url('first/tukang_layanan/' . $data['id']) ?>" class="flex-shrink-0 btn btn-sm btn-info px-3" style="border-radius: 30px 0 0 30px;">Lihat</a>
+                                        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20layanan%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20<?= site_url('first/produk_show/' . $data['id']) ?>" target="_blank" title="Hubungi via whatsapp" class="flex-shrink-0 btn btn-sm btn-warning px-3" style="border-radius: 0 30px 30px 0;">
+                                            Hubungi <i class="fab fa-whatsapp text-primary me-2"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center p-4 pb-0">
-                                    <h5 class="mb-0"><a href="<?= site_url('first/produk_show/' . $data['id']) ?>"><?= $data['nama'] ?></a></h5>
+                                    <h5 class="mb-0"><a href="<?= site_url('first/tukang_layanan/' . $data['id']) ?>"><?= $data['nama'] ?></a></h5>
                                     <h6 class="mb-4"><i class="fa fa-map-marker-alt text-danger"></i> <?= $data['lokasi'] ?></h6>
                                     <div class="text-start">
                                         <small>Pengelola : <?= $data['nama_pengelola'] ?></small><br/>

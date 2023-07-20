@@ -4,7 +4,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">Layanan</h6>
+            <h6 class="section-title bg-white text-center text-primary px-3">UMKM</h6>
             <h1 class="mb-5">Toko Warga</h1>
         </div>
         <div class="row g-4 justify-content-center">
@@ -19,9 +19,9 @@
                                 <div class="position-relative overflow-hidden">
                                     <a href="<?= site_url('first/produk_show/' . $data['id']) ?>"><img class="img-fluid" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" alt="<?= $data['nama'] ?>"></a>
                                     <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                        <a href="<?= site_url('first/produk_show/' . $data['id']) ?>" class="flex-shrink-0 btn btn-sm btn-warning px-3 border-end" style="border-radius: 30px 0 0 30px;">Lihat</a>
-                                        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20layanan%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20<?= site_url('first/produk_show/' . $data['id']) ?>" target="_blank" title="Hubungi via whatsapp" class="flex-shrink-0 btn btn-sm btn-success px-3" style="border-radius: 0 30px 30px 0;">
-                                            Hubungi <i class="fa fa-comments"></i></a>
+                                        <a href="<?= site_url('first/produk_show/' . $data['id']) ?>" class="flex-shrink-0 btn btn-sm btn-info px-3 border-end" style="border-radius: 30px 0 0 30px;">Lihat</a>
+                                        <a href="https://wa.me/+62<?= $data['no_hp_toko'] ?>?text=Assalamu'alaikum%2C%20Saya%20tertarik%20dengan%20layanan%20yang%20ditawarkan%20di%20website%20*<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>*.%20Apakah%20<?= $data['nama'] ?>%20masih%20buka%3F%20<?= site_url('first/produk_show/' . $data['id']) ?>" target="_blank" title="Hubungi via whatsapp" class="flex-shrink-0 btn btn-sm btn-warning px-3" style="border-radius: 0 30px 30px 0;">
+                                        Hubungi <i class="fab fa-whatsapp text-primary me-2"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center p-4 pb-0">

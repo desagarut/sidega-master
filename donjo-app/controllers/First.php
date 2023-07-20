@@ -68,6 +68,11 @@ class First extends Web_Controller
 		//update v 5.5.5
 		$this->load->model('first_gallery_youtube');
 
+		//update v 5.6
+		//$this->load->model('toko_warga_model');
+		//$this->load->model('tukang_model');
+		//$this->load->model('wisata_model');
+		//$this->load->model('tawa_model');
 
 		$this->load->library('upload');
 	}
@@ -94,6 +99,10 @@ class First extends Web_Controller
 
 		$data['gallery'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
 
+		$data['towa'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['tawa'] = $this->first_tawa_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['tukang'] = $this->first_tukang_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['wisata'] = $this->first_wisata_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input
