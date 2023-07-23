@@ -67,6 +67,9 @@ class First extends Web_Controller
 
 		//update v 5.5.5
 		$this->load->model('first_gallery_youtube');
+		//update v 5.7
+		$this->load->model('first_gallery_cctv');
+
 
 		//update v 5.6
 		//$this->load->model('toko_warga_model');
@@ -98,6 +101,7 @@ class First extends Web_Controller
 		$data['setting_desa'] = $this->config_model->get_data();
 
 		$data['gallery'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
+		$data['gallery_cctv'] = $this->first_gallery_cctv->gallery_show($data['paging']->offset, $data['paging']->per_page);
 
 		$data['towa'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['tawa'] = $this->first_tawa_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
@@ -257,6 +261,25 @@ class First extends Web_Controller
 		$this->set_template('layouts/sub_gallery_youtube.tpl.php');
 		$this->load->view($this->template, $data);
 	}
+
+	//update v 5.7
+	public function gallery_cctv($p = 1)
+	{
+		$data = $this->includes;
+		$data['p'] = $p;
+		$data['paging'] = $this->first_gallery_cctv->paging($p);
+		$data['paging_range'] = 3;
+		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+		$data['pages'] = range($data['start_paging'], $data['end_paging']);
+		$data['gallery_cctv'] = $this->first_gallery_cctv->gallery_show($data['paging']->offset, $data['paging']->per_page);
+
+		$this->_get_common_data($data);
+
+		$this->set_template('layouts/gallery_cctv.tpl.php');
+		$this->load->view($this->template, $data);
+	}
+
 
 	public function statistik($stat = 0, $tipe = 0)
 	{

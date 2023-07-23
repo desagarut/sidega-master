@@ -6,14 +6,14 @@
             <h6 class="section-title bg-white text-center text-primary px-3">S D M</h6>
             <h1 class="mb-5">Pemerintah Desa</h1>
         </div>
-        <div class="row g-4 owl-carousel testimonial-carousel position-relative">
+        <div class="row g-3 owl-carousel testimonial-carousel position-relative">
             <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>
-                <div class="col-md-10 wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s">
-                    <div class="team-item bg-light">
+                <div class="col-md-12 text-center wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s" style="width:100%%; padding:0px 40px 0px 40px">
+                    <div class="team-item bg-light" style="padding:10px 15px 0px 15px">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" style="object-fit: cover; height:500px" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
+                            <img class="img-fluid" style="object-fit: cover; height:350px; " src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>">
                         </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -30px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
                                 <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="text-center p-4">
-                            <h5 class="mb-0"><?= $data['nama'] ?></h5>
+                            <h6 class="mb-0"><?= strtoupper($data['nama']) ?></h6>
                             <small><?= strtoupper($data['jabatan']) ?></small>
                         </div>
                     </div>

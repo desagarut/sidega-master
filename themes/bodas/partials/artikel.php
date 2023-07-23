@@ -11,7 +11,7 @@
 				<?php endif; ?>
 			</div>
 		</main>
-		<div class=" py-3 wow fadeInRight data-wow-delay="0.3s">
+		<div class=" py-3 wow fadeInRight data-wow-delay=" 0.3s">
 			<h2 class="text-start"><?= $article['judul'] ?></h2>
 			<p>
 				<i class="fa fa-user-tie text-primary me-2"></i> <?= $article['owner'] ?> &nbsp;
@@ -21,10 +21,8 @@
 						<i class="fa fa-folder text-primary me-2"></i> <?= $article['kategori'] ?>
 					</a>
 					<?php endif ?>&nbsp;
-
 					<i class="fa fa-eye text-primary me-2"></i> <?= hit($article['hit']) ?>&nbsp;
 			</p>
-
 		</div>
 		<div class=" py-3 wow fadeInLeft" data-wow-delay="0.3s">
 			<?= $article['isi'] ?>

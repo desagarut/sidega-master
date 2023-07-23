@@ -59,7 +59,9 @@
 				<?php $this->load->view('home/artikel.php'); ?>
 				<?php $this->load->view('home/gallery.php'); ?>
 				<?php $this->load->view('home/gallery_youtube.php'); ?>
+				<?php $this->load->view('home/cctv.php'); ?>
 				<?php $this->load->view('home/video.php'); ?>
+
 			</div>
 		</div>
 		<div class='row'>

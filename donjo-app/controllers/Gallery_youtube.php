@@ -9,6 +9,8 @@ class Gallery_youtube extends Admin_Controller {
 		$this->load->model('web_gallery_youtube_model');
 		$this->modul_ini = 13;
 		$this->sub_modul_ini = 800;
+		$this->set_minsidebar(1);
+
 	}
 
 	public function clear()

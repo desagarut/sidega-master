@@ -12,19 +12,18 @@
 				base_url($this->theme_folder . '/' . $this->theme . '/assets/img/placeholder.png');
 			?>
 
-			<div class="col-lg-4 col-md-6 wow shadow fadeInUp" data-wow-delay="0.1s">
+			<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 				<div class="course-item bg-light">
-					<div class="position-relative overflow-hidden text-center">
+					<div class="position-relative overflow-hidden text-center" style="padding: 10px 10px 10px 10px">
 						<?php if ($article['gambar']) : ?>
-							<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['judul'] ?>">
+							<a href="<?= site_url('artikel/' . buat_slug($article)) ?>">
+								<img class="img-fluid" src="<?= AmbilFotoArtikel($article['gambar' . $i], 'sedang') ?>" alt="<?= $article['judul'] ?>">
+							</a>
 						<?php else : ?>
-							<img class="img-fluid" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Belum Ada Gambar">
+							<a href="<?= site_url('artikel/' . buat_slug($article)) ?>">
+								<img class="img-fluid" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Belum Ada Gambar">
+							</a>
 						<?php endif; ?>
-
-						<div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-							<a href="<?= site_url('artikel/' . buat_slug($article)) ?>" class="flex-shrink-0 btn btn-sm btn-warning px-3 border-end" style="border-radius: 30px 0 0 30px;">Baca</a>
-							<a href="<?= site_url('artikel/' . buat_slug($article)) ?>" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Semua</a>
-						</div>
 					</div>
 					<div class="text-center p-4 pb-0">
 						<h5 class="mb-4"><a href="<?= site_url('artikel/' . buat_slug($article)) ?>"><?= $article['judul'] ?></a></h5>

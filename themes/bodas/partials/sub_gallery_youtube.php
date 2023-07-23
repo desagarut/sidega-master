@@ -7,7 +7,7 @@
                 <!-- Start Single Product -->
                 <div class="single-product">
                   <div class="product-image">
-                    <iframe height="500px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $data["link"]; ?>" title="<?= $data['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe height="350px" width="100%" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $data["link"]; ?>" title="<?= $data['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
                   <div class="product-info">
                     <h4 class="title"> <a href="<?= site_url("first/sub_gallery_youtube/{$data['id']}") ?>" alt="<?= $article['nama'] ?>">

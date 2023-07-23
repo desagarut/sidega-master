@@ -7,19 +7,22 @@
 <body>
   <?php $this->load->view($folder_themes . '/commons/spinner.php') ?>
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
-
   <div class="container-xxl py-5">
-    <div class="row">
-      <div class="col-md-8 entries">
-        <div class="text-start wow fadeInUp" data-wow-delay="0.1s">
-          <h1 class="mb-5">video</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-start wow fadeInUp" data-wow-delay="0.1s">
+          <h3 class="mb-5">List Video</h3>
         </div>
-
-        <?php $this->load->view($folder_themes . '/partials/sub_gallery_youtube') ?>
       </div>
-      <div class="col-md-4">
-        <div class="sidebar blog-grid-page">
-          <?php $this->load->view($folder_themes . '/partials/sidebar_gallery_youtube.php') ?>
+
+      <div class="row">
+        <div class="col-md-8 entries">
+          <?php $this->load->view($folder_themes . '/partials/sub_gallery_youtube') ?>
+        </div>
+        <div class="col-md-4 entries">
+          <div class="sidebar blog-grid-page">
+            <?php $this->load->view($folder_themes . '/partials/sidebar_gallery_youtube.php') ?>
+          </div>
         </div>
       </div>
     </div>

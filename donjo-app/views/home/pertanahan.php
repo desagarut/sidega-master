@@ -1,4 +1,4 @@
-    <div class="box box-info">
+    <div class="box box-success">
         <div class="box-header">
             <h3 class="box-title">Pertanahan</h3>
             <div class="box-tools pull-right">
@@ -18,12 +18,12 @@
                     <?php endforeach; ?>
                     <div class="info-box-content">
                         <span class="info-box-text">Daftar Letter-C</span>
-                            <span class="info-box-number"><?php foreach ($letterc_warga_total as $data) : ?><?= $data['letterc_warga'] ?> <?php endforeach; ?><small> Warga</small> | <?php foreach ($letterc_nonwarga_total as $data) : ?><?= $data['letterc_non'] ?><?php endforeach; ?><small> Non Warga</small></span>
+                        <span class="info-box-number"><?php foreach ($letterc_warga_total as $data) : ?><?= $data['letterc_warga'] ?> <?php endforeach; ?><small> Warga</small> | <?php foreach ($letterc_nonwarga_total as $data) : ?><?= $data['letterc_non'] ?><?php endforeach; ?><small> Non Warga</small></span>
                         <div class="progress">
                             <div class="progress-bar" style="width: 0%"></div>
                         </div>
                         <span class="progress-description">
-                           Detail
+                            Detail
                         </span>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                 <div class="progress-bar" style="width: 0%"></div>
                             </div>
                             <span class="progress-description">
-                               <small>Detail</small>
+                                <small>Detail</small>
                             </span>
                         </div>
                     </div>

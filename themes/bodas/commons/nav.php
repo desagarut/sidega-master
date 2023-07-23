@@ -3,10 +3,10 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <div class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-    
+
         <h2 class="m-0 text-primary">
-            <a href="<?= site_url('first') ?>" >
-                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:30px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>"> 
+            <a href="<?= site_url('first') ?>">
+                <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:30px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>">
                 <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
             </a>
         </h2>

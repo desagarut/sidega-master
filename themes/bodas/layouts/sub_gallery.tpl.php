@@ -7,15 +7,26 @@
 <body>
   <?php $this->load->view($folder_themes . '/commons/spinner.php') ?>
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
-    <div class="container-xxl py-5">
-      <div class="row g-4 justify-content-center">
-        <div class="row">
-          <div class="col-md-9 entries">
-            <?php $this->load->view($folder_themes . '/partials/sub_gallery') ?>
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-start wow fadeInUp" data-wow-delay="0.1s">
+          <h3 class="mb-5">Sub Gallery</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 entries">
+          <?php $this->load->view($folder_themes . '/partials/sub_gallery') ?>
+        </div>
+        <div class="col-md-4 entries">
+          <div class="sidebar blog-grid-page">
+            <?php $this->load->view($folder_themes . '/partials/sidebar_gallery.php') ?>
           </div>
         </div>
       </div>
     </div>
+  </div>
   <?php $this->load->view($folder_themes . '/commons/footer') ?>
 </body>
 

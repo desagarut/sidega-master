@@ -7,11 +7,10 @@
 <body>
   <?php $this->load->view($folder_themes . '/commons/spinner.php') ?>
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
-
   <div class="container-xxl py-5">
     <div class="row">
       <div class="col-lg-12 entries">
-        <?php $this->load->view($folder_themes . '/partials/gallery') ?>
+        <?php $this->load->view($folder_themes . '/partials/gallery_cctv') ?>
       </div>
     </div>
   </div>
