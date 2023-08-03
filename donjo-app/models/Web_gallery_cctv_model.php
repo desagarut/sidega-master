@@ -91,7 +91,6 @@
 				$data[$i]['aktif'] = "Ya";
 			else
 				$data[$i]['aktif'] = "Tidak";
-
 			$j++;
 		}
 		return $data;
@@ -101,12 +100,32 @@
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
+		if (UploadError($_FILES['gambar']))
+		{
+			$_SESSION['success'] = -1;
+			return;
+		}
 
+		$lokasi_file = $_FILES['gambar']['tmp_name'];
+		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => 0)) + 1;
-		$data['link'] = $this->input->post('link'); //link Video Embed Youtube
-		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi Video
+		$data['link'] = $this->input->post('link'); //link CCTV
+		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi CCTV
+
+		// Bolehkan album tidak ada gambar cover
+		if (!empty($lokasi_file))
+		{
+		  if (!CekGambar($_FILES['gambar'], $tipe_file))
+		  {
+				$_SESSION['success'] = -1;
+				return;
+		  }
+		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			UploadGallery($nama_file, "", $tipe_file);
+			$data['gambar'] = $nama_file;
+		}
 
 		if ($_SESSION['grup'] == 4)
 		{
@@ -121,18 +140,37 @@
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
+		if (UploadError($_FILES['gambar']))
+		{
+			$_SESSION['success'] = -1;
+			return;
+		}
 
+	  $lokasi_file = $_FILES['gambar']['tmp_name'];
+	  $tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
-		$data['link'] = $this->input->post('link'); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
-		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi Video
-		
+		$data['link'] = $this->input->post('link'); //pastikan link di tulis lengkap
+		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi cctv
+		// Kalau kosong, gambar tidak diubah
+		if (!empty($lokasi_file))
+		{
+		  if (!CekGambar($_FILES['gambar'], $tipe_file))
+		  {
+				$_SESSION['success'] = -1;
+				return;
+		  }
+		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			UploadGallery($nama_file, $data['old_gambar'], $tipe_file);
+			$data['gambar'] = $nama_file;
+		}
+
 		if ($_SESSION['grup'] == 4)
 		{
 			$data['enabled'] = 2;
 		}
 
-		unset($data['old_link']);
+		unset($data['old_gambar']);
 		$outp = $this->db->where('id', $id)->update('gallery_cctv', $data);
 		if (!$outp) $_SESSION['success'] = -1;
 	}
@@ -166,7 +204,7 @@
 	{
 		if (!$semua) $this->session->success = 1;
 		// Note:
-		// link yang dihapus ada kemungkinan dipakai
+		// Gambar yang dihapus ada kemungkinan dipakai
 		// oleh gallery lain, karena ketika mengupload
 		// nama file nya belum diubah sesuai dengan
 		// judul gallery
@@ -193,12 +231,6 @@
 		$image = $this->db->select('link')->
 			get_where('gallery_cctv', array('id'=>$id))->
 			row()->link;
-		$prefix = array('kecil_', 'sedang_');
-		foreach ($prefix as $pref)
-		{
-			if (is_file(FCPATH . LOKASI_GALERI . $pref . $image))
-				unlink(FCPATH . LOKASI_GALERI . $pref . $image);
-		}
 	}
 
 	public function gallery_lock($id='', $val=0)
@@ -318,12 +350,29 @@
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
+		if (UploadError($_FILES['gambar']))
+		{
+			$_SESSION['success'] = -1;
+			return;
+		}
 
+	  $lokasi_file = $_FILES['gambar']['tmp_name'];
+	  $tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => $parrent)) + 1;
-		$data['link'] = $this->input->post('link'); //pastikan link terisi
-		$data['deskripsi'] = $this->input->post('deskripsi'); //pastikan link terisi
+		// Bolehkan isi album tidak ada gambar
+		if (!empty($lokasi_file))
+		{
+		  if (!CekGambar($_FILES['gambar'], $tipe_file))
+		  {
+				$_SESSION['success'] = -1;
+				return;
+		  }
+		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			UploadGallery($nama_file, "", $tipe_file);
+			$data['gambar'] = $nama_file;
+		}
 
 		if ($_SESSION['grup'] == 4)
 		{
@@ -340,12 +389,30 @@
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
+		if (UploadError($_FILES['gambar']))
+		{
+			$_SESSION['success'] = -1;
+			return;
+		}
 
+	  $lokasi_file = $_FILES['gambar']['tmp_name'];
+	  $tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
-		$data['link'] = $this->input->post('link'); //pastikan nama album hanya berisi
-		$data['deskripsi'] = $this->input->post('deskripsi'); //pastikan nama album hanya berisi
+		// Kalau kosong, gambar tidak diubah
+		if (!empty($lokasi_file))
+		{
+		  if (!CekGambar($_FILES['gambar'], $tipe_file))
+		  {
+				$_SESSION['success'] = -1;
+				return;
+		  }
+		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			UploadGallery($nama_file,$data['old_gambar'], $tipe_file);
+			$data['gambar'] = $nama_file;
+		}
 
+		unset($data['old_gambar']);
 		$outp = $this->db->where('id', $id)->update('gallery_cctv', $data);
 		if (!$outp) $_SESSION['success'] = -1;
 	}
@@ -355,7 +422,7 @@
 	// 		2 - naik
 	public function urut($id, $arah, $gallery='')
 	{
-  	$subset = !empty($gallery) ? array('parrent' => $gallery) : array('parrent' => 0);
+  	$subset = !empty($gallery_cctv) ? array('parrent' => $gallery) : array('parrent' => 0);
   	$this->urut_model->urut($id, $arah, $subset);
 	}
 }

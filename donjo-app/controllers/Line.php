@@ -7,7 +7,7 @@ class Line extends Admin_Controller {
 		parent::__construct();
 
 		$this->load->model('plan_line_model');
-		$this->modul_ini = 9;
+		$this->modul_ini = 820;
 		$this->sub_modul_ini = 8;
 	}
 

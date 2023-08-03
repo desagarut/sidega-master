@@ -155,13 +155,13 @@
 				var point_style = L.icon({
 					iconUrl: '<?= base_url(LOKASI_SIMBOL_LOKASI) ?>penduduk.png',
 				//	iconUrl: '<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>',
-					iconSize: [27, 36],
+					iconSize: [29, 36],
 					iconAnchor: [13, 36],
 					popupAnchor: [0, -28],
 				});
 				for (var x = 0; x < jml; x++) {
 					if (penduduk[x].lat || penduduk[x].lng) {
-						foto = '<td><img src="' + AmbilFoto(penduduk[x].foto, "kecil_", penduduk[x].id_sex) + '" class="foto_pend" style="width:150px; height="150px""/></td>';
+						foto = '<td><img src="' + AmbilFoto(penduduk[x].foto, "kecil_", penduduk[x].id_sex) + '" class="foto_pend" style="width:150px; height="155px""/></td>';
 
 						//Konten yang akan ditampilkan saat marker diklik
 						content =
@@ -214,17 +214,17 @@
 			//Menampilkan Baselayer dan Overlayer
 			var mainlayer = L.control.layers(baseLayers, overlayLayers, {
 				position: 'topleft',
-				collapsed: true
+				collapsed: false
 			}).addTo(mymap);
 			var customlayer = L.control.groupedLayers('', layerCustom, {
 				groupCheckboxes: true,
 				position: 'topleft',
-				collapsed: true
-			}).addTo(mymap);
-			var covidlayer = L.control.layers('', layerControl, {
-				position: 'topleft',
 				collapsed: false
 			}).addTo(mymap);
+			//var covidlayer = L.control.layers('', layerControl, {
+			//	position: 'topleft',
+			//	collapsed: false
+			//}).addTo(mymap);
 
 			$('#isi_popup').remove();
 			$('#isi_popup_dusun').remove();
@@ -243,7 +243,7 @@
 		/*height:80vh*/
 	}
 </style>
-<div class="content-wrapper">
+<div class="content-wrapper" style="padding: 40 0px 0 0px">
 	<form id="mainform_map" name="mainform_map" action="" method="post">
 		<div class="row">
 			<div class="col-md-12">

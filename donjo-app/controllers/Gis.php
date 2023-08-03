@@ -13,8 +13,8 @@ class Gis extends Admin_Controller {
 
 		$this->load->model('wilayah_model');
 		$this->load->model('referensi_model');
-		$this->modul_ini = 9;
-		$this->sub_modul_ini = 62;
+		$this->modul_ini = 820;
+		$this->sub_modul_ini = 9;
 	}
 
 	public function clear()

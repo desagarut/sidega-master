@@ -6,11 +6,11 @@
   </tr>
   <tr>
     <?php if ($wilayah == $nama_wilayah): ?>
-      <td align="center"><img src="<?= gambar_desa($wil_atas['logo']);?>" alt="logo"  class="logo_mandiri"></td>
-    <?php elseif (in_array($wilayah, array(ucwords($this->setting->sebutan_dusun), "RW", "RT"))): ?>
-      <td align="center"><img src="<?= gambar_desa($logo['logo']);?>" alt="logo"  class="logo_mandiri"></td>
+      <td align="center"><img src="<?= gambar_desa($wil_atas['logo']); ?>" alt="logo"  class="logo_mandiri"></td>
+    <?php elseif (in_array($wilayah, [ucwords($this->setting->sebutan_dusun), 'RW', 'RT'])): ?>
+      <td align="center"><img src="<?= gambar_desa($logo['logo']); ?>" alt="logo"  class="logo_mandiri"></td>
     <?php else: ?>
-      <td align="center"><img src="<?= gambar_desa($desa['logo']);?>" alt="logo"  class="logo_mandiri"></td>
+      <td align="center"><img src="<?= gambar_desa($desa['logo']); ?>" alt="logo"  class="logo_mandiri"></td>
     <?php endif; ?>
   </tr>
   <tr>
@@ -45,11 +45,11 @@
         <h3 class="title text-center">PETA WILAYAH</h3>
         <h3 class="title text-center"><?= strtoupper($this->setting->sebutan_dusun)?></h3>
         <h3 class="title text-center"><?= strtoupper($wil_ini['dusun'])?></h3>
-      <?php elseif ($wilayah == "RW"): ?>
+      <?php elseif ($wilayah == 'RW'): ?>
         <h3 class="title text-center">PETA WILAYAH</h3>
         <h3 class="title text-center">RW <?= $wil_ini['rw']?></h3>
         <h3 class="title text-center"><?= strtoupper($this->setting->sebutan_dusun)?> <?= strtoupper($wil_ini['dusun'])?></h3>
-      <?php elseif ($wilayah == "RT"): ?>
+      <?php elseif ($wilayah == 'RT'): ?>
         <h3 class="title text-center">PETA WILAYAH</h3>
         <h3 class="title text-center">RT <?= $wil_ini['rt']?> RW <?= $wil_ini['rw']?> </h3>
         <h3 class="title text-center"><?= strtoupper($this->setting->sebutan_dusun)?> <?= strtoupper($wil_ini['dusun'])?></h3>
@@ -62,6 +62,6 @@
     <td align="center"></td>
   </tr>
   <tr>
-    <td align="center"><img src="<?= base_url()?>assets/images/kompas.png" alt="SIDeGa"></td>
+    <td align="center"><img src="<?= base_url()?>assets/images/kompas.png" alt="OpenSID"></td>
   </tr>
 </table>

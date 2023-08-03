@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-define("VERSION", '5.6.0');
+define("VERSION", '5.7.0');
 
 define('VERSI_DATABASE', '2023062801');
 

@@ -12,7 +12,7 @@
 		<h1> CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li class="active">CCTV <?= ucfirst($this->setting->sebutan_desa) ?></li>
+			<li class="active">Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -76,15 +76,7 @@
 																	<th class="text-center" width=25%><a href="<?= site_url("gallery_cctv/index/$p/1") ?>">Sumber CCTV <i class='fa fa-sort fa-sm'></i></a></th>
 																<?php endif; ?>
 																<th width=20% class="text-center">Deskripsi</th>
-																<?php if ($o == 6) : ?>
-																	<th nowrap><a href="<?= site_url("gallery_cctv/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
-																<?php elseif ($o == 5) : ?>
-																	<th nowrap><a href="<?= site_url("gallery_cctv/index/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
-																<?php else : ?>
-																	<th nowrap><a href="<?= site_url("gallery_cctv/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
-																<?php endif; ?>
 																<th>Aksi</th>
-
 															</tr>
 														</thead>
 														<tbody>
@@ -99,19 +91,19 @@
 																		<strong><?= $data['nama'] ?></strong>
 																	</td>
 																	<td width=15%>
-																		<?= $data['deskripsi'] ?>
+																		<?= $data['deskripsi'] ?><br/>
+																		<?= tgl_indo2($data['tgl_upload']) ?>
 																	</td>
-																	<td width=10%><?= tgl_indo2($data['tgl_upload']) ?></td>
-																	<td>
+																	<td align="center">
 																		<a href="<?= site_url("gallery_cctv/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
 																		<a href="<?= site_url("gallery_cctv/urut/$data[id]/2") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
 																		<a href="<?= site_url("gallery_cctv/sub_gallery/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Album"><i class="fa fa-bars"></i></a></br>
 																		<a href="<?= site_url("gallery_cctv/form/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
-																		<?php if ($data['slider'] == '1') : ?>
-																			<a href="<?= site_url("gallery_cctv/slider_off/" . $data['id']) ?>" class="btn bg-maroon btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
-																		<?php else : ?>
-																			<a href="<?= site_url("gallery_cctv/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
-																		<?php endif; ?>
+																		<?php // if ($data['slider'] == '1') : ?>
+																			<!--<a href="<?= site_url("gallery_cctv/slider_off/" . $data['id']) ?>" class="btn bg-maroon btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>-->
+																		<?php // else : ?>
+																			<!--<a href="<?= site_url("gallery_cctv/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>-->
+																		<?php // endif; ?>
 																		<?php if ($data['enabled'] == '2') : ?>
 																			<a href="<?= site_url("gallery_cctv/gallery_lock/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i></a>
 																		<?php elseif ($data['enabled'] == '1') : ?>
@@ -121,7 +113,7 @@
 																		<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																			<a href="#" data-href="<?= site_url("gallery_cctv/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																		<?php endif; ?>
-																		<a href="<?= $data['link'] ?>" class="btn btn-info btn-box btn-sm" target="_blank" title="Buka Link CCTV">Buka Link CCTV</a>
+																		<!--<a href="<?= $data['link'] ?>" class="btn btn-info btn-box btn-sm" target="_blank" title="Buka Link CCTV">Buka Link CCTV</a>-->
 																	</td>
 
 																</tr>

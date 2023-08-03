@@ -24,16 +24,16 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="nama">Nama CCTV</label>
 								<div class="col-sm-6">
-									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
+									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery_cctv['nama'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="link">URL CCTV</label>
 								<div class="col-sm-6">
 									<div class="box-body text-center border">
-										<iframe width="250" height="160" src="<?= $gallery["link"]; ?>" frameborder="0" allowfullscreen></iframe>
+										<iframe width="250" height="160" src="<?= $gallery_cctv["link"]; ?>" frameborder="0" allowfullscreen></iframe>
 									</div>
-									<input name="link" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['link'] ?>"></input>
+									<input name="link" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery_cctv['link'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">

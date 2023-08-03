@@ -17,7 +17,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		unset($_SESSION['cari']);
 		unset($_SESSION['filter']);
-		redirect('gallery');
+		redirect('gallery_cctv');
 	}
 
 	public function index($p=1, $o=0)
@@ -46,45 +46,20 @@ class Gallery_cctv extends Admin_Controller {
 		$this->render('gallery_cctv/table', $data);
 	}
 
-	public function cctv_luar($p=1, $o=0)
-	{
-		$data['p'] = $p;
-		$data['o'] = $o;
-		$data      = ['selected_nav' => 'cctv_luar'];
-
-
-		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
-
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-
-		if (isset($_POST['per_page']))
-			$_SESSION['per_page'] = $_POST['per_page'];
-		$data['per_page'] = $_SESSION['per_page'];
-
-		$data['paging'] = $this->web_gallery_cctv_model->paging($p,$o);
-		$data['main'] = $this->web_gallery_cctv_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
-		$data['keyword'] = $this->web_gallery_cctv_model->autocomplete();
-
-		$this->render('gallery_cctv/table_cctv_luar', $data);
-	}
-
 	public function form($p=1, $o=0, $id='')
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'gallery_cctv'];
 
 		if ($id)
 		{
-			$data['gallery'] = $this->web_gallery_cctv_model->get_gallery($id);
+			$data['gallery_cctv'] = $this->web_gallery_cctv_model->get_gallery($id);
 			$data['form_action'] = site_url("gallery_cctv/update/$id/$p/$o");
 		}
 		else
 		{
-			$data['gallery'] = null;
+			$data['gallery_cctv'] = null;
 			$data['form_action'] = site_url("gallery_cctv/insert");
 		}
 
@@ -119,7 +94,7 @@ class Gallery_cctv extends Admin_Controller {
 		}
 		else
 		{
-			redirect('gallery');
+			redirect('gallery_cctv');
 		}
 	}
 
@@ -190,6 +165,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
+		$data      = ['selected_nav' => 'gallery_cctv'];
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -214,14 +190,16 @@ class Gallery_cctv extends Admin_Controller {
 
 	public function form_sub_gallery($gallery=0, $id=0)
 	{
+		$data      = ['selected_nav' => 'gallery_cctv'];
+
 		if ($id)
 		{
-			$data['gallery'] = $this->web_gallery_cctv_model->get_gallery($id);
+			$data['gallery_cctv'] = $this->web_gallery_cctv_model->get_gallery($id);
 			$data['form_action'] = site_url("gallery_cctv/update_sub_gallery/$gallery/$id");
 		}
 		else
 		{
-			$data['gallery'] = null;
+			$data['gallery_cctv'] = null;
 			$data['form_action'] = site_url("gallery_cctv/insert_sub_gallery/$gallery");
 		}
 		$data['album']=$gallery;
@@ -238,7 +216,7 @@ class Gallery_cctv extends Admin_Controller {
 	public function update_sub_gallery($gallery='', $id='')
 	{
 		$this->web_gallery_cctv_model->update_sub_gallery($id);
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		redirect("gallery/sub_gallery/$gallery");
 	}
 
 	public function delete_sub_gallery($gallery='', $id='')
