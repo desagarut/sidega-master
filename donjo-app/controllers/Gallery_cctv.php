@@ -24,7 +24,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
-		$data      = ['selected_nav' => 'gallery_cctv'];
+		$data[] = ['selected_nav' => 'gallery_cctv'];
 
 
 		if (isset($_SESSION['cari']))

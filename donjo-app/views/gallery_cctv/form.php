@@ -1,10 +1,10 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Form Playlist</h1>
+		<h1>Form CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('gallery') ?>"><i class="fa fa-dashboard"></i> Playlist</a></li>
-			<li class="active">Form CCTV</li>
+			<li><a href="<?= site_url('gallery') ?>"><i class="fa fa-dashboard"></i> Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
+			<li class="active">Form</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">

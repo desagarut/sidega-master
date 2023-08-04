@@ -9,7 +9,7 @@
 </script>
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1> CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h1>
+		<h1> Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
 			<li class="active">Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></li>
@@ -24,7 +24,7 @@
 				<div class="col-md-9">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<h3 class="box-title">CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h3>
+							<h3 class="box-title">Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h3>
 							<div class="box-tools">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
 								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i> </button>

@@ -20,31 +20,31 @@
           </div>
         <?php endif; ?>
       <?php endforeach; ?>
-
+<!--
       <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3"><a class="btn btn-link" href="<?= site_url('first/gallery') ?>">Gallery Foto</a></h4>
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg")?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg")?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg")?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg")?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg")?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg")?>" alt="">
-                        </div>
-                    </div>
-                </div>
-
+        <h4 class="text-white mb-3"><a class="btn btn-link" href="<?= site_url('first/gallery') ?>">Gallery Foto</a></h4>
+        <div class="row g-2 pt-2">
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
+          </div>
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg") ?>" alt="">
+          </div>
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg") ?>" alt="">
+          </div>
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg") ?>" alt="">
+          </div>
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg") ?>" alt="">
+          </div>
+          <div class="col-4">
+            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
+          </div>
+        </div>
+      </div>
+        -->
     </div>
   </div>
 </div>
