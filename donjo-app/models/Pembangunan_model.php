@@ -1,23 +1,29 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pembangunan_model extends CI_Model
+class Pembangunan_model extends MY_Model
 {
-	protected $table = 'pembangunan';
+    public const ENABLE     = 1;
+    public const DISABLE    = 0;
+    public const ORDER_ABLE = [
+        2 => 'p.judul',
+        3 => 'p.sumber_dana',
+        4 => 'p.anggaran',
+        5 => 'max_persentase',
+        6 => 'p.volume',
+        7 => 'p.tahun_anggaran',
+        8 => 'p.pelaksana_kegiatan',
+        9 => 'alamat',
+    ];
 
-	const ENABLE = 1;
-	const DISABLE = 0;
+    protected $tipe  = 'rencana';
+    protected $table = 'pembangunan';
 
-	const ORDER_ABLE = [
-		2  => 'p.judul',
-		3  => 'p.sumber_dana',
-		4  => 'p.anggaran',
-		5  => 'max_persentase',
-		6  => 'p.volume',
-		7  => 'p.tahun_anggaran',
-		8  => 'p.pelaksana_kegiatan',
-		9  => 'alamat',
-		10 => 'p.keterangan',
-	];
+    public function set_tipe(string $tipe)
+    {
+        $this->tipe = $tipe;
+
+        return $this;
+    }
 
 	public function get_data(string $search = '', $tahun = '')
 	{
@@ -30,17 +36,14 @@ class Pembangunan_model extends CI_Model
 			) ELSE p.lokasi END) AS alamat",
 			'(CASE WHEN MAX(CAST(d.persentase as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(d.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase',
 		])
-		->from("{$this->table} p")
-		->join('pembangunan_ref_dokumentasi d', 'd.id_pembangunan = p.id', 'left')
-		->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
-		->group_by('p.id');
+			->from("{$this->table} p")
+			->join('pembangunan_ref_dokumentasi d', 'd.id_pembangunan = p.id', 'left')
+			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
+			->group_by('p.id');
 
-		if (empty($search))
-		{
+		if (empty($search)) {
 			$search = $builder;
-		}
-		else
-		{
+		} else {
 			$search = $builder->group_start()
 				->like('p.sumber_dana', $search)
 				->or_like('p.judul', $search)
@@ -70,11 +73,11 @@ class Pembangunan_model extends CI_Model
 				w.dusun
 			) ELSE p.lokasi END) AS alamat",
 		])
-		->from('pembangunan p')
-		->where('p.status = 1')
-		->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
-		->get()
-		->result();
+			->from('pembangunan p')
+			->where('p.status = 1')
+			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
+			->get()
+			->result();
 
 		return $data;
 	}
@@ -107,7 +110,7 @@ class Pembangunan_model extends CI_Model
 		else $_SESSION['success'] = -1;
 	}
 
-	public function update($id=0)
+	public function update($id = 0)
 	{
 		$post = $this->input->post();
 
@@ -146,14 +149,11 @@ class Pembangunan_model extends CI_Model
 		);
 		// Adakah berkas yang disertakan?
 		$adaBerkas = !empty($_FILES[$jenis]['name']);
-		if ($adaBerkas !== TRUE)
-		{
+		if ($adaBerkas !== TRUE) {
 			return NULL;
 		}
 		// Tes tidak berisi script PHP
-		if (isPHP($_FILES['logo']['tmp_name'], $_FILES[$jenis]['name']))
-
-		{
+		if (isPHP($_FILES['logo']['tmp_name'], $_FILES[$jenis]['name'])) {
 			$_SESSION['error_msg'] .= " -> Jenis file ini tidak diperbolehkan ";
 			$_SESSION['success'] = -1;
 			redirect('identitas_desa');
@@ -163,23 +163,21 @@ class Pembangunan_model extends CI_Model
 		// Inisialisasi library 'upload'
 		$this->upload->initialize($this->uploadConfig);
 		// Upload sukses
-		if ($this->upload->do_upload($jenis))
-		{
+		if ($this->upload->do_upload($jenis)) {
 			$uploadData = $this->upload->data();
 			// Buat nama file unik agar url file susah ditebak dari browser
 			$namaFileUnik = tambahSuffixUniqueKeNamaFile($uploadData['file_name']);
 			// Ganti nama file asli dengan nama unik untuk mencegah akses langsung dari browser
 			$fileRenamed = rename(
-				$this->uploadConfig['upload_path'].$uploadData['file_name'],
-				$this->uploadConfig['upload_path'].$namaFileUnik
+				$this->uploadConfig['upload_path'] . $uploadData['file_name'],
+				$this->uploadConfig['upload_path'] . $namaFileUnik
 			);
 			// Ganti nama di array upload jika file berhasil di-rename --
 			// jika rename gagal, fallback ke nama asli
 			$uploadData['file_name'] = $fileRenamed ? $namaFileUnik : $uploadData['file_name'];
 		}
 		// Upload gagal
-		else
-		{
+		else {
 			$_SESSION['success'] = -1;
 			$_SESSION['error_msg'] = $this->upload->display_errors(NULL, NULL);
 		}
@@ -210,11 +208,11 @@ class Pembangunan_model extends CI_Model
 				w.dusun
 			) ELSE p.lokasi END) AS alamat",
 		])
-		->from("{$this->table} p")
-		->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
-		->where('p.id', $id)
-		->get()
-		->row();
+			->from("{$this->table} p")
+			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
+			->where('p.id', $id)
+			->get()
+			->row();
 	}
 
 	public function list_filter_tahun()
@@ -239,4 +237,12 @@ class Pembangunan_model extends CI_Model
 			->where('id', $id)
 			->update($this->table);
 	}
+
+	public function paging($page_number = 1)
+    {
+        $jml_data = $this->get_data('', 'semua')->count_all_results();
+
+       // return $this->paging($page_number, $jml_data);
+    }
+
 }

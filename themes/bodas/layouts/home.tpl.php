@@ -5,6 +5,7 @@
 <?php $this->load->view($folder_themes .'/partials/berita') ?>
 <?php $this->load->view($folder_themes .'/partials/profil') ?>
 <?php $this->load->view($folder_themes .'/partials/team') ?>
+<?php $this->load->view($folder_themes .'/partials/pembangunan/front') ?>
 <?php $this->load->view($folder_themes .'/partials/umkm') ?>
 <?php $this->load->view($folder_themes .'/partials/sinergi') ?>
 <?php $this->load->view($folder_themes .'/partials/gallery_front') ?>

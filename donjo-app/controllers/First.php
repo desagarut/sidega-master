@@ -67,15 +67,8 @@ class First extends Web_Controller
 
 		//update v 5.5.5
 		$this->load->model('first_gallery_youtube');
-		//update v 5.7
+		//update v 5.7.0
 		$this->load->model('first_gallery_cctv');
-
-
-		//update v 5.6
-		//$this->load->model('toko_warga_model');
-		//$this->load->model('tukang_model');
-		//$this->load->model('wisata_model');
-		//$this->load->model('tawa_model');
 
 		$this->load->library('upload');
 	}
@@ -107,6 +100,9 @@ class First extends Web_Controller
 		$data['tawa'] = $this->first_tawa_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['tukang'] = $this->first_tukang_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['wisata'] = $this->first_wisata_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+
+		// Update Versi 5.7.0
+        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
 
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input
@@ -279,6 +275,51 @@ class First extends Web_Controller
 		$this->set_template('layouts/gallery_cctv.tpl.php');
 		$this->load->view($this->template, $data);
 	}
+
+	//Update V.5.7.0
+	public function pembangunan($p = 1)
+    {
+        $this->pembangunan_model->set_tipe(''); // Ambil semua pembangunan
+
+        $data = $this->includes;
+        $this->_get_common_data($data);
+
+        $data['paging']         = $this->pembangunan_model->paging($p);
+        $data['paging_page']    = 'pembangunan/index';
+        $data['paging_range']   = 3;
+        $data['start_paging']   = max($data['paging']->start_link, $p - $data['paging_range']);
+        $data['end_paging']     = min($data['paging']->end_link, $p + $data['paging_range']);
+        $data['pages']          = range($data['start_paging'], $data['end_paging']);
+        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
+       // $data['halaman_statis'] = $this->controller . '/index';
+	   //$data['pembangunan'] = $this->pembangunan_model->get_data($data['paging']->offset, $data['paging']->per_page);
+
+
+        $this->set_template('layouts/pembangunan.tpl.php');
+        $this->load->view($this->template, $data);
+    }
+
+    public function pembangunan_detail($gal = 0, $p = 1)
+    {
+        $this->pembangunan_model->set_tipe(''); // Ambil semua pembangunan
+
+		$data = $this->includes;
+		$data['p'] = $p;
+		$data['gal'] = $gal;
+        $data['paging']         = $this->pembangunan_model->paging($gal, $p);;
+        $data['paging_page']    = 'pembangunan/detail';
+        $data['paging_range']   = 3;
+        $data['start_paging']   = max($data['paging']->start_link, $p - $data['paging_range']);
+        $data['end_paging']     = min($data['paging']->end_link, $p + $data['paging_range']);
+        $data['pages']          = range($data['start_paging'], $data['end_paging']);
+        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
+        $data['halaman_statis'] = $this->controller . '/index';
+
+		$this->_get_common_data($data);
+
+        $this->set_template('layouts/pembangunan_detail.tpl.php');
+        $this->load->view($this->template, $data);
+    }
 
 
 	public function statistik($stat = 0, $tipe = 0)
