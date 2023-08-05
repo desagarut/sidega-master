@@ -69,6 +69,7 @@ class First extends Web_Controller
 		$this->load->model('first_gallery_youtube');
 		//update v 5.7.0
 		$this->load->model('first_gallery_cctv');
+		$this->load->model('first_pembangunan_m');
 
 		$this->load->library('upload');
 	}
@@ -277,50 +278,72 @@ class First extends Web_Controller
 	}
 
 	//Update V.5.7.0
-	public function pembangunan($p = 1)
-    {
-        $this->pembangunan_model->set_tipe(''); // Ambil semua pembangunan
+		public function pembangunan($p = 1)
+		{
+			$data = $this->includes;
+			$data['p'] = $p;
+			$data['paging'] = $this->first_pembangunan_m->paging($p);
+			$data['paging_range'] = 3;
+			$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+			$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+			$data['pages'] = range($data['start_paging'], $data['end_paging']);
+			$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
 
-        $data = $this->includes;
-        $this->_get_common_data($data);
-
-        $data['paging']         = $this->pembangunan_model->paging($p);
-        $data['paging_page']    = 'pembangunan/index';
-        $data['paging_range']   = 3;
-        $data['start_paging']   = max($data['paging']->start_link, $p - $data['paging_range']);
-        $data['end_paging']     = min($data['paging']->end_link, $p + $data['paging_range']);
-        $data['pages']          = range($data['start_paging'], $data['end_paging']);
-        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
-       // $data['halaman_statis'] = $this->controller . '/index';
-	   //$data['pembangunan'] = $this->pembangunan_model->get_data($data['paging']->offset, $data['paging']->per_page);
-
-
-        $this->set_template('layouts/pembangunan.tpl.php');
-        $this->load->view($this->template, $data);
-    }
-
-    public function pembangunan_detail($gal = 0, $p = 1)
-    {
-        $this->pembangunan_model->set_tipe(''); // Ambil semua pembangunan
-
+			$this->_get_common_data($data);
+	
+			$this->set_template('layouts/pembangunan.tpl.php');
+			$this->load->view($this->template, $data);
+		}
+	
+		// halaman rincian Pembangunan
+	public function pembangunan_detail($gal = 0, $p = 1)
+	{
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['gal'] = $gal;
-        $data['paging']         = $this->pembangunan_model->paging($gal, $p);;
-        $data['paging_page']    = 'pembangunan/detail';
-        $data['paging_range']   = 3;
-        $data['start_paging']   = max($data['paging']->start_link, $p - $data['paging_range']);
-        $data['end_paging']     = min($data['paging']->end_link, $p + $data['paging_range']);
-        $data['pages']          = range($data['start_paging'], $data['end_paging']);
-        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
-        $data['halaman_statis'] = $this->controller . '/index';
+		$data['paging'] = $this->first_pembangunan_m->paging2($gal, $p);
+		$data['paging_range'] = 3;
+		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+		$data['pages'] = range($data['start_paging'], $data['end_paging']);
+
+		$data['pembangunan_detail'] = $this->first_pembangunan_m->pembangunan_detail_show($gal, $data['paging']->offset, $data['paging']->per_page);
+		$data['pembangunan'] = $this->first_pembangunan_m->get_parrent($gal);
+		$data['mode'] = 1;
 
 		$this->_get_common_data($data);
 
-        $this->set_template('layouts/pembangunan_detail.tpl.php');
-        $this->load->view($this->template, $data);
-    }
+		$this->set_template('layouts/pembangunan_detail.tpl.php');
+		$this->load->view($this->template, $data);
+	}
 
+	public function pembangunan_detail2($gal = 0, $p = 1, $o = 0)
+	{
+		$data = $this->includes;
+		$data['p'] = $p;
+		$data['o'] = $o;
+
+		if (isset($_POST['per_page']))
+			$_SESSION['per_page'] = $_POST['per_page'];
+		$data['per_page'] = $_SESSION['per_page'];
+
+		$data['paging'] = $this->first_toko_warga_m->paging2($gal, $p);
+		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
+		$data['gallery'] = $gal;
+		$data['sub'] = $this->first_toko_warga_m->get_toko($gal);
+
+		$data['rupiah'] = function ($angka) {
+			$hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+			return $hasil_rupiah;
+		};
+
+		$this->_get_common_data($data);
+
+		$this->set_template('layouts/toko_warga_produk.tpl.php');
+		$this->load->view($this->template, $data);
+	}
+
+	
 
 	public function statistik($stat = 0, $tipe = 0)
 	{
@@ -741,7 +764,6 @@ class First extends Web_Controller
 
 		$data['paging'] = $this->first_toko_warga_m->paging($p, $o);
 		$data['main'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
-		//$data['keyword'] = $this->first_toko_warga_m->autocomplete();
 
 		$this->_get_common_data($data);
 
@@ -763,7 +785,6 @@ class First extends Web_Controller
 		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['gallery'] = $gal;
 		$data['sub'] = $this->first_toko_warga_m->get_toko($gal);
-		//$data['keyword'] = $this->first_toko_warga_m->autocomplete();
 
 		$data['rupiah'] = function ($angka) {
 			$hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');

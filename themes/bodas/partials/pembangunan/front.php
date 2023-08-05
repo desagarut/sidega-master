@@ -14,41 +14,13 @@
 							<div class="overflow-hidden" style="padding:10px 10px 10px 10px">
 
 								<?php if (is_file(LOKASI_GALERI . $data->foto)) : ?>
-									<img class="img-fluid" style="object-fit: cover; height:200px" src="<?= base_url() . LOKASI_GALERI . $data->foto ?>" alt="Foto Pembangunan" />
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data->foto ?>" alt="Foto Pembangunan" />
 								<?php else : ?>
-									<img class="img-fluid" style="object-fit: cover; height:200px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
 								<?php endif; ?>
-								<div class="text-start p-4">
-									<table>
-										<tbody>
-											<tr>
-												<th width="auto"><small>Nama Kegiatan</small></th>
-												<td width="1%">:</td>
-												<td><?= $data->judul ?></td>
-											</tr>
-											<tr>
-												<th><small>Alamat</small></th>
-												<td>:</td>
-
-												<td><?= ($data->alamat == "=== Lokasi Tidak Ditemukan ===") ? 'Lokasi tidak diketahui' : $data->alamat; ?></td>
-											</tr>
-											<tr>
-												<th><small>Tahun</small></th>
-												<td>:</td>
-												<td>
-													<?= $data->tahun_anggaran ?></td>
-											</tr>
-											<tr>
-												<th><small>Keterangan</small></th>
-												<td>:</td>
-												<td><?= $data->keterangan ?></td>
-											</tr>
-										</tbody>
-									</table>
+								<div class="text-center p-4 pb-0">
+									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data->id; ?>"><?= $data->judul ?> (<small><?= $data->tahun_anggaran ?>)</small></a></h5>
 								</div>
-								<!--<a href="<? //= site_url("first/pembangunan_detail/{$data['id']}") ?>" class="btn btn-primary">Selengkapnya</a>-->
-								<a href="<?= site_url("first/pembangunan/") ?>" class="btn btn-primary">Selengkapnya</a>
-
 							</div>
 						</div>
 					</div>
@@ -56,4 +28,3 @@
 			<?php endif; ?>
 		</div>
 	</div>
-</div>

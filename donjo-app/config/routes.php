@@ -63,13 +63,11 @@ $route['peta'] = 'first/peta';
 $route['informasi_publik'] = 'first/informasi_publik';
 
 //Pembangunan
-$route['pembangunan']              = 'first/pembangunan';
-$route['pembangunan/index/(:num)'] = 'first/pembangunan/index/$1';
-$route['pembangunan/(:any)']       = 'first/pembangunan/detail/$1';
+$route['pembangunan_front']              = 'first/pembangunan';
+$route['pembangunan_front/index/(:num)'] = 'first/pembangunan/index/$1';
+$route['pembangunan_front/detail/(:num)'] = 'first/pembangunan/detail/$1';
 
-$route['pembangunan_detail']              = 'first/pembangunan_detail';
-$route['pembangunan_detail/index/(:num)'] = 'first/pembangunan_detail/index/$1';
-$route['pembangunan_detail/(:any)']       = 'first/pembangunan_detail/detail/$1';
+$route['pembangunan_front/(:any)']       = 'first/pembangunan/detail/$1';
 
 // $route['bumindes_umum/([a-z_]+)/(:any)'] = "buku_umum/bumindes_umum/$1/$2";
 // $route['bumindes_umum/([a-z_]+)'] = "buku_umum/bumindes_umum/$1";

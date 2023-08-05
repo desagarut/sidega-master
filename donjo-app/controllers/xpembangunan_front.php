@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 
-class Pelaksanaan_pembangunan extends Web_Controller
+class Pembangunan_front extends Web_Controller
 {
     public function __construct()
     {
@@ -37,7 +37,23 @@ class Pelaksanaan_pembangunan extends Web_Controller
         $data['dokumentasi']    = $this->pembangunan_dokumentasi_model->find_dokumentasi($data['pembangunan']->id);
         $data['halaman_statis'] = $this->controller . '/detail';
 
-        $this->set_template('layouts/halaman_statis_lebar.tpl.php');
+        $this->set_template('layouts/pembangunan_detail.tpl.php');
         $this->load->view($this->template, $data);
     }
+
+    public function info_pembangunan($id = 0)
+	{
+		$pembangunan = $this->model->find($id);
+		$dokumentasi = $this->pembangunan_dokumentasi_model->find_dokumentasi($pembangunan->id);
+
+		$data['pembangunan']    = $pembangunan;
+		$data['dokumentasi']    = $dokumentasi;
+		$data['config']         = $this->header['desa'];
+
+       // $this->set_template('layouts/pembangunan_detail.tpl.php');
+        //$this->load->view($this->template, $data);
+
+		$this->load->view('pembangunan/informasi', $data);
+	}
+
 }

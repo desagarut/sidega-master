@@ -8,7 +8,8 @@ class Pembangunan_dokumentasi extends Admin_Controller
 	{
 		parent::__construct();
 
-		$this->modul_ini = 317;
+		$this->modul_ini = 305;
+		$this->sub_modul_ini = 317;
 		$this->set_minsidebar(0);
 
 

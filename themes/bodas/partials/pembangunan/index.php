@@ -5,58 +5,62 @@
 <div class="container-xxl py-0">
 	<div class="container">
 		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			<h4 class="mb-5 text-start">Pembangunan <a href="<?= site_url("first/pembangunan/{$data['id']}") ?>" class="flex-shrink-0 btn btn-sm btn-light px-3" style="border-radius: 8px 8px 8px 8px;">Perencanaan</a> | <a href="#" class="flex-shrink-0 btn btn-sm btn-warning px-3" style="border-radius: 8px 8px 8px 8px;">Pelaksanaan</a> | <a href="#" class="flex-shrink-0 btn btn-sm btn-light px-3" style="border-radius: 8px 8px 8px 8px;">Progres</a></h4>
+			<h6 class="section-title bg-white text-center text-primary px-3">DAFTAR KEGIATAN PEMBANGUNAN </h6>
+			<h3 class="mb-5"><?= strtoupper($this->setting->sebutan_desa) . ' ' . strtoupper($desa['nama_desa']) . ' ' . KECAMATAN . ' ' . strtoupper($desa['nama_kecamatan']) ?></h3>
 		</div>
-		<div class="row g-4">
-			<?php if ($pembangunan) : ?>
-				<div class="row">
-					<?php foreach ($pembangunan as $data) : ?>
-						<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="course-item bg-light">
-								<div class="position-relative overflow-hidden text-center" style="padding: 10px 10px 10px 10px">
-									<?php if (is_file(LOKASI_GALERI . $data->foto)) : ?>
-										<img width="auto" class="img-fluid" style="object-fit: cover; height:200px" src="<?= base_url() . LOKASI_GALERI . $data->foto ?>" alt="Foto Pembangunan" />
-									<?php else : ?>
-										<img width="auto" class="img-fluid" style="object-fit: cover; height:200px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
-									<?php endif; ?>
-									<div class="text-start p-4 pb-0">
-										<table>
-											<tbody>
-												<tr>
-													<th width="auto"><small>Nama Kegiatan</small></th>
-													<td width="1%">:</td>
-													<td><?= $data->judul ?></td>
-												</tr>
-												<tr>
-													<th><small>Alamat</small></th>
-													<td>:</td>
 
-													<td><?= ($data->alamat == "=== Lokasi Tidak Ditemukan ===") ? 'Lokasi tidak diketahui' : $data->alamat; ?></td>
-												</tr>
-												<tr>
-													<th><small>Tahun</small></th>
-													<td>:</td>
-													<td>
-														<?= $data->tahun_anggaran ?></td>
-												</tr>
-												<tr>
-													<th><small>Keterangan</small></th>
-													<td>:</td>
-													<td><?= $data->keterangan ?></td>
-												</tr>
-											</tbody>
-										</table>
-										<!--<a href="#" class="btn btn-primary">Selengkapnya</a>-->
-									</div>
+		<div class="row g-4 justify-content-center">
+			<?php if ($pembangunan) : ?>
+				<?php foreach ($pembangunan as $data) : ?>
+					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="course-item bg-light">
+							<div class="position-relative overflow-hidden text-center">
+								<?php if (is_file(LOKASI_GALERI . $data['foto'])) : ?>
+									<a href="<?= site_url("first/pembangunan_detail/{$data['id']}") ?>">
+										<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data['foto'] ?>" alt="Foto Pembangunan" />
+									</a>
+								<?php else : ?>
+									<a href="<?= site_url("first/pembangunan_detail/{$data['id']}") ?>">
+										<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
+									</a>
+								<?php endif; ?>
+								<div class="text-start p-4 pb-3">
+									<table>
+										<tbody>
+											<tr>
+												<th width="auto"><small>Nama Kegiatan</small></th>
+												<td width="1%">:</td>
+												<td><?= $data['judul'] ?></td>
+											</tr>
+											<tr>
+												<th><small>Alamat</small></th>
+												<td>:</td>
+												<td><?= $data['lokasi'] ?></td>
+											</tr>
+											<tr>
+												<th><small>Tahun</small></th>
+												<td>:</td>
+												<td>
+													<?= $data['tahun_anggaran'] ?></td>
+											</tr>
+											<tr>
+												<th><small>Keterangan</small></th>
+												<td>:</td>
+												<td><?= $data['keterangan'] ?></td>
+											</tr>
+										</tbody>
+									</table>
+									<a href="<?= site_url("first/pembangunan_detail/{$data['id']}") ?>" class="flex-shrink-0 btn btn-sm btn-success px-3" style="border-radius: 8px 8px 8px 8px;">Selengkapnya</a>
 								</div>
 							</div>
 						</div>
-					<?php endforeach; ?>
-				</div>
+					</div>
+				<?php endforeach; ?>
 				<?php $this->load->view($folder_themes . '/commons/paging') ?>
 			<?php else : ?>
 				<h5>Data pembangunan tidak tersedia.</h5>
 			<?php endif; ?>
 		</div>
+
 	</div>
 </div>
