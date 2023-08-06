@@ -18,7 +18,7 @@
 					<?php endif; ?>
 				</div>
 				<div class="col-lg-6 col-md-6 wow zoomIn bg-light" data-wow-delay="0.7s">
-					<?php $this->load->view($folder_themes . '/widgets/map_tentang') ?>
+					<?php $this->load->view($folder_themes . '/partials/pembangunan/maps') ?>
 				</div>
 			</div>
 			<div class="row g-4 bg-light py-4">
