@@ -100,6 +100,7 @@ class Gis extends Admin_Controller {
 		
 		$this->set_minsidebar(1);
 		$this->render('gis/maps-openstreet', $data);
+
 	}
 
 	public function search()

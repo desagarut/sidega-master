@@ -84,6 +84,9 @@ class Beranda extends Admin_Controller {
 		//Perencanaan Desa
 		$data['rkpdes_total'] = $this->header_model->rkpdes_total();
 		$data['durkpdes_total'] = $this->header_model->durkpdes_total();
+		// Pembangunan
+		$data['pelaksanaan_total'] = $this->header_model->rkpdes_total();
+
 
 		//Rekapitulasi SPPT PBB
 		$data['pbb_terhutang'] = $this->data_sppt_model->rekapitulasi('');

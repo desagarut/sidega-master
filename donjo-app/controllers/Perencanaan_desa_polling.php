@@ -13,14 +13,14 @@ class Perencanaan_desa_polling extends Admin_Controller
 
 		$this->load->library('upload');
 		$this->load->model('referensi_model');
-		$this->load->model('perencanaan_desa_model');
+		$this->load->model('pembangunan_model');
 		$this->load->model('wilayah_model');
 		$this->load->model('perencanaan_desa_polling_model', 'model');
 	}
 
 	public function daftar_polling($id = null)
 	{
-		$polling = $this->perencanaan_desa_model->find($id);
+		$polling = $this->pembangunan_model->find($id);
 		$_SESSION['id_perencanaan_desa'] = $id;
 
 		if ($this->input->is_ajax_request()) {
@@ -45,14 +45,14 @@ class Perencanaan_desa_polling extends Admin_Controller
 		$this->sub_modul_ini = 702;
 
 
-		$this->render('perencanaan_desa/polling/daftar', [
+		$this->render('pembangunan/polling/daftar', [
 			'polling' => $polling,
 		]);
 	}
 
 	public function tanggapan_per_item($id = null)
 	{
-		$polling = $this->perencanaan_desa_model->find($id);
+		$polling = $this->pembangunan_model->find($id);
 		$_SESSION['id_perencanaan_desa'] = $id;
 
 		if ($this->input->is_ajax_request()) {
@@ -76,7 +76,7 @@ class Perencanaan_desa_polling extends Admin_Controller
 		$this->sub_modul_ini = 702;
 
 
-		$this->render('perencanaan_desa/polling/tanggapan_per_item', [
+		$this->render('pembangunan/polling/tanggapan_per_item', [
 			'polling' => $polling,
 		]);
 	}
@@ -102,7 +102,7 @@ class Perencanaan_desa_polling extends Admin_Controller
 		$this->sub_modul_ini = 702;
 
 		//$this->render('perencanaan_desa/polling/form', $data);
-		$this->load->view('perencanaan_desa/polling/form', $data);
+		$this->load->view('pembangunan/polling/form', $data);
 	}
 
 	public function insert($id_perencanaan_desa = '')

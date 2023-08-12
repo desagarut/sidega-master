@@ -51,7 +51,7 @@
 				<?php $this->load->view('home/kependudukan_2.php'); ?>
 			</div>
 			<div class="col-md-3">
-				<?php $this->load->view('home/perencanaan.php'); ?>
+				<?php $this->load->view('home/pembangunan.php'); ?>
 			</div>
 		</div>
 		<div class='row'>

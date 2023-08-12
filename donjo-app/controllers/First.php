@@ -51,7 +51,7 @@ class First extends Web_Controller
 		$this->load->model('plan_area_model');
 		$this->load->model('plan_garis_model');
 		$this->load->model('pembangunan_model');
-		$this->load->model('pembangunan_dokumentasi_model');
+		//$this->load->model('pembangunan_dokumentasi_model');
 		$this->load->model('pamong_model');
 		$this->load->model('penduduk_model');
 
@@ -103,7 +103,8 @@ class First extends Web_Controller
 		$data['wisata'] = $this->first_wisata_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 
 		// Update Versi 5.7.0
-        $data['pembangunan']    = $this->pembangunan_model->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
+       // $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
+		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
 
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input

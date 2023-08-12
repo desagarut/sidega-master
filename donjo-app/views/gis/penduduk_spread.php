@@ -6,37 +6,29 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<?= base_url() ?>assets/css/ace-skins.min.css" />
 
-<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
-<!--<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>-->
+<!--<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>-->
 <script src="<?= base_url() ?>assets/js/leaflet.js"></script>
 <script src="<?= base_url() ?>assets/js/ace-elements.min.js"></script>
 <script src="<?= base_url() ?>assets/js/ace.min.js"></script>
 
+		<div class="page-content">
 
-<div class="col-sm-12">
-	<div id="map" style="height: 350px; width:100%"></div>
-</div>
-
-
-<div class="modal fade" id="sampul<?= $pembangunan['id'] ?>">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Gambar</h4>
-			</div>
-			<div class="modal-body">
-				<div class="text-center">
-					<img src="<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>" width="800px" height="500px">
+			<div class="col-sm-6">
+				<div class="panel panel-success">
+					<div class="panel-heading">Lokasi Pembangunan</div>
+					<div class="panel-body">
+						<div id="map" style="height: 340px;"></div>
+					</div>
 				</div>
 			</div>
+
 		</div>
-	</div>
-</div>
+
+
 
 <script>
-	var map = L.map('map').setView([<?= $pembangunan['lat'] ?>, <?= $pembangunan['lng'] ?>], 18);
+	var map = L.map('map').setView([<?= $penduduk['lat'] ?>, <?= $penduduk['lng'] ?>], 18);
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
@@ -50,14 +42,14 @@
 
 	var info_tempat = "<div class='media text-center'>";
 	info_tempat += "<div class='media-center'>";
-	info_tempat += "<img class='media-object' src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='200px' height='100px'>";
+	info_tempat += "<img class='media-object' src='<?= AmbilFoto($penduduk->foto, 'kecil') ?>' width='200px' height='100px'>";
 	info_tempat += "</div>";
 	info_tempat += "<div class='media-body '>";
-	info_tempat += "<p><b><?= $pembangunan['judul'] ?></b></p>";
+	info_tempat += "<p><b><?= $penduduk['nama'] ?></b></p>";
 	info_tempat += "</div>";
 	info_tempat += "</div>";
 
-	L.marker([<?= $pembangunan['lat'] ?>, <?= $pembangunan['lng'] ?>], {
+	L.marker([<?= $penduduk['lat'] ?>, <?= $penduduk['lng'] ?>], {
 			icon: logo
 		}).addTo(map)
 		.bindPopup(info_tempat).openPopup();

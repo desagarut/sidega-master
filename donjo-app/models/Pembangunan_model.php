@@ -1,69 +1,171 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pembangunan_model extends MY_Model
+class Pembangunan_model extends CI_Model
 {
-    public const ENABLE     = 1;
-    public const DISABLE    = 0;
-    public const ORDER_ABLE = [
-        2 => 'p.judul',
-        3 => 'p.sumber_dana',
-        4 => 'p.anggaran',
-        5 => 'max_persentase',
-        6 => 'p.volume',
-        7 => 'p.tahun_anggaran',
-        8 => 'p.pelaksana_kegiatan',
-        9 => 'alamat',
-    ];
+	protected $table = 'tbl_pembangunan';
+	protected $table2 = 'tbl_pembangunan_dok';
 
-    protected $tipe  = 'rencana';
-    protected $table = 'pembangunan';
+	const ENABLE = 1;
+	const DISABLE = 0;
 
-    public function set_tipe(string $tipe)
-    {
-        $this->tipe = $tipe;
+	const ORDER_ABLE = [
+		1  => 'p.status',
+		2  => 'p.tahun',
+		3  => 'p.dusun',
+		4  => 'p.bidang_desa',
+		5  => 'p.urutan_prioritas',
+		6  => 'p.nama_program_kegiatan',
+		7  => 'p.sdgs_ke',
+		8  => 'p.lokasi',
+		9  => 'p.sumber_dana',
+		10 => 'p.max_persentase',
 
-        return $this;
-    }
+	];
 
 	public function get_data(string $search = '', $tahun = '')
 	{
 		$builder = $this->db->select([
 			'p.*',
-			"(CASE WHEN p.id_lokasi IS NOT NULL THEN CONCAT(
-				(CASE WHEN w.rt != '0' THEN CONCAT('RT ', w.rt, ' / ') ELSE '' END),
-				(CASE WHEN w.rw != '0' THEN CONCAT('RW ', w.rw, ' - ') ELSE '' END),
-				w.dusun
-			) ELSE p.lokasi END) AS alamat",
-			'(CASE WHEN MAX(CAST(d.persentase as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(d.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
 		])
 			->from("{$this->table} p")
-			->join('pembangunan_ref_dokumentasi d', 'd.id_pembangunan = p.id', 'left')
-			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
 			->group_by('p.id');
 
 		if (empty($search)) {
 			$search = $builder;
 		} else {
 			$search = $builder->group_start()
-				->like('p.sumber_dana', $search)
-				->or_like('p.judul', $search)
-				->or_like('p.keterangan', $search)
-				->or_like('p.volume', $search)
-				->or_like('p.tahun_anggaran', $search)
-				->or_like('p.pelaksana_kegiatan', $search)
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->or_like('p.sdgs_ke', $search)
 				->or_like('p.lokasi', $search)
-				->or_like('p.anggaran', $search)
+				->or_like('p.sumber_dana', $search)
 				->group_end();
 		}
 
 		$condition = $tahun === 'semua'
 			? $search
-			: $search->where('p.tahun_anggaran', $tahun);
+			: $search->where('p.tahun', $tahun);
 
 		return $condition;
 	}
 
-	public function list_lokasi_pembangunan()
+	public function get_data_usulan(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+		])
+			->from("{$this->table} p")
+			->where('p.status_usulan = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->or_like('p.sdgs_ke', $search)
+				->or_like('p.lokasi', $search)
+				->or_like('p.sumber_dana', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_daftar_polling(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN 
+				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
+				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
+				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+		])
+			->from("{$this->table} p")
+			->where('p.status_usulan = 1 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->or_like('p.sdgs_ke', $search)
+				->or_like('p.lokasi', $search)
+				->or_like('p.sumber_dana', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_hasil_polling(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN 
+				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
+				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
+				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
+			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
+			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
+			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
+			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
+		])
+			->from("{$this->table} p")
+			->where('p.status_usulan = 1 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.desa', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function list_lokasi_program()
 	{
 		$data = $this->db->select([
 			'p.*',
@@ -73,7 +175,7 @@ class Pembangunan_model extends MY_Model
 				w.dusun
 			) ELSE p.lokasi END) AS alamat",
 		])
-			->from('pembangunan p')
+			->from('tbl_pembangunan p')
 			->where('p.status = 1')
 			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
 			->get()
@@ -86,25 +188,39 @@ class Pembangunan_model extends MY_Model
 	{
 		$post = $this->input->post();
 
-		$data['sumber_dana']        = $post['sumber_dana'];
-		$data['judul']              = $post['judul'];
-		$data['volume']             = $post['volume'];
-		$data['tahun_anggaran']     = $post['tahun_anggaran'];
-		$data['pelaksana_kegiatan'] = $post['pelaksana_kegiatan'];
-		$data['id_lokasi']          = $post['id_lokasi'] ?: null;
-		$data['lokasi']             = $post['lokasi'] ?: null;
-		$data['keterangan']         = $post['keterangan'];
+		$data['tahun']       					= $post['tahun'];
+		$data['dusun']              				= $post['dusun'];
+		$data['bidang_desa']             		= $post['bidang_desa'];
+		$data['urutan_prioritas']     			= $post['urutan_prioritas'];
+		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
+		$data['sdgs_ke']          				= $post['sdgs_ke'];
+		$data['data_eksisting']             	= $post['data_eksisting'];
+		$data['volume']             			= $post['volume'];
+		$data['laki']             				= $post['laki'];
+		$data['perempuan']             			= $post['perempuan'];
+		$data['rtm']             				= $post['rtm'];
+		$data['sumber_dana']             		= $post['sumber_dana'];
+		$data['keterangan']             		= $post['keterangan'];
+		$data['lokasi']             			= $post['lokasi'];
+		$data['lat']             				= $post['lat'];
+		$data['lng']             				= $post['lng'];
+		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
+		$data['status']             			= $post['status'] ?: null;
+		$data['foto'] 						  	= $this->upload_gambar_pembangunan('foto');
+		$data['anggaran']     					= $post['anggaran'];
+		$data['manfaat']     					= $post['manfaat'];
+
+
+
 		$data['created_at']         = date('Y-m-d H:i:s');
 		$data['updated_at']         = date('Y-m-d H:i:s');
-		$data['foto'] 						  = $this->upload_gambar_pembangunan('foto');
-		$data['anggaran']     			= $post['anggaran'];
 
 		if (empty($data['foto'])) unset($data['foto']);
 
 		unset($data['file_foto']);
 		unset($data['old_foto']);
 
-		$outp = $this->db->insert('pembangunan', $data);
+		$outp = $this->db->insert('tbl_pembangunan', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
@@ -114,18 +230,35 @@ class Pembangunan_model extends MY_Model
 	{
 		$post = $this->input->post();
 
-		$data['sumber_dana']        = $post['sumber_dana'];
-		$data['judul']              = $post['judul'];
-		$data['volume']             = $post['volume'];
-		$data['tahun_anggaran']     = $post['tahun_anggaran'];
-		$data['pelaksana_kegiatan'] = $post['pelaksana_kegiatan'];
-		$data['id_lokasi']          = $post['id_lokasi'] ?: null;
-		$data['lokasi']             = $post['lokasi'] ?: null;
-		$data['keterangan']         = $post['keterangan'];
-		$data['created_at']         = date('Y-m-d H:i:s');
-		$data['updated_at']         = date('Y-m-d H:i:s');
-		$data['foto'] 						  = $this->upload_gambar_pembangunan('foto');
-		$data['anggaran']     			= $post['anggaran'];
+		$data['tahun']       					= $post['tahun'];
+		$data['dusun']              				= $post['dusun'];
+		$data['bidang_desa']             		= $post['bidang_desa'];
+		$data['urutan_prioritas']     			= $post['urutan_prioritas'];
+		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
+		$data['sdgs_ke']          				= $post['sdgs_ke'];
+		$data['data_eksisting']             	= $post['data_eksisting'];
+		$data['volume']             			= $post['volume'];
+		$data['laki']             				= $post['laki'];
+		$data['perempuan']             			= $post['perempuan'];
+		$data['rtm']             				= $post['rtm'];
+		$data['sumber_dana']             		= $post['sumber_dana'];
+		$data['keterangan']             		= $post['keterangan'];
+		$data['lokasi']             			= $post['lokasi'];
+		$data['lat']             				= $post['lat'];
+		$data['lng']             				= $post['lng'];
+		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
+		$data['status']             			= $post['status'];
+		$data['status_vote']             			= $post['status_vote'];
+		$data['status_usulan']             			= $post['status_usulan'];
+		$data['status_usulan_musrenbang_kecamatan']             			= $post['status_usulan_musrenbang_kecamatan'];
+		$data['foto'] 						  	= $this->upload_gambar_pembangunan('foto');
+		$data['anggaran']     					= $post['anggaran'];
+		$data['manfaat']     					= $post['manfaat'];
+
+
+		$data['id_lokasi']         				= $post['id_lokasi'];
+		//$data['created_at']        				= date('Y-m-d H:i:s');
+		$data['updated_at']         			= date('Y-m-d H:i:s');
 
 		if (empty($data['foto'])) unset($data['foto']);
 
@@ -133,7 +266,26 @@ class Pembangunan_model extends MY_Model
 		unset($data['old_foto']);
 
 		$this->db->where('id', $id);
-		$outp = $this->db->update('pembangunan', $data);
+		$outp = $this->db->update('tbl_pembangunan', $data);
+
+		if ($outp) $_SESSION['success'] = 1;
+		else $_SESSION['success'] = -1;
+	}
+
+	public function update_draf_musrenbang($id = 0)
+	{
+		$post = $this->input->post();
+
+		$data['skpd_penanggungjawab']       				= $post['skpd_penanggungjawab'];
+		$data['prioritas_daerah']       					= $post['prioritas_daerah'];
+		$data['sasaran_daerah']       						= $post['sasaran_daerah'];
+		$data['sasaran_kegiatan']       					= $post['sasaran_kegiatan'];
+		$data['program']       								= $post['program'];
+		$data['created_at']        							= date('Y-m-d H:i:s');
+		$data['updated_at']         						= date('Y-m-d H:i:s');
+
+		$this->db->where('id', $id);
+		$outp = $this->db->update('tbl_pembangunan', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
@@ -144,7 +296,7 @@ class Pembangunan_model extends MY_Model
 		$this->load->library('upload');
 		$this->uploadConfig = array(
 			'upload_path' => LOKASI_GALERI,
-			'allowed_types' => 'gif|jpg|jpeg|png',
+			'allowed_types' => 'gif|jpg|jpeg|png|pdf',
 			'max_size' => max_upload() * 1024,
 		);
 		// Adakah berkas yang disertakan?
@@ -156,7 +308,7 @@ class Pembangunan_model extends MY_Model
 		if (isPHP($_FILES['logo']['tmp_name'], $_FILES[$jenis]['name'])) {
 			$_SESSION['error_msg'] .= " -> Jenis file ini tidak diperbolehkan ";
 			$_SESSION['success'] = -1;
-			redirect('identitas_desa');
+			redirect('identitas_instansi');
 		}
 
 		$uploadData = NULL;
@@ -201,29 +353,61 @@ class Pembangunan_model extends MY_Model
 	public function find($id)
 	{
 		return $this->db->select([
-			'p.*',
-			"(CASE WHEN p.id_lokasi IS NOT NULL THEN CONCAT(
-				(CASE WHEN w.rt != '0' THEN CONCAT('RT ', w.rt, ' / ') ELSE '' END),
-				(CASE WHEN w.rw != '0' THEN CONCAT('RW ', w.rw, ' - ') ELSE '' END),
-				w.dusun
-			) ELSE p.lokasi END) AS alamat",
+			'*'
 		])
-			->from("{$this->table} p")
-			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
-			->where('p.id', $id)
+			->from('tbl_pembangunan')
+			->where('id', $id)
 			->get()
 			->row();
 	}
+	
+	public function find_rkpdes($id)
+	{
+		$data = $this->db->select([
+			'*'
+		])
+			->from('tbl_pembangunan')
+			->where('status_rkpdes = 1')
+			->get()
+			->row();
 
+		return $data;
+			
+	}
+	
+	public function find_durkpdes($id)
+	{
+		$data = $this->db->select([
+			'*'
+		])
+			->from('tbl_pembangunan')
+			->where('status_rkpdes = 0')
+			->get()
+			->row();
+
+		return $data;
+			
+	}
+
+    public function find_pelaksanaan($id)
+    {
+        return $this->db->where('id', $id)
+            ->get($this->table2)
+            ->row();
+    }
+
+	
 	public function list_filter_tahun()
 	{
-		return $this->db->select('tahun_anggaran')
+		return $this->db->select('tahun')
 			->distinct()
-			->order_by('tahun_anggaran', 'desc')
+			->order_by('tahun', 'desc')
 			->get($this->table)
 			->result();
 	}
 
+
+	//---- Status Aktiv Usulan ----//
 	public function unlock($id)
 	{
 		return $this->db->set('status', static::ENABLE)
@@ -238,11 +422,209 @@ class Pembangunan_model extends MY_Model
 			->update($this->table);
 	}
 
-	public function paging($page_number = 1)
-    {
-        $jml_data = $this->get_data('', 'semua')->count_all_results();
+	//---- Status Vote ----//
+	public function vote($id)
+	{
+		return $this->db->set('status_vote', static::ENABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
 
-       // return $this->paging($page_number, $jml_data);
-    }
+	public function unvote($id)
+	{
+		return $this->db->set('status_vote', static::DISABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+	//---- Status Usulan Desa ----//
+	public function ajukan($id)
+	{
+		return $this->db->set('status_usulan', static::ENABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+	public function batalkan($id)
+	{
+		return $this->db->set('status_usulan', static::DISABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+	//---- Status Status Penetapan APBDes ----//
+	public function apbdes_aktiv($id)
+	{
+		return $this->db->set('status_rkpdes', static::ENABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+	public function durkp_aktiv($id)
+	{
+		return $this->db->set('status_rkpdes', static::DISABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+
+	//status usulan musrenbang kecamatan
+	public function usulan_kecamatan_aktiv($id)
+	{
+		return $this->db->set('status_usulan_musrenbang_kecamatan', static::ENABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+	public function usulan_kecamatan_non_aktiv($id)
+	{
+		return $this->db->set('status_usulan_musrenbang_kecamatan', static::DISABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+
+	public function get_data_rkpdes(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN 
+				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
+				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
+				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
+			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
+			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
+			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
+			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
+		])
+			->from("{$this->table} p")
+			->where('p.status_usulan = 1 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_apdes(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN 
+				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
+				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
+				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
+			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
+			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
+			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
+			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
+		])
+			->from("{$this->table} p")
+			->where('p.status_rkpdes = 1 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+	
+	public function get_data_durkp(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+		])
+			->from("{$this->table} p")
+			->where('p.status_rkpdes = 0 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_pelaksanaan(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+			'(CASE WHEN MAX(CAST(d.persentase AS UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(d.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase',
+
+		])
+			->from("{$this->table} p")
+			->join('tbl_pembangunan_dok', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->or_like('p.sdgs_ke', $search)
+				->or_like('p.lokasi', $search)
+				->or_like('p.sumber_dana', $search)
+				->or_like('p.max_persentase', $search)
+				->or_like('p.pelaksana_kegiatan', $search)
+
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
 
 }

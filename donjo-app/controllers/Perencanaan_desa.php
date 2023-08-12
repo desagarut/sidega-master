@@ -120,6 +120,7 @@ class Perencanaan_desa extends Admin_Controller
 
 		$this->render('perencanaan_desa/musdus/peta', [
 			'data'      => $data,
+			'lokasi_pembangunan'	=>	$this->model->find($id),
 			'desa'      => $this->config_model->get_data(),
 			'wil_atas'  => $this->config_model->get_data(),
 			'dusun_gis' => $this->wilayah_model->list_dusun(),
@@ -170,7 +171,7 @@ class Perencanaan_desa extends Admin_Controller
 		$musdus = $this->model->find($id);
 		$dokumentasi = $this->perencanaan_desa_dok_model->find_dokumentasi($musdus->id);
 
-		$data['musdus']    = $musdus;
+		$data['musdus']    		= $musdus;
 		$data['dokumentasi']    = $dokumentasi;
 		$data['config']         = $this->header['desa'];
 
@@ -554,6 +555,36 @@ class Perencanaan_desa extends Admin_Controller
 
 		$this->load->view('global/format_cetak', $data);
 	}
+
+	//---- Pelaksanaan Pembangunan --//
+	public function pelaksanaan()
+	{
+		$this->tab_ini = 11;
+		$this->sub_modul_ini = 317;
+
+		if ($this->input->is_ajax_request()) {
+			$start = $this->input->post('start');
+			$length = $this->input->post('length');
+			$search = $this->input->post('search[value]');
+			$order = $this->model::ORDER_ABLE[$this->input->post('order[0][column]')];
+			$dir = $this->input->post('order[0][dir]');
+			$tahun = $this->input->post('tahun');
+
+			return $this->output
+				->set_content_type('application/json')
+				->set_output(json_encode([
+					'draw'            => $this->input->post('draw'),
+					'recordsTotal'    => $this->model->get_data_apdes()->count_all_results(),
+					'recordsFiltered' => $this->model->get_data_apdes($search, $tahun)->count_all_results(),
+					'data'            => $this->model->get_data_apdes($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
+				]));
+		}
+
+		$this->render('pelaksanaan_pembangunan/index', [
+			'list_tahun' => $this->model->list_filter_tahun(),
+		]);
+	}
+
 	
 	//---- Status Aktiv Usulan Musdus ----//
 	public function unlock($id)

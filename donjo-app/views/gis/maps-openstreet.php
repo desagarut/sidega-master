@@ -368,34 +368,6 @@
 		</div>
 	</form>
 </div>
-<script>
-	function handle_pend(cb) {
-		formAction('mainform_map', '<?= site_url('gis') ?>/layer_penduduk');
-	}
-
-	function handle_kel(cb) {
-		formAction('mainform_map', '<?= site_url('gis') ?>/layer_keluarga');
-	}
-
-	function AmbilFoto(foto, ukuran = "kecil_", sex) {
-		//Jika penduduk ada foto, maka pakai foto tersebut
-		//Jika tidak, pakai foto default
-		if (foto) {
-			ukuran_foto = ukuran || null
-			file_foto = '<?= base_url() . LOKASI_USER_PICT; ?>' + ukuran_foto + foto;
-		} else {
-			file_foto = sex == '2' ? '<?= FOTO_DEFAULT_WANITA ?>' : '<?= FOTO_DEFAULT_PRIA ?>';
-		}
-
-		return file_foto;
-	}
-
-	function AmbilFotoLokasi(foto, ukuran = "kecil_") {
-		ukuran_foto = ukuran || null
-		file_foto = '<?= base_url() . LOKASI_FOTO_LOKASI; ?>' + ukuran_foto + foto;
-		return file_foto;
-	}
-</script>
 
 <div class="modal fade" id="modalKecil" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
 	<div class="modal-dialog modal-sm">

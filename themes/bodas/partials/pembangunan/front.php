@@ -12,14 +12,13 @@
 					<div class="col-md-12 wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s">
 						<div class="team-item bg-light">
 							<div class="overflow-hidden" style="padding:10px 10px 10px 10px">
-
-								<?php if (is_file(LOKASI_GALERI . $data->foto)) : ?>
-									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data->foto ?>" alt="Foto Pembangunan" />
+								<?php if (is_file(LOKASI_GALERI . $data['foto'])) : ?>
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data['foto'] ?>" alt="Foto Pembangunan" />
 								<?php else : ?>
 									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
 								<?php endif; ?>
 								<div class="text-center p-4 pb-0">
-									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data->id; ?>"><?= $data->judul ?> (<small><?= $data->tahun_anggaran ?>)</small></a></h5>
+									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data['id']; ?>"><?= $data['judul'] ?> (<small><?= $data['tahun_anggaran'] ?>)</small></a></h5>
 								</div>
 							</div>
 						</div>
