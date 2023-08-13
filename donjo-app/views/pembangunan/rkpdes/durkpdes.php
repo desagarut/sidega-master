@@ -24,7 +24,7 @@
                   <div class="col-md-12">
                     <div class="row"> 
 						<div class="col-md-1">
-						<a href="<?= site_url("pembangunan/dialog_cetak_durkpdes/{$perencanaan_desa->id}/cetak")?>" class="btn bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data DU-RKP Desa" title="Cetak Data DU-RKP Desa"><i class="fa fa-print "></i> Cetak</a>&nbsp;
+						<a href="<?= site_url("pembangunan/dialog_cetak_durkpdes/{$pembangunan->id}/cetak")?>" class="btn bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data DU-RKP Desa" title="Cetak Data DU-RKP Desa"><i class="fa fa-print "></i> Cetak</a>&nbsp;
 						</div>
 											<div class="input-group col-md-2">
 												<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">
@@ -171,9 +171,9 @@
 			}
 		});
 
-		tabelPerencanaan_desa.on('draw.dt', function() {
+		tabelpembangunan.on('draw.dt', function() {
 			let PageInfo = $('#example1').DataTable().page.info();
-			tabelPerencanaan_desa.column(0, {
+			tabelpembangunan.column(0, {
 				page: 'current'
 			}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1 + PageInfo.start;
@@ -181,7 +181,7 @@
 		});
 
 		$('#tahun').on('select2:select', function(e) {
-			tabelPerencanaan_desa.ajax.reload();
+			tabelpembangunan.ajax.reload();
 		});
 	});
 </script>

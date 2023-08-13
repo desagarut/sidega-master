@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Perencanaan_desa_polling extends Admin_Controller
+class Pembanguan_polling extends Admin_Controller
 {
-	protected $table = 'tbl_perencanaan_desa_polling';
+	protected $table = 'tbl_pembangunan_polling';
 
 	public function __construct()
 	{
@@ -15,13 +15,13 @@ class Perencanaan_desa_polling extends Admin_Controller
 		$this->load->model('referensi_model');
 		$this->load->model('pembangunan_model');
 		$this->load->model('wilayah_model');
-		$this->load->model('perencanaan_desa_polling_model', 'model');
+		$this->load->model('pembangunan_polling_model', 'model');
 	}
 
 	public function daftar_polling($id = null)
 	{
 		$polling = $this->pembangunan_model->find($id);
-		$_SESSION['id_perencanaan_desa'] = $id;
+		$_SESSION['id_pembangunan'] = $id;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -53,7 +53,7 @@ class Perencanaan_desa_polling extends Admin_Controller
 	public function tanggapan_per_item($id = null)
 	{
 		$polling = $this->pembangunan_model->find($id);
-		$_SESSION['id_perencanaan_desa'] = $id;
+		$_SESSION['id_pembangunan'] = $id;
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -84,40 +84,40 @@ class Perencanaan_desa_polling extends Admin_Controller
 	public function form($id = '')
 	{
 		if ($id) {
-			$id_perencanaan_desa = $_SESSION['id_perencanaan_desa'];
-			$data['id_perencanaan_desa'] = $_SESSION['id_perencanaan_desa'];
+			$id_pembangunan = $_SESSION['id_pembangunan'];
+			$data['id_pembangunan'] = $_SESSION['id_pembangunan'];
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
 			$data['id_pilihan'] = $this->referensi_model->list_ref(PILIHAN_POLLING_1);
-			$data['form_action'] = site_url("perencanaan_desa_polling/update/$id/$id_perencanaan_desa");
+			$data['form_action'] = site_url("pembangunan_polling/update/$id/$id_pembangunan");
 		} else {
-			$id_perencanaan_desa = $_SESSION['id_perencanaan_desa'];
-			$data['id_perencanaan_desa'] = $_SESSION['id_perencanaan_desa'];
+			$id_pembangunan = $_SESSION['id_pembangunan'];
+			$data['id_pembangunan'] = $_SESSION['id_pembangunan'];
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
 			$data['id_pilihan'] = $this->referensi_model->list_ref(PILIHAN_POLLING_1);
-			$data['form_action'] = site_url("perencanaan_desa_polling/insert/$id_perencanaan_desa");
+			$data['form_action'] = site_url("pembangunan_polling/insert/$id_pembangunan");
 		}
 		$this->tab_ini = 7;
 		$this->sub_modul_ini = 702;
 
-		//$this->render('perencanaan_desa/polling/form', $data);
+		//$this->render('pembangunan/polling/form', $data);
 		$this->load->view('pembangunan/polling/form', $data);
 	}
 
-	public function insert($id_perencanaan_desa = '')
+	public function insert($id_pembangunan = '')
 	{
-		$this->model->insert($id_perencanaan_desa);
-		redirect("perencanaan_desa_polling/tanggapan_per_item/$id_perencanaan_desa");
+		$this->model->insert($id_pembangunan);
+		redirect("pembangunan_polling/tanggapan_per_item/$id_pembangunan");
 	}
 
-	public function update($id = '', $id_perencanaan_desa = '')
+	public function update($id = '', $id_pembangunan = '')
 	{
-		$this->model->update($id, $id_perencanaan_desa);
-		redirect("perencanaan_desa_polling/tanggapan_per_item/$id_perencanaan_desa");
+		$this->model->update($id, $id_pembangunan);
+		redirect("pembangunan_polling/tanggapan_per_item/$id_pembangunan");
 	}
 
-	public function delete($id_perencanaan_desa, $id)
+	public function delete($id_pembangunan, $id)
 	{
 		$this->model->delete($id);
 
@@ -127,6 +127,6 @@ class Perencanaan_desa_polling extends Admin_Controller
 			$this->session->success = -4;
 		}
 
-		redirect("perencanaan_desa_polling/daftar_polling/{$id_perencanaan_desa}");
+		redirect("pembangunan_polling/daftar_polling/{$id_pembangunan}");
 	}
 }

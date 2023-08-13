@@ -25,7 +25,7 @@
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div class="col-md-3">
-				<?php $this->load->view('perencanaan_desa/menu'); ?>
+				<?php $this->load->view('pembangunan/menu'); ?>
 			</div>
 
 			<div class="col-md-9">

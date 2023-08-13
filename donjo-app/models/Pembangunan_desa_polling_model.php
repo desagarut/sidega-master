@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Perencanaan_desa_polling_model extends CI_Model
+class Pembangunan_polling_model extends CI_Model
 {
-	protected $table = 'tbl_perencanaan_desa_polling';
+	protected $table = 'tbl_pembangunan_polling';
 
 	const ORDER_ABLE = [
 		3 => 'CAST(d.id_pilihan as UNSIGNED INTEGER)',
@@ -17,8 +17,8 @@ class Perencanaan_desa_polling_model extends CI_Model
 			'd.*',
 		])
 			->from("{$this->table} d")
-			->join('tbl_perencanaan_desa p', 'd.id_perencanaan_desa = p.id')
-			->where('d.id_perencanaan_desa', $id);
+			->join('tbl_pembangunan p', 'd.id_pembangunan = p.id')
+			->where('d.id_pembangunan', $id);
 
 		if (empty($search)) {
 			$condition = $builder;
@@ -35,15 +35,15 @@ class Perencanaan_desa_polling_model extends CI_Model
 	public function get_hasil_polling()
 	{
 		return $this->db->query("SELECT sum(id_pilihan) AS jml_pilihan, count(id_responden) AS jml_responden, 
-		  avg(id_pilihan) AS rata_pilihan from tbl_perencanaan_desa_polling");
+		  avg(id_pilihan) AS rata_pilihan from tbl_pembangunan_polling");
 	}
 
 
-	public function insert($id_perencanaan_desa = 0)
+	public function insert($id_pembangunan = 0)
 	{
 		$post = $this->input->post();
 
-		$data['id_perencanaan_desa'] = $id_perencanaan_desa;
+		$data['id_pembangunan'] = $id_pembangunan;
 
 		$data['id_pilihan']     = $post['id_pilihan'];
 		$data['id_responden']     = $post['id_responden'];
@@ -56,17 +56,17 @@ class Perencanaan_desa_polling_model extends CI_Model
 		unset($data['file_gambar']);
 		unset($data['old_gambar']);
 
-		$outp = $this->db->insert('tbl_perencanaan_desa_polling', $data);
+		$outp = $this->db->insert('tbl_pembangunan_polling', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
 	}
 
-	public function update($id = 0, $id_perencanaan_desa = 0)
+	public function update($id = 0, $id_pembangunan = 0)
 	{
 		$post = $this->input->post();
 
-		$data['id_perencanaan_desa'] = $id_perencanaan_desa;
+		$data['id_pembangunan'] = $id_pembangunan;
 
 		$data['id_pilihan']     = $post['id_pilihan'];
 		$data['id_responden']     = $post['id_responden'];
@@ -80,7 +80,7 @@ class Perencanaan_desa_polling_model extends CI_Model
 		unset($data['old_gambar']);
 
 		$this->db->where('id', $id);
-		$outp = $this->db->update('tbl_perencanaan_desa_polling', $data);
+		$outp = $this->db->update('tbl_pembangunan_polling', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
@@ -143,9 +143,9 @@ class Perencanaan_desa_polling_model extends CI_Model
 			->row();
 	}
 
-	public function find_polling($id_perencanaan_desa)
+	public function find_polling($id_pembangunan)
 	{
-		return $this->db->where('id_perencanaan_desa', $id_perencanaan_desa)
+		return $this->db->where('id_pembangunan', $id_pembangunan)
 			->order_by('CAST(persentase as UNSIGNED INTEGER)')
 			->get($this->table)
 			->result();

@@ -29,7 +29,7 @@
 									<h4>Rencana Program Kegiatan Masuk ke Desa</h4>
 									<div class="row">
 										<div class="col-sm-3">
-											<a href="<?= site_url('perencanaan_desa_program_masuk_desa/form') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
+											<a href="<?= site_url('pembangunan_program_masuk_desa/form') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
 											<a href="#" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $desa_musdus->judul ?> "><i class="fa fa-print "></i> Cetak</a>
 											<a href="#" class="btn bg-navy btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data " title="Unduh Data <?= $desa_musdus->judul ?> "><i class="fa fa-download "></i> Unduh</a>
 										</div>
@@ -101,7 +101,7 @@
 				'targets': [0, 1, 12],
 			}],
 			'ajax': {
-				'url': "<?= site_url('perencanaan_desa_program_masuk_desa') ?>",
+				'url': "<?= site_url('pembangunan_program_masuk_desa') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -120,9 +120,9 @@
 						<div class="btn-group">
 							<a href="#" class="btn btn-success btn-box btn-sm" data-toggle="dropdown" title="Pilih Aksi">Aksi <i class="fa fa-circle-o"></i></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= site_url('perencanaan_desa_program_masuk_desa/detail_program/'); ?>${data.id}">Detail</a></li>
-								<li><a href="<?= site_url('perencanaan_desa_program_masuk_desa/form/'); ?>${data.id}">Ubah</a></li>
-								<li><a href="#" data-href="<?= site_url('perencanaan_desa_program_masuk_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a></li>
+								<li><a href="<?= site_url('pembangunan_program_masuk_desa/detail_program/'); ?>${data.id}">Detail</a></li>
+								<li><a href="<?= site_url('pembangunan_program_masuk_desa/form/'); ?>${data.id}">Ubah</a></li>
+								<li><a href="#" data-href="<?= site_url('pembangunan_program_masuk_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a></li>
 							</ul>
 						</div>
 							`
@@ -171,9 +171,9 @@
 			}
 		});
 
-		tabelPerencanaan_desa.on('draw.dt', function() {
+		tabelpembangunan.on('draw.dt', function() {
 			let PageInfo = $('#tabel-isi').DataTable().page.info();
-			tabelPerencanaan_desa.column(0, {
+			tabelpembangunan.column(0, {
 				page: 'current'
 			}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1 + PageInfo.start;
@@ -181,7 +181,7 @@
 		});
 
 		$('#tahun').on('select2bs4:select', function(e) {
-			tabelPerencanaan_desa.ajax.reload();
+			tabelpembangunan.ajax.reload();
 		});
 	});
 </script>

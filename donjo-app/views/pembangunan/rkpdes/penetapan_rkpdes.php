@@ -24,7 +24,7 @@
 									<div class="col-md-12">
 										<div class="row">
 											<h5>Penetapan RKP Desa</h5>
-											<!--<a href="<?= site_url('perencanaan_desa_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
+											<!--<a href="<?= site_url('pembangunan_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
 											<div class="col-md-3">
 												<div class="input-group">
 													<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">

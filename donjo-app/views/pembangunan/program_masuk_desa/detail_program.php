@@ -10,8 +10,8 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?= site_url() ?>perencanaan_desa">Perencanaan Desa</a></li>
-            <li class="breadcrumb-item active"><a href="<?= site_url() ?>perencanaan_desa_program_masuk_desa">Program Masuk Desa</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url() ?>pembangunan">Perencanaan Desa</a></li>
+            <li class="breadcrumb-item active"><a href="<?= site_url() ?>pembangunan_program_masuk_desa">Program Masuk Desa</a></li>
             <li class="breadcrumb-item active">Detail</li>
           </ol>
         </div>
@@ -27,11 +27,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
-          <?php $this->load->view('perencanaan_desa/menu'); ?>
+          <?php $this->load->view('pembangunan/menu'); ?>
         </div>
         <div class="col-md-9">
           <div class="box">
-            <div class="box-header"> <a href="<?= site_url() ?>perencanaan_desa_program_masuk_desa" class="btn btn-info">Kembali</a> </div>
+            <div class="box-header"> <a href="<?= site_url() ?>pembangunan_program_masuk_desa" class="btn btn-info">Kembali</a> </div>
           </div>
           <div class="row">
             <div class="col-sm-12">

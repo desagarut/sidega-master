@@ -24,7 +24,7 @@
 									<div class="col-md-12">
 										<div class="row">
 											<h5>Daftar Penentuan Prioritas Tingkat Desa</h5>
-											<!--<a href="<?= site_url('perencanaan_desa_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
+											<!--<a href="<?= site_url('pembangunan_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
 											<div class="col-md-3">
 												<div class="input-group">
 													<select class="form-control" hidden="	" disabled="disabled" id="tahun" name="tahun" style="width:100%;">
@@ -113,7 +113,7 @@
 					'data': function(data) {
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `<a href="<?= site_url('perencanaan_desa_polling/tanggapan_per_item/') ?>${data.id}" id="status_vote" class="btn btn-sm btn-primary mb-2 mr-2" title="Penentuan Prioritas Aktif">Beri Tanggapan</a>`
+							status_vote = `<a href="<?= site_url('pembangunan_polling/tanggapan_per_item/') ?>${data.id}" id="status_vote" class="btn btn-sm btn-primary mb-2 mr-2" title="Penentuan Prioritas Aktif">Beri Tanggapan</a>`
 						} else {
 							status_vote = `<a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Tidak Aktif">Penentuan Prioritas Non Aktif</a>`
 						}

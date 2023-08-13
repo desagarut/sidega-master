@@ -70,7 +70,7 @@
                     <tr>
                       <td>Beri Tanggapan Sekarang?</td>
                       <td></td>
-                      <td><a href="<?= site_url("perencanaan_desa_polling/form/"); ?>" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tanggapan Anda"> Berikan Tanggapan </a></td>
+                      <td><a href="<?= site_url("pembangunan_polling/form/"); ?>" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tanggapan Anda"> Berikan Tanggapan </a></td>
                     </tr>
                   </tfoot>
                 </table>
@@ -128,15 +128,15 @@
 			}],
 
 			'ajax': {
-				'url': "<?= site_url("perencanaan_desa_polling/tanggapan_per_item/{$polling->id}") ?>",
+				'url': "<?= site_url("pembangunan_polling/tanggapan_per_item/{$polling->id}") ?>",
 				'method': 'POST'
 			},
 			'columns': [
 				{'data': null},
 				{
 					'data': function(data) {
-						return `<a href="<?= site_url("perencanaan_desa_polling/form/"); ?>${data.id}" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tanggapan Anda" class="btn bg-orange btn-box btn-sm"><i class="fa fa-edit"></i> </a>
-								<a href="#" data-href="<?= site_url("perencanaan_desa_polling/delete/{$polling->id}/"); ?>${data.id}" class="btn bg-maroon btn-box btn-sm"  title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i></a>
+						return `<a href="<?= site_url("pembangunan_polling/form/"); ?>${data.id}" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tanggapan Anda" class="btn bg-orange btn-box btn-sm"><i class="fa fa-edit"></i> </a>
+								<a href="#" data-href="<?= site_url("pembangunan_polling/delete/{$polling->id}/"); ?>${data.id}" class="btn bg-maroon btn-box btn-sm"  title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i></a>
 							   `
 					}, 'class': 'text-center'
 				},

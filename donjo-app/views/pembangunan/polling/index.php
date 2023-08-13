@@ -21,7 +21,7 @@
           <div class="box">
             <div class="row">
               <div class="col-md-12">
-                <div class="box-header"> <a href="<?= site_url("perencanaan_desa_polling/form/"); ?>" class="btn btn-success btn-sm btn-sm " title="Tambah Data Baru"> Tambah Tanggapan </a> <a href="<?= site_url("desa_musdus/dialog_daftar/{$polling->id}/cetak") ?>" class="btnbg-purple btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data Pembangunan" title="Cetak Data Pembangunan <?= $polling->judul ?> "><i class="fa fa-print "></i> Cetak</a> <a href="<?= site_url("desa_musdus/dialog_daftar/{$polling->id}/unduh") ?>" class="btnbg-navy btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data Pembangunan" title="Unduh Data Pembangunan <?= $polling->judul ?> "><i class="fa fa-download "></i> Unduh</a> <a href="<?= site_url('pembangunan/usulan_dusun') ?>" class="btn btn-info btn-sm " title="Kembali Ke Daftar Usulan Dusun"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Daftar Usulan Dusun</a> </div>
+                <div class="box-header"> <a href="<?= site_url("pembangunan_polling/form/"); ?>" class="btn btn-success btn-sm btn-sm " title="Tambah Data Baru"> Tambah Tanggapan </a> <a href="<?= site_url("desa_musdus/dialog_daftar/{$polling->id}/cetak") ?>" class="btnbg-purple btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data Pembangunan" title="Cetak Data Pembangunan <?= $polling->judul ?> "><i class="fa fa-print "></i> Cetak</a> <a href="<?= site_url("desa_musdus/dialog_daftar/{$polling->id}/unduh") ?>" class="btnbg-navy btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data Pembangunan" title="Unduh Data Pembangunan <?= $polling->judul ?> "><i class="fa fa-download "></i> Unduh</a> <a href="<?= site_url('pembangunan/usulan_dusun') ?>" class="btn btn-info btn-sm " title="Kembali Ke Daftar Usulan Dusun"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Daftar Usulan Dusun</a> </div>
                 <div class="box-body">
                   <h5 class="text-bold">INFORMASI PENENTUAN PRIORITAS</h5>
                   <div class="table-responsive">
@@ -111,7 +111,7 @@
         }],
 
         'ajax': {
-          'url': "<?= site_url("perencanaan_desa_polling/daftar_polling/{$polling->id}") ?>",
+          'url': "<?= site_url("pembangunan_polling/daftar_polling/{$polling->id}") ?>",
           'method': 'POST'
         },
         'columns': [{
@@ -119,8 +119,8 @@
           },
           {
             'data': function(data) {
-              return `<a href="<?= site_url("perencanaan_desa_polling/form/"); ?>${data.id}" title="Edit Data"  class="btn bg-orange btn-box btn-sm"><i class="fa fa-edit"></i> </a>
-								<a href="#" data-href="<?= site_url("perencanaan_desa_polling/delete/{$polling->id}/"); ?>${data.id}" class="btn bg-maroon btn-box btn-sm"  title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i></a>
+              return `<a href="<?= site_url("pembangunan_polling/form/"); ?>${data.id}" title="Edit Data"  class="btn bg-orange btn-box btn-sm"><i class="fa fa-edit"></i> </a>
+								<a href="#" data-href="<?= site_url("pembangunan_polling/delete/{$polling->id}/"); ?>${data.id}" class="btn bg-maroon btn-box btn-sm"  title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i></a>
 							   `
             },
             'class': 'text-center'

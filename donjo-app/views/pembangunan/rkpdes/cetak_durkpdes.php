@@ -42,14 +42,14 @@
 				 ?>
                 <tr>
                     <td><?= $no++; ?></td>
-                    <td><?= $perencanaan_desa->desa; ?></td>
-                    <td><?= $perencanaan_desa->bidang_desa; ?></td>
-                    <td><?= $perencanaan_desa->nama_program_kegiatan; ?></td>
-                    <td><?= $perencanaan_desa->lokasi; ?></td>
-                    <td><?= $perencanaan_desa->volume; ?></td>
-                    <td><?= $perencanaan_desa->satuan; ?></td>
-                    <td><?= rupiah($perencanaan_desa->anggaran); ?></td>
-                    <td><?= $perencanaan_desa->sumber_dana; ?></td>
+                    <td><?= $pembangunan->desa; ?></td>
+                    <td><?= $pembangunan->bidang_desa; ?></td>
+                    <td><?= $pembangunan->nama_program_kegiatan; ?></td>
+                    <td><?= $pembangunan->lokasi; ?></td>
+                    <td><?= $pembangunan->volume; ?></td>
+                    <td><?= $pembangunan->satuan; ?></td>
+                    <td><?= rupiah($pembangunan->anggaran); ?></td>
+                    <td><?= $pembangunan->sumber_dana; ?></td>
                 </tr>
 			</tbody>
 		</table>

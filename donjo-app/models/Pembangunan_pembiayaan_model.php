@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Perencanaan_desa_pembiayaan_model extends CI_Model
+class Pembangunan_pembiayaan_model extends CI_Model
 {
-	protected $table = 'tbl_perencanaan_desa_pembiayaan';
+	protected $table = 'tbl_pembangunan_pembiayaan';
 
 	const ENABLE = 1;
 	const DISABLE = 0;
@@ -114,7 +114,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 				w.dusun
 			) ELSE p.lokasi END) AS alamat",
 		])
-			->from('tbl_perencanaan_desa_pembiayaan p')
+			->from('tbl_pembangunan_pembiayaan p')
 			->where('p.status = 1')
 			->join('tweb_wil_clusterdesa w', 'p.id_lokasi = w.id', 'left')
 			->get()
@@ -143,7 +143,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		$data['created_at']         = date('Y-m-d H:i:s');
 		$data['updated_at']         = date('Y-m-d H:i:s');
 
-		$outp = $this->db->insert('tbl_perencanaan_desa_pembiayaan', $data);
+		$outp = $this->db->insert('tbl_pembangunan_pembiayaan', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
@@ -173,7 +173,7 @@ class Perencanaan_desa_pembiayaan_model extends CI_Model
 		if (empty($data['foto'])) unset($data['foto']);
 
 		$this->db->where('id', $id);
-		$outp = $this->db->update('tbl_perencanaan_desa_pembiayaan', $data);
+		$outp = $this->db->update('tbl_pembangunan_pembiayaan', $data);
 
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;

@@ -10,7 +10,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <input type="hidden" name="id_perencanaan_desa" value="<?= $id_perencanaan_desa ?>">
+                    <input type="hidden" name="id_pembangunan" value="<?= $id_pembangunan ?>">
                     <!-- <div class="form-group row">
                     <label class="col-sm-3 control-label" style="text-align:left;" for="desa">Mendukung SDGS Desa Ke-</label>
                     <div class="col-sm-3">

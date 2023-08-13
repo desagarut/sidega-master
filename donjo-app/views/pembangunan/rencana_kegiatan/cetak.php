@@ -37,7 +37,7 @@
                 </tr>          
             </thead>
 			<tbody>
-				<?php foreach ($perencanaan_desa as $data): ?>
+				<?php foreach ($pembangunan as $data): ?>
 				<tr>
 					<td><?= $data['id']?></td>
 					<td><?= $data['desa'] ?></td>

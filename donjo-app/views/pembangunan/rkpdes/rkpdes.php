@@ -24,7 +24,7 @@
 									<div class="col-md-12">
 										<div class="row">
 											<div class="col-md-1">
-											<a href="<?= site_url("pembangunan/dialog_cetak_rkpdes/{$perencanaan_desa->id}/cetak") ?>" class="btn bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data RKPDes" title="Cetak Data RKPDes"><i class="fa fa-print "></i> Cetak</a>&nbsp;
+											<a href="<?= site_url("pembangunan/dialog_cetak_rkpdes/{$pembangunan->id}/cetak") ?>" class="btn bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data RKPDes" title="Cetak Data RKPDes"><i class="fa fa-print "></i> Cetak</a>&nbsp;
 											</div>
 											<div class="input-group col-md-2">
 												<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">

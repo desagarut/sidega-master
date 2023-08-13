@@ -4,10 +4,10 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Daftar Program/Kegiatan Usulan Tingkat Dusun</h1>
+		<h1>Daftar Usulan Tingkat Dusun</h1>
 		<ol class="breadcrumb float-sm-right">
 			<li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-			<li class="breadcrumb-item"><a href="#!">Perencanaan Desa</a></li>
+			<li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
 			<li class="breadcrumb-item active"><a href="#!">Daftar Usulan Dusun</a></li>
 		</ol>
 	</section>
@@ -26,7 +26,7 @@
 										<div class="row">
 										<h5>Daftar Program/Kegiatan Usulan Tingkat Dusun</h5>
 										<div class="col-md-3">	
-										<a href="<?= site_url('perencanaan_desa_polling/daftar_polling') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
+										<a href="<?= site_url('pembangunan_polling/daftar_polling') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
 										</div>
 										<div class="col-md-3">
 												<div class="input-group">
@@ -115,35 +115,52 @@
 					'data': function(data) {
 						let status;
 						if (data.status == 1) {
-							status = `<a href="<?= site_url('pembangunan/lock/') ?>${data.id}" class="btn btn-icon btn-success btn-sm mb-2 mr-2 disabled" title="Non Aktifkan Usulan">Status Aktif</a>`
+							status = `Status : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status = `<a href="<?= site_url('pembangunan/unlock/') ?>${data.id}" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Aktifkan Usulan">Status Tidak Aktif</a>`
+							status = `Status : <i class="fa fa-times" style="color: red"></i>`
 						}
 
 						let status_usulan;
 						if (data.status_usulan == 1) {
-							status_usulan = `<a href="<?= site_url('pembangunan/ajukan/') ?>${data.id}" class="btn btn-icon btn-success btn-sm mb-2 mr-2 disabled" title="Non Aktifkan Usulan">Usulan Aktif</a>`
+							status_usulan = `Ajuan : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_usulan = `<a href="<?= site_url('pembangunan/batalkan/') ?>${data.id}" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Aktifkan Usulan">Usulan Non Aktif</a>`
+							status_usulan = `Ajuan : <i class="fa fa-times" style="color: red"></i>`
 						}
 
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `<a href="<?= site_url('perencanaan_desa_polling/tanggapan_per_item/') ?>${data.id}" id="status_vote" class="btn btn-icon btn-success btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Aktif">Penentuan Prioritas Telah Aktiv</a>`
+							status_vote = `Polling : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_vote = `<a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Tidak Aktif">Penentuan Prioritas Non Aktif</a>`
+							status_vote = `Polling : <i class="fa fa-times" style="color: red"></i>`
 						}
 
+						let status_rkpdes;
+						if (data.status_rkpdes == 1) {
+							status_rkpdes = `RKPDes : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_rkpdes == 0) {
+							status_rkpdes = `RKPDes : <i class="fa fa-times" style="color: red"></i>`
+						} else {
+							status_rkpdes = `RKPDes : <i class="fa fa-minus" style="color: yellow"></i>`
+						}
+
+						let status_pelaksanaan;
+						if (data.status_pelaksanaan == 1) {
+							status_rkpdes = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_pelaksanaan == 0) {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+						} else {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-info" style="color: red"></i>`
+						}
 						return `
 						<div class="btn-group mb-2 mr-2">
 						
 						<a href="#" class="btn bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-list-ol"></i> Aksi</a>
 						<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Penentuan Prioritas Desa</a></li>
-								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Tutup Penentuan Prioritas Desa</a></li>
+								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Prioritas/Polling</a></li>
+								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Keluarkan dari Prioritas/Polling</a></li>
 							</ul>
 						</div><br/>
-						${status}<br/>${status_usulan} <br/>${status_vote}
+						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkpdes}<br/>${status_pelaksanaan}
 							`
 					}
 				},
@@ -151,7 +168,7 @@
 					'data': function(data) {
 						return `<div class="user-panel">
 									<div class="image2">
-										<img src="<?= base_url(LOKASI_GALERI) ?>${data.foto}" class="img-logo" style="width:150px; height:150px" alt="Gambar 0%">
+										<img src="<?= base_url(LOKASI_GALERI) ?>${data.foto}" class="img-logo" style="max-width:100px; max-height:100px" alt="Gambar 0%">
 									</div>
 								</div>`
 					}
@@ -205,9 +222,9 @@
 			}
 		});
 
-		tabelPerencanaan_desa.on('draw.dt', function() {
+		tabelpembangunan.on('draw.dt', function() {
 			let PageInfo = $('#example1').DataTable().page.info();
-			tabelPerencanaan_desa.column(0, {
+			tabelpembangunan.column(0, {
 				page: 'current'
 			}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1 + PageInfo.start;
@@ -215,7 +232,7 @@
 		});
 
 		$('#tahun').on('select2:select', function(e) {
-			tabelPerencanaan_desa.ajax.reload();
+			tabelpembangunan.ajax.reload();
 		});
 	});
 </script>
@@ -224,7 +241,7 @@
 		$("#table_isi").DataTable({
 			"responsive": true,
 			"lengthChange": false,
-			"autoWidth": false,
+			"autoWidth": true,
 			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 		$('#example2').DataTable({
@@ -233,7 +250,7 @@
 			"searching": false,
 			"ordering": true,
 			"info": true,
-			"autoWidth": false,
+			"autoWidth": true,
 			"responsive": true,
 		});
 	});

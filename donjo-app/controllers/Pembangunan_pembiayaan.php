@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Perencanaan_desa_pembiayaan extends Admin_Controller
+class Pembangunan_pembiayaan extends Admin_Controller
 {
 	public function __construct()
 	{
@@ -10,8 +10,8 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 		$this->set_minsidebar(1);
 
 		$this->load->library('upload');
-		//$this->load->model('perencanaan_desa_model');
-		$this->load->model('Perencanaan_desa_pembiayaan_model', 'model');
+		//$this->load->model('pembangunan_model');
+		$this->load->model('pembangunan_pembiayaan_model', 'model');
 		$this->load->model('referensi_model');
 		$this->load->model('config_model');
 		$this->load->model('wilayah_model');
@@ -45,7 +45,7 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 				]));
 		}
 
-		$this->render('perencanaan_desa/pembiayaan/index', [
+		$this->render('pembangunan/pembiayaan/index', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
@@ -60,28 +60,28 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
 			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
 			$data['dusun'] = $this->wilayah_model->list_dusun();
-			$data['form_action'] = site_url("perencanaan_desa_pembiayaan/update/$id");
+			$data['form_action'] = site_url("pembangunan_pembiayaan/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
 			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
 			$data['dusun'] = $this->wilayah_model->list_dusun();
-			$data['form_action'] = site_url("perencanaan_desa_pembiayaan/insert");
+			$data['form_action'] = site_url("pembangunan_pembiayaan/insert");
 		}
 
-		$this->render('perencanaan_desa/pembiayaan/form', $data);
+		$this->render('pembangunan/pembiayaan/form', $data);
 	}
 
 	public function insert()
 	{
 		$this->model->insert();
-		redirect('perencanaan_desa_pembiayaan');
+		redirect('pembangunan_pembiayaan');
 	}
 
 	public function update($id = '')
 	{
 		$this->model->update($id);
-		redirect("perencanaan_desa_pembiayaan");
+		redirect("pembangunan_pembiayaan");
 	}
 
 	public function delete($id)
@@ -94,7 +94,7 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 			$this->session->success = -4;
 		}
 
-		redirect('perencanaan_desa_pembiayaan');
+		redirect('pembangunan_pembiayaan');
 	}
 
 	public function dialog_daftar($id = 0, $aksi = '')
@@ -104,7 +104,7 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 			'pamong' => $this->pamong_model->list_data(),
 			'pamong_ttd' => $this->pamong_model->get_ub(),
 			'pamong_ketahui' => $this->pamong_model->get_ttd(),
-			'form_action' => site_url("perencanaan_desa_pembiayaan/daftar/$id/$aksi"),
+			'form_action' => site_url("pembangunan_pembiayaan/daftar/$id/$aksi"),
 		]);
 	}
 
@@ -121,7 +121,7 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
 		$data['aksi']           = $aksi;
 		$data['file']           = "Laporan Musyawarah Dusun";
-		$data['isi']            = "perencanaan_desa/pembiayaan/cetak";
+		$data['isi']            = "pembangunan/pembiayaan/cetak";
 
 		$this->load->view('global/format_cetak', $data);
 	}
@@ -136,6 +136,6 @@ class Perencanaan_desa_pembiayaan extends Admin_Controller
 		$data['musdus']    = $musdus;
 		$data['config']    = $this->header['desa'];
 
-		$this->render('perencanaan_desa/pembiayaan/detail_program', $data);
+		$this->render('pembangunan/pembiayaan/detail_program', $data);
 	}
 }

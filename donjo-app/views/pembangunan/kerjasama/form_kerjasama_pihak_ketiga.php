@@ -28,14 +28,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
-          <?php $this->load->view('perencanaan_desa/menu'); ?>
+          <?php $this->load->view('pembangunan/menu'); ?>
         </div>
         <div class="col-md-9">
           <div class="box">
             <form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="box-header"> <a href="<?= site_url('perencanaan_desa/kerjasama_pihak_ketiga') ?>" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Kembali</a> </div>
+                  <div class="box-header"> <a href="<?= site_url('pembangunan/kerjasama_pihak_ketiga') ?>" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Kembali</a> </div>
                   <div class="box-body">
                     <div class="row">
                       <div class="col-md-12">
@@ -198,7 +198,7 @@
                       </div>
                     </div>
                     <div class="box-footer">
-                      <div class="col-xs-12"> <a href="<?= site_url('perencanaan_desa') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                      <div class="col-xs-12"> <a href="<?= site_url('pembangunan') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                         <button type="submit" class="btn btn-info pull-right"><i class="fa fa-check"></i> Simpan</button>
                       </div>
                     </div>

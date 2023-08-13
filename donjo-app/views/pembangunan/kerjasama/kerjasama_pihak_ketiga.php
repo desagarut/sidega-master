@@ -14,7 +14,7 @@
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div class="col-md-3">
-				<?php $this->load->view('perencanaan_desa/menu'); ?>
+				<?php $this->load->view('pembangunan/menu'); ?>
 			</div>
 			<div class="col-md-9">
 				<div class="box">
@@ -25,7 +25,7 @@
 									<h5>Kerjasama Pihak Ketiga</h5>
 
 									<div class="col-md-3">
-										<a href="<?= site_url('perencanaan_desa/form_kerjasama_pihak_ketiga') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
+										<a href="<?= site_url('pembangunan/form_kerjasama_pihak_ketiga') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
 										<a href="#" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $desa_musdus->judul ?> "><i class="fa fa-print "></i> Cetak</a>
 										<a href="#" class="btn bg-navy btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data " title="Unduh Data <?= $desa_musdus->judul ?> "><i class="fa fa-download "></i> Unduh</a>
 									</div>
@@ -112,7 +112,7 @@
 				'targets': [0, 1, 12],
 			}],
 			'ajax': {
-				'url': "<?= site_url('perencanaan_desa/kerjasama_pihak_ketiga') ?>",
+				'url': "<?= site_url('pembangunan/kerjasama_pihak_ketiga') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -129,10 +129,10 @@
 					'data': function(data) {
 						return `
 						<div class="btn-group mb-2 mr-2">
-						<a href="<?= site_url('perencanaan_desa/detail_kerjasama_pihak_ketiga/'); ?>${data.id}" title="Lihat Detail Program Kegiatan"><button type="button" class="btn btn-info">Lihat</button></a>
+						<a href="<?= site_url('pembangunan/detail_kerjasama_pihak_ketiga/'); ?>${data.id}" title="Lihat Detail Program Kegiatan"><button type="button" class="btn btn-info">Lihat</button></a>
 							<button type="button" class="btn  btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<?= site_url('perencanaan_desa/form_kerjasama_pihak_ketiga/'); ?>${data.id}">Ubah</a>
+								<a class="dropdown-item" href="<?= site_url('pembangunan/form_kerjasama_pihak_ketiga/'); ?>${data.id}">Ubah</a>
 							</div>
 						</div>
 							`
@@ -185,9 +185,9 @@
 			}
 		});
 
-		tabelPerencanaan_desa.on('draw.dt', function() {
+		tabelpembangunan.on('draw.dt', function() {
 			let PageInfo = $('#tabel-isi').DataTable().page.info();
-			tabelPerencanaan_desa.column(0, {
+			tabelpembangunan.column(0, {
 				page: 'current'
 			}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1 + PageInfo.start;
@@ -195,7 +195,7 @@
 		});
 
 		$('#tahun').on('select2:select', function(e) {
-			tabelPerencanaan_desa.ajax.reload();
+			tabelpembangunan.ajax.reload();
 		});
 	});
 </script>

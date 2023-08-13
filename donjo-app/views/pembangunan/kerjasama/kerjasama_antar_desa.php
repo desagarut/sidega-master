@@ -14,7 +14,7 @@
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div class="col-md-3">
-				<?php $this->load->view('perencanaan_desa/menu'); ?>
+				<?php $this->load->view('pembangunan/menu'); ?>
 			</div>
 			<div class="col-md-9">
 				<div class="box">
@@ -25,7 +25,7 @@
 									<h5>Kerjasama Antar Desa</h5>
 									<div class="row">
 										<div class="col-md-3">
-											<a href="<?= site_url('perencanaan_desa/form_kerjasama_antar_desa') ?>" class="btn btn-success btn-sm" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
+											<a href="<?= site_url('pembangunan/form_kerjasama_antar_desa') ?>" class="btn btn-success btn-sm" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah</a>
 											<a href="#" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $desa_musdus->judul ?> "><i class="fa fa-print "></i> Cetak</a>
 											<a href="#" class="btn bg-navy btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data " title="Unduh Data <?= $desa_musdus->judul ?> "><i class="fa fa-download "></i> Unduh</a>
 										</div>
@@ -93,7 +93,7 @@
 				'targets': [0, 1, 12],
 			}],
 			'ajax': {
-				'url': "<?= site_url('perencanaan_desa/kerjasama_antar_desa') ?>",
+				'url': "<?= site_url('pembangunan/kerjasama_antar_desa') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -110,9 +110,9 @@
 					'data': function(data) {
 						return `
 						<div class="btn-group mb-2 mr-2">
-							<a class="btn btn-sm btn-info" href="<?= site_url('perencanaan_desa/detail_kerjasama_antar_desa/'); ?>${data.id}" title="Lihat Detail Program Kegiatan"> Lihat</a>
-							<a class="btn btn-sm btn-warning" href="<?= site_url('perencanaan_desa/form_kerjasama_antar_desa/'); ?>${data.id}">Ubah</a>
-							<a class="btn btn-sm btn-danger" href="#" data-href="<?= site_url('perencanaan_desa/form_kerjasama_antar_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a>
+							<a class="btn btn-sm btn-info" href="<?= site_url('pembangunan/detail_kerjasama_antar_desa/'); ?>${data.id}" title="Lihat Detail Program Kegiatan"> Lihat</a>
+							<a class="btn btn-sm btn-warning" href="<?= site_url('pembangunan/form_kerjasama_antar_desa/'); ?>${data.id}">Ubah</a>
+							<a class="btn btn-sm btn-danger" href="#" data-href="<?= site_url('pembangunan/form_kerjasama_antar_desa/delete/'); ?>${data.id}" data-toggle="modal" data-target="#confirm-delete"">Hapus</a>
 							</div>
 							`
 					}
@@ -164,9 +164,9 @@
 			}
 		});
 
-		tabelPerencanaan_desa.on('draw.dt', function() {
+		tabelpembangunan.on('draw.dt', function() {
 			let PageInfo = $('#tabel-isi').DataTable().page.info();
-			tabelPerencanaan_desa.column(0, {
+			tabelpembangunan.column(0, {
 				page: 'current'
 			}).nodes().each(function(cell, i) {
 				cell.innerHTML = i + 1 + PageInfo.start;
@@ -174,7 +174,7 @@
 		});
 
 		$('#tahun').on('select2:select', function(e) {
-			tabelPerencanaan_desa.ajax.reload();
+			tabelpembangunan.ajax.reload();
 		});
 	});
 </script>

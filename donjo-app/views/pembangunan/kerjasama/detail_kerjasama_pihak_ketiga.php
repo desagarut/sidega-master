@@ -11,8 +11,8 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="<?= site_url() ?>perencanaan_desa">Perencanaan Desa</a></li>
-            <li class="breadcrumb-item active"><a href="<?= site_url() ?>perencanaan_desa/kerjasama_pihak_ketiga">Kerjasama Pihak Ketiga</a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url() ?>pembangunan">Perencanaan Desa</a></li>
+            <li class="breadcrumb-item active"><a href="<?= site_url() ?>pembangunan/kerjasama_pihak_ketiga">Kerjasama Pihak Ketiga</a></li>
             <li class="breadcrumb-item active">Detail</li>
           </ol>
         </div>
@@ -26,11 +26,11 @@
   <section class="content" id="maincontent">
     <div class="row">
       <div class="col-md-3">
-        <?php $this->load->view('perencanaan_desa/menu'); ?>
+        <?php $this->load->view('pembangunan/menu'); ?>
       </div>
       <div class="col-md-9">
         <div class="box">
-          <div class="box-header"> <a href="<?= site_url() ?>perencanaan_desa/kerjasama_pihak_ketiga" class="btn btn-info">Kembali</a> <span class="float-right"><h5>DETAIL KERJASAMA PIHAK KETIGA</h5></span> </div>
+          <div class="box-header"> <a href="<?= site_url() ?>pembangunan/kerjasama_pihak_ketiga" class="btn btn-info">Kembali</a> <span class="float-right"><h5>DETAIL KERJASAMA PIHAK KETIGA</h5></span> </div>
         </div>
         <div class="row">
             <div class="box box-success">
