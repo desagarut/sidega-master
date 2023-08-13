@@ -3,11 +3,11 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Hasil Penentuan Prioritas Tingkat Desa</h1>
+		<h1>Daftar Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h1>
 		<ol class="breadcrumb float-sm-right">
 			<li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-			<li class="breadcrumb-item"><a href="#!">Perencanaan Desa</a></li>
-			<li class="breadcrumb-item active"><a href="#!">Hasil Penentuan Prioritas</a></li>
+			<li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
+			<li class="breadcrumb-item active"><a href="#!">Penentuan Prioritas Usulan</a></li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -23,11 +23,11 @@
 								<div class="box-header">
 									<div class="col-md-12">
 										<div class="row">
-											<h5>Hasil Penentuan Prioritas Tingkat Desa</h5>
-											<!--<a href="<?= site_url('pembangunan_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
+											<h5>Daftar Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h5>
+											<!--<a href="<?= site_url('pembangunan/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
 											<div class="col-md-3">
 												<div class="input-group">
-													<select class="form-control" hidden="" disabled="disabled" id="tahun" name="tahun" style="width:100%;">
+													<select class="form-control" hidden="	" disabled="disabled" id="tahun" name="tahun" style="width:100%;">
 														<option selected value="semua">Semua Tahun</option>
 														<?php foreach ($list_tahun as $list) : ?>
 															<option value="<?= $list->tahun ?>">
@@ -49,15 +49,18 @@
 													<th class="text-center">No</th>
 													<th class="text-center">Aksi</th>
 													<th class="text-center">Tahun</th>
-													<th class="text-center">Nama Desa</th>
+													<th class="text-center">Nama Dusun</th>
+													<th class="text-center">Bidang </th>
 													<th class="text-center">Nama Program/Kegiatan </th>
 													<th class="text-center">Jumlah Responden </th>
 													<th class="text-center">Skor Total</th>
-													<th class="text-center">Kurang Penting</th>
-													<th class="text-center">Penting</th>
-													<th class="text-center">Sangat Sangat</th>
-													<th class="text-center">Awal Rekam </th>
-													<th class="text-center">Akhir Rekam </th>
+													<th class="text-center">Perkiraan Volume & Satuan</th>
+													<th class="text-center">Jumlah (Rp)</th>
+													<th class="text-center">Sumber Dana</th>
+													<th class="text-center">Data Eksisting</th>
+													<th class="text-center">Prioritas Desa</th>
+													<th class="text-center">Prioritas SDGS</th>
+													<th class="text-center">Pengusul</th>
 													<th class="text-center">Tgl dibuat</th>
 												</tr>
 											</thead>
@@ -83,7 +86,7 @@
 			'serverSide': true,
 			'autoWidth': false,
 			'pageLength': 10,
-			'responsive': false,
+			'responsive': true,
 			'ordering': true,
 			'order': [
 				[10, 'desc'],
@@ -93,7 +96,7 @@
 				'targets': [0, 1, 10],
 			}],
 			'ajax': {
-				'url': "<?= site_url('pembangunan/hasil_polling') ?>",
+				'url': "<?= site_url('pembangunan/prioritas') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -110,9 +113,9 @@
 					'data': function(data) {
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `<a href="<?= site_url('pembangunan_polling/tanggapan_per_item/') ?>${data.id}" id="status_vote" class="btn btn-icon btn-primary btn-sm mb-2 mr-2" title="Penentuan Prioritas Aktif">Lihat Detail</a>`
+							status_vote = `<a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" id="status_vote" class="btn btn-sm btn-primary mb-2 mr-2" title="Berikan Tanggapan">Beri Tanggapan</a>`
 						} else {
-							status_vote = `<a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Tidak Aktif">Penentuan Prioritas Non Aktif</a>`
+							status_vote = `<a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Belum Aktif">Penentuan Prioritas Belum Aktif</a>`
 						}
 
 						return `
@@ -127,6 +130,9 @@
 					'data': 'dusun'
 				},
 				{
+					'data': 'bidang_desa'
+				},
+				{
 					'data': 'nama_program_kegiatan'
 				},
 				{
@@ -136,19 +142,26 @@
 					'data': 'sum_id_pilihan'
 				},
 				{
-					'data': 'sum_ts'
+					'data': 'volume'
 				},
 				{
-					'data': 'sum_s',
+					'data': 'anggaran',
+					'render': $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
 				},
 				{
-					'data': 'sum_ss'
+					'data': 'sumber_dana'
 				},
 				{
-					'data': 'min_updated'
+					'data': 'data_eksisting'
 				},
 				{
-					'data': 'max_updated'
+					'data': 'urutan_prioritas'
+				},
+				{
+					'data': 'sdgs_ke'
+				},
+				{
+					'data': 'pengusul'
 				},
 				{
 					'data': 'created_at'

@@ -4,6 +4,8 @@ class Pembangunan_model extends CI_Model
 {
 	protected $table = 'tbl_pembangunan';
 	protected $table2 = 'tbl_pembangunan_dok';
+	protected $table3 = 'tbl_pembangunan_polling';
+
 
 	const ENABLE = 1;
 	const DISABLE = 0;
@@ -18,7 +20,6 @@ class Pembangunan_model extends CI_Model
 		7  => 'p.sdgs_ke',
 		8  => 'p.lokasi',
 		9  => 'p.sumber_dana',
-		10 => 'p.max_persentase',
 
 	];
 
@@ -89,43 +90,6 @@ class Pembangunan_model extends CI_Model
 		return $condition;
 	}
 
-	public function get_data_daftar_polling(string $search = '', $tahun = '')
-	{
-		$builder = $this->db->select([
-			'p.*',
-			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
-			'(CASE WHEN 
-				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
-				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
-				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
-		])
-			->from("{$this->table} p")
-			->where('p.status_usulan = 1 and p.status_vote = 1')
-			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
-			->group_by('p.id');
-
-		if (empty($search)) {
-			$search = $builder;
-		} else {
-			$search = $builder->group_start()
-				->like('p.tahun', $search)
-				->or_like('p.dusun', $search)
-				->or_like('p.bidang_desa', $search)
-				->or_like('p.urutan_prioritas', $search)
-				->or_like('p.nama_program_kegiatan', $search)
-				->or_like('p.sdgs_ke', $search)
-				->or_like('p.lokasi', $search)
-				->or_like('p.sumber_dana', $search)
-				->group_end();
-		}
-
-		$condition = $tahun === 'semua'
-			? $search
-			: $search->where('p.tahun', $tahun);
-
-		return $condition;
-	}
-
 	public function get_data_hasil_polling(string $search = '', $tahun = '')
 	{
 		$builder = $this->db->select([
@@ -151,7 +115,7 @@ class Pembangunan_model extends CI_Model
 		} else {
 			$search = $builder->group_start()
 				->like('p.tahun', $search)
-				->or_like('p.desa', $search)
+				->or_like('p.dusun', $search)
 				->or_like('p.bidang_desa', $search)
 				->or_like('p.urutan_prioritas', $search)
 				->or_like('p.nama_program_kegiatan', $search)
@@ -349,6 +313,29 @@ class Pembangunan_model extends CI_Model
 	{
 		return $this->db->where('id', $id)->delete($this->table);
 	}
+
+	public function get_data_prioritas($id, string $search = '')
+	{
+		$builder = $this->db->select([
+			'd.*',
+		])
+			->from("{$this->table} d")
+			->join('tbl_pembangunan p', 'd.id_pembangunan = p.id')
+			->where('d.id_pembangunan', $id);
+
+		if (empty($search)) {
+			$condition = $builder;
+		} else {
+			$condition = $builder->group_start()
+				->like('d.keterangan', $search)
+				->or_like('keterangan', $search)
+				->group_end();
+		}
+
+		return $condition;
+	}
+
+
 
 	public function find($id)
 	{
@@ -626,5 +613,55 @@ class Pembangunan_model extends CI_Model
 
 		return $condition;
 	}
+
+	// Start Penentuan Prioritas
+
+	public function insert_tanggapan($id_pembangunan = 0)
+	{
+		$post = $this->input->post();
+
+		$data['id_pembangunan'] = $id_pembangunan;
+
+		$data['id_pilihan']     = $post['id_pilihan'];
+		$data['id_responden']     = $post['id_responden'];
+		$data['keterangan']     = $post['keterangan'];
+		$data['created_at']     = date('Y-m-d H:i:s');
+		$data['updated_at']     = date('Y-m-d H:i:s');
+
+		if (empty($data['gambar'])) unset($data['gambar']);
+
+		unset($data['file_gambar']);
+		unset($data['old_gambar']);
+
+		$outp = $this->db->insert('tbl_pembangunan_polling', $data);
+
+		if ($outp) $_SESSION['success'] = 1;
+		else $_SESSION['success'] = -1;
+	}
+
+	public function update_tanggapan($id = 0, $id_pembangunan = 0)
+	{
+		$post = $this->input->post();
+
+		$data['id_pembangunan'] = $id_pembangunan;
+
+		$data['id_pilihan']     = $post['id_pilihan'];
+		$data['id_responden']     = $post['id_responden'];
+		$data['keterangan']     = $post['keterangan'];
+		$data['created_at']     = date('Y-m-d H:i:s');
+		$data['updated_at']     = date('Y-m-d H:i:s');
+
+		if (empty($data['gambar'])) unset($data['gambar']);
+
+		unset($data['file_gambar']);
+		unset($data['old_gambar']);
+
+		$this->db->where('id', $id);
+		$outp = $this->db->update('tbl_pembangunan_polling', $data);
+
+		if ($outp) $_SESSION['success'] = 1;
+		else $_SESSION['success'] = -1;
+	}
+
 
 }

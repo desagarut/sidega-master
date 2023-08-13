@@ -11,7 +11,7 @@ class Pembangunan_polling_model extends CI_Model
 		6 => 'd.created_at',
 	];
 
-	public function get_data($id, string $search = '')
+	public function get_data_prioritas($id, string $search = '')
 	{
 		$builder = $this->db->select([
 			'd.*',
@@ -38,15 +38,22 @@ class Pembangunan_polling_model extends CI_Model
 		  avg(id_pilihan) AS rata_pilihan from tbl_pembangunan_polling");
 	}
 
+	public function list_tanggapan()
+	{
+		$sql = "SELECT * FROM ref_tanggapan WHERE 1";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
 
 	public function insert($id_pembangunan = 0)
 	{
 		$post = $this->input->post();
 
 		$data['id_pembangunan'] = $id_pembangunan;
-
 		$data['id_pilihan']     = $post['id_pilihan'];
-		$data['id_responden']     = $post['id_responden'];
+		$data['responden']     = $post['responden'];
 		$data['keterangan']     = $post['keterangan'];
 		$data['created_at']     = date('Y-m-d H:i:s');
 		$data['updated_at']     = date('Y-m-d H:i:s');
@@ -67,11 +74,9 @@ class Pembangunan_polling_model extends CI_Model
 		$post = $this->input->post();
 
 		$data['id_pembangunan'] = $id_pembangunan;
-
 		$data['id_pilihan']     = $post['id_pilihan'];
-		$data['id_responden']     = $post['id_responden'];
+		$data['responden']     = $post['responden'];
 		$data['keterangan']     = $post['keterangan'];
-		$data['created_at']     = date('Y-m-d H:i:s');
 		$data['updated_at']     = date('Y-m-d H:i:s');
 
 		if (empty($data['gambar'])) unset($data['gambar']);
@@ -138,8 +143,12 @@ class Pembangunan_polling_model extends CI_Model
 
 	public function find($id)
 	{
-		return $this->db->where('id', $id)
-			->get($this->table)
+		return $this->db->select([
+			'*'
+		])
+			->from('tbl_pembangunan_polling')
+			->where('id', $id)
+			->get()
 			->row();
 	}
 

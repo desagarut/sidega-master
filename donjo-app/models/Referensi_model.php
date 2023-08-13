@@ -489,6 +489,17 @@ define("SEBUTAN_UKURAN", serialize(array(
 
 //--- End Referensi Toko Warga
 
+define("PILIHAN_TANGGAPAN", serialize([
+	5 => 'Sangat Penting',
+	4 => 'Penting',
+	3 => 'Netral',
+	2 => 'Kurang Penting',
+	1 => 'Sangat Tidak Penting',
+
+]));
+
+
+
 class Referensi_model extends CI_Model {
 
 	public function __construct()

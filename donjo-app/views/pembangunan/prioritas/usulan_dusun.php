@@ -24,7 +24,7 @@
 								<div class="box-header">
 									<div class="col-md-12">
 										<div class="row">
-										<h5>Daftar Program/Kegiatan Usulan Tingkat Dusun</h5>
+										<h5>Daftar Usulan Tingkat Dusun</h5>
 										<div class="col-md-3">	
 										<a href="<?= site_url('pembangunan_polling/daftar_polling') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
 										</div>
@@ -147,17 +147,15 @@
 						if (data.status_pelaksanaan == 1) {
 							status_rkpdes = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
 						} else if (data.status_pelaksanaan == 0) {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-info" style="color: red"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
 						}
 						return `
 						<div class="btn-group mb-2 mr-2">
-						
-						<a href="#" class="btn bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-list-ol"></i> Aksi</a>
-						<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Prioritas/Polling</a></li>
-								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Keluarkan dari Prioritas/Polling</a></li>
+						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>						<ul class="dropdown-menu" role="menu">
+								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Prioritas Usulan</a></li>
+								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Keluarkan dari Prioritas Usulan</a></li>
 							</ul>
 						</div><br/>
 						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkpdes}<br/>${status_pelaksanaan}

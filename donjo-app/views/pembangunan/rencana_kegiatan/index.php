@@ -149,9 +149,9 @@
 						if (data.status_pelaksanaan == 1) {
 							status_rkpdes = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
 						} else if (data.status_pelaksanaan == 0) {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-info" style="color: red"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
 						}
 
 						return `

@@ -6,8 +6,8 @@
     <h1>Daftar Vote</h1>
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-      <li class="breadcrumb-item"><a href="<?= site_url() ?>pembangunan">Perencanaan Desa</a></li>
-      <li class="breadcrumb-item "><a href="<?= site_url() ?>pembangunan/usulan_dusun">Usulan Dusun</a></li>
+      <li class="breadcrumb-item"><a href="<?= site_url() ?>pembangunan">Pembangunan</a></li>
+      <li class="breadcrumb-item "><a href="<?= site_url() ?>pembangunan/usulan_dusun">Polling</a></li>
       <li class="breadcrumb-item active"><a href="#!">Daftar Vote</a></li>
     </ol>
   </section>
