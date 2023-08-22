@@ -4,7 +4,7 @@ class Pembangunan_model extends CI_Model
 {
 	protected $table = 'tbl_pembangunan';
 	protected $table2 = 'tbl_pembangunan_dok';
-	protected $table3 = 'tbl_pembangunan_polling';
+	//protected $table3 = 'tbl_pembangunan_polling';
 
 
 	const ENABLE = 1;
@@ -64,7 +64,41 @@ class Pembangunan_model extends CI_Model
 			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
 		])
 			->from("{$this->table} p")
-			->where('p.status_usulan = 1')
+			->where('p.status = 1 and status_usulan = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->or_like('p.sdgs_ke', $search)
+				->or_like('p.lokasi', $search)
+				->or_like('p.sumber_dana', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_prioritas(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
+			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+		])
+			->from("{$this->table} p")
+			->where('p.status = 1 and status_usulan = 1 and status_vote = 1')
 			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
 			->group_by('p.id');
 
@@ -101,9 +135,11 @@ class Pembangunan_model extends CI_Model
 				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
 			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
 			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
-			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
-			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
-			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
+			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_stp',
+			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_tp',
+			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_n',
+			'SUM(IF(d.id_pilihan=4,1,0)) AS sum_p',
+			'SUM(IF(d.id_pilihan=5,1,0)) AS sum_sp',
 		])
 			->from("{$this->table} p")
 			->where('p.status_usulan = 1 and p.status_vote = 1')
@@ -148,6 +184,120 @@ class Pembangunan_model extends CI_Model
 		return $data;
 	}
 
+	public function get_data_penetapan_rkp(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+		])
+			->from("{$this->table} p")
+			->where('p.status = 1 and p.status_usulan = 1 and p.status_vote = 1')
+			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_rkp(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+		])
+			->from("{$this->table} p")
+			->where('p.status = 1 and p.status_usulan = 1 and p.status_vote = 1 and p.status_rkp = 1')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_durkp(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+		])
+			->from("{$this->table} p")
+			->where('p.status_rkp = 0 and p.status_vote = 1')
+			->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
+	public function get_data_pelaksanaan(string $search = '', $tahun = '')
+	{
+		$builder = $this->db->select([
+			'p.*',
+		])
+			->from("{$this->table} p")
+			->where('p.status_pelaksanaan = 1');
+			//->join('tbl_pembangunan_dok d', 'd.id_pembangunan = p.id', 'left')
+			//->group_by('p.id');
+
+		if (empty($search)) {
+			$search = $builder;
+		} else {
+			$search = $builder->group_start()
+				->like('p.tahun', $search)
+				->or_like('p.dusun', $search)
+				->or_like('p.bidang_desa', $search)
+				->or_like('p.urutan_prioritas', $search)
+				->or_like('p.nama_program_kegiatan', $search)
+				->group_end();
+		}
+
+		$condition = $tahun === 'semua'
+			? $search
+			: $search->where('p.tahun', $tahun);
+
+		return $condition;
+	}
+
 	public function insert()
 	{
 		$post = $this->input->post();
@@ -174,10 +324,8 @@ class Pembangunan_model extends CI_Model
 		$data['anggaran']     					= $post['anggaran'];
 		$data['manfaat']     					= $post['manfaat'];
 
-
-
-		$data['created_at']         = date('Y-m-d H:i:s');
-		$data['updated_at']         = date('Y-m-d H:i:s');
+		$data['created_at']         			= date('Y-m-d H:i:s');
+		$data['updated_at']         			= date('Y-m-d H:i:s');
 
 		if (empty($data['foto'])) unset($data['foto']);
 
@@ -212,8 +360,10 @@ class Pembangunan_model extends CI_Model
 		$data['lng']             				= $post['lng'];
 		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
 		$data['status']             			= $post['status'];
-		$data['status_vote']             			= $post['status_vote'];
-		$data['status_usulan']             			= $post['status_usulan'];
+		$data['status_vote']             		= $post['status_vote'];
+		$data['status_usulan']             		= $post['status_usulan'];
+		$data['status_pelaksanaan']             = $post['status_pelaksanaan'];
+
 		$data['status_usulan_musrenbang_kecamatan']             			= $post['status_usulan_musrenbang_kecamatan'];
 		$data['foto'] 						  	= $this->upload_gambar_pembangunan('foto');
 		$data['anggaran']     					= $post['anggaran'];
@@ -314,29 +464,6 @@ class Pembangunan_model extends CI_Model
 		return $this->db->where('id', $id)->delete($this->table);
 	}
 
-	public function get_data_prioritas($id, string $search = '')
-	{
-		$builder = $this->db->select([
-			'd.*',
-		])
-			->from("{$this->table} d")
-			->join('tbl_pembangunan p', 'd.id_pembangunan = p.id')
-			->where('d.id_pembangunan', $id);
-
-		if (empty($search)) {
-			$condition = $builder;
-		} else {
-			$condition = $builder->group_start()
-				->like('d.keterangan', $search)
-				->or_like('keterangan', $search)
-				->group_end();
-		}
-
-		return $condition;
-	}
-
-
-
 	public function find($id)
 	{
 		return $this->db->select([
@@ -347,43 +474,47 @@ class Pembangunan_model extends CI_Model
 			->get()
 			->row();
 	}
-	
-	public function find_rkpdes($id)
+
+	public function find_rkp($id)
 	{
 		$data = $this->db->select([
 			'*'
 		])
 			->from('tbl_pembangunan')
-			->where('status_rkpdes = 1')
+			->where('status_rkp = 1')
 			->get()
 			->row();
 
 		return $data;
-			
 	}
-	
+
 	public function find_durkpdes($id)
 	{
 		$data = $this->db->select([
 			'*'
 		])
 			->from('tbl_pembangunan')
-			->where('status_rkpdes = 0')
+			->where('status_rkp = 0')
 			->get()
 			->row();
 
 		return $data;
-			
 	}
 
-    public function find_pelaksanaan($id)
-    {
-        return $this->db->where('id', $id)
-            ->get($this->table2)
-            ->row();
-    }
+	public function find_pelaksanaan($id)
+	{
+		$data = $this->db->select([
+			'*'
+		])
+			->from('tbl_pembangunan')
+			->where('status_pelaksanaan = 1')
+			->get()
+			->row();
 
-	
+		return $data;
+	}
+
+
 	public function list_filter_tahun()
 	{
 		return $this->db->select('tahun')
@@ -393,8 +524,7 @@ class Pembangunan_model extends CI_Model
 			->result();
 	}
 
-
-	//---- Status Aktiv Usulan ----//
+	//---- Status Usulan ----//
 	public function unlock($id)
 	{
 		return $this->db->set('status', static::ENABLE)
@@ -438,20 +568,42 @@ class Pembangunan_model extends CI_Model
 			->where('id', $id)
 			->update($this->table);
 	}
-	//---- Status Status Penetapan APBDes ----//
+	//---- Status Penetapan APBDes ----//
 	public function apbdes_aktiv($id)
 	{
-		return $this->db->set('status_rkpdes', static::ENABLE)
+		return $this->db->set('status_rkp', static::ENABLE)
 			->where('id', $id)
 			->update($this->table);
 	}
 	public function durkp_aktiv($id)
 	{
-		return $this->db->set('status_rkpdes', static::DISABLE)
+		return $this->db->set('status_rkp', static::DISABLE)
 			->where('id', $id)
 			->update($this->table);
 	}
 
+	public function batal_aktiv($id)
+	{
+		return $this->db->set('status_rkp', 3)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+
+	//---- Status Pelaksanaan ----//
+	public function pelaksanaan_aktiv($id)
+	{
+		return $this->db->set('status_pelaksanaan', static::ENABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
+
+	public function pelaksanaan_non_aktiv($id)
+	{
+		return $this->db->set('status_pelaksanaan', static::DISABLE)
+			->where('id', $id)
+			->update($this->table);
+	}
 
 	//status usulan musrenbang kecamatan
 	public function usulan_kecamatan_aktiv($id)
@@ -466,152 +618,6 @@ class Pembangunan_model extends CI_Model
 		return $this->db->set('status_usulan_musrenbang_kecamatan', static::DISABLE)
 			->where('id', $id)
 			->update($this->table);
-	}
-
-
-	public function get_data_rkpdes(string $search = '', $tahun = '')
-	{
-		$builder = $this->db->select([
-			'p.*',
-			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
-			'(CASE WHEN 
-				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
-				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
-				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
-			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
-			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
-			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
-			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
-			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
-		])
-			->from("{$this->table} p")
-			->where('p.status_usulan = 1 and p.status_vote = 1')
-			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
-			->group_by('p.id');
-
-		if (empty($search)) {
-			$search = $builder;
-		} else {
-			$search = $builder->group_start()
-				->like('p.tahun', $search)
-				->or_like('p.dusun', $search)
-				->or_like('p.bidang_desa', $search)
-				->or_like('p.urutan_prioritas', $search)
-				->or_like('p.nama_program_kegiatan', $search)
-				->group_end();
-		}
-
-		$condition = $tahun === 'semua'
-			? $search
-			: $search->where('p.tahun', $tahun);
-
-		return $condition;
-	}
-
-	public function get_data_apdes(string $search = '', $tahun = '')
-	{
-		$builder = $this->db->select([
-			'p.*',
-			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
-			'(CASE WHEN 
-				COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL 
-				THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) 
-				ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
-			'(CASE WHEN MIN(CAST(d.updated_at as DATETIME)) THEN CONCAT(MIN(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS min_updated',
-			'(CASE WHEN MAX(CAST(d.updated_at as DATETIME)) THEN CONCAT(MAX(CAST(d.updated_at as DATETIME))) ELSE CONCAT("belum ada progres") END) AS max_updated',
-			'SUM(IF(d.id_pilihan=1,1,0)) AS sum_ts',
-			'SUM(IF(d.id_pilihan=2,1,0)) AS sum_s',
-			'SUM(IF(d.id_pilihan=3,1,0)) AS sum_ss',
-		])
-			->from("{$this->table} p")
-			->where('p.status_rkpdes = 1 and p.status_vote = 1')
-			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
-			->group_by('p.id');
-
-		if (empty($search)) {
-			$search = $builder;
-		} else {
-			$search = $builder->group_start()
-				->like('p.tahun', $search)
-				->or_like('p.dusun', $search)
-				->or_like('p.bidang_desa', $search)
-				->or_like('p.urutan_prioritas', $search)
-				->or_like('p.nama_program_kegiatan', $search)
-				->group_end();
-		}
-
-		$condition = $tahun === 'semua'
-			? $search
-			: $search->where('p.tahun', $tahun);
-
-		return $condition;
-	}
-	
-	public function get_data_durkp(string $search = '', $tahun = '')
-	{
-		$builder = $this->db->select([
-			'p.*',
-		])
-			->from("{$this->table} p")
-			->where('p.status_rkpdes = 0 and p.status_vote = 1')
-			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
-			->group_by('p.id');
-
-		if (empty($search)) {
-			$search = $builder;
-		} else {
-			$search = $builder->group_start()
-				->like('p.tahun', $search)
-				->or_like('p.dusun', $search)
-				->or_like('p.bidang_desa', $search)
-				->or_like('p.urutan_prioritas', $search)
-				->or_like('p.nama_program_kegiatan', $search)
-				->group_end();
-		}
-
-		$condition = $tahun === 'semua'
-			? $search
-			: $search->where('p.tahun', $tahun);
-
-		return $condition;
-	}
-
-	public function get_data_pelaksanaan(string $search = '', $tahun = '')
-	{
-		$builder = $this->db->select([
-			'p.*',
-			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
-			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
-			'(CASE WHEN MAX(CAST(d.persentase AS UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(d.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase',
-
-		])
-			->from("{$this->table} p")
-			->join('tbl_pembangunan_dok', 'd.id_pembangunan = p.id', 'left')
-			->group_by('p.id');
-
-		if (empty($search)) {
-			$search = $builder;
-		} else {
-			$search = $builder->group_start()
-				->like('p.tahun', $search)
-				->or_like('p.dusun', $search)
-				->or_like('p.bidang_desa', $search)
-				->or_like('p.urutan_prioritas', $search)
-				->or_like('p.nama_program_kegiatan', $search)
-				->or_like('p.sdgs_ke', $search)
-				->or_like('p.lokasi', $search)
-				->or_like('p.sumber_dana', $search)
-				->or_like('p.max_persentase', $search)
-				->or_like('p.pelaksana_kegiatan', $search)
-
-				->group_end();
-		}
-
-		$condition = $tahun === 'semua'
-			? $search
-			: $search->where('p.tahun', $tahun);
-
-		return $condition;
 	}
 
 	// Start Penentuan Prioritas
@@ -662,6 +668,4 @@ class Pembangunan_model extends CI_Model
 		if ($outp) $_SESSION['success'] = 1;
 		else $_SESSION['success'] = -1;
 	}
-
-
 }

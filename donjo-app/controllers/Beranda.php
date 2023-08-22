@@ -81,11 +81,11 @@ class Beranda extends Admin_Controller {
 	    $data['last_login_operator'] = $this->user_model->list_data(7, 0, 5);
 		//$header = $this->header_model->get_data();
 
-		//Perencanaan Desa
-		$data['rkpdes_total'] = $this->header_model->rkpdes_total();
-		$data['durkpdes_total'] = $this->header_model->durkpdes_total();
+		//Pembangunan Desa
+		$data['usulan_total'] = $this->header_model->usulan_total();
+		$data['durkp_total'] = $this->header_model->durkp_total();
 		// Pembangunan
-		$data['pelaksanaan_total'] = $this->header_model->rkpdes_total();
+		$data['pelaksanaan_total'] = $this->header_model->rkp_total();
 
 
 		//Rekapitulasi SPPT PBB

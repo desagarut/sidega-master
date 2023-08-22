@@ -4,12 +4,12 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>Dokumen Penunjang Usulan Masyarakat</h1>
+    <h1>Monitoring Pelaksanaan RKP <?= ucwords($this->setting->sebutan_desa); ?></h1>
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
       <li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
-      <li class="breadcrumb-item "><a href="#!">Usulan Masyarakat</a></li>
-      <li class="breadcrumb-item active"><a href="#!">Dokumen Penunjang</a></li>
+      <li class="breadcrumb-item "><a href="#!">Monitoring</a></li>
+      <li class="breadcrumb-item active"><a href="#!">Pelaksanaan RKP</a></li>
     </ol>
   </section>
   <!-- /.content-header -->
@@ -29,10 +29,10 @@
                   <a href="<?= site_url("pembangunan_dok/form/") ?>" class="btn btn-success btn-sm btn-sm " title="Tambah Data Baru"> <i class="fa fa-plus"></i>Tambah Data </a>
                   <a href="<?= site_url("pembangunan/dialog_daftar/{$musdus_dok->id}/cetak") ?>" class="btnbg-purple btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Detail Usulan" title="Cetak Detail Usulan <?= $musdus_dok->judul ?> "><i class="fa fa-print "></i> Cetak</a>
                   <a href="<?= site_url("pembangunan/dialog_daftar/{$musdus_dok->id}/unduh") ?>" class="btnbg-navy btn-sm " data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Detail Usulan" title="Unduh Detail Usulan <?= $musdus_dok->judul ?> "><i class="fa fa-download "></i> Unduh</a>
-                  <a href="<?= site_url('pembangunan/pelaksanaan') ?>" class="btn btn-info btn-sm " title="Kembali Ke Daftar Usulan"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Pelaksanaan</a>
+                  <a href="<?= site_url('pembangunan/pelaksanaan_rkp') ?>" class="btn btn-info btn-sm " title="Kembali Ke Daftar Usulan"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Pelaksanaan</a>
                 </div>
                 <div class="box-body">
-                  <h5 class="text-bold">Dokumen Penunjang Usulan Masyarakat</h5>
+                  <h5 class="text-bold">Progres Pelaksanaan Program/Kegiatan</h5>
                   <div class="col-md-8">
                   <div class="table-responsive">
                     <table class="table table-hover tabel-rincian">

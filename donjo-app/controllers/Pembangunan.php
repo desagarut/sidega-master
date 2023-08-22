@@ -19,6 +19,7 @@ class Pembangunan extends Admin_Controller
 		$this->load->model('plan_area_model');
 		$this->load->model('plan_garis_model');
 		$this->load->model('pamong_model');
+		$this->load->model('header_model');
 	}
 
 	public function index()
@@ -27,6 +28,7 @@ class Pembangunan extends Admin_Controller
 		$this->sub_modul_ini = 700;
 		$this->set_minsidebar(1);
 
+		$data['usulan_total'] = $this->header_model->usulan_total();
 
 		if ($this->input->is_ajax_request()) {
 			$start = $this->input->post('start');
@@ -318,7 +320,7 @@ class Pembangunan extends Admin_Controller
 	}
 
 	// Start Usulan Dusun //
-	public function usulan_dusun()
+	public function daftar_usulan_tk_desa()
 	{
 		$this->tab_ini = 6;
 		$this->sub_modul_ini = 700;
@@ -342,7 +344,7 @@ class Pembangunan extends Admin_Controller
 				]));
 		}
 
-		$this->render('pembangunan/prioritas/usulan_dusun', [
+		$this->render('pembangunan/prioritas/daftar_usulan_tk_desa', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
@@ -368,9 +370,9 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/program_masuk_desa/form', $data);
 	}
 
-	//Start Penentuan Prioritas
+	//Start Penentuan Penentuan Prioritas
 
-	public function prioritas()
+	public function penentuan_prioritas_tk_desa()
 	{
 		$this->tab_ini = 7;
 		$this->sub_modul_ini = 700;
@@ -389,68 +391,18 @@ class Pembangunan extends Admin_Controller
 				->set_content_type('application/json')
 				->set_output(json_encode([
 					'draw'            => $this->input->post('draw'),
-					'recordsTotal'    => $this->model->get_data()->count_all_results(),
-					'recordsFiltered' => $this->model->get_data($search, $tahun)->count_all_results(),
-					'data'            => $this->model->get_data($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
+					'recordsTotal'    => $this->model->get_data_prioritas()->count_all_results(),
+					'recordsFiltered' => $this->model->get_data_prioritas($search, $tahun)->count_all_results(),
+					'data'            => $this->model->get_data_prioritas($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
 				]));
 		}
 
-		$this->render('pembangunan/prioritas/daftar_prioritas', [
+		$this->render('pembangunan/prioritas/penentuan_prioritas_tk_desa', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
 
-/*
-	public function form_tanggapan($id = '')
-	{
-		if ($id) {
-			$id_pembangunan = $_SESSION['id_pembangunan'];
-			$data['id_pembangunan'] = $_SESSION['id_pembangunan'];
-			$data['main'] = $this->model->find($id);
-			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['id_pilihan'] = $this->referensi_model->list_ref(PILIHAN_POLLING_1);
-			$data['form_action'] = site_url("pembangunan/update_tanggapan/$id/$id_pembangunan");
-		} else {
-			$id_pembangunan = $_SESSION['id_pembangunan'];
-			$data['id_pembangunan'] = $_SESSION['id_pembangunan'];
-			$data['main'] = NULL;
-			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['id_pilihan'] = $this->referensi_model->list_ref(PILIHAN_POLLING_1);
-			$data['form_action'] = site_url("pembangunan/insert_tanggapan/$id_pembangunan");
-		}
-		$this->tab_ini = 7;
-		$this->sub_modul_ini = 702;
-
-		//$this->render('pembangunan/prioritas/form_tanggapan', $data);
-		$this->load->view('pembangunan/prioritas/form_tanggapan', $data);
-	}
-
-	public function insert_tanggapan($id_pembangunan = '')
-	{
-		$this->model->insert_tanggapan($id_pembangunan);
-		redirect("pembangunan/tanggapan_per_item/$id_pembangunan");
-	}
-
-	public function update_tanggapan($id = '', $id_pembangunan = '')
-	{
-		$this->model->update_tanggapan($id, $id_pembangunan);
-		redirect("pembangunan/tanggapan_per_item/$id_pembangunan");
-	}
-
-	public function delete_tanggapan($id_pembangunan, $id)
-	{
-		$this->model->delete_tanggapan($id);
-
-		if ($this->db->affected_rows()) {
-			$this->session->success = 4;
-		} else {
-			$this->session->success = -4;
-		}
-
-		redirect("pembangunan/prioritas/{$id_pembangunan}");
-	}
-*/
-	public function hasil_polling()
+	public function hasil_prioritas_tk_desa()
 	{
 		$this->tab_ini = 8;
 		$this->sub_modul_ini = 702;
@@ -474,14 +426,14 @@ class Pembangunan extends Admin_Controller
 				]));
 		}
 
-		$this->render('pembangunan/prioritas/hasil', [
+		$this->render('pembangunan/prioritas/hasil_prioritas_tk_desa', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
 	// End Penentuan Prioritas
 
 
-	public function penetapan_rkpdes()
+	public function penetapan_rkp()
 	{
 		$this->tab_ini = 9;
 		$this->sub_modul_ini = 700;
@@ -499,19 +451,19 @@ class Pembangunan extends Admin_Controller
 				->set_content_type('application/json')
 				->set_output(json_encode([
 					'draw'            => $this->input->post('draw'),
-					'recordsTotal'    => $this->model->get_data_rkpdes()->count_all_results(),
-					'recordsFiltered' => $this->model->get_data_rkpdes($search, $tahun)->count_all_results(),
-					'data'            => $this->model->get_data_rkpdes($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
+					'recordsTotal'    => $this->model->get_data_penetapan_rkp()->count_all_results(),
+					'recordsFiltered' => $this->model->get_data_penetapan_rkp($search, $tahun)->count_all_results(),
+					'data'            => $this->model->get_data_penetapan_rkp($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
 				]));
 		}
 
-		$this->render('pembangunan/rkpdes/penetapan_rkpdes', [
+		$this->render('pembangunan/rkpdes/penetapan_rkp', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
 
 
-	public function rkpdes()
+	public function daftar_rkp()
 	{
 		$this->tab_ini = 10;
 		$this->sub_modul_ini = 700;
@@ -529,18 +481,18 @@ class Pembangunan extends Admin_Controller
 				->set_content_type('application/json')
 				->set_output(json_encode([
 					'draw'            => $this->input->post('draw'),
-					'recordsTotal'    => $this->model->get_data_apdes()->count_all_results(),
-					'recordsFiltered' => $this->model->get_data_apdes($search, $tahun)->count_all_results(),
-					'data'            => $this->model->get_data_apdes($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
+					'recordsTotal'    => $this->model->get_data_rkp()->count_all_results(),
+					'recordsFiltered' => $this->model->get_data_rkp($search, $tahun)->count_all_results(),
+					'data'            => $this->model->get_data_rkp($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
 				]));
 		}
 
-		$this->render('pembangunan/rkpdes/rkpdes', [
+		$this->render('pembangunan/rkpdes/daftar_rkp', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
 
-	public function dialog_cetak_rkpdes($id = 0, $aksi = '')
+	public function dialog_cetak_rkp($id = 0, $aksi = '')
 	{
 		$this->load->view('global/ttd_pamong', [
 			'aksi' => $aksi,
@@ -551,14 +503,14 @@ class Pembangunan extends Admin_Controller
 		]);
 	}
 
-	public function cetak_rkpdes($id = '', $aksi = '')
+	public function cetak_rkp($id = '', $aksi = '')
 	{
 		$request = $this->input->post();
 
-		$rkpdes = $this->model->find_rkpdes($id);
+		$rkp = $this->model->find_rkp($id);
 		$dokumentasi = $this->pembangunan_dok_model->find_dokumentasi($pembangunan->id);
 
-		$data['pembangunan']    = $rkpdes;
+		$data['pembangunan']    = $rkp;
 		$data['dokumentasi']    = $dokumentasi;
 		$data['config']         = $this->header['desa'];
 		$data['pamong_ttd']     = $this->pamong_model->get_data($request['pamong_ttd']);
@@ -621,19 +573,17 @@ class Pembangunan extends Admin_Controller
 		$data['pamong_ttd']     = $this->pamong_model->get_data($request['pamong_ttd']);
 		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
 		$data['aksi']           = $aksi;
-		$data['file']           = "Cetak DU-RKP Desa";
-		$data['isi']            = "pembangunan/rkpdes/cetak_durkpdes";
+		$data['file']           = "Cetak DU-RKP";
+		$data['isi']            = "pembangunan/rkpdes/cetak_durk";
 
 		$this->load->view('global/format_cetak', $data);
 	}
 
 	//---- Pelaksanaan Pembangunan --//
-	public function pelaksanaan()
+	public function pelaksanaan_rkp()
 	{
-
 		$this->tab_ini = 12;
-		$this->modul_ini = 305;
-		$this->sub_modul_ini = 317;
+		$this->sub_modul_ini = 700;
 		$this->set_minsidebar(1);
 
 		if ($this->input->is_ajax_request()) {
@@ -654,11 +604,39 @@ class Pembangunan extends Admin_Controller
 				]));
 		}
 
-		$this->render('pembangunan/pelaksanaan/index', [
+		$this->render('pembangunan/pelaksanaan/pelaksanaan_rkp', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
 
+	public function pelaksanaan_durkp()
+	{
+		$this->tab_ini = 13;
+		$this->sub_modul_ini = 700;
+		$this->set_minsidebar(1);
+
+		if ($this->input->is_ajax_request()) {
+			$start = $this->input->post('start');
+			$length = $this->input->post('length');
+			$search = $this->input->post('search[value]');
+			$order = $this->model::ORDER_ABLE[$this->input->post('order[0][column]')];
+			$dir = $this->input->post('order[0][dir]');
+			$tahun = $this->input->post('tahun');
+
+			return $this->output
+				->set_content_type('application/json')
+				->set_output(json_encode([
+					'draw'            => $this->input->post('draw'),
+					'recordsTotal'    => $this->model->get_data_pelaksanaan()->count_all_results(),
+					'recordsFiltered' => $this->model->get_data_pelaksanaan($search, $tahun)->count_all_results(),
+					'data'            => $this->model->get_data_pelaksanaan($search, $tahun)->order_by($order, $dir)->limit($length, $start)->get()->result(),
+				]));
+		}
+
+		$this->render('pembangunan/pelaksanaan/pelaksanaan_durkp', [
+			'list_tahun' => $this->model->list_filter_tahun(),
+		]);
+	}
 
 	//---- Status Aktiv Usulan Musdus ----//
 	public function unlock($id)
@@ -676,23 +654,23 @@ class Pembangunan extends Admin_Controller
 	}
 	//---- End Ststus Aktive Usulan Musdus ----//
 
-	// Start Vote Desa//
+	// Start Vote//
 	public function vote($id)
 	{
 		$this->model->vote($id);
 		$this->session->success = 1;
-		redirect('pembangunan/usulan_dusun');
+		redirect('pembangunan/daftar_usulan_tk_desa');
 	}
 
 	public function unvote($id)
 	{
 		$this->model->unvote($id);
 		$this->session->success = 1;
-		redirect('pembangunan/usulan_dusun');
+		redirect('pembangunan/daftar_usulan_tk_desa');
 	}
-	//End Vote Desa//
+	//End Vote//
 
-	// Start Usulan Ke Desa//
+	// Start Usulan//
 	public function ajukan($id)
 	{
 		$this->model->ajukan($id);
@@ -706,25 +684,51 @@ class Pembangunan extends Admin_Controller
 		$this->session->success = 1;
 		redirect('pembangunan');
 	}
-	//End Vote Desa//
+	//End Usulan//
 
 	// Start Penetapan APBDes//
 	public function apbdes_aktiv($id)
 	{
 		$this->model->apbdes_aktiv($id);
 		$this->session->success = 1;
-		redirect('pembangunan/penetapan_rkpdes');
+		redirect('pembangunan/penetapan_rkp');
 	}
 
-	// Start Penetapan APBDes//
+	// Start durkp//
 	public function durkp_aktiv($id)
 	{
 		$this->model->durkp_aktiv($id);
 		$this->session->success = 1;
-		redirect('pembangunan/penetapan_rkpdes');
+		redirect('pembangunan/penetapan_rkp');
+	}
+	//End durkp//
+
+		// Start durkp//
+		public function batal_aktiv($id)
+		{
+			$this->model->batal_aktiv($id);
+			$this->session->success = 1;
+			redirect('pembangunan/penetapan_rkp');
+		}
+		//End durkp//
+	
+
+	// Start Pelaksanaan APBDes//
+	public function pelaksanaan_aktiv($id)
+	{
+		$this->model->pelaksanaan_aktiv($id);
+		$this->session->success = 1;
+		redirect('pembangunan/pelaksanaan_rkp');
 	}
 
-	//End apbdes Desa//
+	// Start Pelaksanaan Aktiv//
+	public function pelaksanaan_non_aktiv($id)
+	{
+		$this->model->pelaksanaan_non_aktiv($id);
+		$this->session->success = 1;
+		redirect('pembangunan/daftar_rkp');
+	}
+
 
 	// Start Penetapan APBDes//
 	public function usulan_kecamatan_aktiv($id)

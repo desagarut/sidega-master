@@ -8,7 +8,7 @@ class Pembangunan_polling extends Admin_Controller
 	{
 		parent::__construct();
 
-		$this->modul_ini = 700;
+		$this->modul_ini = 305;
 		$this->set_minsidebar(1);
 
 		$this->load->library('upload');

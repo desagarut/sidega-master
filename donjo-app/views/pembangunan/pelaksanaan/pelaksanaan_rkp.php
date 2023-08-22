@@ -3,11 +3,11 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Pelaksanaan Kegiatan</h1>
+		<h1>Daftar Pelaksanaan RKP</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('pembangunan') ?>"> Pelaksanaan Kegiatan</a></li>
-			<li class="active">Daftar Kegiatan</li>
+			<li><a href="<?= site_url('pembangunan') ?>"> Pembangunan</a></li>
+			<li class="active">Daftar Pelaksanaan RKP</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -21,7 +21,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<h4>Daftar Pelaksanaan Kegiatan Pembangunan</h4>
+									<h4>Daftar Pelaksanaan RKP</h4>
 									<div class="row">
 										<div class="col-sm-2">Pilih Tahun :</div>
 										<div class="col-sm-2">
@@ -44,7 +44,6 @@
 														<tr>
 															<th class="text-center">No</th>
 															<th class="text-center">Aksi</th>
-															<th class="text-center">Status Usulan</th>
 															<th class="text-center">Gambar</th>
 															<th class="text-center">Prioritas Desa</th>
 															<th class="text-center">Persentase Pelaksanaan</th>
@@ -90,7 +89,7 @@
 				'targets': [0, 1, 9],
 			}],
 			'ajax': {
-				'url': "<?= site_url('pembangunan') ?>",
+				'url': "<?= site_url('pembangunan/pelaksanaan_rkp') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -105,57 +104,51 @@
 				},
 				{
 					'data': function(data) {
-						return `
-						<div class="text-center">
-						<a href="<?= site_url('pembangunan_dok/show/'); ?>${data.id}" class="btn btn-sm btn-box btn-success"> Dokumen</a><br/>
-						<!--<a href="<?= site_url('pembangunan/ajukan/'); ?>${data.id}" class="btn btn-sm btn-box btn-default">Ajukan Usulan</a><br/>
-						<a href="<?= site_url('pembangunan/batalkan/'); ?>${data.id}" class="btn btn-sm btn-box btn-default">Batalkan Usulan</a>-->
-						</div><br/>
-						`
-					}
-				},
-				{
-					'data': function(data) {
 						let status;
 						if (data.status == 1) {
-							status = `Status : <i class="fa fa-check" style="color: green"></i>`
+							status = `TK. Wilayah: <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status = `Status : <i class="fa fa-times" style="color: red"></i>`
+							status = `TK. Wilayah: <i class="fa fa-times" style="color: red"></i>`
 						}
 
 						let status_usulan;
 						if (data.status_usulan == 1) {
-							status_usulan = `Ajuan : <i class="fa fa-check" style="color: green"></i>`
+							status_usulan = `TK. Des/Kel : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_usulan = `Ajuan : <i class="fa fa-times" style="color: red"></i>`
+							status_usulan = `TK. Des/Kel : <i class="fa fa-times" style="color: red"></i>`
 						}
 
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `Polling : <i class="fa fa-check" style="color: green"></i>`
+							status_vote = `Status prioritas : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_vote = `Polling : <i class="fa fa-times" style="color: red"></i>`
+							status_vote = `Status prioritas : <i class="fa fa-times" style="color: red"></i>`
 						}
 
-						let status_rkpdes;
-						if (data.status_rkpdes == 1) {
-							status_rkpdes = `RKPDes : <i class="fa fa-check" style="color: green"></i>`
-						} else if (data.status_rkpdes == 0) {
-							status_rkpdes = `RKPDes : <i class="fa fa-times" style="color: red"></i>`
+						let status_rkp;
+						if (data.status_rkp == 1) {
+							status_rkp = `Status RKP : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_rkp == 0) {
+							status_rkp = `Status RKP : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_rkpdes = `RKPDes : <i class="fa fa-minus" style="color: yellow"></i>`
+							status_rkp = `Status RKP : <i class="fa fa-minus" style="color: yellow"></i>`
 						}
 
 						let status_pelaksanaan;
 						if (data.status_pelaksanaan == 1) {
-							status_rkpdes = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
-						} else if (data.status_pelaksanaan == 0) {
 							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_pelaksanaan == 0) {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-info" style="color: red"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
 						}
 
-						return `<div class="text-center" style="width: 75px">${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkpdes}<br/>${status_pelaksanaan}</div>`
+						return `
+						<div class="text-center">
+							<a href="<?= site_url('pembangunan_dok/show/'); ?>${data.id}" class="btn btn-sm btn-box btn-success"> Progres Kegiatan</a><br/>
+						</div><br/>
+						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
+						`
 					}
 				},
 				{
@@ -169,18 +162,14 @@
 				},
 				{
 					'data': function(data) {
-						return `<div class="text-center" style="width: 50px">${data.urutan_prioritas}
-								</div>`
-					
+						return `<div class="text-center" style="width: 50px">${data.urutan_prioritas}</div>`
 					}
 				},
 
 				{
-					
+
 					'data': function(data) {
-						return `<div class="text-center" style="color: blue"><strong>${data.max_persentase}</strong>
-								</div>`
-					
+						return `<div class="text-center" style="color: blue"><strong>${data.max_persentase}</strong></div>`
 					}
 				},
 

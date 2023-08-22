@@ -1,21 +1,22 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Daftar Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h1>
+		<h1>Daftar Usulan Tingkat Dusun</h1>
 		<ol class="breadcrumb float-sm-right">
 			<li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
 			<li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
-			<li class="breadcrumb-item active"><a href="#!">Penentuan Prioritas Usulan</a></li>
+			<li class="breadcrumb-item active"><a href="#!">Daftar Usulan Dusun</a></li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<?php $this->load->view('pembangunan/menu'); ?>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div class="box">
 					<form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
 						<div class="row">
@@ -23,18 +24,18 @@
 								<div class="box-header">
 									<div class="col-md-12">
 										<div class="row">
-											<h5>Daftar Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h5>
-											<!--<a href="<?= site_url('pembangunan/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
-											<div class="col-md-3">
+										<h5>Daftar Usulan Tingkat Dusun</h5>
+										<div class="col-md-3">	
+										<a href="<?= site_url('pembangunan_polling/daftar_polling') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
+										</div>
+										<div class="col-md-3">
 												<div class="input-group">
-													<select class="form-control" hidden="	" disabled="disabled" id="tahun" name="tahun" style="width:100%;">
-														<option selected value="semua">Semua Tahun</option>
-														<?php foreach ($list_tahun as $list) : ?>
-															<option value="<?= $list->tahun ?>">
-																<?= $list->tahun ?>
-															</option>
-														<?php endforeach; ?>
-													</select>
+												<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">
+												<option selected value="semua">Semua Tahun</option>
+												<?php foreach ($list_tahun as $list) : ?>
+													<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
+												<?php endforeach; ?>
+											</select>
 												</div>
 											</div>
 										</div>
@@ -48,12 +49,12 @@
 												<tr>
 													<th class="text-center">No</th>
 													<th class="text-center">Aksi</th>
+													<th class="text-center">Gambar</th>
 													<th class="text-center">Tahun</th>
 													<th class="text-center">Nama Dusun</th>
 													<th class="text-center">Bidang </th>
 													<th class="text-center">Nama Program/Kegiatan </th>
-													<th class="text-center">Jumlah Responden </th>
-													<th class="text-center">Skor Total</th>
+													<th class="text-center">Lokasi (RT/RW/Dusun)</th>
 													<th class="text-center">Perkiraan Volume & Satuan</th>
 													<th class="text-center">Jumlah (Rp)</th>
 													<th class="text-center">Sumber Dana</th>
@@ -61,6 +62,7 @@
 													<th class="text-center">Prioritas Desa</th>
 													<th class="text-center">Prioritas SDGS</th>
 													<th class="text-center">Pengusul</th>
+													<th class="text-center">Pelaksana </th>
 													<th class="text-center">Tgl dibuat</th>
 												</tr>
 											</thead>
@@ -89,14 +91,14 @@
 			'responsive': true,
 			'ordering': true,
 			'order': [
-				[10, 'desc'],
+				[7, 'desc'],
 			],
 			'columnDefs': [{
 				'orderable': false,
 				'targets': [0, 1, 10],
 			}],
 			'ajax': {
-				'url': "<?= site_url('pembangunan/prioritas') ?>",
+				'url': "<?= site_url('pembangunan/daftar_usulan_tk_desa') ?>",
 				'method': 'POST',
 				'data': function(d) {
 					d.tahun = $('#tahun').val();
@@ -111,16 +113,63 @@
 				},
 				{
 					'data': function(data) {
+						let status;
+						if (data.status == 1) {
+							status = `TK. Wilayah: <i class="fa fa-check" style="color: green"></i>`
+						} else {
+							status = `TK. Wilayah: <i class="fa fa-times" style="color: red"></i>`
+						}
+
+						let status_usulan;
+						if (data.status_usulan == 1) {
+							status_usulan = `TK. Des/Kel : <i class="fa fa-check" style="color: green"></i>`
+						} else {
+							status_usulan = `TK. Des/Kel : <i class="fa fa-times" style="color: red"></i>`
+						}
+
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `<a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" id="status_vote" class="btn btn-sm btn-primary mb-2 mr-2" title="Berikan Tanggapan">Beri Tanggapan</a>`
+							status_vote = `Status prioritas : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_vote = `<a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Belum Aktif">Penentuan Prioritas Belum Aktif</a>`
+							status_vote = `Status prioritas : <i class="fa fa-times" style="color: red"></i>`
+						}
+
+						let status_rkp;
+						if (data.status_rkp == 1) {
+							status_rkp = `Status RKPDes : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_rkp == 0) {
+							status_rkp = `Status RKPDes : <i class="fa fa-times" style="color: red"></i>`
+						} else {
+							status_rkp = `Status RKPDes : <i class="fa fa-minus" style="color: yellow"></i>`
+						}
+
+						let status_pelaksanaan;
+						if (data.status_pelaksanaan == 1) {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-check" style="color: green"></i>`
+						} else if (data.status_pelaksanaan == 0) {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
+						} else {
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
 						}
 
 						return `
-						${status_vote}
+						<div class="btn-group mb-2 mr-2">
+						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>						<ul class="dropdown-menu" role="menu">
+								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Penentuan Prioritas</a></li>
+								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Batalkan dari Penentuan Prioritas</a></li>
+							</ul>
+						</div><br/>
+						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
 							`
+					}
+				},
+				{
+					'data': function(data) {
+						return `<div class="user-panel">
+									<div class="image2">
+										<img src="<?= base_url(LOKASI_GALERI) ?>${data.foto}" class="img-logo" style="max-width:100px; max-height:100px" alt="Gambar 0%">
+									</div>
+								</div>`
 					}
 				},
 				{
@@ -136,10 +185,7 @@
 					'data': 'nama_program_kegiatan'
 				},
 				{
-					'data': 'count_id_pilihan'
-				},
-				{
-					'data': 'sum_id_pilihan'
+					'data': 'lokasi'
 				},
 				{
 					'data': 'volume'
@@ -162,6 +208,9 @@
 				},
 				{
 					'data': 'pengusul'
+				},
+				{
+					'data': 'pelaksana_kegiatan'
 				},
 				{
 					'data': 'created_at'
@@ -191,7 +240,7 @@
 		$("#table_isi").DataTable({
 			"responsive": true,
 			"lengthChange": false,
-			"autoWidth": false,
+			"autoWidth": true,
 			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 		$('#example2').DataTable({
@@ -200,7 +249,7 @@
 			"searching": false,
 			"ordering": true,
 			"info": true,
-			"autoWidth": false,
+			"autoWidth": true,
 			"responsive": true,
 		});
 	});

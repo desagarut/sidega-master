@@ -115,17 +115,25 @@ class Header_model extends CI_Model {
 		return $outp;
 	}
 
-	public function rkpdes_total()
+	public function usulan_total()
 	{
-		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_pembangunan WHERE status = 1 and status_rkpdes = 1";
+		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_pembangunan";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
 	}
 
-	public function durkpdes_total()
+	public function rkp_total()
 	{
-		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_pembangunan WHERE status = 1 and status_rkpdes = 0";
+		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_pembangunan WHERE status = 1 and status_rkp = 1";
+		$query = $this->db->query($sql);
+		$data = $query->result_array();
+		return $data;
+	}
+
+	public function durkp_total()
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM tbl_pembangunan WHERE status = 1 and status_rkp = 0";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;

@@ -4,12 +4,12 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>Dokumen Penunjang Usulan Masyarakat</h1>
+    <h1>Detail Pelaksanaan Program/Kegiatan</h1>
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
       <li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
-      <li class="breadcrumb-item "><a href="#!">Usulan Masyarakat</a></li>
-      <li class="breadcrumb-item active"><a href="#!">Dokumen Penunjang</a></li>
+      <li class="breadcrumb-item "><a href="#!">Pelaksanaan</a></li>
+      <li class="breadcrumb-item active"><a href="#!">Detail</a></li>
     </ol>
   </section>
   <!-- /.content-header -->
@@ -32,7 +32,7 @@
                   <a href="<?= site_url('pembangunan') ?>" class="btn btn-info btn-sm " title="Kembali Ke Daftar Usulan"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Daftar Usulan Masyarakat</a>
                 </div>
                 <div class="box-body">
-                  <h5 class="text-bold">Dokumen Penunjang Usulan Masyarakat</h5>
+                  <h5 class="text-bold">Detail Pelaksanaan Program/Kegiatan</h5>
                   <div class="col-md-8">
                   <div class="table-responsive">
                     <table class="table table-hover tabel-rincian">
