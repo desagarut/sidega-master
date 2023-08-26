@@ -12,8 +12,8 @@
 		<tr>
 			<td align="center">
 				<img class="logo" src="<?= gambar_desa($config['logo']); ?>" alt="logo-desa">
-				<h3 class="judul">DAFTAR USULAN MASYARAKAT SELURUH DESA<br/>
-					<?= strtoupper($this->setting->sebutan_kecamatan . ' ' . $config['nama_kecamatan'] . ' <br>' . $this->setting->sebutan_kabupaten . ' ' . $config['nama_kabupaten'] . ' <br>' ); ?>
+				<h3 class="judul">DAFTAR USULAN PROGRAM / KEGIATAN<br/>
+					<?= strtoupper($this->setting->sebutan_desa . ' ' . $config['nama_desa'] . ' <br>' .$this->setting->sebutan_kecamatan . ' ' . $config['nama_kecamatan'] . ' <br>' . $this->setting->sebutan_kabupaten . ' ' . $config['nama_kabupaten'] . ' <br>' ); ?>
 				</h3>
 			</td>
 		</tr>
@@ -26,7 +26,7 @@
             <thead>
                 <tr class="border thick">
                     <th>No</th>  
-                    <th>Nama Desa</th> 
+                    <th>Nama <?= strtoupper($this->setting->sebutan_desa);?></th> 
                     <th>Bidang</th>
                     <th>Nama Program Kegiatan</th>
                     <th>Lokasi</th>

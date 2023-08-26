@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="box-header">
-                  <a href="<?= site_url('pembangunan/prioritas') ?>" class="btn btn-info btn-sm " title="Kembali Ke Hasil Penentuan Prioritas">Kembali</a>
+                  <a href="<?= site_url('pembangunan/prioritas') ?>" class="btn btn-success btn-sm " title="Kembali Ke Hasil Penentuan Prioritas">Kembali</a>
                   <a href="<?= site_url('pembangunan/hasil_prioritas_tk_desa') ?>" class="btn btn-success btn-sm " title="Kembali Ke Hasil Penentuan Prioritas">Hasil Penentuan Prioritas</a>
                 </div>
                 <div class="box-body">

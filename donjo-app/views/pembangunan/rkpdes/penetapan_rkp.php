@@ -21,19 +21,17 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<div class="col-md-12">
-										<div class="row">
-											<h5>Penetapan RKP Desa</h5>
-											<!--<a href="<?= site_url('pembangunan_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
-											<div class="col-md-3">
-												<div class="input-group">
-													<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">
-														<option selected value="semua">Semua Tahun</option>
-														<?php foreach ($list_tahun as $list) : ?>
-															<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
-														<?php endforeach; ?>
-													</select>
-												</div>
+									<div class="row">
+										<div class="col-md-10">
+										</div>
+										<div class="col-md-2">
+											<div class="input-group pull-right">
+												<select class="form-control input-sm select2" id="tahun" name="tahun" style="width:100%;">
+													<option selected value="semua">Semua Tahun</option>
+													<?php foreach ($list_tahun as $list) : ?>
+														<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
+													<?php endforeach; ?>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -121,8 +119,10 @@
 
 						return `
 						<div class="btn-group mb-2 mr-2">
-						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>
+						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi Penetapan</a>
 							<ul class="dropdown-menu" role="menu">
+								<li><a href="<?= site_url('pembangunan/detail_usulan/') ?>${data.id}"><i class="fa fa-eye" style="color: blue"></i>Detail Program/kegiatan</a></li>
+								<li class="divider"></li>
 								<li> <a  href="<?= site_url('pembangunan/apbdes_aktiv/'); ?>${data.id}">Tetapkan di RKP Desa</a></li>
 								<li> <a href="<?= site_url('pembangunan/durkp_aktiv/'); ?>${data.id}">Tetapkan di DU-RKP Desa</a><li/>
 								<li> <a href="<?= site_url('pembangunan/batal_aktiv/'); ?>${data.id}">Batalkan</a><li/>

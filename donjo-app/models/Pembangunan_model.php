@@ -318,11 +318,11 @@ class Pembangunan_model extends CI_Model
 		$data['lokasi']             			= $post['lokasi'];
 		$data['lat']             				= $post['lat'];
 		$data['lng']             				= $post['lng'];
-		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
-		$data['status']             			= $post['status'] ?: null;
+		$data['status']             			= $post['status'];
 		$data['foto'] 						  	= $this->upload_gambar_pembangunan('foto');
 		$data['anggaran']     					= $post['anggaran'];
 		$data['manfaat']     					= $post['manfaat'];
+		$data['pengusul']             			= $post['pengusul'];
 
 		$data['created_at']         			= date('Y-m-d H:i:s');
 		$data['updated_at']         			= date('Y-m-d H:i:s');
@@ -343,35 +343,47 @@ class Pembangunan_model extends CI_Model
 		$post = $this->input->post();
 
 		$data['tahun']       					= $post['tahun'];
-		$data['dusun']              				= $post['dusun'];
+		$data['dusun']              			= $post['dusun'];
 		$data['bidang_desa']             		= $post['bidang_desa'];
-		$data['urutan_prioritas']     			= $post['urutan_prioritas'];
 		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
-		$data['sdgs_ke']          				= $post['sdgs_ke'];
 		$data['data_eksisting']             	= $post['data_eksisting'];
 		$data['volume']             			= $post['volume'];
 		$data['laki']             				= $post['laki'];
 		$data['perempuan']             			= $post['perempuan'];
 		$data['rtm']             				= $post['rtm'];
+		$data['manfaat']     					= $post['manfaat'];
 		$data['sumber_dana']             		= $post['sumber_dana'];
 		$data['keterangan']             		= $post['keterangan'];
 		$data['lokasi']             			= $post['lokasi'];
-		$data['lat']             				= $post['lat'];
-		$data['lng']             				= $post['lng'];
-		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
-		$data['status']             			= $post['status'];
-		$data['status_vote']             		= $post['status_vote'];
-		$data['status_usulan']             		= $post['status_usulan'];
-		$data['status_pelaksanaan']             = $post['status_pelaksanaan'];
-
-		$data['status_usulan_musrenbang_kecamatan']             			= $post['status_usulan_musrenbang_kecamatan'];
 		$data['foto'] 						  	= $this->upload_gambar_pembangunan('foto');
 		$data['anggaran']     					= $post['anggaran'];
-		$data['manfaat']     					= $post['manfaat'];
-
+		$data['pengusul']             			= $post['pengusul'];
 
 		$data['id_lokasi']         				= $post['id_lokasi'];
-		//$data['created_at']        				= date('Y-m-d H:i:s');
+		$data['updated_at']         			= date('Y-m-d H:i:s');
+
+		if (empty($data['foto'])) unset($data['foto']);
+
+		unset($data['file_foto']);
+		unset($data['old_foto']);
+
+		$this->db->where('id', $id);
+		$outp = $this->db->update('tbl_pembangunan', $data);
+
+		if ($outp) $_SESSION['success'] = 1;
+		else $_SESSION['success'] = -1;
+	}
+
+	public function update_prioritas($id = 0)
+	{
+		$post = $this->input->post();
+
+		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];
+		$data['pelaksana_kegiatan']             = $post['pelaksana_kegiatan'];
+		$data['urutan_prioritas']             	= $post['urutan_prioritas'];
+		$data['sdgs_ke']             			= $post['sdgs_ke'];
+		$data['anggaran']             			= $post['anggaran'];
+		$data['sumber_dana']             		= $post['sumber_dana'];
 		$data['updated_at']         			= date('Y-m-d H:i:s');
 
 		if (empty($data['foto'])) unset($data['foto']);

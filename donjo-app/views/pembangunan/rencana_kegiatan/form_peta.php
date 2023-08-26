@@ -66,10 +66,10 @@
 
   <section class="content" id="maincontent">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <?php $this->load->view('pembangunan/menu'); ?>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="box box-info">
           <form action="<?= $form_action ?>" method="post" id="validasi" enctype="multipart/form-data">
             <div class="box-header">

@@ -21,30 +21,28 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<div class="col-md-12">
-										<div class="row">
-											<h5>Daftar Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h5>
-											<!--<a href="<?= site_url('pembangunan/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
-											<div class="col-md-9">
-											</div>
-											<div class="col-md-3">
-												<div class="input-group input-group-sm pull-right">
-													<select class="form-control form-control-sm" id="tahun" name="tahun" style="width:100%;">
-														<option selected value="semua">Semua Tahun</option>
-														<?php foreach ($list_tahun as $list) : ?>
-															<option value="<?= $list->tahun ?>">
-																<?= $list->tahun ?>
-															</option>
-														<?php endforeach; ?>
-													</select>
-												</div>
+									<div class="row">
+										<div class="col-md-9">
+											<a href="<?= site_url('pembangunan/hasil_prioritas_tk_desa') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Hasil Penentuan Prioritas</a>
+											<a href="<?= site_url("pembangunan/dialog_daftar/{$desa_musdus->id}/cetak") ?>" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $desa_musdus->judul ?> "><i class="fa fa-print "></i> Cetak</a>
+											<a href="<?= site_url("pembangunan/dialog_daftar/{$desa_musdus->id}/unduh") ?>" class="btn bg-navy btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data " title="Unduh Data <?= $desa_musdus->judul ?> "><i class="fa fa-download "></i> Unduh</a>
+										</div>
+										<div class="col-md-3">
+											<div class="input-group input-group-sm pull-right">
+												<select class="form-control form-control-sm select2" id="tahun" name="tahun" style="width:100%;">
+													<option selected value="semua">Semua Tahun</option>
+													<?php foreach ($list_tahun as $list) : ?>
+														<option value="<?= $list->tahun ?>">
+															<?= $list->tahun ?>
+														</option>
+													<?php endforeach; ?>
+												</select>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="box-body table-border-style">
 									<div class="table-responsive">
-										<!-- <table id="example1" class="table table-hover">-->
 										<table id="example1" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
@@ -113,13 +111,6 @@
 				},
 				{
 					'data': function(data) {
-						let status_vote;
-						if (data.status_vote == 1) {
-							status_vote = `<br/><a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" id="status_vote" class="btn btn-sm btn-social btn-block btn-primary mb-2 mr-2" title="Berikan Tanggapan"><i class="fa fa-bullhorn"></i>Beri Tanggapan</a>`
-						} else {
-							status_vote = `<br/><a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Belum Aktif">Penentuan Prioritas Belum Aktif</a>`
-						}
-
 						let status;
 						if (data.status == 1) {
 							status = `TK. Wilayah: <i class="fa fa-check" style="color: green"></i>`
@@ -134,13 +125,20 @@
 							status_usulan = `TK. Des/Kel : <i class="fa fa-times" style="color: red"></i>`
 						}
 
+						let status_vote;
+						if (data.status_vote == 1) {
+							status_vote = `Penentuan prioritas : <i class="fa fa-check" style="color: green"></i>`
+						} else {
+							status_vote = `Penentuan prioritas : <i class="fa fa-times" style="color: red"></i>`
+						}
+
 						let status_rkp;
 						if (data.status_rkp == 1) {
-							status_rkp = `Status RKP : <i class="fa fa-check" style="color: green"></i>`
+							status_rkp = `Status RKPDes : <i class="fa fa-check" style="color: green"></i>`
 						} else if (data.status_rkp == 0) {
-							status_rkp = `Status RKP : <i class="fa fa-times" style="color: red"></i>`
+							status_rkp = `Status RKPDes : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_rkp = `Status RKP : <i class="fa fa-minus" style="color: yellow"></i>`
+							status_rkp = `Status RKPDes : <i class="fa fa-minus" style="color: grey"></i>`
 						}
 
 						let status_pelaksanaan;
@@ -149,21 +147,21 @@
 						} else if (data.status_pelaksanaan == 0) {
 							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: grey"></i>`
 						}
-
 						return `
-						<div class="btn-group mb-2 mr-2">
-						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>
+						<div class="btn-group text-center">
+						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilihan Aksi"><i class="fa fa-arrow-down"></i> Pilihan Aksi </a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}"><i class="fa fa-eye"></i>Lihat Detail </a></li>
-								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}"><i class="fa fa-login"></i>Daftarkan Ke Prioritas Usulan</a></li>
+								<li><a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}"><i class="fa fa-eye" style="color: blue"></i>Lihat Detail </a></li>
+								<li class="divider"></li>
+								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}"><i class="fa fa-arrow-right" style="color: green"></i>Daftarkan Ke Prioritas Usulan</a></li>
 
-								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}"><i class="fa fa-logout"></i>Keluarkan dari Prioritas Usulan</a></li>
+								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}"><i class="fa fa-arrow-left" style="color: red"></i>Keluarkan dari Prioritas Usulan</a></li>
 							</ul>
-						</div><br/>
-
-						${status_vote}<br/>${status}<br/>${status_usulan}<br/>${status_rkp}<br/>${status_pelaksanaan}
+							<a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" id="status_vote" class="btn btn-block btn-social btn-sm btn-primary" title="Berikan Tanggapan"><i class="fa fa-bullhorn"></i>Beri Tanggapan </a><br/>
+						</div>
+							${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
 							`
 					}
 				},
@@ -227,25 +225,6 @@
 
 		$('#tahun').on('select2:select', function(e) {
 			tabelpembangunan.ajax.reload();
-		});
-	});
-</script>
-<script>
-	$(function() {
-		$("#table_isi").DataTable({
-			"responsive": true,
-			"lengthChange": false,
-			"autoWidth": false,
-			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
 		});
 	});
 </script>

@@ -20,6 +20,7 @@ class Pembangunan extends Admin_Controller
 		$this->load->model('plan_garis_model');
 		$this->load->model('pamong_model');
 		$this->load->model('header_model');
+		$this->load->model('Rekanan_model');
 	}
 
 	public function index()
@@ -62,20 +63,37 @@ class Pembangunan extends Admin_Controller
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['dusun'] = $this->wilayah_model->list_dusun();
 			$data['form_action'] = site_url("pembangunan/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_data('ref_bidang_desa');
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['dusun'] = $this->wilayah_model->list_dusun();
 			$data['form_action'] = site_url("pembangunan/insert");
 		}
 
 		$this->render('pembangunan/rencana_kegiatan/form_usulan', $data);
+	}
+
+	public function form_ubah_prioritas($id = '')
+	{
+		$this->tab_ini = 1;
+		$this->sub_modul_ini = 700;
+		$this->set_minsidebar(1);
+
+		$data['main'] = $this->model->find($id);
+		$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
+		$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
+		$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
+		$data['dusun'] = $this->wilayah_model->list_dusun();
+		$data['form_action'] = site_url("pembangunan/update_prioritas/$id");
+
+		$this->load->view('pembangunan/prioritas/form_ubah_prioritas', $data);
+
 	}
 
 	public function insert()
@@ -103,6 +121,13 @@ class Pembangunan extends Admin_Controller
 		redirect('pembangunan');
 	}
 
+
+	public function update_prioritas($id = '')
+	{
+		$this->model->update_prioritas($id);
+		redirect("pembangunan/daftar_usulan_tk_desa");
+	}
+
 	public function lokasi_maps($id)
 	{
 		$this->tab_ini = 1;
@@ -127,12 +152,6 @@ class Pembangunan extends Admin_Controller
 			'lokasi_pembangunan'	=>	$this->model->find($id),
 			'desa'      => $this->config_model->get_data(),
 			'wil_atas'  => $this->config_model->get_data(),
-			'dusun_gis' => $this->wilayah_model->list_dusun(),
-			'rw_gis'    => $this->wilayah_model->list_rw(),
-			'rt_gis'    => $this->wilayah_model->list_rt(),
-			'all_lokasi' => $this->plan_lokasi_model->list_lokasi(),
-			'all_garis' => $this->plan_garis_model->list_garis(),
-			'all_area' => $this->plan_area_model->list_area(),
 			'list_lokasi_program' => $this->model->list_lokasi_program(),
 		]);
 	}
@@ -155,6 +174,7 @@ class Pembangunan extends Admin_Controller
 		$pembangunan = $this->model->find($id);
 		$dokumentasi = $this->pembangunan_dok_model->find_dokumentasi($pembangunan->id);
 
+		$data['main'] = $this->model->find($id);
 		$data['pembangunan']    = $pembangunan;
 		$data['dokumentasi']    = $dokumentasi;
 		$data['config']         = $this->header['desa'];
@@ -184,6 +204,7 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/rencana_kegiatan/detail_usulan', $data);
 	}
 
+	// Modul Kerjasama Antar Desa
 	public function kerjasama_antar_desa()
 	{
 		$this->tab_ini = 4;
@@ -237,13 +258,13 @@ class Pembangunan extends Admin_Controller
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/insert");
 		}
@@ -251,6 +272,7 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/kerjasama/form_kerjasama_antar_desa', $data);
 	}
 
+	// Modul Kerjasama dengan Pihak Ketiga
 	public function kerjasama_pihak_ketiga()
 	{
 		$this->tab_ini = 5;
@@ -305,13 +327,13 @@ class Pembangunan extends Admin_Controller
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/insert");
 		}
@@ -319,7 +341,7 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/kerjasama/form_kerjasama_pihak_ketiga', $data);
 	}
 
-	// Start Usulan Dusun //
+	//  Modul Perencanaan Pembangunan : Usulan Program/ Kegiatan Tingkat Dusun/Wilayah //
 	public function daftar_usulan_tk_desa()
 	{
 		$this->tab_ini = 6;
@@ -356,13 +378,13 @@ class Pembangunan extends Admin_Controller
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/update/$id");
 		} else {
 			$data['main'] = NULL;
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
-			$data['bidang_desa'] = $this->referensi_model->list_ref(BIDANG_DESA);
+			$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
 			$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 			$data['form_action'] = site_url("pembangunan/insert");
 		}
@@ -370,8 +392,7 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/program_masuk_desa/form', $data);
 	}
 
-	//Start Penentuan Penentuan Prioritas
-
+	// Modul Penentuan Prioritas Program/ Kegiatan Pembangunan: Penentuan Penentuan Prioritas
 	public function penentuan_prioritas_tk_desa()
 	{
 		$this->tab_ini = 7;
@@ -432,7 +453,7 @@ class Pembangunan extends Admin_Controller
 	}
 	// End Penentuan Prioritas
 
-
+	// Modul Penetapan Program/ Kegiatan Pembangunan 
 	public function penetapan_rkp()
 	{
 		$this->tab_ini = 9;
@@ -579,7 +600,7 @@ class Pembangunan extends Admin_Controller
 		$this->load->view('global/format_cetak', $data);
 	}
 
-	//---- Pelaksanaan Pembangunan --//
+	// Modul Pelaksanaan Program/ Kegiatan Pembangunan --//
 	public function pelaksanaan_rkp()
 	{
 		$this->tab_ini = 12;
@@ -638,7 +659,7 @@ class Pembangunan extends Admin_Controller
 		]);
 	}
 
-	//---- Status Aktiv Usulan Musdus ----//
+	//---- Modul Status Aktiv Usulan Musdus ----//
 	public function unlock($id)
 	{
 		$this->model->unlock($id);
@@ -659,7 +680,7 @@ class Pembangunan extends Admin_Controller
 	{
 		$this->model->vote($id);
 		$this->session->success = 1;
-		redirect('pembangunan/daftar_usulan_tk_desa');
+		redirect('pembangunan/penentuan_prioritas_tk_desa');
 	}
 
 	public function unvote($id)
@@ -675,7 +696,7 @@ class Pembangunan extends Admin_Controller
 	{
 		$this->model->ajukan($id);
 		$this->session->success = 1;
-		redirect('pembangunan');
+		redirect('pembangunan/daftar_usulan_tk_desa');
 	}
 
 	public function batalkan($id)

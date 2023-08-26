@@ -1,13 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Daftar Usulan Program / Kegiatan Tingkat <?= ucwords($this->setting->sebutan_dusun); ?> </h1>
+		<h1>Data Rekanan</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
 			<li><a href="<?= site_url('pembangunan') ?>"> Pembangunan</a></li>
-			<li class="active">Daftar Usulan Program / Kegiatan</li>
+			<li class="active">Daftar Rekanan</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -26,7 +25,7 @@
 											<?php if ($this->CI->cek_hak_akses('u')) : ?>
 												<a href="<?= site_url('pembangunan/form_usulan_masyarakat') ?>" class="btn btn-success btn-sm" title="Tambah Data Baru"><i class="feather icon-plus"></i> Tambah Usulan</a>
 											<?php endif; ?>
-											<a href="<?= site_url("pembangunan/dialog_daftar/{$desa_musdus->id}/cetak") ?>" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $pembangunan->nama_program_kegiatan ?> "><i class="fa fa-print "></i> Cetak</a>
+											<a href="<?= site_url("pembangunan/dialog_daftar/{$desa_musdus->id}/cetak") ?>" class="btn btn-info btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data" title="Cetak Data <?= $desa_musdus->judul ?> "><i class="fa fa-print "></i> Cetak</a>
 											<a href="<?= site_url("pembangunan/dialog_daftar/{$desa_musdus->id}/unduh") ?>" class="btn bg-navy btn-sm mb-2 mr-2" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Data " title="Unduh Data <?= $desa_musdus->judul ?> "><i class="fa fa-download "></i> Unduh</a>
 										</div>
 										<div class="col-sm-2">
@@ -47,18 +46,10 @@
 													<thead>
 														<tr>
 															<th class="text-center">No</th>
-															<th class="text-center">Aksi</th>
-															<th class="text-center">Gambar</th>
-															<th class="text-center">Tahun</th>
-															<th class="text-center">Nama Dusun</th>
-															<th class="text-center">Bidang </th>
-															<th class="text-center">Nama Program/Kegiatan </th>
-															<th class="text-center">Lokasi (RT/RW/Dusun)</th>
-															<th class="text-center">Perkiraan Volume & Satuan</th>
-															<th class="text-center">Jumlah (Rp)</th>
-															<th class="text-center">Sumber Dana</th>
-															<th class="text-center">Pengusul</th>
-															<th class="text-center">Tgl dibuat</th>
+															<th class="text-center">Nama</th>
+															<th class="text-center">Instansi</th>
+															<th class="text-center">Telepon</th>
+															<th class="text-center">Aksi </th>
 														</tr>
 													</thead>
 													<tbody>
@@ -107,6 +98,15 @@
 					render: function(data, type, row, meta) {
 						return meta.row + meta.settings._iDisplayStart + 1;
 					}
+				},
+				{
+					'data': 'nama'
+				},
+				{
+					'data': 'instansi'
+				},
+				{
+					'data': 'telepon'
 				},
 				{
 					'data': function(data) {
@@ -178,37 +178,6 @@
 									</div>
 								</div>`
 					}
-				},
-				{
-					'data': 'tahun'
-				},
-				{
-					'data': 'dusun'
-				},
-				{
-					'data': 'bidang_desa'
-				},
-				{
-					'data': 'nama_program_kegiatan'
-				},
-				{
-					'data': 'lokasi'
-				},
-				{
-					'data': 'volume'
-				},
-				{
-					'data': 'anggaran',
-					'render': $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-				},
-				{
-					'data': 'sumber_dana'
-				},
-				{
-					'data': 'pengusul'
-				},
-				{
-					'data': 'created_at'
 				},
 			],
 			'language': {

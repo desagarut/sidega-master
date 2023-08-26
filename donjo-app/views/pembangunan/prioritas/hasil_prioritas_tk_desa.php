@@ -21,21 +21,21 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<div class="col-md-12">
-										<div class="row">
-											<h5>Hasil Penentuan Prioritas Tingkat <?= ucwords($this->setting->sebutan_desa); ?></h5>
+									<div class="row">
+										<div class="col-md-10">
+
 											<!--<a href="<?= site_url('pembangunan_polling/tanggapan_per_item') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Polling"><i class="feather icon-plus"></i> Daftar Polling</a> -->
-											<div class="col-md-3">
-												<div class="input-group">
-													<select class="form-control" hidden="" disabled="disabled" id="tahun" name="tahun" style="width:100%;">
-														<option selected value="semua">Semua Tahun</option>
-														<?php foreach ($list_tahun as $list) : ?>
-															<option value="<?= $list->tahun ?>">
-																<?= $list->tahun ?>
-															</option>
-														<?php endforeach; ?>
-													</select>
-												</div>
+										</div>
+										<div class="col-md-2">
+											<div class="input-group input-group-sm pull-right">
+												<select class="form-control select2" id="tahun" name="tahun" style="width:100%;">
+													<option selected value="semua">Semua Tahun</option>
+													<?php foreach ($list_tahun as $list) : ?>
+														<option value="<?= $list->tahun ?>">
+															<?= $list->tahun ?>
+														</option>
+													<?php endforeach; ?>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -126,11 +126,10 @@
 
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `<br/><a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" id="status_vote" class="btn btn-block btn-social btn-sm btn-primary"  title="Penentuan Prioritas Aktif"><i class="fa fa-eye"></i> Lihat Detail</a>`
+							status_vote = `Penentuan prioritas : <i class="fa fa-check" style="color: green"></i>`
 						} else {
-							status_vote = `<br/><a href="#" id="status_vote" class="btn btn-icon btn-secondary btn-sm mb-2 mr-2 disabled" title="Penentuan Prioritas Tidak Aktif">Penentuan Prioritas Non Aktif</a>`
+							status_vote = `Penentuan prioritas : <i class="fa fa-times" style="color: red"></i>`
 						}
-
 
 						let status_rkp;
 						if (data.status_rkp == 1) {
@@ -151,7 +150,11 @@
 						}
 
 						return `
-						${status_vote}<br/>${status}<br/>${status_usulan}<br/>${status_rkp}<br/>${status_pelaksanaan}
+						<div class="btn-group mb-2 mr-2">
+							<a href="<?= site_url('pembangunan/penetapan_rkp/') ?>${data.id}" class="btn btn-block btn-social btn-sm btn-success"><i class="fa fa-check"></i>Lanjut ke Penetapan </a>
+							<a href="<?= site_url('pembangunan_polling/tanggapan/') ?>${data.id}" class="btn btn-block btn-social btn-sm btn-success"><i class="fa fa-check"></i>Detail Tanggapan</a>
+						</div>
+						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
 							`
 					}
 				},
@@ -165,34 +168,44 @@
 					'data': 'nama_program_kegiatan'
 				},
 				{
-					'data': 'count_id_pilihan','class': 'text-center'
+					'data': 'count_id_pilihan',
+					'class': 'text-center'
 				},
 				{
-					'data': 'sum_id_pilihan','class': 'text-primary'
+					'data': 'sum_id_pilihan',
+					'class': 'text-primary'
 				},
 				{
-					'data': 'sum_stp','class': 'text-center'
+					'data': 'sum_stp',
+					'class': 'text-center'
 				},
 				{
-					'data': 'sum_tp','class': 'text-center'
+					'data': 'sum_tp',
+					'class': 'text-center'
 				},
 				{
-					'data': 'sum_n','class': 'text-center'
+					'data': 'sum_n',
+					'class': 'text-center'
 				},
 				{
-					'data': 'sum_p','class': 'text-center'
+					'data': 'sum_p',
+					'class': 'text-center'
 				},
 				{
-					'data': 'sum_sp','class': 'text-center'
+					'data': 'sum_sp',
+					'class': 'text-center'
 				},
 				{
-					'data': 'min_updated','class': 'text-center'
+					'data': 'min_updated',
+					'class': 'text-center'
 				},
 				{
-					'data': 'max_updated','class': 'text-center'
+					'data': 'max_updated',
+					'class': 'text-center'
 				},
 				{
-					'data': 'created_at','class': 'text-center'
+					'data': 'created_at',
+					'class': 'text-center'
 				},
 			],
 			'language': {

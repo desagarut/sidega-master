@@ -11,29 +11,27 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<div class="row">
-			<div class="col-md-2">
-				<?php $this->load->view('pembangunan/menu'); ?>
-			</div>
-			<div class="col-md-10">
-				<div class="box">
-					<form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
+		<form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
+			<div class="row">
+				<div class="col-md-2">
+					<?php $this->load->view('pembangunan/menu'); ?>
+				</div>
+				<div class="col-md-10">
+					<div class="box">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<div class="col-md-12">
-										<div class="row">
-											<div class="col-md-1">
+									<div class="row">
+										<div class="col-sm-10">
 											<a href="<?= site_url("pembangunan/dialog_cetak_rkpdes/{$pembangunan->id}/cetak") ?>" class="btn bg-purple btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Data RKP" title="Cetak Data RKP"><i class="fa fa-print "></i> Cetak</a>&nbsp;
-											</div>
-											<div class="input-group col-md-2">
-												<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">
-													<option selected value="semua">Semua Tahun</option>
-													<?php foreach ($list_tahun as $list) : ?>
-														<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
-													<?php endforeach; ?>
-												</select>
-											</div>
+										</div>
+										<div class="input-group col-md-2">
+											<select class="form-control input-sm select2" id="tahun" name="tahun" style="width:100%;">
+												<option selected value="semua">Semua Tahun</option>
+												<?php foreach ($list_tahun as $list) : ?>
+													<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
+												<?php endforeach; ?>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -68,10 +66,10 @@
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</section>
 </div>
 <?php $this->load->view('global/confirm_delete'); ?>
@@ -164,8 +162,8 @@
 							`
 					}
 				},
-				
-					{
+
+				{
 					'data': function(data) {
 						return `<div class="user-panel">
 									<div class="image1">

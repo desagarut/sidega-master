@@ -4,26 +4,25 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>Usulan Masyarakat</h1>
+    <h1>Detail Usulan Program/Kegiatan Tingkat Dusun</h1>
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
-      <li class="breadcrumb-item"><a href="<?= site_url() ?>desa_musdus">Perencanaan Desa</a></li>
-      <li class="breadcrumb-item active"><a href="<?= site_url() ?>desa_musdus">Musdus</a></li>
-      <li class="breadcrumb-item active"><a href="<?= site_url() ?>desa_musdus">Usulan Masyarakat</a></li>
+      <li class="breadcrumb-item"><a href="<?= site_url() ?>pembangunan">Pembangunan</a></li>
       <li class="breadcrumb-item active">Detail</li>
     </ol>
   </section>
 
   <section class="content" id="maincontent">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <?php $this->load->view('pembangunan/menu'); ?>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="box">
             <div class="box-body">
-              <a href="<?= site_url('pembangunan') ?>" class="btn btn-info">Kembali</a>
-              <strong> USULAN MASYARAKAT</strong>
+              <a href="<?= site_url('pembangunan') ?>" class="btn btn-success btn-sm">Kembali</a>&nbsp;              
+              <a href="<?= site_url('pembangunan/daftar_usulan_tk_desa') ?>" class="btn btn-success btn-sm">Kembali Ke Prioritas</a>&nbsp;
+              <a href="<?= site_url('pembangunan/penetapan_rkp') ?>" class="btn btn-success btn-sm">Kembali Ke Penetapan RKP</a>&nbsp;
             </div>
           </div>
           <div class="row">
@@ -33,9 +32,9 @@
                 <div class="box-body">
                   <table class="table table-hover">
                     <tr>
-                      <th width="150px">Dusun</th>
+                      <th width="150px"><?= ucwords($this->setting->sebutan_dusun); ?></th>
                       <td width="20px">:</td>
-                      <td><?= $musdus->dusun ?></td>
+                      <td><?= strtoupper($musdus->dusun) ?></td>
                     </tr>
                     <tr>
                       <th>Tahun Usulan</th>
@@ -45,20 +44,25 @@
                     <tr>
                       <th width="150px">Nama Kegiatan</th>
                       <td width="20px">:</td>
-                      <td><?= $musdus->nama_program_kegiatan ?></td>
+                      <td><?= strtoupper($musdus->nama_program_kegiatan) ?></td>
                     </tr>
+                    <th width="150px">Bidang</th>
+                      <td width="20px">:</td>
+                      <td><?= $musdus->bidang_desa ?></td>
+                    </tr>
+
                     <tr>
                       <th width="150px">Status Usulan</th>
                       <td width="20px">:</td>
                       <td><?php if ($musdus->status == "0") { ?>
-                          <button class="btn btn-danger disabled" title="Tidak Aktif"> Tidak Aktif</button>
+                          <button class="btn btn-danger btn-sm" title="Tidak Aktif"> Tidak Aktif</button>
                         <?php } else { ?>
-                          <button class="btn btn-success disabled" title="Aktif"> Aktif</button>
+                          <button class="btn btn-success btn-sm" title="Aktif"> Aktif</button>
                         <?php } ?>
                         <?php if ($musdus->status_usulan == "0") { ?>
-                          <button class="btn btn-danger disabled" title="Belum Diusulkan"> Belum Diusulkan</button>
+                          <button class="btn btn-danger btn-sm" title="Belum Diusulkan"> Belum Diusulkan</button>
                         <?php } else { ?>
-                          <button class="btn btn-success disabled" title="Sudah Diusulkan"> Sudah Diusulkan</button>
+                          <button class="btn btn-success btn-sm" title="Sudah Diusulkan"> Sudah Diusulkan</button>
                         <?php } ?>
                       </td>
                     </tr>
@@ -94,7 +98,12 @@
                         <?= $musdus->rtm ?></td>
                     </tr>
                     <tr>
-                      <th>SDGS KE</th>
+                      <th></th>
+                      <td width="20px">:</td>
+                      <td><?= $musdus->manfaat ?></td>
+                    </tr>
+                    <tr>
+                      <th>Mendukung SDGS Ke</th>
                       <td width="20px">:</td>
                       <td><?= $musdus->sdgs_ke ?></td>
                     </tr>
@@ -129,7 +138,7 @@
                   <div class="col-xs-12 col-sm-12">
                     <div class="widget-main text-center"> <img src="<?= base_url() . LOKASI_GALERI . $musdus->foto ?>" width="auto" height="180px"> </div>
                     <br />
-                    <button class="btn btn-info btn-minier" data-toggle="modal" data-target="#sampul<?= $musdus->id ?>"> <i class="ace-icon fa fa-eye"></i> Lihat </button>
+                    <button class="btn btn-primary btn-social btn-sm" data-toggle="modal" data-target="#sampul<?= $musdus->id ?>"> <i class="ace-icon fa fa-eye"></i> Lihat </button>
                   </div>
                 </div>
               </div>

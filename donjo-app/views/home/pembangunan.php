@@ -32,7 +32,7 @@
             </a>
         </div>
         <div class="row text-center">
-            <a href="<?= site_url('pembangunan/pelaksanaan') ?>" class="btn btn-app bg-red" title="Daftar Daftar Kegiatan Yang dilaksanakan">
+            <a href="<?= site_url('pembangunan/pelaksanaan_rkp') ?>" class="btn btn-app bg-red" title="Daftar Daftar Kegiatan Yang dilaksanakan">
                 <?php foreach ($pelaksanaan_total as $data) : ?>
                     <?= $data['jumlah'] ?><br />
                     Pelaksanaan

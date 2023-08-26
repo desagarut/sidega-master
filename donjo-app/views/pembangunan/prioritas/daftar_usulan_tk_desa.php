@@ -4,11 +4,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Daftar Usulan Tingkat Dusun</h1>
+		<h1>Daftar Usulan Tingkat <?= ucwords($this->setting->sebutan_desa); ?> </h1>
 		<ol class="breadcrumb float-sm-right">
 			<li class="breadcrumb-item"><a href="<?= site_url() ?>beranda">Beranda</a></li>
 			<li class="breadcrumb-item"><a href="#!">Pembangunan</a></li>
-			<li class="breadcrumb-item active"><a href="#!">Daftar Usulan Dusun</a></li>
+			<li class="breadcrumb-item active"><a href="#!">Daftar Usulan TK. <?= ucwords($this->setting->sebutan_desa); ?> </a></li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -22,24 +22,21 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<div class="col-md-12">
 										<div class="row">
-										<h5>Daftar Usulan Tingkat Dusun</h5>
-										<div class="col-md-3">	
-										<a href="<?= site_url('pembangunan_polling/daftar_polling') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Lihat Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
-										</div>
-										<div class="col-md-3">
-												<div class="input-group">
-												<select class="form-control input-sm select2" disabled hidden id="tahun" name="tahun" style="width:100%;">
-												<option selected value="semua">Semua Tahun</option>
-												<?php foreach ($list_tahun as $list) : ?>
-													<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
-												<?php endforeach; ?>
-											</select>
+											<div class="col-sm-10">
+												<a href="<?= site_url('pembangunan/penentuan_prioritas_tk_desa') ?>" class="btn btn-success btn-sm mb-2 mr-2" title="Daftar Penentuan Prioritas"><i class="feather icon-plus"></i> Daftar Penentuan Prioritas</a>
+											</div>
+											<div class="col-sm-2">
+												<div class="input-group pull-right">
+													<select class="form-control input-sm select2" id="tahun" name="tahun" style="width:100%;">
+														<option selected value="semua">Semua Tahun</option>
+														<?php foreach ($list_tahun as $list) : ?>
+															<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
+														<?php endforeach; ?>
+													</select>
 												</div>
 											</div>
 										</div>
-									</div>
 								</div>
 								<div class="box-body table-border-style">
 									<div class="table-responsive">
@@ -79,6 +76,9 @@
 		</div>
 	</section>
 </div>
+
+
+
 <?php $this->load->view('global/confirm_delete'); ?>
 <?php $this->load->view('global/konfirmasi'); ?>
 <script>
@@ -113,6 +113,13 @@
 				},
 				{
 					'data': function(data) {
+						let urutan_prioritas;
+						if (data.urutan_prioritas == null) {
+							urutan_prioritas = `<a href="<?= site_url('pembangunan/form_ubah_prioritas/') ?>${data.id}" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Lengkapi Data Prioritas " data-title="Lengkapi Data" class="btn btn-social btn-box btn-block btn-sm btn-default"><i class='fa fa-question'></i> Lengkapi Data</a>`
+						} else {
+							urutan_prioritas = `<a href="<?= site_url('pembangunan/form_ubah_prioritas/') ?>${data.id}" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Ubah Data Prioritas " data-title="Ubah Data" class="btn btn-social btn-box btn-block btn-sm btn-success"><i class='fa fa-check'></i> Ubah data</a>`
+						}
+
 						let status;
 						if (data.status == 1) {
 							status = `TK. Wilayah: <i class="fa fa-check" style="color: green"></i>`
@@ -129,9 +136,9 @@
 
 						let status_vote;
 						if (data.status_vote == 1) {
-							status_vote = `Status prioritas : <i class="fa fa-check" style="color: green"></i>`
+							status_vote = `<a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}" class="btn btn-social btn-box btn-block btn-sm btn-success"><i class='fa fa-check'></i> Terdaftar di Prioritas</a>`
 						} else {
-							status_vote = `Status prioritas : <i class="fa fa-times" style="color: red"></i>`
+							status_vote = `<a href="<?= site_url('pembangunan/vote/'); ?>${data.id}" class="btn btn-social btn-box btn-block btn-sm btn-warning"><i class='fa fa-question'></i> Daftarkan Ke Prioritas</a>`
 						}
 
 						let status_rkp;
@@ -140,7 +147,7 @@
 						} else if (data.status_rkp == 0) {
 							status_rkp = `Status RKPDes : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_rkp = `Status RKPDes : <i class="fa fa-minus" style="color: yellow"></i>`
+							status_rkp = `Status RKPDes : <i class="fa fa-minus" style="color: grey"></i>`
 						}
 
 						let status_pelaksanaan;
@@ -149,17 +156,20 @@
 						} else if (data.status_pelaksanaan == 0) {
 							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-times" style="color: red"></i>`
 						} else {
-							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: yellow"></i>`
+							status_pelaksanaan = `Pelaksanaan : <i class="fa fa-minus" style="color: grey"></i>`
 						}
 
 						return `
 						<div class="btn-group mb-2 mr-2">
-						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>						<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}">Daftarkan Ke Penentuan Prioritas</a></li>
-								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}">Batalkan dari Penentuan Prioritas</a></li>
+						<a href="#" class="btn btn-block btn-social btn-sm btn-success" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>						
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="<?= site_url('pembangunan/detail_usulan/') ?>${data.id}"><i class="fa fa-eye" style="color: blue"></i>Lihat Detail </a></li>
+								<li class="divider"></li>
+								<li><a href="<?= site_url('pembangunan/vote/'); ?>${data.id}"><i class="fa fa-arrow-right" style="color: green"></i>Daftarkan Ke Penentuan Prioritas</a></li>
+								<li><a href="<?= site_url('pembangunan/unvote/'); ?>${data.id}"><i class="fa fa-arrow-left" style="color: red"></i>Batalkan dari Penentuan Prioritas</a></li>
 							</ul>
-						</div><br/>
-						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
+						</div>
+						${urutan_prioritas}${status_vote}  ${status}<br/>${status_usulan}<br/>${status_rkp}<br/>${status_pelaksanaan}
 							`
 					}
 				},
