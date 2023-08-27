@@ -227,7 +227,7 @@
             'data': 'persentase'
           },
           {
-            'data': 'keterangan_dok'
+            'data': 'keterangan'
           },
           {
             'data': 'created_at'
