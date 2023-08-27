@@ -14,10 +14,10 @@
   <!-- /.content-header -->
   <section class="content" id="maincontent">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <?php $this->load->view('pembangunan/menu'); ?>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-9">
         <form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
           <div class="box">
             <div class="row">

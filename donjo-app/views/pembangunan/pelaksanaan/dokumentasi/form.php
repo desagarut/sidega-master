@@ -27,18 +27,18 @@
   <section class="content" id="maincontent">
     <div class="row">
     <div class="col-md-3">
-      <?php $this->load->view('perencanaan_desa/menu'); ?>
+      <?php $this->load->view('pembangunan/menu'); ?>
     </div>
     <div class="col-md-9">
       <div class="box">
         <form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
           <div class="row">
             <div class="col-md-12">
-              <div class="box-header"> <a href="<?= site_url("pembangunan_dok/show/{$id_perencanaan_desa}") ?>" class="btn btn-info btn-sm "><i class="fa fa-arrow-circle-left"></i> Kembali</a> </div>
+              <div class="box-header"> <a href="<?= site_url("pembangunan_dok/show/{$id_pembangunan}") ?>" class="btn btn-info btn-sm "><i class="fa fa-arrow-circle-left"></i> Kembali</a> </div>
               <div class="box-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <input type="hidden" name="id_perencanaan_desa" value="<?= $id_perencanaan_desa ?>">
+                    <input type="hidden" name="id_pembangunan" value="<?= $id_pembangunan ?>">
                     <div class="form-group row">
                       <label for="jenis_persentase" class="col-sm-3 control-label">Persentase Pelaksaan</label>
                       <div class="btn-group col-sm-8 kiri" data-toggle="buttons">
@@ -90,9 +90,9 @@
                         <span class="help-block"><code>(Kosongkan jika tidak ingin mengubah gambar)</code></span> </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-3 control-label" style="text-align:left;" for="keterangan">Keterangan</label>
+                      <label class="col-sm-3 control-label" style="text-align:left;" for="keterangan_dok">keterangan_dok</label>
                       <div class="col-sm-7">
-                        <textarea rows="5" class="form-control input-sm required" name="keterangan" id="keterangan" placeholder="Keterangan"><?= $main->keterangan ?></textarea>
+                        <textarea rows="5" class="form-control input-sm required" name="keterangan_dok" id="keterangan_dok" placeholder="keterangan_dok"><?= $main->keterangan_dok ?></textarea>
                       </div>
                     </div>
                   </div>

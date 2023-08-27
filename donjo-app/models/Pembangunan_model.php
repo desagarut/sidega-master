@@ -3,7 +3,7 @@
 class Pembangunan_model extends CI_Model
 {
 	protected $table = 'tbl_pembangunan';
-	protected $table2 = 'tbl_pembangunan_dok';
+	//protected $table2 = 'tbl_pembangunan_dok';
 	//protected $table3 = 'tbl_pembangunan_polling';
 
 
@@ -29,9 +29,11 @@ class Pembangunan_model extends CI_Model
 			'p.*',
 			'(CASE WHEN SUM(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(SUM(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada progres") END) AS sum_id_pilihan',
 			'(CASE WHEN COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(COUNT(CAST(d.id_pilihan as UNSIGNED INTEGER))) ELSE CONCAT("belum ada responden") END) AS count_id_pilihan',
+			'(CASE WHEN MAX(CAST(e.persentase AS UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(e.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase'
 		])
 			->from("{$this->table} p")
 			->join('tbl_pembangunan_polling d', 'd.id_pembangunan = p.id', 'left')
+			->join('tbl_pembangunan_dok e', 'd.id_pembangunan = p.id', 'left')
 			->group_by('p.id');
 
 		if (empty($search)) {
@@ -46,6 +48,7 @@ class Pembangunan_model extends CI_Model
 				->or_like('p.sdgs_ke', $search)
 				->or_like('p.lokasi', $search)
 				->or_like('p.sumber_dana', $search)
+				->or_like('e.persentase', $search)
 				->group_end();
 		}
 
@@ -273,11 +276,12 @@ class Pembangunan_model extends CI_Model
 	{
 		$builder = $this->db->select([
 			'p.*',
+			'(CASE WHEN MAX(CAST(e.persentase AS UNSIGNED INTEGER)) IS NOT NULL THEN CONCAT(MAX(CAST(e.persentase as UNSIGNED INTEGER)), "%") ELSE CONCAT("belum ada progres") END) AS max_persentase',
 		])
 			->from("{$this->table} p")
-			->where('p.status_pelaksanaan = 1');
-			//->join('tbl_pembangunan_dok d', 'd.id_pembangunan = p.id', 'left')
-			//->group_by('p.id');
+			->where('p.status_pelaksanaan = 1')
+			->join('tbl_pembangunan_dok e', 'e.id_pembangunan = p.id', 'left')
+			->group_by('p.id');
 
 		if (empty($search)) {
 			$search = $builder;

@@ -122,12 +122,12 @@
         $data['kode_rekanan'] = $this->input->post('kode_rekanan');
         $data['nik_rekanan'] = $this->input->post('nik_rekanan');
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
-        $data['nama_instansi'] = $this->input->post('nama_instansi');
+        $data['nama_rekanan_instansi'] = $this->input->post('nama_rekanan_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
-        $data['nama_bank'] = $this->input->post('nama_bank');
-        $data['nama_cabang'] = $this->input->post('nama_cabang');
+        $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
+        $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
         $data['no_rek'] = $this->input->post('no_rek');
-        $data['nama_rekening'] = $this->input->post('nama_rekening');
+        $data['nama_rekanan_rekening'] = $this->input->post('nama_rekanan_rekening');
         $data['telepon'] = $this->input->post('telepon');
         $data['email'] = $this->input->post('email');
         $data['alamat'] = $this->input->post('alamat');
@@ -139,9 +139,9 @@
                 $_SESSION['success'] = -1;
                 return;
             }
-            $nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
-            UploadGallery($nama_file, "", $tipe_file);
-            $data['gambar'] = $nama_file;
+            $nama_rekanan_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
+            UploadGallery($nama_rekanan_file, "", $tipe_file);
+            $data['gambar'] = $nama_rekanan_file;
         }
 
         if ($_SESSION['grup'] == 4) {
@@ -168,12 +168,12 @@
         $data['kode_rekanan'] = $this->input->post('kode_rekanan');
         $data['nik_rekanan'] = $this->input->post('nik_rekanan');
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
-        $data['nama_instansi'] = $this->input->post('nama_instansi');
+        $data['nama_rekanan_instansi'] = $this->input->post('nama_rekanan_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
-        $data['nama_bank'] = $this->input->post('nama_bank');
-        $data['nama_cabang'] = $this->input->post('nama_cabang');
+        $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
+        $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
         $data['no_rek'] = $this->input->post('no_rek');
-        $data['nama_rekening'] = $this->input->post('nama_rekening');
+        $data['nama_rekanan_rekening'] = $this->input->post('nama_rekanan_rekening');
         $data['telepon'] = $this->input->post('telepon');
         $data['email'] = $this->input->post('email');
         $data['alamat'] = $this->input->post('alamat');
@@ -183,9 +183,9 @@
                 $_SESSION['success'] = -1;
                 return;
             }
-            $nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
-            UploadGallery($nama_file, $data['old_gambar'], $tipe_file);
-            $data['gambar'] = $nama_file;
+            $nama_rekanan_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
+            UploadGallery($nama_rekanan_file, $data['old_gambar'], $tipe_file);
+            $data['gambar'] = $nama_rekanan_file;
         }
 
         if ($_SESSION['grup'] == 4) {
@@ -224,7 +224,7 @@
         // Note:
         // Gambar yang dihapus ada kemungkinan dipakai
         // oleh rekanan lain, karena ketika mengupload
-        // nama file nya belum diubah sesuai dengan
+        // nama_rekanan file nya belum diubah sesuai dengan
         // judul rekanan
         $this->delete_rekanan_image($id);
 
@@ -387,7 +387,7 @@
         $lokasi_file = $_FILES['gambar']['tmp_name'];
         $tipe_file = TipeFile($_FILES['gambar']);
         $data = [];
-        $data['nama_rekanan'] = nomor_surat_keputusan($this->input->post('nama_rekanan')); //pastikan nama album hanya berisi
+        $data['nama_rekanan'] = nomor_surat_keputusan($this->input->post('nama_rekanan')); //pastikan nama_rekanan album hanya berisi
         $data['urut'] = $this->urut_model->urut_max(array('parrent' => $parrent)) + 1;
         // Bolehkan isi album tidak ada gambar
         if (!empty($lokasi_file)) {
@@ -395,9 +395,9 @@
                 $_SESSION['success'] = -1;
                 return;
             }
-            $nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
-            UploadGallery($nama_file, "", $tipe_file);
-            $data['gambar'] = $nama_file;
+            $nama_rekanan_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
+            UploadGallery($nama_rekanan_file, "", $tipe_file);
+            $data['gambar'] = $nama_rekanan_file;
         }
 
         if ($_SESSION['grup'] == 4) {
@@ -422,16 +422,16 @@
         $lokasi_file = $_FILES['gambar']['tmp_name'];
         $tipe_file = TipeFile($_FILES['gambar']);
         $data = [];
-        $data['nama_rekanan'] = nomor_surat_keputusan($this->input->post('nama_rekanan')); //pastikan nama album hanya berisi
+        $data['nama_rekanan'] = nomor_surat_keputusan($this->input->post('nama_rekanan')); //pastikan nama_rekanan album hanya berisi
         // Kalau kosong, gambar tidak diubah
         if (!empty($lokasi_file)) {
             if (!CekGambar($_FILES['gambar'], $tipe_file)) {
                 $_SESSION['success'] = -1;
                 return;
             }
-            $nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
-            UploadGallery($nama_file, $data['old_gambar'], $tipe_file);
-            $data['gambar'] = $nama_file;
+            $nama_rekanan_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
+            UploadGallery($nama_rekanan_file, $data['old_gambar'], $tipe_file);
+            $data['gambar'] = $nama_rekanan_file;
         }
 
         unset($data['old_gambar']);

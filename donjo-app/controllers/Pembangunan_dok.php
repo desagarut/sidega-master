@@ -26,6 +26,8 @@ class Pembangunan_dok extends Admin_Controller
 
 
 		$pembangunan = $this->pembangunan_model->find($id);
+		$pembangunan_dok = $this->pembangunan_dok_model->find($id);
+
 		$_SESSION['id_pembangunan'] = $id;
 
 		if ($this->input->is_ajax_request())
@@ -72,7 +74,7 @@ class Pembangunan_dok extends Admin_Controller
 			$data['form_action'] = site_url("pembangunan_dok/insert/$id_pembangunan");
 		}
 
-		$this->render('pembangunan/rencana_kegiatan/dokumentasi/form', $data);
+		$this->render('pembangunan/pelaksanaan/dokumentasi/form', $data);
 	}
 
 	public function insert($id_pembangunan = '')

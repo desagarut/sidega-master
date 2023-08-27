@@ -20,14 +20,14 @@
 						</div>
 						<div class="box-body">
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="nama">Nama Gambar</label>
+								<label class="control-label col-sm-4" for="nama_rekanan">Nama Gambar</label>
 								<div class="col-sm-6">
 									<input name="nama_rekanan" class="form-control input-sm nomor_sk" maxlength="50" type="text" value="<?= $rekanan['nama_rekanan'] ?>"></input>
 								</div>
 							</div>
 							<?php if ($rekanan['gambar']) : ?>
 								<div class="form-group">
-									<label class="control-label col-sm-4" for="nama"></label>
+									<label class="control-label col-sm-4" for="nama_rekanan"></label>
 									<div class="col-sm-6">
 										<input type="hidden" name="old_gambar" value="<?= $rekanan['gambar'] ?>">
 										<img class="attachment-img img-responsive img-circle" src="<?= AmbilGaleri($rekanan['gambar'], 'sedang') ?>" alt="Gambar Album">

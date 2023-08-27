@@ -20,7 +20,6 @@ class Pembangunan extends Admin_Controller
 		$this->load->model('plan_garis_model');
 		$this->load->model('pamong_model');
 		$this->load->model('header_model');
-		$this->load->model('Rekanan_model');
 	}
 
 	public function index()
@@ -49,7 +48,7 @@ class Pembangunan extends Admin_Controller
 				]));
 		}
 
-		$this->render('pembangunan/rencana_kegiatan/index', [
+		$this->render('pembangunan/perencanaan/index', [
 			'list_tahun' => $this->model->list_filter_tahun(),
 		]);
 	}
@@ -76,7 +75,7 @@ class Pembangunan extends Admin_Controller
 			$data['form_action'] = site_url("pembangunan/insert");
 		}
 
-		$this->render('pembangunan/rencana_kegiatan/form_usulan', $data);
+		$this->render('pembangunan/perencanaan/form_usulan', $data);
 	}
 
 	public function form_ubah_prioritas($id = '')
@@ -88,6 +87,7 @@ class Pembangunan extends Admin_Controller
 		$data['main'] = $this->model->find($id);
 		$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();
 		$data['bidang_desa'] = $this->referensi_model->list_data('keuangan_manual_ref_bidang');
+		$data['pelaksana_kegiatan'] = $this->referensi_model->list_data('data_rekanan');
 		$data['sumber_dana'] = $this->referensi_model->list_ref(SUMBER_DANA);
 		$data['dusun'] = $this->wilayah_model->list_dusun();
 		$data['form_action'] = site_url("pembangunan/update_prioritas/$id");
@@ -147,7 +147,7 @@ class Pembangunan extends Admin_Controller
 			redirect('pembangunan');
 		}
 
-		$this->render('pembangunan/rencana_kegiatan/form_peta', [
+		$this->render('pembangunan/perencanaan/form_peta', [
 			'data'      => $data,
 			'lokasi_pembangunan'	=>	$this->model->find($id),
 			'desa'      => $this->config_model->get_data(),
@@ -182,7 +182,7 @@ class Pembangunan extends Admin_Controller
 		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
 		$data['aksi']           = $aksi;
 		$data['file']           = "Laporan Pembangunan";
-		$data['isi']            = "pembangunan/rencana_kegiatan/cetak";
+		$data['isi']            = "pembangunan/perencanaan/cetak";
 
 		$this->load->view('global/format_cetak', $data);
 	}
@@ -201,7 +201,7 @@ class Pembangunan extends Admin_Controller
 		$data['dokumentasi']    = $dokumentasi;
 		$data['config']         = $this->header['desa'];
 
-		$this->render('pembangunan/rencana_kegiatan/detail_usulan', $data);
+		$this->render('pembangunan/perencanaan/detail_usulan', $data);
 	}
 
 	// Modul Kerjasama Antar Desa
@@ -374,7 +374,7 @@ class Pembangunan extends Admin_Controller
 	public function form_usulan_desa($id = '')
 	{
 		$this->set_minsidebar(1);
-		$this->tab_ini = 1;
+
 		if ($id) {
 			$data['main'] = $this->model->find($id);
 			$data['list_lokasi'] = $this->wilayah_model->list_semua_wilayah();

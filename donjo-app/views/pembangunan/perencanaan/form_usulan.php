@@ -31,10 +31,10 @@
   <!-- Main content -->
   <section class="content" id="maincontent">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <?php $this->load->view('pembangunan/menu'); ?>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-9">
         <div class="box">
           <form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
             <div class="row">

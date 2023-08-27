@@ -13,10 +13,10 @@
 	<section class="content" id="maincontent">
 		<form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<?php $this->load->view('pembangunan/menu'); ?>
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<div class="box">
 						<div class="row">
 							<div class="col-md-12">
@@ -149,9 +149,7 @@
 						<div class="btn-group mb-2 mr-2">
 							<a href="#" class="btn btn-block btn-social btn-sm btn-success float-center" data-toggle="dropdown" title="Pilih Aksi"><i class="fa fa-arrow-down"></i> Pilih Aksi </a>
 							<ul class="dropdown-menu" role="menu">
-								<li> <a  href="<?= site_url('pembangunan/pelaksanaan/'); ?>${data.id}">Lihat</a></li>
-								<li> <a  href="<?= site_url('pembangunan/apbdes_aktiv/'); ?>${data.id}">Waktu</a></li>
-								<li> <a  href="<?= site_url('pembangunan/apbdes_aktiv/'); ?>${data.id}">Pelaksana</a></li>
+								<li> <a  href="<?= site_url('pembangunan_dok/show/'); ?>${data.id}">Lihat</a></li>
 								<li class="divider"></li>
 								<li> <a  href="<?= site_url('pembangunan/pelaksanaan_aktiv/'); ?>${data.id}" >Laksanakan</a></li>
 								<li> <a href="<?= site_url('pembangunan/pelaksanaan_non_aktiv/'); ?>${data.id}">Batalkan</a><li/>

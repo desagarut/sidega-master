@@ -42,15 +42,15 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3 control-label" style="text-align:left;">Nama Rekanan</label>
+								<label class="col-sm-3 control-label" style="text-align:left;">nama_rekanan Rekanan</label>
 								<div class="col-sm-9">
-									<input class="form-control input-sm required" name="nama_rekanan" id="nama_rekanan" value="<?= $rekanan['nama_rekanan'] ?>" type="text" placeholder="Nama Rekanan" />
+									<input class="form-control input-sm required" name="nama_rekanan" id="nama_rekanan" value="<?= $rekanan['nama_rekanan'] ?>" type="text" placeholder="nama_rekanan Rekanan" />
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3 control-label" style="text-align:left;">Nama Instansi</label>
+								<label class="col-sm-3 control-label" style="text-align:left;">nama_rekanan Instansi</label>
 								<div class="col-sm-9">
-									<input class="form-control input-sm required" name="nama_instansi" id="nama_instansi" value="<?= $rekanan['nama_instansi'] ?>" type="text" placeholder="Nama Instansi" />
+									<input class="form-control input-sm required" name="nama_rekanan_instansi" id="nama_rekanan_instansi" value="<?= $rekanan['nama_rekanan_instansi'] ?>" type="text" placeholder="nama_rekanan Instansi" />
 								</div>
 							</div>
 							<div class="form-group row">
@@ -60,15 +60,15 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3 control-label" style="text-align:left;">Nama Bank</label>
+								<label class="col-sm-3 control-label" style="text-align:left;">nama_rekanan Bank</label>
 								<div class="col-sm-9">
-									<input class="form-control input-sm required" name="nama_bank" id="nama_bank" value="<?= $rekanan['nama_bank'] ?>" type="text" placeholder="Nama Bank" />
+									<input class="form-control input-sm required" name="nama_rekanan_bank" id="nama_rekanan_bank" value="<?= $rekanan['nama_rekanan_bank'] ?>" type="text" placeholder="nama_rekanan Bank" />
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3 control-label" style="text-align:left;">Nama Cabang</label>
+								<label class="col-sm-3 control-label" style="text-align:left;">nama_rekanan Cabang</label>
 								<div class="col-sm-9">
-									<input class="form-control input-sm required" name="nama_cabang" id="nama_cabang" value="<?= $rekanan['nama_cabang'] ?>" type="text" placeholder="Nama Cabang" />
+									<input class="form-control input-sm required" name="nama_rekanan_cabang" id="nama_rekanan_cabang" value="<?= $rekanan['nama_rekanan_cabang'] ?>" type="text" placeholder="nama_rekanan Cabang" />
 								</div>
 							</div>
 							<div class="form-group row">
@@ -78,9 +78,9 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3 control-label" style="text-align:left;">Nama Rekening</label>
+								<label class="col-sm-3 control-label" style="text-align:left;">nama_rekanan Rekening</label>
 								<div class="col-sm-9">
-									<input class="form-control input-sm required" name="nama_rekening" id="nama_rekening" value="<?= $rekanan['nama_rekening'] ?>" type="text" placeholder="Nama Pemilik Rekening" />
+									<input class="form-control input-sm required" name="nama_rekanan_rekening" id="nama_rekanan_rekening" value="<?= $rekanan['nama_rekanan_rekening'] ?>" type="text" placeholder="nama_rekanan Pemilik Rekening" />
 								</div>
 							</div>
 							<div class="form-group row">
@@ -103,7 +103,7 @@
 							</div>
 							<?php if ($rekanan['gambar']) : ?>
 								<div class="form-group">
-									<label class="control-label col-sm-4" for="nama"></label>
+									<label class="control-label col-sm-4" for="nama_rekanan"></label>
 									<div class="col-sm-6">
 										<input type="hidden" name="old_gambar" value="<?= $rekanan['gambar'] ?>">
 										<img class="attachment-img img-responsive img-circle" style="width:200px" src="<?= AmbilGaleri($rekanan['gambar'], 'sedang') ?>" alt="Gambar Album">

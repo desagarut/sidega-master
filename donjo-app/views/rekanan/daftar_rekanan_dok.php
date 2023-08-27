@@ -128,7 +128,7 @@
 
 									<?php if ($data_rekanan['gambar']) : ?>
 										<div class="form-group">
-											<label class="control-label col-sm-4" for="nama"></label>
+											<label class="control-label col-sm-4" for="nama_rekanan"></label>
 											<div class="col-sm-6">
 												<img class="img img-responsive" style="width:400px" src="<?= AmbilGaleri($data_rekanan['gambar'], 'sedang') ?>" alt="Gambar Album">
 											</div>

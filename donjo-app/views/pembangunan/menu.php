@@ -55,7 +55,7 @@
 
 <div class="box">
 	<div class="box-header">
-		<h5 class="box-title">Monitoring Pelaksanaan Pembangunan</h5>
+		<h5 class="box-title">Pelaksanaan</h5>
 		<div class="box-tools">
 			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		</div>

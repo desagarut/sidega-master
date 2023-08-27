@@ -3,9 +3,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly" defer></script>
 
 <script>
-	<?php if (!empty($detail_kegiatan->lat && !empty($detail_kegiatan->lng))) : ?>
+	<?php if (!empty($pembangunan->lat && !empty($pembangunan->lng))) : ?>
 		var center = {
-			lat: <?= $detail_kegiatan->lat . ", lng: " . $detail_kegiatan->lng; ?>
+			lat: <?= $pembangunan->lat . ", lng: " . $pembangunan->lng; ?>
 		};
 	<?php else : ?>
 		var center = {
@@ -26,9 +26,9 @@
 			position: myLatlng,
 			map: map,
 			draggable: true,
-			title: '<?= $detail_kegiatan->nama_program_kegiatan ?>',
+			title: '<?= $pembangunan->nama_program_kegiatan ?>',
 			content: "Ini Info Window ku",
-			//icon: iconBase + '<?= base_url() . LOKASI_GALERI . $detail_kegiatan->foto ?>'
+			//icon: iconBase + '<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>'
 		});
 
 		marker.addListener('dragend', (e) => {
@@ -37,7 +37,7 @@
 		});
 
 		var infowindow = new google.maps.InfoWindow({
-			content: "<div class='media text-center'><img src='<?= base_url() . LOKASI_GALERI . $detail_kegiatan->foto ?>' width='150px' height='100px'><br/> <p>Lokasi Kegiatan</p></div>"
+			content: "<div class='media text-center'><img src='<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>' width='150px' height='100px'><br/> <p>Lokasi Kegiatan</p></div>"
 		});
 		infowindow.open(map, marker);
 	}
@@ -52,4 +52,10 @@
 	}
 </style>
 
+<div class='card-body'>
+	<div class="row">
+		<div class="col-sm-12">
 			<div id="map_lokasi"></div>
+		</div>
+	</div>
+</div>

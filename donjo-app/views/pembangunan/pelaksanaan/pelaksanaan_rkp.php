@@ -12,19 +12,17 @@
 	</section>
 	<section class="content" id="maincontent">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<?php $this->load->view('pembangunan/menu'); ?>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<div class="box">
 					<form id="mainformexcel" name="mainformexcel" method="post" class="form-horizontal">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header">
-									<h4>Daftar Pelaksanaan RKP</h4>
 									<div class="row">
-										<div class="col-sm-2">Pilih Tahun :</div>
-										<div class="col-sm-2">
+										<div class="col-sm-2 pull-right">
 											<select class="form-control input-sm select2" id="tahun" name="tahun" style="width:100%;">
 												<option selected value="semua">Semua Tahun</option>
 												<?php foreach ($list_tahun as $list) : ?>
@@ -145,7 +143,7 @@
 
 						return `
 						<div class="text-center">
-							<a href="<?= site_url('pembangunan_dok/show/'); ?>${data.id}" class="btn btn-sm btn-box btn-success"> Progres Kegiatan</a><br/>
+							<a href="<?= site_url('pembangunan_dok/show/'); ?>${data.id}" class="btn btn-sm btn-box btn-success"> Detail Progres</a><br/>
 						</div><br/>
 						${status}<br/>${status_usulan}<br/>${status_vote}<br/>${status_rkp}<br/>${status_pelaksanaan}
 						`
@@ -169,10 +167,9 @@
 				{
 
 					'data': function(data) {
-						return `<div class="text-center" style="color: blue"><strong>${data.max_persentase}</strong></div>`
+						return `<div class="text-center" style="color: blue"><strong>${data.max_persentase}</strong></div>`				
 					}
 				},
-
 				{
 					'data': 'tahun'
 				},

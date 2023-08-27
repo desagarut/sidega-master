@@ -6,12 +6,6 @@
     <div class="col-md-12">
       <form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
         <div class="form-group row">
-          <label class="col-sm-3 control-label" style="text-align:left;">Pelaksana Program/Kegiatan</label>
-          <div class="col-sm-9">
-            <input class="form-control input-sm required" name="pelaksana_kegiatan" id="pelaksana_kegiatan" value="<?= $main->pelaksana_kegiatan ?>" type="text" placeholder="Pelaksana Program/Kegiatan" />
-          </div>
-        </div>
-        <div class="form-group row">
           <label class="col-sm-3 control-label" style="text-align:left;">Nama Program/Kegiatan</label>
           <div class="col-sm-9">
             <input class="form-control input-sm required" name="nama_program_kegiatan" id="nama_program_kegiatan" value="<?= $main->nama_program_kegiatan ?>" type="text" placeholder="Nama Program/Kegiatan" />
@@ -30,11 +24,11 @@
             <input maxlength="50" class="form-control input-sm required" name="sdgs_ke" id="sdgs_ke" value="<?= $main->sdgs_ke ?>" type="text" placeholder="contoh: 1, 2, 3" />
           </div>
           <div class="col-sm-6">
-            <code>isi dengan angka sesuai dengan 18 Goals SDGS Desa</code>
+            <code>Diisi sesuai dengan nomor 18 Goals SDGS Desa</code>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-3 control-label" style="text-align:left;"><strong>Perkiraan Biaya dan Sumber Pembiayaan</strong></label>
+          <label class="col-sm-12 control-label" style="text-align:left;"><strong>Perkiraan Biaya dan Sumber Pembiayaan</strong></label>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 control-label" style="text-align:left;">Jumlah (Rp)</label>
@@ -50,6 +44,18 @@
                 <option <?= $value === $main->sumber_dana ? 'selected' : '' ?> value="<?= $value ?>">
                   <?= $value ?>
                 </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 control-label" style="text-align:left;" for="pelaksana_kegiatan">Pelaksana Program/Kegiatan</label>
+          <div class="col-sm-9">
+          <select class="form-control select2 input-sm required" name="pelaksana_kegiatan">
+            <option value="">Pilih Rekanan</option>
+              <?php foreach ($pelaksana_kegiatan as $data) : ?>
+                <option value="<?= $data['nama_rekanan'] ?>" <?php selected($main->pelaksana_kegiatan, $data['nama_rekanan']); ?>><?= $data['nama_rekanan'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>

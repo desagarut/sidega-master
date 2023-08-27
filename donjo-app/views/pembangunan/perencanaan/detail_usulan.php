@@ -14,10 +14,10 @@
 
   <section class="content" id="maincontent">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
           <?php $this->load->view('pembangunan/menu'); ?>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
           <div class="box">
             <div class="box-body">
               <a href="<?= site_url('pembangunan') ?>" class="btn btn-success btn-sm">Kembali</a>&nbsp;              
@@ -145,7 +145,7 @@
               <div class="box box-success">
                 <div class="box-header">Peta Lokasi Kegiatan</div>
                 <div class="box-body">
-                  <?php $this->load->view('pembangunan/rencana_kegiatan/peta_view'); ?>
+                  <?php $this->load->view('pembangunan/perencanaan/peta_view'); ?>
                   <!--<div id="map" style="height: 340px;"></div>-->
                 </div>
               </div>
