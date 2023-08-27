@@ -50,6 +50,7 @@ class Pembangunan_dok extends Admin_Controller
 
 		$this->render('pembangunan/pelaksanaan/dokumentasi/index', [
 			'pembangunan' => $pembangunan,
+			'pembangunan_dok' => $pembangunan_dok,
 		]);
 	}
 
