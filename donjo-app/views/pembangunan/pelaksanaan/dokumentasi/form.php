@@ -90,9 +90,9 @@
                         <span class="help-block"><code>(Kosongkan jika tidak ingin mengubah gambar)</code></span> </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-3 control-label" style="text-align:left;" for="keterangan_dok">keterangan_dok</label>
+                      <label class="col-sm-3 control-label" style="text-align:left;" for="keterangan_dok">Keterangan</label>
                       <div class="col-sm-7">
-                        <textarea rows="5" class="form-control input-sm required" name="keterangan_dok" id="keterangan_dok" placeholder="keterangan_dok"><?= $main->keterangan_dok ?></textarea>
+                        <textarea rows="5" class="form-control input-sm required" name="keterangan_dok" id="keterangan_dok" placeholder="Keterangan"><?= $main->keterangan_dok ?></textarea>
                       </div>
                     </div>
                   </div>
