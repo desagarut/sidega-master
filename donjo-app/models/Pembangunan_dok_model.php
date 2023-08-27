@@ -4,7 +4,7 @@ class Pembangunan_dok_model extends CI_Model
 {
 	const ORDER_ABLE = [
         3 => 'CAST(d.persentase as UNSIGNED INTEGER)',
-        4 => 'd.keterangan_dok',
+        4 => 'd.keterangan',
         5 => 'd.created_at',
         6 => 'd.updated_at',
     ];
@@ -21,7 +21,7 @@ class Pembangunan_dok_model extends CI_Model
         if ($search) {
             $this->db
                 ->group_start()
-                ->like('d.keterangan_dok', $search)
+                ->like('d.keterangan', $search)
                 ->or_like('p.keterangan', $search)
                 ->or_like('d.persentase', $search)
                 ->or_like('d.created_at', $search)
@@ -40,7 +40,7 @@ class Pembangunan_dok_model extends CI_Model
 
         $data['gambar']         = $this->upload_gambar_pembangunan('gambar');
         $data['persentase']     = $post['persentase'] ?: $post['id_persentase'];
-        $data['keterangan_dok']     = $post['keterangan_dok'];
+        $data['keterangan']     = $post['keterangan'];
         $data['created_at']     = date('Y-m-d H:i:s');
         $data['updated_at']     = date('Y-m-d H:i:s');
 
@@ -61,7 +61,7 @@ class Pembangunan_dok_model extends CI_Model
         $data['id_pembangunan'] = $id_pembangunan;
         $data['gambar']         = $this->upload_gambar_pembangunan('gambar');
         $data['persentase']     = $post['persentase'] ?: $post['id_persentase'];
-        $data['keterangan_dok']     = $post['keterangan_dok'];
+        $data['keterangan']     = $post['keterangan'];
         //$data['created_at']     = date('Y-m-d H:i:s');
         $data['updated_at']     = date('Y-m-d H:i:s');
 
