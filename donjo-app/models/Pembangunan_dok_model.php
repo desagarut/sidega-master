@@ -2,7 +2,7 @@
 
 class Pembangunan_dok_model extends CI_Model
 {
-   public const ORDER_ABLE = [
+	const ORDER_ABLE = [
         3 => 'CAST(d.persentase as UNSIGNED INTEGER)',
         4 => 'd.keterangan_dok',
         5 => 'd.created_at',
