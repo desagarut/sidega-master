@@ -34,9 +34,7 @@
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <div class="portfolio-description" style="padding:10px 10px 10px 10px">
-                                        <a href="<?= site_url('first/toko_show') ?>">
-                                            <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/toko.png") ?>" alt="Toko Warga" style="width:100%; height:200px; fit:content">
-                                        </a>
+                                        <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/toko.png") ?>" alt="Toko Warga" style="width:100%; height:200px; fit:content">
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -75,9 +73,7 @@
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <div class="portfolio-description" style="padding:10px 10px 10px 10px">
-                                        <a href="<?= site_url('first/tawa') ?>">
-                                            <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/transport.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
-                                        </a>
+                                        <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/transport.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -116,9 +112,7 @@
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <div class="portfolio-description" style="padding:10px 10px 10px 10px">
-                                        <a href="<?= site_url('first/tukang') ?>">
-                                            <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/tukang.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
-                                        </a>
+                                        <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/tukang.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -157,9 +151,7 @@
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <div class="portfolio-description" style="padding:10px 10px 10px 10px">
-                                        <a href="<?= site_url('first/wisata_fasilitas') ?>">
-                                            <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/wisata.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
-                                        </a>
+                                        <img class="img-fluid text-center" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/icon/wisata.png") ?>" alt="Transportasi" style="width:100%; height:200px; fit:content">
                                     </div>
                                 <?php endif; ?>
                             </div>
