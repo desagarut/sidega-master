@@ -19,6 +19,7 @@
 				</div>
 				<div class="col-lg-6 col-md-6 wow zoomIn bg-light" data-wow-delay="0.7s">
 					<?php $this->load->view($folder_themes . '/partials/pembangunan/maps') ?>
+					<br/><a href="https://www.google.com/maps/dir/-7.2038882,107.887045/''/<?= $pembangunan['lat'] ?>,<?= $pembangunan['lng'] ?>" class="btn btn-box btn-secondary btn-sm" target="_blank">arah</a>
 				</div>
 			</div>
 			<div class="row g-4 bg-light py-4">

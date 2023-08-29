@@ -17,7 +17,8 @@
 		var myLatlng = new google.maps.LatLng(center.lat, center.lng);
 		var mapOptions = {
 			zoom: 17,
-			center
+			center,
+			mapTypeId:google.maps.MapTypeId.HYBRID
 		}
 		var map = new google.maps.Map(document.getElementById("map_lokasi"), mapOptions);
 
@@ -25,10 +26,9 @@
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			draggable: true,
+			draggable: false,
 			title: '<?= $pembangunan->nama_program_kegiatan ?>',
-			content: "Ini Info Window ku",
-			//icon: iconBase + '<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>'
+			content: "Lokasi Program/Kegiatan",
 		});
 
 		marker.addListener('dragend', (e) => {
@@ -37,8 +37,9 @@
 		});
 
 		var infowindow = new google.maps.InfoWindow({
-			content: "<div class='media text-center'> <?php if (is_file(LOKASI_GALERI . $pembangunan['foto'])) : ?><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><?php else : ?><img src='<?= base_url() ?>themes/bodas/assets/img/noimage.png' width='150px' height='100px'><?php endif; ?><br/> <p>Lokasi Kegiatan</p></div>"
-		});
+			content: "<div class='media text-center'> <?php if (is_file(LOKASI_GALERI . $pembangunan['foto'])) : ?><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><?php else : ?><img src='<?= base_url() ?>themes/bodas/assets/img/noimage.png' width='150px' height='100px'><?php endif; ?><br/> <p>Lokasi Kegiatan</p></div>",
+			title: '<?= $pembangunan->nama_program_kegiatan ?>',
+			});
 		infowindow.open(map, marker);
 	}
 </script>
@@ -46,7 +47,7 @@
 	#map_lokasi {
 		z-index: 1;
 		width: 100%;
-		height: 350px;
+		height: 320px;
 	}
 </style>
 

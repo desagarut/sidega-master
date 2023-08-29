@@ -23,22 +23,22 @@
 										<label class="col-sm-3 control-label" style="text-align:left; color:#999">INFO PEDAGANG</label>
                                     </div>
                                     <div class="form-group" >
-                                        <label class="col-sm-3 control-label "  for="nama_pengelola">Nama | NIK </label>
+                                        <label class="col-sm-3 control-label"  for="nama_pengelola">Nama | NIK </label>
                                         <div class="col-sm-3">
-                                            <input maxlength="50" class="form-control input-sm nomor_sk required" name="nama_pengelola" id="nama_pengelola" value="<?=$toko['nama_pengelola']?>" type="text" placeholder="Nama pengelola" />
+                                            <input maxlength="50" class="form-control input-sm required" name="nama_pengelola" id="nama_pengelola" value="<?=$toko['nama_pengelola']?>" type="text" placeholder="Nama pengelola" />
                                         </div>
                                         <div class="col-sm-2">
-                                            <input maxlength="50" class="form-control input-sm " name="nik" id="nik" value="<?= $toko['nik'] ?>" type="text" placeholder="NIK" />
+                                            <input maxlength="50" class="form-control input-sm" name="nik" id="nik" value="<?= $toko['nik'] ?>" type="text" placeholder="NIK" />
                                         </div>
                                         <div class="col-sm-2">
-                                            <input maxlength="50" class="form-control input-sm required" name="no_hp" id="no_hp" value="<?= $toko['no_hp'] ?>" type="text" placeholder="Contoh: 82317883161" />
+                                            <input maxlength="50" class="form-control input-sm" name="no_hp" id="no_hp" value="<?= $toko['no_hp'] ?>" type="text" placeholder="Contoh: 82317883161" />
                                         </div>
                                     </div>                                
                                 
                                     <div class="form-group" >
                                         <label class="col-sm-3 control-label "  for="alamat_tinggal">Alamat Tempat Tinggal</label>
                                         <div class="col-sm-7">
-											<textarea rows="3" class="form-control input-sm required" name="alamat_tinggal" id="alamat_tinggal" placeholder="Alamat Tempat Tinggal"><?= $toko['alamat_tinggal']?></textarea>
+											<input class="form-control input-sm " name="alamat_tinggal" id="alamat_tinggal" placeholder="Alamat Tempat Tinggal" <?= $toko['alamat_tinggal']?>/>
                                         </div>
                                     </div>  
                                     <!-- End Info Pedagang -->
@@ -98,7 +98,7 @@
                                     <div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="keterangan_lokasi">Keterangan Lokasi Usaha</label>
 										<div class="col-sm-7">
-											<textarea rows="5" class="form-control input-sm required" name="keterangan_lokasi" id="keterangan_lokasi" placeholder="Keterangan lengkap lokasi usaha, seperti patokan"><?= $toko['keterangan_lokasi']?></textarea>
+											<textarea rows="5" class="form-control input-sm" name="keterangan_lokasi" id="keterangan_lokasi" placeholder="Keterangan lengkap lokasi usaha, seperti patokan"><?= $toko['keterangan_lokasi']?></textarea>
 										</div>
 									</div>
 									<?php if ($toko['gambar']): ?>
