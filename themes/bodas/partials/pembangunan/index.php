@@ -21,7 +21,7 @@
 									</a>
 								<?php else : ?>
 									<a href="<?= site_url("first/pembangunan_detail/{$data['id']}") ?>">
-										<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
+										<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Foto Pembangunan" />
 									</a>
 								<?php endif; ?>
 								<div class="text-start p-4 pb-3">
