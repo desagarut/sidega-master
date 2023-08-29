@@ -15,7 +15,7 @@
 								<?php if (is_file(LOKASI_GALERI . $data['foto'])) : ?>
 									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data['foto'] ?>" alt="Foto Program/Kegiatan" />
 								<?php else : ?>
-									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Program/Kegiatan" />
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Foto Program/Kegiatan" />
 								<?php endif; ?>
 								<div class="text-center p-4 pb-0">
 									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data['id']; ?>"><?= $data['nama_program_kegiatan'] ?> (<small><?= $data['tahun'] ?>)</small></a></h5>
