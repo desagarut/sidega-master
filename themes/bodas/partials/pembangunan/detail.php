@@ -80,7 +80,7 @@
 											<?php if (is_file(LOKASI_GALERI . $value['foto'])) : ?>
 												<img width="auto" class="img-fluid img-thumbnail" src="<?= base_url(LOKASI_GALERI . $value['foto']); ?>" alt="<?= $pembangunan_detail['slug'] . '-' . $value['persentase']; ?>" />
 											<?php else : ?>
-												<img width="auto" class="img-fluid img-thumbnail" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="<?= $pembangunan_detail['slug'] . '-' . $value['persentase']; ?>" />
+												<img width="auto" class="img-fluid img-thumbnail" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="<?= $pembangunan_detail['slug'] . '-' . $value['persentase']; ?>" />
 											<?php endif; ?>
 											<b>Foto Pembangunan <?= $value['persentase']; ?></b>
 										</div>
