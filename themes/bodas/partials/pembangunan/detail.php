@@ -14,7 +14,7 @@
 					<?php if (is_file(LOKASI_GALERI . $pembangunan['foto'])) : ?>
 						<img class="img-fluid" style="object-fit: cover; width:100%; height:350px;"  src="<?= base_url(LOKASI_GALERI . $pembangunan['foto']); ?>" alt="<?= $pembangunan['slug']; ?>" />
 					<?php else : ?>
-						<img class="img-fluid" style="object-fit: cover; width:100%; height:350px;"  src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="<?= $pembangunan['slug']; ?>" />
+						<img class="img-fluid" style="object-fit: cover; width:100%; height:350px;"  src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="<?= $pembangunan['slug']; ?>" />
 					<?php endif; ?>
 				</div>
 				<div class="col-lg-6 col-md-6 wow zoomIn bg-light" data-wow-delay="0.7s">
