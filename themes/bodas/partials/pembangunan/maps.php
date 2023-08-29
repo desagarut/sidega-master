@@ -37,7 +37,7 @@
 		});
 
 		var infowindow = new google.maps.InfoWindow({
-			content: "<div class='media text-center'><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><br/> <p>Lokasi Kegiatan</p></div>"
+			content: "<div class='media text-center'> <?php if (is_file(LOKASI_GALERI . $pembangunan['foto'])) : ?><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><?php else : ?><img src='<?= base_url() ?>themes/bodas/assets/img/noimage.png' width='150px' height='100px'><?php endif; ?><br/> <p>Lokasi Kegiatan</p></div>"
 		});
 		infowindow.open(map, marker);
 	}
