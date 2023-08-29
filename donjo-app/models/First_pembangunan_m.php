@@ -10,7 +10,7 @@ class First_pembangunan_m extends CI_Model
 
 	public function paging($p = 1)
 	{
-		//$sql = "SELECT COUNT(id) AS id FROM pembangunan WHERE enabled = 1 AND tipe='0'";
+		//$sql = "SELECT COUNT(id) AS id FROM tbl_pembangunan WHERE status = 1 AND tipe='0'";
 		$sql = "SELECT COUNT(id) AS id FROM tbl_pembangunan WHERE status = 1 ";
 
 		$query = $this->db->query($sql);
@@ -32,8 +32,8 @@ class First_pembangunan_m extends CI_Model
 		// OPTIMIZE: benarkah butuh paging?
 		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
 
-		//$sql = "SELECT * FROM pembangunan
-		//	WHERE enabled = 1 AND tipe ='0'
+		//$sql = "SELECT * FROM tbl_pembangunan
+		//	WHERE status = 1 AND tipe ='0'
 		$sql = "SELECT * FROM tbl_pembangunan
 			WHERE status = 1 
 			ORDER BY tahun";
@@ -45,7 +45,7 @@ class First_pembangunan_m extends CI_Model
 		for ($i = 0; $i < count($data); $i++) {
 			if ($data[$i]['foto'] == '') {
 				$galeri = $data[$i]['id'];
-				//$sql = "SELECT foto FROM pembangunan WHERE ((enabled = '1') AND ((parrent = '".$galeri."') OR (id = '".$galeri."')) AND (foto<>'')) LIMIT 1";
+				//$sql = "SELECT foto FROM tbl_pembangunan WHERE ((status = '1') AND ((parrent = '".$galeri."') OR (id = '".$galeri."')) AND (foto<>'')) LIMIT 1";
 				$sql = "SELECT foto FROM tbl_pembangunan WHERE ((status = '1') AND (foto<>'')) LIMIT 1";
 				$query = $this->db->query($sql);
 				$row  = $query->row_array();
@@ -58,7 +58,8 @@ class First_pembangunan_m extends CI_Model
 	public function paging2($gal = 0, $p = 1)
 	{
 		// di rincian, cover tetap diikutkan, jadi jangan lupa paging juga memperhitungkan kehadirannya :)
-		$sql = "SELECT COUNT(id) AS id FROM pembangunan WHERE enabled = 1 AND (id = '$gal' or parrent = '$gal')";
+		$sql = "SELECT COUNT(id) AS id FROM tbl_pembangunan WHERE status = 1 AND (id = '$gal' or parrent = '$gal')";
+		$sql = "SELECT COUNT(id) AS id FROM tbl_pembangunan WHERE status = 1 ";
 		$query = $this->db->query($sql, $gal);
 		$row = $query->row_array();
 		$jml_data = $row['id'];
@@ -76,9 +77,10 @@ class First_pembangunan_m extends CI_Model
 	public function pembangunan_detail_show($gal = 0, $offset = 0, $limit = 50)
 	{
 		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
-		$sql = "SELECT * FROM pembangunan
-			WHERE ((enabled = '1') AND (parrent = '" . $gal . "'))
-			ORDER BY urut
+		$sql = "SELECT * FROM tbl_pembangunan
+			/*WHERE ((status = '1') AND (parrent = '" . $gal . "'))*/
+			WHERE ((status = '1'))
+			ORDER BY urutan_prioritas
 			";
 		$sql .= $paging_sql;
 
@@ -89,7 +91,9 @@ class First_pembangunan_m extends CI_Model
 
 	public function get_parrent($parrent)
 	{
-		$sql = "SELECT * FROM pembangunan WHERE id = '$parrent'";
+		/*$sql = "SELECT * FROM tbl_pembangunan WHERE id = '$parrent'";*/
+		$sql = "SELECT * FROM tbl_pembangunan";
+
 		$query = $this->db->query($sql);
 		$data  = $query->row_array();
 		return $data;
@@ -98,7 +102,7 @@ class First_pembangunan_m extends CI_Model
 	// daftar album di widget
 	public function gallery_widget()
 	{
-		$sql = "SELECT * FROM pembangunan WHERE enabled = '1' and parrent = 0 order by rand() limit 4";
+		$sql = "SELECT * FROM tbl_pembangunan WHERE status = '1' and parrent = 0 order by rand() limit 4";
 		$query = $this->db->query($sql);
 		$data  = $query->result_array();
 		return $data;

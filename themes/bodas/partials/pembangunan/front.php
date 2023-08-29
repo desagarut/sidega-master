@@ -3,8 +3,8 @@
 <div class="container-fluid p-0 mb-5">
 	<div class="container">
 		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			<h6 class="section-title bg-white text-center text-primary px-3">Pembangunan</h6>
-			<h1 class="mb-5">Kegiatan Pembangunan</h1>
+			<h6 class="section-title bg-white text-center text-primary px-3">Program/Kegiatan</h6>
+			<h1 class="mb-5">Pembangunan</h1>
 		</div>
 		<div class="row g-4 owl-carousel testimonial-carousel">
 			<?php if ($pembangunan) : ?>
@@ -13,12 +13,12 @@
 						<div class="team-item bg-light">
 							<div class="overflow-hidden" style="padding:10px 10px 10px 10px">
 								<?php if (is_file(LOKASI_GALERI . $data['foto'])) : ?>
-									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data['foto'] ?>" alt="Foto Pembangunan" />
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url() . LOKASI_GALERI . $data['foto'] ?>" alt="Foto Program/Kegiatan" />
 								<?php else : ?>
-									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Pembangunan" />
+									<img class="img-fluid" style="object-fit: cover; width:100%; height:300px; padding: 10px 10px 10px 10px" src="<?= base_url('assets/images/404-image-not-found.jpg') ?>" alt="Foto Program/Kegiatan" />
 								<?php endif; ?>
 								<div class="text-center p-4 pb-0">
-									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data['id']; ?>"><?= $data['judul'] ?> (<small><?= $data['tahun_anggaran'] ?>)</small></a></h5>
+									<h5 class="mb-4"><a href="<?= site_url("first/pembangunan_detail/") ?><?= $data['id']; ?>"><?= $data['nama_program_kegiatan'] ?> (<small><?= $data['tahun'] ?>)</small></a></h5>
 								</div>
 							</div>
 						</div>

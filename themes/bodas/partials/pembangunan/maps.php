@@ -1,64 +1,55 @@
-<!--<link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/font-awesome.min.css">
-<link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/ionicons.min.css">-->
-<link rel="stylesheet" href="<?= base_url() ?>assets/css/leaflet.css" />
-<link rel="stylesheet" href="<?= base_url() ?>assets/css/fonts.googleapis.com.css" />
-<link rel="stylesheet" href="<?= base_url() ?>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<?= base_url() ?>assets/css/ace-skins.min.css" />
-
-<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
-<!--<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>-->
-<script src="<?= base_url() ?>assets/js/leaflet.js"></script>
-<script src="<?= base_url() ?>assets/js/ace-elements.min.js"></script>
-<script src="<?= base_url() ?>assets/js/ace.min.js"></script>
-
-
-<div class="col-sm-12">
-	<div id="map" style="height: 350px; width:100%"></div>
-</div>
-
-
-<div class="modal fade" id="sampul<?= $pembangunan['id'] ?>">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Gambar</h4>
-			</div>
-			<div class="modal-body">
-				<div class="text-center">
-					<img src="<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>" width="800px" height="500px">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly" defer></script>
 
 <script>
-	var map = L.map('map').setView([<?= $pembangunan['lat'] ?>, <?= $pembangunan['lng'] ?>], 18);
-	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
+	<?php if (!empty($pembangunan->lat && !empty($pembangunan->lng))) : ?>
+		var center = {
+			lat: <?= $pembangunan->lat . ", lng: " . $pembangunan->lng; ?>
+		};
+	<?php else : ?>
+		var center = {
+			lat: <?= $desa['lat'] . ", lng: " . $desa['lng']; ?>
+		};
+	<?php endif; ?>
 
-	var logo = L.icon({
-		iconUrl: '<?= favico_desa() ?>',
-		iconSize: [32, 32], // size of the icon
-		//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-		popupAnchor: [-1, 1] // point from which the popup should open relative to the iconAnchor
-	});
+	function initMap() {
+		var myLatlng = new google.maps.LatLng(center.lat, center.lng);
+		var mapOptions = {
+			zoom: 17,
+			center
+		}
+		var map = new google.maps.Map(document.getElementById("map_lokasi"), mapOptions);
 
-	var info_tempat = "<div class='media text-center'>";
-	info_tempat += "<div class='media-center'>";
-	info_tempat += "<img class='media-object' src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='200px' height='100px'>";
-	info_tempat += "</div>";
-	info_tempat += "<div class='media-body '>";
-	info_tempat += "<p><b><?= $pembangunan['judul'] ?></b></p>";
-	info_tempat += "</div>";
-	info_tempat += "</div>";
+		// Place a draggable marker on the map
+		var marker = new google.maps.Marker({
+			position: myLatlng,
+			map: map,
+			draggable: true,
+			title: '<?= $pembangunan->nama_program_kegiatan ?>',
+			content: "Ini Info Window ku",
+			//icon: iconBase + '<?= base_url() . LOKASI_GALERI . $pembangunan->foto ?>'
+		});
 
-	L.marker([<?= $pembangunan['lat'] ?>, <?= $pembangunan['lng'] ?>], {
-			icon: logo
-		}).addTo(map)
-		.bindPopup(info_tempat).openPopup();
+		marker.addListener('dragend', (e) => {
+			document.getElementById('lat').value = e.latLng.lat();
+			document.getElementById('lng').value = e.latLng.lng();
+		});
+
+		var infowindow = new google.maps.InfoWindow({
+			content: "<div class='media text-center'><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><br/> <p>Lokasi Kegiatan</p></div>"
+		});
+		infowindow.open(map, marker);
+	}
 </script>
+<style>
+	#map_lokasi {
+		z-index: 1;
+		width: 100%;
+		height: 350px;
+	}
+</style>
+
+		<div class="col-sm-12">
+			<div id="map_lokasi"></div>
+		</div>

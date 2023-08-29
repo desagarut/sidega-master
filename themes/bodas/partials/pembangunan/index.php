@@ -30,7 +30,7 @@
 											<tr>
 												<th width="auto"><small>Nama Kegiatan</small></th>
 												<td width="1%">:</td>
-												<td><?= $data['judul'] ?></td>
+												<td><?= $data['nama_program_kegiatan'] ?></td>
 											</tr>
 											<tr>
 												<th><small>Alamat</small></th>
@@ -41,7 +41,7 @@
 												<th><small>Tahun</small></th>
 												<td>:</td>
 												<td>
-													<?= $data['tahun_anggaran'] ?></td>
+													<?= $data['tahun'] ?></td>
 											</tr>
 											<tr>
 												<th><small>Keterangan</small></th>

@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
 				<h6 class="section-title bg-white text-center text-primary px-3">DETAIL PEMBANGUNAN </h6>
-				<h3 class="mb-1"><?= strtoupper($pembangunan['judul']); ?></h3>
+				<h4 class="mb-1"><?= strtoupper($pembangunan['nama_program_kegiatan']); ?></h4>
 				<h4 class="mb-5 text-end"><a href="<?= site_url("first/pembangunan/") ?>" class="flex-shrink-0 btn btn-sm btn-success px-3" style="border-radius: 8px 8px 8px 8px;">kembali</a></h4>
 			</div>
 
@@ -27,14 +27,14 @@
 						<h4 class="mb-3 text-center">Data Pembangunan</h4>
 						<table class="table table-bordered">
 							<tr>
-								<th width="150px">Nama Kegiatan</th>
+								<th width="150px">Nama Program/Kegiatan</th>
 								<td width="20px">:</td>
-								<td><?= $pembangunan['judul'] ?></td>
+								<td><?= $pembangunan['nama_program_kegiatan'] ?></td>
 							</tr>
 							<tr>
 								<th>Alamat</th>
 								<td width="20px">:</td>
-								<td><?= $pembangunan['alamat'] ?></td>
+								<td><?= $pembangunan['lokasi'] ?></td>
 							</tr>
 							<tr>
 								<th>Sumber Dana</th>
@@ -59,7 +59,7 @@
 							<tr>
 								<th>Tahun</th>
 								<td width="20px">:</td>
-								<td><?= $pembangunan['tahun_anggaran'] ?></td>
+								<td><?= $pembangunan['tahun'] ?></td>
 							</tr>
 							<tr>
 								<th>Keterangan</th>
