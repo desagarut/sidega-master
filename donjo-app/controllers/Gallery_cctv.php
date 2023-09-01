@@ -74,7 +74,7 @@ class Gallery_cctv extends Admin_Controller {
 		else unset($_SESSION['cari']);
 		if ($gallery != '')
 		{
-			redirect("gallery_cctv/sub_gallery/$gallery");
+			redirect("gallery_cctv/sub_cctv/$gallery");
 		}
 		else
 		{
@@ -90,7 +90,7 @@ class Gallery_cctv extends Admin_Controller {
 		else unset($_SESSION['filter']);
 		if ($gallery != '')
 		{
-			redirect("gallery_cctv/sub_gallery/$gallery");
+			redirect("gallery_cctv/sub_cctv/$gallery");
 		}
 		else
 		{
@@ -129,7 +129,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$this->web_gallery_cctv_model->gallery_lock($id, 1);
 		if ($gallery != '')
-			redirect("gallery_cctv/sub_gallery/$gallery/$p");
+			redirect("gallery_cctv/sub_cctv/$gallery/$p");
 		else
 			redirect("gallery_cctv/index/$p/$o");
 	}
@@ -138,7 +138,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$this->web_gallery_cctv_model->gallery_lock($id, 2);
 		if ($gallery != '')
-			redirect("gallery_cctv/sub_gallery/$gallery/$p");
+			redirect("gallery_cctv/sub_cctv/$gallery/$p");
 		else
 			redirect("gallery_cctv/index/$p/$o");
 	}
@@ -147,7 +147,7 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$this->web_gallery_cctv_model->gallery_slider($id, 1);
 		if ($gallery != '')
-			redirect("gallery_cctv/sub_gallery/$gallery/$p");
+			redirect("gallery_cctv/sub_cctv/$gallery/$p");
 		else
 			redirect("gallery_cctv/index/$p/$o");
 	}
@@ -156,12 +156,12 @@ class Gallery_cctv extends Admin_Controller {
 	{
 		$this->web_gallery_cctv_model->gallery_slider($id,0);
 		if ($gallery != '')
-			redirect("gallery_cctv/sub_gallery/$gallery/$p");
+			redirect("gallery_cctv/sub_cctv/$gallery/$p");
 		else
 			redirect("gallery_cctv/index/$p/$o");
 	}
 
-	public function sub_gallery($gal=0, $p=1, $o=0)
+	public function sub_cctv($gal=0, $p=1, $o=0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
@@ -180,77 +180,77 @@ class Gallery_cctv extends Admin_Controller {
 		$data['per_page'] = $_SESSION['per_page'];
 
 		$data['paging'] = $this->web_gallery_cctv_model->paging2($gal, $p);
-		$data['sub_gallery'] = $this->web_gallery_cctv_model->list_sub_gallery($gal, $o, $data['paging']->offset, $data['paging']->per_page);
+		$data['sub_cctv'] = $this->web_gallery_cctv_model->list_sub_cctv($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['gallery'] = $gal;
 		$data['sub'] = $this->web_gallery_cctv_model->get_gallery($gal);
 		$data['keyword'] = $this->web_gallery_cctv_model->autocomplete();
 
-		$this->render('gallery_cctv/sub_gallery_table', $data);
+		$this->render('gallery_cctv/sub_cctv_table', $data);
 	}
 
-	public function form_sub_gallery($gallery=0, $id=0)
+	public function form_sub_cctv($gallery=0, $id=0)
 	{
 		$data      = ['selected_nav' => 'gallery_cctv'];
 
 		if ($id)
 		{
 			$data['gallery_cctv'] = $this->web_gallery_cctv_model->get_gallery($id);
-			$data['form_action'] = site_url("gallery_cctv/update_sub_gallery/$gallery/$id");
+			$data['form_action'] = site_url("gallery_cctv/update_sub_cctv/$gallery/$id");
 		}
 		else
 		{
 			$data['gallery_cctv'] = null;
-			$data['form_action'] = site_url("gallery_cctv/insert_sub_gallery/$gallery");
+			$data['form_action'] = site_url("gallery_cctv/insert_sub_cctv/$gallery");
 		}
 		$data['album']=$gallery;
 
-		$this->render('gallery_cctv/form_sub_gallery', $data);
+		$this->render('gallery_cctv/form_sub_cctv', $data);
 	}
 
-	public function insert_sub_gallery($gallery='')
+	public function insert_sub_cctv($gallery='')
 	{
-		$this->web_gallery_cctv_model->insert_sub_gallery($gallery);
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		$this->web_gallery_cctv_model->insert_sub_cctv($gallery);
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
-	public function update_sub_gallery($gallery='', $id='')
+	public function update_sub_cctv($gallery='', $id='')
 	{
-		$this->web_gallery_cctv_model->update_sub_gallery($id);
-		redirect("gallery/sub_gallery/$gallery");
+		$this->web_gallery_cctv_model->update_sub_cctv($id);
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
-	public function delete_sub_gallery($gallery='', $id='')
+	public function delete_sub_cctv($gallery='', $id='')
 	{
-		$this->redirect_hak_akses('h', "gallery_cctv/sub_gallery/$gallery");
+		$this->redirect_hak_akses('h', "gallery_cctv/sub_cctv/$gallery");
 		$this->web_gallery_cctv_model->delete($id);
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
-	public function delete_all_sub_gallery($gallery='')
+	public function delete_all_sub_cctv($gallery='')
 	{
-		$this->redirect_hak_akses('h', "gallery_cctv/sub_gallery/$gallery");
+		$this->redirect_hak_akses('h', "gallery_cctv/sub_cctv/$gallery");
 		$_SESSION['success']=1;
 		$this->web_gallery_cctv_model->delete_all();
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
-	public function gallery_lock_sub_gallery($gallery='', $id='')
+	public function gallery_lock_sub_cctv($gallery='', $id='')
 	{
 		$this->web_gallery_cctv_model->gallery_lock($id, 1);
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
-	public function gallery_unlock_sub_gallery($gallery='', $id='')
+	public function gallery_unlock_sub_cctv($gallery='', $id='')
 	{
 		$this->web_gallery_cctv_model->gallery_lock($id, 2);
-		redirect("gallery_cctv/sub_gallery/$gallery");
+		redirect("gallery_cctv/sub_cctv/$gallery");
 	}
 
 	public function urut($id, $arah = 0, $gallery='')
 	{
 		$this->web_gallery_cctv_model->urut($id, $arah, $gallery);
 		if ($gallery != '')
-			redirect("gallery_cctv/sub_gallery/$gallery");
+			redirect("gallery_cctv/sub_cctv/$gallery");
 		else
 			redirect("gallery_cctv/index");
 	}

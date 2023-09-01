@@ -4,7 +4,7 @@
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
 			<li><a href="<?= site_url('gallery') ?>"><i class="fa fa-dashboard"></i> Daftar Album</a></li>
-			<li><a href='<?= site_url("gallery_cctv/sub_gallery/$album") ?>'><i class="fa fa-dashboard"></i> Daftar Gambar Album</a></li>
+			<li><a href='<?= site_url("gallery_cctv/sub_cctv/$album") ?>'><i class="fa fa-dashboard"></i> Daftar Gambar Album</a></li>
 			<li class="active">Form Video</li>
 		</ol>
 	</section>
@@ -17,7 +17,7 @@
 				<div class="col-md-9">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<a href="<?= site_url("gallery_cctv/sub_gallery/$album") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
+							<a href="<?= site_url("gallery_cctv/sub_cctv/$album") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
 								<i class="fa fa-arrow-circle-left "></i> Kembali
 							</a>
 						</div>
@@ -25,7 +25,7 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="nama">Nama CCTV</label>
 								<div class="col-sm-6">
-									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['nama'] ?>"></input>
+									<input name="nama" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery_cctv['nama'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">
@@ -34,13 +34,13 @@
 									<div class="box-body text-center border">
 										<iframe width="250" height="160" src="<?= $gallery_cctv["link"]; ?>" frameborder="0" allowfullscreen></iframe>
 									</div>
-									<input name="link" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery_cctv['link'] ?>"></input>
+									<input name="link" class="form-control input-sm" type="text" value="<?= $gallery_cctv['link'] ?>"></input>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="deskripsi">Deskripsi</label>
 								<div class="col-sm-6">
-									<textarea class="textarea" name="deskripsi" placeholder="Deskripsi video" style="width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" type="text" value="<?= $gallery['deskripsi'] ?>"><?= $gallery['deskripsi'] ?></textarea>
+									<textarea class="textarea" name="deskripsi" placeholder="Deskripsi video" style="width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" type="text" value="<?= $gallery_cctv['deskripsi'] ?>"><?= $gallery_cctv['deskripsi'] ?></textarea>
 								</div>
 							</div>
 

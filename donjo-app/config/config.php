@@ -249,7 +249,7 @@ $config['log_path'] = FCPATH . 'logs/';
 | Note: Leaving it blank will default to 'php'.
 |
 */
-$config['log_file_extension'] = 'sidega_';
+$config['log_file_extension'] = 'sidega.php';
 
 /*
 |--------------------------------------------------------------------------

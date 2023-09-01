@@ -39,7 +39,7 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="deskripsi">Deskripsi</label>
 								<div class="col-sm-6">
-									<textarea class="textarea" name="deskripsi" placeholder="Deskripsi video" style="width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="<?= $gallery['deskripsi'] ?>"><?= $gallery['deskripsi'] ?></textarea>
+									<textarea class="textarea" name="deskripsi" placeholder="Deskripsi video" style="width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="<?= $gallery_cctv['deskripsi'] ?>"><?= $gallery_cctv['deskripsi'] ?></textarea>
 								</div>
 							</div>
 						</div>

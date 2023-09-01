@@ -180,10 +180,10 @@
 		if (!$semua) $this->session->success = 1;
 
 		$this->delete($id);
-		$sub_gallery = $this->db->select('id')->
+		$sub_cctv = $this->db->select('id')->
 			where('parrent', $id)->
 			get('gallery_cctv')->result_array();
-		foreach ($sub_gallery as $gallery)
+		foreach ($sub_cctv as $gallery)
 		{
 			$this->delete($gallery['id']);
 		}
@@ -291,7 +291,7 @@
 
 	public function paging2($gal=0, $p=1)
 	{
-		$sql = "SELECT COUNT(*) AS jml " . $this->list_sub_gallery_sql();
+		$sql = "SELECT COUNT(*) AS jml " . $this->list_sub_cctv_sql();
 		$query = $this->db->query($sql,$gal);
 		$row = $query->row_array();
 		$jml_data = $row['jml'];
@@ -305,7 +305,7 @@
 		return $this->paging;
 	}
 
-	private function list_sub_gallery_sql()
+	private function list_sub_cctv_sql()
 	{
 		$sql = " FROM gallery_cctv WHERE parrent = ? AND tipe = 2 ";
 		$sql .= $this->search_sql();
@@ -313,7 +313,7 @@
 		return $sql;
 	}
 
-	public function list_sub_gallery($gal=1, $o=0, $offset=0, $limit=500)
+	public function list_sub_cctv($gal=1, $o=0, $offset=0, $limit=500)
 	{
 		switch($o)
 		{
@@ -328,7 +328,7 @@
 
 		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
 
-		$sql = "SELECT * " . $this->list_sub_gallery_sql();
+		$sql = "SELECT * " . $this->list_sub_cctv_sql();
 		$sql .= $order_sql;
 		$sql .= $paging_sql;
 		$query = $this->db->query($sql, $gal);
@@ -346,7 +346,7 @@
 		return $data;
 	}
 
-	public function insert_sub_gallery($parrent=0)
+	public function insert_sub_cctv($parrent=0)
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
@@ -361,6 +361,8 @@
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => $parrent)) + 1;
+		$data['link'] = $this->input->post('link'); //pastikan link di tulis lengkap
+		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi cctv
 		// Bolehkan isi album tidak ada gambar
 		if (!empty($lokasi_file))
 		{
@@ -385,7 +387,7 @@
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
-	public function update_sub_gallery($id=0)
+	public function update_sub_cctv($id=0)
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
@@ -399,6 +401,8 @@
 	  $tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
+		$data['link'] = $this->input->post('link'); //pastikan link di tulis lengkap
+		$data['deskripsi'] = $this->input->post('deskripsi'); //deskripsi cctv
 		// Kalau kosong, gambar tidak diubah
 		if (!empty($lokasi_file))
 		{
