@@ -249,7 +249,7 @@ $config['log_path'] = FCPATH . 'logs/';
 | Note: Leaving it blank will default to 'php'.
 |
 */
-$config['log_file_extension'] = 'sidega.php';
+$config['log_file_extension'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -283,7 +283,7 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 | application/views/errors/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['error_views_path'] = '';
+$config['error_views_path'] = FCPATH . 'errors/';
 
 /*
 |--------------------------------------------------------------------------

@@ -3,14 +3,14 @@
 		<h1>Form CCTV <?= ucfirst($this->setting->sebutan_desa) ?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('gallery') ?>"><i class="fa fa-dashboard"></i> Gallery CCTV <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
+			<li><a href="<?= site_url('gallery_cctv') ?>">CCTV <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
 			<li class="active">Form</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
 		<form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 			<div class="row">
-				<div id="umum-sidebar" class="col-md-3">
+				<div class="col-md-3">
 					<?php $this->load->view('gallery_cctv/menu') ?>
 				</div>
 				<div class="col-md-9">

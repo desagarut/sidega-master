@@ -9,8 +9,13 @@
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
   <div class="container-xxl py-5">
     <div class="row">
-      <div class="col-lg-12 entries">
-        <?php $this->load->view($folder_themes . '/partials/gallery_cctv') ?>
+      <div class="col-md-9">
+        <?php $this->load->view($folder_themes . '/partials/cctv_sub') ?>
+      </div>
+      <div class="col-md-3 entries">
+        <div class="sidebar blog-grid-page">
+          <?php $this->load->view($folder_themes . '/partials/sidebar_cctv.php') ?>
+        </div>
       </div>
     </div>
   </div>

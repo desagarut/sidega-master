@@ -1,13 +1,14 @@
 <?php
 
-class First_gallery_cctv extends CI_Model {
+class first_cctv_m extends CI_Model
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function paging($p=1)
+	public function paging($p = 1)
 	{
 		$sql = "SELECT COUNT(id) AS id FROM gallery_cctv WHERE enabled = 1 AND tipe='0'";
 		$query = $this->db->query($sql);
@@ -23,11 +24,11 @@ class First_gallery_cctv extends CI_Model {
 		return $this->paging;
 	}
 
-	// daftar album galeri
-	public function gallery_show($offset=0, $limit=50)
+	// daftar CCTV Desa
+	public function cctv($offset = 0, $limit = 50)
 	{
 		// OPTIMIZE: benarkah butuh paging?
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
 
 		$sql = "SELECT * FROM gallery_cctv
 			WHERE enabled = 1 AND tipe ='0'
@@ -37,12 +38,10 @@ class First_gallery_cctv extends CI_Model {
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		// Untuk album yang tidak ada link cover, cari link di sub-gallery
-		for ($i=0; $i<count($data); $i++)
-		{
-			if ($data[$i]['link'] == '')
-			{
+		for ($i = 0; $i < count($data); $i++) {
+			if ($data[$i]['link'] == '') {
 				$galeri = $data[$i]['id'];
-				$sql = "SELECT link FROM gallery_cctv WHERE ((enabled = '1') AND ((parrent = '".$galeri."') OR (id = '".$galeri."')) AND (link<>'')) LIMIT 1";
+				$sql = "SELECT link FROM gallery_cctv WHERE ((enabled = '1') AND ((parrent = '" . $galeri . "') OR (id = '" . $galeri . "')) AND (link<>'')) LIMIT 1";
 				$query = $this->db->query($sql);
 				$row  = $query->row_array();
 				$data[$i]['link'] = $row['link'];
@@ -51,7 +50,7 @@ class First_gallery_cctv extends CI_Model {
 		return $data;
 	}
 
-	public function paging2($gal=0, $p=1)
+	public function paging2($gal = 0, $p = 1)
 	{
 		// di rincian, cover tetap diikutkan, jadi jangan lupa paging juga memperhitungkan kehadirannya :)
 		$sql = "SELECT COUNT(id) AS id FROM gallery_cctv WHERE enabled = 1 AND (id = '$gal' or parrent = '$gal')";
@@ -68,14 +67,14 @@ class First_gallery_cctv extends CI_Model {
 		return $this->paging;
 	}
 
-	// daftar link di tiap album
-	public function sub_gallery_show($gal=0, $offset=0, $limit=50)
+	// daftar gambar di tiap CCTV
+	public function cctv_sub($gal = 0, $offset = 0, $limit = 50)
 	{
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
 		$sql = "SELECT * FROM gallery_cctv
-			WHERE ((enabled = '1') AND (parrent = '".$gal."'))
-			ORDER BY urut
-			";
+				WHERE ((enabled = '1') AND (parrent = '" . $gal . "'))
+				ORDER BY urut
+				";
 		$sql .= $paging_sql;
 
 		$query = $this->db->query($sql);
@@ -99,6 +98,4 @@ class First_gallery_cctv extends CI_Model {
 		$data  = $query->result_array();
 		return $data;
 	}
-
 }
-

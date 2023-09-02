@@ -12,8 +12,8 @@
 		<h1>Daftar Kamera CCTV </h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('gallery_cctv') ?>"> Gallery CCTV</a></li>
-			<li class="active">Daftar CCTV</li>
+			<li><a href="<?= site_url('gallery_cctv') ?>">Daftar CCTV</a></li>
+			<li><a href="<?= site_url('gallery_cctv') ?>">Daftar Kamera</a></li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -79,13 +79,6 @@
 																		<th><a href="<?= site_url("gallery_cctv/sub_cctv/$gallery/$p/1") ?>">Nama Gambar <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
 																	<th width=20%>Deskripsi</th>
-																	<?php if ($o == 4) : ?>
-																		<th nowrap><a href="<?= site_url("gallery_cctv/sub_cctv/$gallery/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
-																	<?php elseif ($o == 3) : ?>
-																		<th nowrap><a href="<?= site_url("gallery_cctv/sub_cctv/$gallery/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
-																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("gallery_cctv/sub_cctv/$gallery/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
-																	<?php endif; ?>
 																	<?php if ($o == 6) : ?>
 																		<th nowrap><a href="<?= site_url("gallery_cctv/sub_cctv/$gallery/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 5) : ?>
@@ -102,9 +95,7 @@
 																		<td><input type="checkbox" name="id_cb[]" value="<?= $data['id'] ?>" /></td>
 																		<td><?= $data['no'] ?></td>
 																		<td width=15% class="padat">
-																			<!--<iframe height="160px" width="250px" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $data["link"]; ?>" title="<?= $data['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></br>-->
-																				<iframe width="250" height="160" src="<?= $data["link"]; ?>" frameborder="0" allowfullscreen></iframe><br/>
-
+																			<iframe width="250" height="160" src="<?= $data["link"]; ?>" frameborder="0" allowfullscreen></iframe><br />
 																			<?= $data['nama'] ?>
 																		</td>
 																		<td>
@@ -113,7 +104,6 @@
 																		<td>
 																			<?= $data['deskripsi'] ?>
 																		</td>
-																		<td><?= $data['aktif'] ?></td>
 																		<td nowrap><?= tgl_indo2($data['tgl_upload']) ?></td>
 																		<td nowrap>
 																			<a href="<?= site_url("gallery_cctv/urut/$data[id]/1/$sub[id]") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>

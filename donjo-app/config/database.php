@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -82,11 +82,11 @@ if (is_file($konfigurasi_db))
 else
 {
 	*/
-	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = '';
-	$db['default']['database'] = 'desagaru_sidega-21';
-	$db['default']['stricton'] = TRUE;
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
+$db['default']['database'] = 'desagaru_sidega-21';
+$db['default']['stricton'] = TRUE;
 //}
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
@@ -102,5 +102,5 @@ $db['default']['encrypt'] = FALSE;
 $db['default']['compress'] = FALSE;
 $db['default']['failover'] = array();
 $db['default']['save_queries'] = TRUE;
-	
+
 include LOKASI_CONFIG_DESA . 'database.php';

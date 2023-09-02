@@ -9,7 +9,7 @@
   <?php $this->load->view($folder_themes . '/commons/nav.php') ?>
   <div class="container-xxl py-5">
     <div class="row">
-      <div class="col-lg-12 entries">
+      <div class="col-md-12">
         <?php $this->load->view($folder_themes . '/partials/gallery_youtube') ?>
       </div>
     </div>

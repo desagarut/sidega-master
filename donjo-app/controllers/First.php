@@ -68,7 +68,7 @@ class First extends Web_Controller
 		//update v 5.5.5
 		$this->load->model('first_gallery_youtube');
 		//update v 5.7.0
-		$this->load->model('first_gallery_cctv');
+		$this->load->model('first_cctv_m');
 		$this->load->model('first_pembangunan_m');
 
 		$this->load->library('upload');
@@ -95,7 +95,7 @@ class First extends Web_Controller
 		$data['setting_desa'] = $this->config_model->get_data();
 
 		$data['gallery'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
-		$data['gallery_cctv'] = $this->first_gallery_cctv->gallery_show($data['paging']->offset, $data['paging']->per_page);
+		$data['cctv'] = $this->first_cctv_m->cctv($data['paging']->offset, $data['paging']->per_page);
 
 		$data['towa'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['tawa'] = $this->first_tawa_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
@@ -103,7 +103,7 @@ class First extends Web_Controller
 		$data['wisata'] = $this->first_wisata_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 
 		// Update Versi 5.7.0
-       // $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
+		// $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
 		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
 
 		if ($this->setting->apbdes_footer) {
@@ -261,42 +261,64 @@ class First extends Web_Controller
 	}
 
 	//update v 5.7
-	public function gallery_cctv($p = 1)
+	public function cctv($p = 1)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
-		$data['paging'] = $this->first_gallery_cctv->paging($p);
+		$data['paging'] = $this->first_cctv_m->paging($p);
 		$data['paging_range'] = 3;
 		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
 		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
 		$data['pages'] = range($data['start_paging'], $data['end_paging']);
-		$data['gallery_cctv'] = $this->first_gallery_cctv->gallery_show($data['paging']->offset, $data['paging']->per_page);
+		$data['cctv'] = $this->first_cctv_m->cctv($data['paging']->offset, $data['paging']->per_page);
 
 		$this->_get_common_data($data);
 
-		$this->set_template('layouts/gallery_cctv.tpl.php');
+		$this->set_template('layouts/cctv.tpl.php');
+		$this->load->view($this->template, $data);
+	}
+
+	// halaman rincian tiap Kamera CCTV
+	public function cctv_sub($gal = 0, $p = 1)
+	{
+		$data = $this->includes;
+		$data['p'] = $p;
+		$data['gal'] = $gal;
+		$data['paging'] = $this->first_cctv_m->paging2($gal, $p);
+		$data['paging_range'] = 3;
+		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+		$data['pages'] = range($data['start_paging'], $data['end_paging']);
+		$data['cctv'] = $this->first_cctv_m->cctv($data['paging']->offset, $data['paging']->per_page);
+		$data['cctv_sub'] = $this->first_cctv_m->cctv_sub($gal, $data['paging']->offset, $data['paging']->per_page);
+		$data['parrent'] = $this->first_cctv_m->get_parrent($gal);
+		$data['mode'] = 1;
+
+		$this->_get_common_data($data);
+
+		$this->set_template('layouts/cctv_sub.tpl.php');
 		$this->load->view($this->template, $data);
 	}
 
 	//Update V.5.7.0
-		public function pembangunan($p = 1)
-		{
-			$data = $this->includes;
-			$data['p'] = $p;
-			$data['paging'] = $this->first_pembangunan_m->paging($p);
-			$data['paging_range'] = 3;
-			$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
-			$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
-			$data['pages'] = range($data['start_paging'], $data['end_paging']);
-			$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
+	public function pembangunan($p = 1)
+	{
+		$data = $this->includes;
+		$data['p'] = $p;
+		$data['paging'] = $this->first_pembangunan_m->paging($p);
+		$data['paging_range'] = 3;
+		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
+		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
+		$data['pages'] = range($data['start_paging'], $data['end_paging']);
+		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
 
-			$this->_get_common_data($data);
-	
-			$this->set_template('layouts/pembangunan.tpl.php');
-			$this->load->view($this->template, $data);
-		}
-	
-		// halaman rincian Pembangunan
+		$this->_get_common_data($data);
+
+		$this->set_template('layouts/pembangunan.tpl.php');
+		$this->load->view($this->template, $data);
+	}
+
+	// halaman rincian Pembangunan
 	public function pembangunan_detail($gal = 0, $p = 1)
 	{
 		$data = $this->includes;
@@ -344,7 +366,7 @@ class First extends Web_Controller
 		$this->load->view($this->template, $data);
 	}
 
-	
+
 
 	public function statistik($stat = 0, $tipe = 0)
 	{

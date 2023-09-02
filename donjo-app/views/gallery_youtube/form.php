@@ -28,7 +28,7 @@
 								<label class="control-label col-sm-4" for="link">Link Youtube</label>
 								<div class="col-sm-6">
 									<div class="box-body text-center">
-										<iframe height="160px" width="250px" class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $gallery["link"]; ?>" title="<?= $gallery['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										<iframe height="160px" width="250px" class="embed-responsive-item" src="<?= $gallery["link"]; ?>" title="<?= $gallery['nama'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 									</div>
 									<input name="link" class="form-control input-sm" maxlength="100" type="text" value="<?= $gallery['link'] ?>"></input>
 									<code>masukan kode embed video, Contoh: 7APs5ZduJ-0</code>

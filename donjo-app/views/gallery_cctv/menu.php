@@ -10,11 +10,8 @@
     </div>
     <div class="box-body no-padding">
       <ul class="nav nav-pills nav-stacked">
-        <li class="<?php compared_return($selected_nav, "gallery_cctv", "active"); ?>"><a href="<?= site_url('gallery_cctv') ?>">CCTV <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
-        <li class="<?php compared_return($selected_nav, "cctv_luar", "active"); ?>"><a href="#">CCTV Luar <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
-        <!--<li class="<?php compared_return($selected_nav, "pertukangan", "active"); ?>"><a href="<?= site_url('tukang') ?>">CCTV Provinsi</a></li>
-        <li class="<?php compared_return($selected_nav, 'transportasi', 'active'); ?>"><a href="<?= site_url('tawa') ?>">CCTV Nasional</a></li>
-        <li class="<?php compared_return($selected_nav, 'wisata', 'active'); ?>"><a href="<?= site_url('wisata') ?>">CCTV Internasional</a></li>-->
+			<li class="<?php ($this->tab_ini == 1) and print('active') ?>"><a href="<?= site_url('gallery_cctv') ?>">CCTV <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
+      <li class="<?php ($this->tab_ini == 2) and print('active') ?>"><a href="#">CCTV Luar <?= ucfirst($this->setting->sebutan_desa) ?></a></li>
       </ul>
     </div>
   </div>

@@ -60,20 +60,13 @@
 																	<th>No</th>
 																	<th>Video Depan</th>
 																	<?php if ($o == 2) : ?>
-																		<th><a href="<?= site_url("gallery_youtube/index/$p/1") ?>">Nama Album <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th width=25%><a href="<?= site_url("gallery_youtube/index/$p/1") ?>">Nama Album <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 1) : ?>
-																		<th><a href="<?= site_url("gallery_youtube/index/$p/2") ?>">Nama Album <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th width=25%><a href="<?= site_url("gallery_youtube/index/$p/2") ?>">Nama Album <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th><a href="<?= site_url("gallery_youtube/index/$p/1") ?>">Nama Album <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th width=25%><a href="<?= site_url("gallery_youtube/index/$p/1") ?>">Nama Album <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
-																	<th width=15%>Deskripsi</th>
-																	<?php if ($o == 4) : ?>
-																		<th nowrap><a href="<?= site_url("gallery_youtube/index/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
-																	<?php elseif ($o == 3) : ?>
-																		<th nowrap><a href="<?= site_url("gallery_youtube/index/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
-																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("gallery_youtube/index/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
-																	<?php endif; ?>
+																	<th width=25%>Deskripsi</th>
 																	<?php if ($o == 6) : ?>
 																		<th nowrap><a href="<?= site_url("gallery_youtube/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 5) : ?>
@@ -82,7 +75,6 @@
 																		<th nowrap><a href="<?= site_url("gallery_youtube/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
 																	<th>Aksi</th>
-
 																</tr>
 															</thead>
 															<tbody>
@@ -100,7 +92,6 @@
 																		<td width=15%>
 																			<?= $data['deskripsi'] ?>
 																		</td>
-																		<td><?= $data['aktif'] ?></td>
 																		<td width=10%><?= tgl_indo2($data['tgl_upload']) ?></td>
 																		<td>
 																			<a href="<?= site_url("gallery_youtube/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
@@ -122,7 +113,6 @@
 																				<a href="#" data-href="<?= site_url("gallery_youtube/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																			<?php endif; ?>
 																		</td>
-
 																	</tr>
 																<?php endforeach; ?>
 															</tbody>

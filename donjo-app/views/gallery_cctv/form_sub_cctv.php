@@ -1,11 +1,11 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Form Video</h1>
+		<h1>Form CCTV</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('gallery') ?>"><i class="fa fa-dashboard"></i> Daftar Album</a></li>
-			<li><a href='<?= site_url("gallery_cctv/sub_cctv/$album") ?>'><i class="fa fa-dashboard"></i> Daftar Gambar Album</a></li>
-			<li class="active">Form Video</li>
+			<li><a href='<?= site_url("gallery_cctv/cctv_sub/$album") ?>'> Daftar CCTV</a></li>
+			<li><a href='<?= site_url("gallery_/cctv_sub/$album") ?>'> Daftar Kamera</a></li>
+			<li class="active">Form</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
