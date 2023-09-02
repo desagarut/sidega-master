@@ -6,7 +6,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V4.8') ?>
+    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V 5.5') ?>
 
     <?php $kampus_title = trim(ucwords($this->setting->website_title)); ?>
 
