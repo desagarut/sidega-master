@@ -32,7 +32,7 @@ class Beranda extends Admin_Controller {
 		$this->load->model('first_gallery_m');
 		$this->load->model('first_artikel_m');
 		// Update v5.7.0
-		$this->load->model('first_gallery_cctv');
+		$this->load->model('first_cctv_m');
 
 		$this->modul_ini = 1;
 	}
