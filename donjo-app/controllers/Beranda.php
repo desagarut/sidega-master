@@ -101,7 +101,7 @@ class Beranda extends Admin_Controller {
 		$data['gallery'] = $this->first_gallery_m->gallery_show(0,5,0);
 		$data['artikel'] = $this->first_artikel_m->artikel_show(0,5,0);
 		//update v5.7.0
-		$data['gallery_cctv'] = $this->first_gallery_cctv->gallery_show(0,1,0);
+		$data['gallery_cctv'] = $this->first_cctv_m->cctv(0,1,0);
 
 
 
