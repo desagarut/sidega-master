@@ -11,32 +11,49 @@
     </div>
     <div class="box-body">
         <div class="row text-center">
-            <a class="btn btn-app bg-green" href="<?php if ($this->CI->cek_hak_akses('u')) : ?><?= site_url('pembangunan') ?><?php endif; ?>" title="Rencana">
-                <span class="badge bg-maroon"><?php foreach ($usulan_total as $data) : ?>
+            <a class="btn btn-app bg-purple" href="<?php if ($this->CI->cek_hak_akses('u')) : ?><?= site_url('pembangunan') ?><?php endif; ?>" title="Rencana">
+                <span class="badge bg-maroon">
+                    <?php foreach ($usulan_total as $data) : ?>
                         <?= $data['jumlah'] ?>
                     <?php endforeach; ?>
                 </span> Rencana</a>
-            <a class="btn btn-app bg-green" href="<?php if ($this->CI->cek_hak_akses('h')) : ?><?= site_url('perencanaan_desa_polling/daftar_polling') ?><?php endif; ?>" title="Buat Surat"><!--<span class="badge bg-maroon">12</span>--> Polling</a>
-            <a class="btn btn-app bg-green" href="<?php if ($this->CI->cek_hak_akses('h')) : ?><?= site_url('penetapan_rkp') ?><?php endif; ?>" title="Surat Masuk"><!--<span class="badge bg-maroon">12</span>--> Penetapan </a>
+            <a class="btn btn-app bg-purple" href="<?php if ($this->CI->cek_hak_akses('h')) : ?><?= site_url('pembangunan/penentuan_prioritas_tk_desa') ?><?php endif; ?>" title="Penentuan Prioritas">
+                <span class="badge bg-maroon">
+                    <?php foreach ($prioritas_total as $data) : ?>
+                        <?= $data['jumlah'] ?>
+                    <?php endforeach; ?>
+                </span>Prioritas</a>
+            <a class="btn btn-app bg-purple" href="<?php if ($this->CI->cek_hak_akses('h')) : ?><?= site_url('pembangunan/penetapan_rkp') ?><?php endif; ?>" title="Penetapan">
+                <span class="badge bg-maroon">
+                    <?php foreach ($rkp_total as $data) : ?>
+                        <?= $data['jumlah'] ?>
+                    <?php endforeach; ?>
+                </span>Prioritas
+            </a>
         </div>
         <div class="row text-center">
-            <a href="<?= site_url('pembangunan/rkp') ?>" class="btn btn-app bg-yellow" title="Rencana Kerja Pemerintah <?= ucwords($this->setting->sebutan_desa); ?>" style="color:blueviolet">
-                <?php foreach ($usulan_total as $data) : ?>
-                    <?= $data['jumlah'] ?>
-                <?php endforeach; ?>
+            <a href="<?= site_url('pembangunan/pelaksanaan_rkp') ?>" class="btn btn-app bg-purple" title="Rencana Kerja Pemerintah <?= ucwords($this->setting->sebutan_desa); ?>" style="color:purpleviolet">
+                <span class="badge bg-maroon">
+                    <?php foreach ($usulan_total as $data) : ?>
+                        <?= $data['jumlah'] ?>
+                    <?php endforeach; ?>
+                </span> RKP <?= ucwords($this->setting->sebutan_desa); ?>
             </a>
-            <a href="<?= site_url('pembangunan/durkp') ?>" class="btn btn-app bg-yellow" title="Daftar Usulan Rencana Kerja Pemerintah <?= ucwords($this->setting->sebutan_desa); ?>" style="color:blueviolet">
-                <?php foreach ($durkp_total as $data) : ?>
-                    <?= $data['jumlah'] ?><br />DU-RKP
-                <?php endforeach; ?>
+            <a href="<?= site_url('pembangunan/pelaksanaan_durkp') ?>" class="btn btn-app bg-purple" title="Daftar Usulan Rencana Kerja Pemerintah <?= ucwords($this->setting->sebutan_desa); ?>" style="color:purpleviolet">
+                <span class="badge bg-maroon">
+                    <?php foreach ($durkp_total as $data) : ?>
+                        <?= $data['jumlah'] ?>
+                    <?php endforeach; ?>
+                </span>DU-RKP
             </a>
         </div>
         <div class="row text-center">
-            <a href="<?= site_url('pembangunan/pelaksanaan_rkp') ?>" class="btn btn-app bg-red" title="Daftar Daftar Kegiatan Yang dilaksanakan">
-                <?php foreach ($pelaksanaan_total as $data) : ?>
-                    <?= $data['jumlah'] ?><br />
-                    Pelaksanaan
-                <?php endforeach; ?>
+            <a href="<?= site_url('pembangunan/pelaksanaan_rkp') ?>" class="btn btn-app bg-green" title="Daftar Daftar Kegiatan Yang dilaksanakan">
+                <span class="badge bg-maroon">
+                    <?php foreach ($pelaksanaan_total as $data) : ?>
+                        <?= $data['jumlah'] ?><br />
+                    <?php endforeach; ?>
+                </span>Pelaksanaan
             </a>
         </div>
     </div>
