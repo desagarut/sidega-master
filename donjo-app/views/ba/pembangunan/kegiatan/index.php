@@ -23,23 +23,15 @@
 				<table id="tabel-pembangunan" class="table table-bordered dataTable table-striped table-hover tabel-daftar">
 					<thead class="bg-gray disabled color-palette">
 						<tr>
-							<th rowspan="2">NOMOR URUT</th>
-							<th rowspan="2">NAMA PROYEK / KEGIATAN</th>
-							<th rowspan="2">VOLUME</th>
-							<th colspan="4">SUMBER DANA</th>
-							<th rowspan="2">JUMLAH</th>
-							<th rowspan="2">WAKTU</th>
-							<th colspan="2">SIFAT PROYEK</th>
-                            <th rowspan="2">PELAKSANA</th>
-							<th rowspan="2">KET</th>
-						</tr>
-						<tr>
-							<th>PEMERINTAH</th>
-							<th>PROVINSI</th>
-							<th>KAB/KOTA</th>
-							<th>SWADAYA</th>
-							<th>BARU</th>
-							<th>LANJUTAN</th>
+							<th >NO.</th>
+							<th >NAMA PROGRAM / KEGIATAN</th>
+							<th >LOKASI</th>
+							<th >SUMBER DANA</th>
+							<th >ANGGARAN</th>
+							<th >VOLUME</th>
+							<th >PELAKSANA</th>
+							<th >MANFAAT</th>
+							<th >KET</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -76,42 +68,27 @@
 					'data': null,
 				},
 				{
-					'data': 'judul'
+					'data': 'nama_program_kegiatan'
+				},
+				{
+					'data': 'lokasi'
+				},
+				{
+					'data': 'sumber_dana',
+					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
+				},
+				{
+					'data': 'anggaran',
+					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
 				},
 				{
 					'data': 'volume'
 				},
 				{
-					'data': 'sumber_biaya_pemerintah',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_provinsi',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_kab_kota',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_swadaya',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_jumlah',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'waktu'
-				},
-				{
-					'data': 'sifat_proyek_baru'
-				},
-				{
-					'data': 'sifat_proyek_lanjutan'
-				},
-				{
 					'data': 'pelaksana_kegiatan'
+				},
+				{
+					'data': 'manfaat'
 				},
 				{
 					'data': 'keterangan'

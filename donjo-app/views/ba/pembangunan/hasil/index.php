@@ -65,7 +65,7 @@
 					'data': null,
 				},
 				{
-					'data': 'judul'
+					'data': 'nama_program_kegiatan'
 				},
 				{
 					'data': 'volume'
@@ -75,7 +75,7 @@
 					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
 				},
 				{
-					'data': 'alamat'
+					'data': 'lokasi'
 				},
 				{
 					'data': 'keterangan'

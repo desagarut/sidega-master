@@ -8,7 +8,7 @@
 					<select class="form-control input-sm select2" id="tahun" name="tahun">
 						<option selected value="semua">Semua Tahun</option>
 						<?php foreach ($list_tahun as $list) : ?>
-							<option value="<?= $list->tahun_anggaran ?>"><?= $list->tahun_anggaran ?></option>
+							<option value="<?= $list->tahun ?>"><?= $list->tahun ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -23,20 +23,15 @@
 				<table id="tabel-pembangunan" class="table table-bordered dataTable table-striped table-hover tabel-daftar">
 					<thead class="bg-gray disabled color-palette">
 						<tr>
-							<th rowspan="2">NOMOR URUT</th>
-							<th rowspan="2">NAMA PROYEK / KEGIATAN</th>
-							<th rowspan="2">LOKASI</th>
-							<th colspan="4">SUMBER DANA</th>
-							<th rowspan="2">JUMLAH</th>
-							<th rowspan="2">PELAKSANA</th>
-							<th rowspan="2">MANFAAT</th>
-							<th rowspan="2">KET</th>
-						</tr>
-						<tr>
-							<th>PEMERINTAH</th>
-							<th>PROVINSI</th>
-							<th>KAB/KOTA</th>
-							<th>SWADAYA</th>
+							<th >NO.</th>
+							<th >NAMA PROGRAM / KEGIATAN</th>
+							<th >LOKASI</th>
+							<th >SUMBER DANA</th>
+							<th >ANGGARAN</th>
+							<th >VOLUME</th>
+							<th >PELAKSANA</th>
+							<th >MANFAAT</th>
+							<th >KET</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -73,30 +68,21 @@
 					'data': null,
 				},
 				{
-					'data': 'judul'
+					'data': 'nama_program_kegiatan'
 				},
 				{
-					'data': 'alamat'
+					'data': 'lokasi'
 				},
 				{
-					'data': 'sumber_biaya_pemerintah',
+					'data': 'sumber_dana',
 					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
 				},
 				{
-					'data': 'sumber_biaya_provinsi',
+					'data': 'anggaran',
 					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
 				},
 				{
-					'data': 'sumber_biaya_kab_kota',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_swadaya',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
-				},
-				{
-					'data': 'sumber_biaya_jumlah',
-					'render': $.fn.dataTable.render.number( '.', '.', 0, 'Rp ' )
+					'data': 'volume'
 				},
 				{
 					'data': 'pelaksana_kegiatan'
