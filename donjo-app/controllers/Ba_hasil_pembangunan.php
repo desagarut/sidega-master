@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 
-require_once APPPATH . 'controllers/ba_rencana_pembangunan.php';
+require_once APPPATH . 'controllers/Ba_rencana_pembangunan.php';
 
 class Ba_hasil_pembangunan extends ba_rencana_pembangunan
 {
