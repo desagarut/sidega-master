@@ -1,0 +1,1 @@
+<img src="<?= $icon ?>" alt="<?= lang('memory_usage') ?>" title="<?= lang('memory_usage') ?>" /> <?= $memory ?>

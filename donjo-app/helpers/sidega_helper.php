@@ -2,51 +2,28 @@
 
 
 define("VERSION", '6.0.1');
-
 define('VERSI_DATABASE', '2023081701');
-
 define("LOKASI_LOGO_DESA", 'desa/logo/');
-
 define("LOKASI_ARSIP", 'desa/arsip/');
-
 define("LOKASI_CONFIG_DESA", 'desa/config/');
-
 define("LOKASI_SURAT_DESA", 'desa/template-surat/');
-
 define("LOKASI_SURAT_FORM_DESA", 'desa/template-surat/form/');
-
 define("LOKASI_SURAT_PRINT_DESA", 'desa/template-surat/print/');
-
 define("LOKASI_SURAT_EXPORT_DESA", 'desa/template-surat/export/');
-
 define("LOKASI_USER_PICT", 'desa/upload/user_pict/');
-
 define("LOKASI_GALERI", 'desa/upload/galeri/');
-
 define("LOKASI_FOTO_ARTIKEL", 'desa/upload/artikel/');
-
 define("LOKASI_FOTO_LOKASI", 'desa/upload/gis/lokasi/');
-
 define("LOKASI_FOTO_AREA", 'desa/upload/gis/area/');
-
 define("LOKASI_FOTO_GARIS", 'desa/upload/gis/garis/');
-
 define("LOKASI_DOKUMEN", 'desa/upload/dokumen/');
-
 define("LOKASI_PENGESAHAN", 'desa/upload/pengesahan/');
-
 define("LOKASI_WIDGET", 'desa/widgets/');
-
 define("LOKASI_GAMBAR_WIDGET", 'desa/upload/widgets/');
-
 define("LOKASI_KEUANGAN_ZIP", 'desa/upload/keuangan/');
-
 define("LOKASI_MEDIA", 'desa/upload/media/');
-
 define("LOKASI_SIMBOL_LOKASI", 'desa/upload/gis/lokasi/point/');
-
 define("LOKASI_SIMBOL_LOKASI_DEF", 'assets/images/gis/point/');
-
 define("LOKASI_RUMAH", 'desa/upload/dokumen/');
 
 
@@ -396,202 +373,137 @@ define("KODE_PEKERJAAN", serialize(array(
 	strtolower("KEPALA DESA") => "86",
 
 	strtolower("BIARAWATI") => "87",
-
 	strtolower("WIRASWASTA") => "88",
-
 	strtolower("PEKERJAAN LAINNYA") => "89",
-
 	strtolower("LAINNYA") => "89"
 
 )));
 
 define("KODE_GOLONGAN_DARAH", serialize(array(
-
 	strtolower('A') => '1',
-
 	strtolower('B') => '2',
-
 	strtolower('AB') => '3',
-
 	strtolower('O') => '4',
-
 	strtolower('A+') => '5',
-
 	strtolower('A-') => '6',
-
 	strtolower('B+') => '7',
-
 	strtolower('B-') => '8',
-
 	strtolower('AB+') => '9',
-
 	strtolower('AB-') => '10',
-
 	strtolower('O+') => '11',
-
 	strtolower('O-') => '12',
-
 	strtolower('TIDAK TAHU') => '13',
-
 	strtolower('Tdk Th') => '13'
 
 )));
 
 define("KODE_CACAT", serialize(array(
-
 	strtolower('CACAT FISIK') => '1',
-
 	strtolower('CACAT NETRA/BUTA') => '2',
-
 	strtolower('CACAT RUNGU/WICARA') => '3',
-
 	strtolower('CACAT MENTAL/JIWA') => '4',
-
 	strtolower('CACAT FISIK DAN MENTAL') => '5',
-
 	strtolower('CACAT LAINNYA') => '6',
-
 	strtolower('TIDAK CACAT') => '7'
 
 )));
 
 define("SASARAN", serialize(array(
-
 	"1" => "Penduduk",
-
 	"2" => "Keluarga / KK",
-
 	"3" => "Rumah Tangga",
-
 	"4" => "Kelompok/Organisasi Kemasyarakatan"
 
 )));
 
 define("ASALDANA", serialize(array(
-
 	"Pusat" => "Pusat",
-
 	"Provinsi" => "Provinsi",
-
 	"Kab/Kota" => "Kab/Kota",
-
 	"Dana Desa" => "Dana Desa",
-
 	"Lain-lain (Hibah)" => "Lain-lain (Hibah)"
 
 )));
 
 define("KTP_EL", serialize(array(
-
 	strtolower("BELUM") => "1",
-
 	strtolower("KTP-EL") => "2"
 
 )));
 
 define("STATUS_REKAM", serialize(array(
-
 	strtolower("BELUM WAJIB") => "1",
-
 	strtolower("BELUM REKAM") => "2",
-
 	strtolower("SUDAH REKAM") => "3",
-
 	strtolower("CARD PRINTED") => "4",
-
 	strtolower("PRINT READY RECORD") => "5",
-
 	strtolower("CARD SHIPPED") => "6",
-
 	strtolower("SENT FOR CARD PRINTING") => "7",
-
 	strtolower("CARD ISSUED") => "8"
 
 )));
 
 define("TEMPAT_DILAHIRKAN", serialize(array(
-
 	"RS/RB" => "1",
-
 	"Puskemas" => "2",
-
 	"Polindes" => "3",
-
 	"Rumah" => "4",
-
 	"Lainnya" => "5"
 
 )));
 
 define("JENIS_KELAHIRAN", serialize(array(
-
 	"Tunggal" => "1",
-
 	"Kembar 2" => "2",
-
 	"Kembar 3" => "3",
-
 	"Kembar 4" => "4"
 
 )));
 
 define("PENOLONG_KELAHIRAN", serialize(array(
-
 	"Dokter" => "1",
-
 	"Bidan Perawat" => "2",
-
 	"Dukun" => "3",
-
 	"Lainnya" => "4"
 
 )));
 
 define("JENIS_MUTASI", serialize(array(
-
 	"Hapus barang masih baik" => "1",
-
 	"Hapus barang rusak" => "4",
-
 	"Status rusak" => "2",
-
 	"Status diperbaiki" => "3"
 
 )));
 
 define("JENIS_PENGHAPUSAN", serialize(array(
-
 	"Rusak" => "1",
-
 	"Dijual" => "2",
-
 	"Disumbang" => "3"
 
 )));
 
 define("ASAL_INVENTARIS", serialize(array(
-
 	"Dibeli Sendiri" => "1",
-
 	"Bantuan Pemerintah" => "2",
-
 	"Bantuan Provinsi" => "3",
-
 	"Bantuan Kabupaten" => "4",
-
 	"Sumbangan" => "5"
 
 )));
 
 define("KATEGORI_MAILBOX", serialize(array(
-
 	"Kotak Masuk" => "1",
-
 	"Kotak Keluar" => "2"
 
 )));
 
-
+define('NILAI_PENDAPAT', serialize([
+    1 => 'Sangat Puas',
+    2 => 'Puas',
+    3 => 'Cukup',
+    4 => 'Buruk',
+]));
 
 /**
 
@@ -610,105 +522,61 @@ define("KATEGORI_MAILBOX", serialize(array(
  */
 
 function AmbilVersi()
-
 {
-
 	return VERSION;
-
 }
 
 
 
 /**
-
  * favico_desa
-
  *
-
  * Mengembalikan path lengkap untuk file favico desa
-
  *
-
  * @access  public
-
  * @return  string
-
  */
 
 function favico_desa()
-
 {
-
 	$favico = 'favicon.ico';
-
 	$favico_desa = (is_file(APPPATH .'../'. LOKASI_LOGO_DESA . $favico)) ?
-
 		base_url() . LOKASI_LOGO_DESA . $favico :
-
 		base_url() . $favico;
-
 	return $favico_desa;
-
 }
 
 
 
 /**
-
  * gambar_desa / KantorDesa
-
  *
-
  * Mengembalikan path lengkap untuk file logo desa / kantor desa
-
  *
-
  * @access  public
-
  * @return  string
-
  */
 
 function gambar_desa($nama_file, $type = FALSE, $file = FALSE)
-
 {
-
 	if (is_file(APPPATH .'../'. LOKASI_LOGO_DESA . $nama_file))
-
 	{
-
-
-
 		return $logo_desa = ($file ? APPPATH.'../' : base_url()) . LOKASI_LOGO_DESA . $nama_file;
-
 	}
 
-
-
 	// type FALSE = logo, TRUE = kantor
-
 	$default = ($type)  ? 'desagarut.jpg' : 'sidega.png';
-
 	return $logo_desa = ($file ? APPPATH.'../' : base_url()). "assets/files/logo/$default";
 
 }
 
-
-
 /**
-
  * KonfigurasiDatabase
-
  *
-
  * Mengembalikan path file konfigurasi database desa
-
  *
-
  * @access  public
-
  * @return  string
-
  */
 
 function KonfigurasiDatabase()
@@ -1276,6 +1144,98 @@ function sql_in_list($list_array)
 }
 
 
+/*
+ * ambilBerkas
+ * Method untuk mengambil berkas
+ * param :
+ * nama_berkas : nama berkas yang ingin diambil (hanya nama, bukan lokasi berkas)
+ * redirect_url : jika terjadi error, maka halaman akan dialihkan ke redirect_url
+ * unique_id : diperlukan jika nama file asli tidak sama dengan nama didatabase
+ * lokasi : lokasi folder berkas berada (contoh : desa/arsip)
+ * tampil : true kalau berkas akan ditampilkan inline (tidak diunduh)
+ */
+function ambilBerkas($nama_berkas, $redirect_url = null, $unique_id = null, $lokasi = LOKASI_ARSIP, $tampil = false)
+{
+    $CI = &get_instance();
+    $CI->load->helper('download');
+
+    // Batasi akses LOKASI_ARSIP hanya untuk admin
+    if ($lokasi == LOKASI_ARSIP && $CI->session->insidega != 1) {
+        redirect('/');
+    }
+
+    // Tentukan path berkas (absolut)
+    $pathBerkas = FCPATH . $lokasi . $nama_berkas;
+    $pathBerkas = str_replace('/', DIRECTORY_SEPARATOR, $pathBerkas);
+    // Redirect ke halaman surat masuk jika path berkas kosong atau berkasnya tidak ada
+    if (! file_exists($pathBerkas)) {
+        $_SESSION['success']   = -1;
+        $_SESSION['error_msg'] = 'Berkas tidak ditemukan';
+        if ($redirect_url) {
+            redirect($redirect_url);
+        } else {
+            show_404();
+        }
+    }
+    // OK, berkas ada. Ambil konten berkasnya
+
+    $data = file_get_contents($pathBerkas);
+
+    if (null !== $unique_id) {
+        // Buang unique id pada nama berkas download
+        $nama_berkas  = explode($unique_id, $nama_berkas);
+        $namaFile     = $nama_berkas[0];
+        $ekstensiFile = explode('.', end($nama_berkas));
+        $ekstensiFile = end($ekstensiFile);
+        $nama_berkas  = $namaFile . '.' . $ekstensiFile;
+    }
+
+    // Kalau $tampil, tampilkan secara inline.
+    if ($tampil) {
+        // Set the default MIME type to send
+        switch (get_extension($nama_berkas)) {
+            case '.gif':
+                $mime = 'image/gif';
+                break;
+
+            case '.png':
+                $mime = 'image/png';
+                break;
+
+            case '.jpeg':
+                $mime = 'image/jpeg';
+                break;
+
+            case '.jpg':
+                $mime = 'image/jpeg';
+                break;
+
+            case '.svg':
+                $mime = 'image/svg+xml';
+                break;
+
+            case '.pdf':
+                $mime = 'application/pdf';
+                break;
+
+            default:
+                $mime = 'application/octet-stream';
+                break;
+        }
+
+        // Generate the server headers
+        header('Content-Type: ' . $mime);
+        header('Content-Disposition: inline; filename="' . $nama_berkas . '"');
+        header('Expires: 0');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . strlen($data));
+        header('Cache-Control: private, no-transform, no-store, must-revalidate');
+
+        return readfile($pathBerkas);
+    }
+
+    force_download($nama_berkas, $data);
+}
 
 
 
@@ -1295,7 +1255,7 @@ function sql_in_list($list_array)
 
  * lokasi : lokasi folder berkas berada (contoh : desa/arsip)
 
- */
+
 
 function ambilBerkas($nama_berkas, $redirect_url, $unique_id = null, $lokasi = LOKASI_ARSIP)
 
@@ -1361,7 +1321,7 @@ function ambilBerkas($nama_berkas, $redirect_url, $unique_id = null, $lokasi = L
 
 }
 
-
+*/
 
 /**
 
@@ -2077,3 +2037,84 @@ function pre_print_r($data)
 
 }
 
+// Kode format lampiran surat
+function kode_format($lampiran = '')
+{
+    $str = strtoupper(str_replace('.php', '', $lampiran));
+
+    return str_replace(',', ', ', $str);
+}
+
+/**
+ * Determine if the given key exists in the provided array.
+ *
+ * @param array|ArrayAccess $array
+ * @param int|string        $key
+ *
+ * @return bool
+ */
+function exists($array, $key)
+{
+    if ($array instanceof \ArrayAccess) {
+        return $array->offsetExists($key);
+    }
+
+    return array_key_exists($key, $array);
+}
+
+/**
+ * Remove one or many array items from a given array using "dot" notation.
+ *
+ * @param array        $array
+ * @param array|string $keys
+ *
+ * @return void
+ */
+function forget(&$array, $keys)
+{
+    $original = &$array;
+    $keys     = (array) $keys;
+
+    if (count($keys) === 0) {
+        return;
+    }
+
+    foreach ($keys as $key) {
+        // if the exact key exists in the top-level, remove it
+        if (exists($array, $key)) {
+            unset($array[$key]);
+
+            continue;
+        }
+
+        $parts = explode('.', $key);
+        // clean up before each pass
+        $array = &$original;
+
+        while (count($parts) > 1) {
+            $part = array_shift($parts);
+
+            if (isset($array[$part]) && is_array($array[$part])) {
+                $array = &$array[$part];
+            } else {
+                continue 2;
+            }
+        }
+        unset($array[array_shift($parts)]);
+    }
+}
+
+/**
+ * Get all of the given array except for a specified array of keys.
+ *
+ * @param array        $array
+ * @param array|string $keys
+ *
+ * @return array
+ */
+function except($array, $keys)
+{
+    forget($array, $keys);
+
+    return $array;
+}

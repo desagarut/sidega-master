@@ -2,7 +2,7 @@
 	<section class="content-header">
 		<h1>Cetak Layanan Surat</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
+			<li><a href="<?= site_url('hom_sid')?>"><i class="fa fa-home"></i> Home</a></li>
 			<li class="active">Cetak Layanan Surat</li>
 		</ol>
 	</section>
@@ -25,7 +25,7 @@
 						</form>
 					</div>
 					<div class="box-body">
-						<?php if ($data['favorit']=1): ?>
+						<?php if ($data['favorit'] = 1): ?>
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -44,16 +44,18 @@
 														</thead>
 														<tbody>
 															<?php if (count($surat_favorit) > 0): ?>
-															<?php $i=1; foreach ($surat_favorit AS $data): ?>
-																<tr <?php if ($data['jenis']!=1): ?>style='background-color:#f8deb5 !important;'<?php endif; ?>>
-																	<td><?= $i;?></td>
+															<?php $i = 1;
+
+                                                                foreach ($surat_favorit as $data): ?>
+																<tr <?php if ($data['jenis'] != 1): ?>style='background-color:#f8deb5 !important;'<?php endif; ?>>
+																	<td><?= $i; ?></td>
 																	<td class="nostretch">
-																		<a href="<?= site_url()?>surat/form/<?= $data['url_surat']?>" class="btn btn-social btn-box bg-olive btn-sm"  title="Buat Surat"><i class="fa fa-file-word-o"></i>Buat Surat</a>
-																		<a href="<?= site_url("surat/favorit/$data[id]/$data[favorit]")?>" class="btn bg-purple btn-box btn-sm" title="Keluarkan dari Daftar Favorit" ><i class="fa fa-star"></i></a>
+																		<a href="<?= site_url()?>surat/form/<?= $data['url_surat']?>" class="btn btn-social btn-flat bg-olive btn-sm"  title="Buat Surat"><i class="fa fa-file-word-o"></i>Buat Surat</a>
+																		<a href="<?= site_url("surat/favorit/{$data['id']}/{$data['favorit']}")?>" class="btn bg-purple btn-flat btn-sm" title="Keluarkan dari Daftar Favorit" ><i class="fa fa-star"></i></a>
 																	</td>
 																	<td><?= $data['nama']?></td>
 																	<td><?= $data['kode_surat']?></td>
-																	<td><?= $data['nama_lampiran']?></td>
+																	<td><?= kode_format($data['lampiran']); ?></td>
 																</tr>
 															<?php $i++; endforeach; ?>
 															<?php else: ?>
@@ -92,20 +94,24 @@
 														</tr>
 													</thead>
 													<tbody>
-														<?php $nomer =1; foreach ($menu_surat2 AS $data): ?>
-															<?php if ($data['favorit']!=1): ?>
-																<tr <?php if ($data['jenis']!=1): ?>style='background-color:#f8deb5 !important;'<?php endif; ?>>
-																	<td><?= $nomer;?></td>
+														<?php $nomer = 1;
+
+                                                            foreach ($menu_surat2 as $data): ?>
+															<?php if ($data['favorit'] != 1): ?>
+																<tr <?php if ($data['jenis'] != 1): ?>style='background-color:#f8deb5 !important;'<?php endif; ?>>
+																	<td><?= $nomer; ?></td>
 																	<td class="nostretch">
-																		<a href="<?= site_url()?>surat/form/<?= $data['url_surat']?>" class="btn btn-social btn-box bg-purple btn-sm"  title="Buat Surat"><i class="fa fa-file-word-o"></i>Buat Surat</a>
-																		<a href="<?= site_url("surat/favorit/$data[id]/$data[favorit]")?>" class="btn bg-purple btn-box btn-sm"  title="Tambahkan ke Daftar Favorit" ><i class="fa fa-star-o"></i></a>
+																		<a href="<?= site_url()?>surat/form/<?= $data['url_surat']?>" class="btn btn-social btn-flat bg-purple btn-sm"  title="Buat Surat"><i class="fa fa-file-word-o"></i>Buat Surat</a>
+																		<?php if ($this->CI->cek_hak_akses('u')): ?>
+																			<a href="<?= site_url("surat/favorit/{$data['id']}/{$data['favorit']}")?>" class="btn bg-purple btn-flat btn-sm"  title="Tambahkan ke Daftar Favorit" ><i class="fa fa-star-o"></i></a>
+																		<?php endif; ?>
 																	</td>
 																	<td><?= $data['nama']?></td>
 																	<td><?= $data['kode_surat']?></td>
-																	<td><?= $data['nama_lampiran']?></td>
+																	<td><?= kode_format($data['lampiran']); ?></td>
 																</tr>
 															<?php $nomer++; endif; ?>
-														<?php endforeach;?>
+														<?php endforeach; ?>
 													</tbody>
 												</table>
 											</div>
