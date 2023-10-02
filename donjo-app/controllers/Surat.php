@@ -9,6 +9,7 @@ class Surat extends Admin_Controller
         $this->load->model('keluarga_model');
         $this->load->model('surat_model');
         $this->load->model('keluar_model');
+        $this->load->model('referensi_model');
         $this->load->model('penomoran_surat_model');
         $this->load->model('permohonan_surat_model');
 		$this->modul_ini = 15;
@@ -79,33 +80,24 @@ class Surat extends Admin_Controller
         $keperluan              = $_POST['keperluan'];
         $keterangan             = $_POST['keterangan'];
 
+
         switch ($url) {
             case 'surat_ket_kelahiran':
                 // surat_ket_kelahiran id-nya ibu atau bayi
-                if (! $id) {
-                    $id = $_SESSION['id_ibu'];
-                }
-                if (! $id) {
-                    $id = $_SESSION['id_bayi'];
-                }
+                if (! $id) { $id = $_SESSION['id_ibu'];}
+                if (! $id) { $id = $_SESSION['id_bayi'];}
                 break;
 
             case 'surat_ket_nikah':
                 // id-nya calon pasangan pria atau wanita
-                if (! $id) {
-                    $id = $_POST['id_pria'];
-                }
-                if (! $id) {
-                    $id = $_POST['id_wanita'];
-                }
+                if (! $id) { $id = $_POST['id_pria'];}
+                if (! $id) { $id = $_POST['id_wanita'];}
                 break;
 
             case 'surat_kuasa':
                 // id-nya pemberi kuasa atau penerima kuasa
-                if (! $id) {
-                    $id = $_POST['id_pemberi_kuasa'];
-                }
-                if (! $id) {
+                if (! $id) { $id = $_POST['id_pemberi_kuasa'];}
+                if (! $id) { 
                     $id = $_POST['id_penerima_kuasa'];
                 }
                 break;
@@ -126,12 +118,14 @@ class Surat extends Admin_Controller
             $nik                         = $log_surat['nik_non_warga'];
         }
 
-        $log_surat['keterangan'] = $keterangan ?: $keperluan;
-        $nama_surat              = $this->keluar_model->nama_surat_arsip($url, $nik, $_POST['nomor']);
-        $log_surat['nama_surat'] = $nama_surat;
+        $log_surat['keterangan']    = $keterangan ?: $keperluan;
+        $log_surat['keperluan']     = $keperluan;
+
+        $nama_surat                 = $this->keluar_model->nama_surat_arsip($url, $nik, $_POST['nomor']);
+        $log_surat['nama_surat']    = $nama_surat;
         if ($format['lampiran']) {
-            $lampiran              = pathinfo($nama_surat, PATHINFO_FILENAME) . '_lampiran.pdf';
-            $log_surat['lampiran'] = $lampiran;
+            $lampiran               = pathinfo($nama_surat, PATHINFO_FILENAME) . '_lampiran.pdf';
+            $log_surat['lampiran']  = $lampiran;
         }
         $this->keluar_model->log_surat($log_surat);
 

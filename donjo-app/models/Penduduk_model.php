@@ -9,11 +9,11 @@ class Penduduk_model extends MY_Model {
 		$this->load->model('keluarga_model');
 		$this->load->model('web_dokumen_model');
 		$this->load->model('web_rumah_model');
-		$this->ktp_el = array_flip(unserialize(KTP_EL));
-		$this->status_rekam = array_flip(unserialize(STATUS_REKAM));
-		$this->tempat_dilahirkan = array_flip(unserialize(TEMPAT_DILAHIRKAN));
-		$this->jenis_kelahiran = array_flip(unserialize(JENIS_KELAHIRAN));
-		$this->penolong_kelahiran = array_flip(unserialize(PENOLONG_KELAHIRAN));
+		$this->ktp_el 				= array_flip(unserialize(KTP_EL));
+		$this->status_rekam 		= array_flip(unserialize(STATUS_REKAM));
+		$this->tempat_dilahirkan 	= array_flip(unserialize(TEMPAT_DILAHIRKAN));
+		$this->jenis_kelahiran 		= array_flip(unserialize(JENIS_KELAHIRAN));
+		$this->penolong_kelahiran 	= array_flip(unserialize(PENOLONG_KELAHIRAN));
 	}
 
 

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
+//require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;

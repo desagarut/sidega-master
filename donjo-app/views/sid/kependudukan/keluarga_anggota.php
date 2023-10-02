@@ -43,7 +43,7 @@
 							<tr>
 								<td>Kepala Keluarga</td>
 								<td>:</td>
-								<td><?= $kepala_kk['nama']?></td>
+								<td><strong><?= $kepala_kk['nama']?></strong></td>
 							</tr>
 							<tr>
 								<td>Alamat</td>

@@ -99,7 +99,16 @@
 															</tr>
 														</thead>
 														<tbody>
-															<?php	foreach ($main as $data): ?>
+														<?php	foreach ($main as $data):
+																if ($data['nama_surat']):
+																	$berkas = $data['nama_surat'];
+																else:
+																	$berkas = $data["berkas"]."_".$data["nik"]."_".date("Y-m-d").".rtf";
+																endif;
+
+																$theFile = FCPATH.LOKASI_ARSIP.$berkas;
+																$lampiran = FCPATH.LOKASI_ARSIP.$data['lampiran'];
+															?>
 																<tr>
 																	<td class="padat"><?= $data['no']?></td>
 																	<td class="aksi">

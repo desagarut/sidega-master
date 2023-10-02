@@ -35,11 +35,7 @@
                 <div class="box box-primary">
                   <div class="box-body box-profile">
                     <div align="center">
-                      <?php if ($penduduk['foto']) : ?>
-                        <img class="img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>" alt="Foto Penduduk">
-                      <?php else : ?>
-                        <img class="img-responsive img-circle" alt="Foto Penduduk" src="<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>" />
-                      <?php endif; ?>
+                      <img class="img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>" alt="Foto Penduduk">
                       <h3 class="profile-username text-center">
                         <?= strtoupper($penduduk['nama']) ?>
                       </h3>
@@ -70,9 +66,7 @@
                     </ul>
                     <a href="<?= site_url("keluarga/anggota/$p/$o/$penduduk[id_kk]") ?>" class="btn btn-danger btn-block"><b>Daftar Keluarga</b></a>
                   </div>
-                  <!-- /.box-body -->
                 </div>
-                <!-- /.box -->
 
                 <!-- About Me Box -->
                 <div class="box box-primary">
@@ -443,18 +437,13 @@
                           </table>
                         </div>
                       </div>
-                      <!-- /.post -->
                     </div>
-                    <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="keluarga">
-                      <!-- Post -->
                       <div class="post">
                         <div class="user-block"> <a href="<?= site_url("keluarga/anggota/$p/$o/$penduduk[id_kk]") ?>" class="btn btn-danger btn-block"> <b>Daftar Keluarga</b></a> </div>
                       </div>
-                      <!-- /.post -->
                     </div>
-                    <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="dokumen">
                       <h5>Daftar Dokumen Penduduk</h5>
@@ -493,7 +482,6 @@
                       </table>
                       <div class="timeline-footer" align="right"> <a href="<?= site_url("penduduk/dokumen_form/$penduduk[id]") ?>" title="Tambah Dokumen" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tambah Dokumen" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-plus'></i>Tambah Dokumen</a> <a href="#confirm-delete" title="Hapus Data" onclick="deleteAllBox('mainform','<?= site_url("penduduk/delete_all_dokumen/$penduduk[id]") ?>')" class="btn btn-social btn-box	btn-danger btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block hapus-terpilih"><i class='fa fa-trash-o'></i> Hapus Data Terpilih</a> </div>
                     </div>
-                    <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="bantuan">
                       <h4> Daftar Program Bantuan Individu yang diterima</h4>
@@ -516,7 +504,6 @@
                         <?php endforeach; ?>
                       </table>
                     </div>
-                    <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="rumah">
                       <!-- The Rumah -->
@@ -556,9 +543,7 @@
                         <div class="timeline-footer" align="right"> <a href="<?= site_url("penduduk/rumah/$penduduk[id]") ?>" class="btn bg-maroon btn-social btn-box	btn-danger btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Hapus Rumah"><i class="fa fa-trash-o"></i>Hapus Rumah</a> <a href="<?= site_url("penduduk/rumah_form/$penduduk[id]") ?>" title="Tambah rumah" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tambah rumah" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-plus'></i>Tambah rumah</a> </div>
                       </div>
                     </div>
-                    <!-- /.tab-pane -->
 
-                    <!-- /.tab-pane -->
                     <div class="active tab-pane" id="resume">
                       <!-- The Resume -->
                       <div class="box box-warning">
@@ -663,18 +648,11 @@
                         </div>
                       </div>
                     </div>
-                    <!-- /.tab-pane -->
-
                   </div>
-                  <!-- /.tab-content -->
                 </div>
-                <!-- /.nav-tabs-custom -->
               </div>
-              <!-- /.col -->
             </div>
-            <!-- /.row -->
           </section>
-          <!-- /.content -->
         </div>
       </div>
     </form>

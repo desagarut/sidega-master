@@ -8,7 +8,7 @@
 
     <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V 5.5') ?>
 
-    <?php $kampus_title = trim(ucwords($this->setting->website_title)); ?>
+    <?php $website_title = trim(ucwords($this->setting->website_title)); ?>
 
     <meta content="utf-8" http-equiv="encoding">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

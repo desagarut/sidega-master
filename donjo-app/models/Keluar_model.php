@@ -1,406 +1,464 @@
-<?php class Keluar_model extends CI_Model {
+<?php defined('BASEPATH') || exit('No direct script access allowed');
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	public function autocomplete()
-	{
-		$sql = array();
-		$sql[] = '('.$this->db->select('no_surat')
-							->from("log_surat")
-							->get_compiled_select()
-							.')';
-		$sql[] = '('.$this->db->select('n.nama')
-							->from("log_surat u")
-							->join("tweb_penduduk n", "u.id_pend = n.id", "left")
-							->get_compiled_select()
-							.')';
-		$sql[] = '('.$this->db->select('p.nama')
-							->from("log_surat u")
-							->join("tweb_desa_pamong s", "u.id_pamong = s.pamong_id", "left")
-							->join("tweb_penduduk p", "s.id_pend = p.id", "left")
-							->get_compiled_select()
-							.')';
-		$sql = implode('
+class Keluar_model extends CI_Model
+{
+    public function autocomplete()
+    {
+        $sql   = [];
+        $sql[] = '(' . $this->db->select('no_surat')
+            ->from('log_surat')
+            ->get_compiled_select()
+                            . ')';
+        $sql[] = '(' . $this->db->select('n.nama')
+            ->from('log_surat u')
+            ->join('tweb_penduduk n', 'u.id_pend = n.id', 'left')
+            ->get_compiled_select()
+                            . ')';
+        $sql[] = '(' . $this->db->select('p.nama')
+            ->from('log_surat u')
+            ->join('tweb_desa_pamong s', 'u.id_pamong = s.pamong_id', 'left')
+            ->join('tweb_penduduk p', 's.id_pend = p.id', 'left')
+            ->get_compiled_select()
+                            . ')';
+        $sql = implode('
 		UNION
 		', $sql);
-		$data = $this->db->query($sql)->result_array();
-		$str = autocomplete_data_ke_str($data);
-		return $str;
-	}
+        $data = $this->db->query($sql)->result_array();
 
-	private function search_sql()
-	{
-		if (isset($_SESSION['cari']))
-		{
-			$cari = $_SESSION['cari'];
-			$kw = $this->db->escape_like_str($cari);
-			$kw = '%' .$kw. '%';
-			$search_sql = " AND (u.no_surat LIKE '$kw' OR n.nama LIKE '$kw' OR
-					s.pamong_nama like '$kw' OR p.nama like '$kw')";
-			return $search_sql;
-		}
-	}
+        return autocomplete_data_ke_str($data);
+    }
 
-	private function filter_sql()
-	{
-		if (isset($_SESSION['filter']))
-		{
-			$kf = $_SESSION['filter'];
-			if ($kf == "0")
-				$filter_sql = "";
-			else
-				$filter_sql = " AND YEAR(u.tanggal) = '".$kf."'";
-			return $filter_sql;
-		}
-	}
+    private function search_sql()
+    {
+        if (isset($this->session->cari)) {
+            $cari = $this->session->cari;
+            $this->db
+                ->group_start()
+                ->or_like('u.no_surat', $cari, 'BOTH')
+                ->or_like('n.nama', $cari, 'BOTH')
+                ->or_like('s.pamong_nama', $cari, 'BOTH')
+                ->or_like('p.nama', $cari, 'BOTH')
+                ->group_end();
+        }
+    }
 
-	private function jenis_sql()
-	{
-		if (isset($_SESSION['jenis']))
-		{
-			$kf = $_SESSION['jenis'];
-			if (empty($kf))
-				$sql = "";
-			else
-				$sql = " AND k.nama = '".$kf."'";
-			return $sql;
-		}
-	}
+    private function tahun_sql()
+    {
+        if (isset($this->session->tahun)) {
+            $kf = $this->session->tahun;
+            if ($kf != '0') {
+                $this->db->where('YEAR(u.tanggal)', $kf);
+            }
+        }
+    }
 
-	private function filterku_sql($nik='')
-	{
-		if (empty($nik)) return "";
-		$kf = $nik;
-		$filterku_sql= " AND u.id_pend = '".$kf."'";
-		return $filterku_sql;
-	}
+    private function bulan_sql()
+    {
+        if (isset($this->session->bulan)) {
+            $kf = $this->session->bulan;
+            if ($kf != '0') {
+                $this->db->where('MONTH(u.tanggal)', $kf);
+            }
+        }
+    }
 
-	public function paging($p=1, $o=0)
-	{
-		$sql = "SELECT COUNT(*) AS jml " . $this->list_data_sql();
-		$query = $this->db->query($sql);
-		$row = $query->row_array();
-		$jml_data = $row['jml'];
+    private function jenis_sql()
+    {
+        if (isset($this->session->jenis)) {
+            $kf = $this->session->jenis;
+            if (! empty($kf)) {
+                $this->db->where('k.nama', $kf);
+            }
+        }
+    }
 
-		$this->load->library('paging');
-		$cfg['page'] = $p;
-		$cfg['per_page'] = $_SESSION['per_page'];
-		$cfg['num_rows'] = $jml_data;
-		$this->paging->init($cfg);
+    private function filterku_sql($nik = '')
+    {
+        if (! empty($nik)) {
+            $this->db->where('u.id_pend', $nik);
+        }
+    }
 
-		return $this->paging;
-	}
+    public function paging($p = 1, $o = 0)
+    {
+        $this->db->select('COUNT(*) AS jml');
 
-	private function list_data_sql()
-	{
-		$sql = " FROM log_surat u
-			LEFT JOIN tweb_penduduk n ON u.id_pend = n.id
-			LEFT JOIN tweb_surat_format k ON u.id_format_surat = k.id
-			LEFT JOIN tweb_desa_pamong s ON u.id_pamong = s.pamong_id
-			LEFT JOIN tweb_penduduk p ON s.id_pend = p.id
-			LEFT JOIN user w ON u.id_user = w.id
-			WHERE 1 ";
-		$sql .= $this->search_sql();
-		$sql .= $this->filter_sql();
-		$sql .= $this->jenis_sql();
-		return $sql;
-	}
+        $row      = $this->list_data_sql()->row_array();
+        $jml_data = $row['jml'];
 
-	// $limit = 0 mengambil semua
-	public function list_data($o=0, $offset=0, $limit=0)
-	{
-		//Ordering SQL
-		switch ($o)
-		{
-			case 1: $order_sql = ' ORDER BY u.no_surat * 1'; break;
-			case 2: $order_sql = ' ORDER BY u.no_surat * 1 DESC'; break;
-			case 3: $order_sql = ' ORDER BY nama'; break;
-			case 4: $order_sql = ' ORDER BY nama DESC'; break;
-			case 5: $order_sql = ' ORDER BY u.tanggal'; break;
-			case 6: $order_sql = ' ORDER BY u.tanggal DESC'; break;
+        $this->load->library('paging');
+        $cfg['page']     = $p;
+        $cfg['per_page'] = $this->session->per_page;
+        $cfg['num_rows'] = $jml_data;
+        $this->paging->init($cfg);
 
-			default:$order_sql = ' ORDER BY u.tanggal DESC';
-		}
+        return $this->paging;
+    }
 
-		//Paging SQL
-		$paging_sql = ($limit > 0 ) ? ' LIMIT ' .$offset. ',' .$limit : '';
+    private function list_data_sql()
+    {
+        // TODO : Sederhanakan, ini berulang
+        $this->db
+            ->join('tweb_penduduk AS n', 'u.id_pend = n.id', 'left')
+            ->join('tweb_surat_format AS k', 'u.id_format_surat = k.id', 'left')
+            ->join('tweb_desa_pamong AS s', 'u.id_pamong = s.pamong_id', 'left')
+            ->join('tweb_penduduk AS p', 's.id_pend = p.id', 'left')
+            ->join('user AS w', 'u.id_user = w.id', 'left');
+        $this->search_sql();
+        $this->tahun_sql();
+        $this->bulan_sql();
+        $this->jenis_sql();
 
-		//Main Query
-		$select_sql = "SELECT u.*, n.nama AS nama, w.nama AS nama_user, n.nik AS nik, k.nama AS format, k.url_surat as berkas, k.kode_surat as kode_surat, s.id_pend as pamong_id_pend, s.pamong_nama AS pamong, p.nama as nama_pamong_desa ";
+        return $this->db->get('log_surat u');
+    }
 
-		$sql = $select_sql . $this->list_data_sql();
-		$sql .= $order_sql;
-		$sql .= $paging_sql;
+    // $limit = 0 mengambil semua
+    public function list_data($o = 0, $offset = 0, $limit = null)
+    {
+        //Ordering SQL
+        switch ($o) {
+            case 1: $this->db->order_by('(u.no_surat) * 1'); break;
 
-		$query = $this->db->query($sql);
-		$data = $query->result_array();
+            case 2: $this->db->order_by('(u.no_surat) * 1 DESC'); break;
 
-		//Formating Output
-		$j = $offset;
-		for ($i=0; $i<count($data); $i++)
-		{
-			$data[$i]['no'] = $j+1;
-			$data[$i]['t'] = $data[$i]['id_pend'];
+            case 3: $this->db->order_by('nama'); break;
 
-			if ($data[$i]['id_pend'] == -1)
-				$data[$i]['id_pend'] = "Masuk";
-			else
-				$data[$i]['id_pend'] = "Keluar";
-			if (!empty($data[$i]['pamong_id_pend']))
-				// Pamong desa
-				$data[$i]['pamong'] = $data[$i]['nama_pamong_desa'];
+            case 4: $this->db->order_by('nama', 'DESC'); break;
 
-			$j++;
-		}
-		return $data;
-	}
+            case 5: $this->db->order_by('u.tanggal'); break;
 
-	public function list_data_keterangan($id)
-	{
-		$this->db->select('id, keterangan');
-		$this->db->from('log_surat');
-		$this->db->where('id', $id);
+            case 6: $this->db->order_by('u.tanggal', 'DESC'); break;
 
-		return $this->db->get()->row_array();
-	}
+            default:$this->db->order_by('u.tanggal', 'DESC');
+        }
 
-	public function update_keterangan($id, $data)
-	{
-		$this->db->where('id', $id);
-		$outp = $this->db->update('log_surat', $data);
+        // TODO : Sederhanakan, ini berulang
+        $this->db
+            ->select('u.*, n.nama AS nama, w.nama AS nama_user, n.nik AS nik, k.nama AS format, k.url_surat as berkas, k.kode_surat as kode_surat, s.id_pend as pamong_id_pend')
+            ->select('(case when p.nama is not null then p.nama else s.pamong_nama end) as pamong_nama')
+            ->limit($limit, $offset);
 
-		status_sukses($outp); //Tampilkan Pesan
-	}
+        $data = $this->list_data_sql()->result_array();
 
-	public function paging_perorangan($nik='', $p=1, $o=0)
-	{
-		if (!empty($nik))
-		{
-			$sql = "SELECT count(*) as jml " . $this->list_data_perorangan_sql($nik);
-			$query  = $this->db->query($sql);
-			$row = $query->row_array();
-			$jml_data = $row['jml'];
-		}
-		else
-			$jml_data = 0;
+        //Formating Output
+        $j = $offset;
 
-		$this->load->library('paging');
-		$cfg['page'] = $p;
-		$cfg['per_page'] = $_SESSION['per_page'];
-		$cfg['num_rows'] = $jml_data;
-		$this->paging->init($cfg);
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['no'] = $j + 1;
+            $data[$i]['t']  = $data[$i]['id_pend'];
 
-		return $this->paging;
-	}
+            if ($data[$i]['id_pend'] == -1) {
+                $data[$i]['id_pend'] = 'Masuk';
+            } else {
+                $data[$i]['id_pend'] = 'Keluar';
+                $this->rincian_file($data, $i);
+            }
 
-	private function list_data_perorangan_sql($nik)
-	{
-		$sql = " FROM log_surat u
-			LEFT JOIN tweb_penduduk n ON u.id_pend = n.id
-			LEFT JOIN tweb_surat_format k ON u.id_format_surat = k.id
-			LEFT JOIN tweb_desa_pamong s ON u.id_pamong = s.pamong_id
-			LEFT JOIN user w ON u.id_user = w.id
-			WHERE 1 ";
-		$sql .= $this->filterku_sql($nik);
-		return $sql;
-	}
+            $j++;
+        }
 
-	public function list_data_perorangan($nik='', $o=0, $offset=0, $limit=500)
-	{
-		if (empty($nik)) return array();
+        return $data;
+    }
 
-		//Ordering SQL
-		switch ($o)
-		{
-			case 1: $order_sql = ' ORDER BY u.no_surat * 1'; break;
-			case 2: $order_sql = ' ORDER BY u.no_surat * 1 DESC'; break;
-			case 3: $order_sql = ' ORDER BY nama'; break;
-			case 4: $order_sql = ' ORDER BY nama DESC'; break;
-			case 5: $order_sql = ' ORDER BY u.tanggal'; break;
-			case 6: $order_sql = ' ORDER BY u.tanggal DESC'; break;
+    private function rincian_file(&$data, $i)
+    {
+        $nama_surat = pathinfo($data[$i]['nama_surat'], PATHINFO_FILENAME);
 
-			default:$order_sql = ' ORDER BY u.tanggal DESC';
-		}
+        if ($nama_surat) {
+            $berkas_rtf      = $nama_surat . '.rtf';
+            $berkas_pdf      = $nama_surat . '.pdf';
+            $berkas_php      = $nama_surat . '.php';
+            $berkas_qr       = $nama_surat . '.png';
+            $berkas_lampiran = $nama_surat . '_lampiran.pdf';
+        } else {
+            $berkas_rtf      = $data[$i]['berkas'] . '_' . $data[$i]['nik'] . '_' . date('Y-m-d') . '.rtf';
+            $berkas_pdf      = $data[$i]['berkas'] . '_' . $data[$i]['nik'] . '_' . date('Y-m-d') . '.pdf';
+            $berkas_php      = $data[$i]['berkas'] . '_' . $data[$i]['nik'] . '_' . date('Y-m-d') . '.php';
+            $berkas_qr       = $data[$i]['berkas'] . '_' . $data[$i]['nik'] . '_' . date('Y-m-d') . '.png';
+            $berkas_lampiran = $data[$i]['berkas'] . '_' . $data[$i]['nik'] . '_' . date('Y-m-d') . '._lampiran.pdf';
+        }
 
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+        $data[$i]['file_rtf']      = LOKASI_ARSIP . $berkas_rtf;
+        $data[$i]['file_pdf']      = LOKASI_ARSIP . $berkas_pdf;
+        $data[$i]['file_qr']       = LOKASI_MEDIA . $berkas_qr;
+        $data[$i]['file_lampiran'] = LOKASI_ARSIP . $berkas_lampiran;
+    }
 
-		$select_sql = "SELECT u.*, n.nama AS nama, w.nama AS nama_user, n.nik AS nik, k.nama AS format, k.url_surat as berkas, s.pamong_nama AS pamong ";
+    public function update_keterangan($id, $data)
+    {
+        $this->db->where('id', $id);
+        $outp = $this->db->update('log_surat', $data);
 
-		$sql = $select_sql . $this->list_data_perorangan_sql($nik);
-		$sql .= $order_sql;
-		$sql .= $paging_sql;
+        status_sukses($outp); //Tampilkan Pesan
+    }
 
-		$query = $this->db->query($sql);
-		$data = $query->result_array();
+    public function paging_perorangan($nik = '', $p = 1, $o = 0)
+    {
+        if (! empty($nik)) {
+            $this->db->select('count(*) as jml');
+            $row      = $this->list_data_perorangan_sql($nik)->row_array();
+            $jml_data = $row['jml'];
+        } else {
+            $jml_data = 0;
+        }
 
-		//Formating Output
-		$j = $offset;
-		for ($i=0; $i<count($data); $i++)
-		{
-			$data[$i]['no']=$j+3;
-			$j++;
-		}
-		return $data;
-	}
+        $this->load->library('paging');
+        $cfg['page']     = $p;
+        $cfg['per_page'] = $this->session->per_page;
+        $cfg['num_rows'] = $jml_data;
+        $this->paging->init($cfg);
 
-	public function nama_surat_arsip($url, $nik, $nomor)
-	{
-		// Nama surat untuk surat keterangan di mana NIK = 1234567890123456 dan
-		// nomor surat = 503/V.58.IV.135/III pada tanggal 27 Juli 2016 akan seperti ini:
-		// surat_ket_pengantar_1234567890123456_2016-07-27_503-V.58.IV.135-III.rtf
-		$nomor_surat = str_replace("'", '', $nomor);
-		$nomor_surat = preg_replace('/[^a-zA-Z0-9.	]/', '-', $nomor_surat);
-		$nama_surat = $url."_".$nik."_".date("Y-m-d")."_".$nomor_surat.".rtf";
-		return $nama_surat;
-	}
+        return $this->paging;
+    }
 
-	public function log_surat($data_log_surat)
-	{
-		$url_surat = $data_log_surat['url_surat'];
-		$nama_surat = $data_log_surat['nama_surat'];
-		unset($data_log_surat['url_surat']);
-		unset($data_log_surat['pamong_nama']);
+    private function list_data_perorangan_sql($nik)
+    {
+        // TODO : Sederhanakan, ini berulang
+        $this->db
+            ->join('tweb_penduduk AS n', 'u.id_pend = n.id', 'left')
+            ->join('tweb_surat_format AS k', 'u.id_format_surat = k.id', 'left')
+            ->join('tweb_desa_pamong AS s', 'u.id_pamong = s.pamong_id', 'left')
+            ->join('tweb_penduduk AS p', 's.id_pend = p.id', 'left')
+            ->join('user AS w', 'u.id_user = w.id', 'left');
+        $this->filterku_sql($nik);
 
-		foreach ($data_log_surat as $key => $val)
-		{
-			$data[$key] = $val;
-		}
+        return $this->db->get('log_surat u');
+    }
 
-		$sql = "SELECT id FROM tweb_surat_format WHERE url_surat = ?";
-		$query = $this->db->query($sql, $url_surat);
-		if ($query->num_rows() > 0)
-		{
-			$pam = $query->row_array();
-			$data['id_format_surat'] = $pam['id'];
-		}
-		else
-		{
-			$data['id_format_surat'] = $url_surat;
-		}
+    public function list_data_perorangan($nik = '', $o = 0, $offset = 0, $limit = 500)
+    {
+        if (empty($nik)) {
+            return [];
+        }
 
-		$data['id_pamong'] = $data_log_surat['id_pamong'];
-		if ($data['id_pamong'] == '')
-			$data['id_pamong'] = 1;
+        //Ordering SQL
+        switch ($o) {
+            case 1: $this->db->order_by('(u.no_surat) * 1'); break;
 
-		$data['bulan'] = date('m');
-		$data['tahun'] = date('Y');
-		$data['tanggal'] = date('Y-m-d H:i:s');
-		//print_r($data);
-		if (!empty($nama_surat))
-		/**
-			Ekspor Dok:
-			Penambahan atau update log disesuaikan dengan file surat yang tersimpan di arsip,
-			sehingga hanya ada satu entri di log surat untuk setiap versi surat di arsip.
-			File surat disimpan di arsip untuk setiap URL-NIK-nomor surat-tanggal yang unik,
-			lihat fungsi nama_surat_arsip (kolom nama_surat di tabel log_surat).
-			Entri itu akan berisi timestamp (pencetakan) terakhir untuk file surat yang bersangkutan.
-		*/
-		{
-			$log_id = $this->db->select('id')->from('log_surat')->where('nama_surat', $nama_surat)->limit(1)->get()->row()->id;
-		}
-		else
-		// Cetak:
-		// Sama dengan aturan Ekspor Dok, hanya URL-NIK-nomor surat-tanggal diambil dari data kolom
-		{
-			$log_id = $this->db->select('id')->from('log_surat')->
-				where('id_format_surat', $data['id_format_surat'])->
-				where('id_pend', $data['id_pend'])->
-				where('no_surat', $data['no_surat'])->
-				where('DATE_FORMAT(tanggal, "%Y-%m-%d") =', date('Y-m-d'))->
-				limit(1)->get()->row()->id;
-		}
-		if ($log_id)
-		{
-			$this->db->where('id', $log_id);
-			$this->db->update('log_surat', $data);
-		}
-		else
-		{
-			$this->db->insert('log_surat', $data);
-		}
+            case 2: $this->db->order_by('(u.no_surat) * 1 DESC'); break;
 
-	}
+            case 3: $this->db->order_by('nama'); break;
 
-	public function grafik()
-	{
-		$data = $this->db
-				->select('f.nama, COUNT(l.id) as jumlah')
-				->from('log_surat l')
-				->join('tweb_surat_format f', 'l.id_format_surat=f.id', 'left')
-				->group_by('f.nama')
-				->get()
-				->result_array();
-		return $data;
-	}
+            case 4: $this->db->order_by('nama', 'DESC'); break;
 
-	public function update($id=0)
-	{
-		status_sukses($outp); //Tampilkan Pesan
-	}
+            case 5: $this->db->order_by('u.tanggal'); break;
 
-	public function delete($id='')
-	{
-		$_SESSION['success'] = 1;
-		$_SESSION['error_msg'] = '';
-		$arsip = $this->db->select('nama_surat, lampiran')->
-			where('id',$id)->
-			get('log_surat')->
-			row_array();
-		$berkas_surat = pathinfo($arsip['nama_surat'], PATHINFO_FILENAME);
-		unlink(LOKASI_ARSIP.$berkas_surat.".rtf");
-		unlink(LOKASI_ARSIP.$berkas_surat.".pdf");
-		if (!empty($arsip['lampiran'])) unlink(LOKASI_ARSIP.$arsip['lampiran']);
+            case 6: $this->db->order_by('u.tanggal', 'DESC'); break;
 
-		if (!$this->db->where('id', $id)->delete('log_surat'))
-		{	// Jika query delete terjadi error
-			$_SESSION['success'] = -1;								// Maka, nilai success jadi -1, untuk memunculkan notifikasi error
-			$error = $this->db->error();
-			$_SESSION['error_msg'] = $error['message']; // Pesan error ditampung disession
-		}
-	}
+            default:  $this->db->order_by('u.tanggal', 'DESC');
 
-	public function list_penduduk()
-	{
-		$sql = "SELECT id, nik, nama FROM tweb_penduduk WHERE status = 1";
-		$query = $this->db->query($sql);
-		$data = $query->result_array();
+        }
 
-		//Formating Output
-		for ($i=0; $i<count($data); $i++)
-		{
-			$data[$i]['alamat']="Alamat :".$data[$i]['nama'];
-		}
-		return $data;
-	}
+        // TODO : Sederhanakan, ini berulang
+        $this->db->select('u.*, n.nama AS nama, w.nama AS nama_user, n.nik AS nik, k.nama AS format, k.url_surat as berkas, k.kode_surat as kode_surat')
+            ->select('(case when p.nama is not null then p.nama else s.pamong_nama end) as pamong_nama')
+            ->limit($limit, $offset);
 
-	public function jml_surat_keluar()
-	{
-		$jml = $this->db->select('count(*) as jml')->get('log_surat')->row()->jml;
-		return $jml;
-	}
+        $data = $this->list_data_perorangan_sql($nik)->result_array();
 
-	public function list_tahun_surat()
-	{
-		$query = $this->db->distinct()->
-			select('YEAR(tanggal) AS tahun')->
-			order_by('YEAR(tanggal)','DESC')->
-			get('log_surat')->result_array();
-		return $query;
-	}
+        //Formating Output
+        $j = $offset;
 
-	public function list_jenis_surat()
-	{
-		$query = $this->db->distinct()->
-			select('k.nama as nama_surat')->
-			from('log_surat u')->
-			join('tweb_surat_format k', 'u.id_format_surat = k.id', 'left')->
-			order_by('nama_surat')->
-			get()->result_array();
-		return $query;
-	}
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['no'] = $j + 3;
+            $this->rincian_file($data, $i);
+            $j++;
+        }
 
+        return $data;
+    }
+
+    public function nama_surat_arsip($url, $nik, $nomor)
+    {
+        // Nama surat untuk surat keterangan di mana NIK = 1234567890123456 dan
+        // nomor surat = 503/V.58.IV.135/III pada tanggal 27 Juli 2016 akan seperti ini:
+        // surat_ket_pengantar_1234567890123456_2016-07-27_503-V.58.IV.135-III.rtf
+        $nomor_surat = str_replace("'", '', $nomor);
+        $nomor_surat = preg_replace('/[^a-zA-Z0-9.	]/', '-', $nomor_surat);
+
+        return $url . '_' . $nik . '_' . date('Y-m-d') . '_' . $nomor_surat . '.rtf';
+    }
+
+    public function log_surat($data_log_surat)
+    {
+        $url_surat  = $data_log_surat['url_surat'];
+        $nama_surat = $data_log_surat['nama_surat'];
+        unset($data_log_surat['url_surat'], $data_log_surat['pamong_nama']);
+
+        foreach ($data_log_surat as $key => $val) {
+            $data[$key] = $val;
+        }
+
+        $sql   = 'SELECT id FROM tweb_surat_format WHERE url_surat = ?';
+        $query = $this->db->query($sql, $url_surat);
+        if ($query->num_rows() > 0) {
+            $pam                     = $query->row_array();
+            $data['id_format_surat'] = $pam['id'];
+        } else {
+            $data['id_format_surat'] = $url_surat;
+        }
+
+        $data['id_pamong'] = $data_log_surat['id_pamong'];
+        if ($data['id_pamong'] == '') {
+            $data['id_pamong'] = 1;
+        }
+
+        $data['bulan']   = date('m');
+        $data['tahun']   = date('Y');
+        $data['tanggal'] = date('Y-m-d H:i:s');
+        //print_r($data);
+        if (! empty($nama_surat)) /**
+            Ekspor Dok:
+            Penambahan atau update log disesuaikan dengan file surat yang tersimpan di arsip,
+            sehingga hanya ada satu entri di log surat untuk setiap versi surat di arsip.
+            File surat disimpan di arsip untuk setiap URL-NIK-nomor surat-tanggal yang unik,
+            lihat fungsi nama_surat_arsip (kolom nama_surat di tabel log_surat).
+            Entri itu akan berisi timestamp (pencetakan) terakhir untuk file surat yang bersangkutan.
+        */
+        {
+            $log_id = $this->db->select('id')->from('log_surat')->where('nama_surat', $nama_surat)->limit(1)->get()->row()->id;
+        } else { // Cetak:
+            // Sama dengan aturan Ekspor Dok, hanya URL-NIK-nomor surat-tanggal diambil dari data kolom
+            $log_id = $this->db->select('id')->from('log_surat')->
+                where('id_format_surat', $data['id_format_surat'])->
+                where('id_pend', $data['id_pend'])->
+                where('no_surat', $data['no_surat'])->
+                where('DATE_FORMAT(tanggal, "%Y-%m-%d") =', date('Y-m-d'))->
+                limit(1)->get()->row()->id;
+        }
+        if ($log_id) {
+            $this->db->where('id', $log_id);
+            $this->db->update('log_surat', $data);
+        } else {
+            $this->db->insert('log_surat', $data);
+        }
+    }
+
+    public function grafik()
+    {
+        return $this->db
+            ->select('f.nama, COUNT(l.id) as jumlah')
+            ->from('log_surat l')
+            ->join('tweb_surat_format f', 'l.id_format_surat=f.id', 'left')
+            ->group_by('f.nama')
+            ->get()
+            ->result_array();
+    }
+
+    public function delete($id = '')
+    {
+        $_SESSION['success']   = 1;
+        $_SESSION['error_msg'] = '';
+        $arsip                 = $this->db->select('nama_surat, lampiran')->
+            where('id', $id)->
+            get('log_surat')->
+            row_array();
+        $berkas_surat = pathinfo($arsip['nama_surat'], PATHINFO_FILENAME);
+        unlink(LOKASI_ARSIP . $berkas_surat . '.rtf');
+        unlink(LOKASI_ARSIP . $berkas_surat . '.pdf');
+        unlink(LOKASI_ARSIP . $berkas_surat . '.php');
+        unlink(LOKASI_MEDIA . $berkas_surat . '.png');
+        if (! empty($arsip['lampiran'])) {
+            unlink(LOKASI_ARSIP . $arsip['lampiran']);
+        }
+
+        if (! $this->db->where('id', $id)->delete('log_surat')) {	// Jika query delete terjadi error
+            $_SESSION['success']   = -1;								// Maka, nilai success jadi -1, untuk memunculkan notifikasi error
+            $error                 = $this->db->error();
+            $_SESSION['error_msg'] = $error['message']; // Pesan error ditampung disession
+        }
+    }
+
+    public function list_penduduk()
+    {
+        $sql   = 'SELECT id, nik, nama FROM tweb_penduduk WHERE status = 1';
+        $query = $this->db->query($sql);
+        $data  = $query->result_array();
+
+        //Formating Output
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['alamat'] = 'Alamat :' . $data[$i]['nama'];
+        }
+
+        return $data;
+    }
+
+    public function jml_surat_keluar()
+    {
+        return $this->db->select('count(*) as jml')->get('log_surat')->row()->jml;
+    }
+
+    public function list_tahun_surat()
+    {
+        return $this->db->distinct()
+            ->select('YEAR(tanggal) AS tahun')
+            ->order_by('YEAR(tanggal)', 'DESC')
+            ->get('log_surat')
+            ->result_array();
+    }
+
+    public function list_bulan_surat()
+    {
+        return $this->db->distinct()
+            ->select('MONTH(tanggal) AS bulan')
+            ->where('YEAR(tanggal)', $this->session->tahun)
+            ->order_by('MONTH(tanggal)', 'ASC')
+            ->get('log_surat')
+            ->result_array();
+    }
+
+    public function list_jenis_surat()
+    {
+        return $this->db->distinct()->
+            select('k.nama as nama_surat')->
+            from('log_surat u')->
+            join('tweb_surat_format k', 'u.id_format_surat = k.id', 'left')->
+            order_by('nama_surat')->
+            where('k.nama is not null')->
+            get()->result_array();
+    }
+
+    public function verifikasi_data_surat($id, $kode_desa)
+    {
+        $this->load->model('penomoran_surat_model');
+
+        // TODO : Sederhanakan, ini berulang
+        $data = $this->db
+            ->select('l.*, k.nama AS perihal, k.kode_surat, n.nama AS nama_penduduk, s.jabatan AS pamong_jabatan')
+            ->select('(case when p.nama is not null then p.nama else s.pamong_nama end) as pamong_nama')
+            ->from('log_surat l')
+            ->join('tweb_penduduk n', 'l.id_pend = n.id', 'left')
+            ->join('tweb_surat_format k', 'l.id_format_surat = k.id', 'left')
+            ->join('tweb_desa_pamong s', 'l.id_pamong = s.pamong_id', 'left')
+            ->join('tweb_penduduk p', 's.id_pend = p.id', 'left')
+            ->where('l.id', $id)
+            ->get()
+            ->row();
+
+        if (! $data) {
+            return false;
+        }
+
+        $format['config']['kode_desa'] = $kode_desa;
+        $format['input']['nomor']      = $data->no_surat;
+        $format['surat']               = [
+            'cek_thn'    => $data->tahun,
+            'cek_bln'    => $data->bulan,
+            'nomor'      => $data->no_surat,
+            'kode_surat' => $data->kode_surat,
+        ];
+
+        $data->nomor_surat = $this->penomoran_surat_model->format_penomoran_surat($format);
+
+        return $data;
+    }
+
+    public function get_surat($id = 0)
+    {
+        return $this->db
+            ->select('nama_surat, lampiran, keterangan')
+            ->where('id', $id)
+            ->get('log_surat')
+            ->row();
+    }
 }
-?>

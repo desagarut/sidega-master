@@ -96,7 +96,6 @@ function AmbilFoto($foto, $ukuran = 'kecil_', $sex = '1')
             $file_foto = Foto_Default(null, $sex);
         }
     }
-
     return $file_foto;
 }
 

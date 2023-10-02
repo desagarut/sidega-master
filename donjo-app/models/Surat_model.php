@@ -900,7 +900,6 @@ class Surat_model extends CI_Model
                 '[ayah_nik]'             => $individu['ayah_nik'],
                 '[cacat]'                => $individu['cacat'],
                 '[dokumen_pasport]'      => $individu['dokumen_pasport'],
-                '[dusun]'                => $individu['dusun'],
                 '[gol_darah]'            => $individu['gol_darah'],
                 '[hubungan]'             => $individu['hubungan'],
                 '[ibu_nik]'              => $individu['ibu_nik'],
@@ -912,6 +911,7 @@ class Surat_model extends CI_Model
                 '[no_ktp]'               => $individu['nik'],
                 '[pendidikan]'           => $individu['pendidikan'],
                 '[pekerjaan]'            => $individu['pekerjaan'],
+                '[dusun]'                => $individu['dusun'],
                 '[rw]'                   => $individu['rw'],
                 '[rt]'                   => $individu['rt'],
                 '[sex]'                  => $individu['sex'],
@@ -926,6 +926,8 @@ class Surat_model extends CI_Model
                 '[usia]'                 => "{$individu['umur']} Tahun",
                 '*usia'                  => "{$individu['umur']} Tahun",
                 '[warga_negara]'         => $individu['warganegara'],
+                '[foto]'                => $individu['foto'],
+
 
                 // Data RTM
                 '[bdt]' => $individu['bdt'] ?? '-',
@@ -955,7 +957,7 @@ class Surat_model extends CI_Model
             //DATA DARI FORM INPUT SURAT
             // Kode isian yang disediakan pada SID CRI
             $this->substitusi_nomor_surat($input['nomor'], $buffer);
-            $buffer = str_replace('[nomor_sorat]', "{$input['nomor']}", $buffer);
+            $buffer = str_replace('[nomor_surat]', "{$input['nomor']}", $buffer);
             if (isset($input['berlaku_dari'])) {
                 $buffer = str_replace('[mulai_berlaku]', tgl_indo(date('Y m d', strtotime($input['berlaku_dari']))), $buffer);
             }

@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Surat_master extends Admin_Controller {
+class Surat_master extends Admin_Controller
+{
 
 	public function __construct()
 	{
@@ -55,14 +56,11 @@ class Surat_master extends Admin_Controller {
 		$data['list_ref_syarat'] = $this->lapor_model->get_surat_ref_all();
 		$data['list_ref_masa'] = $this->referensi_model->list_ref(MASA_BERLAKU);
 
-		if ($id)
-		{
+		if ($id) {
 			$data['surat_master'] = $this->surat_master_model->get_surat_format($id);
 			$data['form_action'] = site_url("surat_master/update/$p/$o/$id");
 			$data['syarat_surat'] = $this->lapor_model->get_current_surat_ref($id);
-		}
-		else
-		{
+		} else {
 			$data['surat_master'] = NULL;
 			$data['form_action'] = site_url("surat_master/insert");
 			$data['syarat_surat'] = NULL;
@@ -167,8 +165,7 @@ class Surat_master extends Admin_Controller {
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
-		if ($id)
-		{
+		if ($id) {
 			$data['surat_master'] = $this->surat_master_model->get_surat_format($id);
 			$data['inputs'] = $this->surat_master_model->get_kode_isian($data['surat_master']);
 		}
@@ -188,5 +185,4 @@ class Surat_master extends Admin_Controller {
 		$this->surat_master_model->favorit($id, $k);
 		redirect("surat_master");
 	}
-
 }
