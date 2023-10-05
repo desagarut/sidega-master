@@ -572,6 +572,15 @@ class Referensi_model extends CI_Model {
 		$list_ref = unserialize($stat);
 		return $list_ref;
 	}
+	
+	public function impor_list_data($tabel, $tambahan = [], $kecuali = '', $termasuk = null)
+    {
+        $data = $this->list_data($tabel, $kecuali, $termasuk);
+        $data = array_flip(array_combine(array_column($data, 'id'), array_column($data, 'nama')));
+
+        return array_change_key_case(array_merge($data, $tambahan));
+    }
+
 
 }
 ?>

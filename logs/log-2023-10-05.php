@@ -1,0 +1,1 @@
+ERROR - 2023-10-05 21:56:25 --> Severity: Error --> Allowed memory size of 536870912 bytes exhausted (tried to allocate 265458816 bytes) D:\laragon\www\sidega-master\vendor\codeigniter\framework\system\libraries\Zip.php 272

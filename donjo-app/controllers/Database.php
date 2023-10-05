@@ -1,16 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
+//require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
 
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-use Box\Spout\Common\Entity\Row;
+//use Box\Spout\Common\Entity\Row;
 
 class Database extends Admin_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->dbforge();
+		//$this->load->dbforge();
 		$this->load->library('zip');
 		$this->load->model(['import_model', 'export_model', 'database_model']);
 
@@ -142,7 +142,9 @@ class Database extends Admin_Controller {
 			['Hamil', 'hamil'],
 			['KTP-el', 'ktp_el'],
 			['Status Rekam', 'status_rekam'],
-			['Alamat Sekarang', 'alamat_sekarang']
+			['Alamat Sekarang', 'alamat_sekarang'],
+			['Status Dasar', 'status_dasar'],
+            ['Tag ID Card', 'tag_id_card'],
 		];
 		if ($opendk)
 		{
@@ -150,7 +152,6 @@ class Database extends Admin_Controller {
 			// Kolom tambahan khusus OpenDK
 			$judul[] = 'id';
 			$judul[] = 'foto';
-			$judul[] = 'status_dasar';
 			$judul[] = 'created_at';
 			$judul[] = 'updated_at';
 			$judul[] = 'desa_id';
@@ -205,9 +206,10 @@ class Database extends Admin_Controller {
 					$row->ktp_el,
 					$row->status_rekam,
 					$row->alamat_sekarang,
+					$row->status_dasar,
+					$row->tag_id_card,
 					$row->id,
 					$row->foto,
-					$row->status_dasar,
 					$row->created_at,
 					$row->updated_at,
 					$row->desa_id,
@@ -269,8 +271,13 @@ class Database extends Admin_Controller {
 					$row->hamil,
 					$row->ktp_el,
 					$row->status_rekam,
-					$row->alamat_sekarang
-				);
+					$row->alamat_sekarang,
+					$row->status_dasar,
+					$row->tag_id_card,
+					$row->suku,
+					$row->asuransi,
+					$row->no_asuransi,
+					);
 				$rowFromValues = WriterEntityFactory::createRowFromArray($penduduk);
 				$writer->addRow($rowFromValues);
 			}
@@ -312,11 +319,13 @@ class Database extends Admin_Controller {
 		redirect('database/kosongkan');
 	}
 
-	// Impor Pengelompokan Data Rumah Tangga
-	public function ppls_individu()
-	{
-		$this->import_model->pbdt_individu();
-	}
+    // Impor Pengelompokan Data Rumah Tangga
+    public function ppls_individu()
+    {
+        $this->redirect_hak_akses('u');
+        $this->import_model->pbdt_individu(isset($_POST['hapus_rtm']));
+        redirect("{$this->controller}/import");
+    }
 
 	public function exec_backup()
 	{
