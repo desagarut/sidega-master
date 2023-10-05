@@ -124,10 +124,10 @@
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
         $data['nama_instansi'] = $this->input->post('nama_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
-        $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
-        $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
+        $data['nama_bank'] = $this->input->post('nama_bank');
+        $data['nama_cabang'] = $this->input->post('nama_cabang');
         $data['no_rek'] = $this->input->post('no_rek');
-        $data['nama_rekanan_rekening'] = $this->input->post('nama_rekanan_rekening');
+        $data['nama_rekening'] = $this->input->post('nama_rekening');
         $data['telepon'] = $this->input->post('telepon');
         $data['email'] = $this->input->post('email');
         $data['alamat'] = $this->input->post('alamat');
@@ -170,10 +170,10 @@
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
         $data['nama_instansi'] = $this->input->post('nama_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
-        $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
-        $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
+        $data['nama_bank'] = $this->input->post('nama_bank');
+        $data['nama_cabang'] = $this->input->post('nama_cabang');
         $data['no_rek'] = $this->input->post('no_rek');
-        $data['nama_rekanan_rekening'] = $this->input->post('nama_rekanan_rekening');
+        $data['nama_rekening'] = $this->input->post('nama_rekening');
         $data['telepon'] = $this->input->post('telepon');
         $data['email'] = $this->input->post('email');
         $data['alamat'] = $this->input->post('alamat');
