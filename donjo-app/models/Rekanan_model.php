@@ -122,7 +122,7 @@
         $data['kode_rekanan'] = $this->input->post('kode_rekanan');
         $data['nik_rekanan'] = $this->input->post('nik_rekanan');
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
-        $data['nama_rekanan_instansi'] = $this->input->post('nama_rekanan_instansi');
+        $data['nama_instansi'] = $this->input->post('nama_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
         $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
         $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
@@ -168,7 +168,7 @@
         $data['kode_rekanan'] = $this->input->post('kode_rekanan');
         $data['nik_rekanan'] = $this->input->post('nik_rekanan');
         $data['npwp_rekanan'] = $this->input->post('npwp_rekanan');
-        $data['nama_rekanan_instansi'] = $this->input->post('nama_rekanan_instansi');
+        $data['nama_instansi'] = $this->input->post('nama_instansi');
         $data['jenis_usaha'] = $this->input->post('jenis_usaha');
         $data['nama_rekanan_bank'] = $this->input->post('nama_rekanan_bank');
         $data['nama_rekanan_cabang'] = $this->input->post('nama_rekanan_cabang');
