@@ -330,11 +330,11 @@
 		$thnskrg = (date("Y"));
 		if (($blnlahir == $blnskrg) and ($thnlahir == $thnskrg))
 		{
-			$x['id_detail'] = '1';
+			$x['kode_peristiwa'] = '1';
 		}
 		else
 		{
-			$x['id_detail'] = '5';
+			$x['kode_peristiwa'] = '5';
 		}
 
 		$x['id_pend'] = $id_pend;
@@ -727,11 +727,11 @@
 		$thnskrg = (date("Y"));
 		if (($blnlahir == $blnskrg) and ($thnlahir == $thnskrg))
 		{
-			$id_detail='1';
+			$kode_peristiwa='1';
 		}
 		else
 		{
-			$id_detail='5';
+			$kode_peristiwa='5';
 		}
 
 		if (!$this->validasi_data_keluarga($data)) return;
@@ -754,7 +754,7 @@
 		if (!$outp) $_SESSION = -1;
 
 		$id_pend = $this->db->insert_id();
-		$this->penduduk_model->tulis_log_penduduk($id_pend, $id_detail, $blnskrg, $thnskrg);
+		$this->penduduk_model->tulis_log_penduduk($id_pend, $kode_peristiwa, $blnskrg, $thnskrg);
 	}
 
 	public function get_nokk($id)
