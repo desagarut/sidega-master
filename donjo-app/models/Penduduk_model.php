@@ -580,7 +580,7 @@ class Penduduk_model extends MY_Model
 		if ($error_nik = $this->nik_error($data['ibu_nik'], 'NIK Ibu'))
 			array_push($valid, $error_nik);
 
-		//cek email duplikat
+		/*cek email duplikat
 		if (isset($data['email'])) {
 			$existing_data = $this->db
 				->select('email')
@@ -597,7 +597,7 @@ class Penduduk_model extends MY_Model
         if ($this->penduduk_model->cekTagIdCard($data['tag_id_card'], $id)) {
             $valid[] = 'Tag ID Card sudah digunakan';
         }
-
+*/
 		if (!empty($valid))
 			$_SESSION['validation_error'] = true;
 		return $valid;
