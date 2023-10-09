@@ -13,7 +13,7 @@
                                 <div class="col-sm-10 col-lg-8">
                                     <h1 class="display-5 text-white animated slideInDown"><?= $gambar['judul'] ?></h1>
                                     <a href="<?= 'artikel/' . buat_slug($gambar); ?>" target="_blank" class="btn btn-info py-md-3 px-md-5 me-3 animated slideInLeft">Baca</a>
-                                    <a href="#" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Login</a>
+                                    <a href="<?= site_url('mandiri_web') ?>" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Login</a>
                                 </div>
                             </div>
                         </div>
