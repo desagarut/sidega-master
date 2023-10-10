@@ -143,16 +143,18 @@
                           <table class="table table-bordered table-striped table-hover">
                             <tbody>
                               <tr>
+                                <td width="300">Nama</td>
+                                <td width="1">:</td>
+                                <td>
+                                  <h4><strong><?= strtoupper($penduduk['nama']) ?></strong></h4>
+                                </td>
+                              </tr>
+                              <tr>
                                 <td>Status Dasar</td>
                                 <td>:</td>
                                 <td><span class="<?= ($penduduk['status_dasar_id'] != 1) ? 'label label-danger' : '' ?>"><strong>
                                       <?= strtoupper($penduduk['status_dasar']) ?>
                                     </strong></span></td>
-                              </tr>
-                              <tr>
-                                <td width="300">Nama</td>
-                                <td width="1">:</td>
-                                <td><?= strtoupper($penduduk['nama']) ?></td>
                               </tr>
                               <tr>
                                 <td>Status Kepemilikan KTP</td>

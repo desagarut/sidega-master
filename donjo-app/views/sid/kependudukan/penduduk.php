@@ -153,13 +153,10 @@
 													<tr>
 														<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']; ?>" /></td>
 														<td class="padat"><?= ($key + $paging->offset + 1); ?></td>
-														<td class="aksi">
-															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-green btn-box btn-sm" title="Lihat Detail"><i class="fa fa-search"></i></a>
-															<!--<a href="<? //= site_url("penduduk/form/$p/$o/$data[id]"); 
-																			?>" class="btn bg-orange btn-box btn-sm" title="Ubah Data Penduduk"><i class="fa fa-pencil"></i></a>-->
+														<td class="aksi text-center" >
+															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-purple btn-box btn-sm" title="Lihat Detail">Lihat</i></a><br/>
 															<div class="btn-group">
-																<a href="#" class="btn bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail"><i class="fa fa-list-ol"></i>Aksi</a>
-																<!-- <button type="button" class="btn btn-social btn-box btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-arrow-circle-down'></i> Pilih Aksi</button>-->
+																<a href="#" class="btn btn-social bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail">Aksi <i class="fa fa-arrow-circle-down"></i></a>
 																<ul class="dropdown-menu" role="menu">
 																	<li>
 																		<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-list-ol"></i> Lihat Detail Biodata Penduduk</a>
