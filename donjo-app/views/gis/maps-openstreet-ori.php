@@ -69,6 +69,82 @@
 			// Menampilkan OverLayer Area, Garis, Lokasi
 			layerCustom = tampilkan_layer_area_garis_lokasi(mymap, '<?= addslashes(json_encode($area)) ?>', '<?= addslashes(json_encode($garis)) ?>', '<?= addslashes(json_encode($lokasi)) ?>', '<?= base_url() . LOKASI_SIMBOL_LOKASI ?>', '<?= base_url() . LOKASI_FOTO_AREA ?>', '<?= base_url() . LOKASI_FOTO_GARIS ?>', '<?= base_url() . LOKASI_FOTO_LOKASI ?>');
 
+			//Covid
+			var mylayer = L.featureGroup();
+			var layerControl = {
+				"Peta Sebaran Covid19": mylayer, // opsi untuk show/hide Peta Sebaran covid19 dari geojson dibawah
+			}
+
+			//loading Peta Covid - data geoJSON dari BNPB- https://bnpb-inacovid19.hub.arcgis.com/datasets/data-harian-kasus-per-provinsi-covid-19-indonesia
+			$.getJSON("https://opendata.arcgis.com/datasets/0c0f4558f1e548b68a1c82112744bad3_0.geojson", function(data) {
+				var datalayer = L.geoJson(data, {
+					onEachFeature: function(feature, layer) {
+						var custom_icon = L.icon({
+							"iconSize": 32,
+							"iconUrl": "<?= base_url() ?>assets/images/covid.png"
+						});
+						layer.setIcon(custom_icon);
+
+						var popup_0 = L.popup({
+							"maxWidth": "100%"
+						});
+
+						var html_a = $('<div id="html_a" style="width: 100.0%; height: 100.0%;">' +
+							'<h4><b>' + feature.properties.Provinsi + '</b></h4>' +
+							'<table><tr>' +
+							'<th style="color:red">Positif&nbsp;&nbsp;</th>' +
+							'<th style="color:green">Sembuh&nbsp;&nbsp;</th>' +
+							'<th style="color:black">Meninggal&nbsp;&nbsp;</th>' +
+							'</tr><tr>' +
+							'<td><center><b style="color:red">' + feature.properties.Kasus_Posi + '</b></center></td>' +
+							'<td><center><b style="color:green">' + feature.properties.Kasus_Semb + '</b></center></td>' +
+							'<td><center><b>' + feature.properties.Kasus_Meni + '</b></center></td>' +
+							'</tr></table></div>')[0];
+
+						popup_0.setContent(html_a);
+
+						layer.bindPopup(popup_0, {
+							'className': 'covid_pop'
+						});
+						layer.bindTooltip(feature.properties.Provinsi, {
+							sticky: true,
+							direction: 'top'
+						});
+					},
+				});
+				mylayer.addLayer(datalayer);
+			});
+
+			mylayer.on('add', function() {
+				setTimeout(function() {
+					var bounds = new L.LatLngBounds();
+					if (mylayer instanceof L.FeatureGroup) {
+						bounds.extend(mylayer.getBounds());
+					}
+					if (bounds.isValid()) {
+						mymap.fitBounds(bounds);
+					} else {
+						<?php if (!empty($desa['path'])) : ?>
+							mymap.fitBounds(<?= $desa['path'] ?>);
+						<?php endif; ?>
+					}
+					//$('#covid_status').show();
+					//$('#covid_status_local').show();
+				});
+			});
+
+			//mylayer.on('remove', function() {
+			//	setTimeout(function() {
+			//		$('#covid_status').hide();
+			//		$('#covid_status_local').hide();
+			//		<?php //if (!empty($desa['path'])) : ?>
+			//			mymap.fitBounds(<? //= $desa['path'] ?>);
+			//		<?php //endif; ?>
+			//	});
+			//});
+
+			//End Covid
+
 			//PENDUDUK
 			<?php if ($layer_penduduk == 1 or $layer_keluarga == 1 and !empty($penduduk)) : ?>
 				//Data penduduk
@@ -154,6 +230,8 @@
 			$('#isi_popup_dusun').remove();
 			$('#isi_popup_rw').remove();
 			$('#isi_popup_rt').remove();
+			//$('#covid_status').hide();
+			//$('#covid_status_local').hide();
 		}; //EOF window.onload
 
 	})();
@@ -161,6 +239,7 @@
 <style>
 	#map {
 		width: 100%;
+		/*height: 00px;*/
 		height:86vh;
 	}
 </style>
@@ -170,7 +249,15 @@
 			<div class="col-md-12">
 				<div id="map">
 					<?php include("donjo-app/views/gis/cetak_peta.php"); ?>
+					<!--<div class="leaflet-top leaflet-left">
+						<div id="covid_status">
+							<?php //$this->load->view("gis/covid_peta.php") ?>
+						</div>
+					</div>-->
 					<div class="leaflet-top leaflet-right">
+						<!--<div id="covid_status_local">
+							<?php // $this->load->view("gis/covid_peta_local.php") ?>
+						</div>-->
 						<div class="leaflet-control-layers leaflet-bar leaflet-control">
 							<a class="leaflet-control-control icos" href="#" title="Control Panel" role="button" aria-label="Control Panel" onclick="$('#target1').toggle();$('#target1').removeClass('hidden');$('#target2').hide();"><i class="fa fa-gears"></i></a>
 							<a class="leaflet-control-control icos" href="#" title="Legenda" role="button" aria-label="Legenda" onclick="$('#target2').toggle();$('#target2').removeClass('hidden');$('#target1').hide();"><i class="fa fa-list"></i></a>

@@ -840,3 +840,44 @@ function upload_foto_penduduk($nama_file = null)
 
     return $nama_file;
 }
+
+// Rumah
+define ('MIME_TYPE_RUMAH', serialize (array(
+	'image/jpeg', 'image/pjpeg',
+	'image/png',  'image/x-png' )));
+
+define ('EXT_RUMAH', serialize(array(
+	".jpg", ".jpeg", ".png", "application/x-download",	"application/pdf",
+)));
+
+// Helper Rumah
+function AmbilRumah($rumah)
+{
+	$file_rumah = base_url() . LOKASI_RUMAH . $rumah;
+	return $file_rumah;
+}
+
+// Upload umum. Parameter lokasi dan file di $_FILES
+function UploadKeLokasiRumah($lokasi, $file, $fupload_name, $old_rumah="")
+{
+	$vfile_upload = $lokasi . $fupload_name;
+	move_uploaded_file($file, $vfile_upload);
+	unlink($lokasi . $old_rumah);
+}
+
+function UploadRumah($fupload_name, $old_rumah="")
+{
+	$vfile_upload = LOKASI_RUMAH . $fupload_name;
+	move_uploaded_file($_FILES["satuan"]["tmp_name"], $vfile_upload);
+	unlink(LOKASI_RUMAH . $old_rumah);
+}
+
+function UploadRumah2($fupload_name)
+{
+	$vdir_upload = LOKASI_RUMAH;
+	$vfile_upload = $vdir_upload . $fupload_name;
+	move_uploaded_file($_FILES["rumah"]["tmp_name"], $vfile_upload);
+
+	//unlink($vfile_upload);
+	return true;
+}

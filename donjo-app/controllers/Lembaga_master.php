@@ -10,7 +10,7 @@ class Lembaga_master extends Admin_Controller {
 		parent::__construct();
 		$this->load->model(['lembaga_master_model']);
 		$this->modul_ini = 200;
-		$this->sub_modul_ini = 35;
+		$this->sub_modul_ini = 34;
 		$this->_set_page = ['20', '50', '100'];
 		$this->_list_session = ['cari', 'filter'];
 	}
