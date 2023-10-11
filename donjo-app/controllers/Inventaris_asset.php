@@ -9,7 +9,7 @@ class Inventaris_asset extends Admin_Controller {
 		$this->load->model('inventaris_asset_model');
 		$this->load->model('referensi_model');
 		$this->load->model('surat_model');
-		$this->modul_ini = 305;
+		$this->modul_ini = 15;
 		$this->sub_modul_ini = 61;
 		$this->tab_ini = 5;
 		$this->tipe = 'inventaris_asset';
