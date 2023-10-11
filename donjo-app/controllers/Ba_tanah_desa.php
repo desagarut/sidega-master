@@ -6,7 +6,7 @@ class Ba_tanah_desa extends Admin_Controller
     {
         parent::__construct();
         $this->load->model(['tanah_desa_model', 'pamong_model']);
-        $this->modul_ini     = 300;
+        $this->modul_ini     = 15;
         $this->sub_modul_ini = 301;
     }
 

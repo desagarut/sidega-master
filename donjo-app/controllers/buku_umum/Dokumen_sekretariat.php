@@ -8,9 +8,11 @@ class Dokumen_sekretariat extends Admin_Controller {
 
 		$this->load->model('web_dokumen_model');
 		$this->load->model('referensi_model');
-		$this->modul_ini = 300;
+		$this->modul_ini = 15;
 		$this->sub_modul_ini = 302;
 		$this->_list_session = ['filter', 'cari', 'jenis_peraturan'];
+		$this->set_minsidebar(1);
+
 	}
 
 	public function index($kat=2, $p=1, $o=0)

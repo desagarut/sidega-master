@@ -10,6 +10,8 @@ class Dokumen extends Admin_Controller {
 		$this->load->model('pamong_model');
 		$this->load->model('referensi_model');
 		$this->load->helper('download');
+		$this->set_minsidebar(1);
+
 	}
 
 	public function clear()
@@ -226,9 +228,11 @@ class Dokumen extends Admin_Controller {
 		$data['main'] = $this->web_dokumen_model->list_data($kat, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->web_dokumen_model->autocomplete();
 
-		$this->modul_ini = 300;
+		$this->modul_ini = 15;
 		$this->sub_modul_ini = 301;
-		$this->set_minsidebar(0);
+		$this->load->view('nav', $nav);
+
+		$this->set_minsidebar(1);
 
 		$this->render('dokumen/table_dokumen_lainnya', $data);
 	}

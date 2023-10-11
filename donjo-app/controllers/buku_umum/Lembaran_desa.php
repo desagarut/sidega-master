@@ -1,6 +1,7 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Lembaran_desa extends Admin_Controller {
+class Lembaran_desa extends Admin_Controller
+{
 
 	private $_set_page;
 	private $_list_session;
@@ -10,14 +11,16 @@ class Lembaran_desa extends Admin_Controller {
 		parent::__construct();
 
 		$this->load->model(['web_dokumen_model', 'referensi_model', 'pamong_model']);
-		$this->modul_ini = 300;
+		$this->modul_ini = 15;
 		$this->sub_modul_ini = 301;
+		$this->set_minsidebar(1);
+
 		$this->_list_session = ['filter', 'cari', 'jenis_peraturan'];
 		$this->_set_page = ['20', '50', '100'];
 	}
 
 	// Buku Lembaran Desa dan Berita Desa
-	public function index($p=1, $o=0)
+	public function index($p = 1, $o = 0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
@@ -26,7 +29,7 @@ class Lembaran_desa extends Admin_Controller {
 		$data['cari'] = $this->session->cari ?: '';
 
 		if (isset($_POST['per_page']))
-			$_SESSION['per_page']=$_POST['per_page'];
+			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
 
 		$data['paging'] = $this->web_dokumen_model->paging($kat, $p, $o);
@@ -35,12 +38,10 @@ class Lembaran_desa extends Admin_Controller {
 		$data['submenu'] = $this->referensi_model->list_data('ref_dokumen');
 		$data['jenis_peraturan'] = $this->referensi_model->list_ref(JENIS_PERATURAN_DESA);
 		$data['sub_kategori'] = $_SESSION['sub_kategori'];
-    $_SESSION['menu_kategori'] = TRUE;
+		$_SESSION['menu_kategori'] = TRUE;
 
-		foreach ($data['submenu'] as $s)
-		{
-			if ($kat == $s['id'])
-			{
+		foreach ($data['submenu'] as $s) {
+			if ($kat == $s['id']) {
 				$_SESSION['submenu'] = $s['id'];
 				$_SESSION['sub_kategori'] = $s['kategori'];
 				$_SESSION['kode_kategori'] = $s['id'];
@@ -65,18 +66,16 @@ class Lembaran_desa extends Admin_Controller {
 		redirect("lembaran_desa");
 	}
 
-	public function form($p=1, $o=0, $id='')
+	public function form($p = 1, $o = 0, $id = '')
 	{
 		$data['kat'] = 3;
 		$data['list_kategori'] = $this->web_dokumen_model->list_kategori();
 		$data['jenis_peraturan'] = $this->referensi_model->list_ref(JENIS_PERATURAN_DESA);
 
-		if ($id)
-		{
+		if ($id) {
 			$data['dokumen'] = $this->web_dokumen_model->get_dokumen($id);
 			$data['form_action'] = site_url("lembaran_desa/update/$id/$p/$o");
-			if ($jenis_peraturan = $data['dokumen']['attr']['jenis_peraturan'] and !in_array($jenis_peraturan, $data['jenis_peraturan']))
-			{
+			if ($jenis_peraturan = $data['dokumen']['attr']['jenis_peraturan'] and !in_array($jenis_peraturan, $data['jenis_peraturan'])) {
 				$data['jenis_peraturan'][] = $jenis_peraturan;
 			}
 		}
@@ -99,7 +98,7 @@ class Lembaran_desa extends Admin_Controller {
 		redirect("lembaran_desa/index");
 	}
 
-	public function update($id='', $p=1, $o=0)
+	public function update($id = '', $p = 1, $o = 0)
 	{
 		$this->session->success = 1;
 		$outp = $this->web_dokumen_model->update($id);
@@ -142,5 +141,4 @@ class Lembaran_desa extends Admin_Controller {
 		$data['template'] = 'lembaran_desa_print';
 		return $data;
 	}
-
 }

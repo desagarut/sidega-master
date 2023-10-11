@@ -11,7 +11,7 @@ class ba_arsip extends Admin_controller
         $this->load->model('arsip_fisik_model');
         $this->list_session  = ['data_filter_tahun', 'data_filter_jenis', 'data_filter_cari', 'data_filter_kategori'];
         $this->_set_page     = ['50', '100', '200'];
-        $this->modul_ini     = 301;
+        $this->modul_ini     = 15;
         $this->sub_modul_ini = 336;
     }
 

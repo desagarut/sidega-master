@@ -8,7 +8,7 @@ class Ba_inventaris_kekayaan extends Admin_Controller
     {
         parent::__construct();
         $this->load->model(['pamong_model', 'inventaris_laporan_model']);
-        $this->modul_ini     = 300;
+        $this->modul_ini     = 15;
         $this->sub_modul_ini = 301;
         $header['minsidebar'] = 1;
     }

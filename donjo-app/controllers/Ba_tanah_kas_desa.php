@@ -7,8 +7,10 @@ class Ba_tanah_kas_desa extends Admin_Controller
         parent::__construct();
         $this->load->model(['tanah_kas_desa_model', 'pamong_model', 'data_persil_model']);
         $this->controller    = 'ba_tanah_kas_desa';
-        $this->modul_ini     = 300;
+        $this->modul_ini     = 15;
         $this->sub_modul_ini = 301;
+        $header['minsidebar'] = 1;
+
     }
 
     public function index()

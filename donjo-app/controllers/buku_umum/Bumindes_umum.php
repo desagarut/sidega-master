@@ -9,7 +9,7 @@ class ba_umum extends Admin_Controller {
 		$this->load->library('session');
 		$this->load->model('header_model');
 
-		$this->modul_ini = 300;
+		$this->modul_ini = 15;
 	}
 
 	public function index()

@@ -13,8 +13,10 @@ class Surat_keluar extends Admin_Controller {
 		$this->load->model('pamong_model');
 
 		$this->load->model('penomoran_surat_model');
-		$this->modul_ini = 300;
+		$this->modul_ini = 15;
 		$this->sub_modul_ini = 301;
+		$this->set_minsidebar(1);
+
 	}
 
 	public function clear($id = 0)
