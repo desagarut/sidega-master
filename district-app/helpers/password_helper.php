@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php 
+
 /**
  * A Compatibility library with PHP 5.5's simplified password hashing API.
  *
