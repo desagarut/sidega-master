@@ -36,9 +36,9 @@
 								</div>
 							</div>
 							<?php if ($individu): ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php	endif; ?>
-							<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+							<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 							<div class="form-group">
 								<label for="alasan" class="col-sm-3 control-label">Alasan Permohonan</label>
 								<div class="col-sm-6 col-lg-4">
@@ -59,10 +59,10 @@
 									<?php endif; ?>
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 				<div class='modal fade' id='infoBox' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 					<div class='modal-dialog'>

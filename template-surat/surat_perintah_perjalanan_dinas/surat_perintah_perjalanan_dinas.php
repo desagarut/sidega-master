@@ -27,7 +27,7 @@
 							<input type="hidden" id="url_surat" name="url_surat" value="<?= $url ?>">
 							<input type="hidden" id="url_remote" name="url_remote" value="<?= site_url('surat/nomor_surat_duplikat')?>">
 							<?php if ($individu): ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php	endif; ?>
 							<div class="row jar_form">
 								<label for="nomor" class="col-sm-3"></label>
@@ -133,10 +133,10 @@
 									</div>
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

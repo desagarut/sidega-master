@@ -83,7 +83,7 @@
 
 								<?php  if ($pemberi_kuasa): ?>
 									<?php $individu = $pemberi_kuasa;?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 
 								<!-- akhir pemberi kuasa -->
@@ -119,7 +119,7 @@
 
 								<?php if ($penerima_kuasa): ?>
 									<?php $individu = $penerima_kuasa;?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 
 								<?php if (empty($penerima_kuasa)): ?>
@@ -219,11 +219,11 @@
 											<input class="form-control input-sm required" type="text" name="untuk_keperluan" id="untuk_keperluan" placeholder="Untuk/Keperluan" value="<?= $_SESSION['post']['untuk_keperluan']?>">
 										</div>
 									</div>
-								<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+								<?php include("district-app/views/surat/form/_pamong.php"); ?>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 				<div class='modal fade' id='infoBox' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 					<div class='modal-dialog'>

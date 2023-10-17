@@ -118,7 +118,7 @@
 									</div>
 								</div>
 								<?php if ($individu): ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php	endif; ?>
 								<?php if (empty($individu)): ?>
 									<div class="form-group pemohon_luar_desa" >
@@ -297,7 +297,7 @@
 								</div>
 								<?php if ($saksi1): //bagian info setelah terpilih
 									$individu = $saksi1;
-									include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+									include("district-app/views/surat/form/konfirmasi_pemohon.php");
 								endif; ?>
 
 								<?php if (empty($saksi1)): ?>
@@ -358,7 +358,7 @@
 								</div>
 								<?php if ($saksi2): //bagian info setelah terpilih
 									$individu = $saksi2;
-									include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+									include("district-app/views/surat/form/konfirmasi_pemohon.php");
 								endif; ?>
 								<?php if (empty($saksi2)): ?>
 									<div class="form-group saksi2_luar_desa">
@@ -394,11 +394,11 @@
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 control-label"><strong>PENANDA TANGAN</strong></label>
 								</div>
-								<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+								<?php include("district-app/views/surat/form/_pamong.php"); ?>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

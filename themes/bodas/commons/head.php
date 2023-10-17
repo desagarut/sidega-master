@@ -27,7 +27,7 @@
 
     <?php if (isset($single_artikel)) : ?>
 
-        <title><?= $single_artikel["judul"] ?> - <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?></title>
+        <title><?= $single_artikel["judul"] ?> - <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?></title>
 
         <meta name='description' content="<?= str_replace('"', "'", substr(strip_tags($single_artikel['isi']), 0, 400)); ?>" />
 
@@ -43,13 +43,13 @@
 
     <?php else : ?>
 
-        <title><?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?> <?= ucfirst($this->setting->sebutan_kecamatan_singkat).' '.ucwords($desa['nama_kecamatan']) ?> <?= ucfirst($this->setting->sebutan_kabupaten_singkat).' '.ucwords($desa['nama_kabupaten']) ?></title>
+        <title><?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?> <?= ucfirst($this->setting->sebutan_kecamatan_singkat) . ' ' . ucwords($desa['nama_kecamatan']) ?> <?= ucfirst($this->setting->sebutan_kabupaten_singkat) . ' ' . ucwords($desa['nama_kabupaten']) ?></title>
 
-        <meta name='description' content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+        <meta name='description' content="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>" />
 
-        <meta property="og:title" content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+        <meta property="og:title" content="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>" />
 
-        <meta property='og:description' content="<?= ucfirst($this->setting->sebutan_desa).' '.ucwords($desa['nama_desa']) ?>" />
+        <meta property='og:description' content="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>" />
 
     <?php endif; ?>
 
@@ -66,10 +66,10 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->

@@ -101,9 +101,9 @@
 							<div class="col-md-12">
 								<input name="anchor" type="hidden" value="<?= $anchor; ?>" />
 								<?php if ($individu) : ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
-								<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+								<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 control-label" for="status">DATA IBU KANDUNG</label>
 									<div class="btn-group col-sm-8" data-toggle="buttons">
@@ -135,7 +135,7 @@
 								<?php if ($ibu) : ?>
 									<?php //bagian info setelah terpilih
 									$individu = $ibu;
-									include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+									include("district-app/views/surat/form/konfirmasi_pemohon.php");
 									?>
 									<?php if (!empty($ayah)) : ?>
 										<div class="form-group">
@@ -149,7 +149,7 @@
 										</div>
 										<?php
 										$individu = $ayah;
-										include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+										include("district-app/views/surat/form/konfirmasi_pemohon.php");
 										?>
 									<?php endif; ?>
 								<?php endif; ?>
@@ -335,7 +335,7 @@
 								</div>
 								<?php if ($bayi) : ?>
 									<?php $individu = $bayi; ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 								<?php if (empty($bayi)) : ?>
 									<div class="form-group bayi_luar_desa">
@@ -476,7 +476,7 @@
 								</div>
 								<?php if ($pelapor) : ?>
 									<?php $individu = $pelapor; ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 								<?php if (empty($pelapor)) : ?>
 									<div class="form-group pelapor_luar_desa">
@@ -597,7 +597,7 @@
 								</div>
 								<?php if ($saksi1) : ?>
 									<?php $individu = $saksi1; ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 								<?php if (empty($saksi1)) : ?>
 									<div class="form-group saksi1_luar_desa">
@@ -712,7 +712,7 @@
 								</div>
 								<?php if ($saksi2) : ?>
 									<?php $individu = $saksi2; ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php endif; ?>
 								<?php if (empty($saksi2)) : ?>
 									<div class="form-group saksi2_luar_desa">
@@ -810,11 +810,11 @@
 										<input class="form-control input-sm required" type="text" name="lokasi_disdukcapil" id="lokasi_disdukcapil" placeholder="Lokasi Disdukcapil" value="<?= $_SESSION['post']['lokasi_disdukcapil'] ?>">
 									</div>
 								</div>
-								<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+								<?php include("district-app/views/surat/form/_pamong.php"); ?>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 				<div class='modal fade' id='infoBox' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 					<div class='modal-dialog'>

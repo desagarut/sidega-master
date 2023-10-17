@@ -49,7 +49,7 @@
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 text-right"><strong>PIHAK YANG MEMBERI IZIN</strong></label>
 								</div>
-								<?php include("donjo-app/views/surat/form/_cari_nik.php"); ?>
+								<?php include("district-app/views/surat/form/_cari_nik.php"); ?>
 							</div>
 						</form>
 						<form id="validasi" action="<?= $form_action?>" method="POST" target="_blank" class="form-surat form-horizontal">
@@ -59,7 +59,7 @@
 								<input id="nik_validasi" name="nik" type="hidden" value="<?= $_SESSION['post']['nik']?>">
 								<input id="id_diberi_izin_validasi" name="id_diberi_izin" type="hidden" value="<?= $_SESSION['id_diberi_izin']?>"/>
 								<?php if ($individu): ?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php	endif; ?>
 								<div class="form-group">
 									<label for="nik"  class="col-sm-3 control-label">Memberi Izin Selaku</label>
@@ -72,7 +72,7 @@
 										</select>
 									</div>
 								</div>
-								<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+								<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 text-right"><strong>PIHAK YANG DIBERI IZIN</strong></label>
 								</div>
@@ -102,7 +102,7 @@
 								<?php if ($diberi_izin): ?>
 									<?php //bagian info setelah terpilih
 										$individu = $diberi_izin;
-										include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+										include("district-app/views/surat/form/konfirmasi_pemohon.php");
 									?>
 								<?php endif; ?>
 								<div class="form-group">
@@ -139,11 +139,11 @@
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 text-right"><strong>PENANDA TANGAN</strong></label>
 								</div>
-								<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+								<?php include("district-app/views/surat/form/_pamong.php"); ?>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

@@ -11,7 +11,7 @@
 					</div>
 					<div class="box-body">
 						<form id="main" name="main" method="POST" class="form-horizontal">
-							<?php include("donjo-app/views/surat/form/_cari_nik.php"); ?>
+							<?php include("district-app/views/surat/form/_cari_nik.php"); ?>
 						</form>
 						<form id="validasi" action="<?= $form_action?>" method="POST" target="_blank" class="form-surat form-horizontal">
 							<input type="hidden" id="url_surat" name="url_surat" value="<?= $url ?>">
@@ -23,9 +23,9 @@
 								</div>
 							</div>
 							<?php if ($individu): ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php	endif; ?>
-							<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+							<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
               <div class="form-group">
 								<label for="nama_anak"  class="col-sm-3 control-label">Nama Anak</label>
 								<div class="col-sm-8">
@@ -76,10 +76,10 @@
 									<input  id="nama_ortu" class="form-control input-sm required" type="text" placeholder="Alamat Orang Tua" name="nama_ortu">
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

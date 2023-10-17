@@ -11,7 +11,7 @@
 					</div>
 					<div class="box-body">
 						<form id="main" name="main" method="POST" class="form-horizontal">
-							<?php include("donjo-app/views/surat/form/_cari_nik.php"); ?>
+							<?php include("district-app/views/surat/form/_cari_nik.php"); ?>
 						</form>
 						<form id="validasi" action="<?= $form_action ?>" method="POST" target="_blank" class="form-surat form-horizontal">
 							<input type="hidden" id="url_surat" name="url_surat" value="<?= $url ?>">
@@ -24,7 +24,7 @@
 							</div>
 							<input id="kode_format" type="hidden" name="kode_format" value="f125">
 							<?php if ($individu) : ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php endif; ?>
 							<div class="form-group">
 								<label for="telpon" class="col-sm-3 control-label">Telepon Pemohon</label>
@@ -46,7 +46,7 @@
 									</select>
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+							<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 							<div id="group_jenis_permohonan" class="form-group" style="display:none;">
 								<label for="jenis_permohonan_id" class="col-sm-3 control-label">Jenis Permohonan</label>
 								<div class="col-sm-4">
@@ -353,10 +353,10 @@
 									<input id="keterangan" class="form-control input-sm required <?= jecho($cek_anjungan['keyboard'] == 1, TRUE, 'kbvtext'); ?>" type="text" placeholder="Keterangan" name="keterangan">
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

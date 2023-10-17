@@ -97,7 +97,7 @@
 							<input type="hidden" name="sex_pria" value="Laki-laki">
 							<input type="hidden" name="sex_wanita" value="Perempuan">
 							<div class="col-md-12">
-								<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+								<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 								<?php $jenis_pasangan = "Istri"; ?>
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 control-label" for="status">A. CALON PASANGAN PRIA</label>
@@ -128,7 +128,7 @@
 								</div>
 								<?php if ($pria): ?>
 									<?php $individu = $pria;?>
-									<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+									<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 								<?php	endif; ?>
 								<?php if (empty($pria)): ?>
 									<div class="form-group pria_luar_desa">
@@ -541,7 +541,7 @@
 								<?php if ($wanita): ?>
 									<?php if ($wanita): //bagian info setelah terpilih
 										$individu = $wanita;
-										include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+										include("district-app/views/surat/form/konfirmasi_pemohon.php");
 									endif; ?>
 									<div class="form-group">
 										<label for="status_kawin_wanita" class="col-sm-3 control-label"><strong>Jika wanita, terangkan perawan atau janda</strong></label>
@@ -1017,11 +1017,11 @@
 								<div class="form-group">
 									<label class="col-xs-12 col-sm-3 col-lg-3 control-label bg-maroon" style="margin-top:10px;padding-top:10px;padding-bottom:10px"><strong>D. PENANDA TANGAN </strong></label>
 								</div>
-								<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+								<?php include("district-app/views/surat/form/_pamong.php"); ?>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 				<div class='modal fade' id='dialog' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 					<div class='modal-dialog'>

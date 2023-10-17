@@ -117,7 +117,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = 'donjo-app';
+	$application_folder = 'district-app';
 
 /*
  *---------------------------------------------------------------

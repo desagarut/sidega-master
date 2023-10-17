@@ -61,10 +61,10 @@ switch (ENVIRONMENT) {
  * DESA DIRECTORY NAME
  *---------------------------------------------------------------
  *
- * This variable must contain the name of your "desa" directory.
+ * This variable must contain the name of your "instansi" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$desa_path = 'desa';
+	$desa_path = 'instansi';
 
 /*
  *---------------------------------------------------------------
@@ -91,7 +91,7 @@ $system_path = 'vendor/codeigniter/framework/system';
  *
  * NO TRAILING SLASH!
  */
-$application_folder = 'donjo-app';
+$application_folder = 'district-app';
 
 /*
  *---------------------------------------------------------------

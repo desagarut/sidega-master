@@ -13,7 +13,7 @@
 						<form id="main" name="main" method="POST" class="form-horizontal">
 							<div class="col-sm-12">
 								<div class="row">
-									<?php include("donjo-app/views/surat/form/_cari_nik.php"); ?>
+									<?php include("district-app/views/surat/form/_cari_nik.php"); ?>
 								</div>
 							</div>
 						</form>
@@ -29,9 +29,9 @@
 										</div>
 									</div>
 									<?php if ($individu) : ?>
-										<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+										<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 									<?php endif; ?>
-									<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+									<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 								</div>
 								<div class="form-group subtitle_head">
 									<label class="col-sm-3 text-right"><strong>BARANG JUAL BELI</strong></label>
@@ -115,12 +115,12 @@
 									<label class="col-sm-3 text-right"><strong>PENANDA TANGAN</strong></label>
 								</div>
 								<div class="row">
-									<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+									<?php include("district-app/views/surat/form/_pamong.php"); ?>
 								</div>
 							</div>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 			</div>
 		</div>

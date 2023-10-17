@@ -248,7 +248,7 @@ $(document).ready(function() {
 			});
 	});
 
-	// Untuk donjo-app/views/man_user/manajemen_user_form.php di mana 'radiisi' berarti password tidak diubah
+	// Untuk district-app/views/man_user/manajemen_user_form.php di mana 'radiisi' berarti password tidak diubah
 	// Ketentuan kata sandi sesuai US National Institute of Standards and Technology (NIST)
 	jQuery.validator.addMethod("pwdLengthNist_atau_kosong", function(value, element) {
 		valid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/.test(value);

@@ -35,7 +35,7 @@ setlocale(LC_CTYPE, 'en_US');
 
 define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 
-// RFM access key dibuat di donjo-app/models/User_model.php pada waktu login
+// RFM access key dibuat di district-app/models/User_model.php pada waktu login
 // Nama file menggunakan tmpnam supaya unik untuk sesi pengguna
 // Di simpan di sys_get_temp_dir() supaya bisa dihapus oleh sistem kalau tidak logout;
 $rfm_config_files = glob(sys_get_temp_dir()."/config_rfm_*");
@@ -94,7 +94,7 @@ $config = array(
 		| with start and final /
 		|
 		*/
-		'upload_dir' => '/../desa/upload/media/',
+		'upload_dir' => '/../instansi/upload/media/',
 		/*
 		|--------------------------------------------------------------------------
 		| relative path from filemanager folder to upload folder
@@ -103,7 +103,7 @@ $config = array(
 		| with final /
 		|
 		*/
-		'current_path' => '../../desa/upload/media/',
+		'current_path' => '../../instansi/upload/media/',
 
 		/*
 		|--------------------------------------------------------------------------
@@ -114,7 +114,7 @@ $config = array(
 		| DO NOT put inside upload folder
 		|
 		*/
-		'thumbs_base_path' => '../../desa/upload/thumbs/',
+		'thumbs_base_path' => '../../instansi/upload/thumbs/',
 
 		/*
 		|--------------------------------------------------------------------------
@@ -125,7 +125,7 @@ $config = array(
 		| DO NOT put inside upload folder
 		|
 		*/
-		'thumbs_upload_dir' => '/desa/upload/thumbs/',
+		'thumbs_upload_dir' => '/instansi/upload/thumbs/',
 
 		/*
 		|--------------------------------------------------------------------------

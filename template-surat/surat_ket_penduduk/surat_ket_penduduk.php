@@ -11,7 +11,7 @@
 							</a>
 						</div>
 						<form id="main" name="main" method="POST" class="form-horizontal">
-							<?php include("donjo-app/views/surat/form/_cari_nik.php"); ?>
+							<?php include("district-app/views/surat/form/_cari_nik.php"); ?>
 						</form>
 						<form id="validasi" action="<?= $form_action ?>" method="POST" target="_blank" class="form-surat form-horizontal">
 							<input type="hidden" id="url_surat" name="url_surat" value="<?= $url ?>">
@@ -23,19 +23,19 @@
 								</div>
 							</div>
 							<?php if ($individu) : ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php endif; ?>
-							<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+							<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 							<div class="form-group">
 								<label for="keterangan" class="col-sm-3 control-label">Keterangan</label>
 								<div class="col-sm-8">
 									<textarea name="keterangan" id="keterangan" class="form-control input-sm required <?= jecho($cek_anjungan['keyboard'] == 1, TRUE, 'kbvtext'); ?>" placeholder="Keterangan"></textarea>
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/tgl_berlaku.php"); ?>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
-							<?php include("donjo-app/views/surat/form/tampil_foto.php"); ?>
-							<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+							<?php include("district-app/views/surat/form/tgl_berlaku.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/tampil_foto.php"); ?>
+							<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 						</form>
 					</div>
 				</div>

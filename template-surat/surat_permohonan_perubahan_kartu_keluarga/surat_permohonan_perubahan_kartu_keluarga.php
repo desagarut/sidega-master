@@ -36,9 +36,9 @@
 								</div>
 							</div>
 							<?php if ($individu): ?>
-								<?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+								<?php include("district-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 							<?php	endif; ?>
-							<?php include("donjo-app/views/surat/form/nomor_surat.php"); ?>
+							<?php include("district-app/views/surat/form/nomor_surat.php"); ?>
 							<div class="form-group">
 								<input name="sebab_nama" type="hidden">
 								<label for="sebab"  class="col-sm-3 control-label">Alasan Permohonan</label>
@@ -58,10 +58,10 @@
 									<p class="help-block">*)<i>Diisi apabila pilihan alasan permohonan yang dipilih adalah Lainnya.</i>
 								</div>
 							</div>
-							<?php include("donjo-app/views/surat/form/_pamong.php"); ?>
+							<?php include("district-app/views/surat/form/_pamong.php"); ?>
 						</form>
 					</div>
-					<?php include("donjo-app/views/surat/form/tombol_cetak.php"); ?>
+					<?php include("district-app/views/surat/form/tombol_cetak.php"); ?>
 				</div>
 				<div class='modal fade' id='infoBox' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 					<div class='modal-dialog'>
