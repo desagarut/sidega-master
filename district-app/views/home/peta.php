@@ -31,7 +31,8 @@
       position: center,
       map: map,
       title: 'Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?>',
-      animation: google.maps.Animation.BOUNCE
+      //animation: google.maps.Animation.BOUNCE,
+      content: "Tampilan Info Window",
     });
 
     <?php if (!empty($desa['path'])) : ?>
@@ -55,6 +56,12 @@
       });
 
       batasWilayah.setMap(map)
+
+      var infowindow = new google.maps.InfoWindow({
+        content: "<div class='media text-center'><img src='<?= gambar_desa($desa['kantor_desa'], TRUE); ?>' width='140px' height='100px'><br/> <p>Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?></p></div>"
+      });
+      infowindow.open(map, kantorDesa);
+
     <?php endif; ?>
   }
 </script>

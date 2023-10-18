@@ -27,7 +27,7 @@
 			map: map,
 			draggable: true,
 			title: '<?= $musdus->nama_program_kegiatan ?>',
-			content: "Ini Info Window ku",
+			content: "Tampilan Info Window",
 			//icon: iconBase + '<?= base_url() . LOKASI_GALERI . $musdus->foto ?>'
 		});
 

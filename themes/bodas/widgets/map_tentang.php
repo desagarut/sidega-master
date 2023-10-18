@@ -33,7 +33,8 @@ function initMap() {
         position: center,
         map: PetaDesa,
         title: 'Lokasi Kantor <?php echo ucwords($this->setting->sebutan_desa)." "?><?php echo ucwords($desa['nama_desa'])?>',
-		animation: google.maps.Animation.BOUNCE,
+		//animation: google.maps.Animation.BOUNCE,
+        content: "Tampilan Info Window",
     });
 
     <?php if (!empty($desa['path'])): ?>
@@ -54,6 +55,12 @@ function initMap() {
 	});
 
 	batasWilayah.setMap(PetaDesa)
+
+    var infowindow = new google.maps.InfoWindow({
+        content: "<div class='media text-center'><img src='<?= gambar_desa($desa['kantor_desa'], TRUE); ?>' width='140px' height='100px'><br/> <p>Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?></p></div>"
+      });
+      infowindow.open(PetaDesa, LokasiKantorDesa);
+
     <?php endif; ?>
 	
     <?php if (!empty($dusun_gis)): ?>
@@ -75,6 +82,9 @@ function initMap() {
 
         batasWilayahDusun.setMap(PetaDesa)
     <?php endif; ?>
+
+    infowindow.open(map, kantorDesa);
+
 }
 </script>
 
