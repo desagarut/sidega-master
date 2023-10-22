@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 
-class Lapak extends Web_Controller
+class Lapak extends Mandiri_Controller
 {
     public function __construct()
     {
@@ -10,19 +10,12 @@ class Lapak extends Web_Controller
 
     public function index($p = 1)
     {
-        if ($this->setting->tampilkan_lapak_web == 0) {
-            show_404();
-        }
-
-        $data = $this->includes;
-        $this->_get_common_data($data);
-
         $data['id_kategori'] = $this->input->get('id_kategori');
         $data['keyword']     = $this->input->get('keyword');
 
         // TODO : Sederhanakan bagian panging dengan suffix
         $data['paging']       = $this->lapak_model->paging_produk($p, $data['keyword'], $data['id_kategori']);
-        $data['paging_page']  = 'lapak';
+        $data['paging_page']  = 'layanan-mandiri/lapak';
         $data['paging_range'] = 3;
         $data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
         $data['end_paging']   = min($data['paging']->end_link, $p + $data['paging_range']);
@@ -38,13 +31,9 @@ class Lapak extends Web_Controller
             $data['produk'] = $data['produk']->where('id_produk_kategori', $data['id_kategori']);
         }
 
-        $data['produk']         = $data['produk']->limit($data['paging']->per_page, $data['keyword'] ? 0 : $data['paging']->offset)->get()->result();
-        $data['kategori']       = $this->lapak_model->get_kategori()->get()->result();
-        $data['halaman_statis'] = 'lapak/index';
+        $data['produk']   = $data['produk']->limit($data['paging']->per_page, $data['keyword'] ? 0 : $data['paging']->offset)->get()->result();
+        $data['kategori'] = $this->lapak_model->get_kategori()->get()->result();
 
-        $this->set_template('layouts/halaman_statis_lebar.tpl.php');
-        $this->load->view($this->template, $data);
-
-        // $this->json_output($data['paging']);
+        $this->render('lapak', $data);
     }
 }

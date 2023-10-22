@@ -8,9 +8,8 @@ class Surat extends Mandiri_Controller
     public function __construct()
     {
         parent::__construct();
-       // $this->load->model(['keluar_model', 'permohonan_surat_model', 'surat_model', 'surat_master_model', 'lapor_model', 'penduduk_model']);
-	   $this->load->model(['web_dokumen_model', 'surat_model', 'penduduk_model', 'keluar_model', 'permohonan_surat_model', 'mailbox_model', 'penduduk_model', 'lapor_model', 'keluarga_model', 'mandiri_model', 'anjungan_model', 'wilayah_model', 'referensi_model', 'web_rumah_model']);
-	}
+        $this->load->model(['keluar_model', 'permohonan_surat_model', 'surat_model', 'surat_master_model', 'lapor_model', 'penduduk_model']);
+    }
 
     // Kat 1 = Permohonan
     // Kat 2 = Arsip

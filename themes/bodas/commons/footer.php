@@ -9,7 +9,7 @@
                     <a class="btn btn-link" href="<?= site_url('first/peta') ?>">Peta</a>
                     <a class="btn btn-link" href="<?= site_url('first/gallery') ?>">Foto</a>
                     <a class="btn btn-link" href="<?= site_url('first/gallery_youtube') ?>">Video</a>
-                    <a class="btn btn-link" href="<?= site_url('first/gallery_cctv') ?>">CCTV</a>
+                    <a class="btn btn-link" href="<?= site_url('first/cctv') ?>">CCTV</a>
                     <a class="btn btn-link" href="<?= site_url('insidega') ?>">Login</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
