@@ -55,7 +55,7 @@ class Tawa extends Admin_Controller {
 		$this->render('umkm/tawa/table', $data);
 	}
 
-	public function form($p=1, $o=0, $id='')
+	public function form($id='')
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;

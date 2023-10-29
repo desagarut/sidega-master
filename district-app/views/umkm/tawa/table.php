@@ -93,14 +93,14 @@
                                     <td align="center"><?= $data['no'] ?></td>
                                     <td align="center" nowrap="nowrap"><a href="<?= site_url("tawa/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a> <a href="<?= site_url("tawa/urut/$data[id]/2") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
                                       <!--
-				  <?php if ($data['slider'] == '1') : ?>
-                  <a href="<?= site_url("tawa/slider_off/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm"  title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
-                  <?php else : ?>
-                  <a href="<?= site_url("tawa/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm"  title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
-                  <?php endif; ?>
+                                  <?php if ($data['slider'] == '1') : ?>
+                                          <a href="<?= site_url("tawa/slider_off/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm"  title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
+                                          <?php else : ?>
+                                          <a href="<?= site_url("tawa/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm"  title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
+                                          <?php endif; ?>
  				-->
                                       <br />
-                                      <a href="<?= site_url("tawa/form/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
+                                      <a href="<?= site_url("tawa/form/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
                                       <?php if ($this->CI->cek_hak_akses('h')) : ?>
                                         <a href="#" data-href="<?= site_url("tawa/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                       <?php endif; ?>

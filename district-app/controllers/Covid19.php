@@ -13,7 +13,7 @@ class Covid19 extends Admin_Controller {
 		$this->load->model('wilayah_model');
 		$this->load->model('penduduk_model');
 
-		$this->modul_ini = 306;
+		$this->modul_ini = 340;
 	}
 
 	public function index()

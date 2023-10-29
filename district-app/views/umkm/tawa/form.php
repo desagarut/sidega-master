@@ -25,17 +25,17 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label " for="nama_pengelola">Nama | NIK </label>
 										<div class="col-sm-3">
-											<input maxlength="50" class="form-control input-sm nomor_sk required" name="nama_pengelola" id="nama_pengelola" value="<?= $usaha['nama_pengelola'] ?>" type="text" placeholder="Nama pengelola" />
+											<input maxlength="50" class="form-control required" name="nama_pengelola" id="nama_pengelola" value="<?= $usaha['nama_pengelola'] ?>" type="text" placeholder="Nama pengelola" />
 										</div>
-										<div class="col-sm-2">
-											<input maxlength="50" class="form-control input-sm " name="nik" id="nik" value="<?= $usaha['nik'] ?>" type="text" placeholder="NIK" />
+										<div class="col-sm-3">
+											<input maxlength="17" class="form-control" name="nik" id="nik" value="<?= $usaha['nik'] ?>" type="text" placeholder="NIK" />
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label " for="alamat_tinggal">Alamat Tempat Tinggal</label>
 										<div class="col-sm-7">
-											<textarea rows="3" class="form-control input-sm required" name="alamat_tinggal" id="alamat_tinggal" placeholder="Alamat Tempat Tinggal"><?= $usaha['alamat_tinggal'] ?></textarea>
+											<textarea rows="3" class="form-control" name="alamat_tinggal" id="alamat_tinggal" placeholder="Alamat Tempat Tinggal"><?= $usaha['alamat_tinggal'] ?></textarea>
 										</div>
 									</div>
 									<!-- End Info Pedagang -->
@@ -48,14 +48,14 @@
 									<div class="form-group">
 										<label class="control-label col-sm-3" for="nama">Nama Usaha</label>
 										<div class="col-sm-7">
-											<input name="nama" class="form-control input-sm nomor_sk required" maxlength="50" type="text" value="<?= $usaha['nama'] ?>"></input>
+											<input name="nama" class="form-control  nomor_sk required" maxlength="50" type="text" value="<?= $usaha['nama'] ?>"></input>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label for="nama_toko" class="col-sm-3 control-label">Tahun Berdiri</label>
 										<div class="col-sm-2">
-											<select class="form-control input-sm select2 required" id="tahun_berdiri" name="tahun_berdiri" style="width:100%;">
+											<select class="form-control  select2" id="tahun_berdiri" name="tahun_berdiri" style="width:100%;">
 												<?php for ($i = date('Y'); $i >= 1999; $i--) : ?>
 													<option value="<?= $i ?>"><?= $i ?></option>
 												<?php endfor; ?>
@@ -68,7 +68,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="kepemilikan_tempat_usaha">Kepemilikan Tempat Usaha</label>
 										<div class="col-sm-7">
-											<select class="form-control input-sm select2 required" id="kepemilikan_tempat_usaha" name="kepemilikan_tempat_usaha" style="width:100%;">
+											<select class="form-control  select2" id="kepemilikan_tempat_usaha" name="kepemilikan_tempat_usaha" style="width:100%;">
 												<?php foreach ($kepemilikan_tempat_usaha as $value) : ?>
 													<option <?= $value === $usaha['kepemilikan_tempat_usaha'] ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -78,19 +78,19 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;">Jumlah Karyawan</label>
 										<div class="col-sm-2">
-											<input maxlength="50" class="form-control input-sm required" name="jumlah_karyawan" id="jumlah_karyawan" value="<?= $usaha['jumlah_karyawan'] ?>" type="text" placeholder="Jumlah Karyawan" />
+											<input maxlength="50" class="form-control" name="jumlah_karyawan" id="jumlah_karyawan" value="<?= $usaha['jumlah_karyawan'] ?>" type="text" placeholder="Jumlah Karyawan" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="lokasi" class="col-sm-3 control-label">Lokasi Usaha</label>
 										<div class="col-sm-7">
-											<input maxlength="200" class="form-control input-sm required" name="lokasi" id="jumlah_karyawan" value="<?= $usaha['lokasi'] ?>" type="text" placeholder="Lokasi Tempat Usaha" />
+											<input maxlength="200" class="form-control" name="lokasi" id="jumlah_karyawan" value="<?= $usaha['lokasi'] ?>" type="text" placeholder="Lokasi Tempat Usaha" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="keterangan_lokasi">Keterangan Lokasi Usaha</label>
 										<div class="col-sm-7">
-											<textarea rows="5" class="form-control input-sm required" name="keterangan_lokasi" id="keterangan_lokasi" placeholder="Keterangan lengkap lokasi usaha, seperti patokan"><?= $usaha['keterangan_lokasi'] ?></textarea>
+											<textarea rows="5" class="form-control" name="keterangan_lokasi" id="keterangan_lokasi" placeholder="Keterangan lengkap lokasi usaha, seperti patokan"><?= $usaha['keterangan_lokasi'] ?></textarea>
 										</div>
 									</div>
 									<?php if ($usaha['gambar']) : ?>
@@ -122,7 +122,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="sumber_dana">Sumber Modal</label>
 										<div class="col-sm-5">
-											<select class="form-control input-sm select2" id="sumber_modal" name="sumber_modal" style="width:100%;">
+											<select class="form-control  select2" id="sumber_modal" name="sumber_modal" style="width:100%;">
 												<?php foreach ($sumber_modal as $value) : ?>
 													<option <?= $value === $usaha['sumber_modal'] ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -132,14 +132,14 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;">Taksiran Modal/Aset</label>
 										<div class="col-sm-2">
-											<input class="form-control input-sm required" name="taksiran_modal" id="taksiran_modal" value="<?= $rupiah($usaha['taksiran_modal']) ?>" type="text" placeholder="Taksiran Modal" />
+											<input class="form-control" name="taksiran_modal" id="taksiran_modal" value="<?= $rupiah($usaha['taksiran_modal']) ?>" type="text" placeholder="Taksiran Modal" />
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;">Taksiran Omset</label>
 										<div class="col-sm-2">
-											<input maxlength="50" class="form-control input-sm required" name="taksiran_omset" id="taksiran_omset" value="<?= $rupiah($usaha['taksiran_omset']) ?>" type="text" placeholder="Taksiran Omset" />
+											<input maxlength="50" class="form-control" name="taksiran_omset" id="taksiran_omset" value="<?= $rupiah($usaha['taksiran_omset']) ?>" type="text" placeholder="Taksiran Omset" />
 										</div>
 									</div>
 									<!-- End Info Usaha -->
@@ -152,7 +152,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="jenis_usaha">Jenis Usaha</label>
 										<div class="col-sm-5">
-											<select class="form-control input-sm select2 required" id="jenis_usaha" name="jenis_usaha" style="width:100%;">
+											<select class="form-control  select2 required" id="jenis_usaha" name="jenis_usaha" style="width:100%;">
 												<?php foreach ($jenis_usaha as $value) : ?>
 													<option <?= $value === $usaha['jenis_usaha'] ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -163,7 +163,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="kelompok_usaha">Kelompok Usaha</label>
 										<div class="col-sm-5">
-											<select class="form-control input-sm select2 required" id="kelompok_usaha" name="kelompok_usaha" style="width:100%;">
+											<select class="form-control  select2 required" id="kelompok_usaha" name="kelompok_usaha" style="width:100%;">
 												<?php foreach ($kelompok_usaha as $value) : ?>
 													<option <?= $value === $usaha->kelompok_usaha ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -173,7 +173,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="area">Area Layanan</label>
 										<div class="col-sm-5">
-											<select class="form-control input-sm select2" id="area" name="area" style="width:100%;">
+											<select class="form-control  select2" id="area" name="area" style="width:100%;">
 												<?php foreach ($area as $value) : ?>
 													<option <?= $value === $usaha['area'] ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -183,13 +183,13 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;">Trayek Tujuan</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm required" name="trayek" id="trayek" value="<?= $usaha['trayek'] ?>" type="text" placeholder="Contoh: Garut - Bandung" />
+											<input maxlength="50" class="form-control" name="trayek" id="trayek" value="<?= $usaha['trayek'] ?>" type="text" placeholder="Contoh: Garut - Bandung" />
 										</div>
 									</div>
 									<!--<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="kategori_toko">Kategori Toko</label>
 										<div class="col-sm-5">
-											<select class="form-control input-sm select2 required" id="kategori_toko" name="kategori_toko" style="width:100%;">
+											<select class="form-control  select2 required" id="kategori_toko" name="kategori_toko" style="width:100%;">
 												<?php foreach ($kategori_toko as $value) : ?>
 													<option <?= $value === $usaha['kategori_toko'] ? 'selected' : '' ?> value="<?= $value ?>"><?= $value ?></option>
 												<?php endforeach; ?>
@@ -205,37 +205,37 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="email">Telepon</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm required" name="no_hp_pengelola" id="no_hp_pengelola" value="<?= $usaha['no_hp_pengelola'] ?>" type="text" placeholder="Contoh: 82317883161" />
+											<input maxlength="50" class="form-control" name="no_hp_pengelola" id="no_hp_pengelola" value="<?= $usaha['no_hp_pengelola'] ?>" type="text" placeholder="Contoh: 82317883161" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="email">Email</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="email" id="email" value="<?= $usaha['email'] ?>" type="text" placeholder="Email" />
+											<input maxlength="50" class="form-control " name="email" id="email" value="<?= $usaha['email'] ?>" type="text" placeholder="Email" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="website">Website</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="website" id="website" value="<?= $usaha['website'] ?>" type="text" placeholder="Website" />
+											<input maxlength="50" class="form-control " name="website" id="website" value="<?= $usaha['website'] ?>" type="text" placeholder="Website" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="fb">Facebook</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="fb" id="fb" value="<?= $usaha['fb'] ?>" type="text" placeholder="Nama Facebook" />
+											<input maxlength="50" class="form-control " name="fb" id="fb" value="<?= $usaha['fb'] ?>" type="text" placeholder="Nama Facebook" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="ig">Instagram</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="ig" id="ig" value="<?= $usaha['fb'] ?>" type="text" placeholder="Nama Akun Instagram" />
+											<input maxlength="50" class="form-control " name="ig" id="ig" value="<?= $usaha['fb'] ?>" type="text" placeholder="Nama Akun Instagram" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="youtube">Youtube</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="youtube" id="youtube" value="<?= $usaha['youtube'] ?>" type="text" placeholder="Chanel Youtube" />
+											<input maxlength="50" class="form-control " name="youtube" id="youtube" value="<?= $usaha['youtube'] ?>" type="text" placeholder="Chanel Youtube" />
 										</div>
 									</div>
 									<!-- End Klasifikasi Usaha -->
@@ -247,79 +247,79 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="skdu">SKDU (Surat Keterangan Domisili Usaha)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="skdu" id="skdu" value="<?= $usaha['skdu'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="skdu" id="skdu" value="<?= $usaha['skdu'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="iud">IUD (Izin Usaha Dagang)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="iud" id="iud" value="<?= $usaha['iud'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="iud" id="iud" value="<?= $usaha['iud'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="npwp">NPWP (Nomor Pokok Wajib Pajak)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="npwp" id="npwp" value="<?= $usaha['npwp'] ?>" type="text" placeholder="Nomor NPWP" />
+											<input maxlength="50" class="form-control " name="npwp" id="npwp" value="<?= $usaha['npwp'] ?>" type="text" placeholder="Nomor NPWP" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="situ">SITU (Surat Izin Tempat Usaha)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="situ" id="situ" value="<?= $usaha['situ'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="situ" id="situ" value="<?= $usaha['situ'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="siui">SIUI (Surat Izin Usaha Industri)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="siui" id="siui" value="<?= $usaha['siui'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="siui" id="siui" value="<?= $usaha['siui'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="sip">SIP (Surat Izin Prinsip)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="sip" id="sip" value="<?= $usaha['sip'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="sip" id="sip" value="<?= $usaha['sip'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="siup">SIUP (Surat Izin Usaha Perdagangan)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="siup" id="siup" value="<?= $usaha['siup'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="siup" id="siup" value="<?= $usaha['siup'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="tdp">TDP (Tanda Daftar Perusahaan)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="tdp" id="tdp" value="<?= $usaha['tdp'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="tdp" id="tdp" value="<?= $usaha['tdp'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="tdi">TDI (Tanda Daftar Industri)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="tdi" id="tdi" value="<?= $usaha['tdi'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="tdi" id="tdi" value="<?= $usaha['tdi'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="imb">IMB (Surat Izin Mendirikan Bangunan)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="imb" id="imb" value="<?= $usaha['imb'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="imb" id="imb" value="<?= $usaha['imb'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="bpom">BPOM (Badan Pengawas Obat dan Makanan)</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="bpom" id="bpom" value="<?= $usaha['bpom'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="bpom" id="bpom" value="<?= $usaha['bpom'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="ho">HO Surat Izin Gangguan</label>
 										<div class="col-sm-5">
-											<input maxlength="50" class="form-control input-sm" name="ho" id="ho" value="<?= $usaha['ho'] ?>" type="text" placeholder="Nomor Surat" />
+											<input maxlength="50" class="form-control " name="ho" id="ho" value="<?= $usaha['ho'] ?>" type="text" placeholder="Nomor Surat" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label" style="text-align:left;" for="keterangan">Keterangan</label>
 										<div class="col-sm-7">
-											<textarea id="keterangan" class="form-control input-sm" type="text" placeholder="Keterangan" name="keterangan"><?= $usaha['keterangan'] ?></textarea>
+											<textarea id="keterangan" class="form-control " type="text" placeholder="Keterangan" name="keterangan"><?= $usaha['keterangan'] ?></textarea>
 										</div>
 									</div>
 

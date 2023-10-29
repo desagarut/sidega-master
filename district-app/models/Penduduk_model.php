@@ -682,7 +682,7 @@ class Penduduk_model extends MY_Model
 
 		$log1['id_pend'] = $idku;
 		$log1['id_cluster'] = 1;
-		$log1['tgl_lapor'] = date("d-m-y");
+		$log1['tanggal'] = date("d-m-y");
 
 		$outp = $this->db->insert('log_perubahan_penduduk', $log1);
 
