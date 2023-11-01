@@ -110,11 +110,6 @@
 																			<a href="<?= site_url("rekanan/dokumen_rekanan/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Dokumen Rekanan"><i class="fa fa-folder"></i></a>
 																			<br/>
 																			<a href="<?= site_url("rekanan/form_rekanan/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
-																			<?php if ($data['slider'] == '1') : ?>
-																				<a href="<?= site_url("rekanan/slider_off/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
-																			<?php else : ?>
-																				<a href="<?= site_url("rekanan/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
-																			<?php endif; ?>
 																			<?php if ($data['enabled'] == '2') : ?>
 																				<a href="<?= site_url("rekanan/rekanan_lock/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i></a>
 																			<?php elseif ($data['enabled'] == '1') : ?>

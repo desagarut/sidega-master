@@ -1,98 +1,19 @@
-<?php class Laporan_bulanan_model extends CI_Model {
+<?php defined('BASEPATH') || exit('No direct script access allowed');
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->tulis_log_bulanan();
-	}
-
-	public function tulis_log_bulanan()
-	{
-		// Jangan tulis kalau database belum dimigrasi
-		if (!$this->db->field_exists('wni_lk', 'log_bulanan')) return;
-
-		// Jangan hitung keluarga yang tidak ada Kepala Keluarga
-		// Anggap warganegara_id = 0, 1 atau 3 adalah WNI
-		$sql = "SELECT
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE status_dasar =1) AS pend,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE status_dasar =1 AND sex =1 AND warganegara_id <> 2) AS wni_lk,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE status_dasar =1 AND sex =2 AND warganegara_id <> 2) AS wni_pr,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE status_dasar =1 AND sex =1 AND warganegara_id = 2) AS wna_lk,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE status_dasar =1 AND sex =2 AND warganegara_id = 2) AS wna_pr,
-			(SELECT COUNT(p.id) FROM tweb_keluarga k
-				LEFT JOIN tweb_penduduk p ON k.nik_kepala = p.id
-				WHERE p.status_dasar = 1
-					AND k.nik_kepala IS NOT NULL AND k.nik_kepala <> 0) AS kk,
-			(SELECT COUNT(k.id) FROM tweb_keluarga k LEFT JOIN tweb_penduduk p ON k.nik_kepala = p.id
-				WHERE p.sex = 1 AND p.status_dasar = 1) AS kk_lk,
-			(SELECT COUNT(k.id) FROM tweb_keluarga k LEFT JOIN tweb_penduduk p ON k.nik_kepala = p.id
-				WHERE p.sex = 2  AND p.status_dasar = 1) AS kk_pr";
-		$query = $this->db->query($sql);
-		$data = $query->row_array();
-
-		$bln = date("m");
-		$thn = date("Y");
-
-		$sql = "SELECT * FROM log_bulanan WHERE month(tgl) = $bln AND year(tgl) = $thn";
-		$query = $this->db->query($sql);
-		$ada = $query->result_array();
-
-		if (!$ada)
-		{
-			$this->db->insert('log_bulanan', $data);
-		}
-		else
-		{
-			$this->db
-					->where("month(tgl) = $bln AND year(tgl) = $thn")
-					->update('log_bulanan', $data);
-		}
-	}
-
-	private function bulan_sql()
-	{
-		$bulan = $_SESSION['bulanku'];
-		if ( ! empty($bulan))
-		{
-			return " AND cast(bulan as signed) = '".$bulan."'";
-		}
-	}
-
-	private function tahun_sql()
-	{
-		$tahun = $_SESSION['tahunku'];
-		if ( ! empty($tahun))
-		{
-			return " AND tahun = '".$tahun."'";
-		}
-	}
-
-	public function bulan($bulan)
-	{
-		switch ($bulan)
-		{
-	    case 1 : $bulan = "Januari"; break;
-	    case 2 : $bulan = "Februari"; break;
-	    case 3 : $bulan = "Maret"; break;
-	    case 4 : $bulan = "April"; break;
-	    case 5 : $bulan = "Mei"; break;
-	    case 6 : $bulan = "Juni"; break;
-	    case 7 : $bulan = "Juli"; break;
-	    case 8 : $bulan = "Agustus"; break;
-	    case 9 : $bulan = "September"; break;
-	    case 10 : $bulan = "Oktober"; break;
-	    case 11 : $bulan = "November"; break;
-	    case 12 : $bulan = "Desember"; break;
-    }
-		return $bulan;
-	}
+class Laporan_bulanan_model extends MY_Model
+{
+	protected $awal;
+	protected $lahir;
+	protected $datang;
+	protected $pindah;
+	protected $mati;
+	protected $hilang;
 
 	private function dusun_sql()
 	{
 		$dusun = $_SESSION['dusun'];
-		if ( ! empty($dusun))
-		{
-			return " AND dusun = '" .$dusun. "'";
+		if (!empty($dusun)) {
+			return " AND dusun = '" . $dusun . "'";
 		}
 	}
 
@@ -121,255 +42,590 @@
 			from  tweb_wil_clusterdesa c WHERE rw<>'0' AND rt<>'0' AND (select count(id) from tweb_penduduk where id_cluster=c.id)>0 ";
 
 		$sql .= $this->dusun_sql();
-		$sql .= " ORDER BY c.dusun,c.rw,c.rt ";
+		$sql .= ' ORDER BY c.dusun,c.rw,c.rt ';
 		$query = $this->db->query($sql);
-		$data = $query->result_array();
+		$data  = $query->result_array();
 		//	$data = null;
 		//Formating Output
-		for ($i=0; $i<count($data); $i++)
-		{
-			$data[$i]['no'] = $i + 1;
+		for ($i = 0; $i < count($data); $i++) {
+			$data[$i]['no']    = $i + 1;
 			$data[$i]['tabel'] = $data[$i]['rt'];
 		}
+
 		return $data;
 	}
 
-  public function list_dusun()
-  {
+	public function bulan($bulan)
+	{
+		switch ($bulan) {
+			case 1:
+				$bulan = "Januari";
+				break;
+			case 2:
+				$bulan = "Februari";
+				break;
+			case 3:
+				$bulan = "Maret";
+				break;
+			case 4:
+				$bulan = "April";
+				break;
+			case 5:
+				$bulan = "Mei";
+				break;
+			case 6:
+				$bulan = "Juni";
+				break;
+			case 7:
+				$bulan = "Juli";
+				break;
+			case 8:
+				$bulan = "Agustus";
+				break;
+			case 9:
+				$bulan = "September";
+				break;
+			case 10:
+				$bulan = "Oktober";
+				break;
+			case 11:
+				$bulan = "November";
+				break;
+			case 12:
+				$bulan = "Desember";
+				break;
+		}
+		return $bulan;
+	}
+
+
+
+	public function list_dusun()
+	{
 		$sql = "SELECT * FROM tweb_wil_clusterdesa WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
 	}
 
-	public function penduduk_awal()
-	{
-		$bln = $this->db->escape($_SESSION['bulanku']-1);
-		$thn = $this->db->escape($_SESSION['tahunku']);
 
-		$sql = "SELECT wni_lk as WNI_L, wni_pr AS WNI_P, wna_lk as WNA_L, wna_pr AS WNA_P, kk_lk AS KK_L, kk_pr AS KK_P, kk AS KK
-			FROM log_bulanan
-			WHERE month(tgl) = $bln AND year(tgl) = $thn;";
-		$query = $this->db->query($sql);
-		if ($query)
-		{
-			if ($query->num_rows() > 0)
-			{
-				$hasil=$query->row();
-				$data= array(
-				"WNI_L" => $hasil->WNI_L,
-				"WNI_P" => $hasil->WNI_P,
-				"WNA_L" => $hasil->WNA_L,
-				"WNA_P" => $hasil->WNA_P,
-				"KK_L"  => $hasil->KK_L,
-				"KK_P"  => $hasil->KK_P,
-				"KK"	  => $hasil->KK,
-				"bulan" => $bln,
-				"tahun" => $thn);
+	/**
+	 * KETERANGAN kode_peristiwa di log_penduduk
+	 * 1 = insert penduduk baru dengan status lahir
+	 * 2 = penduduk mati
+	 * 3 = penduduk pindah keluar
+	 * 4 = penduduk hilang
+	 * 5 = insert penduduk baru pindah masuk
+	 * 6 = penduduk tidak tetap pergi
+	 *
+	 * @param mixed|null $rincian
+	 * @param mixed|null $tipe
+	 */
+	public function penduduk_awal($rincian = null, $tipe = null)
+	{
+		// Jika rincian dan tipe di definisikan, maka akan masuk kedetil laporan
+		if ($rincian && $tipe) {
+			return $this->rincian_awal($tipe);
+		}
+
+		$bln     = $this->session->bulanku;
+		$thn     = $this->session->tahunku;
+		$pad_bln = str_pad($bln, 2, '0', STR_PAD_LEFT); // Untuk membandingkan dengan tgl mysql
+
+		// Perubahan penduduk sebelum bulan laporan
+		$this->db
+			->select('p.*, l.kode_peristiwa')
+			->from('log_penduduk l')
+			->join('tweb_penduduk p', 'l.id_pend = p.id')
+			->where("DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}'");
+		$penduduk_mutasi_sql = $this->db->get_compiled_select();
+
+		$penduduk_mutasi = $this->db
+			->select('sum(case when sex = 1 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_L_PLUS')
+			->select('sum(case when sex = 2 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_P_PLUS')
+			->select('sum(case when sex = 1 and warganegara_id = 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNA_L_PLUS')
+			->select('sum(case when sex = 2 and warganegara_id = 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNA_P_PLUS')
+			->select('sum(case when sex = 1 and warganegara_id <> 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNI_L_MINUS')
+			->select('sum(case when sex = 2 and warganegara_id <> 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNI_P_MINUS')
+			->select('sum(case when sex = 1 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_L_MINUS')
+			->select('sum(case when sex = 2 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_P_MINUS')
+			->from('(' . $penduduk_mutasi_sql . ') as m')
+			->get()
+			->row_array();
+
+		// Perubahan keluarga sebelum bulan laporan
+		$this->db
+			->select('p.*, l.id_peristiwa')
+			->from('log_keluarga l')
+			->join('tweb_keluarga k', 'k.id = l.id_kk')
+			->join('tweb_penduduk p', 'p.id = k.nik_kepala')
+			->where("DATE_FORMAT(l.tgl_peristiwa, '%Y-%m') < '{$thn}-{$pad_bln}'");
+		$keluarga_mutasi_sql = $this->db->get_compiled_select();
+
+		$keluarga_mutasi = $this->db
+			->select('sum(case when id_peristiwa = 1 then 1 else 0 end) AS KK_PLUS')
+			->select('sum(case when sex = 1 and id_peristiwa = 1 then 1 else 0 end) AS KK_L_PLUS')
+			->select('sum(case when sex = 2 and id_peristiwa = 1 then 1 else 0 end) AS KK_P_PLUS')
+			->select('sum(case when id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_MINUS')
+			->select('sum(case when sex = 1 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_L_MINUS')
+			->select('sum(case when sex = 2 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_P_MINUS')
+			->from('(' . $keluarga_mutasi_sql . ') as m')
+			->get()
+			->row_array();
+
+		$penduduk_mutasi = array_merge($penduduk_mutasi, $keluarga_mutasi);
+
+		$data     = [];
+		$kategori = ['WNI_L', 'WNI_P', 'WNA_L', 'WNA_P', 'KK', 'KK_L', 'KK_P'];
+
+		foreach ($kategori as $k) {
+			$data[$k] = $penduduk_mutasi[$k . '_PLUS'] - $penduduk_mutasi[$k . '_MINUS'];
+		}
+		$data['tahun'] = $thn;
+		$data['bulan'] = $bln;
+
+		$this->awal = $data;
+
+		return $this->awal;
+	}
+
+	private function rincian_awal($tipe)
+	{
+		$penduduk = ['wni_l', 'wni_p', 'wna_l', 'wna_p', 'jml', 'jml_l', 'jml_p'];
+		$keluarga = ['kk', 'kk_l', 'kk_p'];
+		$bln      = $this->session->bulanku;
+		$thn      = $this->session->tahunku;
+		$pad_bln  = str_pad($bln, 2, '0', STR_PAD_LEFT); // Untuk membandingkan dengan tgl mysql
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				// Perubahan penduduk sebelum bulan laporan
+				$this->db
+					->select('p.*, l.kode_peristiwa')
+					->from('log_penduduk l')
+					->join('tweb_penduduk p', 'l.id_pend = p.id')
+					->where("DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}'");
+				break;
+
+			case in_array($tipe, $keluarga):
+				// Perubahan penduduk sebelum bulan laporan
+				$this->db
+					->select('p.*, l.id_peristiwa')
+					->from('log_keluarga l')
+					->join('tweb_keluarga k', 'k.id = l.id_kk')
+					->join('tweb_penduduk p', 'p.id = k.nik_kepala')
+					->where("DATE_FORMAT(l.tgl_peristiwa, '%Y-%m') < '{$thn}-{$pad_bln}'");
+				break;
+		}
+
+		$penduduk_mutasi_sql = $this->db->get_compiled_select();
+
+		// Mutasi plus
+		$penduduk_awal_bulan_plus_sql = $penduduk_mutasi_sql;
+		$this->db->select('*')->from('(' . $penduduk_awal_bulan_plus_sql . ') as p');
+		$this->rincian_dasar($tipe);
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				$this->db->where('kode_peristiwa in (1,5)');
+				break;
+
+			case in_array($tipe, $keluarga):
+				$this->db->where('id_peristiwa in (1)');
+				break;
+		}
+		$penduduk_awal_bulan_plus_sql = $this->db->get_compiled_select();
+
+		// Mutasi minus
+		$penduduk_awal_bulan_minus_sql = $penduduk_mutasi_sql;
+		$this->db->select('*')->from('(' . $penduduk_awal_bulan_minus_sql . ') as m');
+		$this->rincian_dasar($tipe);
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				$this->db->where('kode_peristiwa in (2, 3, 4)');
+				break;
+
+			case in_array($tipe, $keluarga):
+				$this->db->where('id_peristiwa in (2, 3, 4)');
+				break;
+		}
+		$penduduk_awal_bulan_minus_sql = $this->db->get_compiled_select();
+		$this->db->select('*')
+			->from('(' . $penduduk_awal_bulan_minus_sql . ') as minus')
+			->where('minus.id = plus.id');
+		$penduduk_awal_bulan_minus_sql = $this->db->get_compiled_select();
+
+		$this->db->select('*')
+			->from('(' . $penduduk_awal_bulan_plus_sql . ') as plus')
+			->where('NOT EXISTS (' . $penduduk_awal_bulan_minus_sql . ')');
+
+		return $this->db->get()->result_array();
+	}
+
+	private function rincian_dasar($tipe)
+	{
+		switch ($tipe) {
+			case 'wni_l':
+				$this->db->where('sex = 1 AND warganegara_id <> 2');
+				break;
+
+			case 'wni_p':
+				$this->db->where('sex = 2 AND warganegara_id <> 2');
+				break;
+
+			case 'wna_l':
+				$this->db->where('sex = 1 AND warganegara_id = 2');
+				break;
+
+			case 'wna_p':
+				$this->db->where('sex = 2 AND warganegara_id = 2');
+				break;
+
+			case 'jml':
+				break;
+
+			case 'jml_l':
+				$this->db->where('sex = 1');
+				break;
+
+			case 'jml_p':
+				$this->db->where('sex = 2');
+				break;
+
+			case 'kk':
+				break;
+
+			case 'kk_l':
+				$this->db->where('sex = 1');
+				break;
+
+			case 'kk_p':
+				$this->db->where('sex = 2');
+				break;
+		}
+	}
+
+	private function rincian_akhir($tipe)
+	{
+		$penduduk = ['wni_l', 'wni_p', 'wna_l', 'wna_p', 'jml', 'jml_l', 'jml_p'];
+		$keluarga = ['kk', 'kk_l', 'kk_p'];
+		$bln      = $this->session->bulanku;
+		$thn      = $this->session->tahunku;
+		$pad_bln  = str_pad($bln, 2, '0', STR_PAD_LEFT); // Untuk membandingkan dengan tgl mysql
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				// Perubahan penduduk sebelum bulan laporan
+				$this->db
+					->select('p.*, l.kode_peristiwa')
+					->from('log_penduduk l')
+					->join('tweb_penduduk p', 'l.id_pend = p.id')
+					->where("DATE_FORMAT(l.tgl_lapor, '%Y-%m') <= '{$thn}-{$pad_bln}'");
+				break;
+
+			case in_array($tipe, $keluarga):
+				// Perubahan penduduk sebelum bulan laporan
+				$this->db
+					->select('p.*, l.id_peristiwa')
+					->from('log_keluarga l')
+					->join('tweb_keluarga k', 'k.id = l.id_kk')
+					->join('tweb_penduduk p', 'p.id = k.nik_kepala')
+					->where("DATE_FORMAT(l.tgl_peristiwa, '%Y-%m') <= '{$thn}-{$pad_bln}'");
+				break;
+		}
+
+		$penduduk_mutasi_sql = $this->db->get_compiled_select();
+
+		// Mutasi plus
+		$this->db->select('*')->from('(' . $penduduk_mutasi_sql . ') as p');
+		$this->rincian_dasar($tipe);
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				$this->db->where('kode_peristiwa in (1,5)');
+				break;
+
+			case in_array($tipe, $keluarga):
+				$this->db->where('id_peristiwa in (1)');
+				break;
+		}
+		$mutasi_plus = $this->db->get_compiled_select();
+
+		// Mutasi minus
+		$this->db->select('*')->from('(' . $penduduk_mutasi_sql . ') as m');
+		$this->rincian_dasar($tipe);
+
+		switch (true) {
+			case in_array($tipe, $penduduk):
+				$this->db->where('kode_peristiwa in (2, 3, 4)');
+				break;
+
+			case in_array($tipe, $keluarga):
+				$this->db->where('id_peristiwa in (2, 3, 4)');
+				break;
+		}
+		$mutasi_minus = $this->db->get_compiled_select();
+		$this->db->select('*')
+			->from('(' . $mutasi_minus . ') as minus')
+			->where('minus.id = plus.id');
+		$mutasi_minus = $this->db->get_compiled_select();
+
+		$this->db->select('*')
+			->from('(' . $mutasi_plus . ') as plus')
+			->where('NOT EXISTS (' . $mutasi_minus . ')');
+
+		return $this->db->get()->result_array();
+	}
+
+	/**
+	 * Panggil setelah menghitung penduduk awal dan semua mutasi
+	 *
+	 * @param mixed|null $rincian
+	 * @param mixed|null $tipe
+	 */
+	public function penduduk_akhir($rincian = null, $tipe = null)
+	{
+		// Jika rincian dan tipe di definisikan, maka akan masuk kedetil laporan
+		if ($rincian && $tipe) {
+			return $this->rincian_akhir($tipe);
+		}
+
+		$data     = [];
+		$kategori = ['WNI_L', 'WNI_P', 'WNA_L', 'WNA_P', 'KK', 'KK_L', 'KK_P'];
+
+		foreach ($kategori as $k) {
+			$data[$k] = $this->awal[$k] + $this->lahir[$k] + $this->datang[$k] - $this->mati[$k] - $this->pindah[$k] - $this->hilang[$k];
+		}
+		$data['tahun'] = $this->session->bulanku;
+		$data['bulan'] = $this->session->tahunku;
+
+		return $data;
+	}
+
+	// Perubahan penduduk pada bulan laporan
+	private function mutasi_pada_bln_thn($kode_peristiwa)
+	{
+		$bln = $this->session->bulanku;
+		$thn = $this->session->tahunku;
+
+		$this->db
+			->select('p.*, l.ref_pindah, l.kode_peristiwa')
+			->from('log_penduduk l')
+			->join('tweb_penduduk p', 'l.id_pend = p.id')
+			->where('year(l.tgl_lapor)', $thn)
+			->where('month(l.tgl_lapor)', $bln)
+			->where('l.kode_peristiwa', $kode_peristiwa);
+
+		return $this->db->get_compiled_select();
+	}
+
+	/**
+	 * Untuk statistik perkembangan keluarga
+	 * id_peristiwa:
+	 * 1 - keluarga baru
+	 * 2 - kepala keluarga status dasar 'mati'
+	 * 3 - kepala keluarga status dasar 'pindah'
+	 * 4 - kepala keluarga status dasar 'hilang'
+	 * 6 - kepala keluarga status dasar 'pergi' (seharusnya tidak ada)
+	 * 11- kepala keluarga status dasar 'tidak valid' (seharusnya tidak ada)
+	 * 12- anggota keluarga keluar atau pecah dari keluarga
+	 * 13 - keluarga dihapus
+	 * 14 - kepala keluarga status dasar kembali 'hidup' (salah mengisi di log_penduduk)
+	 *
+	 *  Perubahan keluarga pada bulan laporan
+	 *
+	 * @param mixed $kode_peristiwa
+	 */
+	private function mutasi_keluarga_bln_thn($kode_peristiwa)
+	{
+		$bln = $this->session->bulanku;
+		$thn = $this->session->tahunku;
+
+		$id_peristiwa = $kode_peristiwa;
+
+		$this->db
+			->select('p.*, l.id_peristiwa')
+			->from('log_keluarga l')
+			->join('tweb_keluarga k', 'k.id = l.id_kk')
+			->join('tweb_penduduk p', 'p.id = k.nik_kepala')
+			->join('log_penduduk lp', 'lp.id = l.id_log_penduduk', 'left')
+			->group_start()
+			->where("lp.tgl_lapor is not null and year(lp.tgl_lapor) = {$thn}")
+			->or_where("lp.tgl_lapor is null and year(l.tgl_peristiwa) = {$thn}")
+			->group_end()
+			->group_start()
+			->where("lp.tgl_lapor is not null and month(lp.tgl_lapor) = {$bln}")
+			->or_where("lp.tgl_lapor is null and month(l.tgl_peristiwa) = {$bln}")
+			->group_end()
+			->where('l.id_peristiwa', $id_peristiwa);
+
+		return $this->db->get_compiled_select();
+	}
+
+	private function rincian_peristiwa($peristiwa, $tipe)
+	{
+		$penduduk = ['wni_l', 'wni_p', 'wna_l', 'wna_p', 'jml', 'jml_l', 'jml_p'];
+		$keluarga = ['kk', 'kk_l', 'kk_p'];
+
+		if (in_array($tipe, $penduduk)) {
+			$mutasi_pada_bln_thn = $this->mutasi_pada_bln_thn($peristiwa);
+			$data                = $this->db
+				->select('*')
+				->from('(' . $mutasi_pada_bln_thn . ') as m');
+
+			switch ($tipe) {
+				case 'wni_l':
+					$this->db->where('sex = 1 AND warganegara_id <> 2');
+					break;
+
+				case 'wni_p':
+					$this->db->where('sex = 2 AND warganegara_id <> 2');
+					break;
+
+				case 'wna_l':
+					$this->db->where('sex = 1 AND warganegara_id = 2');
+					break;
+
+				case 'wna_p':
+					$this->db->where('sex = 2 AND warganegara_id = 2');
+					break;
+
+				case 'jml':
+					break;
+
+				case 'jml_l':
+					$this->db->where('sex = 1');
+					break;
+
+				case 'jml_p':
+					$this->db->where('sex = 2');
+					break;
 			}
-			else
-			{
-				$data = array(
-				"WNI_L" => 0,
-				"WNI_P" => 0,
-				"WNA_L" => 0,
-				"WNA_P" => 0,
-				"KK_L"  => 0,
-				"KK_P"  => 0,
-				"KK"    => 0,
-				"bulan" => $bln,
-				"tahun" => $thn);
+		} elseif (in_array($tipe, $keluarga)) {
+			$mutasi_keluarga_bln_thn = $this->mutasi_keluarga_bln_thn($peristiwa);
+			$data                    = $this->db
+				->select('*')
+				->from('(' . $mutasi_keluarga_bln_thn . ') as m');
+
+			switch ($tipe) {
+				case 'kk':
+					break;
+
+				case 'kk_l':
+					$this->db->where('sex = 1');
+					break;
+
+				case 'kk_p':
+					$this->db->where('sex = 2');
+					break;
 			}
 		}
-		else
-		{
-			$data = $this->db->error_reporting();
+
+		return $this->db->get()->result_array();
+	}
+
+	private function mutasi_peristiwa($peristiwa, $rincian = null, $tipe = null)
+	{
+		// Jika rincian dan tipe di definisikan, maka akan masuk kedetil laporan
+		if ($rincian && $tipe) {
+			return $this->rincian_peristiwa($peristiwa, $tipe);
 		}
-		return $data;
+
+		// Mutasi penduduk
+		$mutasi_pada_bln_thn = $this->mutasi_pada_bln_thn($peristiwa);
+		$data                = $this->db
+			->select('sum(case when sex = 1 and warganegara_id <> 2 then 1 else 0 end) AS WNI_L')
+			->select('sum(case when sex = 2 and warganegara_id <> 2 then 1 else 0 end) AS WNI_P')
+			->select('sum(case when sex = 1 and warganegara_id = 2 then 1 else 0 end) AS WNA_L')
+			->select('sum(case when sex = 2 and warganegara_id = 2 then 1 else 0 end) AS WNA_P')
+			->from('(' . $mutasi_pada_bln_thn . ') as m')
+			->get()
+			->row_array();
+
+		// Mutasi keluarga
+		$mutasi_keluarga_bln_thn = $this->mutasi_keluarga_bln_thn($peristiwa);
+		$kel                     = $this->db
+			->select('sum(case when kk_level = 1 then 1 else 0 end) AS KK')
+			->select('sum(case when kk_level = 1 and sex = 1 then 1 else 0 end) AS KK_L')
+			->select('sum(case when kk_level = 1 and sex = 2 then 1 else 0 end) AS KK_P')
+			->from('(' . $mutasi_keluarga_bln_thn . ') as m')
+			->get()
+			->row_array();
+
+		return array_merge($data, $kel);
 	}
 
-	function penduduk_akhir()
+	public function kelahiran($rincian = null, $tipe = null)
 	{
-		$bln = $_SESSION['bulanku'];
-		$thn = $_SESSION['tahunku'];
+		$this->lahir = $this->mutasi_peristiwa(1, $rincian, $tipe);
 
-		$sql = "SELECT wni_lk as WNI_L, wni_pr AS WNI_P, wna_lk as WNA_L, wna_pr AS WNA_P, kk_lk AS KK_L, kk_pr AS KK_P, kk AS KK
-			FROM log_bulanan
-			WHERE month(tgl) = $bln AND year(tgl) = $thn;";
-		$query = $this->db->query($sql);
-		$hasil = $query->row_array();
-		$data = array(
-		"WNI_L" => $hasil["WNI_L"],
-		"WNI_P" => $hasil["WNI_P"],
-		"WNA_L" => $hasil["WNA_L"],
-		"WNA_P" => $hasil["WNA_P"],
-		"KK_L"  => $hasil["KK_L"],
-		"KK_P"  => $hasil["KK_P"],
-		"KK"	  => $hasil["KK"],
-		"bulan" => $bln,
-		"tahun" => $thn);
-		return $data;
+		return $this->lahir;
 	}
 
-	/*
-		Kelahiran penduduk berdasarkan tanggal lahir penduduk.
-		Keluarga baru berdasarkan tgl_peristiwa di log_keluarga. Log keluarga mencatat keluarga baru pada:
-		(1) tambah keluarga dari penduduk lepas
-		(2) tambah keluarga baru
-	*/
-	public function kelahiran()
+	public function kematian($rincian = null, $tipe = null)
 	{
-		$bln = $_SESSION['bulanku'];
-		$thn = $_SESSION['tahunku'];
+		$this->mati = $this->mutasi_peristiwa(2, $rincian, $tipe);
 
-		$sql = "SELECT
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE month(tanggallahir) = $bln AND year(tanggallahir) = $thn AND sex = 1 AND warganegara_id <> 2) AS WNI_L,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE month(tanggallahir) = $bln AND year(tanggallahir) = $thn AND sex = 2 AND warganegara_id <> 2) AS WNI_P,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE month(tanggallahir) = $bln AND year(tanggallahir) = $thn AND sex = 1 AND warganegara_id = 2) AS WNA_L,
-			(SELECT COUNT(id) FROM tweb_penduduk WHERE month(tanggallahir) = $bln AND year(tanggallahir) = $thn AND sex = 2 AND warganegara_id = 2) AS WNA_P,
-			(SELECT COUNT(id) FROM log_keluarga WHERE id_peristiwa = 1 AND month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn) AS KK,
-			(SELECT COUNT(id) FROM log_keluarga WHERE id_peristiwa = 1 AND month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND kk_sex = 1) AS KK_L,
-			(SELECT COUNT(id) FROM log_keluarga k WHERE id_peristiwa = 1 AND month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND kk_sex = 2) AS KK_P
-			";
-		$query = $this->db->query($sql);
-		$data = $query->row_array();
-		return $data;
+		return $this->mati;
 	}
 
-	/* KETERANGAN kode_peristiwa
-	   1 = status hidup, insert penduduk baru lahir
-	   2 = status menjadi mati
-		 3 = status menjadi pindah
-		 4 = status menjadi hilang
-		 5 = insert penduduk baru dengan status tetap/tidak tetap
-		 6 = pindah dalam desa
-		 7 = hapus anggota keluarga
-		 8 = insert penduduk baru dengan status pendatang
-		 9 = tambah keluarga baru dari penduduk yang sudah ada
-	*/
-
-	public function kematian()
+	public function pindah($rincian = null, $tipe = null)
 	{
-		$sql = "SELECT
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND sex = 1 AND kode_peristiwa = 2 AND warganegara_id <> 2) AS WNI_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND sex = 2 AND kode_peristiwa = 2 AND warganegara_id <> 2) AS WNI_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND sex = 1 AND kode_peristiwa = 2 AND warganegara_id = 2) AS WNA_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND sex = 2 AND kode_peristiwa = 2 AND warganegara_id = 2) AS WNA_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND p.kk_level = 1 AND kode_peristiwa = 2) AS KK,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 2) AS KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = ? AND year(tgl_peristiwa) =? AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 2) AS KK_P";
-		$query = $this->db->query($sql, array(
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku'],
-			$_SESSION['bulanku'], $_SESSION['tahunku']));
-		$data=$query->row_array();
-		return $data;
-	}
+		$this->pindah = $this->mutasi_peristiwa(3, $rincian, $tipe);
 
-	public function pindah()
-	{
-		$bln = $this->db->escape($_SESSION['bulanku']);
-		$thn = $this->db->escape($_SESSION['tahunku']);
-		$sql = "SELECT
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND warganegara_id <> 2) AS WNI_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND warganegara_id <> 2) AS WNI_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND warganegara_id = 2) AS WNA_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND warganegara_id = 2) AS WNA_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND kode_peristiwa = 3) AS KK,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 3) AS KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 3) AS KK_P
-			";
-		$query = $this->db->query($sql);
-		$data = $query->row_array();
-		return $data;
+		return $this->pindah;
 	}
 
 	public function rincian_pindah()
 	{
-		$bln = $this->db->escape($_SESSION['bulanku']);
-		$thn = $this->db->escape($_SESSION['tahunku']);
-		$sql = "SELECT
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND ref_pindah = 1) AS DESA_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 1) AS DESA_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 3 AND ref_pindah = 1) AS DESA_KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 1) AS DESA_KK_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND ref_pindah = 2) AS KEC_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 2) AS KEC_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 3 AND ref_pindah = 2) AS KEC_KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 2) AS KEC_KK_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND ref_pindah = 3) AS KAB_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 3) AS KAB_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 3 AND ref_pindah = 3) AS KAB_KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 3) AS KAB_KK_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 3 AND ref_pindah = 4) AS PROV_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 4) AS PROV_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 3 AND ref_pindah = 4) AS PROV_KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 3 AND ref_pindah = 4) AS PROV_KK_P
-			";
-		$query = $this->db->query($sql);
-		$data = $query->row_array();
-		$data['TOTAL_L'] = $data['DESA_L'] + $data['KEC_L'] + $data['KAB_L'] + $data['PROV_L'];
-		$data['TOTAL_P'] = $data['DESA_P'] + $data['KEC_P'] + $data['KAB_P'] + $data['PROV_P'];
+		$mutasi_pada_bln_thn = $this->mutasi_pada_bln_thn(3);
+
+		$data = $this->db
+			->select('sum(case when sex = 1 and ref_pindah = 1 then 1 else 0 end) AS DESA_L')
+			->select('sum(case when sex = 2 and ref_pindah = 1 then 1 else 0 end) AS DESA_P')
+			->select('sum(case when sex = 1 and ref_pindah = 1 and kk_level = 1 then 1 else 0 end) AS DESA_KK_L')
+			->select('sum(case when sex = 2 and ref_pindah = 1 and kk_level = 1 then 1 else 0 end) AS DESA_KK_P')
+
+			->select('sum(case when sex = 1 and ref_pindah = 2 then 1 else 0 end) AS KEC_L')
+			->select('sum(case when sex = 2 and ref_pindah = 2 then 1 else 0 end) AS KEC_P')
+			->select('sum(case when sex = 1 and ref_pindah = 2 and kk_level = 1 then 1 else 0 end) AS KEC_KK_L')
+			->select('sum(case when sex = 2 and ref_pindah = 2 and kk_level = 1 then 1 else 0 end) AS KEC_KK_P')
+
+			->select('sum(case when sex = 1 and ref_pindah = 3 then 1 else 0 end) AS KAB_L')
+			->select('sum(case when sex = 2 and ref_pindah = 3 then 1 else 0 end) AS KAB_P')
+			->select('sum(case when sex = 1 and ref_pindah = 3 and kk_level = 1 then 1 else 0 end) AS KAB_KK_L')
+			->select('sum(case when sex = 2 and ref_pindah = 3 and kk_level = 1 then 1 else 0 end) AS KAB_KK_P')
+
+			->select('sum(case when sex = 1 and ref_pindah = 4 then 1 else 0 end) AS PROV_L')
+			->select('sum(case when sex = 2 and ref_pindah = 4 then 1 else 0 end) AS PROV_P')
+			->select('sum(case when sex = 1 and ref_pindah = 4 and kk_level = 1 then 1 else 0 end) AS PROV_KK_L')
+			->select('sum(case when sex = 2 and ref_pindah = 4 and kk_level = 1 then 1 else 0 end) AS PROV_KK_P')
+
+			->from('(' . $mutasi_pada_bln_thn . ') as m')
+			->get()
+			->row_array();
+
+		$data['TOTAL_L']    = $data['DESA_L'] + $data['KEC_L'] + $data['KAB_L'] + $data['PROV_L'];
+		$data['TOTAL_P']    = $data['DESA_P'] + $data['KEC_P'] + $data['KAB_P'] + $data['PROV_P'];
 		$data['TOTAL_KK_L'] = $data['DESA_KK_L'] + $data['KEC_KK_L'] + $data['KAB_KK_L'] + $data['PROV_KK_L'];
 		$data['TOTAL_KK_P'] = $data['DESA_KK_P'] + $data['KEC_KK_P'] + $data['KAB_KK_P'] + $data['PROV_KK_P'];
+
 		return $data;
 	}
 
-	public function pendatang()
+	public function pendatang($rincian = null, $tipe = null)
 	{
-		$bln = $_SESSION['bulanku'];
-		$thn = $_SESSION['tahunku'];
+		$this->datang = $this->mutasi_peristiwa(5, $rincian, $tipe);
 
-		$paging_sql = ' LIMIT 1';
-		$sql = "SELECT
-		(select count(s.id) from log_penduduk s INNER join tweb_penduduk p on s.id_pend=p.id and warganegara_id<>'2' and sex='1' and kode_peristiwa in ('8','5') and month(tgl_lapor)=month(curdate()) and year(tgl_lapor)=year(curdate()) ) as WNI_L,
-		(select count(s.id) from log_penduduk s INNER join tweb_penduduk p on s.id_pend=p.id and warganegara_id<>'2' and sex='2' and kode_peristiwa in ('8','5') and month(tgl_lapor)=month(curdate()) and year(tgl_lapor)=year(curdate()) ) as WNI_P,
-		(select count(s.id) from log_penduduk s INNER join tweb_penduduk p on s.id_pend=p.id and warganegara_id='2' and sex='1' and kode_peristiwa in ('8','5') and month(tgl_lapor)=month(curdate()) and year(tgl_lapor)=year(curdate()) ) as WNA_L,
-		(select count(s.id) from log_penduduk s INNER join tweb_penduduk p on s.id_pend=p.id and warganegara_id='2' and sex='2' and kode_peristiwa in ('8','5') and month(tgl_lapor)=month(curdate()) and year(tgl_lapor)=year(curdate()) ) as WNA_P,
-		bulan, tahun
-		FROM log_penduduk
-		WHERE 1 ";
-		$sql .= $this->bulan_sql();
-		$sql .= $this->tahun_sql();
-		$sql .= $paging_sql;
-		$query = $this->db->query($sql);
-		if ($query->num_rows() > 0)
-		{
-			$data=$query->row_array();
-		}
-		else
-		{
-			$data = array(
-			"WNI_L" => 0,
-			"WNI_P" => 0,
-			"WNA_L" => 0,
-			"WNA_P" => 0,
-			"bulan" => $bln,
-			"tahun" => $thn);
-		}
-		return $data;
+		return $this->datang;
 	}
 
-	public function hilang()
+	public function hilang($rincian = null, $tipe = null)
 	{
-		$bln = $this->db->escape($_SESSION['bulanku']);
-		$thn = $this->db->escape($_SESSION['tahunku']);
-		$sql = "SELECT
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 4 AND warganegara_id <> 2) AS WNI_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 4 AND warganegara_id <> 2) AS WNI_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex =1 AND kode_peristiwa = 4 AND warganegara_id = 2) AS WNA_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND sex = 2 AND kode_peristiwa = 4 AND warganegara_id = 2) AS WNA_P,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND kode_peristiwa = 4) AS KK,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 1 AND kode_peristiwa = 4) AS KK_L,
-			(SELECT COUNT(u.id) FROM log_penduduk u LEFT JOIN tweb_penduduk p ON u.id_pend = p.id WHERE month(tgl_peristiwa) = $bln AND year(tgl_peristiwa) = $thn AND p.kk_level = 1 AND sex = 2 AND kode_peristiwa = 4) AS KK_P
-			";
-		$query = $this->db->query($sql);
-		$data =$query->row_array();
-		return $data;
+		$this->hilang = $this->mutasi_peristiwa(4, $rincian, $tipe);
+
+		return $this->hilang;
 	}
 
 	public function rekapitulasi_list($offset = 0, $limit = 0)
@@ -378,18 +634,19 @@
 		$this->rekapitulasi_data();
 
 		//Paging SQL
-		if ($limit > 0 ) $this->db->limit($limit, $offset);
+		if ($limit > 0) {
+			$this->db->limit($limit, $offset);
+		}
 
 		$data = $this->db->get()->result_array();
 
 		//Set Penduduk Akhir
-		foreach ($data as $key => $value)
-		{
-			$data[$key]['WNI_L_AKHIR'] = $value['WNI_L_AWAL'] + $value['WNI_L_TAMBAH_LAHIR'] + $value['WNI_L_TAMBAH_MASUK'] - $value['WNI_L_KURANG_MATI'] - $value['WNI_L_KURANG_KELUAR'];
-			$data[$key]['WNI_P_AKHIR'] = $value['WNI_P_AWAL'] + $value['WNI_P_TAMBAH_LAHIR'] + $value['WNI_P_TAMBAH_MASUK'] - $value['WNI_P_KURANG_MATI'] - $value['WNI_P_KURANG_KELUAR'];
-			$data[$key]['WNA_L_AKHIR'] = $value['WNA_L_AWAL'] + $value['WNA_L_TAMBAH_LAHIR'] + $value['WNA_L_TAMBAH_MASUK'] - $value['WNA_L_KURANG_MATI'] - $value['WNA_L_KURANG_KELUAR'];
-			$data[$key]['WNA_P_AKHIR'] = $value['WNA_P_AWAL'] + $value['WNA_P_TAMBAH_LAHIR'] + $value['WNA_P_TAMBAH_MASUK'] - $value['WNA_P_KURANG_MATI'] - $value['WNA_P_KURANG_KELUAR'];
-			$data[$key]['KK_AKHIR_JML'] = $value['KK_JLH'] + $value['KK_MASUK_JLH'];
+		foreach ($data as $key => $value) {
+			$data[$key]['WNI_L_AKHIR']      = $value['WNI_L_AWAL'] + $value['WNI_L_TAMBAH_LAHIR'] + $value['WNI_L_TAMBAH_MASUK'] - $value['WNI_L_KURANG_MATI'] - $value['WNI_L_KURANG_KELUAR'];
+			$data[$key]['WNI_P_AKHIR']      = $value['WNI_P_AWAL'] + $value['WNI_P_TAMBAH_LAHIR'] + $value['WNI_P_TAMBAH_MASUK'] - $value['WNI_P_KURANG_MATI'] - $value['WNI_P_KURANG_KELUAR'];
+			$data[$key]['WNA_L_AKHIR']      = $value['WNA_L_AWAL'] + $value['WNA_L_TAMBAH_LAHIR'] + $value['WNA_L_TAMBAH_MASUK'] - $value['WNA_L_KURANG_MATI'] - $value['WNA_L_KURANG_KELUAR'];
+			$data[$key]['WNA_P_AKHIR']      = $value['WNA_P_AWAL'] + $value['WNA_P_TAMBAH_LAHIR'] + $value['WNA_P_TAMBAH_MASUK'] - $value['WNA_P_KURANG_MATI'] - $value['WNA_P_KURANG_KELUAR'];
+			$data[$key]['KK_AKHIR_JML']     = $value['KK_JLH'] + $value['KK_MASUK_JLH'];
 			$data[$key]['KK_AKHIR_ANG_KEL'] = $value['KK_ANG_KEL'] + $value['KK_MASUK_ANG_KEL'];
 		}
 
@@ -398,10 +655,10 @@
 
 	public function rekapitulasi_data()
 	{
-		$bln = $this->session->filter_bulan;
-		$thn = $this->session->filter_tahun;
+		$bln     = $this->session->filter_bulan;
+		$thn     = $this->session->filter_tahun;
 		$pad_bln = str_pad($bln, 2, '0', STR_PAD_LEFT); // Untuk membandingkan dengan tgl mysql
-		$data = $this->db
+		$data    = $this->db
 			->select('a.dusun as DUSUN')
 			// Penduduk Awal Bulan
 			->select("(sum(case when p.sex = 1 and p.warganegara_id <> 2 and l.kode_peristiwa in (1,5) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end) - sum(case when p.sex = 1 and p.warganegara_id <> 2 and l.kode_peristiwa in (2,3,4) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end)) AS WNI_L_AWAL")
@@ -409,30 +666,30 @@
 			->select("(sum(case when p.sex = 1 and p.warganegara_id = 2 and l.kode_peristiwa in (1,5) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end) - sum(case when p.sex = 1 and p.warganegara_id = 2 and l.kode_peristiwa in (2,3,4) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end)) AS WNA_L_AWAL")
 			->select("(sum(case when p.sex = 2 and p.warganegara_id = 2 and l.kode_peristiwa in (1,5) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end) - sum(case when p.sex = 2 and p.warganegara_id = 2 and l.kode_peristiwa in (2,3,4) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end)) AS WNA_P_AWAL")
 			// Tambahan Lahir
-			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 1 then 1 else 0 end) AS WNI_L_TAMBAH_LAHIR")
-			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 1 then 1 else 0 end) AS WNI_P_TAMBAH_LAHIR")
-			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 1 then 1 else 0 end) AS WNA_L_TAMBAH_LAHIR")
-			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 1 then 1 else 0 end) AS WNA_P_TAMBAH_LAHIR")
+			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 1 then 1 else 0 end) AS WNI_L_TAMBAH_LAHIR")
+			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 1 then 1 else 0 end) AS WNI_P_TAMBAH_LAHIR")
+			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 1 then 1 else 0 end) AS WNA_L_TAMBAH_LAHIR")
+			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 1 then 1 else 0 end) AS WNA_P_TAMBAH_LAHIR")
 			// Tambahan Pendatang
-			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 5 then 1 else 0 end) AS WNI_L_TAMBAH_MASUK")
-			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 5 then 1 else 0 end) AS WNI_P_TAMBAH_MASUK")
-			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 5 then 1 else 0 end) AS WNA_L_TAMBAH_MASUK")
-			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 5 then 1 else 0 end) AS WNA_P_TAMBAH_MASUK")
+			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 5 then 1 else 0 end) AS WNI_L_TAMBAH_MASUK")
+			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 5 then 1 else 0 end) AS WNI_P_TAMBAH_MASUK")
+			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 5 then 1 else 0 end) AS WNA_L_TAMBAH_MASUK")
+			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 5 then 1 else 0 end) AS WNA_P_TAMBAH_MASUK")
 			// Keluar Mati
-			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 2 then 1 else 0 end) AS WNI_L_KURANG_MATI")
-			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 2 then 1 else 0 end) AS WNI_P_KURANG_MATI")
-			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 2 then 1 else 0 end) AS WNA_L_KURANG_MATI")
-			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 2 then 1 else 0 end) AS WNA_P_KURANG_MATI")
+			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 2 then 1 else 0 end) AS WNI_L_KURANG_MATI")
+			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 2 then 1 else 0 end) AS WNI_P_KURANG_MATI")
+			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 2 then 1 else 0 end) AS WNA_L_KURANG_MATI")
+			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 2 then 1 else 0 end) AS WNA_P_KURANG_MATI")
 			// Keluar Pindah
-			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 3 then 1 else 0 end) AS WNI_L_KURANG_KELUAR")
-			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 3 then 1 else 0 end) AS WNI_P_KURANG_KELUAR")
-			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 3 then 1 else 0 end) AS WNA_L_KURANG_KELUAR")
-			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn and l.kode_peristiwa = 3 then 1 else 0 end) AS WNA_P_KURANG_KELUAR")
+			->select("sum(case when p.sex = 1 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 3 then 1 else 0 end) AS WNI_L_KURANG_KELUAR")
+			->select("sum(case when p.sex = 2 and p.warganegara_id <> 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 3 then 1 else 0 end) AS WNI_P_KURANG_KELUAR")
+			->select("sum(case when p.sex = 1 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 3 then 1 else 0 end) AS WNA_L_KURANG_KELUAR")
+			->select("sum(case when p.sex = 2 and p.warganegara_id = 2 and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} and l.kode_peristiwa = 3 then 1 else 0 end) AS WNA_P_KURANG_KELUAR")
 			// KK
 			->select("(sum(case when p.kk_level = 1 and kode_peristiwa in (1,5) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end) - sum(case when kk_level = 1 and kode_peristiwa in (2,3,4) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end)) AS KK_JLH")
 			->select("(sum(case when p.kk_level != 1 and kode_peristiwa in (1,5) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end) - sum(case when p.kk_level != 1 and kode_peristiwa in (2,3,4) and DATE_FORMAT(l.tgl_lapor, '%Y-%m') < '{$thn}-{$pad_bln}' then 1 else 0 end)) AS KK_ANG_KEL")
-			->select("(sum(case when p.kk_level = 1 and kode_peristiwa in (1,5) and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn then 1 else 0 end) - sum(case when p.kk_level = 1 and kode_peristiwa in (2,3,4) and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn then 1 else 0 end)) AS KK_MASUK_JLH")
-			->select("(sum(case when p.kk_level != 1 and kode_peristiwa in (1,5) and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn then 1 else 0 end) - sum(case when p.kk_level != 1 and kode_peristiwa in (2,3,4) and month(l.tgl_lapor) = $bln and year(l.tgl_lapor) = $thn then 1 else 0 end)) AS KK_MASUK_ANG_KEL");
+			->select("(sum(case when p.kk_level = 1 and kode_peristiwa in (1,5) and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} then 1 else 0 end) - sum(case when p.kk_level = 1 and kode_peristiwa in (2,3,4) and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} then 1 else 0 end)) AS KK_MASUK_JLH")
+			->select("(sum(case when p.kk_level != 1 and kode_peristiwa in (1,5) and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} then 1 else 0 end) - sum(case when p.kk_level != 1 and kode_peristiwa in (2,3,4) and month(l.tgl_lapor) = {$bln} and year(l.tgl_lapor) = {$thn} then 1 else 0 end)) AS KK_MASUK_ANG_KEL");
 
 		$this->rekapitulasi_query_dasar();
 	}
@@ -448,8 +705,7 @@
 			->group_by('a.dusun');
 	}
 
-
-	public function rekapitulasi_paging($p=1)
+	public function rekapitulasi_paging($p = 1)
 	{
 		$this->db->select('COUNT(a.dusun) as jml');
 		$this->rekapitulasi_query_dasar();
@@ -464,7 +720,4 @@
 
 		return $this->paging;
 	}
-
 }
-
-?>

@@ -1,20 +1,15 @@
-<style>
-	img.gambar-pembangunan {
-		width: 400px;
-		height: 300px;
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
-</style>
+<?php defined('BASEPATH') || exit('No direct script access allowed'); ?>
+
 <table>
 	<tbody>
 		<tr>
-			<td align="center">
-				<img class="logo" src="<?= gambar_desa($config['logo']); ?>" alt="logo-desa">
-				<h3 class="judul">DAFTAR USULAN RENCANA KERJA PEMERINTAH DESA<br/>
-					<?= strtoupper($this->setting->sebutan_kecamatan . ' ' . $config['nama_kecamatan'] . ' <br>' . $this->setting->sebutan_kabupaten . ' ' . $config['nama_kabupaten'] . ' <br>' ); ?>
-				</h3>
+			<td>
+				<?php if ($aksi != 'unduh') : ?>
+					<img class="logo" src="<?= gambar_desa($config['logo']); ?>" alt="logo-desa">
+				<?php endif; ?>
+				<h1 class="judul">
+					PEMERINTAH <?= strtoupper($this->setting->sebutan_kabupaten . ' ' . $config['nama_kabupaten'] . ' <br>' . $this->setting->sebutan_kecamatan . ' ' . $config['nama_kecamatan'] . ' <br>' . $this->setting->sebutan_desa . ' ' . $config['nama_desa']); ?>
+				</h1>
 			</td>
 		</tr>
 		<tr>
@@ -22,54 +17,54 @@
 				<hr class="garis">
 			</td>
 		</tr>
-		<table>
-            <thead>
-                <tr class="border thick">
-                    <th>No</th>  
-                    <th>Nama Desa</th> 
-                    <th>Bidang</th>
-                    <th>Nama Program Kegiatan</th>
-                    <th>Lokasi</th>
-                    <th>Volume</th>
-                    <th>Satuan</th>
-                    <th>Jumlah (Rp)</th>
-                    <th>Sumber Dana</th> 
-                </tr>          
-            </thead>
-			<tbody>
-            <?php  
-				$no = 1;
-				 ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $pembangunan->desa; ?></td>
-                    <td><?= $pembangunan->bidang_desa; ?></td>
-                    <td><?= $pembangunan->nama_program_kegiatan; ?></td>
-                    <td><?= $pembangunan->lokasi; ?></td>
-                    <td><?= $pembangunan->volume; ?></td>
-                    <td><?= $pembangunan->satuan; ?></td>
-                    <td><?= rupiah($pembangunan->anggaran); ?></td>
-                    <td><?= $pembangunan->sumber_dana; ?></td>
-                </tr>
-			</tbody>
-		</table>
+		<tr>
+			<td class="text-center">
+				<h4>DAFTAR USULAN RENCANA KERJA PEMERINTAH DESA</h4>
+			</td>
+		</tr>
+		<?php if ($tahun) : ?>
+			<tr>
+				<td class="text-center">
+					<h4>TAHUN <?= $tahun; ?></h4>
+				</td>
+			</tr>
+		<?php endif; ?>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
-		<!--<table>
-			<tbody>
-				<?php foreach ($dokumentasi as $value) : ?>
-					<tr>
-						<td class="text-center">
-							<h4><?= $value->keterangan . ' ' . $value->persentase ?></h4>
-							<img class="gambar-pembangunan" src="<?= base_url() . LOKASI_GALERI . $value->gambar ?>" alt="<?= $musdus->judul ?>">
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-				<?php endforeach ?>
-			</tbody>
-		</table>-->
+		<tr>
+			<td>
+				<table class="border thick">
+					<thead>
+						<tr class="border thick">
+							<th>NOMOR URUT</th>
+							<th>NAMA PROGRAM / KEGIATAN</th>
+							<th>LOKASI</th>
+							<th>SUMBER DANA</th>
+							<th>ANGGARAN</th>
+							<th>VOLUME</th>
+							<th>PELAKSANA</th>
+							<th>MANFAAT</th>
+							<th>KET</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($main as $key => $data) : ?>
+							<tr>
+								<td align="center"><?= ($key + 1) ?></td>
+								<td><?= $data->nama_program_kegiatan; ?></td>
+								<td><?= $data->lokasi; ?></td>
+								<td align="right"><?= $data->sumber_dana; ?></td>
+								<td align="right"><?= Rupiah2($data->anggaran); ?></td>
+								<td align="right"><?= Rupiah2($data->volume); ?></td>
+								<td><?= $data->pelaksana_kegiatan; ?></td>
+								<td><?= $data->manfaat; ?></td>
+								<td><?= $data->keterangan; ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</td>
+		</tr>
 	</tbody>
 </table>

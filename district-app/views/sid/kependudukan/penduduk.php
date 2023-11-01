@@ -130,17 +130,6 @@
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 1, 'NIK'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 3, 'Nama'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 7, 'Umur'); ?></th>
-												<!--<th>Tag ID Card</th>												
-												<!-- tambah kolom orang tua-->
-												<!--<th>Nama Ayah</th>
-												<th>Nama Ibu</th>
-												<!-- tambah kolom orang tua-->
-												<!--<th>No. Rumah Tangga</th>-->
-												<th>Alamat</th>
-												<!--<th><? //= ucwords($this->setting->sebutan_dusun); 
-														?></th>
-												<th>RW</th>
-												<th>RT</th>-->
 												<th>Pendidikan</th>
 												<th>Pekerjaan</th>
 												<th>Perkawinan</th>
@@ -153,8 +142,8 @@
 													<tr>
 														<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']; ?>" /></td>
 														<td class="padat"><?= ($key + $paging->offset + 1); ?></td>
-														<td class="aksi text-center" >
-															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-purple btn-box btn-sm" title="Lihat Detail">Lihat</i></a><br/>
+														<td class="aksi text-center">
+															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-purple btn-box btn-sm" title="Lihat Detail">Lihat</i></a><br />
 															<div class="btn-group">
 																<a href="#" class="btn btn-social bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail">Aksi <i class="fa fa-arrow-circle-down"></i></a>
 																<ul class="dropdown-menu" role="menu">
@@ -219,25 +208,9 @@
 															Ibu : <?= $data['nama_ibu']; ?>
 														</td>
 														<td align="center"><strong><?= $data['umur']; ?></strong> <small>tahun</small><br /><small style="color:#F60"><?= $data['sex']; ?></small><br /><small style="color:#03F"><?= $data['tempatlahir']; ?>, <?= strtoupper($data['tanggallahir']); ?></small></td>
-														<!--<td nowrap><? //= $data['tag_id_card']; 
-																		?></td>
-														<!-- tambah kolom orang tua-->
-														<!--<td nowrap><? //= $data['nama_ayah']; 
-																		?></td>
-														<td nowrap><? //= $data['nama_ibu']; 
-																	?></td>
-														<!-- tambah kolom orang tua-->
-														<!--<td><a href="<? //= site_url("rtm/anggota/$data[id_rtm]"); 
-																			?>"><? //= $data['no_rtm']; 
-																				?></a></td>-->
 														<td>
 															<?= strtoupper($data['alamat']); ?>, RT <?= $data['rt']; ?> / RW <?= $data['rw']; ?> Dusun <?= strtoupper($data['dusun']); ?>
 														</td>
-														<!--<td nowrap><?= strtoupper($data['dusun']); ?></td>
-														<td><? //= $data['rw']; 
-															?></td>
-														<td><? //= $data['rt']; 
-															?></td>-->
 														<td><?= $data['pendidikan']; ?></td>
 														<td><?= $data['pekerjaan']; ?></td>
 														<td nowrap><?= $data['kawin']; ?></td>

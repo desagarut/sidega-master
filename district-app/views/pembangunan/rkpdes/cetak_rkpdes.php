@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td class="text-center">
-				<h4>BUKU RENCANA PEMBANGUNAN</h4>
+				<h4>DAFTAR RENCANA KERJA PEMERINTAH DESA</h4>
 			</td>
 		</tr>
 		<?php if ($tahun) : ?>

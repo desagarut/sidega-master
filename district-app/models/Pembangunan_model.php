@@ -307,7 +307,7 @@ class Pembangunan_model extends CI_Model
 		$post = $this->input->post();
 
 		$data['tahun']       					= $post['tahun'];
-		$data['dusun']              				= $post['dusun'];
+		$data['dusun']              			= $post['dusun'];
 		$data['bidang_desa']             		= $post['bidang_desa'];
 		$data['urutan_prioritas']     			= $post['urutan_prioritas'];
 		$data['nama_program_kegiatan'] 			= $post['nama_program_kegiatan'];

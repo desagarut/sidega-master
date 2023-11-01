@@ -93,7 +93,6 @@ class Pembangunan extends Admin_Controller
 		$data['form_action'] = site_url("pembangunan/update_prioritas/$id");
 
 		$this->load->view('pembangunan/prioritas/form_ubah_prioritas', $data);
-
 	}
 
 	public function insert()
@@ -156,37 +155,6 @@ class Pembangunan extends Admin_Controller
 		]);
 	}
 
-	public function dialog_daftar($id = 0, $aksi = '')
-	{
-		$this->load->view('global/ttd_pamong', [
-			'aksi' => $aksi,
-			'pamong' => $this->pamong_model->list_data(),
-			'pamong_ttd' => $this->pamong_model->get_ub(),
-			'pamong_ketahui' => $this->pamong_model->get_ttd(),
-			'form_action' => site_url("pembangunan/daftar/$id/$aksi"),
-		]);
-	}
-
-	public function daftar($id = 0, $aksi = '')
-	{
-		$request = $this->input->post();
-
-		$pembangunan = $this->model->find($id);
-		$dokumentasi = $this->pembangunan_dok_model->find_dokumentasi($pembangunan->id);
-
-		$data['main'] = $this->model->find($id);
-		$data['pembangunan']    = $pembangunan;
-		$data['dokumentasi']    = $dokumentasi;
-		$data['config']         = $this->header['desa'];
-		$data['pamong_ttd']     = $this->pamong_model->get_data($request['pamong_ttd']);
-		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
-		$data['aksi']           = $aksi;
-		$data['file']           = "Laporan Pembangunan";
-		$data['isi']            = "pembangunan/perencanaan/cetak";
-
-		$this->load->view('global/format_cetak', $data);
-	}
-
 	public function detail_usulan($id = 0)
 	{
 		$this->tab_ini = 1;
@@ -203,6 +171,53 @@ class Pembangunan extends Admin_Controller
 
 		$this->render('pembangunan/perencanaan/detail_usulan', $data);
 	}
+
+	public function dialog($aksi = '')
+	{
+		$data = [
+			'aksi'        => $aksi,
+			'form_action' => site_url('pembangunan/cetak/' . $aksi),
+			'isi'         => 'pembangunan/ajax_dialog',
+			'list_tahun'  => $this->model->list_filter_tahun(),
+		];
+
+		$this->load->view('global/dialog_cetak', $data);
+	}
+
+	public function cetak($aksi = '')
+	{
+		$tahun = $this->input->post('tahun');
+
+		$data = [
+			'aksi'           => $aksi,
+			'config'         => $this->header['desa'],
+			'tahun'          => $tahun,
+			//'pamong' 		=> $this->pamong_model->list_data(),
+
+			'pamong_ketahui' => $this->pamong_model->get_ttd(),
+			'pamong_ttd'     => $this->pamong_model->get_ub(),
+			'main'           => $this->model->get_data('', $tahun)->get()->result(),
+			'tgl_cetak'      => $this->input->post('tgl_cetak'),
+			'file'           => 'Buku Rencana Kerja Pembangunan',
+			'isi'            => 'pembangunan/perencanaan/cetak',
+			'letak_ttd'      => ['1', '1', '3'],
+		];
+
+		$this->load->view('global/format_cetak', $data);
+	}
+
+	// Lainnya
+	public function lainnya($submenu)
+	{
+		$this->render('ba/pembangunan/main', [
+			'selected_nav' => $submenu,
+			'main_content' => 'ba/pembangunan/content_rencana',
+		]);
+	}
+
+
+	// END PERENCANAAN
+
 
 	// Modul Kerjasama Antar Desa
 	public function kerjasama_antar_desa()
@@ -483,7 +498,7 @@ class Pembangunan extends Admin_Controller
 		]);
 	}
 
-
+	// START RKP DESA
 	public function daftar_rkp()
 	{
 		$this->tab_ini = 10;
@@ -513,36 +528,41 @@ class Pembangunan extends Admin_Controller
 		]);
 	}
 
-	public function dialog_cetak_rkp($id = 0, $aksi = '')
+	public function dialog_rkpdes($aksi = '')
 	{
-		$this->load->view('global/ttd_pamong', [
-			'aksi' => $aksi,
-			'pamong' => $this->pamong_model->list_data(),
-			'pamong_ttd' => $this->pamong_model->get_ub(),
-			'pamong_ketahui' => $this->pamong_model->get_ttd(),
-			'form_action' => site_url("pembangunan/cetak_rkpdes/$id/$aksi"),
-		]);
+		$data = [
+			'aksi'        => $aksi,
+			'form_action' => site_url('pembangunan/cetak_rkpdes/' . $aksi),
+			'isi'         => 'pembangunan/ajax_dialog',
+			'list_tahun'  => $this->model->list_filter_tahun(),
+		];
+
+		$this->load->view('global/dialog_cetak', $data);
 	}
 
-	public function cetak_rkp($id = '', $aksi = '')
+	public function cetak_rkpdes($aksi = '')
 	{
-		$request = $this->input->post();
+		$tahun = $this->input->post('tahun');
 
-		$rkp = $this->model->find_rkp($id);
-		$dokumentasi = $this->pembangunan_dok_model->find_dokumentasi($pembangunan->id);
+		$data = [
+			'aksi'           => $aksi,
+			'config'         => $this->header['desa'],
+			'tahun'          => $tahun,
+			//'pamong' 		=> $this->pamong_model->list_data(),
 
-		$data['pembangunan']    = $rkp;
-		$data['dokumentasi']    = $dokumentasi;
-		$data['config']         = $this->header['desa'];
-		$data['pamong_ttd']     = $this->pamong_model->get_data($request['pamong_ttd']);
-		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
-		$data['aksi']           = $aksi;
-		$data['file']           = "Cetak RKP Desa";
-		$data['isi']            = "pembangunan/rkpdes/cetak";
+			'pamong_ketahui' => $this->pamong_model->get_ttd(),
+			'pamong_ttd'     => $this->pamong_model->get_ub(),
+			'main'           => $this->model->get_data('', $tahun)->get()->result(),
+			'tgl_cetak'      => $this->input->post('tgl_cetak'),
+			'file'           => 'Daftar Rencana Kerja Pemerintah Desa',
+			'isi'            => 'pembangunan/rkpdes/cetak_rkpdes',
+			'letak_ttd'      => ['1', '1', '3'],
+		];
 
 		$this->load->view('global/format_cetak', $data);
 	}
 
+	// DU-RKPDesa
 	public function durkpdes()
 	{
 		$this->tab_ini = 11;
@@ -570,35 +590,39 @@ class Pembangunan extends Admin_Controller
 		$this->render('pembangunan/rkpdes/durkpdes');
 	}
 
-	public function dialog_cetak_durkpdes($id = 0, $aksi = '')
-	{
-		$this->load->view('global/ttd_pamong', [
-			'aksi' => $aksi,
-			'pamong' => $this->pamong_model->list_data(),
-			'pamong_ttd' => $this->pamong_model->get_ub(),
-			'pamong_ketahui' => $this->pamong_model->get_ttd(),
-			'form_action' => site_url("pembangunan/cetak_durkpdes/$id/$aksi"),
-		]);
-	}
+	public function dialog_durkpdes($aksi = '')
+    {
+        $data = [
+            'aksi'        => $aksi,
+            'form_action' => site_url('pembangunan/cetak_durkpdes/' . $aksi),
+            'isi'         => 'pembangunan/ajax_dialog',
+            'list_tahun'  => $this->model->list_filter_tahun(),
+        ];
 
-	public function cetak_durkpdes($id = 0, $aksi = '')
-	{
-		$request = $this->input->post();
+        $this->load->view('global/dialog_cetak', $data);
+    }
 
-		$durkpdes = $this->model->find_durkpdes($id);
-		$dokumentasi = $this->pembangunan_dok_model->find_dokumentasi($pembangunan->id);
+    public function cetak_durkpdes($aksi = '')
+    {
+        $tahun = $this->input->post('tahun');
 
-		$data['pembangunan']    = $durkpdes;
-		$data['dokumentasi']    = $dokumentasi;
-		$data['config']         = $this->header['desa'];
-		$data['pamong_ttd']     = $this->pamong_model->get_data($request['pamong_ttd']);
-		$data['pamong_ketahui'] = $this->pamong_model->get_data($request['pamong_ketahui']);
-		$data['aksi']           = $aksi;
-		$data['file']           = "Cetak DU-RKP";
-		$data['isi']            = "pembangunan/rkpdes/cetak_durk";
+        $data = [
+            'aksi'           => $aksi,
+            'config'         => $this->header['desa'],
+            'tahun'          => $tahun,
+			//'pamong' 		=> $this->pamong_model->list_data(),
 
-		$this->load->view('global/format_cetak', $data);
-	}
+            'pamong_ketahui' => $this->pamong_model->get_ttd(),
+            'pamong_ttd'     => $this->pamong_model->get_ub(),
+            'main'           => $this->model->get_data('', $tahun)->get()->result(),
+            'tgl_cetak'      => $this->input->post('tgl_cetak'),
+            'file'           => 'Daftar Rencana Kerja Pemerintah Desa',
+            'isi'            => 'pembangunan/rkpdes/cetak_durkpdes',
+            'letak_ttd'      => ['1', '1', '3'],
+        ];
+
+        $this->load->view('global/format_cetak', $data);
+    }
 
 	// Modul Pelaksanaan Program/ Kegiatan Pembangunan --//
 	public function pelaksanaan_rkp()
@@ -724,15 +748,15 @@ class Pembangunan extends Admin_Controller
 	}
 	//End durkp//
 
-		// Start durkp//
-		public function batal_aktiv($id)
-		{
-			$this->model->batal_aktiv($id);
-			$this->session->success = 1;
-			redirect('pembangunan/penetapan_rkp');
-		}
-		//End durkp//
-	
+	// Start durkp//
+	public function batal_aktiv($id)
+	{
+		$this->model->batal_aktiv($id);
+		$this->session->success = 1;
+		redirect('pembangunan/penetapan_rkp');
+	}
+	//End durkp//
+
 
 	// Start Pelaksanaan APBDes//
 	public function pelaksanaan_aktiv($id)
