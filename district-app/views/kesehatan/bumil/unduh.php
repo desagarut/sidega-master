@@ -4,5 +4,5 @@
 	header("Pragma: no-cache");
 	header("Expires: 0");
 
-	include("district-app/views/covid19/vaksin/cetak_$judul.php");
+	include("district-app/views/kesehatan/balita/cetak_$judul.php");
 ?>

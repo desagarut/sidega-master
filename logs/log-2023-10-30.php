@@ -1,1 +1,0 @@
-ERROR - 2023-10-30 12:28:33 --> Severity: error --> Exception: Unable to locate the model you have specified: Data_balita_model D:\laragon\www\sidega-master\vendor\codeigniter\framework\system\core\Loader.php 348

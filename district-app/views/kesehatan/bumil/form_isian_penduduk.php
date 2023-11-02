@@ -10,7 +10,7 @@
 	<div class="col-sm-6">
 		<div class="form-group">
 			<label for="i_nama">Nama Lengkap</label>
-			<input type="text" class="form-control input-sm required nama" name="nama" placeholder="Nama Lengkap Tanpa Gelar" value="<?= strtoupper($penduduk['nama'])?>">
+			<input type="text" class="form-control input-sm required nama" name="nama" placeholder="Nama Lengkap Bayi" value="<?= strtoupper($penduduk['nama'])?>">
 		</div>
 	</div>
 

@@ -6,26 +6,26 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Pendataan Balita </h1>
+		<h1>Pendataan Ibu Hamil </h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
 			<li class="active">Kesehatan</li>
-			<li class="active">Data Balita</li>
+			<li class="active">Data Ibu Hamil</li>
 		</ol>
 	</section>
 
 	<section class="content" id="maincontent">
 		<div class="row">
 			<div id="kesehatan" class="col-sm-2">
-				<?php $this->load->view('kesehatan/balita/menu') ?>
+				<?php $this->load->view('kesehatan/bumil/menu') ?>
 			</div>
 			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<a href="<?= site_url("kesehatan_balita/form_balita") ?>" title="Tambah Data Balita" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-plus"></i> Tambah Data Balita</a>
-						<a href="<?= site_url("kesehatan_balita/daftar/cetak") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak" target="_blank"><i class="fa fa-print"></i> Cetak</a>
-						<a href="<?= site_url("kesehatan_balita/daftar/unduh") ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh" target="_blank"><i class="fa fa-download"></i> Unduh</a>
-						<a href="<?= site_url("kesehatan_balita/pantau") ?>" class="btn btn-box btn-info btn-sm" title="Pemantauan Balita">Ke Pemantauan Balita</a>
+						<a href="<?= site_url("kesehatan_bumil/form_bumil") ?>" title="Tambah Data Bumil" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-plus"></i> Tambah Data Bumil</a>
+						<a href="<?= site_url("kesehatan_bumil/daftar/cetak") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?= site_url("kesehatan_bumil/daftar/unduh") ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh" target="_blank"><i class="fa fa-download"></i> Unduh</a>
+						<a href="<?= site_url("kesehatan_bumil/pantau") ?>" class="btn btn-box btn-info btn-sm" title="Pemantauan Bumil">Ke Pemantauan Bumil</a>
 					</div>
 					<div class="box-body">
 						<div class="row">
@@ -54,18 +54,18 @@
 														<tbody>
 															<?php
 															$nomer = $paging->offset;
-															foreach ($balita_list as $key => $item) :
+															foreach ($bumil_list as $key => $item) :
 																$nomer++;
 															?>
 																<tr>
 																	<td align="center" width="2"><?= $nomer; ?></td>
 																	<td nowrap>
 																		<?php if ($this->CI->cek_hak_akses('h')) : ?>
-																			<a href="<?= site_url("kesehatan_balita/edit_balita_form/$item[id]") ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data Balita" title="Ubah Data Pemudik" class="btn btn-warning btn-box btn-sm"><i class="fa fa-edit"></i></a>
-																			<a href="#" data-href="<?= site_url("kesehatan_balita/hapus_balita/$item[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+																			<a href="<?= site_url("kesehatan_bumil/edit_bumil_form/$item[id]") ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data Bumil" title="Ubah Data Pemudik" class="btn btn-warning btn-box btn-sm"><i class="fa fa-edit"></i></a>
+																			<a href="#" data-href="<?= site_url("kesehatan_bumil/hapus_bumil/$item[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																		<?php endif; ?>
 																	</td>
-																	<td nowrap><a href="<?= site_url('kesehatan_balita/detil_balita/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?> /<br><?= $item["terdata_nama"] ?></a></td>
+																	<td nowrap><a href="<?= site_url('kesehatan_bumil/detil_bumil/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?> /<br><?= $item["terdata_nama"] ?></a></td>
 																	<td class="text-center"><?= $item["umur"] ?></td>
 																	<?php
 																	$jk = (strtoupper($item['sex']) === "PEREMPUAN") ? "P" : "L";
@@ -108,27 +108,27 @@
 												<ul class="pagination">
 													<?php if ($paging->start_link) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_balita/data_balita/' . $paging->start_link) ?>" aria-label="First"><span aria-hidden="true">Awal</span></a>
+															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->start_link) ?>" aria-label="First"><span aria-hidden="true">Awal</span></a>
 														</li>
 													<?php endif; ?>
 													<?php if ($paging->prev) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_balita/data_balita/' . $paging->prev) ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->prev) ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
 														</li>
 													<?php endif; ?>
 													<?php for ($i = $paging->start_link; $i <= $paging->end_link; $i++) : ?>
 														<li <?= jecho($p, $i, "class='active'") ?>>
-															<a href="<?= site_url('kesehatan_balita/data_balita/' . $i) ?>"><?= $i ?></a>
+															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $i) ?>"><?= $i ?></a>
 														</li>
 													<?php endfor; ?>
 													<?php if ($paging->next) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_balita/data_balita/' . $paging->next) ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->next) ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
 														</li>
 													<?php endif; ?>
 													<?php if ($paging->end_link) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_balita/data_balita/' . $paging->end_link) ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a>
+															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->end_link) ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a>
 														</li>
 													<?php endif; ?>
 												</ul>

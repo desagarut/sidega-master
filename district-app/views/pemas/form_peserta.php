@@ -2,30 +2,30 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Form Data Balita</h1>
+		<h1>Formulir Penambahan peserta</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('data_balita')?>"> Data Balita</a></li>
-			<li><a href="<?= site_url()?>data_balita/rincian/1/<?= $data_balita['id']?>"> Rincian Data Balita</a></li>
-			<li class="active">Form Penambahan Data Balita</li>
+			<li><a href="<?= site_url('pemas')?>"> Data Peserta</a></li>
+			<li><a href="<?= site_url()?>pemas/rincian/1/<?= $pemas['id']?>"> Rincian Data Peserta</a></li>
+			<li class="active">Formulir Penambahan peserta</li>
 		</ol>
 	</section>
 	<section class="content">
 		<div class="box box-info">
 			<div class="box-header with-border">
-				<a href="<?= site_url("data_balita"); ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Suplemen"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Suplemen</a>
-				<a href="<?= site_url("data_balita/rincian/$data_balita[id]"); ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Rincian Data Suplemen</a>
+				<a href="<?= site_url("pemas"); ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
+				<a href="<?= site_url("pemas/rincian/$pemas[id]"); ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Rincian Data</a>
 			</div>
-			<?php $this->load->view('kesehatan/data_balita/rincian'); ?>
+			<?php $this->load->view('pemas/rincian'); ?>
 			<div class="box-body">
-				<h5><b>Tambahkan Data Individu Balita</b></h5>
+				<h5><b>Tambahkan Warga peserta</b></h5>
 				<hr>
 				<form action="" id="main" name="main" method="POST" class="form-horizontal">
 					<div class="form-group" >
-						<label for="terdata" class="col-sm-3 control-label">Nama / NIK Balita</label>
+						<label for="peserta" class="col-sm-3 control-label"><?= $list_sasaran['judul']; ?></label>
 						<div class="col-sm-8">
-							<select class="form-control select2 required" id="terdata" name="terdata" onchange="formAction('main')">
-								<option selected="selected">-- Silakan Masukan Nama/NIK Balita  --</option>
+							<select class="form-control select2 required" id="peserta" name="peserta" onchange="formAction('main')">
+								<option selected="selected">-- Silakan Masukan <?= $list_sasaran['judul']; ?>  --</option>
 								<?php foreach ($list_sasaran['data'] as $item): ?>
 									<?php if (strlen($item["id"])>0): ?>
 										<option value="<?= $item['id']?>" <?= selected($individu['id'], $item['id']); ?>>Nama : <?= $item['nama'] . ' - ' . $item['info']; ?></option>
@@ -36,15 +36,15 @@
 					</div>
 				</form>
 				<div id="form-melengkapi-data-peserta">
-					<form id="validasi" action="<?= "$form_action/$data_balita[id]"; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+					<form id="validasi" action="<?= "$form_action/$pemas[id]"; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
-								<input type="hidden" name="id_terdata" value="<?= $individu['id']?>" class="form-control input-sm required">
+								<input type="hidden" name="id_peserta" value="<?= $individu['id']?>" class="form-control input-sm required">
 							</div>
 						</div>
 						<?php if ($individu): ?>
-							<?php include("district-app/views/data_balita/konfirmasi_terdata.php"); ?>
+							<?php include("district-app/views/pemas/konfirmasi_peserta.php"); ?>
 						<?php endif; ?>
 						<div class="form-group">
 							<label class="col-sm-3 control-label" for="keterangan">Keterangan</label>

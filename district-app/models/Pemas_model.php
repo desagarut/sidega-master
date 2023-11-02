@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Data_balita_model extends MY_Model {
+class Pemas_model extends MY_Model {
 
 	public function __construct()
 	{
@@ -10,7 +10,7 @@ class Data_balita_model extends MY_Model {
 	public function create()
 	{
 		$data = $this->validasi($this->input->post());
-		$hasil = $this->db->insert('tbl_data_balita', $data);
+		$hasil = $this->db->insert('tbl_pemberdayaan_masyarakat', $data);
 		$_SESSION["success"] = $hasil ? 1 : -1;
 	}
 
@@ -19,8 +19,16 @@ class Data_balita_model extends MY_Model {
 		$data = [];
 		// Ambil dan bersihkan data input
 		$data['sasaran'] = $post['sasaran'];
-		$data['nama'] = nomor_surat_keputusan($post['nama']);
+		$data['nama_kegiatan'] = nomor_surat_keputusan($post['nama_kegiatan']);
+//		$data['nama'] = nomor_surat_keputusan($post['nama']);
+		$data['nama_penyelenggara'] = $post['nama_penyelenggara'];
+		$data['tgl_mulai'] = tgl_indo_in($post['tgl_mulai']);
+		$data['tgl_selesai'] = tgl_indo_in($post['tgl_selesai']);
+		$data['sumber_dana'] = $post['sumber_dana'];
+		$data['lokasi'] = $post['lokasi'];
+		$data['anggaran'] = $post['anggaran'];
 		$data['keterangan'] = htmlentities($post['keterangan']);
+		
 		return $data;
 	}
 
@@ -31,9 +39,9 @@ class Data_balita_model extends MY_Model {
 		$data = $this->db
 			->select('s.*')
 			->select('COUNT(st.id) AS jml')
-			->from('tbl_data_balita s')
-			->join('tbl_data_balita_terdata st', "s.id = st.id_data_balita", 'left')
-			->order_by('s.nama')
+			->from('tbl_pemberdayaan_masyarakat s')
+			->join('tbl_pemberdayaan_masyarakat_peserta st', "s.id = st.id_kegiatan", 'left')
+			->order_by('s.nama_kegiatan')
 			->group_by('s.id')
 			->get()
 			->result_array();
@@ -65,13 +73,13 @@ class Data_balita_model extends MY_Model {
 		return $data;
 	}
 
-	private function get_id_terdata_penduduk($id_data_balita)
+	private function get_id_peserta_penduduk($id_kegiatan)
 	{
 		$list_penduduk = $this->db
 			->select('p.id')
 			->from('tweb_penduduk p')
-			->join('tbl_data_balita_terdata t', 'p.id = t.id_terdata', 'left')
-			->where('t.id_data_balita', $id_data_balita)
+			->join('tbl_pemberdayaan_masyarakat_peserta t', 'p.id = t.id_peserta', 'left')
+			->where('t.id_kegiatan', $id_kegiatan)
 			->get()
 			->result_array();
 
@@ -80,9 +88,9 @@ class Data_balita_model extends MY_Model {
 
 	private function list_penduduk($id)
 	{
-		// Penduduk yang sudah terdata untuk Data Balita ini
-		$terdata = $this->get_id_terdata_penduduk($id);
-		if ($terdata) $this->db->where("p.id NOT IN ($terdata)");
+		// Penduduk yang sudah peserta untuk tbl_pemberdayaan_masyarakat ini
+		$peserta = $this->get_id_peserta_penduduk($id);
+		if ($peserta) $this->db->where("p.id NOT IN ($peserta)");
 
 		$data = $this->db->select('p.id as id, p.nik as nik, p.nama, w.rt, w.rw, w.dusun')
 			->from('tweb_penduduk p')
@@ -103,13 +111,13 @@ class Data_balita_model extends MY_Model {
 		return $hasil;
 	}
 
-	private function get_id_terdata_kk($id_data_balita)
+	private function get_id_peserta_kk($id_kegiatan)
 	{
 		$list_kk = $this->db
 			->select('k.id')
 			->from('tweb_keluarga k')
-			->join('tbl_data_balita_terdata t', 'k.id = t.id_terdata', 'left')
-			->where('t.id_data_balita', $id_data_balita)
+			->join('tbl_pemberdayaan_masyarakat_peserta t', 'k.id = t.id_peserta', 'left')
+			->where('t.id_kegiatan', $id_kegiatan)
 			->get()
 			->result_array();
 
@@ -118,11 +126,11 @@ class Data_balita_model extends MY_Model {
 
 	private function list_kk($id)
 	{
-		// Keluarga yang sudah terdata untuk Data Balita ini
-		$terdata = $this->get_id_terdata_kk($id);
-		if ($terdata) $this->db->where("k.id NOT IN ($terdata)");
+		// Keluarga yang sudah peserta untuk tbl_pemberdayaan_masyarakat ini
+		$peserta = $this->get_id_peserta_kk($id);
+		if ($peserta) $this->db->where("k.id NOT IN ($peserta)");
 
-		// Daftar keluarga, tidak termasuk keluarga yang sudah terdata
+		// Daftar keluarga, tidak termasuk keluarga yang sudah peserta
 		$data = $this->db->select('k.id as id, k.no_kk, p.nama, w.rt, w.rw, w.dusun')
 			->from('tweb_keluarga k')
 			->join('tweb_penduduk p', 'p.id = k.nik_kepala', 'left')
@@ -144,13 +152,13 @@ class Data_balita_model extends MY_Model {
 		return $hasil;
 	}
 
-	public function get_data_balita($id)
+	public function get_pemas($id)
 	{
 		$data = $this->db
 			->select('s.*')
 			->select('COUNT(st.id) AS jml')
-			->from('tbl_data_balita s')
-			->join('tbl_data_balita_terdata st', "s.id = st.id_data_balita", 'left')
+			->from('tbl_pemberdayaan_masyarakat s')
+			->join('tbl_pemberdayaan_masyarakat_peserta st', "s.id = st.id_kegiatan", 'left')
 			->where('s.id', $id)
 			->group_by('s.id')
 			->get()
@@ -159,26 +167,26 @@ class Data_balita_model extends MY_Model {
 		return $data;
 	}
 
-	public function get_rincian($p, $data_balita_id)
+	public function get_rincian($p, $kegiatan_id)
 	{
-		$data_balita = $this->db->where('id', $data_balita_id)->get('tbl_data_balita')->row_array();
+		$pemas = $this->db->where('id', $kegiatan_id)->get('tbl_pemberdayaan_masyarakat')->row_array();
 
-		switch ($data_balita['sasaran'])
+		switch ($pemas['sasaran'])
 		{
 			// Sasaran Penduduk
 			case '1':
-				$data = $this->get_penduduk_terdata($data_balita_id, $p);
-				$data['judul']['judul_terdata_info'] = 'No. KK';
-				$data['judul']['judul_terdata_plus'] = 'NIK Penduduk';
-				$data['judul']['judul_terdata_nama'] = 'Nama Penduduk';
+				$data = $this->get_penduduk_peserta($kegiatan_id, $p);
+				$data['judul']['judul_peserta_info'] = 'No. KK';
+				$data['judul']['judul_peserta_plus'] = 'NIK Penduduk';
+				$data['judul']['judul_peserta_nama'] = 'Nama Penduduk';
 				break;
 
 			// Sasaran Keluarga
 			case '2':
-				$data = $this->get_kk_terdata($data_balita_id, $p);
-				$data['judul']['judul_terdata_info'] = 'NIK KK';
-				$data['judul']['judul_terdata_plus'] = 'No. KK';
-				$data['judul']['judul_terdata_nama'] = 'Kepala Keluarga';
+				$data = $this->get_kk_peserta($kegiatan_id, $p);
+				$data['judul']['judul_peserta_info'] = 'NIK KK';
+				$data['judul']['judul_peserta_plus'] = 'No. KK';
+				$data['judul']['judul_peserta_nama'] = 'Kepala Keluarga';
 
 				break;
 
@@ -188,15 +196,15 @@ class Data_balita_model extends MY_Model {
 				break;
 		}
 
-		$data['data_balita'] = $data_balita;
-		$data['keyword'] = $this->autocomplete($data_balita['sasaran']);
+		$data['pemas'] = $pemas;
+		$data['keyword'] = $this->autocomplete($pemas['sasaran']);
 
 		return $data;
 	}
 
-	private function paging($p, $get_terdata_sql)
+	private function paging($p, $get_peserta_sql)
 	{
-		$sql = "SELECT COUNT(*) as jumlah ".$get_terdata_sql;
+		$sql = "SELECT COUNT(*) as jumlah ".$get_peserta_sql;
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		$jml_data = $row['jumlah'];
@@ -210,29 +218,29 @@ class Data_balita_model extends MY_Model {
 		return $this->paging;
 	}
 
-	private function get_penduduk_terdata_sql($data_balita_id)
+	private function get_penduduk_peserta_sql($kegiatan_id)
 	{
 		# Data penduduk
-		$sql = " FROM tbl_data_balita_terdata s
-			LEFT JOIN tweb_penduduk o ON s.id_terdata = o.id
+		$sql = " FROM tbl_pemberdayaan_masyarakat_peserta s
+			LEFT JOIN tweb_penduduk o ON s.id_peserta = o.id
 			LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
 			LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-			WHERE s.id_data_balita=".$data_balita_id;
+			WHERE s.id_kegiatan=".$kegiatan_id;
 		return $sql;
 	}
 
-	private function get_penduduk_terdata($data_balita_id, $p)
+	private function get_penduduk_peserta($kegiatan_id, $p)
 	{
 		$hasil = [];
-		$get_terdata_sql = $this->get_penduduk_terdata_sql($data_balita_id);
-		$select_sql = "SELECT s.*, s.id_terdata, o.nik, o.nama, o.tempatlahir, o.tanggallahir, o.sex, k.no_kk, w.rt, w.rw, w.dusun,
+		$get_peserta_sql = $this->get_penduduk_peserta_sql($kegiatan_id);
+		$select_sql = "SELECT s.*, s.id_peserta, o.nik, o.nama, o.tempatlahir, o.tanggallahir, o.sex, k.no_kk, w.rt, w.rw, w.dusun,
 			(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
 		 ";
-		$sql = $select_sql.$get_terdata_sql;
+		$sql = $select_sql.$get_peserta_sql;
 		$sql .= $this->search_sql('1');
 		if ( ! empty($_SESSION['per_page']) and $_SESSION['per_page'] > 0)
 		{
-			$hasil["paging"] = $this->paging($p, $get_terdata_sql.$this->search_sql('1'));
+			$hasil["paging"] = $this->paging($p, $get_peserta_sql.$this->search_sql('1'));
 			$paging_sql = ' LIMIT ' .$hasil["paging"]->offset. ',' .$hasil["paging"]->per_page;
 			$sql .= $paging_sql;
 		}
@@ -243,42 +251,42 @@ class Data_balita_model extends MY_Model {
 			$data = $query->result_array();
 			for ($i=0; $i<count($data); $i++)
 			{
-				$data[$i]['terdata_info'] = $data[$i]['no_kk'];
-				$data[$i]['terdata_plus'] = $data[$i]['nik'];
-				$data[$i]['terdata_nama'] = strtoupper($data[$i]['nama']);
+				$data[$i]['peserta_info'] = $data[$i]['no_kk'];
+				$data[$i]['peserta_plus'] = $data[$i]['nik'];
+				$data[$i]['peserta_nama'] = strtoupper($data[$i]['nama']);
 				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
 				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
 			}
-			$hasil['terdata'] = $data;
+			$hasil['peserta'] = $data;
 		}
 
 		return $hasil;
 	}
 
-	private function get_kk_terdata_sql($data_balita_id)
+	private function get_kk_peserta_sql($kegiatan_id)
 	{
 		# Data KK
-		$sql = " FROM tbl_data_balita_terdata s
-			LEFT JOIN tweb_keluarga o ON s.id_terdata = o.id
+		$sql = " FROM tbl_pemberdayaan_masyarakat_peserta s
+			LEFT JOIN tweb_keluarga o ON s.id_peserta = o.id
 			LEFT JOIN tweb_penduduk q ON o.nik_kepala = q.id
 			LEFT JOIN tweb_wil_clusterdesa w ON w.id = q.id_cluster
-			WHERE s.id_data_balita=".$data_balita_id;
+			WHERE s.id_kegiatan=".$kegiatan_id;
 		return $sql;
 	}
 
 
-	private function get_kk_terdata($data_balita_id, $p)
+	private function get_kk_peserta($kegiatan_id, $p)
 	{
 		$hasil = [];
-		$get_terdata_sql = $this->get_kk_terdata_sql($data_balita_id);
-		$select_sql = "SELECT s.*, s.id_terdata, o.no_kk, s.id_data_balita, o.nik_kepala, o.alamat, q.nik, q.nama, q.tempatlahir, q.tanggallahir, q.sex, w.rt, w.rw, w.dusun ";
-		$sql = $select_sql.$get_terdata_sql;
+		$get_peserta_sql = $this->get_kk_peserta_sql($kegiatan_id);
+		$select_sql = "SELECT s.*, s.id_peserta, o.no_kk, s.id_kegiatan, o.nik_kepala, o.alamat, q.nik, q.nama, q.tempatlahir, q.tanggallahir, q.sex, w.rt, w.rw, w.dusun ";
+		$sql = $select_sql.$get_peserta_sql;
 		$sql .= $this->search_sql('2');
 		if ( ! empty($_SESSION['per_page']) and $_SESSION['per_page'] > 0)
 		{
-			$hasil["paging"] = $this->paging($p, $get_terdata_sql.$this->search_sql('2'));
+			$hasil["paging"] = $this->paging($p, $get_peserta_sql.$this->search_sql('2'));
 			$paging_sql = ' LIMIT ' .$hasil["paging"]->offset. ',' .$hasil["paging"]->per_page;
 			$sql .= $paging_sql;
 		}
@@ -289,23 +297,23 @@ class Data_balita_model extends MY_Model {
 			$data = $query->result_array();
 			for ($i=0; $i<count($data); $i++)
 			{
-				$data[$i]['terdata_info'] = $data[$i]['nik'];
-				$data[$i]['terdata_plus'] = $data[$i]['no_kk'];
-				$data[$i]['terdata_nama'] = strtoupper($data[$i]['nama']);
+				$data[$i]['peserta_info'] = $data[$i]['nik'];
+				$data[$i]['peserta_plus'] = $data[$i]['no_kk'];
+				$data[$i]['peserta_nama'] = strtoupper($data[$i]['nama']);
 				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
 				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
 			}
-			$hasil['terdata'] = $data;
+			$hasil['peserta'] = $data;
 		}
 		return $hasil;
 	}
 
 	/*
-		Mengambil data individu terdata
+		Mengambil data individu peserta
 	*/
-	public function get_terdata($id_terdata, $sasaran)
+	public function get_peserta($id_peserta, $sasaran)
 	{
 		$this->load->model('surat_model');
 		switch ($sasaran)
@@ -313,7 +321,7 @@ class Data_balita_model extends MY_Model {
 			// Sasaran Penduduk
 			case 1:
 				$sql = "SELECT u.id AS id, u.nama AS nama, x.nama AS sex, u.id_kk AS id_kk,
-				u.tempatlahir AS tempatlahir, u.tanggallahir AS tanggallahir, u.nama_ibu AS nama_ibu, u.foto AS foto,
+				u.tempatlahir AS tempatlahir, u.tanggallahir AS tanggallahir,
 				(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 				from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur,
 				w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik AS nik, c.rt AS rt, c.rw AS rw, c.dusun AS dusun, k.no_kk AS no_kk, k.alamat,
@@ -328,21 +336,21 @@ class Data_balita_model extends MY_Model {
 				left join tweb_keluarga k on u.id_kk = k.id
 				left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
 				WHERE u.id = ?";
-				$query = $this->db->query($sql, $id_terdata);
+				$query = $this->db->query($sql, $id_peserta);
 				$data  = $query->row_array();
-				$data['terdata_nik'] = $data['nik'];
-				$data['terdata_plus'] = $data['no_kk'];
-				$data['terdata_nama'] = $data['nama'];
+				$data['peserta_info'] = $data['nik'];
+				$data['peserta_plus'] = $data['no_kk'];
+				$data['peserta_nama'] = $data['nama'];
 				$data['alamat_wilayah']= $this->surat_model->get_alamat_wilayah($data);
 				break;
 
 			// Sasaran Keluarga
 			case 2:
-				$data = $this->keluarga_model->get_kepala_kk($id_terdata);
-				$data['terdata_nik'] = $data['nik'];
-				$data['terdata_plus'] = $data['no_kk'];
-				$data['terdata_nama'] = $data['nama'];
-				$data['id'] = $data['id_kk']; // id_kk digunakan sebagai id terdata
+				$data = $this->keluarga_model->get_kepala_kk($id_peserta);
+				$data['peserta_info'] = $data['nik'];
+				$data['peserta_plus'] = $data['no_kk'];
+				$data['peserta_nama'] = $data['nama'];
+				$data['id'] = $data['id_kk']; // id_kk digunakan sebagai id peserta
 				break;
 
 			default:
@@ -353,15 +361,15 @@ class Data_balita_model extends MY_Model {
 
 	public function hapus($id)
 	{
-		$ada = $this->db->where('id_data_balita', $id)
-			->get('tbl_data_balita_terdata')->num_rows();
+		$ada = $this->db->where('id_kegiatan', $id)
+			->get('tbl_pemberdayaan_masyarakat_peserta')->num_rows();
 		if ($ada)
 		{
 			$this->session->success = '-1';
 			$this->session->error_msg = ' --> Tidak bisa dihapus, karena masih digunakan';
 			return;
 		}
-		$hasil = $this->db->where('id', $id)->delete('tbl_data_balita');
+		$hasil = $this->db->where('id', $id)->delete('tbl_pemberdayaan_masyarakat');
 
 		status_sukses($hasil); //Tampilkan Pesan
 	}
@@ -369,16 +377,16 @@ class Data_balita_model extends MY_Model {
 	public function update($id)
 	{
 		$data = $this->validasi($this->input->post());
-		$hasil = $this->db->where('id', $id)->update('tbl_data_balita', $data);
+		$hasil = $this->db->where('id', $id)->update('tbl_pemberdayaan_masyarakat', $data);
 
 		status_sukses($hasil); //Tampilkan Pesan
 	}
 
-	public function add_terdata($post, $id)
+	public function add_peserta2($post, $id)
 	{
-		$id_terdata = $post['id_terdata'];
-		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('tbl_data_balita')->row()->sasaran;
-		$hasil = $this->db->where('id_data_balita', $id)->where('id_terdata', $id_terdata)->get('tbl_data_balita_terdata');
+		$id_peserta = $post['id_peserta'];
+		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('tbl_pemberdayaan_masyarakat')->row()->sasaran;
+		$hasil = $this->db->where('id_kegiatan', $id)->where('id_peserta', $id_peserta)->get('tbl_pemberdayaan_masyarakat_peserta');
 		if ($hasil->num_rows() > 0)
 		{
 			return false;
@@ -386,50 +394,71 @@ class Data_balita_model extends MY_Model {
 		else
 		{
 			$data = array(
-				'id_data_balita' => $id,
-				'id_terdata' => $id_terdata,
+				'id_kegiatan' => $id,
+				'id_peserta' => $id_peserta,
 				'sasaran' => $sasaran,
 				'keterangan' => substr(htmlentities($post['keterangan']), 0, 100) // Batasi 100 karakter
 			);
-			return $this->db->insert('tbl_data_balita_terdata', $data);
+			return $this->db->insert('tbl_pemberdayaan_masyarakat_peserta', $data);
 		}
 	}
 
-	public function hapus_terdata($id_terdata)
+	public function add_peserta($post, $id)
 	{
-		$this->db->where('id', $id_terdata);
-		$this->db->delete('tbl_data_balita_terdata');
+		$id_peserta = $post['id_peserta'];
+		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('tbl_pemberdayaan_masyarakat')->row()->sasaran;
+		$hasil = $this->db->where('id_kegiatan', $id)->where('id_peserta', $id_peserta)->get('tbl_pemberdayaan_masyarakat_peserta');
+		if ($hasil->num_rows() > 0)
+		{
+			return false;
+		}
+		else
+		{
+			$data = array(
+				'id_kegiatan' => $id,
+				'id_peserta' => $id_peserta,
+				'sasaran' => $sasaran,
+				'keterangan' => substr(htmlentities($post['keterangan']), 0, 100) // Batasi 100 karakter
+			);
+			return $this->db->insert('tbl_pemberdayaan_masyarakat_peserta', $data);
+		}
 	}
 
-	// $id = tbl_data_balita_terdata.id
-	public function edit_terdata($post,$id)
+	public function hapus_peserta($id_peserta)
+	{
+		$this->db->where('id', $id_peserta);
+		$this->db->delete('tbl_pemberdayaan_masyarakat_peserta');
+	}
+
+	// $id = pemas_peserta.id
+	public function edit_peserta($post,$id)
 	{
 		$data['keterangan'] = substr(htmlentities($post['keterangan']), 0, 100); // Batasi 100 karakter
 		$this->db->where('id', $id);
-		$this->db->update('tbl_data_balita_terdata', $data);
+		$this->db->update('tbl_pemberdayaan_masyarakat_peserta', $data);
 	}
 
 	/*
-		Mengambil data individu terdata menggunakan id tabel tbl_data_balita_terdata
+		Mengambil data individu peserta menggunakan id tabel tbl_pemberdayaan_masyarakat_peserta
 	*/
-	public function get_data_balita_terdata_by_id($id)
+	public function get_pemas_peserta_by_id($id)
 	{
-		$data = $this->db->where('id', $id)->get('tbl_data_balita_terdata')->row_array();
+		$data = $this->db->where('id', $id)->get('tbl_pemberdayaan_masyarakat_peserta')->row_array();
 		// Data tambahan untuk ditampilkan
-		$terdata = $this->get_terdata($data['id_terdata'], $data['sasaran']);
+		$peserta = $this->get_peserta($data['id_peserta'], $data['sasaran']);
 		switch ($data['sasaran'])
 		{
 			case 1:
-				$data['judul_terdata_nama'] = 'NIK';
-				$data['judul_terdata_info'] = 'Nama Terdata';
-				$data['terdata_nama'] = $terdata['nik'];
-				$data['terdata_info'] = $terdata['nama'];
+				$data['judul_peserta_nama'] = 'NIK';
+				$data['judul_peserta_info'] = 'Nama peserta';
+				$data['peserta_nama'] = $peserta['nik'];
+				$data['peserta_info'] = $peserta['nama'];
 				break;
 			case 2:
-				$data['judul_terdata_nama'] = 'No. KK';
-				$data['judul_terdata_info'] = 'Kepala Keluarga';
-				$data['terdata_nama'] = $terdata['no_kk'];
-				$data['terdata_info'] = $terdata['nama'];
+				$data['judul_peserta_nama'] = 'No. KK';
+				$data['judul_peserta_info'] = 'Kepala Keluarga';
+				$data['peserta_nama'] = $peserta['no_kk'];
+				$data['peserta_info'] = $peserta['nama'];
 				break;
 			default:
 		}
@@ -437,21 +466,21 @@ class Data_balita_model extends MY_Model {
 		return $data;
 	}
 
-	public function get_terdata_data_balita($sasaran,$id_terdata)
+	public function get_peserta_pemas($sasaran,$id_peserta)
 	{
-		$list_data_balita = [];
+		$list_pemas = [];
 		/*
-		 * Menampilkan keterlibatan $id_terdata dalam data Data Balita yang ada
+		 * Menampilkan keterlibatan $id_peserta dalam data tbl_pemberdayaan_masyarakat yang ada
 		 *
 		 * */
-		$strSQL = "SELECT p.id as id, o.id_terdata as nik, p.nama as nama, p.keterangan
-			FROM tbl_data_balita_terdata o
-			LEFT JOIN tbl_data_balita p ON p.id = o.id_data_balita
-			WHERE ((o.id_terdata='".$id_terdata."') AND (o.sasaran='".$sasaran."'))";
+		$strSQL = "SELECT p.id as id, o.id_peserta as nik, p.nama as nama, p.keterangan
+			FROM tbl_pemberdayaan_masyarakat_peserta o
+			LEFT JOIN tbl_pemberdayaan_masyarakat p ON p.id = o.id_kegiatan
+			WHERE ((o.id_peserta='".$id_peserta."') AND (o.sasaran='".$sasaran."'))";
 		$query = $this->db->query($strSQL);
 		if ($query->num_rows() > 0)
 		{
-			$list_data_balita = $query->result_array();
+			$list_pemas = $query->result_array();
 		}
 
 		switch ($sasaran)
@@ -460,29 +489,24 @@ class Data_balita_model extends MY_Model {
 				/*
 				 * Rincian Penduduk
 				 * */
-				$strSQL = "SELECT o.nama, o.foto, o.nik, o.nama_ibu, o.nama_ayah, o.tempatlahir, o.tanggallahir, o.sex, w.rt, w.rw, w.dusun,
+				$strSQL = "SELECT o.nama, o.foto, o.nik, w.rt, w.rw, w.dusun,
 				(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
 					FROM tweb_penduduk o
 					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
 					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE o.id = '".$id_terdata."'";
+					WHERE o.id = '".$id_peserta."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
 				{
 					$row = $query->row_array();
 					$data_profil = array(
 						"id" => $id,
-						"nama" => $row["nama"],
-						"nik" => $row["nik"],
-						"tempatlahir" => $row["tempatlahir"],
-						"tanggallahir" => $row["tanggallahir"],
-						"sex" => $row["sex"],
-						"nama_ibu" => $row["nama_ibu"],
-						"nama_ayah" => $row["nama_ayah"],
-						"alamat" => $row["alamat"]." RT ".strtoupper($row["rt"])." / RW ".strtoupper($row["rw"])." DUSUN ".strtoupper($row["dusun"]),
+						"nama" => $row["nama"] ." - ".$row["nik"],
+						"ndesc" => "Alamat: ".$row["alamat"]." RT ".strtoupper($row["rt"])." / RW ".strtoupper($row["rw"])." ".strtoupper($row["dusun"]),
 						"foto" => $row["foto"]
 						);
 				}
+
 				break;
 			case 2:
 				/*
@@ -492,7 +516,7 @@ class Data_balita_model extends MY_Model {
 					FROM tweb_keluarga o
 					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
 					LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster
-					WHERE o.id = '".$id_terdata."'";
+					WHERE o.id = '".$id_peserta."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
 				{
@@ -509,9 +533,9 @@ class Data_balita_model extends MY_Model {
 			default:
 
 		}
-		if ( ! empty($list_data_balita))
+		if ( ! empty($list_pemas))
 		{
-			$hasil = array("daftar_data_balita" => $list_data_balita, "profil" => $data_profil);
+			$hasil = array("daftar_pemas" => $list_pemas, "profil" => $data_profil);
 			return $hasil;
 		}
 		else
@@ -550,8 +574,8 @@ class Data_balita_model extends MY_Model {
 				## sasaran penduduk
 				$data = $this->db
 					->select('p.nama')
-					->from('tbl_data_balita_terdata s')
-					->join('tweb_penduduk p', 'p.id = s.id_terdata', 'left')
+					->from('tbl_pemberdayaan_masyarakat_peserta s')
+					->join('tweb_penduduk p', 'p.id = s.id_peserta', 'left')
 					->where('s.sasaran', $sasaran)
 					->group_by('p.nama')
 					->get()
@@ -562,8 +586,8 @@ class Data_balita_model extends MY_Model {
 				## sasaran keluarga / KK
 				$data = $this->db
 					->select('p.nama')
-					->from('tbl_data_balita_terdata s')
-					->join('tweb_keluarga k', 'k.id = s.id_terdata', 'left')
+					->from('tbl_pemberdayaan_masyarakat_peserta s')
+					->join('tweb_keluarga k', 'k.id = s.id_peserta', 'left')
 					->join('tweb_penduduk p', 'p.id = k.nik_kepala', 'left')
 					->where('s.sasaran', $sasaran)
 					->group_by('p.nama')

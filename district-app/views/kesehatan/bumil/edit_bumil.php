@@ -26,7 +26,7 @@
 			<div class="box box-danger">
 				<div class="box-body">
 					<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
-						<?php include("district-app/views/covid19/vaksin/form_isian_peserta_vaksin.php"); ?>
+						<?php include("district-app/views/kesehatan/balita/form_isian_balita.php"); ?>
 					</form>
 				</div>
 			</div>

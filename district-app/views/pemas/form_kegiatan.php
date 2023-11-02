@@ -12,7 +12,7 @@
 	<section class="content" id="maincontent">
 		<div class="box box-info">
 			<div class="box-header with-border">
-				<a href="<?= site_url('pemberdayaan_masyarakat') ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Daftar Kegiatan</a>
+				<a href="<?= site_url('pemas') ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Daftar Kegiatan</a>
 			</div>
 			<form id="validasi" action="<?= $form_action; ?>" method="POST" class="form-horizontal">
 				<div class="box-body">
