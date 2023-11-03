@@ -130,6 +130,7 @@
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 1, 'NIK'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 3, 'Nama'); ?></th>
 												<th><?= url_order($o, "{$this->controller}/{$func}/$p", 7, 'Umur'); ?></th>
+												<th>Alamat</th>
 												<th>Pendidikan</th>
 												<th>Pekerjaan</th>
 												<th>Perkawinan</th>
