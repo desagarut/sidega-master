@@ -4,12 +4,12 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <div class="navbar-brand d-flex align-items-center px-4 px-lg-5">
 
-        <h2 class="m-0 text-primary">
+        <h3 class="m-0 text-primary">
             <a href="<?= site_url('first') ?>">
                 <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:30px;" alt="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>">
                 <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>
             </a>
-        </h2>
+        </h3>
     </div>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>

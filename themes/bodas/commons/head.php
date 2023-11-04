@@ -6,7 +6,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V 5.5') ?>
+    <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V 5.6') ?>
 
     <?php $website_title = trim(ucwords($this->setting->website_title)); ?>
 
@@ -18,8 +18,8 @@
     <meta name='designer' content='Bambang Andri H' />
     <meta name='theme:designer' content='Bambang Andri H' />
     <meta name="theme:version" content="<?= THEME_VERSION ?>" />
-    <meta name="theme-color" content="#00C" />
-    <meta name="keywords" content="sidega, SIDEGA, SIDeGa, sistem informasi desa garut, web, blog, informasi, website, tema sidega-blue, desa garut, kelurahan garut, kecamatan garut, kabupaten garut, Jawa Barat, indonesia" />
+    <meta name="theme-color" content="#06BBCC"/>
+    <meta name="keywords" content="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>, sidega, SIDEGA, SIDeGa, sistem informasi desa garut, web, blog, informasi, website, tema sidega-blue, desa garut, kelurahan garut, kecamatan garut, kabupaten garut, Jawa Barat, indonesia" />
     <meta property="og:site_name" content="<?= $website_title ?>" />
     <meta property="og:type" content="article" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
