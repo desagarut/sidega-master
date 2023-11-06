@@ -4,17 +4,32 @@
 		$('#tanggal_terdaftar').datetimepicker({
 			format: 'YYYY-MM-DD'
 		});
+		$('#tanggal_hpht').datetimepicker({
+			format: 'YYYY-MM-DD'
+		});
+
 	});
 </script>
-
 <div class="form-group">
-	<label for="tanggal_terdaftar" class="col-sm-3 control-label">Hari Pertama Haid Terakhir</label>
+	<label for="tanggal_terdaftar" class="col-sm-3 control-label">Tanggal Terdaftar</label>
 	<div class="col-sm-4">
 		<div class="input-group input-group-sm date">
 			<div class="input-group-addon">
 				<i class="fa fa-calendar"></i>
 			</div>
 			<input type="text" class="form-control input-sm pull-right required" id="tanggal_terdaftar" name="tanggal_terdaftar" value="<?= $tanggal_terdaftar ?>">
+		</div>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="tanggal_hpht" class="col-sm-3 control-label">Hari Pertama Haid Terakhir</label>
+	<div class="col-sm-4">
+		<div class="input-group input-group-sm date">
+			<div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			</div>
+			<input type="text" class="form-control input-sm pull-right required" id="tanggal_hpht" name="tanggal_hpht" value="<?= $tanggal_hpht ?>">
 		</div>
 	</div>
 </div>
@@ -33,16 +48,16 @@
 		<input class="form-control input-sm" type="text" name="hp_ortu" id="hp_ortu" value="<?= $hp_ortu ?>" placeholder="No HP">
 	</div>
 	<div class="col-sm-4">
-		<input class="form-control input-sm" type="text" name="email_ortu" id="email_ortu" value="<?= $email_ortu ?>" placeholder="Email Orang Tua / Wali">
+		<input class="form-control input-sm" type="text" name="email_ortu" id="email_ortu" value="<?= $email_ortu ?>" placeholder="Email">
 	</div>
 </div>
 <div class="form-group">
-	<label for="tb_lahir" class="col-sm-3 control-label">BB - TB Lahir</label>
+	<label for="tb_lahir" class="col-sm-3 control-label">BB - TB</label>
 	<div class="col-sm-2">
-		<input class="form-control input-sm" type="text" name="bb_lahir" id="bb_lahir" value="<?= $bb_lahir ?>" placeholder="BB Lahir (Kg)">
+		<input class="form-control input-sm" type="text" name="bb_lahir" id="bb_lahir" value="<?= $bb_lahir ?>" placeholder="BB (Kg)">
 	</div>
 	<div class="col-sm-2">
-		<input class="form-control input-sm" type="text" name="tb_lahir" id="tb_lahir" value="<?= $tb_lahir ?>" placeholder="TB Lahir (Cm)">
+		<input class="form-control input-sm" type="text" name="tb_lahir" id="tb_lahir" value="<?= $tb_lahir ?>" placeholder="TB (Cm)">
 	</div>
 </div>
 

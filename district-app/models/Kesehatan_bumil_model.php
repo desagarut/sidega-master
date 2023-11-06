@@ -66,9 +66,11 @@ class Kesehatan_bumil_model extends CI_Model
 		}
 		$not_in_bumil = ltrim($not_in_bumil, ",");
 
-		$this->db->select('p.id as id, p.nik as nik, p.nama, w.rt, w.rw, w.dusun');
+		$this->db->select('p.id as id, p.nik as nik, p.nama, p.foto, p.sex, w.rt, w.rw, w.dusun');
 		$this->db->from('penduduk_hidup p');
 		$this->db->join('tweb_wil_clusterdesa w', 'w.id = p.id_cluster', 'left');
+
+		$this->db->where('p.sex', 2);
 
 		if (!empty($not_in_bumil))
 		{
@@ -80,6 +82,7 @@ class Kesehatan_bumil_model extends CI_Model
 		{
 			$penduduk = array(
 				'id' => $item['id'],
+				'foto' => $item['foto'],
 				'nama' => strtoupper($item['nama']) ." [".$item['nik']."]",
 				'info' => "RT/RW ". $item['rt']."/".$item['rw']." - ".strtoupper($item['dusun'])
 			);
@@ -90,7 +93,7 @@ class Kesehatan_bumil_model extends CI_Model
 
 	public function get_penduduk_by_id($id)
 	{
-		$this->db->select('u.id, u.nama, x.nama AS sex, u.id_kk, u.tempatlahir, u.tanggallahir, w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik, c.rt, c.rw, c.dusun, k.no_kk, k.alamat');
+		$this->db->select('u.id, u.nama, x.nama AS sex, u.id_kk, u.foto, u.tempatlahir, u.tanggallahir, w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik, c.rt, c.rw, c.dusun, k.no_kk, k.alamat');
 		$this->db->select("(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 		from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur");
 		$this->db->select('(select tweb_penduduk.nama AS nama from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS kepala_kk');
@@ -119,7 +122,7 @@ class Kesehatan_bumil_model extends CI_Model
 
 	private function get_bumil($id = NULL, $is_wajib_pantau = NULL, $limit = NULL)
 	{
-		$this->db->select('s.*, o.nik as terdata_id, o.nama, o.tempatlahir, o.tanggallahir, o.sex, w.rt, w.rw, w.dusun');
+		$this->db->select('s.*, o.nik as terdata_id, o.nama, o.foto, o.tempatlahir, o.tanggallahir, o.sex, w.rt, w.rw, w.dusun');
 		$this->db->select("(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 		from tweb_penduduk where (tweb_penduduk.id = o.id)) AS umur");
 		$this->db->select('(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS `alamat`');
@@ -131,7 +134,7 @@ class Kesehatan_bumil_model extends CI_Model
 		if (isset($id))
 			$this->db->where('s.id', $id);
 
-		if ($is_pantau_covid_page)
+		if ($is_pantau_bumil_page)
 			$this->db->where('s.is_wajib_pantau', '1');
 
 		if (isset($limit))
@@ -186,10 +189,11 @@ class Kesehatan_bumil_model extends CI_Model
 			for ($i=0; $i<count($data); $i++)
 			{
 				$data[$i]['id'] = $data[$i]['id'];
-				$data[$i]['terdata_nama'] = $data[$i]['terdata_id'];
-				$data[$i]['terdata_info'] = $data[$i]['nama'];
-				$data[$i]['nama'] = strtoupper($data[$i]['nama']);
-				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
+				$data[$i]['terdata_nama'] 	= $data[$i]['terdata_id'];
+				$data[$i]['terdata_info'] 	= $data[$i]['nama'];
+				$data[$i]['foto'] 			= $data[$i]['foto'];
+				$data[$i]['nama'] 			= strtoupper($data[$i]['nama']);
+				$data[$i]['tempat_lahir'] 	= strtoupper($data[$i]['tempatlahir']);
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
 				$data[$i]['info'] = $data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw']." - ". "Dusun " . strtoupper($data[$i]['dusun']);
@@ -216,6 +220,7 @@ class Kesehatan_bumil_model extends CI_Model
 	{
 		$data = array(
 			'tanggal_terdaftar' => $post['tanggal_terdaftar'],
+			'tanggal_hpht' => $post['tanggal_hpht'],
 			'nama_puskesmas' => alfanumerik_spasi($post['nama_puskesmas']),
 			'nama_posyandu' => alfanumerik_spasi($post['nama_posyandu']),
 			'tb_lahir' => alfanumerik_spasi($post['tb_lahir']),
@@ -340,11 +345,15 @@ class Kesehatan_bumil_model extends CI_Model
 			'suhu_tubuh' => $post['suhu'],
 			'bb_pantau' => $post['bb_pantau'],
 			'tb_pantau' => $post['tb_pantau'],
+			'tekanandarah_pantau' => $post['tekanandarah_pantau'],
+			'janin_pantau' => $post['janin_pantau'],
+			'djj_pantau' => $post['djj_pantau'],
+			'tfu_pantau' => $post['tfu_pantau'],
 			'lila_pantau' => $post['lila_pantau'],
 			'pmt_pantau' => $post['pmt_pantau'],
 			'vita_pantau' => $post['vita_pantau'],
-			'kpsp_pantau' => (isset($post['kpsp_pantau']) ? '1':'0'),
-			'kia_pantau' => (isset($post['kia_pantau']) ? '1':'0'),
+			'ttd_pantau' => $post['ttd_pantau'],
+			'imunisasitetanus_pantau' => (isset($post['imunisasitetanus_pantau']) ? '1':'0'),
 			'keluhan_lain' => $post['keluhan_lain'],
 		);
 		return $this->db->insert('tbl_kesehatan_bumil_pantau', $data);
@@ -358,4 +367,3 @@ class Kesehatan_bumil_model extends CI_Model
 	// TABEL PEMANTAUAN END
 
 }
-?>

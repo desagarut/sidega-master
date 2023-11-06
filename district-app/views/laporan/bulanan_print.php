@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="<?= base_url()?>assets/css/report.css" rel="stylesheet" type="text/css">
     <!-- Untuk ubahan style desa -->
-    <?php if (is_file("desa/css/insidega.css")): ?>
+    <?php if (is_file("instansi/css/insidega.css")): ?>
       <link type='text/css' href="<?= base_url()?>desa/css/insidega.css" rel='Stylesheet' />
     <?php endif; ?>
   </head>
@@ -127,7 +127,7 @@
             <td rowspan="7" colspan="2" width="30%" class="no-border-kecuali-kiri">&nbsp;</td>
             <td rowspan="2" colspan="3" class="no-border" style="vertical-align: top;">
               <?= ucwords($this->setting->sebutan_desa)?> <?= $config['nama_desa']?>, <?= tgl_indo(date("Y m d"))?><br>
-              <?= str_ireplace($this->setting->sebutan_desa, '', $pamong_ttd['jabatan']).' '.ucwords($this->setting->sebutan_desa).' '.$config['nama_desa']?>
+              <?= str_ireplace($this->setting->sebutan_desa, '', $pamong_ttd['jabatan']).' '.strtoupper($this->setting->sebutan_desa).' '.strtoupper($config['nama_desa'])?>
             </td>
           </tr>
           <tr>

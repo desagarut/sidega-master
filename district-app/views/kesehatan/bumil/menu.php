@@ -9,10 +9,10 @@
     </div>
     <div class="box-body no-padding">
       <ul class="nav nav-pills nav-stacked">
-        <li class="<?php compared_return($selected_nav, "data_bumil", "active"); ?>"><a href="<?= site_url('kesehatan_bumil') ?>">Data Bumil</a></li>
+        <li class="<?php compared_return($selected_nav, "data", "active"); ?>"><a href="<?= site_url('kesehatan_bumil') ?>">Data Bumil</a></li>
       </ul>
       <ul class="nav nav-pills nav-stacked">
-        <li class="<?php compared_return($selected_nav, "pantau_bumil", "active"); ?>"><a href="<?= site_url('kesehatan_bumil/pantau') ?>">Pemantauan Bumil</a></li>
+        <li class="<?php compared_return($selected_nav, "pantau", "active"); ?>"><a href="<?= site_url('kesehatan_bumil/pantau') ?>">Pemantauan Bumil</a></li>
       </ul>
     </div>
   </div>

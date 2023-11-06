@@ -33,7 +33,7 @@ class Covid19 extends Admin_Controller {
 		$data = $this->covid19_model->get_list_pemudik($page);
 		$data['per_page'] = $this->session->userdata('per_page');
 
-		$this->render('covid19/data_pemudik', $data);
+		$this->render('kesehatan/covid19/data_pemudik', $data);
 	}
 
 	public function form_pemudik()
@@ -69,7 +69,7 @@ class Covid19 extends Admin_Controller {
 
 		$data['form_action'] = site_url("covid19/add_pemudik");
 		$data['form_action_penduduk'] = site_url("covid19/insert_penduduk");
-		$this->render('covid19/form_pemudik', $data);
+		$this->render('kesehatan/covid19/form_pemudik', $data);
 	}
 
 	public function insert_penduduk()
@@ -103,7 +103,7 @@ class Covid19 extends Admin_Controller {
 		$data['select_status_covid'] = $this->covid19_model->list_status_covid();
 
 		$data['form_action'] = site_url("covid19/edit_pemudik/$id");
-		$this->load->view('covid19/edit_pemudik', $data);
+		$this->load->view('kesehatan/covid19/edit_pemudik', $data);
 	}
 
 	public function edit_pemudik($id)
@@ -136,7 +136,7 @@ class Covid19 extends Admin_Controller {
 		$data['status_penduduk'] = $this->referensi_model->list_data("tweb_penduduk_status");
 
 		$data['form_action_penduduk'] = site_url("covid19/update_penduduk/".$data['terdata']['id_terdata']."/".$id);
-		$this->render('covid19/detil_pemudik', $data);
+		$this->render('kesehatan/covid19/detil_pemudik', $data);
 	}
 
 	public function update_penduduk($id_pend, $id_pemudik)
@@ -185,7 +185,7 @@ class Covid19 extends Admin_Controller {
 		$data['url_delete_front'] = $url_delete_front;
 		$data['url_delete_rare'] = $url_delete_rare;
 
-		$this->render('covid19/pantau_pemudik', $data);
+		$this->render('kesehatan/covid19/pantau_pemudik', $data);
 	}
 
 	public function add_pantau()
@@ -231,6 +231,6 @@ class Covid19 extends Admin_Controller {
 		$data['judul'] = $judul;
 		$this->session->set_userdata('per_page', 10); // Kembalikan ke paginasi default
 
-		$this->load->view('covid19/'.$data['aksi'], $data);
+		$this->load->view('kesehatan/covid19/'.$data['aksi'], $data);
 	}
 }

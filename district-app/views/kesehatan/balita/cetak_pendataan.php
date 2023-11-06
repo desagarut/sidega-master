@@ -43,11 +43,13 @@
 							<thead>
 								<tr class="border thick">
 									<th>No</th>
+									<th>Foto</th>
 									<th>NIK</th>
 									<th>Nama</th>
 									<th>Tempat Lahir</th>
 									<th>Tanggal Lahir</th>
 									<th>Jenis Kelamin</th>
+									<th>Ayah - Ibu</th>
 									<th>Alamat</th>
 									<th>Tanggal Terdaftar</th>
 									<th>Puskesmas</th>
@@ -57,7 +59,6 @@
 									<th>Email</th>
 									<th>Riwayat Penyakit</th>
 									<th>Keterangan</th>
-									<th>Wajib Pantau</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -65,21 +66,22 @@
 								foreach ($balita_list as $key => $item) : ?>
 									<tr>
 										<td><?= $i ?></td>
-										<td class='textx'><?= $item["terdata_nama"] ?></td>
-										<td><?= $item["terdata_info"] ?></td>
+										<td><img class="img img-circle" style="with:100px; height:100px" src="<?= AmbilFoto($item['foto'], '', $item['id_sex']) ?>" alt="foto <?= strtoupper($item['nama']); ?>" title="foto <?= strtoupper($item['nama']); ?>" /></td>
+										<td nowrap><?= $item["terdata_nama"] ?></td>
+										<td nowrap><?= $item["terdata_info"] ?></td>
 										<td><?= $item["tempat_lahir"] ?></td>
-										<td><?= $item["tanggal_lahir"] ?></td>
+										<td nowrap><?= $item["tanggal_lahir"] ?></td>
 										<td><?= $item["sex"] ?></td>
+										<td align=center nowrap><?= $item["nama_ayah"] ?><br/> - <br/><?= $item["nama_ibu"] ?></td>
 										<td><?= $item["info"] ?></td>
-										<td><?= $item["tanggal_terdaftar"] ?></td>
+										<td><?= tgl_indo_out($item["tanggal_terdaftar"]) ?></td>
 										<td><?= $item["nama_puskesmas"] ?></td>
 										<td><?= $item["nama_posyandu"] ?></td>
-										<td><?= $item["bb_lahir"] ?> / <?= $item["tb_lahir"] ?></td>
+										<td><?= $item["bb_lahir"] ?>/<?= $item["tb_lahir"] ?></td>
 										<td><?= $item["hp_ortu"] ?></td>
 										<td><?= $item["email_ortu"] ?></td>
 										<td><?= $item["riwayat_penyakit"] ?></td>
 										<td><?= $item["keterangan"] ?></td>
-										<td><?= ($item["is_wajib_pantau"] === '1' ? "Ya" : "Tidak"); ?></td>
 									</tr>
 								<?php $i++;
 								endforeach;	?>

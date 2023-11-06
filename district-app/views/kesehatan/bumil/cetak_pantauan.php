@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>PEMANTAUAN BALITA</title>
+	<title>PEMANTAUAN IBU HAMIL</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="<?= base_url() ?>assets/css/report.css" rel="stylesheet" type="text/css">
 </head>
@@ -29,12 +29,12 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<h3><u>PEMANTAUAN BALITA</u></h3>
+						<h3><u>PEMANTAUAN IBU HAMIL</u></h3>
 					</td>
 				</tr>
 				<tr>
 					<td style="padding: 5px 20px;">
-						<strong>Sasaran: </strong>Penduduk Balita<br>
+						<strong>Sasaran: </strong>Penduduk Ibu Hamil<br>
 					</td>
 				</tr>
 				<tr>
@@ -50,15 +50,16 @@
 									<th>Usia Saat Pengukuran</th>
 									<th>Jenis Kelamin</th>
 									<th>Suhu</th>
-									<th>BB</th>
-									<th>TB</th>
-									<th>Lila </th>
+									<th>BB/TB/Lila</th>
+									<th>Tekanan Darah </th>
+									<th>Presentasi Janin </th>
+									<th>Denyut Jantung Janin </th>
+									<th>Tinggi Fundus Uteri </th>
 									<th>PMT </th>
-									<th>Vit A </th>
-									<th>KPSP </th>
-									<th>KIA </th>
+									<th>Vitamin</th>
+									<th>Tablet Tambah Darah
+									<th>Imunisasi Tetanus </th>
 									<th>Keluhan</th>
-									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -69,7 +70,7 @@
 										<td><?= $item["tanggal_terdaftar"] ?></td>
 										<td><?= $item["tanggal_jam"] ?></td>
 										<td><?= $item["nik"] ?></td>
-										<td class='textx'><?= $item["nama"] ?></td>
+										<td class='padat'><?= $item["nama"] ?></td>
 										<td>
 											<?php $lahir    = new DateTime($item['tanggallahir']);
 											$today        = new DateTime($item['tanggal_jam']);
@@ -84,15 +85,16 @@
 										</td>
 										<td><?= ($item["sex"] === '1' ? 'Laki-laki' : 'Perempuan'); ?></td>
 										<td><?= $item["suhu_tubuh"]; ?></td>
-										<td><?= ($item["bb_pantau"]); ?></td>
-										<td><?= ($item["tb_pantau"]); ?></td>
-										<td><?= ($item["lila_pantau"]); ?></td>
+										<td><?= ($item["bb_pantau"]); ?>/<?= ($item["tb_pantau"]); ?>/<?= ($item["lila_pantau"]); ?></td>
+										<td><?= ($item["tekanandarah_pantau"]); ?></td>
+										<td><?= ($item["janin_pantau"]); ?></td>
+										<td><?= ($item["djj_pantau"]); ?></td>
+										<td><?= ($item["tfu_pantau"]); ?></td>
 										<td><?= ($item["pmt_pantau"]); ?></td>
 										<td><?= ($item["vita_pantau"]); ?></td>
-										<td><?= ($item["kpsp_pantau"]); ?></td>
-										<td><?= ($item["kia_pantau"]); ?></td>
+										<td><?= ($item["ttd_pantau"]); ?></td>
+										<td><?= ($item["imunisasitetanus_pantau"] === '1' ? 'Ya' : 'Tidak'); ?></td>
 										<td><?= $item["keluhan_lain"]; ?></td>
-										<td><?= $item["status_covid"]; ?></td>
 									</tr>
 								<?php $i++;
 								endforeach;	?>

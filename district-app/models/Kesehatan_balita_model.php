@@ -1,20 +1,4 @@
 <?php
-define("TUJUAN_MUDIK", serialize(array(
-	"Liburan" => "1",
-	"Menjenguk Keluarga" => "2",
-	"Pulang Kampung" => "3",
-	"Dll" => "4",
-)));
-
-define("STATUS_COVID", serialize(array(
-	"Orang Dalam Pemantauan (ODP)" => "ODP",
-	"Pasien Dalam Pengawasan (PDP)" => "PDP",
-	"Orang Dalam Resiko (ODR)" => "ODR",
-	"Orang Tanpa Gejala (OTG)" => "OTG",
-	"Positif Covid-19" => "POSITIF",
-	"Dll" => "DLL",
-)));
-
 $h_plus_array = array();
 $h_plus_array["-- Semua Data --"] = "99";
 for ($i=0; $i<=31; $i++, $h_plus_array["H+$i"] = "$i");
@@ -90,7 +74,7 @@ class Kesehatan_balita_model extends CI_Model
 
 	public function get_penduduk_by_id($id)
 	{
-		$this->db->select('u.id, u.nama, x.nama AS sex, u.id_kk, u.tempatlahir, u.tanggallahir, w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik, c.rt, c.rw, c.dusun, k.no_kk, k.alamat');
+		$this->db->select('u.id, u.nama, u.nama_ayah, u.nama_ibu, u.foto, x.nama AS sex, u.id_kk, u.tempatlahir, u.tanggallahir, w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik, c.rt, c.rw, c.dusun, k.no_kk, k.alamat');
 		$this->db->select("(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 		from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur");
 		$this->db->select('(select tweb_penduduk.nama AS nama from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS kepala_kk');
@@ -119,7 +103,7 @@ class Kesehatan_balita_model extends CI_Model
 
 	private function get_balita($id = NULL, $is_wajib_pantau = NULL, $limit = NULL)
 	{
-		$this->db->select('s.*, o.nik as terdata_id, o.nama, o.tempatlahir, o.tanggallahir, o.sex, w.rt, w.rw, w.dusun');
+		$this->db->select('s.*, o.nik as terdata_id, o.nama, o.nama_ayah, o.nama_ibu, o.foto, o.tempatlahir, o.tanggallahir, o.sex, w.rt, w.rw, w.dusun');
 		$this->db->select("(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
 		from tweb_penduduk where (tweb_penduduk.id = o.id)) AS umur");
 		$this->db->select('(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS `alamat`');
@@ -189,6 +173,9 @@ class Kesehatan_balita_model extends CI_Model
 				$data[$i]['terdata_nama'] = $data[$i]['terdata_id'];
 				$data[$i]['terdata_info'] = $data[$i]['nama'];
 				$data[$i]['nama'] = strtoupper($data[$i]['nama']);
+				$data[$i]['foto'] = strtoupper($data[$i]['foto']);
+				$data[$i]['nama_ayah'] = strtoupper($data[$i]['nama_ayah']);
+				$data[$i]['nama_ibu'] = strtoupper($data[$i]['nama_ibu']);
 				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
 				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
 				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";

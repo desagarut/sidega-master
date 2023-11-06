@@ -34,7 +34,7 @@ class Covid19_vaksin extends Admin_Controller {
 		$data = $this->covid19_vaksin_model->get_list_peserta_vaksin($page);
 		$data['per_page'] = $this->session->userdata('per_page');
 
-		$this->render('covid19/vaksin/data_peserta_vaksin', $data);
+		$this->render('kesehatan/covid19/vaksin/data_peserta_vaksin', $data);
 	}
 
 	public function form_peserta_vaksin()
@@ -67,7 +67,7 @@ class Covid19_vaksin extends Admin_Controller {
 
 		$data['form_action'] = site_url("covid19_vaksin/add_peserta_vaksin");
 		$data['form_action_penduduk'] = site_url("covid19_vaksin/insert_penduduk");
-		$this->render('covid19/vaksin/form_peserta_vaksin', $data);
+		$this->render('kesehatan/covid19/vaksin/form_peserta_vaksin', $data);
 	}
 
 	public function insert_penduduk()
@@ -98,7 +98,7 @@ class Covid19_vaksin extends Admin_Controller {
 	{
 		$data = $this->covid19_vaksin_model->get_peserta_vaksin_by_id($id);
 		$data['form_action'] = site_url("covid19_vaksin/edit_peserta_vaksin/$id");
-		$this->load->view('covid19/vaksin/edit_peserta_vaksin', $data);
+		$this->load->view('kesehatan/covid19/vaksin/edit_peserta_vaksin', $data);
 	}
 
 	public function edit_peserta_vaksin($id)
@@ -131,7 +131,7 @@ class Covid19_vaksin extends Admin_Controller {
 		$data['status_penduduk'] = $this->referensi_model->list_data("tweb_penduduk_status");
 
 		$data['form_action_penduduk'] = site_url("covid19/update_penduduk/".$data['terdata']['id_terdata']."/".$id);
-		$this->render('covid19/vaksin/detil_peserta_vaksin', $data);
+		$this->render('kesehatan/covid19/vaksin/detil_peserta_vaksin', $data);
 	}
 
 	public function update_penduduk($id_pend, $id_peserta_vaksin)
@@ -180,7 +180,7 @@ class Covid19_vaksin extends Admin_Controller {
 		$data['url_delete_front'] = $url_delete_front;
 		$data['url_delete_rare'] = $url_delete_rare;
 
-		$this->render('covid19/vaksin/pantau_peserta_vaksin', $data);
+		$this->render('kesehatan/covid19/vaksin/pantau_peserta_vaksin', $data);
 	}
 
 	public function add_pantau()
@@ -226,6 +226,6 @@ class Covid19_vaksin extends Admin_Controller {
 		$data['judul'] = $judul;
 		$this->session->set_userdata('per_page', 10); // Kembalikan ke paginasi default
 
-		$this->load->view('covid19/vaksin/'.$data['aksi'], $data);
+		$this->load->view('kesehatan/covid19/vaksin/'.$data['aksi'], $data);
 	}
 }

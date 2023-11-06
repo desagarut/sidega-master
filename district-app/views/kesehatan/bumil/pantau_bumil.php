@@ -115,9 +115,9 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="tb_pantau" class="col-md-6 control-label required">Tinggi fundus uteri</label>
+												<label for="tfu_pantau" class="col-md-6 control-label required">Tinggi fundus uteri</label>
 												<div class="col-sm-6">
-													<input type="text" class="form-control input-sm required" name="tb_pantau" id="tb_pantau" placeholder="">
+													<input type="text" class="form-control input-sm required" name="tfu_pantau" id="tfu_pantau" placeholder="">
 												</div>
 											</div>
 										</div>
@@ -151,9 +151,9 @@
 								</div>
 								<div class="col-sm-3">
 									<div class="form-group">
-										<label for="vita_pantau" class="col-md-12 control-label required">Tablet Tambah Darah</label>
+										<label for="ttd_pantau" class="col-md-12 control-label required">Tablet Tambah Darah</label>
 										<div class="col-sm-12">
-											<input type="text" class="form-control input-sm" name="vita_pantau" id="vita_pantau" placeholder="">
+											<input type="text" class="form-control input-sm" name="ttd_pantau" id="ttd_pantau" placeholder="">
 										</div>
 									</div>
 								</div>
@@ -243,11 +243,15 @@
 																<th>Usia Saat Pengukuran</th>
 																<th>JK</th>
 																<th>Suhu</th>
-																<th>BB / TB / Lila</th>
+																<th>BB/TB/Lila</th>
+																<th>Tekanan Darah</th>
+																<th>Presentasi Janin</th>
+																<th>Denyut Jantung Janin</th>
+																<th>Tinggi Fundus Uteri</th>
 																<th>PMT</th>
-																<th>Vit A</th>
-																<th>KPSP</th>
-																<th>KIA</th>
+																<th>Vitamin</th>
+																<th>Tablet Tambah Darah</th>
+																<th>Imunisasi Tetanus</th>
 																<th>Keluhan</th>
 															</tr>
 														</thead>
@@ -281,11 +285,15 @@
 																	</td>
 																	<td><?= ($item["sex"] === '1' ? 'Laki-laki' : 'Perempuan'); ?></td>
 																	<td><?= $item["suhu_tubuh"]; ?></td>
-																	<td><?= $item["bb_pantau"]; ?> / <?= $item["tb_pantau"]; ?> / <?= $item["lila_pantau"]; ?></td>
+																	<td><?= $item["bb_pantau"]; ?>/<?= $item["tb_pantau"]; ?>/<?= $item["lila_pantau"]; ?></td>
+																	<td><?= $item["tekanandarah_pantau"]; ?></td>
+																	<td><?= $item["janin_pantau"]; ?></td>
+																	<td><?= $item["djj_pantau"]; ?></td>
+																	<td><?= $item["tfu_pantau"]; ?></td>
 																	<td><?= $item["pmt_pantau"]; ?></td>
 																	<td><?= $item["vita_pantau"]; ?></td>
-																	<td><?= ($item["kpsp_pantau"] === '1' ? 'Ya' : 'Tidak'); ?></td>
-																	<td><?= ($item["kia_pantau"] === '1' ? 'Ya' : 'Tidak'); ?></td>
+																	<td><?= $item["ttd_pantau"]; ?></td>
+																	<td><?= ($item["imunisasitetanus_pantau"] === '1' ? 'Ya' : 'Tidak'); ?></td>
 																	<td><?= $item["keluhan_lain"]; ?></td>
 																</tr>
 															<?php endforeach; ?>

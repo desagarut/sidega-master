@@ -29,12 +29,12 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<h3><u>DAFTAR BALITA</u></h3>
+						<h3><u>DAFTAR IBU HAMIL</u></h3>
 					</td>
 				</tr>
 				<tr>
 					<td style="padding: 5px 20px;">
-						<strong>Sasaran: </strong>Penduduk Balita<br>
+						<strong>Sasaran: </strong>Penduduk Hamil<br>
 					</td>
 				</tr>
 				<tr>
@@ -43,6 +43,7 @@
 							<thead>
 								<tr class="border thick">
 									<th>No</th>
+									<th>Foto</th>
 									<th>NIK</th>
 									<th>Nama</th>
 									<th>Tempat Lahir</th>
@@ -52,7 +53,8 @@
 									<th>Tanggal Terdaftar</th>
 									<th>Puskesmas</th>
 									<th>Posyandu</th>
-									<th>BB / TB Lahir</th>
+									<th>BB/TB</th>
+									<th>HPHT</th>
 									<th>No HP</th>
 									<th>Email</th>
 									<th>Riwayat Penyakit</th>
@@ -62,19 +64,23 @@
 							</thead>
 							<tbody>
 								<?php $i = 1;
-								foreach ($balita_list as $key => $item) : ?>
+								foreach ($bumil_list as $key => $item) : ?>
 									<tr>
 										<td><?= $i ?></td>
+										<td align=center>
+											<img class="img img-circle" style="height:75px" src="<?= AmbilFoto($item['foto'], '', $item['id_sex']) ?>" alt="foto <?= strtoupper($item['nama']); ?>" title="foto <?= strtoupper($item['nama']); ?>" />
+										</td>
 										<td class='textx'><?= $item["terdata_nama"] ?></td>
-										<td><?= $item["terdata_info"] ?></td>
+										<td nowrap><?= $item["terdata_info"] ?></td>
 										<td><?= $item["tempat_lahir"] ?></td>
-										<td><?= $item["tanggal_lahir"] ?></td>
+										<td class="padat"><?= $item["tanggal_lahir"] ?></td>
 										<td><?= $item["sex"] ?></td>
 										<td><?= $item["info"] ?></td>
-										<td><?= $item["tanggal_terdaftar"] ?></td>
+										<td><?= tgl_indo_out($item["tanggal_terdaftar"]) ?></td>
 										<td><?= $item["nama_puskesmas"] ?></td>
 										<td><?= $item["nama_posyandu"] ?></td>
-										<td><?= $item["bb_lahir"] ?> / <?= $item["tb_lahir"] ?></td>
+										<td><?= $item["bb_lahir"] ?>/<?= $item["tb_lahir"] ?></td>
+										<td><?= $item["tanggal_hpht"] ?></td>
 										<td><?= $item["hp_ortu"] ?></td>
 										<td><?= $item["email_ortu"] ?></td>
 										<td><?= $item["riwayat_penyakit"] ?></td>

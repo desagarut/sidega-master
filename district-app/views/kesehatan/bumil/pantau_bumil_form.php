@@ -17,8 +17,8 @@
 						<div class="col-sm-8">
 							<select class="form-control select2 input-sm" id="terdata" name="terdata" style="width: 100%;">
 								<option value="">-- Silakan Masukan NIK / Nama--</option>
-								<?php foreach ($balita_array as $item) : ?>
-									<option value="<?= $item['id'] ?>" data-statuscovid="<?= $item['status_covid'] ?>" data-tgltiba="<?= $item['tanggal_datang'] ?>"> <?= $item['terdata_id'] . " - " . $item['nama'] ?></option>
+								<?php foreach ($bumil_array as $item) : ?>
+									<option value="<?= $item['id'] ?>"> <?= $item['terdata_id'] . " - " . $item['nama'] ?> </option>
 								<?php endforeach; ?>
 							</select>
 						</div>
@@ -33,7 +33,7 @@
 
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="tgl_jam">Hari Pertama Haid Terakhir</label>
+							<label for="tgl_jam">Hari Pertama Haid Terakhir (HPHT)</label>
 							<input type="text" class="form-control input-sm" name="tgl_terdaftar" id="tgl_terdaftar" value="<?= $datetime_now; ?>" disabled>
 						</div>
 					</div>

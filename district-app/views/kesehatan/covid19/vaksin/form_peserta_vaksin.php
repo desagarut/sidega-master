@@ -1,11 +1,11 @@
 <div class="content-wrapper">
 
 	<section class="content-header">
-		<h1>Penambahan Pemudik Covid-19</h1>
+		<h1>Pendataan Vaksin Covid-19</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('covid19')?>"> Daftar Pemudik Saat Covid-19</a></li>
-			<li class="active">Penambahan Pemudik Covid-19</li>
+			<li><a href="<?= site_url('covid19_vaksin')?>"> Daftar Peserta Vaksin Covid-19</a></li>
+			<li class="active">Pendataan Vaksin Covid19</li>
 		</ol>
 	</section>
 
@@ -15,20 +15,20 @@
 				<div class="box box-info">
 					<div class="box-header with-border">
 						<div class="col-md-12">
-							<a href="<?= site_url('covid19')?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Pemudik Saat Covid-19"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Pemudik Saat Covid-19</a>
+							<a href="<?= site_url('covid19_vaksin')?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Pemudik Saat Covid-19"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Peserta Vaksin Covid-19</a>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="box-header with-border">
-									<h3 class="box-title">Tambahkan Warga Pemudik</h3>
+									<h3 class="box-title">Tambahkan Peserta Vaksin</h3>
 								</div>
 								<div class="box-body">
 									<form action="" id="main" name="main" method="POST"  class="form-horizontal">
 
 										<div class="form-group" >
-											<label class="col-sm-3 control-label required"  for="terdata">NIK / Nama</label>
+											<label class="col-sm-3 control-label required"  for="terdata">NIK / Nama Penerima Vaksin</label>
 											<div class="col-sm-4">
 												<select class="form-control select2 required" id="terdata" name="terdata"  onchange="formAction('main')" style="width: 100%;">
 													<option value="">-- Silakan Masukan NIK / Nama--</option>
@@ -60,10 +60,10 @@
 												 </div>
 											</div>
 											<?php if ($individu): ?>
-												<?php include("district-app/views/covid19/konfirmasi_pemudik.php"); ?>
+												<?php include("district-app/views/kesehatan/covid19/vaksin/konfirmasi_peserta_vaksin.php"); ?>
 											<?php endif; ?>
 
-											<?php include("district-app/views/covid19/form_isian_pemudik.php"); ?>
+											<?php include("district-app/views/kesehatan/covid19/vaksin/form_isian_peserta_vaksin.php"); ?>
 
 										</form>
 									</div>
@@ -93,7 +93,7 @@
 			</div>
 			<div class='modal-body'>
 				<div class="row">
-					<?php include("district-app/views/covid19/form_isian_penduduk.php"); ?>
+					<?php include("district-app/views/covid19/vaksin/form_isian_penduduk.php"); ?>
 				</div>
 			</div>
 			<div class='modal-footer'>

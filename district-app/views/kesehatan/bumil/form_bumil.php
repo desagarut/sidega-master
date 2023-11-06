@@ -1,10 +1,10 @@
 <div class="content-wrapper">
 
 	<section class="content-header">
-		<h1>Form Data Balita</h1>
+		<h1>Form Data Bumil</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('kesehatan_balita') ?>"> Kesehatan Balita</a></li>
+			<li><a href="<?= site_url('kesehatan_bumil') ?>"> Kesehatan Bumil</a></li>
 			<li class="active">Form</li>
 		</ol>
 	</section>
@@ -18,14 +18,14 @@
 				<div class="box box-info">
 					<div class="box-header with-border">
 						<div class="col-md-12">
-							<a href="<?= site_url('kesehatan_balita') ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Balita"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Balita</a>
+							<a href="<?= site_url('kesehatan_bumil') ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Bumil"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Bumil</a>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="box-header with-border">
-									<h3 class="box-title">Tambah / Ubah Data Balita</h3>
+									<h3 class="box-title">Tambah / Ubah Data Bumil</h3>
 								</div>
 								<div class="box-body">
 									<form action="" id="main" name="main" method="POST" class="form-horizontal">
@@ -62,10 +62,10 @@
 												</div>
 											</div>
 											<?php if ($individu) : ?>
-												<?php include("district-app/views/kesehatan/balita/konfirmasi_balita.php"); ?>
+												<?php include("district-app/views/kesehatan/bumil/konfirmasi_bumil.php"); ?>
 											<?php endif; ?>
 
-											<?php include("district-app/views/kesehatan/balita/form_isian_balita.php"); ?>
+											<?php include("district-app/views/kesehatan/bumil/form_isian_bumil.php"); ?>
 
 										</form>
 									</div>
@@ -94,7 +94,7 @@
 			</div>
 			<div class='modal-body'>
 				<div class="row">
-					<?php include("district-app/views/kesehatan/balita/form_isian_penduduk.php"); ?>
+					<?php include("district-app/views/kesehatan/bumil/form_isian_penduduk.php"); ?>
 				</div>
 			</div>
 			<div class='modal-footer'>

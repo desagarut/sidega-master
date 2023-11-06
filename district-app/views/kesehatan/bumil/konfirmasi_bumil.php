@@ -1,4 +1,11 @@
 <div class="form-group">
+	<label for="foto" class="col-sm-3 control-label">Foto</label>
+	<div class="col-sm-4">
+		<img class="img img-circle" style="with:100px; height:100px" src="<?= AmbilFoto($individu['foto'], '', $individu['id_sex']) ?>" alt="foto <?= strtoupper($individu['nama']); ?>" title="foto <?= strtoupper($individu['nama']); ?>" />
+	</div>
+</div>
+
+<div class="form-group">
 	<label for="keperluan"  class="col-sm-3 control-label">Tempat  Tanggal Lahir / Umur</label>
 	<div class="col-sm-4">
 		<input class="form-control input-sm" type="text" value="<?= $individu['tempatlahir']?>" disabled="">

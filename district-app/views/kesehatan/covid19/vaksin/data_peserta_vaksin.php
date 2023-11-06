@@ -6,26 +6,26 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Pendataan Ibu Hamil </h1>
+		<h1>Pendataan Peserta Vaksin Covid19</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li class="active">Kesehatan</li>
-			<li class="active">Data Ibu Hamil</li>
+			<li class="active">Data Peserta Vaksin Covid19</li>
 		</ol>
 	</section>
 
 	<section class="content" id="maincontent">
 		<div class="row">
-			<div id="kesehatan" class="col-sm-2">
-				<?php $this->load->view('kesehatan/bumil/menu') ?>
+			<div class="col-sm-2">
+				<?php $this->load->view('kesehatan/covid19/menu') ?>
 			</div>
 			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<a href="<?= site_url("kesehatan_bumil/form_bumil") ?>" title="Tambah Data Bumil" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-plus"></i> Tambah Data Bumil</a>
-						<a href="<?= site_url("kesehatan_bumil/daftar/cetak") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak" target="_blank"><i class="fa fa-print"></i> Cetak</a>
-						<a href="<?= site_url("kesehatan_bumil/daftar/unduh") ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh" target="_blank"><i class="fa fa-download"></i> Unduh</a>
-						<a href="<?= site_url("kesehatan_bumil/pantau") ?>" class="btn btn-box btn-info btn-sm" title="Pemantauan Bumil">Ke Pemantauan Bumil</a>
+						<a href="<?= site_url("covid19_vaksin/form_peserta_vaksin") ?>" title="Tambah Data Warga" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-plus"></i> Tambah Data Warga Vaksin</a>
+						<a href="<?= site_url("covid19_vaksin/daftar/cetak") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak" target="_blank"><i class="fa fa-print"></i> Cetak
+						</a>
+						<a href="<?= site_url("covid19_vaksin/daftar/unduh") ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh" target="_blank"><i class="fa fa-download"></i> Unduh
+						</a>
 					</div>
 					<div class="box-body">
 						<div class="row">
@@ -40,47 +40,50 @@
 															<tr>
 																<th>No</th>
 																<th>Aksi</th>
-																<th>Foto</th>
-																<th>Nama / NIK</th>
-																<th class="text-center">Usia Saat Ini</th>
+																<th>NIK</th>
+																<th>Nama</th>
+																<th>Usia</th>
 																<th>JK</th>
 																<th>Alamat</th>
-																<th>Tanggal Terdaftar</th>
-																<th>BB/TB</th>
-																<th>Kontak</th>
-																<th>Riwayat Penyakit</th>
+																<th>Kelompok Masyarakat</th>
+																<th>Tanggal</th>
+																<th>No Hp</th>
+																<th>Dosis</th>
+																<th>Nama/Jenis/Merek Vaksin***</th>
 																<th>Wajib Pantau</th>
+																<th>KIPI</th>
+																<th>Keterangan</th>
 															</tr>
 														</thead>
 														<tbody>
 															<?php
 															$nomer = $paging->offset;
-															foreach ($bumil_list as $key => $item) :
+															foreach ($peserta_vaksin_list as $key => $item) :
 																$nomer++;
 															?>
 																<tr>
 																	<td align="center" width="2"><?= $nomer; ?></td>
 																	<td nowrap>
-																		<?php if ($this->CI->cek_hak_akses('h')) : ?>
-																			<a href="<?= site_url("kesehatan_bumil/edit_bumil_form/$item[id]") ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data Bumil" title="Ubah Data Pemudik" class="btn btn-warning btn-box btn-sm"><i class="fa fa-edit"></i></a>
-																			<a href="#" data-href="<?= site_url("kesehatan_bumil/hapus_bumil/$item[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-																		<?php endif; ?>
+																		<a href="<?= site_url('covid19_vaksin/edit_peserta_vaksin_form/' . $item[id]) ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data Peserta Vaksin" title="Ubah Data Peserta Vaksin" class="btn btn-warning btn-box btn-sm"><i class="fa fa-edit"></i></a>
+																		<a href="#" data-href="<?= site_url('covid19_vaksin/hapus_peserta_vaksin/' . $item[id]) ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+																		<a href="<?= site_url('covid19_vaksin/detil_peserta_vaksin/' . $item[id]) ?>" title="Detil Data Warga" class="btn btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-eye"></i></a>
 																	</td>
-																	<td align=center>
-																		<img class="img img-circle" style="height:75px" src="<?= AmbilFoto($item['foto'], '', $item['id_sex']) ?>" alt="foto <?= strtoupper($item['nama']); ?>" title="foto <?= strtoupper($item['nama']); ?>" />
-																	</td>
-																	<td nowrap><a href="<?= site_url('kesehatan_bumil/detil_bumil/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?> /<br><?= $item["terdata_nama"] ?></a></td>
-																	<td class="text-center"><?= $item["umur"] ?></td>
+																	<td><?= $item["terdata_nama"] ?></td>
+																	<td nowrap><a href="<?= site_url('covid19_vaksin/detil_peserta_vaksin/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?></a></td>
+																	<td><?= $item["umur"] ?></td>
 																	<?php
-																	$jk = (strtoupper($item['sex']) === "PEREMPUAN") ? "P" : "L";
+																	$jk = (strtoupper($item['sex']) === "PEREMPUAN") ? "Pr" : "Lk";
 																	?>
 																	<td><?= $jk ?></td>
 																	<td><?= $item["info"]; ?></td>
-																	<td><?= $item["tanggal_terdaftar"]; ?></td>
-																	<td nowrap><?= $item["bb_lahir"]; ?> / <?= $item["tb_lahir"]; ?></td>
-																	<td><?= $item["hp_ortu"]; ?> - <?= $item["email_ortu"]; ?> </td>
-																	<td><?= $item["riwayat_penyakit"]; ?></td>
+																	<td><?= $item["pokmas"]; ?></td>
+																	<td><?= $item["tanggal"]; ?></td>
+																	<td><?= $item["no_hp"]; ?> - <?= $item["email"]; ?> </td>
+																	<td>1: <?= $item["dosis1"]; ?> <br />2: <?= $item["dosis2"]; ?></td>
+																	<td><?= $item["jenis_vaksin"]; ?></td>
 																	<td><?= ($item["is_wajib_pantau"] === '1' ? "Ya" : "Tidak"); ?></td>
+																	<td><?= $item["kipi"]; ?></td>
+																	<td><?= $item["keterangan"]; ?></td>
 																</tr>
 															<?php endforeach; ?>
 														</tbody>
@@ -112,29 +115,30 @@
 												<ul class="pagination">
 													<?php if ($paging->start_link) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->start_link) ?>" aria-label="First"><span aria-hidden="true">Awal</span></a>
+															<a href="<?= site_url('covid19_vaksin/data_peserta_vaksin/' . $paging->start_link) ?>" aria-label="First"><span aria-hidden="true">Awal</span></a>
 														</li>
 													<?php endif; ?>
 													<?php if ($paging->prev) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->prev) ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+															<a href="<?= site_url('covid19_vaksin/data_peserta_vaksin/' . $paging->prev) ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
 														</li>
 													<?php endif; ?>
 													<?php for ($i = $paging->start_link; $i <= $paging->end_link; $i++) : ?>
 														<li <?= jecho($p, $i, "class='active'") ?>>
-															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $i) ?>"><?= $i ?></a>
+															<a href="<?= site_url('covid19_vaksin/data_peserta_vaksin/' . $i) ?>"><?= $i ?></a>
 														</li>
 													<?php endfor; ?>
 													<?php if ($paging->next) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->next) ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+															<a href="<?= site_url('covid19_vaksin/data_peserta_vaksin/' . $paging->next) ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
 														</li>
 													<?php endif; ?>
 													<?php if ($paging->end_link) : ?>
 														<li>
-															<a href="<?= site_url('kesehatan_bumil/data_bumil/' . $paging->end_link) ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a>
+															<a href="<?= site_url('covid19_vaksin/data_peserta_vaksin/' . $paging->end_link) ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a>
 														</li>
 													<?php endif; ?>
+
 												</ul>
 											</div>
 										</div>

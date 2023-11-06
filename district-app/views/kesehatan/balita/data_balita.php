@@ -40,9 +40,13 @@
 															<tr>
 																<th>No</th>
 																<th>Aksi</th>
+																<th>Foto</th>
+
 																<th>Nama / NIK</th>
 																<th class="text-center">Usia Saat Ini</th>
 																<th>JK</th>
+																<th>Ayah - Ibu</th>
+
 																<th>Alamat</th>
 																<th>Tanggal Terdaftar</th>
 																<th>BB/TB</th>
@@ -65,12 +69,17 @@
 																			<a href="#" data-href="<?= site_url("kesehatan_balita/hapus_balita/$item[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																		<?php endif; ?>
 																	</td>
-																	<td nowrap><a href="<?= site_url('kesehatan_balita/detil_balita/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?> /<br><?= $item["terdata_nama"] ?></a></td>
+																	<td>
+																		<img class="img img-circle" style="with:100px; height:100px" src="<?= AmbilFoto($item['foto'], '', $item['id_sex']) ?>" alt="foto <?= strtoupper($item['nama']); ?>" title="foto <?= strtoupper($item['nama']); ?>" />
+																	</td>
+																	<td nowrap><a href="<?= site_url('kesehatan_balita/detil_balita/' . $item["id"]) ?>" title="Data terdata"><?= $item['terdata_info']; ?> /<br> <?= $item["terdata_nama"] ?></a></td>
 																	<td class="text-center"><?= $item["umur"] ?></td>
 																	<?php
 																	$jk = (strtoupper($item['sex']) === "PEREMPUAN") ? "P" : "L";
 																	?>
 																	<td><?= $jk ?></td>
+																	<td><?= $item["nama_ayah"]; ?> - <?= $item["nama_ibu"]; ?></td>
+
 																	<td><?= $item["info"]; ?></td>
 																	<td><?= $item["tanggal_terdaftar"]; ?></td>
 																	<td nowrap><?= $item["bb_lahir"]; ?> / <?= $item["tb_lahir"]; ?></td>

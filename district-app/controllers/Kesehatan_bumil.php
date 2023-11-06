@@ -18,16 +18,8 @@ class Kesehatan_bumil extends Admin_Controller
 		$this->sub_modul_ini = 342;
 	}
 
-	public function index()
+	public function index($page = 1)
 	{
-		$this->data_bumil(1);
-		$data      			= ['selected_nav' => 'data_bumil'];
-	}
-
-	public function data_bumil($page = 1)
-	{
-		$data      			= ['selected_nav' => 'data_bumil'];
-		$this->set_minsidebar(1);
 
 		if (isset($_POST['per_page']))
 			$this->session->set_userdata('per_page', $_POST['per_page']);
@@ -37,13 +29,15 @@ class Kesehatan_bumil extends Admin_Controller
 		$data = $this->kesehatan_bumil_model->get_list_bumil($page);
 		$data['per_page'] = $this->session->userdata('per_page');
 
+		$this->set_minsidebar(1);
+
 		$this->render('kesehatan/bumil/data_bumil', $data);
 	}
 
 	public function form_bumil()
 	{
 		$this->sub_modul_ini = 342;
-		$data      			= ['selected_nav' => 'data_bumil'];
+		$data      			= ['selected_nav' => 'data'];
 		$this->set_minsidebar(1);
 
 
@@ -114,7 +108,7 @@ class Kesehatan_bumil extends Admin_Controller
 
 	public function detil_bumil($id)
 	{
-		$data      			= ['selected_nav' => 'data_bumil'];
+		$data      			= ['selected_nav' => 'data'];
 
 		$data['terdata'] = $this->kesehatan_bumil_model->get_bumil_by_id($id);
 		$data['individu'] = $this->kesehatan_bumil_model->get_penduduk_by_id($data['terdata']['id_terdata']);
@@ -150,6 +144,7 @@ class Kesehatan_bumil extends Admin_Controller
 	public function pantau($page = 1, $filter_tgl = null, $filter_nik = null)
 	{
 		$this->sub_modul_ini = 342;
+		$data      			= ['selected_nav' => 'pantau'];
 
 		if (isset($_POST['per_page']))
 			$this->session->set_userdata('per_page', $_POST['per_page']);

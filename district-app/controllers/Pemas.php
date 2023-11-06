@@ -19,6 +19,7 @@ class Pemas extends Admin_Controller {
 		$data['pemas'] = $this->pemas_model->list_data($sasaran);
 		$data['list_sasaran'] = unserialize(SASARAN);
 		$data['set_sasaran'] = $sasaran;
+		$this->set_minsidebar(1);
 
 		$this->render('pemas/daftar_kegiatan', $data);
 	}
