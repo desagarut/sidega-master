@@ -18,7 +18,7 @@
           <ul class="products-list product-list-in-box">
             <li class="item">
               <div class="product-img">
-              <img width=50 height=80 src=<?= AmbilFotoArtikel($data['gambar'], 'kecil')?>>
+              <img width=50 height=80 src=<?= AmbilFotoArtikel(urldecode($data['gambar']), 'kecil')?>>
               </div>
               <div class="product-info">
               <?php if ($this->CI->cek_hak_akses('u')): ?>

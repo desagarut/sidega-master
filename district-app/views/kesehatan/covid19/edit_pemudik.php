@@ -1,21 +1,21 @@
-<script type="text/javascript" src="<?= base_url()?>assets/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<?= base_url()?>assets/js/validasi.js"></script>
-<script type="text/javascript" src="<?= base_url()?>assets/js/localization/messages_id.js"></script>
-<script type="text/javascript" src="<?= base_url()?>assets/js/script.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>assets/js/validasi.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>assets/js/localization/messages_id.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>assets/js/script.js"></script>
 <div class='modal-body'>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="box box-danger">
 				<div class="box-body">
-					<table class="table table-bordered table-striped table-hover" >
+					<table class="table table-bordered table-striped table-hover">
 						<tbody>
 							<tr>
-								<td style="padding-top : 10px;padding-bottom : 10px; width:40%;" ><?= $judul_terdata_nama?></td>
-								<td> : <?= $terdata_nama?></td>
+								<td style="padding-top : 10px;padding-bottom : 10px; width:40%;"><?= $judul_terdata_nama ?></td>
+								<td> : <?= $terdata_nama ?></td>
 							</tr>
 							<tr>
-								<td style="padding-top : 10px;padding-bottom : 10px; width:40%;" ><?= $judul_terdata_info?></td>
-								<td> :  <?= $terdata_info?></td>
+								<td style="padding-top : 10px;padding-bottom : 10px; width:40%;"><?= $judul_terdata_info ?></td>
+								<td> : <?= $terdata_info ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -25,7 +25,7 @@
 		<div class="col-sm-12">
 			<div class="box box-danger">
 				<div class="box-body">
-					<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+					<form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 						<?php include("district-app/views/kesehatancovid19/form_isian_pemudik.php"); ?>
 					</form>
 				</div>
