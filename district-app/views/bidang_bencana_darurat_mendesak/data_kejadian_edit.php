@@ -1,27 +1,31 @@
-<script src="<?= base_url()?>assets/js/jquery.validate.min.js"></script>
-<script src="<?= base_url()?>assets/js/localization/messages_id.js"></script>
+<?php $data = $program[0]; ?>
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Tambah Program Pembinaan Masyarakat</h1>
+		<h1>Ubah Laporan Kejadian</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?=site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?=site_url('pembinaan_masyarakat')?>"> Daftar Program Pembinaan Masyarakat</a></li>
-			<li class="active">Tambah </li>
+			<li><a href="<?=site_url('bidang_bencana_darurat_mendesak')?>"> Daftar Laporan Kejadian</a></li>
+			<li class="active">Ubah Laporan Kejadian</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
 		<div class="box box-info">
 			<div class="box-header with-border">
-				<a href="<?=site_url('pembinaan_masyarakat')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Program"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Program</a>
+				<a href="<?=site_url('bidang_bencana_darurat_mendesak')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Laporan Kejadian"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Laporan Kejadian</a>
 			</div>
 			<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 				<div class="box-body">
-					<?php $cid = @$_REQUEST["cid"]; ?>
+					<?php $cid = $data["sasaran"]; ?>
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Sasaran Program</label>
 						<div class="col-sm-3">
-							<select class="form-control input-sm required" name="cid" id="cid">
-								<option value="">Pilih Sasaran Program <?= $cid; ?></option>
+							<?php if ($jml <> 0): ?>
+								<input type="hidden" name="cid" value="<?= $cid ?>">
+								<select class="form-control input-sm" disabled>
+							<?php else: ?>
+								<select class="form-control input-sm required" name="cid" id="cid">
+							<?php endif;?>
+								<option value="">Pilih Sasaran Program</option>
 								<option value="1" <?php selected($cid, 1); ?>>Penduduk Perorangan</option>
 								<option value="2" <?php selected($cid, 2); ?>>Keluarga - KK</option>
 								<option value="3" <?php selected($cid, 3); ?>>Rumah Tangga</option>
@@ -32,42 +36,43 @@
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="nama">Nama Program</label>
 						<div class="col-sm-8">
-							<input name="nama" class="form-control input-sm nomor_sk required" maxlength="100" placeholder="Nama Program"  type="text"></input>
+							<input name="nama" class="form-control input-sm nomor_sk" maxlength="100" placeholder="Nama Program"  type="text" value="<?= $data["nama"]; ?>"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="ndesc">Keterangan</label>
 						<div class="col-sm-8">
-							<textarea id="ndesc" name="ndesc" class="form-control input-sm required" placeholder="Isi Keterangan" rows="8"></textarea>
+							<textarea id="ndesc" name="ndesc" class="form-control input-sm required" placeholder="Isi Keterangan" maxlength="500" rows="8"><?= $data["ndesc"]; ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="penyelenggara">Penyelenggara</label>
 						<div class="col-sm-8">
-							<input name="penyelenggara" class="form-control input-sm required" maxlength="100" placeholder="Nama Penyelenggara"  type="text"></input>
+							<input name="penyelenggara" class="form-control input-sm" maxlength="100" placeholder="Nama Penyelenggara"  type="text" value="<?= $data["penyelenggara"]; ?>"></input>
 						</div>
 					</div>
+					<?php $data= $program[0]; $val = $data["asaldana"]; ?>
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="asaldana">Asal Dana</label>
 						<div class="col-sm-3">
 							<select class="form-control input-sm required" name="asaldana" id="asaldana">
-								<option value="">Asal Dana</option>
+								<option value="">Sumber Dana</option>
 								<?php foreach ($asaldana AS $ad): ?>
-									<option value="<?= $ad?>"><?= $ad?></option>
+									<option value="<?= $ad?>" <?php selected($val, $ad); ?>><?= $ad?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="anggaran">Pagu Anggaran</label>
+						<label class="control-label col-sm-3" for="anggaran">Anggaran</label>
 						<div class="col-sm-8">
-							<input name="anggaran" class="form-control input-sm required" maxlength="100" placeholder="Pagu Anggaran"  type="text"></input>
+							<input name="anggaran" class="form-control input-sm required" maxlength="100" placeholder="Pagu Anggaran"  type="text" value="<?= $data["anggaran"]; ?>"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-3" for="lokasi">Lokasi</label>
 						<div class="col-sm-8">
-							<input name="lokasi" class="form-control input-sm required" maxlength="100" placeholder="Lokasi"  type="text"></input>
+							<input name="lokasi" class="form-control input-sm required" maxlength="100" placeholder="Lokasi"  type="text" value="<?= $data["lokasi"]; ?>"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -77,7 +82,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input class="form-control input-sm pull-right required" id="tgl_1" name="sdate" placeholder="Tgl. Mulai" type="text">
+								<input class="form-control input-sm pull-right" id="tgl_1" name="sdate" placeholder="Tgl. Mulai" type="text" value="<?= date("d/m/Y",strtotime($data["sdate"])); ?>">
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -85,16 +90,17 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input class="form-control input-sm pull-right required" id="tgl_2" name="edate" placeholder="Tgl. Akhir" type="text">
+								<input class="form-control input-sm pull-right" id="tgl_2" name="edate" placeholder="Tgl. Akhir" type="text" value="<?= date("d/m/Y",strtotime($data["edate"])); ?>">
 							</div>
 						</div>
 					</div>
+					<?php $data= $program[0]; $status = $data["status"]; ?>
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="status">Status</label>
 						<div class="col-sm-3">
 							<select class="form-control input-sm required" name="status" id="status">
-								<option value="1">Aktif</option>
-								<option value="0">Tidak Aktif</option>
+								<option value="1" <?php selected($status, 1); ?>>Aktif</option>
+								<option value="0" <?php selected($status, 0); ?>>Tidak Aktif</option>
 								<!-- Default Value Aktif -->
 							</select>
 						</div>
@@ -104,8 +110,7 @@
 					<button type='reset' class='btn btn-social btn-box btn-danger btn-sm'><i class='fa fa-times'></i> Batal</button>
 					<button type='submit' class='btn btn-social btn-box btn-info btn-sm pull-right confirm'><i class='fa fa-check'></i> Simpan</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</section>
 </div>
-
