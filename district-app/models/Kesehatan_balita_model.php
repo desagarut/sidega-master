@@ -203,15 +203,15 @@ class Kesehatan_balita_model extends CI_Model
 	{
 		$data = array(
 			'tanggal_terdaftar' => $post['tanggal_terdaftar'],
-			'nama_puskesmas' => alfanumerik_spasi($post['nama_puskesmas']),
-			'nama_posyandu' => alfanumerik_spasi($post['nama_posyandu']),
-			'tb_lahir' => alfanumerik_spasi($post['tb_lahir']),
-			'bb_lahir' => alfanumerik_spasi($post['bb_lahir']),
-			'hp_ortu' => bilangan_spasi($post['hp_ortu']),
-			'email_ortu' => strip_tags($post['email_ortu']),
+			'nama_puskesmas' => $post['nama_puskesmas'],
+			'nama_posyandu' => $post['nama_posyandu'],
+			'tb_lahir' => $post['tb_lahir'],
+			'bb_lahir' => $post['bb_lahir'],
+			'hp_ortu' => $post['hp_ortu'],
+			'email_ortu' => $post['email_ortu'],
 			'is_wajib_pantau' => $post['wajib_pantau'],
-			'riwayat_penyakit' => alfanumerik_spasi($post['riwayat_penyakit']),
-			'keterangan' => alfanumerik_spasi($post['keterangan'])
+			'riwayat_penyakit' => $post['riwayat_penyakit'],
+			'keterangan' => $post['keterangan'],
 		);
 		return $data;
 	}
