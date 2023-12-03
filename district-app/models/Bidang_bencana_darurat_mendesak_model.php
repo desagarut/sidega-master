@@ -1,70 +1,252 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bidang_bencana_darurat_mendesak_model extends MY_Model
-{
-
-	// Untuk datatables peserta bantuan di themes/hijau/partials/statistik.php (web)
-	var $column_order = array(null, 'program', 'peserta', null); //set column field database for datatable orderable
-	var $column_search = array('p.nama', 'pend.nama'); //set column field database for datatable searchable
-	var $order = array('peserta' => 'asc'); // default order
+class  Bidang_bencana_darurat_mendesak_model extends MY_Model {
 
 	public function __construct()
 	{
-		$this->load->model(['penduduk_model', 'rtm_model', 'kelompok_model', 'wilayah_model']);
+		parent::__construct();
 	}
 
-	public function autocomplete($id, $cari)
+	public function create()
 	{
-		$cari = $this->db->escape_like_str($cari);
-
-		// Jika parameter yg digunakan sama
-		$tabel = "tbl_bidang_bencana_darurat_mendesak_terdampak";
-		$where = "program_id = $id";
-
-		$list_kode = [
-			["peserta", $tabel, $where, $cari],
-			["kartu_nik", $tabel, $where, $cari],
-			["kartu_nama", $tabel, $where, $cari]
-		];
-
-		$data = $this->union($list_kode);
-
-		return autocomplete_data_ke_str($data);
+		$data = $this->validasi($this->input->post());
+		$hasil = $this->db->insert('tbl_bidang_bencana_darurat_mendesak', $data);
+		$_SESSION["success"] = $hasil ? 1 : -1;
 	}
 
-	public function list_program($sasaran = 0)
+	private function validasi($post)
 	{
-		if ($sasaran > 0) {
-			$strSQL = "SELECT p.id, p.nama, p.penyelenggara, p.sasaran, p.ndesc, p.sdate, p.edate, p.userid, p.status
-				FROM tbl_bidang_bencana_darurat_mendesak p WHERE p.sasaran=" . $sasaran;
-		} else {
-			$strSQL = "SELECT p.id, p.nama, p.penyelenggara, p.sasaran, p.ndesc, p.sdate, p.edate, p.userid, p.status, CONCAT('50',p.id) as lap
-				FROM tbl_bidang_bencana_darurat_mendesak p WHERE 1";
+		$data = [];
+		// Ambil dan bersihkan data input
+		$data['kelompok_bencana'] = $post['kelompok_bencana'];
+		$data['jenis_bencana'] = nomor_surat_keputusan($post['jenis_bencana']);
+		$data['lokasi_bencana'] = $post['lokasi_bencana'];
+		$data['tanggal_kejadian'] = tgl_indo_in($post['tanggal_kejadian']);
+		$data['waktu_kejadian'] = $post['waktu_kejadian'];
+		$data['lokasi_bencana'] = htmlentities($post['lokasi_bencana']);
+		$data['penyebab_bencana'] = htmlentities($post['penyebab_bencana']);
+		$data['deskripsi_bencana'] = htmlentities($post['deskripsi_bencana']);
+		$data['jumlah_korban'] = $post['jumlah_korban'];
+		$data['korban_meninggal'] = $post['korban_meninggal'];
+		$data['korban_hilang'] = $post['korban_hilang'];
+		$data['korban_lukaberat'] = $post['korban_lukaberat'];
+		$data['korban_lukaringan'] = $post['korban_lukaringan'];
+		$data['lokasi_pengungsi'] = $post['lokasi_pengungsi'];
+		$data['jumlah_pengungsi'] = $post['jumlah_pengungsi'];
+		$data['penderita_terdampak'] = $post['penderita_terdampak'];
+		$data['kerusakan_bangunan'] = htmlentities($post['kerusakan_bangunan']);
+		$data['kerusakan_ls'] = htmlentities($post['kerusakan_ls']);
+		$data['akses_ke_lokasi'] = htmlentities($post['akses_ke_lokasi']);
+		$data['sarana_transportasi'] = $post['sarana_transportasi'];
+		$data['jalur_komunikasi'] = $post['jalur_komunikasi'];
+		$data['jaringan_listrik'] = $post['jaringan_listrik'];
+		$data['jaringan_air_bersih'] = $post['jaringan_air_bersih'];
+		$data['fasilitas_kesehatan'] = $post['fasilitas_kesehatan'];
+		$data['upaya_penanganan'] = htmlentities($post['upaya_penanganan']);
+		$data['sumberdaya'] = htmlentities($post['sumberdaya']);
+		$data['mobilisasi_relawan'] = htmlentities($post['mobilisasi_relawan']);
+		$data['bantuan_dn'] = $post['bantuan_dn'];
+		$data['bantuan_ln'] = $post['bantuan_ln'];
+		$data['potensi_bencana_susulan'] = $post['potensi_bencana_susulan'];
+		$data['nama_pelapor'] = $post['nama_pelapor'];
+		$data['alamat_pelapor'] = $post['alamat_pelapor'];
+		$data['nomor_pelapor'] = $post['nomor_pelapor'];
+		$data['foto_kejadian'] = $post['foto_kejadian'];
+		$data['tanggal_tutup_laporan'] = tgl_indo_in($post['tanggal_tutup_laporan']);
+		$data['status'] = $post['status'];
+		$data['userid'] = $post['userid'];
+
+		return $data;
+	}
+
+	public function list_data($kelompok_bencana = 0)
+	{
+		if ($kelompok_bencana > 0) $this->db->where('s.kelompok_bencana', $kelompok_bencana);
+
+		$data = $this->db
+			->select('s.*')
+			->select('COUNT(st.id) AS jml')
+			->from('tbl_bidang_bencana_darurat_mendesak s')
+			->join('tbl_bidang_bencana_darurat_mendesak_terdampak st', "s.id = st.kejadian_bencana_id", 'left')
+			->order_by('s.jenis_bencana')
+			->group_by('s.id')
+			->get()
+			->result_array();
+
+		return $data;
+	}
+
+	public function get_data_bencana($id)
+	{
+		$data = $this->db
+			->select('s.*')
+			->select('COUNT(st.id) AS jml')
+			->from('tbl_bidang_bencana_darurat_mendesak s')
+			->join('tbl_bidang_bencana_darurat_mendesak_terdampak st', "s.id = st.kejadian_bencana_id", 'left')
+			->where('s.id', $id)
+			->group_by('s.id')
+			->get()
+			->row_array();
+
+		return $data;
+	}
+
+	public function list_kelompok_bencana($id, $kelompok_bencana)
+	{
+		$data = [];
+		switch ($kelompok_bencana)
+		{
+			// Sasaran Penduduk
+			case '1':
+				$data['judul'] = 'NIK / Nama Penduduk';
+				$data['data'] = $this->list_penduduk($id);
+				break;
+
+			// Sasaran Keluarga
+			case '2':
+				$data['judul'] = 'No.KK / Nama Kepala Keluarga';
+				$data['data'] = $this->list_kk($id);
+
+			default:
+				# code...
+				break;
 		}
-		$query = $this->db->query($strSQL);
-		$data = $query->result_array();
-		return $data;
-	}
-
-	public function list_program_keluarga($kk_id)
-	{
-		$this->load->model('keluarga_model'); // Di-load di sini karena tidak bisa diload di constructor, karena keluarga_model juga load bidang_bencana_darurat_mendesak_model
-		$no_kk = $this->keluarga_model->get_nokk($kk_id);
-		$sasaran = 2;
-		$strSQL = "
-			SELECT p.id, p.nama, p.penyelenggara, p.sasaran, p.ndesc, p.sdate, p.edate, p.userid, p.status, CONCAT('50',p.id) as lap, pp.peserta
-			FROM tbl_bidang_bencana_darurat_mendesak p
-			LEFT OUTER JOIN tbl_bidang_bencana_darurat_mendesak_terdampak pp ON p.id = pp.program_id AND pp.peserta = '$no_kk'
-			WHERE p.sasaran = $sasaran";
-		$query = $this->db->query($strSQL);
-		$data = $query->result_array();
 
 		return $data;
 	}
 
-	public function paging_peserta($p, $slug, $sasaran)
+	private function get_warga_terdampak_bencana($kejadian_bencana_id)
 	{
-		$sql = $this->get_peserta_sql($slug, $sasaran, true);
+		$list_penduduk = $this->db
+			->select('p.id')
+			->from('tweb_penduduk p')
+			->join('tbl_bidang_bencana_darurat_mendesak_terdampak t', 'p.id = t.warga_terdampak', 'left')
+			->where('t.kejadian_bencana_id', $kejadian_bencana_id)
+			->get()
+			->result_array();
+
+		return sql_in_list(array_column($list_penduduk, 'id'));
+	}
+
+	private function list_penduduk($id)
+	{
+		// Penduduk yang sudah peserta untuk tbl_bidang_bencana_darurat_mendesak ini
+		$peserta = $this->get_warga_terdampak_bencana($id);
+		if ($peserta) $this->db->where("p.id NOT IN ($peserta)");
+
+		$data = $this->db->select('p.id as id, p.nik as nik, p.nama, w.rt, w.rw, w.dusun')
+			->from('tweb_penduduk p')
+			->join('tweb_wil_clusterdesa w', 'w.id = p.id_cluster', 'left')
+			->get()
+			->result_array();
+
+		$hasil = [];
+		foreach ($data as $item)
+		{
+			$penduduk = array(
+				'id' => $item['id'],
+				'nama' => strtoupper($item['nama']) ." [".$item['nik']."]",
+				'info' => "RT/RW ". $item['rt']."/".$item['rw']." - ".strtoupper($item['dusun'])
+			);
+			$hasil[] = $penduduk;
+		}
+		return $hasil;
+	}
+
+	private function get_warga_terdampak_kk($kejadian_bencana_id)
+	{
+		$list_kk = $this->db
+			->select('k.id')
+			->from('tweb_keluarga k')
+			->join('tbl_bidang_bencana_darurat_mendesak_terdampak t', 'k.id = t.warga_terdampak', 'left')
+			->where('t.kejadian_bencana_id', $kejadian_bencana_id)
+			->get()
+			->result_array();
+
+		return sql_in_list(array_column($list_kk, 'id'));
+	}
+
+	private function list_kk($id)
+	{
+		// Keluarga yang sudah peserta untuk tbl_bidang_bencana_darurat_mendesak ini
+		$peserta = $this->get_warga_terdampak_kk($id);
+		if ($peserta) $this->db->where("k.id NOT IN ($peserta)");
+
+		// Daftar keluarga, tidak termasuk keluarga yang sudah peserta
+		$data = $this->db->select('k.id as id, k.no_kk, p.nama, w.rt, w.rw, w.dusun')
+			->from('tweb_keluarga k')
+			->join('tweb_penduduk p', 'p.id = k.nik_kepala', 'left')
+			->join('tweb_wil_clusterdesa w', 'w.id = p.id_cluster', 'left')
+			->get()
+			->result_array();
+
+		$hasil = [];
+		foreach ($data as $item)
+		{
+			$item['id'] = preg_replace('/[^a-zA-Z0-9]/', '', $item['id']); //hapus non_alpha di no_kk
+			$kk = array(
+				'id' => $item['id'],
+				'nama' => strtoupper($item['nama']) ." [".$item['no_kk']."]",
+				'info' => "RT/RW ". $item['rt']."/".$item['rw']." - ".strtoupper($item['dusun'])
+			);
+			$hasil[] = $kk;
+		}
+		return $hasil;
+	}
+
+	public function get_laporan_kejadian_bencana($id)
+	{
+		$data = $this->db
+			->select('s.*')
+			->select('COUNT(st.id) AS jml')
+			->from('tbl_bidang_bencana_darurat_mendesak s')
+			->join('tbl_bidang_bencana_darurat_mendesak_terdampak st', "s.id = st.kejadian_bencana_id", 'left')
+			->where('s.id', $id)
+			->group_by('s.id')
+			->get()
+			->row_array();
+
+		return $data;
+	}
+
+	public function get_rincian($p, $kejadian_bencana_id)
+	{
+		$kejadian_bencana = $this->db->where('id', $kejadian_bencana_id)->get('tbl_bidang_bencana_darurat_mendesak')->row_array();
+
+		switch ($kejadian_bencana['kelompok_bencana'])
+		{
+			// Sasaran Penduduk
+			case '1':
+				$data = $this->get_penduduk_peserta($kejadian_bencana_id, $p);
+				$data['judul']['judul_warga_info'] = 'No. KK';
+				$data['judul']['judul_warga_plus'] = 'NIK Penduduk';
+				$data['judul']['judul_warga_nama'] = 'Nama Penduduk';
+				break;
+
+			// Sasaran Keluarga
+			case '2':
+				$data = $this->get_kk_peserta($kejadian_bencana_id, $p);
+				$data['judul']['judul_warga_info'] = 'NIK KK';
+				$data['judul']['judul_warga_plus'] = 'No. KK';
+				$data['judul']['judul_warga_nama'] = 'Kepala Keluarga';
+
+				break;
+
+			// Sasaran X
+			default:
+				# code...
+				break;
+		}
+
+		$data['kejadian_bencana'] = $kejadian_bencana;
+		$data['keyword'] = $this->autocomplete($kejadian_bencana['kejadian_bencana']);
+
+		return $data;
+	}
+
+	private function paging($p, $get_peserta_sql)
+	{
+		$sql = "SELECT COUNT(*) as jumlah ".$get_peserta_sql;
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		$jml_data = $row['jumlah'];
@@ -78,1134 +260,388 @@ class Bidang_bencana_darurat_mendesak_model extends MY_Model
 		return $this->paging;
 	}
 
-	public function paging_bantuan($p)
+	private function get_penduduk_peserta_sql($kejadian_bencana_id)
 	{
-		$sql = "SELECT count(*) as jumlah " . $this->get_program_sql();
-		$query = $this->db->query($sql);
-		$row = $query->row_array();
-		$jml_data = $row['jumlah'];
-
-		$this->load->library('paging');
-		$cfg['page'] = $p;
-		$cfg['per_page'] = $this->session->per_page;
-		$cfg['num_rows'] = $jml_data;
-		$this->paging->init($cfg);
-
-		return $this->paging;
-	}
-
-	/*
-	 * Mengambil data individu peserta
-	*/
-	public function get_peserta($peserta_id, $sasaran)
-	{
-		$this->load->model('wilayah_model');
-		switch ($sasaran) {
-			case 1:
-				// Data Penduduk; $peserta_id adalah NIK
-				$data = $this->get_penduduk($peserta_id);
-				$data['alamat_wilayah'] 		= $this->wilayah_model->get_alamat_wilayah($data);
-				$data['kartu_nik'] 				= $data['id_peserta'] = $data['nik']; /// NIK Penduduk digunakan sebagai peserta
-				$data['judul_nik'] 				= 'NIK Penduduk';
-				$data['judul'] 					= 'Penduduk';
-				break;
-
-			case 2:
-				// Data Penduduk; $peserta_id adalah NIK
-				// NIK bisa untuk anggota keluarga, belum tentu kepala KK
-				$data = $this->get_penduduk($peserta_id);
-				// Data KK
-				$kk = $this->get_kk($data['id_kk']);
-				$data['no_kk'] 					= $data['id_peserta'] = $kk['no_kk']; // No KK digunakan sebagai peserta
-				$data['nik_kk'] 				= $kk['nik_kk'];
-				$data['nama_kk'] 				= $kk['nama_kk'];
-				$data['alamat_wilayah'] 		= $this->wilayah_model->get_alamat_wilayah($kk);
-				$data['kartu_nik'] 				= $data['nik'];
-				$data['judul_nik'] 				= 'NIK Penduduk';
-				$data['judul'] 					= 'Peserta';
-				break;
-
-			case 3:
-				// Data Penduduk; $peserta_id adalah No RTM (kolom no_kk)
-				$data = $this->rtm_model->get_kepala_rtm($peserta_id, $is_no_kk = true);
-				$data['id_peserta'] 			= $data['no_kk']; // No RTM digunakan sebagai peserta
-				$data['nama_kepala_rtm'] 		= $data['nama'];
-				$data['kartu_nik'] 				= $data['nik'];
-				$data['judul_nik'] 				= 'NIK Kepala RTM';
-				$data['judul'] 					= 'Kepala RTM';
-				break;
-
-			case 4:
-				# Data Kelompok; $peserta_id adalah id kelompok
-				$data = $this->kelompok_model->get_ketua_kelompok($peserta_id);
-				$data['kartu_nik'] 				= $data['nik'];
-				$data['id_peserta'] 			= $peserta_id; // Id_kelompok digunakan sebagai peserta
-				$data['judul_nik'] 				= 'Nama Kelompok';
-				$data['judul'] 					= 'Ketua Kelompok';
-				break;
-
-			default:
-				break;
-		}
-
-
-		return $data;
-	}
-
-	private function search_peserta_sql()
-	{
-		$value = $this->session->cari;
-
-		if ($this->session->has_userdata('cari')) {
-			$kw = $this->db->escape_like_str($value);
-			$kw = '%' . $kw . '%';
-			$search_sql = " AND (o.nama LIKE '$kw' OR peserta LIKE '$kw' OR p.kartu_nik LIKE '$kw' OR p.kartu_nama LIKE '$kw')";
-			return $search_sql;
-		}
-	}
-
-	// Query dibuat pada satu tempat, supaya penghitungan baris untuk paging selalu
-	// konsisten dengan data yang diperoleh
-	private function get_peserta_sql($slug, $sasaran, $jumlah = false)
-	{
-		if ($jumlah) $select_sql = "COUNT(*) as jumlah";
-		switch ($sasaran) {
-			case 1:
-				# Data penduduk
-				if (!$jumlah) $select_sql = "p.*, o.nama, x.nama AS sex, w.rt, w.rw, w.dusun, k.no_kk";
-				$strSQL = "SELECT " . $select_sql . " FROM tbl_bidang_bencana_darurat_mendesak_terdampak p
-					LEFT JOIN tweb_penduduk o ON p.peserta = o.nik
-					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
-					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE p.program_id =" . $slug;
-				break;
-
-			case 2:
-				# Data KK
-				if (!$jumlah) $select_sql = "p.*, p.peserta as nama, k.nik_kepala, k.no_kk, o.nik as nik_kk, o.nama as nama_kk, x.nama AS sex, w.rt, w.rw, w.dusun";
-				$strSQL = "SELECT " . $select_sql . "
-					FROM tbl_bidang_bencana_darurat_mendesak_terdampak p
-					LEFT JOIN tweb_keluarga k ON p.peserta = k.no_kk
-					LEFT JOIN tweb_penduduk o ON k.nik_kepala = o.id
-					LEFT JOIN tweb_penduduk kartu on p.kartu_id_pend = kartu.id
-					LEFT JOIN tweb_penduduk_sex x ON x.id = kartu.sex
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE p.program_id =" . $slug;
-				break;
-
-			case 3:
-				# Data RTM
-				if (!$jumlah) $select_sql = "p.*, o.nama, o.nik, r.no_kk, x.nama AS sex, w.rt, w.rw, w.dusun";
-				$strSQL = "SELECT " . $select_sql . " FROM tbl_bidang_bencana_darurat_mendesak_terdampak p
-					LEFT JOIN tweb_rtm r ON r.no_kk = p.peserta
-					LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
-					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE p.program_id=" . $slug;
-				break;
-
-			case 4:
-				# Data Kelompok
-				if (!$jumlah) $select_sql = "p.*, o.nama, o.nik, x.nama AS sex, k.no_kk, r.nama as nama_kelompok, w.rt, w.rw, w.dusun";
-				$strSQL = "SELECT " . $select_sql . " FROM tbl_bidang_bencana_darurat_mendesak_terdampak p
-					LEFT JOIN kelompok r ON r.id = p.peserta
-					LEFT JOIN tweb_penduduk o ON o.id = r.id_ketua
-					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
-					LEFT JOIN tweb_keluarga k on k.id = o.id_kk
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE p.program_id=" . $slug;
-				break;
-
-			default:
-				break;
-		}
-
-		$strSQL .= $this->search_peserta_sql();
-
-		return $strSQL;
-	}
-
-	public function get_sasaran($id)
-	{
-		$this->db->select('sasaran, nama');
-		$this->db->where('id', $id);
-		$query = $this->db->get('tbl_bidang_bencana_darurat_mendesak');
-		$data = $query->row_array();
-		switch ($data['sasaran']) {
-			case 1:
-				$data['judul_sasaran'] = 'Sasaran Penduduk';
-				break;
-
-			case 2:
-				$data['judul_sasaran'] = 'Sasaran Keluarga';
-				break;
-
-			case 3:
-				$data['judul_sasaran'] = 'Sasaran Rumah Tangga';
-				break;
-
-			case 4:
-				$data['judul_sasaran'] = 'Sasaran Kelompok';
-				break;
-
-			default:
-				$data['judul_sasaran'] = 'Sasaran Penduduk';
-				break;
-		}
-
-		return $data;
-	}
-
-	private function sasaran_sql()
-	{
-		$kf = $this->session->sasaran;
-
-		if (isset($kf)) {
-			$sql = " AND p.sasaran = $kf ";
-			return $sql;
-		}
-	}
-
-	private function get_program_sql()
-	{
-		$sql = ' FROM tbl_bidang_bencana_darurat_mendesak p WHERE 1 ';
-		$sql .= $this->sasaran_sql();
-
+		# Data penduduk
+		$sql = " FROM tbl_bidang_bencana_darurat_mendesak_terdampak s
+			LEFT JOIN tweb_penduduk o ON s.warga_terdampak = o.id
+			LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
+			LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
+			WHERE s.kejadian_bencana_id=".$kejadian_bencana_id;
 		return $sql;
 	}
 
-	private function get_program_data($p, $slug)
+	private function get_penduduk_peserta($kejadian_bencana_id, $p)
 	{
-		$strSQL = "SELECT p.id, p.nama, p.penyelenggara, p.anggaran, p.lokasi, p.sasaran, p.ndesc, p.sdate, p.edate, p.userid, p.status, p.asaldana, p.status
-			FROM tbl_bidang_bencana_darurat_mendesak p
-			WHERE p.id = " . $slug;
-		$query = $this->db->query($strSQL);
-		$hasil0 = $query->row_array();
-
-		$hasil0["paging"] = $this->paging_peserta($p, $slug, $hasil0["sasaran"]);
-
-		switch ($hasil0["sasaran"]) {
-			case 1:
-				/*
-				 * Data penduduk
-				 * */
-				$hasil0['judul_peserta'] = 'NIK';
-				$hasil0['judul_peserta_plus'] = 'No. KK';
-				$hasil0['judul_peserta_info'] = 'Nama Penduduk';
-				$hasil0['judul_cari_peserta'] = 'NIK / Nama Penduduk';
-				break;
-
-			case 2:
-				/*
-				 * Data KK
-				 * */
-				$hasil0['judul_peserta'] = 'No. KK';
-				$hasil0['judul_peserta_plus'] = 'NIK';
-				$hasil0['judul_peserta_info'] = 'Kepala Keluarga';
-				$hasil0['judul_cari_peserta'] = 'No. KK / Nama Kepala Keluarga';
-				break;
-
-			case 3:
-				/*
-				 * Data RTM
-				 * */
-				$hasil0['judul_peserta'] = 'No. Rumah Tangga';
-				$hasil0['judul_peserta_info'] = 'Kepala Rumah Tangga';
-				$hasil0['judul_cari_peserta'] = 'No. RT / Nama Kepala Rumah Tangga';
-				break;
-
-			case 4:
-				/*
-				 * Data Kelompok
-				 * */
-				$hasil0['judul_peserta'] = 'Nama Kelompok';
-				$hasil0['judul_peserta_info'] = 'Ketua Kelompok';
-				$hasil0['judul_cari_peserta'] = 'Nama Kelompok / Nama Kepala Keluarga';
+		$hasil = [];
+		$get_peserta_sql = $this->get_penduduk_peserta_sql($kejadian_bencana_id);
+		$select_sql = "SELECT s.*, s.warga_terdampak, o.nik, o.nama, o.tempatlahir, o.tanggallahir, o.sex, k.no_kk, w.rt, w.rw, w.dusun,
+			(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
+		 ";
+		$sql = $select_sql.$get_peserta_sql;
+		$sql .= $this->search_sql('1');
+		if ( ! empty($_SESSION['per_page']) and $_SESSION['per_page'] > 0)
+		{
+			$hasil["paging"] = $this->paging($p, $get_peserta_sql.$this->search_sql('1'));
+			$paging_sql = ' LIMIT ' .$hasil["paging"]->offset. ',' .$hasil["paging"]->per_page;
+			$sql .= $paging_sql;
 		}
+		$query = $this->db->query($sql);
 
-		return $hasil0;
-	}
-
-	private function get_data_peserta($hasil0, $slug)
-	{
-		$paging_sql = ' LIMIT ' . $hasil0["paging"]->offset . ',' . $hasil0["paging"]->per_page;
-		$strSQL = $this->get_peserta_sql($slug, $hasil0["sasaran"]);
-		$strSQL .= $paging_sql;
-		$query = $this->db->query($strSQL);
-
-		switch ($hasil0["sasaran"]) {
-			case 1:
-				return $this->get_data_peserta_penduduk($query);
-				break;
-
-			case 2:
-				return $this->get_data_peserta_kk($query);
-				break;
-
-			case 3:
-				return $this->get_data_peserta_rumah_tangga($query);
-				break;
-
-			case 4:
-				return $this->get_data_peserta_kelompok($query);
-		}
-	}
-
-	private function get_data_peserta_penduduk($query)
-	{
-		/*
-		 * Data penduduk
-		 * */
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0)
+		{
 			$data = $query->result_array();
-			for ($i = 0; $i < count($data); $i++) {
-				$data[$i]['id'] = $data[$i]['id'];
-				$data[$i]['nik'] = $data[$i]['peserta'];
-				$data[$i]['peserta_plus'] = $data[$i]['no_kk'] ?: '-';
-				$data[$i]['peserta_nama'] = $data[$i]['peserta'];
-				$data[$i]['peserta_info'] = $data[$i]['nama'];
-				$data[$i]['nama'] = strtoupper($data[$i]['nama']);
-				$data[$i]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
+			for ($i=0; $i<count($data); $i++)
+			{
+				$data[$i]['peserta_info'] = $data[$i]['no_kk'];
+				$data[$i]['peserta_plus'] = $data[$i]['nik'];
+				$data[$i]['peserta_nama'] = strtoupper($data[$i]['nama']);
+				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
+				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
+				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
+				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
 			}
-			$hasil1 = $data;
-		} else {
-			$hasil1 = false;
+			$hasil['peserta'] = $data;
 		}
 
-		return $hasil1;
+		return $hasil;
 	}
 
-	private function get_data_peserta_kk($query)
+	private function get_kk_peserta_sql($kejadian_bencana_id)
 	{
-		/*
-		 * Data KK
-		 * */
-		if ($query->num_rows() > 0) {
+		# Data KK
+		$sql = " FROM tbl_bidang_bencana_darurat_mendesak_terdampak s
+			LEFT JOIN tweb_keluarga o ON s.warga_terdampak = o.id
+			LEFT JOIN tweb_penduduk q ON o.nik_kepala = q.id
+			LEFT JOIN tweb_wil_clusterdesa w ON w.id = q.id_cluster
+			WHERE s.kejadian_bencana_id=".$kejadian_bencana_id;
+		return $sql;
+	}
+
+
+	private function get_kk_peserta($kejadian_bencana_id, $p)
+	{
+		$hasil = [];
+		$get_peserta_sql = $this->get_kk_peserta_sql($kejadian_bencana_id);
+		$select_sql = "SELECT s.*, s.warga_terdampak, o.no_kk, s.kejadian_bencana_id, o.nik_kepala, o.alamat, q.nik, q.nama, q.tempatlahir, q.tanggallahir, q.sex, w.rt, w.rw, w.dusun ";
+		$sql = $select_sql.$get_peserta_sql;
+		$sql .= $this->search_sql('2');
+		if ( ! empty($_SESSION['per_page']) and $_SESSION['per_page'] > 0)
+		{
+			$hasil["paging"] = $this->paging($p, $get_peserta_sql.$this->search_sql('2'));
+			$paging_sql = ' LIMIT ' .$hasil["paging"]->offset. ',' .$hasil["paging"]->per_page;
+			$sql .= $paging_sql;
+		}
+		$query = $this->db->query($sql);
+
+		if ($query->num_rows() > 0)
+		{
 			$data = $query->result_array();
-			for ($i = 0; $i < count($data); $i++) {
-				$data[$i]['id'] = $data[$i]['id'];
-				$data[$i]['nik'] = $data[$i]['peserta'];
-				$data[$i]['peserta_plus'] = $data[$i]['nik_kk'];
-				$data[$i]['peserta_nama'] = $data[$i]['peserta'];
-				$data[$i]['peserta_info'] = $data[$i]['nama_kk'];
-				$data[$i]['nama'] = strtoupper($data[$i]['nama']);
-				$data[$i]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
+			for ($i=0; $i<count($data); $i++)
+			{
+				$data[$i]['peserta_info'] = $data[$i]['nik'];
+				$data[$i]['peserta_plus'] = $data[$i]['no_kk'];
+				$data[$i]['peserta_nama'] = strtoupper($data[$i]['nama']);
+				$data[$i]['tempat_lahir'] = strtoupper($data[$i]['tempatlahir']);
+				$data[$i]['tanggal_lahir'] = tgl_indo($data[$i]['tanggallahir']);
+				$data[$i]['sex'] = ($data[$i]['sex'] == 1) ? "LAKI-LAKI" : "PEREMPUAN";
+				$data[$i]['info'] = strtoupper($data[$i]['alamat'] . " "  .  "RT/RW ". $data[$i]['rt']."/".$data[$i]['rw'] . " - " . $this->setting->sebutan_dusun . " " . $data[$i]['dusun']);
 			}
-			$hasil1 = $data;
-		} else {
-			$hasil1 = false;
+			$hasil['peserta'] = $data;
 		}
-
-		return $hasil1;
-	}
-
-	private function get_data_peserta_rumah_tangga($query)
-	{
-		/*
-		 * Data RTM
-		 * */
-		if ($query->num_rows() > 0) {
-			$data = $query->result_array();
-			for ($i = 0; $i < count($data); $i++) {
-				$data[$i]['id'] = $data[$i]['id'];
-				$data[$i]['nik'] = $data[$i]['peserta'];
-				$data[$i]['peserta_nama'] = $data[$i]['no_kk'];
-				$data[$i]['peserta_info'] = $data[$i]['nama'];
-				$data[$i]['nama'] = strtoupper($data[$i]['nama']) . " [" . $data[$i]['nik'] . " - " . $data[$i]['no_kk'] . "]";
-				$data[$i]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-			}
-			$hasil1 = $data;
-		} else {
-			$hasil1 = false;
-		}
-
-		return $hasil1;
-	}
-
-	private function get_data_peserta_kelompok($query)
-	{
-		/*
-		 * Data Kelompok
-		 * */
-		if ($query->num_rows() > 0) {
-			$data = $query->result_array();
-			for ($i = 0; $i < count($data); $i++) {
-				$data[$i]['id'] = $data[$i]['id'];
-				$data[$i]['nik'] = $data[$i]['nama_kelompok'];
-				$data[$i]['peserta_nama'] = $data[$i]['nama_kelompok'];
-				$data[$i]['peserta_info'] = $data[$i]['nama'];
-				$data[$i]['nama'] = strtoupper($data[$i]['nama']);
-				$data[$i]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-			}
-			$hasil1 = $data;
-		} else {
-			$hasil1 = false;
-		}
-
-		return $hasil1;
-	}
-
-	private function get_pilihan_penduduk($filter)
-	{
-		/*
-		 * Data penduduk
-		 * */
-		$strSQL = "SELECT p.nik, p.nama, w.rt, w.rw, w.dusun
-			FROM penduduk_hidup p
-			LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster
-			WHERE 1 ORDER BY nama";
-		$query = $this->db->query($strSQL);
-		$data = "";
-		$data = $query->result_array();
-		if ($query->num_rows() > 0) {
-			$j = 0;
-			for ($i = 0; $i < count($data); $i++) {
-				// Abaikan penduduk yang sudah terdaftar pada program
-				if (!in_array($data[$i]['nik'], $filter)) {
-					if ($data[$i]['nik'] != "") {
-						$data1[$j]['id'] = $data[$i]['nik'];
-						$data1[$j]['nik'] = $data[$i]['nik'];
-						$data1[$j]['nama'] = strtoupper($data[$i]['nama']) . " [" . $data[$i]['nik'] . "]";
-						$data1[$j]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-						$j++;
-					}
-				}
-			}
-			$hasil2 = $data1;
-		} else {
-			$hasil2 = false;
-		}
-
-		return $hasil2;
-	}
-
-	private function get_pilihan_kk($filter)
-	{
-		/*
-		 * Data KK
-		 * */
-
-		// Daftar keluarga, tidak termasuk keluarga yang sudah menjadi peserta
-		$query = $this->db
-			->select('k.no_kk, p.nama, p.nik, h.nama as kk_level, w.dusun, w.rw, w.rt')
-			->from('penduduk_hidup p')
-			->join('tweb_penduduk_hubungan h', 'h.id = p.kk_level', 'LEFT')
-			->join('keluarga_aktif k', 'k.id = p.id_kk', 'OUTER JOIN')
-			->join('tweb_wil_clusterdesa w', 'w.id = k.id_cluster', 'LEFT')
-			->where_in('p.kk_level', ['1', '2', '3', '4'])
-			->order_by('p.id_kk')
-			->get();
-
-		$hasil2 = array();
-		$data = $query->result_array();
-		if ($query->num_rows() > 0) {
-			$j = 0;
-			for ($i = 0; $i < count($data); $i++) {
-				// Abaikan keluarga yang sudah terdaftar pada program
-				if (!in_array($data[$i]['no_kk'], $filter)) {
-					$hasil2[$j]['id'] = $data[$i]['nik'];
-					$hasil2[$j]['nik'] = $data[$i]['nik'];
-					$hasil2[$j]['nama'] = strtoupper("KK[" . $data[$i]['no_kk'] . "] - [" . $data[$i]['kk_level'] . "] " . $data[$i]['nama'] . " [" . $data[$i]['nik'] . "]");
-					$hasil2[$j]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-					$j++;
-				}
-			}
-		} else {
-			$hasil2 = false;
-		}
-
-		return $hasil2;
-	}
-
-	private function get_pilihan_rumah_tangga($filter)
-	{
-		/*
-		 * Data RTM
-		 * */
-
-		$strSQL = "SELECT r.no_kk as id, o.nama, w.rt, w.rw, w.dusun  FROM tweb_rtm r
-			LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
-			LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-			WHERE 1
-			";
-		$query = $this->db->query($strSQL);
-		$hasil2 = array();;
-		$data = $query->result_array();
-		if ($query->num_rows() > 0) {
-			$j = 0;
-			for ($i = 0; $i < count($data); $i++) {
-				// Abaikan RTM yang sudah terdaftar pada program
-				if (!in_array($data[$i]['id'], $filter)) {
-					$hasil2[$j]['id'] = $data[$i]['id'];
-					$hasil2[$j]['nik'] = $data[$i]['id'];
-					$hasil2[$j]['nama'] = strtoupper($data[$i]['nama']) . " [" . $data[$i]['id'] . "]";
-					$hasil2[$j]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-					$j++;
-				}
-			}
-		} else {
-			$hasil2 = false;
-		}
-
-		return $hasil2;
-	}
-
-	private function get_pilihan_kelompok($filter)
-	{
-		/*
-		 * Data Kelompok
-		 * */
-		$strSQL = "SELECT k.id,k.nama as nama_kelompok, o.nama, w.rt, w.rw, w.dusun FROM kelompok k
-			LEFT JOIN tweb_penduduk o ON o.id = k.id_ketua
-			LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-			WHERE 1";
-		$query = $this->db->query($strSQL);
-		$hasil2 = array();
-		$data = $query->result_array();
-		if ($query->num_rows() > 0) {
-			$j = 0;
-			for ($i = 0; $i < count($data); $i++) {
-				// Abaikan kelompok yang sudah terdaftar pada program
-				if (!in_array($data[$i]['id'], $filter)) {
-					$hasil2[$j]['id'] = $data[$i]['id'];
-					$hasil2[$j]['nik'] = $data[$i]['nama_kelompok'];
-					$hasil2[$j]['nama'] = strtoupper($data[$i]['nama']) . " [" . $data[$i]['nama_kelompok'] . "]";
-					$hasil2[$j]['info'] = "RT/RW " . $data[$i]['rt'] . "/" . $data[$i]['rw'] . " - " . strtoupper($data[$i]['dusun']);
-					$j++;
-				}
-			}
-		} else {
-			$hasil2 = false;
-		}
-
-
-		return $hasil2;
-	}
-
-	public function get_program($p, $slug)
-	{
-		if ($slug === false) {
-			//Query untuk expiration status, jika end date sudah melebihi dari datenow maka status otomatis menjadi tidak aktif
-			$expirySQL = "UPDATE tbl_bidang_bencana_darurat_mendesak SET status = IF(edate < CURRENT_DATE(), 0, IF(edate > CURRENT_DATE(), 1, status)) WHERE status IS NOT NULL";
-			$expiryQuery = $this->db->query($expirySQL);
-
-			$response['paging'] = $this->paging_bantuan($p);
-			$strSQL = "SELECT COUNT(v.program_id) AS jml_peserta, p.id, p.nama, p.penyelenggara, p.anggaran, p.sasaran, p.ndesc, p.sdate, p.edate, p.userid, p.status, p.asaldana FROM tbl_bidang_bencana_darurat_mendesak p ";
-			$strSQL .= "LEFT JOIN tbl_bidang_bencana_darurat_mendesak_terdampak AS v ON p.id = v.program_id WHERE 1 ";
-			$strSQL .= $this->sasaran_sql();
-			$strSQL .= " GROUP BY p.id ";
-			$strSQL .= ' LIMIT ' . $response["paging"]->offset . ',' . $response["paging"]->per_page;
-			$query = $this->db->query($strSQL);
-			$data = $query->result_array();
-			$response['program'] = $data;
-			return $response;
-		} else {
-			// Untuk program bantuan, $slug berbentuk '50<program_id>'
-			$slug = preg_replace("/^50/", "", $slug);
-			$hasil0 = $this->get_program_data($p, $slug);
-			$hasil1 = $this->get_data_peserta($hasil0, $slug);
-			$filter = array();
-			foreach ($hasil1 as $data) {
-				$filter[] = $data['peserta'];
-			}
-
-			switch ($hasil0["sasaran"]) {
-				case 1:
-					$hasil2 = $this->get_pilihan_penduduk($filter);
-					break;
-				case 2:
-					$hasil2 = $this->get_pilihan_kk($filter);
-					break;
-				case 3:
-					$hasil2 = $this->get_pilihan_rumah_tangga($filter);
-					break;
-				case 4:
-					$hasil2 = $this->get_pilihan_kelompok($filter);
-					break;
-				default:
-			}
-			$hasil = array($hasil0, $hasil1, $hasil2);
-
-			return $hasil;
-		}
-	}
-
-	// Ambil data program
-	function get_data_program($id)
-	{
-		// Untuk program bantuan, $id '50<program_id>'
-		$program_id = preg_replace("/^50/", "", $id);
-		return $this->db->select("*")->where("id", $program_id)->get("program")->row_array();
+		return $hasil;
 	}
 
 	/*
-	 * Fungsi untuk menampilkan program bantuan yang sedang diterima peserta.
-	 * $id => id_peserta tergantung sasaran
-	 * $cat => sasaran program bantuan.
-	 *
-	 * */
-	public function get_peserta_program($cat, $id)
+		Mengambil data individu peserta
+	*/
+	public function get_peserta($warga_terdampak, $sasaran)
 	{
-		$data_program = false;
-		$strSQL = "SELECT p.id AS id, o.peserta AS nik, o.id AS peserta_id,  p.nama AS nama, p.sdate, p.edate, p.ndesc, p.status
-			FROM tbl_bidang_bencana_darurat_mendesak_terdampak o
-			LEFT JOIN tbl_bidang_bencana_darurat_mendesak p ON p.id = o.program_id
-			WHERE ((o.peserta='" . $id . "') AND (p.sasaran='" . $cat . "'))";
-		$query = $this->db->query($strSQL);
-		if ($query->num_rows() > 0) {
-			$data_program = $query->result_array();
-		}
-
-		switch ($cat) {
+		$this->load->model('surat_model');
+		switch ($sasaran)
+		{
+			// Sasaran Penduduk
 			case 1:
-				/*
-				 * Rincian Penduduk
-				 * */
-				$strSQL = "SELECT o.nama, o.foto, o.nik, w.rt, w.rw, w.dusun
-					FROM tweb_penduduk o
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE o.nik='" . $id . "'";
-				$query = $this->db->query($strSQL);
-				if ($query->num_rows() > 0) {
-					$row = $query->row_array();
-					$data_profil = array(
-						"id"	=> $id,
-						"nama"	=> $row["nama"] . " - " . $row["nik"],
-						"ndesc"	=> "Alamat: RT " . strtoupper($row["rt"]) . " / RW " . strtoupper($row["rw"]) . " " . strtoupper($row["dusun"]),
-						"foto"	=> $row["foto"],
-						"kk"	=> $row["id_kk"],
-
-					);
-				}
-
+				$sql = "SELECT u.id AS id, u.nama AS nama, x.nama AS sex, u.id_kk AS id_kk,
+				u.tempatlahir AS tempatlahir, u.tanggallahir AS tanggallahir,
+				(select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0)`
+				from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur,
+				w.nama AS status_kawin, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, j.nama AS pekerjaan, u.nik AS nik, c.rt AS rt, c.rw AS rw, c.dusun AS dusun, k.no_kk AS no_kk, k.alamat,
+				(select tweb_penduduk.nama AS nama from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS kepala_kk
+				from tweb_penduduk u
+				left join tweb_penduduk_sex x on u.sex = x.id
+				left join tweb_penduduk_kawin w on u.status_kawin = w.id
+				left join tweb_penduduk_agama a on u.agama_id = a.id
+				left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
+				left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
+				left join tweb_wil_clusterdesa c on u.id_cluster = c.id
+				left join tweb_keluarga k on u.id_kk = k.id
+				left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
+				WHERE u.id = ?";
+				$query = $this->db->query($sql, $warga_terdampak);
+				$data  = $query->row_array();
+				$data['peserta_info'] = $data['nik'];
+				$data['peserta_plus'] = $data['no_kk'];
+				$data['peserta_nama'] = $data['nama'];
+				$data['alamat_wilayah']= $this->surat_model->get_alamat_wilayah($data);
 				break;
 
+			// Sasaran Keluarga
 			case 2:
-				/*
-				 * KK
-				 * */
-				$strSQL = "SELECT o.nik_kepala, o.no_kk, p.nama, w.rt, w.rw, w.dusun FROM tweb_keluarga o
-					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster WHERE o.no_kk = '" . $id . "'";
-				$query = $this->db->query($strSQL);
-				if ($query->num_rows() > 0) {
-					$row = $query->row_array();
-					$data_profil = array(
-						"id" => $id,
-						"nama" => "Kepala KK : " . $row["nama"] . ", NO KK: " . $row["no_kk"],
-						"ndesc" => "Alamat: RT " . strtoupper($row["rt"]) . " / RW " . strtoupper($row["rw"]) . " " . strtoupper($row["dusun"]),
-						"foto" => $row["foto"]
-					);
-				}
-				break;
-
-			case 3:
-				/*
-				 * RTM
-				 * */
-				$strSQL = "SELECT r.id, r.no_kk, o.nama, o.nik, w.rt, w.rw, w.dusun  FROM tweb_rtm r
-					LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
-					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
-					WHERE r.no_kk=$id";
-				$query = $this->db->query($strSQL);
-				if ($query->num_rows() > 0) {
-					$row = $query->row_array();
-					$data_profil = array(
-						"id" 	=> $id,
-						"nama" 	=> "Kepala RTM : " . $row["nama"] . ", NIK: " . $row["nik"],
-						"ndesc" => "Alamat: RT " . strtoupper($row["rt"]) . " / RW " . strtoupper($row["rw"]) . " " . strtoupper($row["dusun"]),
-						"foto" 	=> $row["foto"]
-					);
-				}
-				break;
-
-			case 4:
-				/*
-				 * Kelompok
-				 * */
-				$strSQL = "SELECT k.id as id, k.nama as nama, p.nama as ketua, p.nik as nik, w.rt, w.rw, w.dusun FROM kelompok k
-				 LEFT JOIN tweb_penduduk p ON p.id = k.id_ketua
-				 LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster
-				 WHERE k.id='" . $id . "'";
-				$query = $this->db->query($strSQL);
-				if ($query->num_rows() > 0) {
-					$row = $query->row_array();
-					$data_profil = array(
-						"id" 	=> $id,
-						"nama" 	=> $row["nama"],
-						"ndesc" => "Ketua: " . $row["ketua"] . " [" . $row["nik"] . "]<br />Alamat: RT " . strtoupper($row["rt"]) . " / RW " . strtoupper($row["rw"]) . " " . strtoupper($row["dusun"]),
-						"foto" 	=> ""
-					);
-				}
+				$data = $this->keluarga_model->get_kepala_kk($warga_terdampak);
+				$data['peserta_info'] = $data['nik'];
+				$data['peserta_plus'] = $data['no_kk'];
+				$data['peserta_nama'] = $data['nama'];
+				$data['id'] = $data['id_kk']; // id_kk digunakan sebagai id peserta
 				break;
 
 			default:
+				break;
 		}
-		if (!$data_program == false) {
-			$hasil = array("programkerja" => $data_program, "profil" => $data_profil);
-			return $hasil;
-		} else {
-			return null;
-		}
-	}
-
-	public function set_program()
-	{
-		$data = $this->validasi_program($this->input->post());
-		$data['userid'] = $this->session->user;
-
-		return $this->db->insert('tbl_bidang_bencana_darurat_mendesak', $data);
-	}
-
-	private function validasi_program($post)
-	{
-		$data = [];
-		// Ambil dan bersihkan data input
-		$data['sasaran'] = $post['cid'];
-		$data['nama'] = nomor_surat_keputusan($post['nama']);
-		$data['penyelenggara'] = $post['penyelenggara'];
-		$data['anggaran'] = $post['anggaran'];
-		$data['lokasi'] = $post['lokasi'];
-		$data['ndesc'] = htmlentities($post['ndesc']);
-		$data['asaldana'] = $post['asaldana'];
-		$data['sdate'] = date("Y-m-d", strtotime($post['sdate']));
-		$data['edate'] = date("Y-m-d", strtotime($post['edate']));
-		$data['status'] = $post['status'];
 		return $data;
 	}
 
-	public function add_peserta($program_id)
+	public function hapus($id)
 	{
-		$this->session->success = 1;
-		$this->session->error_msg = '';
-		$data = $this->validasi_peserta($this->input->post());
-		$data['program_id'] = $program_id;
-		$data['peserta'] = $this->input->post('peserta');
+		$ada = $this->db->where('kejadian_bencana_id', $id)
+			->get('tbl_bidang_bencana_darurat_mendesak_terdampak')->num_rows();
+		if ($ada)
+		{
+			$this->session->success = '-1';
+			$this->session->error_msg = ' --> Tidak bisa dihapus, karena masih digunakan';
+			return;
+		}
+		$hasil = $this->db->where('id', $id)->delete('tbl_bidang_bencana_darurat_mendesak');
 
-		$file_gambar = $this->_upload_gambar();
-		if ($file_gambar) $data['kartu_peserta'] = $file_gambar;
-		$outp = $this->db->insert('tbl_bidang_bencana_darurat_mendesak_terdampak', $data);
-		status_sukses($outp, true);
+		status_sukses($hasil); //Tampilkan Pesan
 	}
 
-	// $id = tbl_bidang_bencana_darurat_mendesak_terdampak.id
-	public function edit_peserta($id)
+	public function update($id)
 	{
-		$this->session->success = 1;
-		$this->session->error_msg = '';
-		$data = $this->validasi_peserta($this->input->post());
+		$data = $this->validasi($this->input->post());
+		$hasil = $this->db->where('id', $id)->update('tbl_bidang_bencana_darurat_mendesak', $data);
 
-		if ($data['gambar_hapus']) {
-			unlink(LOKASI_DOKUMEN . $data['gambar_hapus']);
-			$data['kartu_peserta'] = '';
+		status_sukses($hasil); //Tampilkan Pesan
+	}
+
+	public function add_peserta2($post, $id)
+	{
+		$warga_terdampak = $post['warga_terdampak'];
+		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('tbl_bidang_bencana_darurat_mendesak')->row()->sasaran;
+		$hasil = $this->db->where('kejadian_bencana_id', $id)->where('warga_terdampak', $warga_terdampak)->get('tbl_bidang_bencana_darurat_mendesak_terdampak');
+		if ($hasil->num_rows() > 0)
+		{
+			return false;
 		}
+		else
+		{
+			$data = array(
+				'kejadian_bencana_id' => $id,
+				'warga_terdampak' => $warga_terdampak,
+				'sasaran' => $sasaran,
+				'keterangan' => substr(htmlentities($post['keterangan']), 0, 100) // Batasi 100 karakter
+			);
+			return $this->db->insert('tbl_bidang_bencana_darurat_mendesak_terdampak', $data);
+		}
+	}
 
-		unset($data['gambar_hapus']);
-		$file_gambar = $this->_upload_gambar($data['old_gambar']);
-		if ($file_gambar) $data['kartu_peserta'] = $file_gambar;
-		unset($data['old_gambar']);
+	public function add_peserta($post, $id)
+	{
+		$warga_terdampak = $post['warga_terdampak'];
+		$sasaran = $this->db->select('sasaran')->where('id', $id)->get('tbl_bidang_bencana_darurat_mendesak')->row()->sasaran;
+		$hasil = $this->db->where('kejadian_bencana_id', $id)->where('warga_terdampak', $warga_terdampak)->get('tbl_bidang_bencana_darurat_mendesak_terdampak');
+		if ($hasil->num_rows() > 0)
+		{
+			return false;
+		}
+		else
+		{
+			$data = array(
+				'kejadian_bencana_id' => $id,
+				'warga_terdampak' => $warga_terdampak,
+				'sasaran' => $sasaran,
+				'keterangan' => substr(htmlentities($post['keterangan']), 0, 100) // Batasi 100 karakter
+			);
+			return $this->db->insert('tbl_bidang_bencana_darurat_mendesak_terdampak', $data);
+		}
+	}
+
+	public function hapus_peserta($warga_terdampak)
+	{
+		$this->db->where('id', $warga_terdampak);
+		$this->db->delete('tbl_bidang_bencana_darurat_mendesak_terdampak');
+	}
+
+	// $id = pemberdayaan_masyarakat_peserta.id
+	public function edit_peserta($post,$id)
+	{
+		$data['keterangan'] = substr(htmlentities($post['keterangan']), 0, 100); // Batasi 100 karakter
 		$this->db->where('id', $id);
-		$outp = $this->db->update('tbl_bidang_bencana_darurat_mendesak_terdampak', $data);
-		status_sukses($outp, true);
-	}
-
-	public function validasi_peserta($post)
-	{
-		$data['no_id_kartu'] 			= nama_terbatas($post['no_id_kartu']);
-		$data['kartu_nik'] 				= bilangan($post['kartu_nik']);
-		$data['kartu_nama'] 			= nama(htmlentities($post['kartu_nama']));
-		$data['kartu_tempat_lahir'] 	= alamat(htmlentities($post['kartu_tempat_lahir']));
-		$data['kartu_tanggal_lahir'] 	= date_is_empty($post['kartu_tanggal_lahir']) ? NULL : tgl_indo_in($post['kartu_tanggal_lahir']);
-		$data['kartu_alamat'] 			= alamat(htmlentities($post['kartu_alamat']));
-		if ($post['kartu_id_pend']) $data['kartu_id_pend'] = bilangan($post['kartu_id_pend']);
-
-		return $data;
-	}
-
-	private function _upload_gambar($old_document = '')
-	{
-		if ($_FILES['satuan']['error'] == UPLOAD_ERR_NO_FILE) return null;
-
-		$error = periksa_file('satuan', unserialize(MIME_TYPE_GAMBAR), unserialize(EXT_GAMBAR));
-		if ($error != '') {
-			$this->session->set_userdata('success', -1);
-			$this->session->set_userdata('error_msg', $error);
-			return null;
-		}
-		$nama_file = $_FILES['satuan']['name'];
-		$nama_file   = time() . '-' . urlencode($nama_file); 	 // normalkan nama file
-		UploadDocument($nama_file, $old_document);
-
-		return $nama_file;
-	}
-
-	public function hapus_peserta_program($peserta_id, $program_id)
-	{
-		$this->db->where(array('peserta' => $peserta_id, 'program_id' => $program_id));
-		$this->db->delete('tbl_bidang_bencana_darurat_mendesak_terdampak');
-	}
-
-	public function hapus_peserta($peserta_id = '', $semua = false)
-	{
-		$this->db->where('id', $peserta_id);
-		$this->db->delete('tbl_bidang_bencana_darurat_mendesak_terdampak');
-	}
-
-	public function delete_all()
-	{
-		$this->session->success = 1;
-
-		$id_cb = $_POST['id_cb'];
-		foreach ($id_cb as $peserta_id) {
-			$this->hapus_peserta($peserta_id, $semua = true);
-		}
+		$this->db->update('tbl_bidang_bencana_darurat_mendesak_terdampak', $data);
 	}
 
 	/*
 		Mengambil data individu peserta menggunakan id tabel tbl_bidang_bencana_darurat_mendesak_terdampak
 	*/
-	public function get_bidang_bencana_darurat_mendesak_peserta_by_id($id)
+	public function get_laporan_kejadian_bencana_warga_by_id($id)
 	{
-		$data = $this->db
-			->select('pp.*, p.sasaran')
-			->from('tbl_bidang_bencana_darurat_mendesak_terdampak pp')
-			->join('tbl_bidang_bencana_darurat_mendesak p', 'pp.program_id = p.id')
-			->where('pp.id', $id)
-			->get()
-			->row_array();
-
+		$data = $this->db->where('id', $id)->get('tbl_bidang_bencana_darurat_mendesak_terdampak')->row_array();
 		// Data tambahan untuk ditampilkan
-		$peserta = $this->get_peserta($data['peserta'], $data['sasaran']);
-		switch ($data['sasaran']) {
+		$peserta = $this->get_peserta($data['warga_terdampak'], $data['sasaran']);
+		switch ($data['sasaran'])
+		{
 			case 1:
-				$data['judul_peserta'] = 'NIK';
-				$data['judul_peserta_info'] = 'Nama Peserta';
-				$data['peserta_nama'] = $data['peserta'];
+				$data['judul_warga_nama'] = 'NIK';
+				$data['judul_warga_info'] = 'Nama peserta';
+				$data['peserta_nama'] = $peserta['nik'];
 				$data['peserta_info'] = $peserta['nama'];
 				break;
-
 			case 2:
-				// Data KK; $peserta_id adalah No KK
-				$kk = $this->get_kk($data['peserta']);
-				$data['judul_peserta'] = 'No. KK';
-				$data['judul_peserta_info'] = 'Kepala Keluarga';
-				$data['peserta_nama'] = $data['peserta'];
-				$data['peserta_info'] = $kk['nama_kk'];
-				break;
-
-			case 3:
-				$data['judul_peserta'] = 'No. Rumah Tangga';
-				$data['judul_peserta_info'] = 'Kepala Rumah Tangga';
-				$data['peserta_nama'] = $data['peserta'];
+				$data['judul_warga_nama'] = 'No. KK';
+				$data['judul_warga_info'] = 'Kepala Keluarga';
+				$data['peserta_nama'] = $peserta['no_kk'];
 				$data['peserta_info'] = $peserta['nama'];
 				break;
-
-			case 4:
-				$data['judul_peserta'] = 'Nama Kelompok';
-				$data['judul_peserta_info'] = 'Ketua Kelompok';
-				$data['peserta_nama'] = $peserta['nama_kelompok'];
-				$data['peserta_info'] = $peserta['nama'];
-				break;
-
 			default:
 		}
 
 		return $data;
 	}
 
-	public function update_program($id)
+	public function get_peserta_pemberdayaan_masyarakat($sasaran,$warga_terdampak)
 	{
-		$data = $this->validasi_program($this->input->post());
-		$hasil = $this->db->where('id', $id)
-			->update('tbl_bidang_bencana_darurat_mendesak', $data);
-
-		if ($hasil) {
-			$_SESSION["success"] = 1;
-			$_SESSION["pesan"] = "Data program telah diperbarui";
-		} else {
-			$_SESSION["success"] = -1;
-		}
-	}
-
-	public function jml_peserta_program($id)
-	{
-		$jml_peserta = $this->db->select('count(v.program_id) as jml')->from('program p')->join('tbl_bidang_bencana_darurat_mendesak_terdampak v', 'p.id = v.program_id', 'left')->where('p.id', $id)->get()->row()->jml;
-
-		return $jml_peserta;
-	}
-
-	/*
-		Program yang sudah ada pesertanya tidak boleh dihapus
-	*/
-	public function hapus_program($id)
-	{
-		if ($this->jml_peserta_program($id) > 0) {
-			$_SESSION["success"] = -1;
-			return;
-		}
-
-		$hasil = $this->db->where('id', $id)->delete('tbl_bidang_bencana_darurat_mendesak');
-		if ($hasil) {
-			$_SESSION["success"] = 1;
-			$_SESSION["pesan"] = "Data program telah dihapus";
-		} else {
-			$_SESSION["success"] = -1;
-		}
-	}
-
-	/* Mendapatkan daftar bantuan yang diterima oleh penduduk
-		 parameter pencarian yang digunakan adalah nik ( data nik disimpan pada kolom peserta tabel tbl_bidang_bencana_darurat_mendesak_terdampak ).
-		 Saat ini terbatas pada program bantuan perorangan
-	*/
-	public function daftar_bantuan_yang_diterima($nik)
-	{
-		return $this->db->select('p.*, pp.*')
-			->where(array('peserta' => $nik))
-			->join('program p', 'p.id = pp.program_id', 'left')
-			->get('tbl_bidang_bencana_darurat_mendesak_terdampak pp')
-			->result_array();
-	}
-
-	/* ====================================
-	 * Untuk datatable #peserta_program di themes/hijau/partials/statistik.php
-	 * ==================================== */
-
-	private function get_all_peserta_bantuan_query()
-	{
-		$this->db
-			->select("p.nama as program, pend.nama as peserta, concat('RT ', w.rt, ' / RW ', w.rw, ' DUSUN ', w.dusun) AS alamat")
-			->from('program p')
-			->join('tbl_bidang_bencana_darurat_mendesak_terdampak pp', 'p.id = pp.program_id', 'left');
-		if ($this->input->post('stat') == 'bantuan_keluarga') {
-			$this->db
-				->join('tweb_keluarga k', 'pp.peserta = k.no_kk')
-				->join('tweb_penduduk pend', 'k.nik_kepala = pend.id')
-				->join('tweb_wil_clusterdesa w', 'k.id_cluster = w.id')
-				->where('p.sasaran', '2')
-				->where('p.status', '1');
-		} else // bantuan_penduduk
+		$list_pemberdayaan_masyarakat = [];
+		/*
+		 * Menampilkan keterlibatan $warga_terdampak dalam data tbl_bidang_bencana_darurat_mendesak yang ada
+		 *
+		 * */
+		$strSQL = "SELECT p.id as id, o.warga_terdampak as nik, p.nama as nama, p.keterangan
+			FROM tbl_bidang_bencana_darurat_mendesak_terdampak o
+			LEFT JOIN tbl_bidang_bencana_darurat_mendesak p ON p.id = o.kejadian_bencana_id
+			WHERE ((o.warga_terdampak='".$warga_terdampak."') AND (o.sasaran='".$sasaran."'))";
+		$query = $this->db->query($strSQL);
+		if ($query->num_rows() > 0)
 		{
-			$this->db
-				->join('tweb_penduduk pend', 'pp.peserta = pend.nik')
-				->join('tweb_keluarga k', 'pend.id_kk = k.id')
-				->join('tweb_wil_clusterdesa w', 'pend.id_cluster = w.id')
-				->where('p.sasaran', '1')
-				->where('p.status', '1');
+			$list_pemberdayaan_masyarakat = $query->result_array();
+		}
+
+		switch ($sasaran)
+		{
+			case 1:
+				/*
+				 * Rincian Penduduk
+				 * */
+				$strSQL = "SELECT o.nama, o.foto, o.nik, w.rt, w.rw, w.dusun,
+				(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
+					FROM tweb_penduduk o
+					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
+					LEFT JOIN tweb_wil_clusterdesa w ON w.id = o.id_cluster
+					WHERE o.id = '".$warga_terdampak."'";
+				$query = $this->db->query($strSQL);
+				if ($query->num_rows() > 0)
+				{
+					$row = $query->row_array();
+					$data_profil = array(
+						"id" => $id,
+						"nama" => $row["nama"] ." - ".$row["nik"],
+						"ndesc" => "Alamat: ".$row["alamat"]." RT ".strtoupper($row["rt"])." / RW ".strtoupper($row["rw"])." ".strtoupper($row["dusun"]),
+						"foto" => $row["foto"]
+						);
+				}
+
+				break;
+			case 2:
+				/*
+				 * KK
+				 * */
+				$strSQL = "SELECT o.nik_kepala, o.no_kk, o.alamat, p.nama, w.rt, w.rw, w.dusun
+					FROM tweb_keluarga o
+					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
+					LEFT JOIN tweb_wil_clusterdesa w ON w.id = p.id_cluster
+					WHERE o.id = '".$warga_terdampak."'";
+				$query = $this->db->query($strSQL);
+				if ($query->num_rows() > 0)
+				{
+					$row = $query->row_array();
+					$data_profil = array(
+						"id" => $id,
+						"nama" => "Kepala KK : ".$row["nama"].", NO KK: ".$row["no_kk"],
+						"ndesc" => "Alamat: ".$row["alamat"]." RT ".strtoupper($row["rt"])." / RW ".strtoupper($row["rw"])." ".strtoupper($row["dusun"]),
+						"foto" => ""
+						);
+				}
+
+				break;
+			default:
+
+		}
+		if ( ! empty($list_pemberdayaan_masyarakat))
+		{
+			$hasil = array("daftar_pemberdayaan_masyarakat" => $list_pemberdayaan_masyarakat, "profil" => $data_profil);
+			return $hasil;
+		}
+		else
+		{
+			return null;
 		}
 	}
 
-	private function get_peserta_bantuan_query()
+	protected function search_sql($kelompok_bencana = '')
 	{
-		$this->get_all_peserta_bantuan_query();
-
-		$i = 0;
-
-		foreach ($this->column_search as $item) // loop column
+		if ( $this->session->cari)
 		{
-			if ($cari = $_POST['search']['value']) // if datatable send POST for search
+			$cari = $this->session->cari;
+			$kw = $this->db->escape_like_str($cari);
+			$kw = '%' .$kw. '%';
+			switch ($kelompok_bencana)
 			{
-				if ($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					// $this->db->like($item, $_POST['search']['value']);
-
-					$this->db->like($item, $cari);
-				} else {
-					$this->db->or_like($item, $cari);
-				}
-				if (count($this->column_search) - 1 == $i) //last loop
-				{
-					/* Kolom pencarian tambahan */
-					$this->db->or_where('pend.nik', $cari) // harus persis sama
-						->or_where('k.no_kk', $cari);
-					$this->db->group_end(); //close bracket
-				}
+				case '1':
+					## sasaran penduduk
+					$search_sql = " AND (o.nama LIKE '$kw' OR o.nik LIKE '$kw' OR k.no_kk like '$kw')";
+					break;
+				case '2':
+					## sasaran keluarga / KK
+					$search_sql = " AND (o.no_kk LIKE '$kw' OR o.nik_kepala LIKE '$kw' OR q.nik LIKE '$kw' OR q.nama LIKE '$kw')";
+					break;
 			}
-			$i++;
+			return $search_sql;
 		}
+	}
 
-		if (isset($_POST['order'])) // here order processing
+	private function autocomplete($kelompok_bencana)
+	{
+		switch ($kelompok_bencana)
 		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	public function get_peserta_bantuan()
-	{
-		$this->get_peserta_bantuan_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$data = $this->db->get()->result_array();
-
-		return $data;
-	}
-
-	public function count_peserta_bantuan_filtered()
-	{
-		$this->get_peserta_bantuan_query();
-		$query = $this->db->get();
-
-		return $query->num_rows();
-	}
-
-	public function count_peserta_bantuan_all()
-	{
-		$this->get_all_peserta_bantuan_query();
-		return $this->db->count_all_results();
-	}
-
-	//Ambil data yg dibutuhkan saja, ambil dr tabel penduduk_hidup
-	public function get_penduduk($peserta_id)
-	{
-		$data = $this->db
-			->select('p.id as id, p.nama, p.nik, p.id_kk, p.id_rtm, p.rtm_level, x.nama AS sex, h.nama AS hubungan, p.tempatlahir, p.tanggallahir, a.nama AS agama, k.nama AS pendidikan, j.nama AS pekerjaan, w.nama AS warganegara, c.dusun, c.rw, c.rt')
-			->from('penduduk_hidup p')
-			->join('tweb_penduduk_sex x', 'x.id = p.sex', 'left')
-			->join('tweb_penduduk_hubungan h', 'h.id = p.kk_level', 'left')
-			->join('tweb_penduduk_agama a', 'a.id = p.agama_id', 'left')
-			->join('tweb_penduduk_pendidikan_kk k', 'k.id = p.pendidikan_kk_id', 'left')
-			->join('tweb_penduduk_pekerjaan j', 'j.id = p.pekerjaan_id', 'left')
-			->join('tweb_penduduk_warganegara w', 'w.id = p.warganegara_id', 'left')
-			->join('tweb_wil_clusterdesa c', 'c.id = p.id_cluster', 'left')
-			->group_start()
-			->where('p.nik', $peserta_id) // Hapus jika 'peserta' sudah fix menggunakan 'id' (sesuai sasaran) sebagai referensi parameter
-			->or_where('p.id', $peserta_id)
-			->group_end()
-			->get()
-			->row_array();
-
-		$data['umur'] = umur($data['tanggallahir']);
-
-		return $data;
-	}
-
-	public function get_kk($id_kk)
-	{
-		$kk = $this->db
-			->select('k.no_kk, p.nik as nik_kk, p.nama as nama_kk, k.alamat, c.*')
-			->from('keluarga_aktif k')
-			->join('penduduk_hidup p', 'p.id = k.nik_kepala', 'left')
-			->join('tweb_wil_clusterdesa c', 'c.id = k.id_cluster', 'left')
-			->group_start()
-			->where('k.no_kk', $id_kk) // Hapus jika 'peserta' sudah fix menggunakan 'id' (sesuai sasaran) sebagai referensi parameter
-			->or_where('k.id', $id_kk)
-			->group_end()
-			->get()
-			->row_array();
-
-		return $kk;
-	}
-
-	public function impor_program($program_id = NULL, $data_program = [], $ganti_program = 0)
-	{
-		$this->session->success = 1;
-		$sekarang = date("Y m d");
-		$data_tambahan = [
-			'userid' => $this->session->user,
-			'status' => ($data_program['edate'] < $sekarang) ? 0 : 1,
-		];
-
-		$data_program = array_merge($data_program, $data_tambahan);
-
-		if ($program_id == NULL) {
-			$this->db->insert('tbl_bidang_bencana_darurat_mendesak', $data_program);
-
-			return $this->db->insert_id();
-		}
-
-		if ($ganti_program == 1) $this->db->where('id', $program_id)->update('tbl_bidang_bencana_darurat_mendesak', $data_program);
-
-		return $program_id;
-	}
-
-	public function impor_peserta($program_id = '', $data_peserta = [], $kosongkan_peserta = 0, $data_diubah = '')
-	{
-		$this->session->success = 1;
-
-		if ($kosongkan_peserta == 1) $this->db->where('program_id', $program_id)->delete('tbL_bidang_bencana_darurat_mendesak');
-
-		if ($data_diubah) {
-			$data_diubah = explode(", ", ltrim($data_diubah, ", "));
-
-			$this->db->where_in('peserta', $data_diubah)->where('program_id', $program_id)->delete('tbL_bidang_bencana_darurat_mendesak');
-		}
-
-		$outp = $this->db->insert_batch('tbL_bidang_bencana_darurat_mendesak', $data_peserta);
-		status_sukses($outp, true);
-	}
-
-	// TODO: function ini terlalu panjang dan sebaiknya dipecah menjadi beberapa method
-	public function cek_peserta($peserta = '', $sasaran = 1)
-	{
-		if (in_array($peserta, [NULL, '-', ' ', '0'])) return false;
-
-		switch ($sasaran) {
-			case 1:
-				// Penduduk
-				$sasaran_peserta = 'NIK';
-
+			case '1':
+				## kelompok_bencana penduduk
 				$data = $this->db
-					->select('id, nik')
-					->where('nik', $peserta)
-					->get('penduduk_hidup')
-					->result_array();
-				break;
-
-			case 2:
-				// Keluarga
-				$sasaran = 'No. KK';
-
-				$data = $this->db
-					->select('k.id, p.nik')
-					->from('penduduk_hidup p')
-					->join('keluarga_aktif k', 'k.id = p.id_kk', 'left')
-					->where('k.no_kk', $peserta)
+					->select('p.nama')
+					->from('tbl_bidang_bencana_darurat_mendesak_terdampak s')
+					->join('tweb_penduduk p', 'p.id = s.warga_terdampak', 'left')
+					->where('s.kelompok_bencana', $kelompok_bencana)
+					->group_by('p.nama')
 					->get()
 					->result_array();
 				break;
 
-			case 3:
-				// RTM
-				// no_rtm = no_kk
-				$sasaran_peserta = 'No. RTM';
-
+			case '2':
+				## kelompok_bencana keluarga / KK
 				$data = $this->db
-					->select('r.id, p.nik')
-					->from('penduduk_hidup p')
-					->join('tweb_rtm r', 'p.id = r.nik_kepala', 'left')
-					->where('r.no_kk', $peserta)
+					->select('p.nama')
+					->from('tbl_bidang_bencana_darurat_mendesak_terdampak s')
+					->join('tweb_keluarga k', 'k.id = s.warga_terdampak', 'left')
+					->join('tweb_penduduk p', 'p.id = k.nik_kepala', 'left')
+					->where('s.kelompok_bencana', $kelompok_bencana)
+					->group_by('p.nama')
 					->get()
 					->result_array();
 				break;
-
-			case 4:
-				// Kelompok
-				$sasaran_peserta = 'Kode Kelompok';
-
-				$data = $this->db
-					->select('kl.id, p.nik')
-					->from('penduduk_hidup p')
-					->join('kelompok kl', 'p.id = kl.id_ketua', 'left')
-					->where('kl.kode', $peserta)
-					->get()
-					->result_array();
-				break;
-
 			default:
-				// Lainnya
 				break;
 		}
 
-		$data = [
-			'id' => $data[0]['id'], // untuk nik, no_kk, no_rtm, kode konversi menjadi id issue #3417
-			'sasaran_peserta' => $sasaran_peserta,
-			'valid' => str_replace("'", "", explode(", ", sql_in_list(array_column($data, 'nik')))) // untuk daftar valid anggota keluarga
-		];
-
-		return $data;
+		return autocomplete_data_ke_str($data);
 	}
+
 }
+?>

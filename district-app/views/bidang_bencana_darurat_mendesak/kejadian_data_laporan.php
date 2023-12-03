@@ -12,8 +12,7 @@
 				<div class="box box-info">
 					<div class="box-header with-border">
 						<?php if ($this->CI->cek_hak_akses('h')) : ?>
-							<a href="<?= site_url('bidang_bencana_darurat_mendesak/form_laporan_kejadian') ?>" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Program Bantuan"><i class="fa fa-plus"></i> Tambah</a>
-							<a href="<?= site_url('bidang_bencana_darurat_mendesak/impor') ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Impor Program Bantuan" data-target="#impor" data-remote="false" data-toggle="modal" data-backdrop="false" data-keyboard="false"><i class="fa fa-upload"></i> Impor</a>
+							<a href="<?= site_url('bidang_bencana_darurat_mendesak/form_kejadian') ?>" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Program Bantuan"><i class="fa fa-plus"></i> Tambah</a>
 						<?php endif; ?>
 						<a href="<?= site_url('bidang_bencana_darurat_mendesak/panduan') ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Panduan"><i class="fa fa-question-circle"></i> Panduan</a>
 						<?php if ($tampil != 0) : ?>
@@ -27,80 +26,89 @@
 									<div class="row">
 										<div class="col-sm-9">
 											<form id="mainform" name="mainform" action="" method="post">
-												<select class="form-control input-sm" name="sasaran" onchange="formAction('mainform', '<?= site_url('bidang_bencana_darurat_mendesak/filter/sasaran') ?>')">
-													<option value="">Pilih Sasaran</option>
-													<?php foreach ($list_sasaran as $key => $value) : ?>
-														<option value="<?= $key; ?>" <?= selected($set_sasaran, $key); ?>><?= $value ?></option>
+												<select class="form-control input-sm" name="kelompok_bencana" onchange="formAction('mainform', '<?= site_url('bidang_bencana_darurat_mendesak/filter/kelompok_bencana') ?>')">
+													<option value="">Pilih Jenis Bencana</option>
+													<?php foreach ($list_kelompok_bencana as $key => $value) : ?>
+														<option value="<?= $key; ?>" <?= selected($set_kelompok_bencana, $key); ?>><?= $value ?></option>
 													<?php endforeach; ?>
 												</select>
 											</form>
 										</div>
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<table class="table table-bordered table-striped dataTable table-hover" id="table-program">
+												<table class="table table-bordered table-striped dataTable table-hover" id="table-laporan-kejadian-bencana">
 													<thead class="bg-gray disabled color-palette">
 														<tr>
 															<th width="1%">No</th>
 															<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																<th width="5%" class="text-center">Aksi</th>
 															<?php endif ?>
-															<th class="text-center">Jenis Bencana</th>
 															<th class="text-center">Tanggal Kejadian</th>
-															<th class="text-center">Waktu Kejadian</th>
+															<th class="text-center">Jenis Bencana</th>
 															<th class="text-center">Lokasi Bencana</th>
 															<th class="text-center">Penyebab Bencana</th>
 															<th class="text-center">Deskripsi </th>
-															<th class="text-center">Korban Jiwa</th>
+															<th class="text-center">Jumlah Korban</th>
 															<th class="text-center">Kerusakan</th>
 															<th class="text-center">Sumber Informasi</th>
+															<th class="text-center">Status</th>
 														</tr>
 													</thead>
 													<tbody>
 														<?php $nomer = $paging->offset; ?>
-														<?php foreach ($program as $item) : ?>
+														<?php foreach ($kejadian_bencana as $item) : ?>
 															<?php $nomer++; ?>
 															<tr>
 																<td class="text-center"><?= $nomer ?></td>
 																<?php if ($this->CI->cek_hak_akses('h')) : ?>
-																	<td nowrap>
+																	<td>
 																		<div class="btn-group">
 																			<a href="#" class="btn btn-social bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Aksi">Aksi <i class="fa fa-arrow-circle-down"></i></a>
 																			<ul class="dropdown-menu" role="menu">
 																				<li class="text-left">
-																					<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-eye"></i>Detail Kejadian</a>
+																					<a href="<?= site_url("bidang_bencana_darurat_mendesak/detail_kejadian/$item[id]") ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-eye"></i>Detail Kejadian</a>
 																				</li>
 																				<li>
-																					<a href="<?= site_url("bidang_bencana_darurat_mendesak/detail/$item[id]") ?>" class="btn btn-social btn-box btn-block btn-sm" title="Detail Warga Terdampak"><i class="fa fa-list-ul"></i>Detail Warga terdampak</a>
+																					<a href="<?= site_url("bidang_bencana_darurat_mendesak/warga_terdampak_daftar/$item[id]") ?>" class="btn btn-social btn-box btn-block btn-sm" title="Detail Warga Terdampak"><i class="fa fa-list-ul"></i>Warga terdampak</a>
 																				</li>
-																				<li>
-																					<?php if ($item['jml_peserta'] != 0) : ?>
-																						<a href="<?= site_url("bidang_bencana_darurat_mendesak/expor/$item[id]"); ?>"class="btn btn-social btn-box btn-block btn-sm" title="Download"><i class="fa fa-download"></i>Download</a>
+																				<!--<li>
+																					<?php if ($item['jumlah_korban'] != 0) : ?>
+																						<a href="<?= site_url("bidang_bencana_darurat_mendesak/expor/$item[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm" title="Download"><i class="fa fa-download"></i>Download</a>
 																					<?php endif ?>
 																				</li>
-																				<li>
-																					<a href="<?= site_url("bidang_bencana_darurat_mendesak/edit_laporan_kejadian/$item[id]") ?>" class="btn btn-social btn-box btn-block btn-sm" title="Ubah"><i class="fa fa-edit"></i>Edit Kejadian</a>
+																				<li>-->
+																					<a href="<?= site_url("bidang_bencana_darurat_mendesak/form_kejadian/$item[id]") ?>" class="btn btn-social btn-box btn-block btn-sm" title="Ubah"><i class="fa fa-edit"></i>Edit Kejadian</a>
 																				</li>
 																				<li>
-																					<?php if ($item['jml_peserta'] != 0) : ?>
+																					<?php if ($item['jumlah_korban'] != 0) : ?>
 																						<a href="#" class="btn bg-maroon btn-social btn-box btn-block btn-sm disabled" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>Hapus</a>
 																					<?php endif ?>
 																				</li>
 																			</ul>
 																		</div>
 
-																		<?php if ($item['jml_peserta'] == 0) : ?>
+																		<?php if ($item['jumlah_korban'] == 0) : ?>
 																			<a href="#" data-href="<?= site_url("bidang_bencana_darurat_mendesak/hapus/$item[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																		<?php endif ?>
 																	</td>
 																<?php endif; ?>
-																<td nowrap><a href="<?= site_url("bidang_bencana_darurat_mendesak/detail/$item[id]") ?>"><?= $item["nama"] ?></a></td>
-																<td nowrap><?= $item['penyelenggara'] ?></td>
-																<td nowrap><?= $item['asaldana'] ?></td>
-																<td nowrap><?= Rupiah($item['anggaran']) ?></td>
-																<td align="center"><?= $item['jml_peserta'] ?></td>
-																<td align="center"><?= fTampilTgl($item["sdate"], $item["edate"]); ?></td>
-																<td align="center"><?= $sasaran[$item["sasaran"]] ?></td>
-																<td align="center"><?= $item['status'] ?></td>
+																<td nowrap><a href="<?= site_url("bidang_bencana_darurat_mendesak/detail/$item[id]") ?>"><?= $item["tanggal_kejadian"] ?><br/><?= $item["waktu_kejadian"] ?></a></td>
+																<td nowrap><?= $list_kelompok_bencana[$item["kelompok_bencana"]]?><br /><?= $item['jenis_bencana'] ?></td>
+																<td width="10%"><?= $item['lokasi_bencana'] ?></td>
+																<td><?= $item['penyebab_bencana'] ?></td>
+																<td><?= $item['deskripsi_bencana'] ?></td>
+																<td width="8%">Meninggal: <?= $item['korban_meninggal'] ?><br />
+																	Hilang: <?= $item['korban_hilang'] ?><br />
+																	Luka Berat: <?= $item['korban_lukaberat'] ?><br />
+																	Lukas Ringan :<?= $item['korban_lukarigan'] ?><br />
+																</td>
+																<td>bangunan: <?= $item['kerusakan_bangunan'] ?><br />
+																	Lintas sektor: <?= $item['kerusakan_ls'] ?></td>
+																<td width="10%"><?= $item['nama_pelapor'] ?> - <br/>
+																<?= $item['alamat_pelapor'] ?> - <br/>
+																<?= $item['nomor_pelapor'] ?></td>
+																<td nowrap><?= $item['status'] ?></td>
+
 															</tr>
 														<?php endforeach; ?>
 													</tbody>

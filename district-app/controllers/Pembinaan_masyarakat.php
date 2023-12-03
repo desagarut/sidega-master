@@ -295,14 +295,14 @@ class Pembinaan_masyarakat extends Admin_Controller {
 		$config['upload_path']		= LOKASI_DOKUMEN;
 		$config['allowed_types']	= 'xls|xlsx|xlsm';
 		//$config['max_size']				= max_upload() * 1024;
-		$config['file_name']			= namafile('Impor Peserta Program Bantuan');
+		$config['file_name']			= namafile('Impor Peserta Pembinaan');
 
 		$this->upload->initialize($config);
 
 		if ($this->upload->do_upload('userfile'))
 		{
 			$program_id = '';
-			// Data Program Bantuan
+			// Data Program Pembinaan
 			$temp = $this->session->per_page;
 			$this->session->per_page = 1000000000;
 			$ganti_program = $this->input->post('ganti_program');
@@ -496,7 +496,7 @@ class Pembinaan_masyarakat extends Admin_Controller {
 	// TODO: function ini terlalu panjang dan sebaiknya dipecah menjadi beberapa method
 	public function expor($program_id = '')
 	{
-		// Data Program Bantuan
+		// Data Program Pembinaan
 		$temp = $this->session->per_page;
 		$this->session->per_page = 1000000000;
 		$data = $this->pembinaan_masyarakat_model->get_program(1, $program_id);

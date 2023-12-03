@@ -15,28 +15,22 @@
 			</div>
 			<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 				<div class="box-body">
-					<?php $cid = $data["sasaran"]; ?>
+					<?php $kelompok_bencana = $data["kelompok_bencana"]; ?>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Sasaran Program</label>
+						<label class="col-sm-3 control-label">Kelompok Bencana</label>
 						<div class="col-sm-3">
-							<?php if ($jml <> 0): ?>
-								<input type="hidden" name="cid" value="<?= $cid ?>">
-								<select class="form-control input-sm" disabled>
-							<?php else: ?>
-								<select class="form-control input-sm required" name="cid" id="cid">
-							<?php endif;?>
-								<option value="">Pilih Sasaran Program</option>
-								<option value="1" <?php selected($cid, 1); ?>>Penduduk Perorangan</option>
-								<option value="2" <?php selected($cid, 2); ?>>Keluarga - KK</option>
-								<option value="3" <?php selected($cid, 3); ?>>Rumah Tangga</option>
-								<option value="4" <?php selected($cid, 4); ?>>Kelompok / Organisasi</option>
+							<select class="form-control input-sm required" name="kelompok_bencana" id="kelompok_bencana">
+								<option value="">Pilih Kelompok Bencana</option>
+								<option value="1" <?php selected($kelompok_bencana, 1); ?>>Bencana Alam</option>
+								<option value="2" <?php selected($kelompok_bencana, 2); ?>>Bencana Non Alam</option>
+								<option value="3" <?php selected($kelompok_bencana, 3); ?>>Bencana Sosial</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-3" for="nama">Nama Program</label>
+						<label class="control-label col-sm-3" for="jenis_bencana">Jenis Bencana</label>
 						<div class="col-sm-8">
-							<input name="nama" class="form-control input-sm nomor_sk" maxlength="100" placeholder="Nama Program"  type="text" value="<?= $data["nama"]; ?>"></input>
+							<input name="jenis_bencana" class="form-control input-sm nomor_sk required" maxlength="100" placeholder="Detail jenis bencana" type="text" <?= $kejadian_bencana["jenis_bencana"]; ?>></input>
 						</div>
 					</div>
 					<div class="form-group">

@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-define("VERSION", '6.1.0');
-define('VERSI_DATABASE', '2023110301');
+define("VERSION", '6.2.0');
+define('VERSI_DATABASE', '2023120301');
 define("LOKASI_LOGO_DESA", 'instansi/logo/');
 define("LOKASI_ARSIP", 'instansi/arsip/');
 define("LOKASI_CONFIG_DESA", 'instansi/config/');
@@ -504,6 +504,12 @@ define('NILAI_PENDAPAT', serialize([
     3 => 'Cukup',
     4 => 'Buruk',
 ]));
+
+define("KELOMPOK_BENCANA", serialize(array(
+	"1" => "Bencana Alam",
+	"2" => "Bencana Non-Alam",
+	"3" => "Bencana Sosial",
+)));
 
 /**
 

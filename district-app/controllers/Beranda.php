@@ -15,7 +15,6 @@ class Beranda extends Admin_Controller {
 		$this->load->model('notif_model');
 	    $this->load->model('first_m');
 	    $this->load->model('user_model');
-		$this->load->model('header_model');
 		$this->load->library('data_publik');
         $this->load->model("data_sppt_model");
 		
@@ -23,7 +22,6 @@ class Beranda extends Admin_Controller {
 		$this->load->model('wilayah_model');
 		$this->load->model('laporan_penduduk_model');
 		$this->load->model('pamong_model');
-		$this->load->model('program_bantuan_model');
 		$this->load->model('config_model');
 		$this->load->model('dpt_model');
 

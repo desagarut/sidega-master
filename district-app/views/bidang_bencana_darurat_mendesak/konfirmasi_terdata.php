@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 
-<?php if ($pemas["sasaran"] == 1): ?>
+<?php if ($suplemen["sasaran"] == 1): ?>
 	<div class="form-group">
 		<label for="keperluan"  class="col-sm-3 control-label">Tempat  Tanggal Lahir / Umur</label>
 		<div class="col-sm-4">
@@ -34,7 +34,7 @@
 			<input class="form-control input-sm" type="text" value="<?= $individu['agama']?>" disabled="">
 		</div>
 	</div>
-<?php elseif ($pemas["sasaran"] == 2): ?>
+<?php elseif ($suplemen["sasaran"] == 2): ?>
 	<div class="form-group">
 		<label for="keperluan"  class="col-sm-3 control-label">Tempat Tanggal Lahir (Umur) KK</label>
 		<div class="col-sm-4">

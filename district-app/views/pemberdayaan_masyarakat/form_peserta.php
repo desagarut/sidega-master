@@ -5,18 +5,18 @@
 		<h1>Formulir Penambahan peserta</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('pemas')?>"> Data Peserta</a></li>
-			<li><a href="<?= site_url()?>pemas/rincian/1/<?= $pemas['id']?>"> Rincian Data Peserta</a></li>
+			<li><a href="<?= site_url('pemberdayaan_masyarakat')?>"> Data Peserta</a></li>
+			<li><a href="<?= site_url()?>pemberdayaan_masyarakat/rincian/1/<?= $pemberdayaan_masyarakat['id']?>"> Rincian Data Peserta</a></li>
 			<li class="active">Formulir Penambahan peserta</li>
 		</ol>
 	</section>
 	<section class="content">
 		<div class="box box-info">
 			<div class="box-header with-border">
-				<a href="<?= site_url("pemas"); ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
-				<a href="<?= site_url("pemas/rincian/$pemas[id]"); ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Rincian Data</a>
+				<a href="<?= site_url("pemberdayaan_masyarakat"); ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
+				<a href="<?= site_url("pemberdayaan_masyarakat/rincian/$pemberdayaan_masyarakat[id]"); ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Rincian Data</a>
 			</div>
-			<?php $this->load->view('pemas/rincian'); ?>
+			<?php $this->load->view('pemberdayaan_masyarakat/rincian'); ?>
 			<div class="box-body">
 				<h5><b>Tambahkan Warga peserta</b></h5>
 				<hr>
@@ -36,7 +36,7 @@
 					</div>
 				</form>
 				<div id="form-melengkapi-data-peserta">
-					<form id="validasi" action="<?= "$form_action/$pemas[id]"; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+					<form id="validasi" action="<?= "$form_action/$pemberdayaan_masyarakat[id]"; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
@@ -44,7 +44,7 @@
 							</div>
 						</div>
 						<?php if ($individu): ?>
-							<?php include("district-app/views/pemas/konfirmasi_peserta.php"); ?>
+							<?php include("district-app/views/pemberdayaan_masyarakat/konfirmasi_peserta.php"); ?>
 						<?php endif; ?>
 						<div class="form-group">
 							<label class="col-sm-3 control-label" for="keterangan">Keterangan</label>

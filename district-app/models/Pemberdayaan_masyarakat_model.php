@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pemas_model extends MY_Model {
+class Pemberdayaan_masyarakat_model extends MY_Model {
 
 	public function __construct()
 	{
@@ -152,7 +152,7 @@ class Pemas_model extends MY_Model {
 		return $hasil;
 	}
 
-	public function get_pemas($id)
+	public function get_pemberdayaan_masyarakat($id)
 	{
 		$data = $this->db
 			->select('s.*')
@@ -169,9 +169,9 @@ class Pemas_model extends MY_Model {
 
 	public function get_rincian($p, $kegiatan_id)
 	{
-		$pemas = $this->db->where('id', $kegiatan_id)->get('tbl_pemberdayaan_masyarakat')->row_array();
+		$pemberdayaan_masyarakat = $this->db->where('id', $kegiatan_id)->get('tbl_pemberdayaan_masyarakat')->row_array();
 
-		switch ($pemas['sasaran'])
+		switch ($pemberdayaan_masyarakat['sasaran'])
 		{
 			// Sasaran Penduduk
 			case '1':
@@ -196,8 +196,8 @@ class Pemas_model extends MY_Model {
 				break;
 		}
 
-		$data['pemas'] = $pemas;
-		$data['keyword'] = $this->autocomplete($pemas['sasaran']);
+		$data['pemberdayaan_masyarakat'] = $pemberdayaan_masyarakat;
+		$data['keyword'] = $this->autocomplete($pemberdayaan_masyarakat['sasaran']);
 
 		return $data;
 	}
@@ -430,7 +430,7 @@ class Pemas_model extends MY_Model {
 		$this->db->delete('tbl_pemberdayaan_masyarakat_peserta');
 	}
 
-	// $id = pemas_peserta.id
+	// $id = pemberdayaan_masyarakat_peserta.id
 	public function edit_peserta($post,$id)
 	{
 		$data['keterangan'] = substr(htmlentities($post['keterangan']), 0, 100); // Batasi 100 karakter
@@ -441,7 +441,7 @@ class Pemas_model extends MY_Model {
 	/*
 		Mengambil data individu peserta menggunakan id tabel tbl_pemberdayaan_masyarakat_peserta
 	*/
-	public function get_pemas_peserta_by_id($id)
+	public function get_pemberdayaan_masyarakat_peserta_by_id($id)
 	{
 		$data = $this->db->where('id', $id)->get('tbl_pemberdayaan_masyarakat_peserta')->row_array();
 		// Data tambahan untuk ditampilkan
@@ -466,9 +466,9 @@ class Pemas_model extends MY_Model {
 		return $data;
 	}
 
-	public function get_peserta_pemas($sasaran,$id_peserta)
+	public function get_peserta_pemberdayaan_masyarakat($sasaran,$id_peserta)
 	{
-		$list_pemas = [];
+		$list_pemberdayaan_masyarakat = [];
 		/*
 		 * Menampilkan keterlibatan $id_peserta dalam data tbl_pemberdayaan_masyarakat yang ada
 		 *
@@ -480,7 +480,7 @@ class Pemas_model extends MY_Model {
 		$query = $this->db->query($strSQL);
 		if ($query->num_rows() > 0)
 		{
-			$list_pemas = $query->result_array();
+			$list_pemberdayaan_masyarakat = $query->result_array();
 		}
 
 		switch ($sasaran)
@@ -533,9 +533,9 @@ class Pemas_model extends MY_Model {
 			default:
 
 		}
-		if ( ! empty($list_pemas))
+		if ( ! empty($list_pemberdayaan_masyarakat))
 		{
-			$hasil = array("daftar_pemas" => $list_pemas, "profil" => $data_profil);
+			$hasil = array("daftar_pemberdayaan_masyarakat" => $list_pemberdayaan_masyarakat, "profil" => $data_profil);
 			return $hasil;
 		}
 		else

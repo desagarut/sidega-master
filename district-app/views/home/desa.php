@@ -56,7 +56,6 @@
 		</div>
 		<div class='row'>
 			<div class="col-md-12">
-				<?php $this->load->view('home/link_tupoksi.php'); ?>
 				<?php $this->load->view('home/artikel.php'); ?>
 				<?php $this->load->view('home/gallery.php'); ?>
 				<?php $this->load->view('home/gallery_youtube.php'); ?>

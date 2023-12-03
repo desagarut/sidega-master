@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<td class="text-center">
-				<h4>DAFTAR PESERTA PROGRAM <?= strtoupper($pemas["nama_kegiatan"]); ?></h4>
+				<h4>DAFTAR PESERTA PROGRAM <?= strtoupper($pemberdayaan_masyarakat["nama_kegiatan"]); ?></h4>
 			</td>
 		</tr>
 		<tr>
@@ -34,32 +34,32 @@
 						<tr width="400px" >
 							<td class="text-left" width="20%">Sasaran </td>
 							<td>: </td>
-							<td><?= $sasaran[$pemas["sasaran"]]; ?></td>
+							<td><?= $sasaran[$pemberdayaan_masyarakat["sasaran"]]; ?></td>
 							<td class="text-left" width="20%">Penyelenggara</td>
 							<td>: </td>
-							<td><?= $pemas["nama_penyelenggara"]; ?></td>
+							<td><?= $pemberdayaan_masyarakat["nama_penyelenggara"]; ?></td>
 						</tr>
 						<tr>
 							<td class="text-left" width="20%">Waktu</td>
 							<td>: </td>
-							<td><?= $pemas["tgl_mulai"]; ?> s.d <?= $pemas["tgl_selesai"]; ?></td>
+							<td><?= $pemberdayaan_masyarakat["tgl_mulai"]; ?> s.d <?= $pemberdayaan_masyarakat["tgl_selesai"]; ?></td>
 							<td>Sumber Dana</td>
 							<td>: </td>
-							<td><?= $pemas["sumber_dana"]; ?></td>
+							<td><?= $pemberdayaan_masyarakat["sumber_dana"]; ?></td>
 						</tr>
 						<tr>
 							<td>Anggaran</td>
 							<td>: </td>
-							<td><?= rupiah($pemas["anggaran"]); ?></td>
+							<td><?= rupiah($pemberdayaan_masyarakat["anggaran"]); ?></td>
 							<td>Lokasi</td>
 							<td>: </td>
-							<td><?= $pemas["lokasi"]; ?></td>
+							<td><?= $pemberdayaan_masyarakat["lokasi"]; ?></td>
 
 						</tr>
 						<tr>
 							<td>Keterangan</td>
 							<td>: </td>
-							<td><?= $pemas["keterangan"]; ?></td>
+							<td><?= $pemberdayaan_masyarakat["keterangan"]; ?></td>
 						</tr>
 					</tbody>
 				</table>
