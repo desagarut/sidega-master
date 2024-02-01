@@ -1,0 +1,12 @@
+User-agent: *
+
+Disallow: /assets/
+Disallow: /district-app/
+Disallow: /instansi/
+Disallow: /logs/
+Disallow: /system/
+Disallow: /template-surat/
+Disallow: /themes/
+Disallow: /vendor/
+
+Allow: /instansi/logo/favicon.ico
