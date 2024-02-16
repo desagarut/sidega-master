@@ -18,13 +18,18 @@
           <ul class="products-list product-list-in-box">
             <li class="item">
               <div class="product-img">
-              <img width=50 height=80 src=<?= AmbilFotoArtikel(urldecode($data['gambar']), 'kecil')?>>
+                <?php if ($data['gambar']) : ?>
+                  <img style="width:100%;height:50px" src="<?= AmbilFotoArtikel($data['gambar'], 'sedang') ?>" alt="<?= $data['nama'] ?>">
+                <?php else : ?>
+                  <img style="width:100%;height:50px" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" style="width:40px">
+                <?php endif; ?>
+                <!--<img width=50 height=80 src=<?= AmbilFotoArtikel(urldecode($data['gambar']), 'kecil') ?>>-->
               </div>
               <div class="product-info">
-              <?php if ($this->CI->cek_hak_akses('u')): ?>
-                <a href="<?= site_url("web/form/$data[id]")?>" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
-                </a>
-                <?php else: ?>
+                <?php if ($this->CI->cek_hak_akses('u')) : ?>
+                  <a href="<?= site_url("web/form/$data[id]") ?>" class="product-title" alt="<?= $data['judul'] ?>"><?= $data['judul'] ?>
+                  </a>
+                <?php else : ?>
                   <?= $data['judul'] ?>
                 <?php endif; ?>
                 <span class="product-description">
