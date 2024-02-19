@@ -14,10 +14,8 @@ class Ba_penduduk_sementara extends Admin_Controller {
 		parent::__construct();
 
 		$this->load->model(['pamong_model', 'penduduk_model_ba', 'referensi_model']);
-
 		$this->modul_ini = 300;
 		$this->sub_modul_ini = 303;
-
 		$this->_set_page = ['10', '20', '50', '100'];
 		$this->_list_session = ['filter_tahun', 'filter_bulan', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik'];
 	}

@@ -23,23 +23,20 @@ class Ba_penduduk_induk extends Admin_Controller {
 	}
 
     public function index($page_number = 1, $order_by = 0)
-    {
-        $per_page = $this->input->post('per_page');
-        if (isset($per_page)) {
-            $this->session->per_page = $per_page;
-        }
+	{
+		// Hanya menampilkan data status_dasar HIDUP, HILANG
+		$this->session->status_dasar = [1, 4];
+		// Menampilkan hanya status penduduk TETAP
+		$this->session->status_penduduk = 1;
 
-        // Hanya menampilkan data status_dasar HIDUP, HILANG
-        $this->session->status_dasar = [1, 4];
-
-        // Menampilkan hanya status penduduk TETAP
-        $this->session->status_penduduk = 1;
+		if ($this->input->post('per_page')) $this->session->per_page = $this->input->post('per_page');
 
         $data      = [
             'main_content' => 'ba/penduduk/induk/content_induk',
             'subtitle'     => 'Buku Induk Penduduk',
             'selected_nav' => 'penduduk_induk',
-            //'order_by'     => $order_by,
+			'p' => $page_number,
+			'o' => $order_by,
             'cari'         => $this->session->cari ?: '',
             'filter'       => $this->session->filter ?: '',
             'bulan'        => $this->session->filter_bulan,
@@ -51,12 +48,13 @@ class Ba_penduduk_induk extends Admin_Controller {
 			'main'			=>$this->penduduk_model_ba->list_data($order_by,  $page_number, $data['paging']->offset, $data['paging']->per_page),
 		];
 
-        // TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
+		// TODO : Cari cara agar bisa digabungkan ke array $data = [] (tdk terpisah)
 		//$data['main'] = $this->penduduk_model_ba->list_data($order_by, $data['paging']->offset, $data['paging']->per_page);
 
-
+		$this->set_minsidebar(1);
         $this->render('ba/penduduk/main', $data);
     }
+
 
 	private function clear_session()
 	{
