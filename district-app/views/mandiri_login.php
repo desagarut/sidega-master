@@ -103,7 +103,7 @@
 					<div class="col-md-4">
 						<div class="card-body">
 							<div class="brand-wrapper" align="center">
-								<a href="<?= site_url('first'); ?>"><img src="<?= gambar_desa($header['logo']); ?>" alt="<?= $header['nama_desa'] ?>" class="img-responsive" /></a>
+								<a href="<?= site_url('first'); ?>"><img src="<?= gambar_desa($header['logo']); ?>" alt="<?= $header['nama_desa'] ?>" class="img-responsive" style="width:100px; height:100px" /></a>
 							</div>
 							<h1 align="center" style="font-size:18px">Login Warga <?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?> </h1>
 
@@ -141,7 +141,7 @@
 							</form>
 
 							<h4 class="col-md-12 text-center">
-								<a class="btn btn-lg btn-warning mr-2 mb-2" href="<?= site_url('first'); ?>"> Ke Beranda</a>
+								<a class="btn btn-lg btn-warning mr-2 mb-2" href="<?= site_url('first'); ?>"> Website</a>
 								<a class="btn btn-lg btn-success mr-2 mb-2" href="https://wa.me/+62<?= $header['telepon'] ?>?text=Assalamu'alaikum%2C%20Perkenalkan%20saya%20warga%20desa%20<?= $header['nama_desa'] ?>%2C%20Saya%20ingin%20mengakses%20layanan%20masyarakat%2C%20Apakah%20Bapak/Ibu%20dapat%20membantu%3F%20" target="_blank" title="Hubungi via whatsapp"> <i class="fa fa-whatsapp"></i> Hubungi </a>
 								<a class="btn btn-lg btn-primary mr-2 mb-2" href="<?= site_url('insidega'); ?>">Login Manajemen</a>
 							</h4>
