@@ -150,7 +150,7 @@
 				</div>
 			</div>
 			<div class="credit text-center" style="color:black">
-				<a href="https://desagarut.net" target="_blank">SIDeGa (Sistem Informasi Desa Garut) - </a> Inspirasi untuk desa & kelurahan di
+				<a href="https://desagarut.id" target="_blank">SIDeGa (Sistem Informasi Desa Garut) - </a> Inspirasi untuk desa & kelurahan di
 				<strong><a href="https://garutkab.go.id" target="_blank">Kabupaten Garut</a></a>.</strong>
 			</div>
 		</div>
