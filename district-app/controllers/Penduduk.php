@@ -55,7 +55,7 @@ class Penduduk extends Admin_Controller
 				} else {
 					$data['rt'] = '';
 				}
-			} else { 
+			} else {
 				$data['rw'] = '';
 			}
 		} else {
@@ -81,12 +81,12 @@ class Penduduk extends Admin_Controller
 	}
 
 	public function form_peristiwa($peristiwa = '')
-    {
-        $this->redirect_hak_akses('u');
-        // Acuan jenis peristiwa berada pada ref_peristiwa
-        $this->session->jenis_peristiwa = $peristiwa;
-        $this->form();
-    }
+	{
+		$this->redirect_hak_akses('u');
+		// Acuan jenis peristiwa berada pada ref_peristiwa
+		$this->session->jenis_peristiwa = $peristiwa;
+		$this->form();
+	}
 
 	public function form($p = 1, $o = 0, $id = '')
 	{
