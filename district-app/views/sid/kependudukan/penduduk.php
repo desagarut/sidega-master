@@ -24,7 +24,7 @@
 		});
 	});
 </script>
-
+<!--
 <style>
 	.input-sm {
 		padding: 4px 4px;
@@ -40,7 +40,7 @@
 		min-height: 400px;
 	}
 </style>
-
+-->
 
 <div class="content-wrapper">
 	<section class="content-header">

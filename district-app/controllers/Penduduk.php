@@ -12,7 +12,7 @@ class Penduduk extends Admin_Controller
 		$this->modul_ini 		= 2;
 		$this->sub_modul_ini 	= 21;
 		$this->_set_page 		= ['20', '50', '100'];
-		$this->_list_session 	= ['filter_tahun', 'filter_bulan', 'status_hanya_tetap', 'jenis_peristiwa', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'penerima_bantuan', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik', 'suku', 'bpjs_ketenagakerjaan', 'nik_sementara'];
+		$this->_list_session = ['filter_tahun', 'filter_bulan', 'status_hanya_tetap', 'jenis_peristiwa', 'filter', 'status_dasar', 'sex', 'agama', 'dusun', 'rw', 'rt', 'cari', 'umur_min', 'umur_max', 'umurx', 'pekerjaan_id', 'status', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk', 'judul_statistik', 'cacat', 'cara_kb_id', 'akta_kelahiran', 'status_ktp', 'id_asuransi', 'status_covid', 'bantuan_penduduk', 'log', 'warganegara', 'menahun', 'hubungan', 'golongan_darah', 'hamil', 'kumpulan_nik', 'suku', 'bpjs_ketenagakerjaan', 'nik_sementara', 'tag_id_card'];
 	}
 
 	private function clear_session()
@@ -36,19 +36,19 @@ class Penduduk extends Admin_Controller
 
 		foreach ($this->_list_session as $list) {
 			if (in_array($list, ['dusun', 'rw', 'rt'])) {
-				$$list = $this->session->$list;
+				${$list} = $this->session->{$list};
 			} else {
-				$data[$list] = $this->session->$list ?: '';
+				$data[$list] = $this->session->{$list} ?: '';
 			}
 		}
 
 		if (isset($dusun)) {
-			$data['dusun'] = $dusun;
+			$data['dusun']   = $dusun;
 			$data['list_rw'] = $this->wilayah_model->list_rw($dusun);
 
 			if (isset($rw)) {
-				$data['rw'] 		= $rw;
-				$data['list_rt'] 	= $this->wilayah_model->list_rt($dusun, $rw);
+				$data['rw']      = $rw;
+				$data['list_rt'] = $this->wilayah_model->list_rt($dusun, $rw);
 
 				if (isset($rt)) {
 					$data['rt'] = $rt;
@@ -63,22 +63,23 @@ class Penduduk extends Admin_Controller
 		}
 
 		$per_page = $this->input->post('per_page');
-		if (isset($per_page))
+		if (isset($per_page)) {
 			$this->session->per_page = $per_page;
+		}
 
-		$data['func'] = 'index';
-		$data['set_page'] = $this->_set_page;
-		$data['paging'] = $this->penduduk_model->paging($p, $o);
-		$data['main'] = $this->penduduk_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
-		$data['list_dusun'] = $this->wilayah_model->list_dusun();
-		$data['list_status_dasar'] = $this->referensi_model->list_data('tweb_status_dasar');
+		$data['func']                 = 'index';
+		$data['set_page']             = $this->_set_page;
+		$list_data                    = $this->penduduk_model->list_data($o, $p);
+		$data['paging']               = $list_data['paging'];
+		$data['main']                 = $list_data['main'];
+		$data['list_dusun']           = $this->wilayah_model->list_dusun();
+		$data['list_status_dasar']    = $this->referensi_model->list_data('tweb_status_dasar');
 		$data['list_status_penduduk'] = $this->referensi_model->list_data('tweb_penduduk_status');
-		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
-
-		$this->set_minsidebar(0);
+		$data['list_jenis_kelamin']   = $this->referensi_model->list_data('tweb_penduduk_sex');
 
 		$this->render('sid/kependudukan/penduduk', $data);
 	}
+
 
 	public function form_peristiwa($peristiwa = '')
 	{
@@ -585,10 +586,6 @@ class Penduduk extends Admin_Controller
 			case 'hubungan_kk':
 				$session = 'hubungan';
 				$kategori = 'HUBUNGAN DALAM KK : ';
-				break;
-			case 'covid':
-				$session = 'status_covid';
-				$kategori = 'STATUS COVID : ';
 				break;
 			case 'bantuan_penduduk':
 				$session = 'penerima_bantuan';

@@ -11,7 +11,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 	{
 		parent::__construct();
 
-		$this->load->model(['pamong_model', 'penduduk_model', 'referensi_model']);
+		$this->load->model(['pamong_model', 'penduduk_model_ba', 'referensi_model']);
 
 		$this->modul_ini = 300;
 		$this->sub_modul_ini = 303;
