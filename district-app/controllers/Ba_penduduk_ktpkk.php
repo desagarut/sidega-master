@@ -11,7 +11,7 @@ class Ba_penduduk_ktpkk extends Admin_Controller {
 
 		$this->load->model(['pamong_model', 'penduduk_model']);
 
-		$this->modul_ini     = 301;
+		$this->modul_ini     = 2;
 		$this->sub_modul_ini = 303;
 
 		$this->_set_page     = ['10', '20', '50', '100'];
@@ -45,7 +45,7 @@ class Ba_penduduk_ktpkk extends Admin_Controller {
 			'paging'       => $list_data['paging'],
 			'list_tahun'   => $this->penduduk_log_model->list_tahun(),
 		];
-		
+
 		$this->set_minsidebar(1);
 		$data['main'] = $list_data['main'];
 
