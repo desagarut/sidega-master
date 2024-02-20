@@ -13,7 +13,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 
 		$this->load->model(['pamong_model', 'penduduk_model', 'laporan_bulanan_model', 'laporan_sinkronisasi_model']);
 
-		$this->modul_ini     = 301;
+		$this->modul_ini     = 2;
 		$this->sub_modul_ini = 303;
 
 		$this->_set_page     = ['10', '20', '50', '100'];
@@ -46,6 +46,7 @@ class Ba_penduduk_rekapitulasi extends Admin_Controller {
 		];
 
 		$data['main'] = $this->laporan_bulanan_model->rekapitulasi_list($data['paging']->offset, $data['paging']->per_page);
+		$this->set_minsidebar(1);
 
 		$this->render('ba/penduduk/main', $data);
 	}

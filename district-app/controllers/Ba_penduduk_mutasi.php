@@ -10,7 +10,7 @@ class Ba_penduduk_mutasi extends Admin_Controller
 
 		$this->load->model(['pamong_model', 'penduduk_model', 'penduduk_log_model']);
 
-		$this->modul_ini     = 301;
+		$this->modul_ini     = 2;
 		$this->sub_modul_ini = 303;
 
 		$this->_set_page     = ['10', '20', '50', '100'];
