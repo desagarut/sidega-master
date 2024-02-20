@@ -54,6 +54,7 @@ class Ba_penduduk_mutasi extends Admin_Controller
 		if ($data['tgl_lengkap']) {
 			$this->session->tgl_lengkap = $data['tgl_lengkap'];
 		}
+		$this->set_minsidebar(1);
 
 		$this->render('ba/penduduk/main', $data);
 	}
