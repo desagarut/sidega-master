@@ -1,6 +1,7 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dpt extends Admin_Controller {
+class Dpt extends Admin_Controller
+{
 
 	private $set_page;
 	private $list_session;
@@ -22,54 +23,52 @@ class Dpt extends Admin_Controller {
 		redirect('dpt');
 	}
 
-	public function index($p=1, $o=0)
+	public function index($p = 1, $o = 0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-		foreach ($this->list_session as $list)
-		{
-			if (in_array($list, ['dusun', 'rw', 'rt']))
-				$$list = $this->session->$list;
-			else
-				$data[$list] = $this->session->$list ?: '';
-		}
-
-		if (isset($dusun))
-		{
-			$data['dusun'] = $dusun;
-			$data['list_rw'] = $this->penduduk_model->list_rw($dusun);
-
-			if (isset($rw))
-			{
-				$data['rw'] = $rw;
-				$data['list_rt'] = $this->penduduk_model->list_rt($dusun, $rw);
-
-				if (isset($rt))
-					$data['rt'] = $rt;
-				else $data['rt'] = '';
+		foreach ($this->list_session as $list) {
+			if (in_array($list, ['dusun', 'rw', 'rt'])) {
+				${$list} = $this->session->{$list};
+			} else {
+				$data[$list] = $this->session->{$list} ?: '';
 			}
-			else $data['rw'] = '';
 		}
-		else
-		{
+
+		if (isset($dusun)) {
+			$data['dusun']   = $dusun;
+			$data['list_rw'] = $this->wilayah_model->list_rw($dusun);
+
+			if (isset($rw)) {
+				$data['rw']      = $rw;
+				$data['list_rt'] = $this->wilayah_model->list_rt($dusun, $rw);
+
+				if (isset($rt)) {
+					$data['rt'] = $rt;
+				} else {
+					$data['rt'] = '';
+				}
+			} else {
+				$data['rw'] = '';
+			}
+		} else {
 			$data['dusun'] = $data['rw'] = $data['rt'] = '';
 		}
 
 		$per_page = $this->input->post('per_page');
-		if (isset($per_page))
+		if (isset($per_page)) {
 			$this->session->per_page = $per_page;
+		}
 
-		$data['func'] = 'index';
-		$data['set_page'] = $this->set_page;
-		$data['per_page'] = $this->session->per_page;
+		$data['func']               = 'index';
+		$data['set_page']           = $this->set_page;
+		$data['per_page']           = $this->session->per_page;
 		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
-		$data['list_dusun'] = $this->wilayah_model->list_dusun();
-		$data['paging'] = $this->dpt_model->paging($p, $o);
-		$data['main'] = $this->dpt_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
-		$data['keyword'] = $this->dpt_model->autocomplete();
-
-		$this->set_minsidebar(1);
+		$data['list_dusun']         = $this->wilayah_model->list_dusun();
+		$data['keyword']            = $this->dpt_model->autocomplete();
+		$data['paging']             = $this->dpt_model->paging($p, $o);
+		$data['main']               = $this->dpt_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 
 		$this->render('dpt/dpt', $data);
 	}
@@ -114,9 +113,8 @@ class Dpt extends Admin_Controller {
 
 	public function ajax_adv_search()
 	{
-		foreach ($this->list_session as $list)
-		{
-				$data[$list] = $this->session->$list ?: '';
+		foreach ($this->list_session as $list) {
+			$data[$list] = $this->session->$list ?: '';
 		}
 
 		$data['list_agama'] = $this->referensi_model->list_data('tweb_penduduk_agama');
@@ -134,21 +132,16 @@ class Dpt extends Admin_Controller {
 	{
 		$adv_search = $_POST;
 		$i = 0;
-		while ($i++ < count($adv_search))
-		{
+		while ($i++ < count($adv_search)) {
 			$col[$i] = key($adv_search);
-				next($adv_search);
+			next($adv_search);
 		}
 		$i = 0;
-		while ($i++ < count($col))
-		{
-			if ($adv_search[$col[$i]] == "")
-			{
-				UNSET($adv_search[$col[$i]]);
-				UNSET($_SESSION[$col[$i]]);
-			}
-			else
-			{
+		while ($i++ < count($col)) {
+			if ($adv_search[$col[$i]] == "") {
+				unset($adv_search[$col[$i]]);
+				unset($_SESSION[$col[$i]]);
+			} else {
 				$_SESSION[$col[$i]] = $adv_search[$col[$i]];
 			}
 		}
