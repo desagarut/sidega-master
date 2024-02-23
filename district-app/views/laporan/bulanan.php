@@ -1,46 +1,49 @@
 <div class="content-wrapper">
-	<section class="content-header">
-		<h1>Laporan Kependudukan Bulanan</h1>
-		<ol class="breadcrumb">
-			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Home</a></li>
-			<li class="active">Laporan Kependudukan Bulanan</li>
-		</ol>
-	</section>
-	<section class="content" id="maincontent">
-		<form id="mainform" name="mainform" action="<?= site_url('laporan')?>" method="post" class="form-horizontal">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-info">
+  <section class="content-header">
+    <h1>Laporan Kependudukan Bulanan</h1>
+    <ol class="breadcrumb">
+      <li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
+      <li class="active">Laporan Kependudukan Bulanan</li>
+    </ol>
+  </section>
+  <section class="content" id="maincontent">
+    <form id="mainform" name="mainform" action="<?= site_url('laporan') ?>" method="post" class="form-horizontal">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
             <div class="box-header with-border">
-							<a href="<?= site_url("{$this->controller}/dialog_cetak")?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Laporan" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Laporan"><i class="fa fa-print "></i> Cetak</a>
-							<a href="<?= site_url("{$this->controller}/dialog_unduh")?>" title="Unduh Laporan" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh Laporan" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Laporan"><i class="fa fa-download"></i> Unduh XLS</a>
-						</div>
-						<div class="box-body">
-							<div class="row">
-								<div class="col-sm-12">
-                  <h4 class="text-center"><strong>PEMERINTAH KABUPATEN <?= strtoupper($config['nama_kabupaten'])?></strong></h4>
+              <a href="<?= site_url("{$this->controller}/dialog_cetak") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Laporan" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Cetak Laporan"><i class="fa fa-print "></i> Cetak</a>
+              <a href="<?= site_url("{$this->controller}/dialog_unduh") ?>" title="Unduh Laporan" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh Laporan" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Unduh Laporan"><i class="fa fa-download"></i> Unduh XLS</a>
+              <a href="<?= site_url('penduduk/clear'); ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-user"></i>Master Penduduk</a>
+              <a href="<?= site_url('keluarga/clear'); ?>" class="btn btn-social btn-box btn-primary btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-users"></i>Master Keluarga</a>
+              <a href="<?= site_url('statistik'); ?>" class="btn btn-social btn-box bg-orange btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-bar-chart"></i>Statistik Penduduk</a>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h4 class="text-center"><strong>PEMERINTAH KABUPATEN <?= strtoupper($config['nama_kabupaten']) ?></strong></h4>
                   <h5 class="text-center"><strong>LAPORAN PERKEMBANGAN PENDUDUK (LAMPIRAN A - 9)</strong></h5>
-                  <br/>
-									<div class="form-group">
-                    <label class="col-sm-2 control-label" for="kelurahan"><?= ucwords($this->setting->sebutan_desa)?></label>
+                  <br />
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="kelurahan"><?= ucwords($this->setting->sebutan_desa) ?></label>
                     <div class="col-sm-7 col-md-5">
-                      <input type="text" class="form-control input-sm" value="<?= $config['nama_desa']?>" disabled/></input>
+                      <input type="text" class="form-control input-sm" value="<?= $config['nama_desa'] ?>" disabled /></input>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" for="kecamatan"><?= ucwords($this->setting->sebutan_kecamatan)?></label>
+                    <label class="col-sm-2 control-label" for="kecamatan"><?= ucwords($this->setting->sebutan_kecamatan) ?></label>
                     <div class="col-sm-7 col-md-5">
-                      <input type="text" class="form-control input-sm" value="<?= $config['nama_kecamatan']?>" disabled/></input>
+                      <input type="text" class="form-control input-sm" value="<?= $config['nama_kecamatan'] ?>" disabled /></input>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label" for="tahun">Tahun</label>
                     <div class="col-sm-2">
-                      <input name="tahun" placeholder="Tahun" type="text" class="form-control input-sm required" value="<?= $tahun ?>"  onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?=site_url("laporan/bulan")?>');$('#'+'mainform').submit();}" /></input>
+                      <input name="tahun" placeholder="Tahun" type="text" class="form-control input-sm required" value="<?= $tahun ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("laporan/bulan") ?>');$('#'+'mainform').submit();}" /></input>
                     </div>
-										<label class="col-sm-2 col-md-1 control-label" for="tahun">Bulan</label>
+                    <label class="col-sm-2 col-md-1 control-label" for="tahun">Bulan</label>
                     <div class="col-sm-3 col-md-2">
-                      <select class="form-control input-sm" name="bulan" onchange="formAction('mainform','<?= site_url('laporan/bulan')?>')" width="100%">
+                      <select class="form-control input-sm" name="bulan" onchange="formAction('mainform','<?= site_url('laporan/bulan') ?>')" width="100%">
                         <option value="">Pilih bulan</option>
                         <option value="1" <?php selected($bulan, "1"); ?>>Januari</option>
                         <option value="2" <?php selected($bulan, "2"); ?>>Februari</option>
@@ -57,20 +60,19 @@
                       </select>
                     </div>
                   </div>
-									<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-										<div class="row">
-											<div class="col-sm-12">
-												<?php include ("district-app/views/laporan/tabel_bulanan.php"); ?>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-	</section>
+                  <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <?php include("district-app/views/laporan/tabel_bulanan.php"); ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
 </div>
-

@@ -28,7 +28,7 @@ class Statistik extends Admin_Controller {
 		$data['stat_bantuan'] = $this->program_bantuan_model->list_program(0);
 		$data['judul_kelompok'] = "Jenis Kelompok";
 		$this->get_data_stat($data, $data['lap']);
-
+		$this->set_minsidebar(1);
 		$this->render('statistik/penduduk', $data);
 	}
 

@@ -68,6 +68,8 @@
 						</li>
 					</ul>
 				</div>
+				<a href="<?= site_url('penduduk/clear'); ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-user"></i>Master Penduduk</a>
+				<a href="<?= site_url('statistik'); ?>" class="btn btn-social btn-box bg-orange btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-bar-chart"></i>Statistik Penduduk</a>
 				<a href="<?= site_url("{$this->controller}/clear") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-refresh"></i>Bersihkan Filter</a>
 			</div>
 			<div class="box-body">
