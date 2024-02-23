@@ -587,90 +587,95 @@ class Penduduk_model extends MY_Model
 			->join('ref_status_covid cv', 'cv.id = c.status_covid', 'left');
 	}
 
+	// TODO : Apakah function ini masih digunakan?
 	public function list_data_map()
 	{
 		//Main Query
-		$sql = "SELECT u.id, u.nik, u.nama, map.lat, map.lng, a.dusun, a.rw, a.rt, u.foto, d.no_kk AS no_kk,
-					(SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`tanggallahir`)), '%Y')+0
-					FROM tweb_penduduk
-					WHERE id = u.id) AS umur,
-				x.nama AS sex, sd.nama AS pendidikan_sedang, n.nama AS pendidikan, p.nama AS pekerjaan, k.nama AS kawin, g.nama AS agama, m.nama AS gol_darah, hub.nama AS hubungan,
-				@alamat:=trim(concat_ws('',
-					case
-						when a.rt != '-' then concat('RT-', a.rt)
-						else ''
-					end,
-					case
-						when a.rw != '-' then concat('RW-', a.rw)
-						else ''
-					end,
-					case
-						when a.dusun != '-' then concat('Dusun ', a.dusun)
-						else ''
-					end
-				)),
-				case
-					when length(@alamat) > 0 then @alamat
-					else 'Alamat penduduk belum valid'
-				end as alamat
-				FROM tweb_penduduk u
-				LEFT JOIN tweb_wil_clusterdesa a ON u.id_cluster = a.id
-				LEFT JOIN tweb_wil_clusterdesa a2 ON u.id_cluster = a2.id
-				LEFT JOIN tweb_keluarga d ON u.id_kk = d.id
-				LEFT JOIN tweb_penduduk_pendidikan_kk n ON u.pendidikan_kk_id = n.id
-				LEFT JOIN tweb_penduduk_pendidikan sd ON u.pendidikan_sedang_id = sd.id
-				LEFT JOIN tweb_penduduk_pekerjaan p ON u.pekerjaan_id = p.id
-				LEFT JOIN tweb_penduduk_kawin k ON u.status_kawin = k.id
-				LEFT JOIN tweb_penduduk_sex x ON u.sex = x.id
-				LEFT JOIN tweb_penduduk_agama g ON u.agama_id = g.id
-				LEFT JOIN tweb_penduduk_warganegara v ON u.warganegara_id = v.id
-				LEFT JOIN tweb_golongan_darah m ON u.golongan_darah_id = m.id
-				LEFT JOIN tweb_cacat f ON u.cacat_id = f.id
-				LEFT JOIN tweb_penduduk_hubungan hub ON u.kk_level = hub.id
-				LEFT JOIN tweb_sakit_menahun j ON u.sakit_menahun_id = j.id
-				LEFT JOIN tweb_penduduk_map map ON u.id = map.id ";
+		$this->db
+			->select(
+		"u.id, u.nik, u.nama, u.sex as id_sex, map.lat, map.lng, a.dusun, a.rw, a.rt, u.foto, d.no_kk AS no_kk,
+					DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`tanggallahir`)), '%Y')+0	AS umur,
+						x.nama AS sex, sd.nama AS pendidikan_sedang, n.nama AS pendidikan, p.nama AS pekerjaan, k.nama AS kawin, g.nama AS agama, m.nama AS gol_darah, hub.nama AS hubungan,
+						@alamat:=trim(concat_ws('',
+							case
+								when a.rt != '-' then concat('RT-', a.rt)
+								else ''
+							end,
+							case
+								when a.rw != '-' then concat('RW-', a.rw)
+								else ''
+							end,
+							case
+								when a.dusun != '-' then concat('Dusun ', a.dusun)
+								else ''
+							end
+						)),
+						case
+							when length(@alamat) > 0 then @alamat
+							else 'Alamat penduduk belum valid'
+						end as alamat")
+		->from('tweb_penduduk u')
+		->join('tweb_penduduk_map map', 'u.id = map.id')
+		->join('tweb_wil_clusterdesa a', 'u.id_cluster = a.id', 'left')
+		->join('tweb_wil_clusterdesa a2', 'u.id_cluster = a2.id', 'left')
+		->join('tweb_keluarga d', 'u.id_kk = d.id', 'left')
+		->join('tweb_penduduk_pendidikan_kk n', 'u.pendidikan_kk_id = n.id', 'left')
+		->join('tweb_penduduk_pendidikan sd', 'u.pendidikan_sedang_id = sd.id', 'left')
+		->join('tweb_penduduk_pekerjaan p', 'u.pekerjaan_id = p.id', 'left')
+		->join('tweb_penduduk_kawin k', 'u.status_kawin = k.id', 'left')
+		->join('tweb_penduduk_sex x', 'u.sex = x.id', 'left')
+		->join('tweb_penduduk_agama g', 'u.agama_id = g.id', 'left')
+		->join('tweb_penduduk_warganegara v', 'u.warganegara_id = v.id', 'left')
+		->join('tweb_golongan_darah m', 'u.golongan_darah_id = m.id', 'left')
+		->join('tweb_cacat f', 'u.cacat_id = f.id', 'left')
+		->join('tweb_penduduk_hubungan hub', 'u.kk_level = hub.id', 'left')
+		->join('tweb_sakit_menahun j', 'u.sakit_menahun_id = j.id', 'left');
 
-		$sql .= " WHERE 1 ";
-		$sql .= $this->keluarga_sql();
-		$sql .= $this->search_sql();
-		$sql .= $this->dusun_sql();
-		$sql .= $this->rw_sql();
-		$sql .= $this->rt_sql();
+		$this->keluarga_sql();
+		$this->search_sql();
+		$this->dusun_sql();
+		$this->rw_sql();
+		$this->rt_sql();
 
 		// Filter data penduduk juga digunakan untuk laporan statistik kependudukan di peta.
 		// Filter untuk statistik kependudukan menggunakan kode yang ada di daftar STAT_PENDUDUK di referensi_model.php
-		$kolom_kode = array(
-			array('filter', 'u.status'), // Status : Hidup, Mati, Dll -> Load data awal (filtering combobox)
-			array('status_penduduk', 'u.status'), // Status : Hidup, Mati, Dll -> Hanya u/ Pencarian Spesifik
-			array('status_dasar', 'u.status_dasar'), // Kode 6
-			array('sex', 'u.sex'), // Kode 4
-			array('pendidikan_kk_id', 'u.pendidikan_kk_id'), // Kode 0
-			array('cacat', 'u.cacat_id'), // Kode 9
-			array('cara_kb_id', 'u.cara_kb_id'), // Kode 16
-			array('menahun', 'u.sakit_menahun_id'), // Kode 10
-			array('status', 'u.status_kawin'), // Kode 2
-			array('pendidikan_sedang_id', 'u.pendidikan_sedang_id'), // Kode 14
-			array('pekerjaan_id', 'u.pekerjaan_id'), // Kode 1
-			array('agama', 'u.agama_id'), // Kode 3
-			array('warganegara', 'u.warganegara_id'), // Kode 5
-			array('golongan_darah', 'u.golongan_darah_id'), // Kode 7
-			array('hubungan', 'u.kk_level'), // Kode 11
-			array('id_asuransi', 'u.id_asuransi'), // Kode 19
-		);
+		$kolom_kode = [
+			['filter', 'u.status'], // Status : Hidup, Mati, Dll -> Load data awal (filtering combobox)
+			['status_penduduk', 'u.status'], // Status : Hidup, Mati, Dll -> Hanya u/ Pencarian Spesifik
+			['status_dasar', 'u.status_dasar'], // Kode 6
+			['sex', 'u.sex'], // Kode 4
+			['pendidikan_kk_id', 'u.pendidikan_kk_id'], // Kode 0
+			['cacat', 'u.cacat_id'], // Kode 9
+			['cara_kb_id', 'u.cara_kb_id'
+			], // Kode 16
+			['menahun', 'u.sakit_menahun_id'], // Kode 10
+			['status', 'u.status_kawin'], // Kode 2
+			['pendidikan_sedang_id', 'u.pendidikan_sedang_id'], // Kode 14
+			['pekerjaan_id', 'u.pekerjaan_id'], // Kode 1
+			['agama', 'u.agama_id'], // Kode 3
+			['warganegara', 'u.warganegara_id'], // Kode 5
+			['golongan_darah', 'u.golongan_darah_id'], // Kode 7
+			['hubungan', 'u.kk_level'], // Kode 11
+			['id_asuransi', 'u.id_asuransi'], // Kode 19
+			['status_covid', 'cv.id'], // Kode covid
+			['suku', 'u.suku'], // Kode suku
+			['bpjs_ketenagakerjaan', 'u.bpjs_ketenagakerjaan'], // Kode bpjs_ketenagakerjaan
+		];
+
 		foreach ($kolom_kode as $kolom) {
 			// Gunakan cara ini u/ filter sederhana
-			$sql .= $this->get_sql_kolom_kode($kolom[0], $kolom[1]);
+			$this->get_sql_kolom_kode($kolom[0], $kolom[1]);
 		}
 
-		$sql .= $this->status_ktp_sql(); // Kode 18
-		$sql .= $this->umur_min_sql(); // Kode 13, 15
-		$sql .= $this->umur_max_sql(); // Kode 13, 15
-		$sql .= $this->umur_sql(); // Kode 13, 15
-		$sql .= $this->akta_kelahiran_sql(); // Kode 17
-		$sql .= $this->hamil_sql(); // Filter blum digunakan
+		$this->status_ktp_sql(); // Kode 18
+		$this->umur_min_sql(); // Kode 13, 15
+		$this->umur_max_sql(); // Kode 13, 15
+		$this->umur_sql(); // Kode 13, 15
+		$this->akta_kelahiran_sql(); // Kode 17
+		$this->hamil_sql(); // Filter blum digunakan
+		$this->tag_id_card_sql(); // Filter blum digunakan
 
-		$query = $this->db->query($sql);
-		return $query->result_array();
+		return $this->db->get()->result_array();
 	}
 
 	public function validasi_data_penduduk(&$data)
