@@ -110,6 +110,32 @@ class Plan extends Admin_Controller {
 		$this->render("lokasi/maps", $data);
 	}
 
+	public function ajax_lokasi_maps_koordinat($p = 1, $o = 0, $id = '')
+	{
+		$data['p'] = $p;
+		$data['o'] = $o;
+		if ($id) {
+			$data['lokasi'] = $this->plan_lokasi_model->get_lokasi($id);
+		} else {
+			$data['lokasi'] = NULL;
+		}
+
+		$data['desa'] = $this->config_model->get_data();;
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['all_lokasi'] = $this->plan_lokasi_model->list_data();
+		$data['all_garis'] = $this->plan_garis_model->list_data();
+		$data['all_area'] = $this->plan_area_model->list_data();
+		$data['form_action'] = site_url("plan/update_maps/$p/$o/$id");
+
+		//$this->render("lokasi/maps_koordinat", $data);
+		$this->load->view('lokasi/maps_koordinat', $data);
+	}
+
+
 	public function ajax_lokasi_maps_osm($p = 1, $o = 0, $id = '')
 	{
 		$data['p'] = $p;
