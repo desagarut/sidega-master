@@ -59,7 +59,7 @@ class Masuk extends Web_Controller
 
     public function cek()
     {
-        $this->mandiri_model->siteman();
+        $this->mandiri_model->insidega();
         redirect('layanan-mandiri');
     }
 
