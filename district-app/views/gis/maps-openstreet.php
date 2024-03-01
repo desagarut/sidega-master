@@ -78,7 +78,7 @@
 				var content;
 				var point_style = L.icon({
 					iconUrl: '<?= base_url(LOKASI_SIMBOL_LOKASI) ?>penduduk.png',
-				//	iconUrl: '<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>',
+					//	iconUrl: '<?= AmbilFoto($penduduk['foto'], '', $penduduk['id_sex']) ?>',
 					iconSize: [29, 36],
 					iconAnchor: [13, 36],
 					popupAnchor: [0, -28],
@@ -161,10 +161,13 @@
 <style>
 	#map {
 		width: 100%;
-		height:86vh;
+		height: auto;
+		border: 1px solid;
+		border-color: green;
+		padding: auto;
 	}
 </style>
-<div class="content-wrapper" style="padding: 30px 0px 0px 0px">
+<div class="content-wrapper">
 	<form id="mainform_map" name="mainform_map" action="" method="post">
 		<div class="row">
 			<div class="col-md-12">
