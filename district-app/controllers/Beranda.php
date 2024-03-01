@@ -23,6 +23,7 @@ class Beranda extends Admin_Controller {
 		$this->load->model('laporan_penduduk_model');
 		$this->load->model('pamong_model');
 		$this->load->model('config_model');
+		$this->load->model('setting_model');
 		$this->load->model('dpt_model');
 
 		//Update 5.5.5
@@ -85,7 +86,6 @@ class Beranda extends Admin_Controller {
 		// Pembangunan
 		$data['pelaksanaan_total'] = $this->header_model->rkp_total();
 
-
 		//Rekapitulasi SPPT PBB
 		$data['pbb_terhutang'] = $this->data_sppt_model->rekapitulasi('');
         $data['data'] = $this->data_sppt_model->rekapitulasi();
@@ -100,8 +100,6 @@ class Beranda extends Admin_Controller {
 		$data['artikel'] = $this->first_artikel_m->artikel_show(0,3,0);
 		//update v5.7.0
 		$data['gallery_cctv'] = $this->first_cctv_m->cctv(0,1,0);
-
-
 
 		//Pertanahan
 		$data['letterc_total'] = $this->header_model->letterc_total();

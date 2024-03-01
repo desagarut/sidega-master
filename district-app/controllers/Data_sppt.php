@@ -385,7 +385,7 @@ class Data_sppt extends Admin_Controller {
 	public function cek_nomor($nomor)
 	{
 		$id_sppt = $this->input->post('id');
-		if ($id_sppt) $this->db->where('id <>', $id_sppt);
+		if ($id_sppt) $this->db->where('id =', $id_sppt);
 		$ada = $this->db
 			->where('nomor', $nomor)
 			->get('tbl_data_sppt')->num_rows();

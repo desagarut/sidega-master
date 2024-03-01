@@ -31,42 +31,48 @@
 				<?php $this->load->view('home/peta.php'); ?>
 			</div>
 			<div class="col-md-4">
+				<?php $this->load->view('home/selamat_datang.php'); ?>
 				<?php $this->load->view('home/link_tupoksi.php'); ?>
 				<?php $this->load->view('home/umkm.php'); ?>
+
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<?php $this->load->view('home/umkm.php'); ?>
+			</div>
+			<div class="col-md-8">
 				<?php $this->load->view('home/layanan.php'); ?>
 			</div>
 		</div>
+
 		<div class='row'>
-			<?php //$this->load->view('home/layanan.php');
-			?>
-		</div>
-		<div class='row'>
-			<div class="col-md-3">
-				<?php $this->load->view('home/rekap_sppt.php'); ?>
-			</div>
 			<div class="col-md-3">
 				<?php $this->load->view('home/pertanahan.php'); ?>
 			</div>
 			<div class="col-md-3">
-				<?php $this->load->view('home/kependudukan_2.php'); ?>
+				<?php $this->load->view('home/rekap_sppt.php'); ?>
 			</div>
 			<div class="col-md-3">
 				<?php $this->load->view('home/pembangunan.php'); ?>
 			</div>
-		</div>
-		<div class='row'>
-			<div class="col-md-12">
-				<?php $this->load->view('home/artikel.php'); ?>
-				<?php $this->load->view('home/gallery.php'); ?>
-				<?php $this->load->view('home/gallery_youtube.php'); ?>
-				<?php $this->load->view('home/cctv.php'); ?>
-				<?php $this->load->view('home/video.php'); ?>
-			</div>
-		</div>
-		<div class='row'>
 			<div class="col-md-3">
-				<?php $this->load->view('home/helpdesk.php'); ?>
+				<?php $this->load->view('home/kependudukan_2.php'); ?>
 			</div>
+		</div>
+		<div class='row'>
+			<div class="col-md-4">
+				<?php $this->load->view('home/artikel.php'); ?>
+			</div>
+			<div class="col-md-4">
+				<?php $this->load->view('home/gallery.php'); ?>
+			</div>
+			<div class="col-md-4">
+				<?php $this->load->view('home/gallery_youtube.php'); ?>
+			</div>
+		</div>
+		<div class='row'>
 			<div class="col-md-3">
 				<?php $this->load->view('home/aparat_login.php'); ?>
 			</div>
@@ -75,9 +81,16 @@
 			</div>
 			<div class="col-md-3">
 				<?php $this->load->view('home/pengunjung.php'); ?>
-				<?php //$this->load->view('home/artikel.php'); 
-				?>
+			</div>
+			<?php $this->load->view('home/video.php'); ?>
+		</div>
+		<div class='row'>
+			<?php $this->load->view('home/helpdesk.php'); ?>
+			<div class="col-md-4">
 				<?php $this->load->view('home/changelog.php'); ?>
+			</div>
+			<div class="col-md-4">
+				<?php $this->load->view('home/cctv.php'); ?>
 			</div>
 		</div>
 	</section>
