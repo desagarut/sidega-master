@@ -59,16 +59,18 @@
                           <form id="mainform" name="mainform" action="" method="post">
                             <div class="row">
                               <div class="col-sm-12">
-                                <div class="col-sm-6">
-                                  <h4 class="text-left"><strong>DAFTAR SPPT PBB</strong></h4>
-                                </div>
-                                <div class="col-sm-6">
-                                  <div class="box-tools">
-                                    <div class="input-group input-group-sm pull-right">
-                                      <input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" value="<?= html_escape($cari) ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("data_persil/search") ?>');$('#'+'mainform').submit();}">
-                                      <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("data_sppt/search") ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
-                                      </div>
+                                <h4 class="text-left"><strong>MASTER DATA SPPT PBB</strong></h4>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-9">
+                              </div>
+                              <div class="col-sm-3">
+                                <div class="box-tools">
+                                  <div class="input-group input-group-sm pull-right">
+                                    <input name="cari" id="cari" class="form-control" placeholder="Cari..." type="text" value="<?= html_escape($cari) ?>" onkeypress="if (event.keyCode == 13){$('#'+'mainform').attr('action', '<?= site_url("data_persil/search") ?>');$('#'+'mainform').submit();}">
+                                    <div class="input-group-btn">
+                                      <button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?= site_url("data_sppt/search") ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
                                     </div>
                                   </div>
                                 </div>

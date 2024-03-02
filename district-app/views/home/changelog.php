@@ -10,8 +10,13 @@
     <p><strong>Perubahan pada versi
         <?= AmbilVersi() ?></strong>
     <ul class="text-left">
-      Update peta Google:
-      <li>Peta Wilayah Desa, Dusun, RW, RT, Lokasi dll</li>
+      Fix Bugs
+      <li>- Peta Wilayah</li>
+      <li>- SPPT PBB</li>
+      <li>- Layout Beranda, Penambahan Blok Informasi Desa/Kelurahan pada halaman beranda kanan atas</li>
+      <li>- Tabel Penduduk, Penambahan Tombol Master Keluarga, Laporan, Statistik Penduduk, Log Penduduk</li>
+      <li>- Tabel Keluarga, Penambahan Tombol Master Penduduk, Laporan, Statistik Penduduk</li>
+      <li>- Laporan Kependudukan, Penambahan Tombol Master Keluarga, Master Penduduk</li>
     </ul>
     </p>
   </div>

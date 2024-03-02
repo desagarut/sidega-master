@@ -16,7 +16,7 @@ class Data_sppt extends Admin_Controller {
 		$this->modul_ini = 7;
 		$this->sub_modul_ini = 316;
 		$this->set_page = ['20', '50', '100'];
-		$this->list_session = ['cari'];
+		$this->list_session = ['cari', 'tahun_awal', 'nama_wp', 'nama_wp_lokal'];
 	}
 
 	public function clear()
@@ -39,7 +39,21 @@ class Data_sppt extends Admin_Controller {
 		$this->session->cari = $this->input->post('cari') ?: NULL;
 		redirect('data_sppt');
 	}
-	
+
+	public function filter($filter)
+	{
+		if ($filter == "tahun_awal") $this->session->unset_userdata(['nama_wp_luar', 'nama_wp']);
+		if ($filter == "tipe") $this->session->unset_userdata('jenis_wp');
+
+		$value = $this->input->post($filter);
+
+		if ($value != "")
+			$this->session->$filter = $value;
+		else $this->session->unset_userdata($filter);
+
+		redirect('data_sppt');
+	}
+
 	public function index($page=1, $o=0)
 	{
 		$this->tab_ini = 20;
@@ -52,9 +66,13 @@ class Data_sppt extends Admin_Controller {
 		$data['func'] = 'index';
 		$data['set_page'] = $this->set_page;
 		$data['paging']  = $this->data_sppt_model->paging_data_sppt($page);
-//		$data["deskel"] = $this->config_model->get_data();
+//		$data["desa"] = $this->config_model->get_data();
 		$data["data_sppt"] = $this->data_sppt_model->list_data_sppt($data['paging']->offset, $data['paging']->per_page);
-		
+
+		$per_page = $this->input->post('per_page');
+		if (isset($per_page))
+			$this->session->per_page = $per_page;
+
 		$data['rupiah'] = function($angka){
             $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
             return $hasil_rupiah;
@@ -86,7 +104,6 @@ class Data_sppt extends Admin_Controller {
 		$this->render('data_sppt/sppt_detail', $data);
 	}
 
-
 	public function sppt_form($mode=0, $id=0)
 	{
 		$this->load->helper('form');
@@ -110,14 +127,14 @@ class Data_sppt extends Admin_Controller {
 			switch ($post['jenis_wp'])
 			{
 				case '1':
-					# Pemilik deskel
+					# Pemilik Terdata SIDeGa
 					if (!empty($post['nik']))
 					{
 						$data['wajib_pajak'] = $this->data_sppt_model->get_penduduk($post['nik'], $nik=true);
 					}
 					break;
 				case '2':
-					# Pemilik luar deskel
+					# Pemilik Tidak Terdata SIDeGa
 					$data['sppt']['jenis_wp'] = 2;
 					break;
 			}
@@ -135,23 +152,23 @@ class Data_sppt extends Admin_Controller {
 		{
 			case '0':
 				// Buka form ubah pertama kali
-				if ($data['sppt']['jenis_wp'] == 1)
+				if ($data['data_sppt']['jenis_wp'] == 1)
 				{
 					$data['wajib_pajak'] = $this->data_sppt_model->get_wajib_pajak($id);
 				}
 				break;
 			case '1':
-				// Ubah atau ambil wajib_pajak deskel
+				// Ubah atau ambil wajib_pajak desa
 				$data['wajib_pajak'] = $this->data_sppt_model->get_wajib_pajak($id);
 				if ($post['nik'] and $$data['wajib_pajak']['nik'] != $post['nik'])
 				{
 					$data['wajib_pajak'] = $this->data_sppt_model->get_penduduk($post['nik'], $nik=true);
 				}
-				$data['sppt']['jenis_wp'] = $jenis_wp_baru;
+				$data['data_sppt']['jenis_wp'] = $jenis_wp_baru;
 				break;
 			case '2':
 				// Ubah wajib_pajak luar
-				$data['sppt']['jenis_wp'] = $jenis_wp_baru;
+				$data['data_sppt']['jenis_wp'] = $jenis_wp_baru;
 				break;
 		}
 	}
@@ -254,22 +271,22 @@ class Data_sppt extends Admin_Controller {
 			switch ($post['jenis_wp'])
 			{
 				case '1':
-					# Pemilik deskel
+					# Pemilik desa
 					if (!empty($post['nik']))
 					{
 						$data['wajib_pajak'] = $this->data_sppt_model->get_penduduk($post['nik'], $nik=true);
 					}
 					break;
 				case '2':
-					# Pemilik luar deskel
+					# Pemilik luar desa
 					$data['sppt']['jenis_wp'] = 2;
 					break;
 			}
 		}
 		$this->load->view('data_sppt/tagihan_tambah', $data);
 	}
-	
-	public function simpan_tagihan($page=1)
+
+	public function simpan_tagihan()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -322,7 +339,7 @@ class Data_sppt extends Admin_Controller {
 		$data['ubah_tagih'] = $this->data_sppt_model->get_data_tagih($id);
 
 		$this->load->view('data_sppt/tagihan_ubah', $data);
-		//		status_sukses($outp); //Tampilkan Pesan
+		status_sukses($outp); //Tampilkan Pesan
 
 	}
 
@@ -448,7 +465,7 @@ class Data_sppt extends Admin_Controller {
 
 	public function form_data_sppt($id=0)
 	{
-		$data['deskel'] = $this->config_model->get_data();
+		$data['desa'] = $this->config_model->get_data();
 		$data['sppt'] = $this->data_sppt_model->get_data_sppt($id);
 		//$data['basah'] = $this->data_sppt_model->get_cetak_mutasi($id, 'BASAH');
 		//$data['kering'] = $this->data_sppt_model->get_cetak_mutasi($id, 'KERING');
@@ -463,8 +480,8 @@ class Data_sppt extends Admin_Controller {
 			$data['lokasi_op'] = NULL;
 		}
 
-		$data['deskel'] = $this->config_model->get_data();;
-		$sebutan_deskel = ucwords($this->setting->sebutan_deskel);
+		$data['desa'] = $this->config_model->get_data();;
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
 		$data['wil_atas'] = $this->config_model->get_data();
 		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
