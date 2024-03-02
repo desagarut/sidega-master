@@ -42,17 +42,9 @@ class Data_sppt_tagih extends Admin_Controller {
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
 		$config['last_tagl_close']  = '</span></li>';
 		
-		//$this->pagination->initialize($config);
 		$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
 		$data['datas'] = $this->data_sppt_tagih_model->fetchData($config['per_page'], $data['page']);
 
-       // $data['pagination'] = $this->pagination->create_links();
-
-       // $data['content'] = 'contents/datasppt/index';
-
-		//$this->load->view('app', $data);
-		
 		$this->render('data_sppt/tagihan_daftar', $data);
     }
 

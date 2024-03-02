@@ -233,14 +233,12 @@ class Data_sppt extends Admin_Controller {
 
 		$this->render('data_sppt/tagihan_daftar', $data);
 	}
-	
-	public function tagihan_tambah($mode=0, $id=0)
+
+	public function form_tagih($mode = 0, $id = 0)
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
-
-//		$this->tab_ini = empty($mode) ? 21 : 21;
 
 		$post = $this->input->post();
 		$data = array();
@@ -269,7 +267,6 @@ class Data_sppt extends Admin_Controller {
 			}
 		}
 		$this->load->view('data_sppt/tagihan_tambah', $data);
-		//$this->render('data_sppt/tagihan_tambah', $data);
 	}
 	
 	public function simpan_tagihan($page=1)
