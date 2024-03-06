@@ -12,7 +12,7 @@
 	public function list_all()
 	{
 		$tema_sistem = glob('themes/*' , GLOB_ONLYDIR);
-		$tema_desa = glob('desa/themes/*' , GLOB_ONLYDIR);
+		$tema_desa = glob('instansi/themes/*' , GLOB_ONLYDIR);
 		$tema_semua = array_merge($tema_sistem, $tema_desa);
 		$list_tema = array();
 		foreach ($tema_semua as $tema){

@@ -32,7 +32,7 @@ class Folder_desa_model extends CI_Model {
 	public function amankan_folder_desa()
 	{
 		$this->salin_file('desa', 'index.html', 'desa-contoh/index.html');
-		$this->salin_file('desa/upload', '.htaccess', 'desa-contoh/upload/media/.htaccess');
+		$this->salin_file('instansi/upload', '.htaccess', 'desa-contoh/upload/media/.htaccess');
 	}
 
 	public function salin_file($cek, $cari, $contoh)

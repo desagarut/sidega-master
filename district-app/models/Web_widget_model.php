@@ -341,10 +341,10 @@
 
 		foreach ($tema_desa as $tema)
 		{
-			$tema = str_replace('desa/', '', $tema);
+			$tema = str_replace('instansi/', '', $tema);
 
 			if($tema !== 'hijau' OR $tema !== 'umkm')
-				$list = $this->widget('desa/themes/'.$tema.'/widgets/*.php');
+				$list = $this->widget('instansi/themes/'.$tema.'/widgets/*.php');
 
 			$list_widget = array_merge($list_widget, $list);
 		}

@@ -2190,12 +2190,12 @@ class Database_model extends MY_Model
         $this->db->query($query);
         // Tambah folder desa/upload/media
         if (! file_exists('/desa/upload/media')) {
-            mkdir('desa/upload/media');
-            xcopy('desa-contoh/upload/media', 'desa/upload/media');
+            mkdir('instansi/upload/media');
+            xcopy('instansi-contoh/upload/media', 'instansi/upload/media');
         }
         if (! file_exists('/desa/upload/thumbs')) {
-            mkdir('desa/upload/thumbs');
-            xcopy('desa-contoh/upload/thumbs', 'desa/upload/thumbs');
+            mkdir('instansi/upload/thumbs');
+            xcopy('desa-contoh/upload/thumbs', 'instansi/upload/thumbs');
         }
         // Tambah kolom kode di tabel kelompok
         if (! $this->db->field_exists('kode', 'kelompok')) {
@@ -3576,12 +3576,12 @@ class Database_model extends MY_Model
 
         // Kecuali folder
         $exclude = [
-            'desa/config',
-            'desa/themes',
+            'instansi/config',
+            'instansi/themes',
         ];
 
         // Kosongkan folder desa dan copy isi folder desa-contoh
-        foreach (glob('desa/*', GLOB_ONLYDIR) as $folder) {
+        foreach (glob('instansi/*', GLOB_ONLYDIR) as $folder) {
             if (! in_array($folder, $exclude)) {
                 delete_files(FCPATH . $folder, true);
             }

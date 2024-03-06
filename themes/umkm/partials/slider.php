@@ -41,7 +41,7 @@
           <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> 
             <!-- Start Small Banner -->
             <div class="hero-small-banner"
-                                style="background-image: url('<?php echo base_url('desa/logo/umkm_juara.jpg')?>');">
+                                style="background-image: url('<?php echo base_url('instansi/logo/umkm_juara.jpg')?>');">
               <div class="content" style="padding-top:180px">
                 <h2 style="color:#FC0; text-shadow: 4px 4px 4px #081828; -webkit-text-stroke: 0.25px #081828;"> "Tinggal di desa, Rezeki kota, Bisnis mendunia" </h2>
                 <h3 style="text-shadow: 4px 4px 4px #FFF;">~ Ridwan Kamil ~</h3>

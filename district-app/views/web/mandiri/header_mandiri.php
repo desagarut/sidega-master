@@ -13,7 +13,7 @@
 
 <body class="hold-transition <?= $this->setting->warna_tema_admin; ?> sidebar-mini fixed">
 <div class="wrapper">
-  <header class="main-header"> <a href="<?=site_url()?>mandiri_web"  target="_blank" class="logo"> <span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'desa/logo/logo.png'; ?>" class="img-circle logo-desa" alt="User Image" width="27px"></span> <span class="logo-lg logo-text"><img src="<?php echo base_url().'desa/logo/logo.png'; ?>" class="img-circle logo-desa" alt="User Image" width="27px"><small> Layanan
+  <header class="main-header"> <a href="<?=site_url()?>mandiri_web"  target="_blank" class="logo"> <span class="logo-mini logo-text" style="padding-top:7px"><img src="<?php echo base_url().'instansi/logo/logo.png'; ?>" class="img-circle logo-desa" alt="User Image" width="27px"></span> <span class="logo-lg logo-text"><img src="<?php echo base_url().'instansi/logo/logo.png'; ?>" class="img-circle logo-desa" alt="User Image" width="27px"><small> Layanan
     <?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?>
     </small> </span> </a>
     <nav class="navbar navbar-static-top"> <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"> <span class="sr-only">Toggle navigation</span> </a>

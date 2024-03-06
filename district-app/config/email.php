@@ -22,5 +22,5 @@ $config['bcc_batch_mode'] = false;                // TRUE or FALSE (boolean)	Ena
 $config['bcc_batch_size'] = 200;                  // None	Number of emails in each BCC batch.
 $config['dsn']            = false;                // TRUE or FALSE (boolean)	Enable notify message from server
 
-// Ganti pegaturan basisdata sesuai yg ada pada file desa/config/config.php
+// Ganti pegaturan basisdata sesuai yg ada pada file instansi/config/config.php
 include LOKASI_CONFIG_DESA . 'config.php';

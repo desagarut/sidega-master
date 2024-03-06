@@ -77,7 +77,7 @@ class Release
 
 	/**
 	 * Set lokasi folder cache.
-	 * Misalkan diisi 'desa/config' maka file cache akan
+	 * Misalkan diisi 'instansi/config' maka file cache akan
 	 * disimpan di [FCPATH]/desa/config/version.json
 	 * Jika folder tidak ditemuakan atau tidak writable
 	 * maka akan fallback ke path default (FCPATH/version.json)

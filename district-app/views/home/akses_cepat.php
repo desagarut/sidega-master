@@ -25,7 +25,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-body">
                         <a href="http://prodeskel.binapemdes.kemendagri.go.id/mpublik/" target="_blank" class="btn btn-block btn-social btn-success">
-                            <span class="info-box-icon bg-clear"><img src="<?php echo base_url().'desa/logo/kemdagri.png'; ?>" class="img-circle" alt="" width="70px"></span> PRODESKEL
+                            <span class="info-box-icon bg-clear"><img src="<?php echo base_url().'instansi/logo/kemdagri.png'; ?>" class="img-circle" alt="" width="70px"></span> PRODESKEL
                           </a>
                         <!-- /.info-box -->
        <!--             </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-body">
                         <a href="http://epdeskel.kemendagri.go.id/app_Login/" target="_blank" class="btn btn-block btn-social btn-success">
-                            <span class="info-box-icon bg-clear"><img src="<?php echo base_url().'desa/logo/kemdagri.png'; ?>" class="img-circle" alt="" width="70px"></span> EPDESKEL
+                            <span class="info-box-icon bg-clear"><img src="<?php echo base_url().'instansi/logo/kemdagri.png'; ?>" class="img-circle" alt="" width="70px"></span> EPDESKEL
                           </a>
                         <!-- /.info-box -->
                   <!--  </div>

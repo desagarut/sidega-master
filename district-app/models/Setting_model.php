@@ -102,7 +102,7 @@ class Setting_model extends CI_Model {
 		}
 		$this->setting->user_admin = config_item('user_admin');
 		// Kalau folder tema ubahan tidak ditemukan, ganti dengan tema default
-		$pos = strpos($this->setting->web_theme, 'desa/');
+		$pos = strpos($this->setting->web_theme, 'instansi/');
 		if ($pos !== false)
 		{
 			$folder = FCPATH . '/instansi/themes/' . substr($this->setting->web_theme, $pos + strlen('instansi/'));

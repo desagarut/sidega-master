@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta name="description" content="Website Resmi <?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>">
 
     <?php defined('THEME_VERSION') or define('THEME_VERSION', 'V 5.6') ?>
 
@@ -18,7 +17,7 @@
     <meta name='designer' content='Bambang Andri H' />
     <meta name='theme:designer' content='Bambang Andri H' />
     <meta name="theme:version" content="<?= THEME_VERSION ?>" />
-    <meta name="theme-color" content="#06BBCC"/>
+    <meta name="theme-color" content="#06BBCC" />
     <meta name="keywords" content="<?= ucfirst($this->setting->sebutan_desa) . ' ' . ucwords($desa['nama_desa']) ?>, sidega, SIDEGA, SIDeGa, sistem informasi desa garut, web, blog, informasi, website, tema sidega-blue, desa garut, kelurahan garut, kecamatan garut, kabupaten garut, Jawa Barat, indonesia" />
     <meta property="og:site_name" content="<?= $website_title ?>" />
     <meta property="og:type" content="article" />
