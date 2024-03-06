@@ -23,26 +23,22 @@ if (!empty($html)) {
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp bg-dark" data-wow-delay="0.1s" style="padding: 10px 10px 10px 10px">
-                <h4 class="mb-5 text-light text-center">KABAR DESA GARUT</h4>
+                <h4 class="mb-2 text-light text-center">SOROTAN DESA GARUT</h4>
                     <div class="course-item ">
                         <div class="position-relative overflow-hidden text-center"><img class="img-fluid" src="' . $RowCariGambar->nodeValue . '">' . '</div></div>';
         };
         foreach ($CariJudul as $RowCariJudul) {
-            echo '<div class="col-lg-12 " style="padding: 10px 10px 10px 10px"><h4 class="mb-4 text-light text-center">' . $RowCariJudul->nodeValue . '</h4>';
+            echo '<div class="col-lg-12 " style="padding: 10px 10px 10px 10px"><h4 class="mb-3 text-light text-center">' . $RowCariJudul->nodeValue . '</h4>';
         };
 
         foreach ($CariSubjudul as $RowCariSubjudul) {
-            echo '<p class="text-center">Penulis : ' . $RowCariSubjudul->nodeValue . '</p>';
+            echo '<p class="text-center">Penulis : ' . $RowCariSubjudul->nodeValue . '<br>';
         };
-
-
-        // foreach ($CariDeskripsi as $RowCariDeskripsi) {
-        //    echo $RowCariDeskripsi->nodeValue . '<br>';
-        // };
 
         foreach ($CariUrl as $RowCariUrl) {
             echo '<a class="btn btn-sm btn-primary py-3 px-5 mt-2 text-center" href="' . $RowCariUrl->nodeValue
-                . '">Baca Selengkapnya </a></div>
+                . '">Baca Selengkapnya </a></p></div>
+        
 </div>
 </div>
 </div>
