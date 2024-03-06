@@ -12,4 +12,4 @@
 <?php $this->load->view($folder_themes . '/partials/gallery_front') ?>
 <?php $this->load->view($folder_themes . '/partials/gallery_youtube_front') ?>
 <?php $this->load->view($folder_themes . '/partials/cctv_front') ?>
-<?php $this->load->view($folder_themes . '/partials/weblain/info_desa_garut') ?>
+<?php $this->load->view($folder_themes . '/partials/weblain/sorotan_desa_garut') ?>
