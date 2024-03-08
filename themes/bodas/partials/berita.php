@@ -7,14 +7,15 @@
     base_url($this->theme_folder . '/' . $this->theme . '/assets/images/placeholder.png') ?>
 
 <!-- Berita Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-3">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center text-primary px-3">Berita</h6>
+            <h6 class="section-title bg-white text-center text-primary px-3">Info</h6>
             <h1 class="mb-5">Terkini</h1>
         </div>
         <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp bg-light" data-wow-delay="0.1s" style="padding: 10px 10px 10px 10px">
+            <div class="col-lg-6 wow fadeInUp shadow" data-wow-delay="0.1s" style="padding: 10px 10px 10px 10px">
+                <h5 class="py-3 bg-light text-dark text-center">Topik Utama</h5>
                 <div class="course-item ">
                     <div class="position-relative overflow-hidden text-center">
                         <?php if ($headline['gambar']) : ?>
@@ -24,16 +25,14 @@
                         <?php endif; ?>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="padding: 10px 10px 10px 10px">
-                <h6 class="section-title bg-white text-start text-primary pe-3">Sorotan</h6>
-                <h1 class="mb-4"><?= $headline['judul'] ?></h1>
+                <h5 class="py-3"><?= $headline['judul'] ?></h5>
                 <p class="mb-4"><?= $abstract ?></p>
-                <small class="flex-fill py-2"><i class="fa fa-user-tie text-primary me-2"></i><?= tgl_indo($headline['tgl_upload']) ?></small>&nbsp;&nbsp;
-                <small class="flex-fill py-2"><i class="fa fa-clock text-primary me-2"></i> <?= $headline['owner'] ?></small><br />
+                <small class="flex-fill py-2"><i class="fa fa-clock text-primary me-2"></i><?= tgl_indo($headline['tgl_upload']) ?></small>&nbsp;&nbsp;
+                <small class="flex-fill py-2"><i class="fa fa-user-tie text-primary me-2"></i> <?= $headline['owner'] ?></small><br />
                 <small class="flex-fill py-2"><a class="btn btn-sm btn-warning py-3 px-5 mt-2" href="<?= $url ?>">Baca</a></small>
                 <small class="flex-fill py-2"><a class="btn btn-sm btn-primary py-3 px-5 mt-2" href="<?= site_url('arsip') ?>">Semua Berita</a></small>
             </div>
+            <?php $this->load->view($folder_themes . '/partials/weblain/sorotan_desa_garut') ?>
         </div>
         <div class="row py-2">
             <?php $this->load->view($folder_themes . '/partials/artikel_single') ?>
