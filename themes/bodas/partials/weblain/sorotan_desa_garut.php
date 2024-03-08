@@ -46,7 +46,7 @@
                     <a class="btn btn-sm btn-primary py-3 px-5 mt-2 text-center" width="80px" target="_blank" href="https://desagarut.id/">BPJS Ketenagakerjaan </a>
                     <a class="btn btn-sm btn-warning py-3 px-5 mt-2 text-center" width="80px" target="_blank" href="https://desagarut.id/">Pendaftaran NIB </a>
                     <a class="btn btn-sm btn-warning py-3 px-5 mt-2 text-center" target="_blank" href="https://desagarut.id/">Sertifikat Halal </a>
-                    <a class="btn btn-sm btn-warning py-3 px-5 mt-2 text-center" target="_blank" href="https://desagarut.id/">Cek Bansos </a>
+                    <a class="btn btn-sm btn-warning py-3 px-5 mt-2 text-center" target="_blank" href="https://cekbansos.kemensos.go.id/">Cek Bansos </a>
                     <a class="btn btn-sm btn-warning py-3 px-5 mt-2 text-center" target="_blank" href="https://desagarut.id/">Internet Desa</a>
 
                 </div>
