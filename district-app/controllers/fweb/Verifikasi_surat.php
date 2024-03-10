@@ -11,7 +11,7 @@ class Verifikasi_surat extends Web_Controller
     public function cek($alias = null)
     {
         $cek = $this->url_shortener_model->get_url($alias);
-        if (! $cek) {
+        if (!$cek) {
             show_404();
         }
 
@@ -34,22 +34,21 @@ class Verifikasi_surat extends Web_Controller
         $data['config'] = $this->header;
         $data['surat']  = $this->keluar_model->verifikasi_data_surat($id_decoded, $this->header['kode_desa']);
         $data['desa'] = $this->config_model->get_data();
-        
-		$this->_get_common_data($data);
 
-        if (! $data['surat']) {
+        $this->_get_common_data($data);
+
+        if (!$data['surat']) {
             show_404();
         }
 
-       $this->load->view($this->fallback_default($this->theme, '/partials/verifikasi_surat/index.php'), $data);
+        $this->load->view($this->fallback_default($this->theme, '/partials/verifikasi_surat/index.php'), $data);
     }
 
     private function _get_common_data(&$data)
-	{
-		$data['desa'] = $this->config_model->get_data();
-		$data['menu_atas'] = $this->first_menu_m->list_menu_atas();
-		$data['menu_atas'] = $this->first_menu_m->list_menu_atas();
-		$data['menu_kiri'] = $this->first_menu_m->list_menu_kiri();
-	}
-
+    {
+        $data['desa'] = $this->config_model->get_data();
+        $data['menu_atas'] = $this->first_menu_m->list_menu_atas();
+        $data['menu_atas'] = $this->first_menu_m->list_menu_atas();
+        $data['menu_kiri'] = $this->first_menu_m->list_menu_kiri();
+    }
 }

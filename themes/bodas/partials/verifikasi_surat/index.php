@@ -75,7 +75,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="text-center">
-					<img class="logo" src="<?= gambar_desa($config['logo']); ?>" alt="logo-desa" style="width: 50px">
+					<img class="logo py-2" src="<?= gambar_desa($desa['logo']); ?>" alt="logo-desa" style="width: 100px">
 					<h4 class="mb-5">Pemerintah <?= ucwords($this->setting->sebutan_kabupaten . ' ' . $desa['nama_kabupaten']); ?><br />
 						<?= ucwords($this->setting->sebutan_kecamatan . ' ' . $desa['nama_kecamatan']); ?><br />
 						<?= ucwords($this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?>
@@ -88,7 +88,7 @@
 						<table>
 							<tbody>
 								<tr>
-									<td colspan="3"><u><b>Menyatakan Bahwa :</b></u></td>
+									<td colspan="3"><b>Menyatakan Bahwa :</b></td>
 								</tr>
 								<tr>
 									<td width="30%">Nomor Surat</td>
@@ -106,17 +106,17 @@
 									<td><?= "Surat " . $surat->perihal; ?></td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td><?= "a/n " . $surat->nama_penduduk ?? $surat->nama_non_warga; ?></td>
+									<td>Pemohon</td>
+									<td>:</td>
+									<td><strong><?= $surat->nama_penduduk ?? $surat->nama_non_warga; ?></strong></td>
 								</tr>
 								<tr>
-									<td colspan="3"><u><b>Ditandatangani oleh :</b></u></td>
+									<td colspan="3"><b>Ditandatangani oleh :</b></td>
 								</tr>
 								<tr>
 									<td>Nama</td>
 									<td>:</td>
-									<td><?= $surat->pamong_nama; ?></td>
+									<td><strong><?= $surat->pamong_nama; ?></strong></td>
 								</tr>
 								<tr>
 									<td>Jabatan</td>
@@ -126,10 +126,11 @@
 							</tbody>
 						</table>
 					</div>
-
-					<div class="btn btn-success btn-box py-2">
-						<h5>Surat tersebut adalah benar dan tercatat dalam database sistem informasi kami.</h5>
-					</div>
+				</div>
+			</div>
+			<div class="row py-4">
+				<div class="btn btn-primary btn-box py-2 pt-2">
+					<h6 class="text-light">Surat tersebut adalah benar dan tercatat dalam database sistem informasi kami.</h6>
 				</div>
 			</div>
 		</div>
