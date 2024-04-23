@@ -38,10 +38,9 @@ define('KOLOM_IMPOR_KELUARGA', serialize([
     'status_rekam'         => '34',
     'alamat_sekarang'      => '35',
     'status_dasar'         => '36',
-    'suku'                 => '37',
-    'tag_id_card'          => '38',
-    'id_asuransi'          => '39',
-    'no_asuransi'          => '40',
+    'tag_id_card'          => '37',
+    'created_at'          => '38',
+    'updated_at'          => '39',
 ]));
 
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
@@ -332,6 +331,8 @@ class Import_model extends CI_Model
         $isi_baris['status_dasar']         = $this->get_konversi_kode($this->kode_status_dasar, $rowData[$kolom_impor_keluarga['status_dasar']]);
         $isi_baris['suku']                 = $this->cek_kosong($rowData[$kolom_impor_keluarga['suku']]);
         $isi_baris['tag_id_card']          = $this->cek_kosong($rowData[$kolom_impor_keluarga['tag_id_card']]);
+        $isi_baris['created_at']          = $this->cek_kosong($rowData[$kolom_impor_keluarga['created_at']]);
+        $isi_baris['updated_at']          = $this->cek_kosong($rowData[$kolom_impor_keluarga['updated_at']]);
         $isi_baris['id_asuransi']          = $this->get_konversi_kode($this->kode_asuransi, trim($rowData[$kolom_impor_keluarga['id_asuransi']]));
         $isi_baris['no_asuransi']          = trim($rowData[$kolom_impor_keluarga['no_asuransi']]);
 
@@ -428,12 +429,12 @@ class Import_model extends CI_Model
         $this->error_tulis_penduduk = null;
 
         // Siapkan data penduduk
-        $kolom_baris = ['nama', 'nik', 'id_kk', 'kk_level', 'sex', 'tempatlahir', 'tanggallahir', 'agama_id', 'pendidikan_kk_id', 'pendidikan_sedang_id', 'pekerjaan_id', 'status_kawin', 'warganegara_id', 'nama_ayah', 'nama_ibu', 'golongan_darah_id', 'akta_lahir', 'dokumen_pasport', 'tanggal_akhir_paspor', 'dokumen_kitas', 'ayah_nik', 'ibu_nik', 'akta_perkawinan', 'tanggalperkawinan', 'akta_perceraian', 'tanggalperceraian', 'cacat_id', 'cara_kb_id', 'hamil', 'id_cluster', 'ktp_el', 'status_rekam', 'alamat_sekarang', 'alamat_sebelumnya', 'status_dasar', 'suku', 'tag_id_card', 'id_asuransi', 'no_asuransi'];
+        $kolom_baris = ['nama', 'nik', 'id_kk', 'kk_level', 'sex', 'tempatlahir', 'tanggallahir', 'agama_id', 'pendidikan_kk_id', 'pendidikan_sedang_id', 'pekerjaan_id', 'status_kawin', 'warganegara_id', 'nama_ayah', 'nama_ibu', 'golongan_darah_id', 'akta_lahir', 'dokumen_pasport', 'tanggal_akhir_paspor', 'dokumen_kitas', 'ayah_nik', 'ibu_nik', 'akta_perkawinan', 'tanggalperkawinan', 'akta_perceraian', 'tanggalperceraian', 'cacat_id', 'cara_kb_id', 'hamil', 'id_cluster', 'ktp_el', 'status_rekam', 'alamat_sekarang', 'alamat_sebelumnya', 'status_dasar', 'tag_id_card', 'created_at', 'updated_at'];
 
         foreach ($kolom_baris as $kolom) {
             $data[$kolom] = $isi_baris[$kolom];
         }
-
+ 
         $data['status'] = '1';  // penduduk impor dianggap aktif
         // Jangan masukkan atau update isian yang kosong
         foreach ($data as $key => $value) {
@@ -492,7 +493,7 @@ class Import_model extends CI_Model
             if ($data['status_dasar'] == -1) {
                 $data['status_dasar'] = 9;
             } // Tidak Valid
-            $data['created_at'] = date('Y-m-d H:i:s');
+           // $data['created_at'] = date('Y-m-d H:i:s');
             $data['created_by'] = $this->session->user;
             if (! $this->db->insert('tweb_penduduk', $data)) {
                 $this->error_tulis_penduduk = $this->db->error();
@@ -501,7 +502,7 @@ class Import_model extends CI_Model
 
             // Insert ke log_penduduk pada penduduk baru
             $log['tgl_peristiwa']  = $data['created_at'];
-            $log['kode_peristiwa'] = 5;
+            $log['kode_peristiwa'] = $data['status_dasar'];
             $log['tgl_lapor']      = $data['created_at'];
             $log['id_pend']        = $penduduk_baru;
             $log['created_by']     = $data['created_by'];

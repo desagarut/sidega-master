@@ -32,9 +32,11 @@
         kantorDesa = new google.maps.Marker({
             position: center,
             map: PetaDesa,
-           // title: 'Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?>'.true,
-           // icon: '<?= gambar_desa($main['logo']); ?>',
-           content: "Tampilan Info Window",
+            // title: 'Kantor <?php //echo ucwords($this->setting->sebutan_desa) . " " 
+                                ?><?php //echo ucwords($main['nama_desa']) 
+                                    ?>'.true,
+            // icon: '<?= gambar_desa($main['logo']); ?>',
+            content: "Tampilan Info Window",
 
         });
 
@@ -61,7 +63,7 @@
             batasWilayah.setMap(PetaDesa)
 
             var infowindow = new google.maps.InfoWindow({
-                content: "<div class='media text-center'><img src='<?= gambar_desa($main['kantor_desa'], TRUE); ?>' width='140px' height='100px'><br/> <p>Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?></p></div>"
+                content: "<div class='media text-center'><img src='<?= gambar_desa($main['kantor_desa'], true); ?>' width='140px' height='100px'><br/> <p>Kantor <?php echo ucwords($this->setting->sebutan_desa, true) . " "?><?php echo ucwords($main['nama_desa']) ?></p></div>"
             });
             infowindow.open(PetaDesa, kantorDesa);
 

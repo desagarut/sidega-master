@@ -66,7 +66,8 @@
 				<?php $this->load->view('home/artikel.php'); ?>
 			</div>
 			<div class="col-md-4">
-				<?php $this->load->view('home/gallery.php'); ?>
+				<?php $this->load->view('home/gallery.php');
+				?>
 			</div>
 			<div class="col-md-4">
 				<?php $this->load->view('home/gallery_youtube.php'); ?>
@@ -80,7 +81,8 @@
 				<?php $this->load->view('home/warga_login.php'); ?>
 			</div>
 			<div class="col-md-3">
-				<?php $this->load->view('home/pengunjung.php'); ?>
+				<?php $this->load->view('home/pengunjung.php'); 
+				?>
 			</div>
 			<?php $this->load->view('home/video.php'); ?>
 		</div>
