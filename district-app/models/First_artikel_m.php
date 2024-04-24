@@ -145,11 +145,11 @@ class First_artikel_m extends CI_Model {
 				break;
 
 			case 'populer':
-				$this->db->order_by('a.hit', 'DESC');
+				$this->db->order_by('a.hit', DESC);
 				break;
 
 			default:
-				$this->db->order_by('a.tgl_upload', 'DESC');
+				$this->db->order_by('a.tgl_upload', DESC);
 				break;
 		}
 

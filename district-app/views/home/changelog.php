@@ -17,7 +17,6 @@
       <li>- Tabel Penduduk, Penambahan Tombol Master Keluarga, Laporan, Statistik Penduduk, Log Penduduk</li>
       <li>- Tabel Keluarga, Penambahan Tombol Master Penduduk, Laporan, Statistik Penduduk</li>
       <li>- Laporan Kependudukan, Penambahan Tombol Master Keluarga, Master Penduduk</li>
-      <li>- Export database penduduk, menambah kolom tgl dibuat dan diubah data penduduk</li>
     </ul>
     </p>
   </div>

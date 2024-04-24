@@ -162,7 +162,7 @@ class Laporan_penduduk_model extends MY_Model {
 
 	// -------------------- Siapkan data untuk statistik kependudukan -------------------
 
-	protected function hitung_total($data)
+	protected function hitung_total(&$data)
 	{
 		$total['no'] = "";
 		$total['id'] = TOTAL;
@@ -188,7 +188,7 @@ class Laporan_penduduk_model extends MY_Model {
 		}
 	}
 
-	protected function hitung_persentase($data, $semua)
+	protected function hitung_persentase(&$data, $semua)
 	{
 		// Hitung semua presentase
 		for ($i=0; $i<count($data); $i++)

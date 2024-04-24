@@ -1,4 +1,4 @@
-<!-- ======= Gallery Foto ======= -->
+<!-- ======= Gallery Youtube ======= -->
 
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -14,17 +14,16 @@
       <?php if ($data['gambar']) : ?>
         <ul class="products-list product-list-in-box">
           <li class="item">
-            <a href="<?= site_url("gallery/sub_gallery/{$data['id']}") ?>">
-              <div class="product-img">
-                <img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>
-              </div>
-              <div class="product-info">
-                <?= $data['nama'] ?>
-                <span class="product-description">
-                  <?= $data['tgl_upload'] ?>
-                </span>
-              </div>
-            </a>
+            <div class="product-img">
+              <img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>
+            </div>
+            <div class="product-info">
+              <a href="<?= site_url("gallery/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['nama'] ?>"><?= $data[nama] ?>
+              </a>
+              <span class="product-description">
+                <?= $data['tgl_upload'] ?>
+              </span>
+            </div>
           </li>
         </ul>
       <?php endif; ?>

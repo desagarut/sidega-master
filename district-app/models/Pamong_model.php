@@ -341,7 +341,7 @@ class Pamong_model extends CI_Model {
 		foreach ($data['daftar_perangkat'] as $key => $perangkat)
 		{
 			$perangkat['foto'] = AmbilFoto($perangkat['foto'], "besar");
-			if (!$data['foto_pertama'] and $perangkat['foto'] != 'FOTO_DEFAULT') $data['foto_pertama'] = $key;
+			if (!$data['foto_pertama'] and $perangkat['foto'] != FOTO_DEFAULT) $data['foto_pertama'] = $key;
 		 	$data['daftar_perangkat'][$key] = $perangkat;
 		}
 

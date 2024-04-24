@@ -316,7 +316,7 @@ class keuangan_grafik_manual_model extends CI_model {
 
 		return $data;
   }
-	/*
+
   public function grafik_keuangan_tema($tahun = NULL)
   {
 		if (is_null($tahun)) $tahun = date('Y');
@@ -365,50 +365,6 @@ class keuangan_grafik_manual_model extends CI_model {
 		$result['tahun'] = $tahun;
 		return $result;
   }
-*/
-	public function grafik_keuangan_tema($tahun = null)
-	{
-		if (null === $tahun) {
-			$tahun = date('Y');
-		}
-		$thn = $this->keuangan_manual_model->list_tahun_anggaran_manual();
-		if (empty($thn)) {
-			return null;
-		}
-
-		if (!in_array($tahun, $thn)) {
-			$tahun = $thn[0];
-		}
-		$raw_data = $this->data_keuangan_tema($tahun);
-
-		foreach ($raw_data as $keys => $raws) {
-			foreach ($raws as $key => $raw) {
-				if ($key == 'laporan') {
-					$result['data_widget'][$keys]['laporan'] = $raw;
-
-					continue;
-				}
-
-				$data['judul']     = $raw['nama'];
-				$data['anggaran']  = $raw['anggaran'];
-				$data['realisasi'] = $raw['realisasi'] + $raw['realisasi_pendapatan'] + $raw['realisasi_belanja'];
-
-				if ($data['anggaran'] != 0 && $data['realisasi'] != 0) {
-					$data['persen'] = $data['realisasi'] / $data['anggaran'] * 100;
-				} elseif ($data['realisasi'] != 0) {
-					$data['persen'] = 100;
-				} else {
-					$data['persen'] = 0;
-				}
-				$data['persen'] = round($data['persen'], 2);
-
-				$result['data_widget'][$keys][] = $data;
-			}
-		}
-		$result['tahun'] = $tahun;
-
-		return $result;
-	}
 
   /*
     lap_rp_apbd merupakan fungsi Akhir (Main) dari semua sub dan sub-sub fungsi :

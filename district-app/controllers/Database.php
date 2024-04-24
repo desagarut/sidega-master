@@ -145,10 +145,6 @@ class Database extends Admin_Controller {
 			['Alamat Sekarang', 'alamat_sekarang'],
 			['Status Dasar', 'status_dasar'],
             ['Tag ID Card', 'tag_id_card'],
-			['Tgl Dibuat', 'created_at'],
-			['Tgl Diubah', 'updated_at'],
-			['ID Asuransi', 'id_asuransi'],
-			['Nomor Asuransi', 'no_asuransi'],
 		];
 		if ($opendk)
 		{
@@ -278,8 +274,6 @@ class Database extends Admin_Controller {
 					$row->alamat_sekarang,
 					$row->status_dasar,
 					$row->tag_id_card,
-					$row->created_at,
-					$row->updated_at,
 					$row->suku,
 					$row->asuransi,
 					$row->no_asuransi,
