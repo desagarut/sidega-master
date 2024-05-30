@@ -2294,6 +2294,9 @@ class User_model extends CI_Model {
 
 				// kependudukan
 				'penduduk' => array('b', 'u', 'h'),
+				//'sid_core' => array('b', 'u'),
+				// wilayah
+				'wilayah' => array('b'),
 
 				// Penduduk
 				'penduduk_log' => array('b', 'u'),
