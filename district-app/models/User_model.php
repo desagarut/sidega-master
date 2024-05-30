@@ -2285,7 +2285,27 @@ class User_model extends CI_Model {
 
 				// notifikasi
 				'notif' => array('b','u')
-			)
+			),
+
+			// Enumerator
+			18 => array(
+				// home
+				'beranda' => array('b', 'u', 'h'),
+
+				// kependudukan
+				'penduduk' => array('b', 'u', 'h'),
+
+				// Penduduk
+				'penduduk_log' => array('b', 'u'),
+				'keluarga' => array('b', 'u', 'h'),
+				'rtm' => array('b', 'u'),
+				'kelompok' => array('b', 'u'),
+
+				// statistik
+				'statistik' => array('b', 'u'),
+				'laporan' => array('b', 'u'),
+				'laporan_rentan' => array('b', 'u'),
+			),
 		);
 		return in_array($akses, $hak_akses[$group][$controller[0]]);
 	}
