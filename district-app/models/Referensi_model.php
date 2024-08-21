@@ -44,11 +44,9 @@ define("LINK_TIPE", serialize([
 ]));
 
 // Statistik Penduduk
-define("STAT_PENDUDUK", serialize([
-	'13' => 'Umur (Rentang)',
-	'15' => 'Umur (Kategori)',
-	'0' => 'Pendidikan Dalam KK',
-	'14' => 'Pendidikan Sedang Ditempuh',
+define("STAT_PENDUDUK",
+	serialize([
+		'0' => 'Pendidikan Dalam KK',
 	'1' => 'Pekerjaan',
 	'2' => 'Status Perkawinan',
 	'3' => 'Agama',
@@ -59,6 +57,9 @@ define("STAT_PENDUDUK", serialize([
 	'7' => 'Golongan Darah',
 	'9' => 'Penyandang Cacat',
 	'10' => 'Penyakit Menahun',
+	'13' => 'Umur (Rentang)',
+	'14' => 'Pendidikan Sedang Ditempuh',
+	'15' => 'Umur (Kategori)',
 	'16' => 'Akseptor KB',
 	'17' => 'Akta Kelahiran',
 	'18' => 'Kepemilikan KTP',
