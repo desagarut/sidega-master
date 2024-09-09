@@ -42,7 +42,7 @@
 <!-- Start Open Web Analytics Tracker -->
 <script type="text/javascript">
 //<![CDATA[
-var owa_baseUrl = 'https://trace.desagarut.id/';
+var owa_baseUrl = 'https://pantau.desagarut.id/';
 var owa_cmds = owa_cmds || [];
 owa_cmds.push(['setSiteId', '<?= $this->setting->trace; ?>']);
 owa_cmds.push(['trackPageView']);
