@@ -688,7 +688,7 @@ class First extends Web_Controller
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
 		$data['list_ref'] = $this->referensi_model->list_ref(STAT_PENDUDUK);
-		$data['covid'] = $this->laporan_penduduk_model->list_data('covid');
+		//$data['covid'] = $this->laporan_penduduk_model->list_data('covid');
 		$data['lokasi'] = $this->plan_lokasi_model->list_lokasi();
 		$data['garis'] = $this->plan_garis_model->list_garis();
 		$data['area'] = $this->plan_area_model->list_area();
@@ -735,14 +735,14 @@ class First extends Web_Controller
 
 		$this->load->view('gis/aparatur_wilayah', $data);
 	}
-
+/*
 	public function ambil_data_covid()
 	{
 		if ($content = getUrlContent($this->input->post('endpoint'))) {
 			echo $content;
 		}
 	}
-
+*/
 	public function status_idm()
 	{
 		if (!$this->web_menu_model->menu_aktif('status_idm')) show_404();

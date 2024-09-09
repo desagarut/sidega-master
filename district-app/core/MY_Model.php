@@ -49,7 +49,7 @@ class MY_Model extends CI_Model {
 			case 'arsip':
 			case 'peraturan_desa':
 			case 'data_analisis':
-			case 'ambil_data_covid':
+			//case 'ambil_data_covid':
 			case 'informasi_publik':
 			case 'load_aparatur_desa':
 			case 'load_apbdes':

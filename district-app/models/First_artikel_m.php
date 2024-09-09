@@ -30,7 +30,7 @@ class First_artikel_m extends CI_Model {
 		}
 		return $data;
 	}
-
+/*
 	public function get_feed()
 	{
 		$sumber_feed = 'https://www.covid19.go.id/feed/';
@@ -41,7 +41,7 @@ class First_artikel_m extends CI_Model {
 		$items = array_slice($feed->items, 0, 5);
 		return $items;
 	}
-	
+	*/
 	public function get_widget()
 	{
 		$sql = "SELECT * FROM widget LIMIT 1 ";
