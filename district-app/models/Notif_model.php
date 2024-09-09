@@ -2,7 +2,7 @@
 
 class Notif_model extends CI_Model {
 
-	public function status_langganan()
+/*	public function status_langganan()
 	{
 		$this->load->library('data_publik');
 		$tracker_host = (ENVIRONMENT == 'development') ? $this->setting->dev_tracker : $this->setting->tracker;
@@ -30,7 +30,7 @@ class Notif_model extends CI_Model {
 		}
 		$status['masa'] = $masa_berlaku;
 		return $status;
-	}
+	}*/
 
 	public function permohonan_surat_baru()
 	{
