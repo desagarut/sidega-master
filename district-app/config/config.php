@@ -389,7 +389,7 @@ $config['encryption_key'] = 'KomunitasDesaGarut';
 */
 $config['sess_driver']             = 'files';
 $config['sess_cookie_name']        = 'sidega_session_demo_';
-$config['sess_expiration']         = 7200;
+$config['sess_expiration']         = 25200;
 $config['sess_save_path']          = sys_get_temp_dir();
 //$config['sess_save_path']          = NULL;
 $config['sess_match_ip']           = false;
@@ -542,9 +542,9 @@ $config['proxy_ips'] = '';
 | - Token Pantau (Default)
 |
 */
-$config['server_pantau'] = 'https://pantau.desagarut.id';
+//$config['server_pantau'] = 'https://pantau.desagarut.id';
 //$config['token_pantau']  = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6bnVsbCwidGltZXN0YW1wIjoxNjAzNDY2MjM5fQ.HVCNnMLokF2tgHwjQhSIYo6-2GNXB4-Kf28FSIeXnZw';
-$config['server_layanan'] = 'https://layanan.desagarut.id';
+//$config['server_layanan'] = 'https://layanan.desagarut.id';
 
 /*
 |--------------------------------------------------------------------------
