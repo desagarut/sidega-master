@@ -388,7 +388,7 @@ $config['encryption_key'] = 'KomunitasDesaGarut';
 |
 */
 $config['sess_driver']             = 'files';
-$config['sess_cookie_name']        = 'sidega_session_demo_';
+$config['sess_cookie_name']        = 'sidega_session_demo1_';
 $config['sess_expiration']         = 25200;
 $config['sess_save_path']          = sys_get_temp_dir();
 //$config['sess_save_path']          = NULL;
