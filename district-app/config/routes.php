@@ -52,8 +52,8 @@ $route['default_controller']   = 'first';
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = false;
 
-$route['sitemap\.xml'] = 'Sitemap/index';
-$route['feed\.xml']    = 'Feed/index';
+//$route['sitemap\.xml'] = 'Sitemap/index';
+//$route['feed\.xml']    = 'Feed/index';
 $route['ppid']         = 'Api_informasi_publik/ppid';
 
 // Artikel
@@ -100,7 +100,7 @@ $route['(:num)']             = 'first/index/$1';
 $route['arsip']              = 'first/arsip';
 $route['arsip/(:num)']       = 'first/arsip/$1';
 $route['add_comment/(:any)'] = 'first/add_comment/$1';
-$route['ambil_data_covid']   = 'first/ambil_data_covid';
+//$route['ambil_data_covid']   = 'first/ambil_data_covid';
 $route['load_apbdes']        = 'first/load_apbdes';
 $route['logout']             = 'first/logout';
 $route['ganti']              = 'first/ganti';
@@ -118,7 +118,7 @@ $route['peta']                       = 'first/peta';
 $route['load_aparatur_desa']         = 'first/load_aparatur_desa';
 $route['load_aparatur_wilayah/(.+)'] = 'first/load_aparatur_wilayah/$1';
 $route['status-idm/(:num)']          = 'first/status_idm/$1';
-$route['status-sdgs']                = 'first/status_sdgs';
+//$route['status-sdgs']                = 'first/status_sdgs';
 
 // Surat
 $route['v/(:any)']                = WEB . '/verifikasi_surat/cek/$1';
