@@ -257,7 +257,7 @@ $config['clv_log_file_pattern'] = 'log-*.php';
 | Note: Leaving it blank will default to 'php'.
 |
 */
-$config['log_file_extension'] = 'sidega_';
+$config['log_file_extension'] = 'log_sidega';
 
 /*
 |--------------------------------------------------------------------------
@@ -388,9 +388,10 @@ $config['encryption_key'] = 'KomunitasDesaGarut';
 |
 */
 $config['sess_driver']             = 'files';
-$config['sess_cookie_name']        = 'sidega_session_19_';
+$config['sess_cookie_name']        = 'sidega_session_26_';
 $config['sess_expiration']         = 25200;
-$config['sess_save_path']          = sys_get_temp_dir();
+//$config['sess_save_path']          = sys_get_temp_dir();
+$config['sess_save_path']          = FCPATH . 'sessions/';
 $config['sess_save_path']          = NULL;
 $config['sess_match_ip']           = false;
 $config['sess_time_to_update']     = 300;
