@@ -1496,7 +1496,7 @@ class User_model extends CI_Model {
 				'laporan_inventaris' => array('b','u'),
 				'klasifikasi' => array('b','u'),
 
-												// buku administrasi
+				// buku administrasi
 				'buku_umum' => array('b','u'),
 				'bumindes_umum' => array('b','u'),
 				'ekspedisi' => array('b','u'),
@@ -1645,7 +1645,7 @@ class User_model extends CI_Model {
 				'laporan_inventaris' => array('b','u'),
 				'klasifikasi' => array('b','u'),
 
-												// buku administrasi
+				// buku administrasi
 				'buku_umum' => array('b', 'u'),
 				'bumindes_umum' => array('b', 'u'),
 				'ekspedisi' => array('b','u','h'),
@@ -1729,7 +1729,11 @@ class User_model extends CI_Model {
 				'notif' => array('b','u'),
 
 				// wilayah
-				'wilayah' => array('b')
+				'wilayah' => array('b'),
+
+				// Pemberdayaan
+				'pemberdayaan_masyarakat' => array('b','u','h'),
+				'pembinaan_masyarakat' => array('b','u','h'),
 			),
 			
 			// Kesejahteraan
