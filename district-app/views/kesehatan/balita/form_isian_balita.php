@@ -27,13 +27,6 @@
 		<input class="form-control input-sm" type="text" name="nama_posyandu" id="nama_posyandu" value="<?= $nama_posyandu ?>" placeholder="Nama Posyandu">
 	</div>
 </div>
-<!--
-<div class="form-group">
-	<div class="col-sm-4">
-		<input class="form-control input-sm number" type="text" name="durasi_pemudik" id="durasi_pemudik" value="<?= $durasi_mudik ?>" placeholder="Jumlah Hari (angka)">
-	</div>
-</div>
--->
 
 <div class="form-group">
 	<label for="hp_ortu" class="col-sm-3 control-label">Kontak Orang Tua/Wali (No HP - Email)</label>
