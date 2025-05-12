@@ -17,7 +17,7 @@ class Inventaris_gedung_model extends CI_Model
 		$this->db
 				->select('*')
 				->from('tweb_aset u')
-				->where('golongan',3);
+				->where('golongan',4);
 		$data = $this->db->get()->result_array();
 		return $data;
 	}
