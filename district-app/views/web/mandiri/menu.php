@@ -35,7 +35,6 @@
 					</br>
 					<?= ucwords(substr($seb_kab, 0, 3).". " . $nam_kab); ?>
 				<?php	endif; ?><br/>
-                <?php $this->load->view('jam.php');?>
             </div>		
         </div>
     <ul class="sidebar-menu" data-widget="tree">

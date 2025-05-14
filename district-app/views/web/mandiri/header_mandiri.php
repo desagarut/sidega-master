@@ -20,9 +20,6 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li> <a href="<?= site_url();?>mandiri_web"><i class="fa fa-refresh" title="Home"></i> </a> </li>
-          <li><span>
-            <?php $this->load->view('jam.php');?>
-            </span></li>
           <li> <a href="<?= site_url();?>mandiri_web/mandiri/1/3"><i class="fa fa-envelope-o" title="Pesan Masuk"></i> <span class="pull-right-container"><small class="label pull-right bg-maroon" id="b_pesan" title="Pesan Masuk"></small></span> </a> </li>
           <li class="dropdown user user-menu"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <?php if ($penduduk['foto']): ?>
