@@ -4,7 +4,7 @@
 	<div class="container-xxl py-4">
 		<div class="container">
 			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-				<h6 class="section-title bg-white text-center text-primary px-3">DETAIL PEMBANGUNAN </h6>
+				<h6 class="section-title bg-white text-center text-primary px-3">DETAIL PELAKSANAAN PEMBANGUNAN </h6>
 				<h4 class="mb-1"><?= strtoupper($pembangunan['nama_program_kegiatan']); ?></h4>
 				<h4 class="mb-5 text-end"><a href="<?= site_url("first/pembangunan/") ?>" class="flex-shrink-0 btn btn-sm btn-success px-3" style="border-radius: 8px 8px 8px 8px;">kembali</a></h4>
 			</div>
