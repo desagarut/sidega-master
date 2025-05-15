@@ -17,7 +17,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5 mt-10 text-center team-item animated slideInDown">
+                        <div class="col-md-5 mt-10 text-center animated slideInDown">
+                                <span class="text-white">  </span><br>
+                                <h1 class="display-7 text-white" style="display: flex; align-items: center; justify-content: center; height: 100%; flex: 1 0 100%">
+                                    Selamat datang di<br>
+                                    <?= strtoupper($this->setting->sebutan_desa) . ' ' . strtoupper($desa['nama_desa']) ?><br>
+                                <?= ucfirst($this->setting->sebutan_kecamatan) . ' ' . ucwords($desa['nama_kecamatan']) ?>
+                                <?= ucfirst($this->setting->sebutan_kabupaten) . ' ' . ucwords($desa['nama_kabupaten']) ?>
+                                Provinsi Jawa Barat</h1>
+                            
+                            <!--
                             <h1>
                                 <small class="text-white"> Selamat datang di </small><br>
                                 <span class="display-7 text-white"><?= strtoupper($this->setting->sebutan_desa) . ' ' . strtoupper($desa['nama_desa']) ?> </span><br />
@@ -25,8 +34,10 @@
                                 <small class="text-white"><?= ucfirst($this->setting->sebutan_kabupaten) . ' ' . ucwords($desa['nama_kabupaten']) ?></small><br />
                                 <small class="text-white">Provinsi Jawa Barat</small>
                             </h1>
+
                             <a href="<?= site_url('arsip') ?>" target="_blank" class="btn btn-info py-md-3 px-md-5 me-3 animated slideInLeft">Berita</a>
                             <a href="<?= site_url('first/wilayah') ?>" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Statistik</a>
+-->
                         </div>
                         <div class="col-md-3 d-none d-sm-block d-md-block">
                             <div class="team-item animated slideInRight" style="padding:10px 15px 0px 15px">
