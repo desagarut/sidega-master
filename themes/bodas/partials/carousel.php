@@ -10,7 +10,7 @@
                         <div class="col-md-4 d-none d-sm-block">
                             <div class="team-item animated slideInLeft" style="padding:10px 15px 0px 15px">
                                 <div class="overflow-hidden  mb-2">
-                                    <img class="img-fluid" style="object-fit: content; height:300px; " src="<?= base_url() ?>assets/files/user_pict/Bupati-Garut.png" alt="Bupati dan Wakil Bupati Garut">
+                                    <img class="img-fluid" style="object-fit: content; height:80%; " src="<?= base_url() ?>assets/files/user_pict/Bupati-Garut.png" alt="Bupati dan Wakil Bupati Garut">
                                 </div>
                                 <div class="text-center bg-light">
                                     <p class="mb-0">Bupati & Wakil Bupati Garut</p>
@@ -21,17 +21,17 @@
                             <h1>
                                 <small class="text-white"> Selamat datang di </small><br>
                                 <span class="display-7 text-white"><?= strtoupper($this->setting->sebutan_desa) . ' ' . strtoupper($desa['nama_desa']) ?> </span><br />
-                                <small class="display-10 text-white"><?= ucfirst($this->setting->sebutan_kecamatan) . ' ' . ucwords($desa['nama_kecamatan']) ?></small><br />
-                                <small class="display-10 text-white"><?= ucfirst($this->setting->sebutan_kabupaten) . ' ' . ucwords($desa['nama_kabupaten']) ?></small><br />
-                                <small class="display-10 text-white">Provinsi Jawa Barat</small>
+                                <small class="text-white"><?= ucfirst($this->setting->sebutan_kecamatan) . ' ' . ucwords($desa['nama_kecamatan']) ?></small><br />
+                                <small class="text-white"><?= ucfirst($this->setting->sebutan_kabupaten) . ' ' . ucwords($desa['nama_kabupaten']) ?></small><br />
+                                <small class="text-white">Provinsi Jawa Barat</small>
                             </h1>
                             <a href="<?= site_url('arsip') ?>" target="_blank" class="btn btn-info py-md-3 px-md-5 me-3 animated slideInLeft">Berita</a>
                             <a href="<?= site_url('first/wilayah') ?>" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Statistik</a>
                         </div>
-                        <div class="col-md-3 d-none d-sm-block">
+                        <div class="col-md-3 d-none d-sm-block d-md-block">
                             <div class="team-item animated slideInRight" style="padding:10px 15px 0px 15px">
                                 <div class="overflow-hidden">
-                                    <img class="img-fluid" style="object-fit: cover; height:300px; " src="<?= base_url() ?>instansi/upload/user_pict/<?= $pamong_kades['foto'] ?>" alt="<?= $pamong_kades['pamong_nama'] ?>">
+                                    <img class="img-fluid" style="object-fit: cover; height:80%; " src="<?= base_url() ?>instansi/upload/user_pict/<?= $pamong_kades['foto'] ?>" alt="<?= $pamong_kades['pamong_nama'] ?>">
                                 </div>
                                 <div class="text-center bg-light">
                                     <p class="mb-0"><b><?= $pamong_kades['pamong_nama'] ?></b><br>
