@@ -92,6 +92,7 @@ class First extends Web_Controller
 		$data['main'] = $this->first_toko_warga_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['pamong'] = $this->pamong_model->get_data();
+		$data['pamong_kades'] = $this->pamong_model->get_data_kades();
 		$data['setting_desa'] = $this->config_model->get_data();
 
 		$data['gallery'] = $this->first_gallery_youtube->gallery_show($data['paging']->offset, $data['paging']->per_page);
@@ -467,25 +468,7 @@ class First extends Web_Controller
 		$this->set_template('layouts/stat.tpl.php');
 		$this->load->view($this->template, $data);
 	}
-	/*
-	public function wilayah()
-	{
-		if (!$this->web_menu_model->menu_aktif('wilayah')) show_404();
 
-		$this->load->model('wilayah_model');
-		$data = $this->includes;
-
-		$data['main'] = $this->wilayah_model->list_semua_wilayah();
-		$data['heading'] = "Populasi Per Wilayah";
-		$data['tipe'] = 3;
-		$data['total'] = $this->wilayah_model->total();
-		$data['st'] = 1;
-		$this->_get_common_data($data);
-
-		$this->set_template('layouts/stat.tpl.php');
-		$this->load->view($this->template, $data);
-	}
-*/
 	public function wilayah()
 	{
 		if (!$this->web_menu_model->menu_aktif('wilayah')) {

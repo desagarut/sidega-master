@@ -142,6 +142,23 @@ class Pamong_model extends CI_Model {
 		return $data;
 	 }
 
+	public function get_data_kades($id = 0)
+	{
+		$sql = "SELECT u.*, p.nama as nama
+			FROM tweb_desa_pamong u
+			LEFT JOIN tweb_penduduk p ON u.id_pend = p.id
+			WHERE urut = 1";
+		$query = $this->db->query($sql, $id);
+		$data  = $query->row_array();
+		$data['pamong_niap_nip'] = (!empty($data['pamong_nip']) and $data['pamong_nip'] != '-') ? $data['pamong_nip'] : $data['pamong_niap'];
+		if (!empty($data['id_pend']))
+		{
+			// Dari database penduduk
+			$data['pamong_nama'] = $data['nama'];
+		}
+		return $data;
+	 }
+
 	public function get_pamong($id = null)
 	{
 		$pamong = $this->db->where('pamong_id', $id)->limit(1)->get('tweb_desa_pamong')->row_array();;
