@@ -1,7 +1,8 @@
 <div class="panel">
+	<div class="panel-head text-center">
 	<h4>Data Inventaris Desa</h4>
+	</div>
 	<div class="panel-body">
-
 		<?php if (sizeof($peralatan) > 0) { ?>
 			<div class="head-tb-inventaris">Kategori : Inventaris Peralatan</div>
 			<div class="table-responsive">
