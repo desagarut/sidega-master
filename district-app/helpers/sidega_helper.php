@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 
 define("VERSION", '6.2.2');
@@ -499,10 +499,10 @@ define("KATEGORI_MAILBOX", serialize(array(
 )));
 
 define('NILAI_PENDAPAT', serialize([
-    1 => 'Sangat Puas',
-    2 => 'Puas',
-    3 => 'Cukup',
-    4 => 'Buruk',
+	1 => 'Sangat Puas',
+	2 => 'Puas',
+	3 => 'Cukup',
+	4 => 'Buruk',
 ]));
 
 define("KELOMPOK_BENCANA", serialize(array(
@@ -546,7 +546,7 @@ function AmbilVersi()
 function favico_desa()
 {
 	$favico = 'favicon.ico';
-	$favico_desa = (is_file(APPPATH .'../'. LOKASI_LOGO_DESA . $favico)) ?
+	$favico_desa = (is_file(APPPATH . '../' . LOKASI_LOGO_DESA . $favico)) ?
 		base_url() . LOKASI_LOGO_DESA . $favico :
 		base_url() . $favico;
 	return $favico_desa;
@@ -565,15 +565,13 @@ function favico_desa()
 
 function gambar_desa($nama_file, $type = FALSE, $file = FALSE)
 {
-	if (is_file(APPPATH .'../'. LOKASI_LOGO_DESA . $nama_file))
-	{
-		return $logo_desa = ($file ? APPPATH.'../' : base_url()) . LOKASI_LOGO_DESA . $nama_file;
+	if (is_file(APPPATH . '../' . LOKASI_LOGO_DESA . $nama_file)) {
+		return $logo_desa = ($file ? APPPATH . '../' : base_url()) . LOKASI_LOGO_DESA . $nama_file;
 	}
 
 	// type FALSE = logo, TRUE = kantor
 	$default = ($type)  ? 'desagarut.jpg' : 'sidega.png';
-	return $logo_desa = ($file ? APPPATH.'../' : base_url()). "assets/files/logo/$default";
-
+	return $logo_desa = ($file ? APPPATH . '../' : base_url()) . "assets/files/logo/$default";
 }
 
 /**
@@ -592,7 +590,6 @@ function KonfigurasiDatabase()
 	$konfigurasi_database = LOKASI_CONFIG_DESA . 'database.php';
 
 	return $konfigurasi_database;
-
 }
 
 
@@ -604,7 +601,6 @@ function session_error($pesan = '')
 	$_SESSION['error_msg'] = $pesan;
 
 	$_SESSION['success']   = -1;
-
 }
 
 
@@ -616,7 +612,6 @@ function session_error_clear()
 	$_SESSION['error_msg'] = '';
 
 	unset($_SESSION['success']);
-
 }
 
 
@@ -628,7 +623,6 @@ function session_success()
 	$_SESSION['error_msg'] = '';
 
 	$_SESSION['success']   = 1;
-
 }
 
 
@@ -639,14 +633,11 @@ function httpPost($url, $params)
 
 {
 
-	if (!extension_loaded('curl') OR isset($_SESSION['no_curl']))
+	if (!extension_loaded('curl') or isset($_SESSION['no_curl'])) {
 
-	{
-
-		log_message('error', 'curl tidak bisa dijalankan 1.'.$_SESSION['no_curl'].' 2.'.extension_loaded('curl'));
+		log_message('error', 'curl tidak bisa dijalankan 1.' . $_SESSION['no_curl'] . ' 2.' . extension_loaded('curl'));
 
 		return;
-
 	}
 
 
@@ -655,21 +646,16 @@ function httpPost($url, $params)
 
 	//create name value pairs seperated by &
 
-	foreach ($params as $k => $v)
-
-	{
+	foreach ($params as $k => $v) {
 
 		$postData .= $k . '=' . $v . '&';
-
 	}
 
 	$postData = rtrim($postData, '&');
 
 
 
-	try
-
-	{
+	try {
 
 		$ch = curl_init();
 
@@ -703,30 +689,20 @@ function httpPost($url, $params)
 
 
 
-		if ($output === false)
-
-		{
+		if ($output === false) {
 
 			log_message('error', 'Curl error: ' . curl_error($ch));
 
 			log_message('error', print_r(curl_getinfo($ch), true));
-
 		}
 
 		curl_close($ch);
 
 		return $output;
-
-	}
-
-	catch (Exception $e)
-
-	{
+	} catch (Exception $e) {
 
 		return $e;
-
 	}
-
 }
 
 
@@ -751,18 +727,14 @@ function cek_koneksi_internet($sCheckHost = 'www.google.com')
 
 
 
-  if ($connected)
+	if ($connected) {
 
-  {
+		fclose($connected);
 
-  	fclose($connected);
+		return true;
+	}
 
-  	return true;
-
-  }
-
-  return false;
-
+	return false;
 }
 
 
@@ -771,28 +743,27 @@ function cek_bisa_akses_site($url)
 
 {
 
-  $ch = curl_init();
+	$ch = curl_init();
 
 
 
-  curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_URL, $url);
 
-  curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_HEADER, false);
 
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-
-
-  $content = curl_exec($ch);
-
-  $error = curl_error($ch);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 
 
-  curl_close($ch);
+	$content = curl_exec($ch);
 
-  return empty($error);
+	$error = curl_error($ch);
 
+
+
+	curl_close($ch);
+
+	return empty($error);
 }
 
 
@@ -830,7 +801,6 @@ function myErrorHandler($code, $message, $file, $line)
 		// Ulangi url yang memanggil fungsi tracker.
 
 		redirect(base_url() . "index.php/" . $_SESSION['balik_ke']);
-
 	}
 
 	// Uncomment apabila melakukan debugging
@@ -862,9 +832,7 @@ function fatalErrorShutdownHandler()
 		// fatal error
 
 		myErrorHandler(E_ERROR, $last_error['message'], $last_error['file'], $last_error['line']);
-
 	}
-
 }
 
 
@@ -892,9 +860,7 @@ function get_dynamic_title_page_from_path()
 		if (!empty($t) && $t != '1' && $t != '0') {
 
 			$title .= ((is_numeric($t)) ? ' ' : ' - ') . $t;
-
 		}
-
 	}
 
 	return ucwords(str_replace(array(
@@ -904,7 +870,6 @@ function get_dynamic_title_page_from_path()
 		'_'
 
 	), ' ', $title));
-
 }
 
 
@@ -914,7 +879,6 @@ function show_zero_as($val, $str)
 {
 
 	return (empty($val) ? $str : $val);
-
 }
 
 
@@ -926,7 +890,6 @@ function log_time($msg)
 	$now = DateTime::createFromFormat('U.u', microtime(true));
 
 	error_log($now->format("m-d-Y H:i:s.u") . " : " . $msg . "\n", 3, "sidega.log");
-
 }
 
 
@@ -944,13 +907,9 @@ function umur($tgl_lahir)
 	try {
 
 		$date = new DateTime($tgl_lahir);
-
-	}
-
-	catch (Exception $e) {
+	} catch (Exception $e) {
 
 		return null;
-
 	}
 
 	$now      = new DateTime();
@@ -958,7 +917,6 @@ function umur($tgl_lahir)
 	$interval = $now->diff($date);
 
 	return $interval->y;
-
 }
 
 
@@ -970,7 +928,6 @@ function isMobile()
 {
 
 	return preg_match("/\b(?:a(?:ndroid|vantgo)|b(?:lackberry|olt|o?ost)|cricket|do‌​como|hiptop|i(?:emob‌​ile|p[ao]d)|kitkat|m‌​(?:ini|obi)|palm|(?:‌​i|smart|windows )phone|symbian|up\.(?:browser|link)|tablet(?: browser| pc)|(?:hp-|rim |sony )tablet|w(?:ebos|indows ce|os))/i", $_SERVER["HTTP_USER_AGENT"]);
-
 }
 
 
@@ -1010,13 +967,11 @@ function isPHP($file, $filename)
 		fclose($handle);
 
 		return true;
-
 	}
 
 	fclose($handle);
 
 	return false;
-
 }
 
 
@@ -1030,7 +985,6 @@ function get_extension($filename)
 	$ext = '.' . end($ext);
 
 	return $ext;
-
 }
 
 
@@ -1046,7 +1000,6 @@ function max_upload()
 	$memory_limit = (int) bilangan(ini_get('memory_limit'));
 
 	return min($max_filesize, $max_post, $memory_limit);
-
 }
 
 
@@ -1057,11 +1010,12 @@ function get_external_ip()
 
 	// Batasi waktu mencoba
 
-	$options = stream_context_create(array('http'=>
+	$options = stream_context_create(array(
+		'http' =>
 
 		array(
 
-		'timeout' => 2 //2 seconds
+			'timeout' => 2 //2 seconds
 
 		)
 
@@ -1074,7 +1028,6 @@ function get_external_ip()
 	$externalIp = $m[0];
 
 	return $externalIp;
-
 }
 
 
@@ -1096,7 +1049,6 @@ function xcopy($src, $dest)
 		if (!is_readable($srcfile)) {
 
 			continue;
-
 		}
 
 		if ($file != '.' && $file != '..') {
@@ -1106,21 +1058,15 @@ function xcopy($src, $dest)
 				if (!file_exists($destfile)) {
 
 					mkdir($destfile);
-
 				}
 
 				xcopy($srcfile, $destfile);
-
 			} else {
 
 				copy($srcfile, $destfile);
-
 			}
-
 		}
-
 	}
-
 }
 
 
@@ -1135,18 +1081,14 @@ function sql_in_list($list_array)
 
 	$prefix = $list = '';
 
-	foreach ($list_array as $key => $value)
-
-	{
+	foreach ($list_array as $key => $value) {
 
 		$list .= $prefix . "'" . $value . "'";
 
 		$prefix = ', ';
-
 	}
 
 	return $list;
-
 }
 
 
@@ -1162,85 +1104,85 @@ function sql_in_list($list_array)
  */
 function ambilBerkas($nama_berkas, $redirect_url = null, $unique_id = null, $lokasi = LOKASI_ARSIP, $tampil = false)
 {
-    $CI = &get_instance();
-    $CI->load->helper('download');
+	$CI = &get_instance();
+	$CI->load->helper('download');
 
-    // Batasi akses LOKASI_ARSIP hanya untuk admin
-    if ($lokasi == LOKASI_ARSIP && $CI->session->insidega != 1) {
-        redirect('/');
-    }
+	// Batasi akses LOKASI_ARSIP hanya untuk admin
+	if ($lokasi == LOKASI_ARSIP && $CI->session->insidega != 1) {
+		redirect('/');
+	}
 
-    // Tentukan path berkas (absolut)
-    $pathBerkas = FCPATH . $lokasi . $nama_berkas;
-    $pathBerkas = str_replace('/', DIRECTORY_SEPARATOR, $pathBerkas);
-    // Redirect ke halaman surat masuk jika path berkas kosong atau berkasnya tidak ada
-    if (! file_exists($pathBerkas)) {
-        $_SESSION['success']   = -1;
-        $_SESSION['error_msg'] = 'Berkas tidak ditemukan';
-        if ($redirect_url) {
-            redirect($redirect_url);
-        } else {
-            show_404();
-        }
-    }
-    // OK, berkas ada. Ambil konten berkasnya
+	// Tentukan path berkas (absolut)
+	$pathBerkas = FCPATH . $lokasi . $nama_berkas;
+	$pathBerkas = str_replace('/', DIRECTORY_SEPARATOR, $pathBerkas);
+	// Redirect ke halaman surat masuk jika path berkas kosong atau berkasnya tidak ada
+	if (! file_exists($pathBerkas)) {
+		$_SESSION['success']   = -1;
+		$_SESSION['error_msg'] = 'Berkas tidak ditemukan';
+		if ($redirect_url) {
+			redirect($redirect_url);
+		} else {
+			show_404();
+		}
+	}
+	// OK, berkas ada. Ambil konten berkasnya
 
-    $data = file_get_contents($pathBerkas);
+	$data = file_get_contents($pathBerkas);
 
-    if (null !== $unique_id) {
-        // Buang unique id pada nama berkas download
-        $nama_berkas  = explode($unique_id, $nama_berkas);
-        $namaFile     = $nama_berkas[0];
-        $ekstensiFile = explode('.', end($nama_berkas));
-        $ekstensiFile = end($ekstensiFile);
-        $nama_berkas  = $namaFile . '.' . $ekstensiFile;
-    }
+	if (null !== $unique_id) {
+		// Buang unique id pada nama berkas download
+		$nama_berkas  = explode($unique_id, $nama_berkas);
+		$namaFile     = $nama_berkas[0];
+		$ekstensiFile = explode('.', end($nama_berkas));
+		$ekstensiFile = end($ekstensiFile);
+		$nama_berkas  = $namaFile . '.' . $ekstensiFile;
+	}
 
-    // Kalau $tampil, tampilkan secara inline.
-    if ($tampil) {
-        // Set the default MIME type to send
-        switch (get_extension($nama_berkas)) {
-            case '.gif':
-                $mime = 'image/gif';
-                break;
+	// Kalau $tampil, tampilkan secara inline.
+	if ($tampil) {
+		// Set the default MIME type to send
+		switch (get_extension($nama_berkas)) {
+			case '.gif':
+				$mime = 'image/gif';
+				break;
 
-            case '.png':
-                $mime = 'image/png';
-                break;
+			case '.png':
+				$mime = 'image/png';
+				break;
 
-            case '.jpeg':
-                $mime = 'image/jpeg';
-                break;
+			case '.jpeg':
+				$mime = 'image/jpeg';
+				break;
 
-            case '.jpg':
-                $mime = 'image/jpeg';
-                break;
+			case '.jpg':
+				$mime = 'image/jpeg';
+				break;
 
-            case '.svg':
-                $mime = 'image/svg+xml';
-                break;
+			case '.svg':
+				$mime = 'image/svg+xml';
+				break;
 
-            case '.pdf':
-                $mime = 'application/pdf';
-                break;
+			case '.pdf':
+				$mime = 'application/pdf';
+				break;
 
-            default:
-                $mime = 'application/octet-stream';
-                break;
-        }
+			default:
+				$mime = 'application/octet-stream';
+				break;
+		}
 
-        // Generate the server headers
-        header('Content-Type: ' . $mime);
-        header('Content-Disposition: inline; filename="' . $nama_berkas . '"');
-        header('Expires: 0');
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . strlen($data));
-        header('Cache-Control: private, no-transform, no-store, must-revalidate');
+		// Generate the server headers
+		header('Content-Type: ' . $mime);
+		header('Content-Disposition: inline; filename="' . $nama_berkas . '"');
+		header('Expires: 0');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Length: ' . strlen($data));
+		header('Cache-Control: private, no-transform, no-store, must-revalidate');
 
-        return readfile($pathBerkas);
-    }
+		return readfile($pathBerkas);
+	}
 
-    force_download($nama_berkas, $data);
+	force_download($nama_berkas, $data);
 }
 
 
@@ -1343,22 +1285,18 @@ function autocomplete_data_ke_str($data)
 
 	$str = '';
 
-	foreach ($data as $baris)
-
-	{
+	foreach ($data as $baris) {
 
 		$keys = array_keys($baris);
 
 		$first_key = $keys[0];
 
-		$str .= ','.json_encode(substr($baris[$first_key], 0, 30));
-
+		$str .= ',' . json_encode(substr($baris[$first_key], 0, 30));
 	}
 
 	$str = '[' . strtolower(substr($str, 1)) . ']';
 
 	return $str;
-
 }
 
 
@@ -1367,12 +1305,12 @@ function autocomplete_data_ke_str($data)
 
 // https://recalll.co/?q=How%20to%20convert%20a%20Roman%20numeral%20to%20integer%20in%20PHP?&type=code
 
-function is_angka_romawi($roman) {
+function is_angka_romawi($roman)
+{
 
-  $roman_regex='/^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/';
+	$roman_regex = '/^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/';
 
-  return preg_match($roman_regex, $roman) > 0;
-
+	return preg_match($roman_regex, $roman) > 0;
 }
 
 
@@ -1414,7 +1352,6 @@ function bulan_romawi($bulan)
 	);
 
 	return ($bulan_romawi[$bulan]);
-
 }
 
 
@@ -1424,7 +1361,6 @@ function buang_nondigit($str)
 {
 
 	return preg_replace('/[^0-9]/', '', $str);
-
 }
 
 
@@ -1451,70 +1387,50 @@ function buang_nondigit($str)
 
 		$file = array('nama' => 'dir', 'file' => nama-folder)
 
-*/
+ */
 
-function masukkan_zip($files=array())
+function masukkan_zip($files = array())
 
 {
 
-  $zip = new ZipArchive();
+	$zip = new ZipArchive();
 
-  # create a temp file & open it
+	# create a temp file & open it
 
-  $tmp_file = tempnam(sys_get_temp_dir(),'');
+	$tmp_file = tempnam(sys_get_temp_dir(), '');
 
-  $zip->open($tmp_file, ZipArchive::CREATE);
+	$zip->open($tmp_file, ZipArchive::CREATE);
 
 
 
-  foreach ($files as $file)
+	foreach ($files as $file) {
 
-  {
+		if (is_array($file)) {
 
-		if (is_array($file))
-
-		{
-
-			if ($file['nama'] == 'dir')
-
-			{
+			if ($file['nama'] == 'dir') {
 
 				$zip->addEmptyDir($file['file']);
 
 				continue;
-
-			}
-
-			else
-
-			{
+			} else {
 
 				$nama_file = $file['nama'];
 
 				$file = $file['file'];
-
 			}
-
-		}
-
-		else
-
-		{
+		} else {
 
 			$nama_file = basename($file);
-
 		}
 
-    $download_file = file_get_contents($file);
+		$download_file = file_get_contents($file);
 
-    $zip->addFromString($nama_file, $download_file);
+		$zip->addFromString($nama_file, $download_file);
+	}
 
-  }
+	$zip->close();
 
-  $zip->close();
-
-  return $tmp_file;
-
+	return $tmp_file;
 }
 
 
@@ -1524,39 +1440,38 @@ function alfa_spasi($str)
 {
 
 	return preg_replace('/[^a-zA-Z ]/', '', strip_tags($str));
-
 }
 
 
 
 // https://www.php.net/manual/en/function.array-column.php
 
-function array_column_ext($array, $columnkey, $indexkey = null) {
+function array_column_ext($array, $columnkey, $indexkey = null)
+{
 
-  $result = array();
+	$result = array();
 
-  foreach ($array as $subarray => $value) {
+	foreach ($array as $subarray => $value) {
 
-    if (array_key_exists($columnkey,$value)) { $val = $array[$subarray][$columnkey]; }
+		if (array_key_exists($columnkey, $value)) {
+			$val = $array[$subarray][$columnkey];
+		} else if ($columnkey === null) {
+			$val = $value;
+		} else {
+			continue;
+		}
 
-    else if ($columnkey === null) { $val = $value; }
-
-    else { continue; }
 
 
+		if ($indexkey === null) {
+			$result[] = $val;
+		} elseif ($indexkey == -1 || array_key_exists($indexkey, $value)) {
 
-    if ($indexkey === null) { $result[] = $val; }
+			$result[($indexkey == -1) ? $subarray : $array[$subarray][$indexkey]] = $val;
+		}
+	}
 
-    elseif ($indexkey == -1 || array_key_exists($indexkey,$value)) {
-
-      $result[($indexkey == -1)?$subarray:$array[$subarray][$indexkey]] = $val;
-
-    }
-
-  }
-
-  return $result;
-
+	return $result;
 }
 
 
@@ -1566,7 +1481,6 @@ function nama_file($str)
 {
 
 	return preg_replace('/[^a-zA-Z0-9\s]\./', '', strip_tags($str));
-
 }
 
 
@@ -1576,7 +1490,6 @@ function alfanumerik($str)
 {
 
 	return preg_replace('/[^a-zA-Z0-9]/', '', htmlentities($str));
-
 }
 
 
@@ -1586,7 +1499,6 @@ function alfanumerik_spasi($str)
 {
 
 	return preg_replace('/[^a-zA-Z0-9\s]/', '', htmlentities($str));
-
 }
 
 
@@ -1596,7 +1508,6 @@ function bilangan($str)
 {
 
 	return preg_replace('/[^0-9]/', '', strip_tags($str));
-
 }
 
 
@@ -1606,7 +1517,6 @@ function bilangan_spasi($str)
 {
 
 	return preg_replace('/[^0-9\s]/', '', strip_tags($str));
-
 }
 
 
@@ -1616,7 +1526,6 @@ function bilangan_titik($str)
 {
 
 	return preg_replace('/[^0-9\.]/', '', strip_tags($str));
-
 }
 
 
@@ -1626,7 +1535,6 @@ function nomor_surat_keputusan($str)
 {
 
 	return preg_replace('/[^a-zA-Z0-9 \.\-\/]/', '', $str);
-
 }
 
 
@@ -1638,7 +1546,6 @@ function nama($str)
 {
 
 	return preg_replace("/[^a-zA-Z '\.,\-]/", '', strip_tags($str));
-
 }
 
 
@@ -1650,7 +1557,6 @@ function nama_terbatas($str)
 {
 
 	return preg_replace("/[^a-zA-Z0-9 \-]/", '', $str);
-
 }
 
 
@@ -1662,7 +1568,6 @@ function alamat($str)
 {
 
 	return preg_replace("/[^a-zA-Z0-9 \.,\-]/", '', htmlentities($str));
-
 }
 
 
@@ -1674,7 +1579,6 @@ function koordinat($str)
 {
 
 	return preg_replace("/[^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$]/", '', htmlentities($str));
-
 }
 
 
@@ -1686,7 +1590,6 @@ function email($str)
 {
 
 	return preg_replace("/[^a-zA-Z0-9@\.\-]/", '', htmlentities($str));
-
 }
 
 
@@ -1698,7 +1601,6 @@ function alamat_web($str)
 {
 
 	return preg_replace("/[^a-zA-Z0-9:\/\.\-]/", '', htmlentities($str));
-
 }
 
 
@@ -1707,10 +1609,9 @@ function buat_slug($data_slug)
 
 {
 
-	$slug = $data_slug['thn'].'/'.$data_slug['bln'].'/'.$data_slug['hri'].'/'.$data_slug['slug'];
+	$slug = $data_slug['thn'] . '/' . $data_slug['bln'] . '/' . $data_slug['hri'] . '/' . $data_slug['slug'];
 
 	return $slug;
-
 }
 
 
@@ -1721,95 +1622,78 @@ function namafile($str)
 
 	$tgl =  date('d_m_Y');
 
-	$filename = urlencode(underscore(strtolower($str))."_".$tgl);
+	$filename = urlencode(underscore(strtolower($str)) . "_" . $tgl);
 
 	return $filename;
-
 }
 
 
 
-function luas($int=0, $satuan="meter")
+function luas($int = 0, $satuan = "meter")
 
 {
 
-	if (($int / 10000) >= 1)
+	if (($int / 10000) >= 1) {
 
-	{
-
-		$ukuran = $int/10000;
+		$ukuran = $int / 10000;
 
 		$pisah = explode('.', $ukuran);
 
 		$luas['ha'] = number_format($pisah[0]);
 
-		$luas['meter'] = round(($ukuran-$luas["ha"])*10000, 2);
+		$luas['meter'] = round(($ukuran - $luas["ha"]) * 10000, 2);
+	} else {
 
+		$luas['ha'] = 0;
+
+		$luas['meter'] = round($int, 2);
 	}
 
-	else
-
-	{
-
-		$luas['ha'] =0;
-
-		$luas['meter'] = round($int,2);
-
-	}
-
-	$hasil = ($int!=0)?$luas[$satuan]:null;
+	$hasil = ($int != 0) ? $luas[$satuan] : null;
 
 	return $hasil;
-
 }
 
 
 
-function list_mutasi($mutasi=[])
+function list_mutasi($mutasi = [])
 
 {
 
-	if($mutasi)
+	if ($mutasi) {
 
-	{
+		foreach ($mutasi as $item) {
 
-		foreach($mutasi as $item)
-
-		{
-
-			$div = ($item['jenis_mutasi'] == 2)? 'class="error"':null;
+			$div = ($item['jenis_mutasi'] == 2) ? 'class="error"' : null;
 
 			$hasil = "<p $div>";
 
 			$hasil .= $item['sebabmutasi'];
 
-			$hasil .= !empty($item['no_c_desa']) ? " ".ket_mutasi_persil($item['jenis_mutasi'])." C No ".sprintf("%04s",$item['no_c_desa']): null;
+			$hasil .= !empty($item['no_c_desa']) ? " " . ket_mutasi_persil($item['jenis_mutasi']) . " C No " . sprintf("%04s", $item['no_c_desa']) : null;
 
-			$hasil .= !empty($item['luasmutasi']) ? ", Seluas ".number_format($item['luasmutasi'])." m<sup>2</sup>, " : null;
+			$hasil .= !empty($item['luasmutasi']) ? ", Seluas " . number_format($item['luasmutasi']) . " m<sup>2</sup>, " : null;
 
-			$hasil .= !empty($item['tanggalmutasi']) ? tgl_indo_out($item['tanggalmutasi'])."<br />" : null;
+			$hasil .= !empty($item['tanggalmutasi']) ? tgl_indo_out($item['tanggalmutasi']) . "<br />" : null;
 
-			$hasil .= !empty($item['keterangan']) ? $item['keterangan']: null;
+			$hasil .= !empty($item['keterangan']) ? $item['keterangan'] : null;
 
 			$hasil .= "</p>";
 
 
 
 			echo $hasil;
-
 		}
-
 	}
-
 }
 
 
 
-function ket_mutasi_persil($id=0)
+function ket_mutasi_persil($id = 0)
 
 {
 
-	if ($id==1)
+	if ($id == 1)
 
 		$ket = "dari";
 
@@ -1818,31 +1702,24 @@ function ket_mutasi_persil($id=0)
 		$ket = "ke";
 
 	return $ket;
-
 }
 
 
 
-function status_sukses($outp, $gagal_saja=false, $msg='')
+function status_sukses($outp, $gagal_saja = false, $msg = '')
 
 {
 
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	if ($msg) $CI->session->error_msg = $msg;
 
-	if ($gagal_saja)
-
-	{
+	if ($gagal_saja) {
 
 		if (!$outp) $CI->session->success = -1;
-
-	}
-
-	else
+	} else
 
 		$CI->session->success = $outp ? 1 : -1;
-
 }
 
 
@@ -1853,137 +1730,111 @@ function convertToBytes(string $from)
 
 {
 
-  $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+	$units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-  $number = substr($from, 0, -2);
+	$number = substr($from, 0, -2);
 
-  $suffix = strtoupper(substr($from,-2));
-
-
-
-  //B or no suffix
-
-  if(is_numeric(substr($suffix, 0, 1))) {
-
-      return preg_replace('/[^\d]/', '', $from);
-
-  }
+	$suffix = strtoupper(substr($from, -2));
 
 
 
-  $exponent = array_flip($units);
+	//B or no suffix
 
-  $exponent = isset($exponent[$suffix]) ? $exponent[$suffix] : null;
+	if (is_numeric(substr($suffix, 0, 1))) {
 
-  if($exponent === null) {
-
-      return null;
-
-  }
+		return preg_replace('/[^\d]/', '', $from);
+	}
 
 
 
-  return $number * (1024 ** $exponent);
+	$exponent = array_flip($units);
 
+	$exponent = isset($exponent[$suffix]) ? $exponent[$suffix] : null;
+
+	if ($exponent === null) {
+
+		return null;
+	}
+
+
+
+	return $number * (1024 ** $exponent);
 }
 
 
 
-  /**
+/**
 
-  * Disalin dari FeedParser.php
+ * Disalin dari FeedParser.php
 
-	* Load the whole contents of a web page
+ * Load the whole contents of a web page
 
-	*
+ *
 
-	* @access   public
+ * @access   public
 
-	* @param    string
+ * @param    string
 
-	* @return   string
+ * @return   string
 
-	*/
+ */
 
-	function getUrlContent($url)
+function getUrlContent($url)
 
-	{
+{
 
-		if (empty($url))
+	if (empty($url)) {
 
-		{
+		throw new Exception("URL to parse is empty!.");
 
-			throw new Exception("URL to parse is empty!.");
+		return false;
+	}
 
-			return false;
+	if (!in_array(explode(':', $url)[0], array('http', 'https'))) {
 
-		}
+		throw new Exception("URL harus http atau https");
 
-		if (!in_array(explode(':', $url)[0], array('http', 'https')))
+		return false;
+	}
 
-		{
+	if ($content = @file_get_contents($url)) {
 
-			throw new Exception("URL harus http atau https");
+		return $content;
+	} else {
 
-			return false;
+		$ch = curl_init();
 
-		}
 
-		if ($content = @file_get_contents($url))
 
-		{
+		curl_setopt($ch, CURLOPT_URL, $url);
+
+		curl_setopt($ch, CURLOPT_HEADER, false);
+
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+
+
+		$content = curl_exec($ch);
+
+		$error = curl_error($ch);
+
+
+
+		curl_close($ch);
+
+
+
+		if (empty($error)) {
 
 			return $content;
+		} else {
 
+			log_message('error', "Error occured while loading url by cURL. <br />\n" . $error);
+
+			return false;
 		}
-
-		else
-
-		{
-
-			$ch = curl_init();
-
-
-
-			curl_setopt($ch, CURLOPT_URL, $url);
-
-			curl_setopt($ch, CURLOPT_HEADER, false);
-
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-
-
-			$content = curl_exec($ch);
-
-			$error = curl_error($ch);
-
-
-
-			curl_close($ch);
-
-
-
-			if (empty($error))
-
-			{
-
-				return $content;
-
-			}
-
-			else
-
-			{
-
-				log_message('error', "Error occured while loading url by cURL. <br />\n" . $error) ;
-
-				return false;
-
-			}
-
-		}
-
 	}
+}
 
 
 
@@ -1991,26 +1842,22 @@ function crawler()
 
 {
 
-	$file = APPPATH.'config/crawler-user-agents.json';
+	$file = APPPATH . 'config/crawler-user-agents.json';
 
 	$data = json_decode(file_get_contents($file), true);
 
 
 
-	foreach($data as $entry)
+	foreach ($data as $entry) {
 
-	{
-
-		if (preg_match('/'.strtolower($entry['pattern']).'/', $_SERVER['HTTP_USER_AGENT']))
+		if (preg_match('/' . strtolower($entry['pattern']) . '/', $_SERVER['HTTP_USER_AGENT']))
 
 			return TRUE;
-
 	}
 
 
 
 	return FALSE;
-
 }
 
 
@@ -2030,7 +1877,6 @@ function kode_wilayah($kode_wilayah)
 	$kode_standar = implode('.', $kode_prov_kab_kec) . $kode_desa;
 
 	return $kode_standar;
-
 }
 
 
@@ -2039,16 +1885,15 @@ function pre_print_r($data)
 
 {
 
-	print("<pre>".print_r($data, true)."</pre>");
-
+	print("<pre>" . print_r($data, true) . "</pre>");
 }
 
 // Kode format lampiran surat
 function kode_format($lampiran = '')
 {
-    $str = strtoupper(str_replace('.php', '', $lampiran));
+	$str = strtoupper(str_replace('.php', '', $lampiran));
 
-    return str_replace(',', ', ', $str);
+	return str_replace(',', ', ', $str);
 }
 
 /**
@@ -2061,11 +1906,11 @@ function kode_format($lampiran = '')
  */
 function exists($array, $key)
 {
-    if ($array instanceof \ArrayAccess) {
-        return $array->offsetExists($key);
-    }
+	if ($array instanceof \ArrayAccess) {
+		return $array->offsetExists($key);
+	}
 
-    return array_key_exists($key, $array);
+	return array_key_exists($key, $array);
 }
 
 /**
@@ -2078,36 +1923,36 @@ function exists($array, $key)
  */
 function forget(&$array, $keys)
 {
-    $original = &$array;
-    $keys     = (array) $keys;
+	$original = &$array;
+	$keys     = (array) $keys;
 
-    if (count($keys) === 0) {
-        return;
-    }
+	if (count($keys) === 0) {
+		return;
+	}
 
-    foreach ($keys as $key) {
-        // if the exact key exists in the top-level, remove it
-        if (exists($array, $key)) {
-            unset($array[$key]);
+	foreach ($keys as $key) {
+		// if the exact key exists in the top-level, remove it
+		if (exists($array, $key)) {
+			unset($array[$key]);
 
-            continue;
-        }
+			continue;
+		}
 
-        $parts = explode('.', $key);
-        // clean up before each pass
-        $array = &$original;
+		$parts = explode('.', $key);
+		// clean up before each pass
+		$array = &$original;
 
-        while (count($parts) > 1) {
-            $part = array_shift($parts);
+		while (count($parts) > 1) {
+			$part = array_shift($parts);
 
-            if (isset($array[$part]) && is_array($array[$part])) {
-                $array = &$array[$part];
-            } else {
-                continue 2;
-            }
-        }
-        unset($array[array_shift($parts)]);
-    }
+			if (isset($array[$part]) && is_array($array[$part])) {
+				$array = &$array[$part];
+			} else {
+				continue 2;
+			}
+		}
+		unset($array[array_shift($parts)]);
+	}
 }
 
 /**
@@ -2120,7 +1965,7 @@ function forget(&$array, $keys)
  */
 function except($array, $keys)
 {
-    forget($array, $keys);
+	forget($array, $keys);
 
-    return $array;
+	return $array;
 }

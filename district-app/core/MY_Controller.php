@@ -89,7 +89,7 @@ class MY_Controller extends CI_Controller {
 		if (is_file($template_file_path))
 			$this->template = "../../{$this->theme_folder}/{$this->theme}/{$template_file}";
 		else
-			$this->template = '../../themes/hijau/' . $template_file;
+			$this->template = '../../themes/bodas/' . $template_file;
 	}
 
 	/*

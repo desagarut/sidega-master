@@ -90,13 +90,13 @@
 											<div class="form-group">
 												<label for="data_sppt" class="col-sm-3 control-label">Nama Wajib Pajak <span style="color:red">*</span></label>
 												<div class="col-sm-9">
-													<input class="form-control input-sm nama required" type="text" placeholder="Nama Wajib Pajak Luar" id="nama_wp_luar" name="nama_wp_luar" value="<?= ($sppt["nama_wp_luar"]) ?>" <?php $wajib_pajak and print('disabled') ?>>
+													<input class="form-control input-sm nama required nama_wp_luar" type="text" placeholder="Nama Wajib Pajak Luar" id="nama_wp_luar" name="nama_wp_luar" value="<?= ($sppt["nama_wp_luar"]) ?>" <?php $wajib_pajak and print('disabled') ?>>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="data_sppt" class="col-sm-3 control-label">Alamat Wajib Pajak <span style="color:red">*</span></label>
 												<div class="col-sm-9">
-													<input class="form-control input-sm required" type="text" placeholder="Alamat Wajib Pajak Luar" id="alamat_wp_luar" name="alamat_wp_luar" value="<?= ($sppt["alamat_wp_luar"]) ?>" <?php $wajib_pajak and print('disabled') ?>>
+													<input class="form-control input-sm required alamat_wp_luar" type="text" placeholder="Alamat Wajib Pajak Luar" id="alamat_wp_luar" name="alamat_wp_luar" value="<?= ($sppt["alamat_wp_luar"]) ?>" <?php $wajib_pajak and print('disabled') ?>>
 												</div>
 											</div>
 										</div>
@@ -104,14 +104,14 @@
 										<div class="form-group">
 											<label for="data_sppt" class="col-sm-3 control-label">Tahun Awal Data Pajak <span style="color:red">*</span></label>
 											<div class="col-sm-2">
-												<input class="form-control input-sm angka required" maxlength="4" type="text" placeholder="Tahun Awal" name="tahun_awal" value="<?= ($sppt["tahun_awal"]) ?>">
+												<input class="form-control input-sm angka required tahun_awal" id="tahun_awal" maxlength="4" type="text" placeholder="Tahun Awal" name="tahun_awal" value="<?= ($sppt["tahun_awal"]) ?>">
 											</div><small><code>4 digit tahun, contoh 2024</code></small>
 										</div>
 										<div class="form-group">
 											<label for="data_sppt" class="col-sm-3 control-label">Nomor Objek Pajak <span style="color:red">*</span></label>
 											<div class="col-sm-2">
-												<input class="form-control input-sm angka required" maxlength="18" type="text" placeholder="Nomor Objek Pajak" name="data_sppt" value="<?= ($sppt["nomor"]) ?>" <?php !($wajib_pajak or $sppt['jenis_wp'] == 2) and print('disabled') ?>>
-											</div><small><code>Diisi dengan angka sebanyak 18 digit tanpa titik dan strip (. -)</code></small>
+												<input class="form-control input-sm angka required data_sppt" id="data_sppt" name="data_sppt" maxlength="18" type="text" placeholder="Nomor Objek Pajak" value="<?= ($sppt["nomor"]) ?>" <?php !($wajib_pajak or $sppt['jenis_wp'] == 2) and print('disabled') ?>>
+											</div><!--<small><code>Diisi angka sebanyak 18 digit tanpa titik dan strip (. -)</code></small>-->
 										</div>
 										<div class="form-group">
 											<label for="sppt" class="col-sm-3 control-label">Nama Wajib Pajak Tertulis di SPPT <span style="color:red">*</span></label>
@@ -122,27 +122,27 @@
 										<div class="form-group">
 											<label for="letak_op" class="col-sm-3 control-label">Letak Objek Pajak <span style="color:red">*</span></label>
 											<div class="col-sm-9">
-												<input class="form-control input-sm alamat required" type="text" placeholder="Letak Objek Pajak" name="letak_op" value="<?= ($sppt["letak_op"]) ?>">
+												<input class="form-control input-sm alamat required letak_op" id="letak_op" name="letak_op" type="text" placeholder="Letak Objek Pajak" value="<?= ($sppt["letak_op"]) ?>">
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="nama_wp" class="col-sm-3 control-label">Objek Bumi :</label>
 											<div class="col-sm-9">
 												<div class="col-sm-3">
-													<label for="nama_wp" class="control-label">Luas per Meter </label>
-													<input class="form-control input-sm angka " type="text" placeholder="Meter persegi" name="luas_tanah" value="<?= ($sppt["luas_tanah"]) ?>">
+													<label for="luas_tanah" class="control-label">Luas per Meter </label>
+													<input class="form-control input-sm angka required luas_tanah" id="luas_tanah" name="luas_tanah" type="text" placeholder="0" value="<?= ($sppt["luas_tanah"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Kelas </label>
-													<input class="form-control input-sm angka " type="text" placeholder="Angka" name="kelas_tanah" value="<?= ($sppt["kelas_tanah"]) ?>">
+													<input class="form-control input-sm required" type="text" placeholder="0" name="kelas_tanah" value="<?= ($sppt["kelas_tanah"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">NJOP per Meter </label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="pajak_tanah" value="<?= ($sppt["pajak_tanah"]) ?>">
+													<input class="form-control input-sm angka required" type="text" placeholder="Rupiah" name="pajak_tanah" value="<?= ($sppt["pajak_tanah"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Total </label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="total_pajak_tanah" value="<?= ($sppt["total_pajak_tanah"]) ?>">
+													<input class="form-control input-sm angka required" type="text" placeholder="Rupiah" name="total_pajak_tanah" value="<?= ($sppt["total_pajak_tanah"]) ?>">
 												</div>
 											</div>
 										</div>
@@ -151,19 +151,19 @@
 											<div class="col-sm-9">
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Luas per Meter</label>
-													<input class="form-control input-sm angka" type="text" placeholder="Meter persegi" name="luas_bangunan" value="<?= ($sppt["luas_bangunan"]) ?>">
+													<input class="form-control input-sm angka required" type="text" placeholder="0" name="luas_bangunan" value="<?= ($sppt["luas_bangunan"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Kelas </label>
-													<input class="form-control input-sm angka " type="text" placeholder="Angka" name="kelas_bangunan" value="<?= ($sppt["kelas_bangunan"]) ?>">
+													<input class="form-control input-sm required" type="text" placeholder="0" name="kelas_bangunan" value="<?= ($sppt["kelas_bangunan"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">PNJOP per Meter </label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="pajak_bangunan" value="<?= ($sppt["pajak_bangunan"]) ?>">
+													<input class="form-control input-sm angka required" type="text" placeholder="Rupiah" name="pajak_bangunan" value="<?= ($sppt["pajak_bangunan"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Total </label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="total_pajak_bangunan" value="<?= ($sppt["total_pajak_bangunan"]) ?>">
+													<input class="form-control input-sm angka required" type="text" placeholder="Rupiah" name="total_pajak_bangunan" value="<?= ($sppt["total_pajak_bangunan"]) ?>">
 												</div>
 											</div>
 										</div>
@@ -172,15 +172,15 @@
 											<div class="col-sm-9">
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">Dasar Pengenaan PBB</label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="dp_pbb" value="<?= ($sppt["dp_pbb"]) ?>">
+													<input class="form-control input-sm required" type="text" placeholder="Rupiah" name="dp_pbb" value="<?= ($sppt["dp_pbb"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">NJOP Tidak Kena Pajak </label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="njop_tkp" value="<?= ($sppt["njop_tkp"]) ?>">
+													<input class="form-control input-sm required" type="text" placeholder="Rupiah" name="njop_tkp" value="<?= ($sppt["njop_tkp"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">NJOP perhitungan PBB</label>
-													<input class="form-control input-sm" type="text" placeholder="Rupiah" name="njop_ppbb" value="<?= ($sppt["njop_ppbb"]) ?>">
+													<input class="form-control input-sm required" type="text" placeholder="Rupiah" name="njop_ppbb" value="<?= ($sppt["njop_ppbb"]) ?>">
 												</div>
 												<div class="col-sm-3">
 													<label for="nama_wp" class="control-label">PBB Terhutang <span style="color:red">*</span></label>

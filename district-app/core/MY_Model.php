@@ -62,6 +62,7 @@ class MY_Model extends CI_Model {
 			case 'pembangunan':
 			case 'galeri':
 			case 'pengaduan':
+			case 'inventaris':
 				break;
 
 			default:
