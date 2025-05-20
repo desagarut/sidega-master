@@ -31,7 +31,7 @@
 			<!--<li class="header">MENU UTAMA</li>-->
 			<?php foreach ($modul AS $mod): ?>
 				<?php if ($this->CI->cek_hak_akses('b', $mod['url'])): ?>
-					<?php if (count($mod['submodul'])==0): ?>
+					<?php if ($mod['submodul']==0): ?>
 						<li class="<?= jecho($this->modul_ini, $mod['id'], 'active'); ?>">
 							<a href="<?= site_url("$mod[url]"); ?>">
 								<i class="fa <?= $mod['ikon']; ?> <?= jecho($this->modul_ini, $mod['id'], 'text-aqua'); ?>"></i><span><?= $mod['modul']; ?></span>
