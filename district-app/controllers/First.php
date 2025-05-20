@@ -76,7 +76,7 @@ class First extends Web_Controller
 		$this->load->model('inventaris_asset_model');
 		$this->load->model('inventaris_gedung_model');
 		$this->load->model('inventaris_jalan_model');
-		$this->load->model('inventaris_konstruksi_model');
+		$this->load->model('inventaris_kontruksi_model');
 		$this->load->model('inventaris_peralatan_model');
 		$this->load->model('inventaris_tanah_model');
 	}
