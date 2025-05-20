@@ -1,10 +1,10 @@
 <div class="panel">
 	<div class="panel-head text-center">
-	<h4>Data Inventaris Desa</h4>
+	<h3>Data Inventaris Desa</h3>
 	</div>
 	<div class="panel-body">
 		<?php if (sizeof($peralatan) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Peralatan</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Peralatan</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -32,7 +32,7 @@
 		<?php } ?>
 
 		<?php if (sizeof($gedung) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Gedung</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Gedung</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -58,7 +58,7 @@
 		<?php } ?>
 
 		<?php if (sizeof($tanah) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Tanah</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Tanah</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -84,7 +84,7 @@
 		<?php } ?>
 
 		<?php if (sizeof($kontruksi) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Konstruksi</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Konstruksi</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -110,7 +110,7 @@
 		<?php } ?>
 
 		<?php if (sizeof($jalan) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Konstruksi</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Jalan</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -136,7 +136,7 @@
 		<?php } ?>
 
 		<?php if (sizeof($asset) > 0) { ?>
-			<div class="head-tb-inventaris">Kategori : Inventaris Asset Lainnya</div>
+			<div class="head-tb-inventaris"><h5 class="pt-2">Kategori : Inventaris Asset Lainnya</h5></div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
