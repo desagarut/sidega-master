@@ -180,10 +180,10 @@
 		return $bulan;
 	}
 
-	function getBulan(int $bln)
+	function getBulan($bln)
 	{
 		$bulan = bulan();
-		return $bulan[(int)$bln];
+		return $bulan[$bln];
 	}
 
 	function tahun(int $awal = 2018)
