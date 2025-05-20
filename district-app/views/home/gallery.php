@@ -18,7 +18,7 @@
               <img width=50 height=80 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>
             </div>
             <div class="product-info">
-              <a href="<?= site_url("gallery/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['nama'] ?>"><?= $data[nama] ?>
+              <a href="<?= site_url("gallery/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['nama'] ?>"><?= $data['nama'] ?>
               </a>
               <span class="product-description">
                 <?= $data['tgl_upload'] ?>
