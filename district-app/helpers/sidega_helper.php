@@ -667,7 +667,7 @@ function httpPost($url, $params)
 
 		curl_setopt($ch, CURLOPT_HEADER, false);
 
-		curl_setopt($ch, CURLOPT_POST, $postData);
+		curl_setopt($ch, CURLOPT_POST, count($postData));
 
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
