@@ -2,7 +2,7 @@
 	<h4 >Data Inventaris Desa</h4>
 	<div class="panel-body">
 
-		<?php if (sizeof($mesin) > 0) { ?>
+		<?php if (sizeof($peralatan) > 0) { ?>
 			<div class="head-tb-inventaris">Kategori : Inventaris Mesin</div>
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
@@ -16,7 +16,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($mesin as $data) { ?>
+						<?php foreach ($peralatan as $data) { ?>
 							<tr <?php echo ($data->status == "1") ? 'style="background-color:#cacaca"' : ''; ?>>
 								<td><?= $data->nama_barang; ?></td>
 								<td class="text-center"><?= $data->kode_barang; ?></td>
@@ -165,6 +165,5 @@
 				</table>
 			</div>
 		<?php } ?>
-
 	</div>
 </div>

@@ -74,7 +74,11 @@ class First extends Web_Controller
 		$this->load->library('upload');
 
 		$this->load->model('inventaris_asset_model');
-
+		$this->load->model('inventaris_gedung_model');
+		$this->load->model('inventaris_jalan_model');
+		$this->load->model('inventaris_konstruksi_model');
+		$this->load->model('inventaris_peralatan_model');
+		$this->load->model('inventaris_tanah_model');
 	}
 
 	public function index($p = 1)
@@ -958,22 +962,17 @@ class First extends Web_Controller
 	}
 
 	public function inventaris()
-
 	{
-
 		$data = $this->includes;
 		$data['asset'] = $this->inventaris_asset_model->list_inventaris();
-		//$data['elektronik'] = $this->inventaris_elektronik_model->list_inventaris();
-		//$data['gedung'] = $this->inventaris_gedung_model->list_inventaris();
-		//$data['kontruksi'] = $this->inventaris_kontruksi_model->list_inventaris();
-		//$data['jalan'] = $this->inventaris_jalan_model->list_inventaris();
-		//$data['tanah'] = $this->inventaris_tanah_model->list_inventaris();
+		$data['peralatan'] = $this->inventaris_peralatan_model->list_inventaris();
+		$data['gedung'] = $this->inventaris_gedung_model->list_inventaris();
+		$data['kontruksi'] = $this->inventaris_kontruksi_model->list_inventaris();
+		$data['jalan'] = $this->inventaris_jalan_model->list_inventaris();
+		$data['tanah'] = $this->inventaris_tanah_model->list_inventaris();
 
 		$this->_get_common_data($data);
 				$this->set_template('layouts/inventaris.tpl.php');
-
-		//$data['data_agenda'] = $this->first_artikel_m->agenda_show();
-		//$data['page_content'] = $this->load->view($this->theme_path . 'template-parts/inventaris', $data, TRUE);
 
 		$this->load->view($this->template, $data);
 	}
