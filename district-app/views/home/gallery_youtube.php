@@ -17,7 +17,7 @@
               <img src="<?= base_url("assets/files/logo/youtube.png") ?>" alt="Product Image">
             </div>
             <div class="product-info">
-              <a href="<?= site_url("gallery_youtube/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['nama'] ?>"><?= $data[nama] ?>
+              <a href="<?= site_url("gallery_youtube/sub_gallery/{$data['id']}") ?>" class="product-title" alt="<?= $data['nama'] ?>"><?= $data['nama'] ?>
               </a>
               <span class="product-description">
                 <?= $data['tgl_upload'] ?>
