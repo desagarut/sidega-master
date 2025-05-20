@@ -65,10 +65,10 @@
 						<tr>
 							<th class="text-center uppercase">Nama Barang</th>
 							<th class="text-center uppercase">Kode</th>
-							<th class="text-center uppercase">Letak</th>
-							<th class="text-center uppercase">Penggunanaan</th>
+							<th class="text-left uppercase">Letak</th>
+							<th class="text-left uppercase">Penggunanaan</th>
 							<th class="text-center uppercase">Tahun Perolehan</th>
-							<th class="text-center uppercase">Keterangan</th>
+							<th class="text-left uppercase">Keterangan</th>
 							<th class="text-center uppercase">Sumber Dana</th>
 						</tr>
 					</thead>
@@ -164,7 +164,7 @@
 								<td class="text-center"><?= $data->kode_barang; ?></td>
 								<td class="text-center"><?= $data->jumlah; ?></td>
 								<td class="text-center"><?= $data->tahun_pengadaan; ?></td>
-								<td class="text-center"><?= $data->keterangan; ?></td>
+								<td class="text-left"><?= $data->keterangan; ?></td>
 								<td class="text-center"><?= $data->asal; ?></td>
 							</tr>
 						<?php } ?>
