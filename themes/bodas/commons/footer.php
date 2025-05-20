@@ -1,5 +1,5 @@
     <!-- Load APB Desa -->
-    <?php if ($transparansi) $this->load->view($folder_themes . '/partials/apbdesa', $transparansi) ?>
+    <?php //if ($transparansi) $this->load->view($folder_themes . '/partials/apbdesa', $transparansi) ?>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
