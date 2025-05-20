@@ -972,7 +972,17 @@ class First extends Web_Controller
 		$data['tanah'] = $this->inventaris_tanah_model->list_inventaris();
 
 		$this->_get_common_data($data);
-				$this->set_template('layouts/inventaris.tpl.php');
+		$this->set_template('layouts/inventaris.tpl.php');
+
+		$this->load->view($this->template, $data);
+	}
+
+	public function pemerintahan_desa()
+	{
+		$data = $this->includes;
+
+		$this->_get_common_data($data);
+		$this->set_template('layouts/pemerintahan_desa.tpl.php');
 
 		$this->load->view($this->template, $data);
 	}

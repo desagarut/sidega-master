@@ -120,7 +120,7 @@ $route['load_aparatur_wilayah/(.+)'] = 'first/load_aparatur_wilayah/$1';
 $route['status-idm/(:num)']          = 'first/status_idm/$1';
 //$route['status-sdgs']                = 'first/status_sdgs';
 $route['inventaris']                = 'first/inventaris';
-
+$route['pemerintahan_desa']                = 'first/pemerintahan_desa';
 
 // Surat
 $route['v/(:any)']                = WEB . '/verifikasi_surat/cek/$1';
