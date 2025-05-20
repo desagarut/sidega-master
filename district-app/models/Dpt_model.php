@@ -8,7 +8,7 @@ class Dpt_model extends Penduduk_model
         $this->load->model('keluarga_model');
     }
 
-    public function autocomplete()
+    public function autocomplete($cari = '')
     {
         return $this->autocomplete_str('nama', 'tweb_penduduk');
     }
