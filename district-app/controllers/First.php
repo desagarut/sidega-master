@@ -979,8 +979,12 @@ class First extends Web_Controller
 
 	public function pemerintahan_desa()
 	{
+		$this->load->model('pamong_model');
+
 		$data = $this->includes;
 
+		$data['main'] = $this->pamong_model->list_data();
+		//$data['main'] = $this->pamong_model->get_pamong($data);
 		$this->_get_common_data($data);
 		$this->set_template('layouts/pemerintahan_desa.tpl.php');
 

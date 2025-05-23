@@ -65,7 +65,7 @@
 								<span class="help-block"><code>Judul artikel minimal 5 karakter dan maksimal 100 karakter</code></span>
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="kode_desa">Isi Artikel</label>
+								<label class="control-label" for="isi">Isi Artikel</label>
 								<textarea name="isi" class="form-control input-sm required" style="height:350px;">
 									<?=$artikel['isi']?>
 								</textarea>

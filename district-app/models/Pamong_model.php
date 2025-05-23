@@ -222,6 +222,7 @@ class Pamong_model extends CI_Model {
 		$data['bagan_offset'] = (integer)$post['bagan_offset'] ?: NULL;
 		$data['bagan_layout'] = htmlentities($post['bagan_layout']);
 		$data['bagan_warna'] = $post['bagan_warna'];
+		$data['tupoksi'] = $post['tupoksi'];
 		return $data;
 	}
 
@@ -345,7 +346,7 @@ class Pamong_model extends CI_Model {
 	 */
 	public function list_aparatur_desa()
 	{
-		$data['daftar_perangkat'] = $this->db->select('dp.jabatan, dp.pamong_niap, dp.foto,
+		$data['daftar_perangkat'] = $this->db->select('dp.jabatan, dp.pamong_niap, dp.foto, dp.tupoksi,
 			CASE WHEN dp.id_pend IS NULL THEN dp.pamong_nama
 			ELSE p.nama END AS nama', FALSE)
 			->from('tweb_desa_pamong dp')

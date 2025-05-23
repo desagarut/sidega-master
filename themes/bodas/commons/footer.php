@@ -43,6 +43,7 @@
 
                         <?php $this->load->view($folder_themes . '/widgets/statistik_pengunjung') ?>
                     </div>
+                    <!--
                     <div class="row g-2 pt-2">
                         <div class="col-4">
                             <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
@@ -62,7 +63,7 @@
                         <div class="col-4">
                             <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

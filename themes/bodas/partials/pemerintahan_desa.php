@@ -10,72 +10,112 @@
 			<div class="row g-4 p-4 shadow justify-content-center">
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="course-item bg-success">
-						<div class="position-relative overflow-hidden text-center" style="padding: 10px 10px 10px 10px; ">
+						<div class="position-relative overflow-hidden text-center" style="padding: 5px 5px 5px 5px; height: 100%">
 							<?php if ($data['foto']): ?>
-								<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" />
+								<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:600px; width:auto" />
 							<?php else: ?>
-								<img class="img-fluid" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" />
+								<img class="img-fluid" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" sstyle="object-fit: cover; height:600px; width:auto" />
 							<?php endif ?>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-8 wow fadeInUp" data-wow-delay="0.1s" style="padding: 10px 10px 10px 50px">
+				<div class="col-md-8 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="row">
-						<div class="col-md-4">
-							<h6 class="text-left">BIODATA:</h6>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<h4>NAMA </h4>
-						</div>
-						<div class="col-md-8">
-							<h4 class="nama-pejabat">: <?= strtoupper($data['nama']) ?></h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<h5 class="text-left">JABATAN</h5>
-						</div>
-						<div class="col-md-7">
-							<h5 class="text-left">: <?= strtoupper($data['jabatan']) ?> <?= strtoupper($desa['nama_desa']) ?></h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<h5 class="text-left">NIP/NIPD </h5>
-						</div>
-						<div class="col-md-7">
-							<h5 class="text-left">: <?= $data['pamong_nip'] ?></h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<h5 class="text-left">MASA JABATAN</h5>
-						</div>
-						<div class="col-md-7">
-							<h5 class="text-left">: <?= strtoupper($data['pamong_masajab']) ?></h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<h5 class="text-left">JENIS KELAMIN</h5>
-						</div>
-						<div class="col-md-7">
-							<h5 class="text-left">: <?= $data['pamong_sex'] ?></h5>
-						</div>
-					</div>
-					<div class="row mt-4">
-						<div class="col-md-4">
-							<h6 class="text-left">TUGAS POKOK DAN FUNGSI:</h6>
-						</div>
-					</div>
-					<div class="row mt-4">
-						<div class="col-md-4">
-							<p class="text-justify">Melaksananakan....</p>
+						<div class="col-sm-12">
+							<div class="table-responsive">
+								<table class="table table-responsive table-borderless">
+									<thead>
+										<tr>
+											<th colspan="3">BIODATA:</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="width: 20%;">NAMA</td>
+											<td style="width: 2%;">:</td>
+											<td class="width: 78%"><?= strtoupper($data['nama']) ?></td>
+										<tr>
+										</tr>
+										<td style="width: 20%;">JABATAN</td>
+										<td style="width: 2%;">:</td>
+										<td class="width: 78%"><?= strtoupper($data['jabatan']) ?></td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-responsive table-borderless">
+									<thead>
+										<tr>
+											<th colspan="3">TUGAS POKOK DAN FUNGSI:</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div class="card card-body"><?= $data['tupoksi'] ?></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 
+					<!--
+						<div class="row">
+							<div class="col-md-4">
+								<h6 class="text-left">BIODATA:</h6>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="col-md-4">
+								<p>NAMA </p>
+							</div>
+							<div class="col-md-8">
+								<p class="text-left">: </h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5 class="text-left">JABATAN</h5>
+							</div>
+							<div class="col-md-7">
+								<h5 class="text-left">: </h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<h5 class="text-left">NIP/NIPD </h5>
+							</div>
+							<div class="col-md-7">
+								<h5 class="text-left">: <?= $data['pamong_nip'] ?></h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5 class="text-left">MASA JABATAN</h5>
+							</div>
+							<div class="col-md-7">
+								<h5 class="text-left">: <?= strtoupper($data['pamong_masajab']) ?></h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5 class="text-left">JENIS KELAMIN</h5>
+							</div>
+							<div class="col-md-7">
+								<h5 class="text-left">: <?= $data['pamong_sex'] ?></h5>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-md-4">
+								<h6 class="text-left">TUGAS POKOK DAN FUNGSI:</h6>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-md-4">
+								<p class="text-justify">Melaksananakan....</p>
+							</div>
+						</div>
+							-->
 				</div>
 			</div>
 		</div>
