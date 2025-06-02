@@ -1,5 +1,6 @@
     <!-- Load APB Desa -->
-    <?php //if ($transparansi) $this->load->view($folder_themes . '/partials/apbdesa', $transparansi) ?>
+    <?php if ($transparansi) $this->load->view($folder_themes . '/partials/apbdesa', $transparansi) 
+    ?>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -40,30 +41,8 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Pengunjung</h4>
                     <div class="row g-2 pt-2">
-
                         <?php $this->load->view($folder_themes . '/widgets/statistik_pengunjung') ?>
                     </div>
-                    <!--
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg") ?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg") ?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-2.jpg") ?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-3.jpg") ?>" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/course-1.jpg") ?>" alt="">
-                        </div>
-                    </div>-->
                 </div>
             </div>
         </div>
@@ -91,6 +70,7 @@
     <!-- Footer End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <!-- Back to Top End -->
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -105,4 +85,3 @@
     <script src="<?= base_url("$this->theme_folder/$this->theme/assets/js/main.js") ?>"></script>
     <script src="<?= base_url('assets/bootstrap/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
-    <link rel="stylesheet" href="<?= base_url("$this->theme_folder/$this->theme/assets/css/bootstrap.min.css") ?>">

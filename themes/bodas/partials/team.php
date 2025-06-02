@@ -4,7 +4,7 @@
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3">S D M</h6>
-            <h1 class="mb-5">Pemerintah Desa</h1>
+            <h1 class="mb-5"><a href="<?= site_url('first/pemerintahan_desa') ?>">Pemerintahan Desa </a></h1>
         </div>
         <div class="row g-3 owl-carousel testimonial-carousel position-relative">
             <?php foreach ($aparatur_desa['daftar_perangkat'] as $data) : ?>

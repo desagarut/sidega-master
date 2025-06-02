@@ -9,7 +9,7 @@
 		<div class="course-item p-4">
 			<div class="row g-4 p-4 shadow justify-content-center">
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="course-item bg-success">
+					<div class="course-item bg-info">
 						<div class="position-relative overflow-hidden text-center" style="padding: 5px 5px 5px 5px; height: 100%">
 							<?php if ($data['foto']): ?>
 								<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:600px; width:auto" />
@@ -57,65 +57,6 @@
 							</div>
 						</div>
 					</div>
-
-					<!--
-						<div class="row">
-							<div class="col-md-4">
-								<h6 class="text-left">BIODATA:</h6>
-							</div>
-						</div>
-						<div class="row">
-
-							<div class="col-md-4">
-								<p>NAMA </p>
-							</div>
-							<div class="col-md-8">
-								<p class="text-left">: </h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5 class="text-left">JABATAN</h5>
-							</div>
-							<div class="col-md-7">
-								<h5 class="text-left">: </h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								<h5 class="text-left">NIP/NIPD </h5>
-							</div>
-							<div class="col-md-7">
-								<h5 class="text-left">: <?= $data['pamong_nip'] ?></h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5 class="text-left">MASA JABATAN</h5>
-							</div>
-							<div class="col-md-7">
-								<h5 class="text-left">: <?= strtoupper($data['pamong_masajab']) ?></h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5 class="text-left">JENIS KELAMIN</h5>
-							</div>
-							<div class="col-md-7">
-								<h5 class="text-left">: <?= $data['pamong_sex'] ?></h5>
-							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-md-4">
-								<h6 class="text-left">TUGAS POKOK DAN FUNGSI:</h6>
-							</div>
-						</div>
-						<div class="row mt-4">
-							<div class="col-md-4">
-								<p class="text-justify">Melaksananakan....</p>
-							</div>
-						</div>
-							-->
 				</div>
 			</div>
 		</div>
