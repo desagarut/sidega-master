@@ -1,6 +1,6 @@
 #============
-# Di server yg ada Apache, gunakan file ini untuk menghapus index.php dari url OpenSID,
-# dan untuk mengamankan folder desa.
+# Di server yg ada Apache, gunakan file ini untuk menghapus index.php dari url SIDeGa,
+# dan untuk mengamankan folder Instansi.
 # Untuk mengaktifkan, ubah nama file ini menjadi .htaccess,
 # Sesudah aktif, misalnya, modul Web bisa dipanggil dengan http://localhost/first.
 # Untuk menggunakan fitur ini, pastikan konfigurasi Apache di server SID
@@ -30,7 +30,7 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Periksa apakah full-path perlu disesuaikan untuk server anda
-<Directory /home/*/*/desa/upload>
+<Directory /home/*/*/instansi/upload>
 	php_flag engine off
 	<FilesMatch "(?i)\.(php|php3?|phtml|phpjpeg)$">
 		Order Deny,Allow
@@ -39,7 +39,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </Directory>
 
 # Periksa apakah full-path perlu disesuaikan untuk server anda
-<Directory /home/*/*/desa-contoh>
+<Directory /home/*/*/instansi-contoh>
 	php_flag engine off
 	<FilesMatch "(?i)\.(php|php3?|phtml|phpjpeg)$">
 		Order Deny,Allow
