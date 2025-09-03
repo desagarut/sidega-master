@@ -6,8 +6,8 @@ class Ba_kader extends Admin_Controller
     {
         parent::__construct();
         $this->load->model(['kader_model', 'pamong_model', 'penduduk_model']);
-        $this->modul_ini     = 300;
-        $this->sub_modul_ini = 330;
+        $this->modul_ini     = 350;
+        $this->sub_modul_ini = 352;
     }
 
     public function index()
@@ -29,10 +29,10 @@ class Ba_kader extends Admin_Controller
                 ]));
         }
 
-        $this->render('ba/pembangunan/main', [
+        $this->render('pemberdayaan_masyarakat/kader/index', [
             'selected_nav' => 'kader',
             'subtitle'     => 'Buku Kader Pemberdayaan',
-            'main_content' => 'ba/pembangunan/kader/index',
+            'main_content' => 'pemberdayaan_masyarakat/kader/index',
         ]);
     }
 
@@ -49,7 +49,7 @@ class Ba_kader extends Admin_Controller
         $data['daftar_bidang']   = $this->referensi_model->list_data('ref_penduduk_bidang');
         $data['daftar_kursus']   = $this->referensi_model->list_data('ref_penduduk_kursus');
 
-        $this->render('ba/pembangunan/kader/form', $data);
+        $this->render('pemberdayaan_masyarakat/kader/form', $data);
     }
 
     public function get_kursus()
@@ -103,7 +103,7 @@ class Ba_kader extends Admin_Controller
         $data = [
             'aksi'        => $aksi,
             'form_action' => site_url($this->controller . '/cetak/' . $aksi),
-            'isi'         => 'ba/pembangunan/ajax_dialog',
+            'isi'         => 'pemberdayaan_masyarakat/kader/ajax_dialog',
         ];
 
         $this->load->view('global/dialog_cetak', $data);
@@ -119,7 +119,7 @@ class Ba_kader extends Admin_Controller
             'main'           => $this->kader_model->get_data()->get()->result(),
             'tgl_cetak'      => $this->input->post('tgl_cetak'),
             'file'           => 'Buku ' . ucwords($this->tipe) . ' Kerja Pembangunan',
-            'isi'            => 'ba/pembangunan/kader/cetak',
+            'isi'            => 'pemberdayaan_masyarakat/kader/cetak',
             'letak_ttd'      => ['2', '2', '5'],
         ];
 

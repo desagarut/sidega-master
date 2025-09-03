@@ -113,13 +113,13 @@ class First extends Web_Controller
 		// Update Versi 5.7.0
 		// $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
 		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
-
+/*
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input
 				? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
 				: $this->keuangan_grafik_model->grafik_keuangan_tema();
 		}
-
+*/
 		$cari = trim($this->input->get('cari'));
 		if (!empty($cari)) {
 			// Judul artikel bisa digunakan untuk serangan XSS
@@ -689,7 +689,7 @@ class First extends Web_Controller
 		$this->set_template('layouts/peta_statis.tpl.php');
 		$this->load->view($this->template, $data);
 	}
-
+	/*
 	public function load_apbdes()
 	{
 		$data['transparansi'] = $this->keuangan_grafik_model->grafik_keuangan_tema();
@@ -697,7 +697,7 @@ class First extends Web_Controller
 		$this->_get_common_data($data);
 		$this->load->view('gis/apbdes_web', $data);
 	}
-
+*/
 	public function load_aparatur_desa()
 	{
 		$this->_get_common_data($data);

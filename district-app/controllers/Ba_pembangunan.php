@@ -9,7 +9,7 @@ class Ba_pembangunan extends Admin_Controller {
 		$this->load->library('session');
 		$this->load->model('header_model');
 
-		$this->modul_ini = 300;
+		$this->modul_ini = 305;
 
 	}
 

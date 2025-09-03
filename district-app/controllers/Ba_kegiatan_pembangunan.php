@@ -9,7 +9,7 @@ class Ba_kegiatan_pembangunan extends Ba_rencana_pembangunan
     public function __construct()
     {
         parent::__construct();
-        $this->modul_ini     = 300;
+        $this->modul_ini     = 305;
         $this->sub_modul_ini = 330;
     }
 }

@@ -7,7 +7,7 @@ class Pemberdayaan_masyarakat extends Admin_Controller {
 		parent::__construct();
 		$this->load->model(['pemberdayaan_masyarakat_model', 'pamong_model']);
 		$this->modul_ini = 350;
-		$this->sub_modul_ini = 25;
+		$this->sub_modul_ini = 351;
 	}
 
 	public function index()
@@ -19,7 +19,7 @@ class Pemberdayaan_masyarakat extends Admin_Controller {
 		$data['pemberdayaan_masyarakat'] = $this->pemberdayaan_masyarakat_model->list_data($sasaran);
 		$data['list_sasaran'] = unserialize(SASARAN);
 		$data['set_sasaran'] = $sasaran;
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 		$this->render('pemberdayaan_masyarakat/daftar_kegiatan', $data);
 	}
