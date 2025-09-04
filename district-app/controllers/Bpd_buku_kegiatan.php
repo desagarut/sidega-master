@@ -51,27 +51,27 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 
 		if ($id)
 		{
-			$data['gallery'] = $this->bpd_kegiatan_model->get_gallery($id);
-			$data['form_action'] = site_url("gallery/update/$id/$p/$o");
+			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_gallery($id);
+			$data['form_action'] = site_url("bpd_buku_kegiatan/update/$id/$p/$o");
 		}
 		else
 		{
-			$data['gallery'] = null;
-			$data['form_action'] = site_url("gallery/insert");
+			$data['bpd_buku_kegiatan'] = null;
+			$data['form_action'] = site_url("bpd_buku_kegiatan/insert");
 		}
 
 		$this->render('bpd/kegiatan/form', $data);
 	}
 
-	public function search($gallery='')
+	public function search($bpd_buku_kegiatan='')
 	{
 		$cari = $this->input->post('cari');
 		if ($cari != '')
 			$_SESSION['cari'] = $cari;
 		else unset($_SESSION['cari']);
-		if ($gallery != '')
+		if ($bpd_buku_kegiatan != '')
 		{
-			redirect("gallery/sub_gallery/$gallery");
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 		}
 		else
 		{
@@ -79,15 +79,15 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 		}
 	}
 
-	public function filter($gallery='')
+	public function filter($bpd_buku_kegiatan='')
 	{
 		$filter = $this->input->post('filter');
 		if ($filter != 0)
 			$_SESSION['filter'] = $filter;
 		else unset($_SESSION['filter']);
-		if ($gallery != '')
+		if ($bpd_buku_kegiatan != '')
 		{
-			redirect("gallery/sub_gallery/$gallery");
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 		}
 		else
 		{
@@ -104,58 +104,58 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 	public function update($id='', $p=1, $o=0)
 	{
 		$this->bpd_kegiatan_model->update($id);
-		redirect("gallery/index/$p/$o");
+		redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
 	public function delete($p=1, $o=0, $id='')
 	{
-		$this->redirect_hak_akses('h', "gallery/index/$p/$o");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/index/$p/$o");
 		$this->bpd_kegiatan_model->delete_gallery($id);
-		redirect("gallery/index/$p/$o");
+		redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
 	public function delete_all($p=1, $o=0)
 	{
-		$this->redirect_hak_akses('h', "gallery/index/$p/$o");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/index/$p/$o");
 		$_SESSION['success'] = 1;
 		$this->bpd_kegiatan_model->delete_all_gallery();
-		redirect("gallery/index/$p/$o");
+		redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function gallery_lock($id='', $gallery='')
+	public function gallery_lock($id='', $bpd_buku_kegiatan='')
 	{
 		$this->bpd_kegiatan_model->gallery_lock($id, 1);
-		if ($gallery != '')
-			redirect("gallery/sub_gallery/$gallery/$p");
+		if ($bpd_buku_kegiatan != '')
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
 		else
-			redirect("gallery/index/$p/$o");
+			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function gallery_unlock($id='', $gallery='')
+	public function gallery_unlock($id='', $bpd_buku_kegiatan='')
 	{
 		$this->bpd_kegiatan_model->gallery_lock($id, 2);
-		if ($gallery != '')
-			redirect("gallery/sub_gallery/$gallery/$p");
+		if ($bpd_buku_kegiatan != '')
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
 		else
-			redirect("gallery/index/$p/$o");
+			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function slider_on($id='', $gallery='')
+	public function slider_on($id='', $bpd_buku_kegiatan='')
 	{
 		$this->bpd_kegiatan_model->gallery_slider($id, 1);
-		if ($gallery != '')
-			redirect("gallery/sub_gallery/$gallery/$p");
+		if ($bpd_buku_kegiatan != '')
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
 		else
-			redirect("gallery/index/$p/$o");
+			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function slider_off($id='', $gallery='')
+	public function slider_off($id='', $bpd_buku_kegiatan='')
 	{
 		$this->bpd_kegiatan_model->gallery_slider($id,0);
-		if ($gallery != '')
-			redirect("gallery/sub_gallery/$gallery/$p");
+		if ($bpd_buku_kegiatan != '')
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
 		else
-			redirect("gallery/index/$p/$o");
+			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
 	public function sub_gallery($gal=0, $p=1, $o=0)
@@ -177,75 +177,75 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 
 		$data['paging'] = $this->bpd_kegiatan_model->paging2($gal, $p);
 		$data['sub_gallery'] = $this->bpd_kegiatan_model->list_sub_gallery($gal, $o, $data['paging']->offset, $data['paging']->per_page);
-		$data['gallery'] = $gal;
+		$data['bpd_buku_kegiatan'] = $gal;
 		$data['sub'] = $this->bpd_kegiatan_model->get_gallery($gal);
 		$data['keyword'] = $this->bpd_kegiatan_model->autocomplete();
 
 		$this->render('bpd/kegiatan/sub_gallery_table', $data);
 	}
 
-	public function form_sub_gallery($gallery=0, $id=0)
+	public function form_sub_gallery($bpd_buku_kegiatan=0, $id=0)
 	{
 		if ($id)
 		{
-			$data['gallery'] = $this->bpd_kegiatan_model->get_gallery($id);
-			$data['form_action'] = site_url("gallery/update_sub_gallery/$gallery/$id");
+			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_gallery($id);
+			$data['form_action'] = site_url("bpd_buku_kegiatan/update_sub_gallery/$bpd_buku_kegiatan/$id");
 		}
 		else
 		{
-			$data['gallery'] = null;
-			$data['form_action'] = site_url("gallery/insert_sub_gallery/$gallery");
+			$data['bpd_buku_kegiatan'] = null;
+			$data['form_action'] = site_url("bpd_buku_kegiatan/insert_sub_gallery/$bpd_buku_kegiatan");
 		}
-		$data['album']=$gallery;
+		$data['album']=$bpd_buku_kegiatan;
 
 		$this->render('bpd/kegiatan/form_sub_gallery', $data);
 	}
 
-	public function insert_sub_gallery($gallery='')
+	public function insert_sub_gallery($bpd_buku_kegiatan='')
 	{
-		$this->bpd_kegiatan_model->insert_sub_gallery($gallery);
-		redirect("gallery/sub_gallery/$gallery");
+		$this->bpd_kegiatan_model->insert_sub_gallery($bpd_buku_kegiatan);
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function update_sub_gallery($gallery='', $id='')
+	public function update_sub_gallery($bpd_buku_kegiatan='', $id='')
 	{
 		$this->bpd_kegiatan_model->update_sub_gallery($id);
-		redirect("gallery/sub_gallery/$gallery");
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function delete_sub_gallery($gallery='', $id='')
+	public function delete_sub_gallery($bpd_buku_kegiatan='', $id='')
 	{
-		$this->redirect_hak_akses('h', "gallery/sub_gallery/$gallery");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 		$this->bpd_kegiatan_model->delete($id);
-		redirect("gallery/sub_gallery/$gallery");
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function delete_all_sub_gallery($gallery='')
+	public function delete_all_sub_gallery($bpd_buku_kegiatan='')
 	{
-		$this->redirect_hak_akses('h', "gallery/sub_gallery/$gallery");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 		$_SESSION['success']=1;
 		$this->bpd_kegiatan_model->delete_all();
-		redirect("gallery/sub_gallery/$gallery");
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function gallery_lock_sub_gallery($gallery='', $id='')
+	public function gallery_lock_sub_gallery($bpd_buku_kegiatan='', $id='')
 	{
 		$this->bpd_kegiatan_model->gallery_lock($id, 1);
-		redirect("gallery/sub_gallery/$gallery");
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function gallery_unlock_sub_gallery($gallery='', $id='')
+	public function gallery_unlock_sub_gallery($bpd_buku_kegiatan='', $id='')
 	{
 		$this->bpd_kegiatan_model->gallery_lock($id, 2);
-		redirect("gallery/sub_gallery/$gallery");
+		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 	}
 
-	public function urut($id, $arah = 0, $gallery='')
+	public function urut($id, $arah = 0, $bpd_buku_kegiatan='')
 	{
-		$this->bpd_kegiatan_model->urut($id, $arah, $gallery);
-		if ($gallery != '')
-			redirect("gallery/sub_gallery/$gallery");
+		$this->bpd_kegiatan_model->urut($id, $arah, $bpd_buku_kegiatan);
+		if ($bpd_buku_kegiatan != '')
+			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
 		else
-			redirect("gallery/index");
+			redirect("bpd_buku_kegiatan/index");
 	}
 }
