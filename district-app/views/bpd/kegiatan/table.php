@@ -95,7 +95,7 @@
 																		<td nowrap>
 																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
 																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
-																			<a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Album"><i class="fa fa-bars"></i></a>
+																			<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Album"><i class="fa fa-bars"></i></a>
 																			<br />
 																			<a href="<?= site_url("bpd_buku_kegiatan/form/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
 																			<?php if ($data['slider'] == '1') : ?>
@@ -104,9 +104,9 @@
 																				<a href="<?= site_url("bpd_buku_kegiatan/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
 																			<?php endif; ?>
 																			<?php if ($data['enabled'] == '2') : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/gallery_lock/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i></a>
+																				<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i></a>
 																			<?php elseif ($data['enabled'] == '1') : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/gallery_unlock/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i></a>
+																				<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i></a>
 																			<?php endif ?>
 																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																				<a href="#" data-href="<?= site_url("bpd_buku_kegiatan/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
@@ -120,14 +120,14 @@
 																				</div>
 																			</div>
 																		</td>
-																		<td width="60%">
+																		<td>
 																			<label data-rel="popover" data-content="<img width=200 height=134 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>"><?= $data['nama'] ?></label>
 																		</td>
 																		<td><?= $data['pelaksana'] ?></td>
-																		<td><?= $data['hasil'] ?></td>
-																		<td><?= $data['aktif'] ?></td>
-																		<td nowrap><?= tgl_indo2($data['tgl_upload']) ?></td>
-																		<td nowrap><?= $data['keterangan'] ?></td>
+																		<td width="20%"><?= $data['hasil'] ?></td>
+																		<td width="5%"><?= $data['aktif'] ?></td>
+																		<td width="20%"><?= tgl_indo2($data['tgl_upload']) ?></td>
+																		<td width="20%"><?= $data['keterangan'] ?></td>
 																	</tr>
 																<?php endforeach; ?>
 															</tbody>

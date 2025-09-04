@@ -51,7 +51,7 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 
 		if ($id)
 		{
-			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_gallery($id);
+			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_kegiatan($id);
 			$data['form_action'] = site_url("bpd_buku_kegiatan/update/$id/$p/$o");
 		}
 		else
@@ -71,7 +71,7 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 		else unset($_SESSION['cari']);
 		if ($bpd_buku_kegiatan != '')
 		{
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 		}
 		else
 		{
@@ -87,7 +87,7 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 		else unset($_SESSION['filter']);
 		if ($bpd_buku_kegiatan != '')
 		{
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 		}
 		else
 		{
@@ -110,7 +110,7 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 	public function delete($p=1, $o=0, $id='')
 	{
 		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/index/$p/$o");
-		$this->bpd_kegiatan_model->delete_gallery($id);
+		$this->bpd_kegiatan_model->delete_kegiatan($id);
 		redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
@@ -118,24 +118,24 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 	{
 		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/index/$p/$o");
 		$_SESSION['success'] = 1;
-		$this->bpd_kegiatan_model->delete_all_gallery();
+		$this->bpd_kegiatan_model->delete_all_kegiatan();
 		redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function gallery_lock($id='', $bpd_buku_kegiatan='')
+	public function kunci_kegiatan($id='', $bpd_buku_kegiatan='')
 	{
-		$this->bpd_kegiatan_model->gallery_lock($id, 1);
+		$this->bpd_kegiatan_model->kunci_kegiatan($id, 1);
 		if ($bpd_buku_kegiatan != '')
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p");
 		else
 			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function gallery_unlock($id='', $bpd_buku_kegiatan='')
+	public function buka_kunci_kegiatan($id='', $bpd_buku_kegiatan='')
 	{
-		$this->bpd_kegiatan_model->gallery_lock($id, 2);
+		$this->bpd_kegiatan_model->kunci_kegiatan($id, 2);
 		if ($bpd_buku_kegiatan != '')
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p");
 		else
 			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
@@ -144,7 +144,7 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 	{
 		$this->bpd_kegiatan_model->gallery_slider($id, 1);
 		if ($bpd_buku_kegiatan != '')
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p");
 		else
 			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
@@ -153,12 +153,12 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 	{
 		$this->bpd_kegiatan_model->gallery_slider($id,0);
 		if ($bpd_buku_kegiatan != '')
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p");
 		else
 			redirect("bpd_buku_kegiatan/index/$p/$o");
 	}
 
-	public function sub_gallery($gal=0, $p=1, $o=0)
+	public function table_dokumentasi($gal=0, $p=1, $o=0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
@@ -176,75 +176,75 @@ class Bpd_buku_kegiatan extends Admin_Controller {
 		$data['per_page'] = $_SESSION['per_page'];
 
 		$data['paging'] = $this->bpd_kegiatan_model->paging2($gal, $p);
-		$data['sub_gallery'] = $this->bpd_kegiatan_model->list_sub_gallery($gal, $o, $data['paging']->offset, $data['paging']->per_page);
+		$data['table_dokumentasi'] = $this->bpd_kegiatan_model->list_dokumentasi($gal, $o, $data['paging']->offset, $data['paging']->per_page);
 		$data['bpd_buku_kegiatan'] = $gal;
-		$data['sub'] = $this->bpd_kegiatan_model->get_gallery($gal);
+		$data['sub'] = $this->bpd_kegiatan_model->get_kegiatan($gal);
 		$data['keyword'] = $this->bpd_kegiatan_model->autocomplete();
 
-		$this->render('bpd/kegiatan/sub_gallery_table', $data);
+		$this->render('bpd/kegiatan/table_dokumentasi', $data);
 	}
 
-	public function form_sub_gallery($bpd_buku_kegiatan=0, $id=0)
+	public function form_dokumentasi($bpd_buku_kegiatan=0, $id=0)
 	{
 		if ($id)
 		{
-			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_gallery($id);
-			$data['form_action'] = site_url("bpd_buku_kegiatan/update_sub_gallery/$bpd_buku_kegiatan/$id");
+			$data['bpd_buku_kegiatan'] = $this->bpd_kegiatan_model->get_kegiatan($id);
+			$data['form_action'] = site_url("bpd_buku_kegiatan/update_dokumentasi/$bpd_buku_kegiatan/$id");
 		}
 		else
 		{
 			$data['bpd_buku_kegiatan'] = null;
-			$data['form_action'] = site_url("bpd_buku_kegiatan/insert_sub_gallery/$bpd_buku_kegiatan");
+			$data['form_action'] = site_url("bpd_buku_kegiatan/insert_dokumentasi/$bpd_buku_kegiatan");
 		}
 		$data['album']=$bpd_buku_kegiatan;
 
-		$this->render('bpd/kegiatan/form_sub_gallery', $data);
+		$this->render('bpd/kegiatan/form_dokumentasi', $data);
 	}
 
-	public function insert_sub_gallery($bpd_buku_kegiatan='')
+	public function insert_dokumentasi($bpd_buku_kegiatan='')
 	{
-		$this->bpd_kegiatan_model->insert_sub_gallery($bpd_buku_kegiatan);
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->bpd_kegiatan_model->insert_dokumentasi($bpd_buku_kegiatan);
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
-	public function update_sub_gallery($bpd_buku_kegiatan='', $id='')
+	public function update_dokumentasi($bpd_buku_kegiatan='', $id='')
 	{
-		$this->bpd_kegiatan_model->update_sub_gallery($id);
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->bpd_kegiatan_model->update_dokumentasi($id);
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
-	public function delete_sub_gallery($bpd_buku_kegiatan='', $id='')
+	public function delete_dokumentasi($bpd_buku_kegiatan='', $id='')
 	{
-		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 		$this->bpd_kegiatan_model->delete($id);
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
-	public function delete_all_sub_gallery($bpd_buku_kegiatan='')
+	public function delete_all_dokumentasi($bpd_buku_kegiatan='')
 	{
-		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->redirect_hak_akses('h', "bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 		$_SESSION['success']=1;
 		$this->bpd_kegiatan_model->delete_all();
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
-	public function gallery_lock_sub_gallery($bpd_buku_kegiatan='', $id='')
+	public function gallery_lock_dokumentasi($bpd_buku_kegiatan='', $id='')
 	{
-		$this->bpd_kegiatan_model->gallery_lock($id, 1);
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->bpd_kegiatan_model->kunci_kegiatan($id, 1);
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
-	public function gallery_unlock_sub_gallery($bpd_buku_kegiatan='', $id='')
+	public function gallery_unlock_dokumentasi($bpd_buku_kegiatan='', $id='')
 	{
-		$this->bpd_kegiatan_model->gallery_lock($id, 2);
-		redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+		$this->bpd_kegiatan_model->kunci_kegiatan($id, 2);
+		redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 	}
 
 	public function urut($id, $arah = 0, $bpd_buku_kegiatan='')
 	{
 		$this->bpd_kegiatan_model->urut($id, $arah, $bpd_buku_kegiatan);
 		if ($bpd_buku_kegiatan != '')
-			redirect("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan");
+			redirect("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan");
 		else
 			redirect("bpd_buku_kegiatan/index");
 	}

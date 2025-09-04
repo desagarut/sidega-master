@@ -1,11 +1,12 @@
-<?php class Bpd_kegiatan_model extends MY_Model {
+<?php class Bpd_kegiatan_model extends MY_Model
+{
 
 	private $urut_model;
 
 	public function __construct()
 	{
 		parent::__construct();
-	  require_once APPPATH.'/models/Urut_model.php';
+		require_once APPPATH . '/models/Urut_model.php';
 		$this->urut_model = new Urut_Model('bpd_buku_kegiatan');
 	}
 
@@ -16,27 +17,25 @@
 
 	private function search_sql()
 	{
-		if (isset($_SESSION['cari']))
-		{
+		if (isset($_SESSION['cari'])) {
 			$cari = $_SESSION['cari'];
 			$kw = $this->db->escape_like_str($cari);
-			$kw = '%' .$kw. '%';
-			$search_sql= " AND (gambar LIKE '$kw' OR nama LIKE '$kw')";
+			$kw = '%' . $kw . '%';
+			$search_sql = " AND (gambar LIKE '$kw' OR nama LIKE '$kw')";
 			return $search_sql;
 		}
 	}
 
 	private function filter_sql()
 	{
-		if (isset($_SESSION['filter']))
-		{
+		if (isset($_SESSION['filter'])) {
 			$kf = $_SESSION['filter'];
-			$filter_sql= " AND enabled = $kf";
+			$filter_sql = " AND enabled = $kf";
 			return $filter_sql;
 		}
 	}
 
-	public function paging($p=1, $o=0)
+	public function paging($p = 1, $o = 0)
 	{
 		$sql = "SELECT COUNT(*) AS jml " . $this->list_data_sql();
 		$query = $this->db->query($sql);
@@ -60,20 +59,32 @@
 		return $sql;
 	}
 
-	public function list_data($o=0, $offset=0, $limit=500)
+	public function list_data($o = 0, $offset = 0, $limit = 500)
 	{
-		switch ($o)
-		{
-			case 1: $order_sql = ' ORDER BY nama'; break;
-			case 2: $order_sql = ' ORDER BY nama DESC'; break;
-			case 3: $order_sql = ' ORDER BY enabled'; break;
-			case 4: $order_sql = ' ORDER BY enabled DESC'; break;
-			case 5: $order_sql = ' ORDER BY tgl_upload'; break;
-			case 6: $order_sql = ' ORDER BY tgl_upload DESC'; break;
-			default:$order_sql = ' ORDER BY urut';
+		switch ($o) {
+			case 1:
+				$order_sql = ' ORDER BY nama';
+				break;
+			case 2:
+				$order_sql = ' ORDER BY nama DESC';
+				break;
+			case 3:
+				$order_sql = ' ORDER BY enabled';
+				break;
+			case 4:
+				$order_sql = ' ORDER BY enabled DESC';
+				break;
+			case 5:
+				$order_sql = ' ORDER BY tgl_upload';
+				break;
+			case 6:
+				$order_sql = ' ORDER BY tgl_upload DESC';
+				break;
+			default:
+				$order_sql = ' ORDER BY urut';
 		}
 
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
 
 		$sql = "SELECT * " . $this->list_data_sql();
 		$sql .= $order_sql;
@@ -83,8 +94,7 @@
 		$data = $query->result_array();
 
 		$j = $offset;
-		for ($i=0; $i<count($data); $i++)
-		{
+		for ($i = 0; $i < count($data); $i++) {
 			$data[$i]['no'] = $j + 1;
 
 			if ($data[$i]['enabled'] == 1)
@@ -100,8 +110,7 @@
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
-		if (UploadError($_FILES['gambar']))
-		{
+		if (UploadError($_FILES['gambar'])) {
 			$_SESSION['success'] = -1;
 			return;
 		}
@@ -109,23 +118,24 @@
 		$lokasi_file = $_FILES['gambar']['tmp_name'];
 		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
-		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
+		$data['nama'] = $this->input->post('nama'); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
+		$data['jenis'] = $this->input->post('jenis');
+		$data['pelaksana'] = $this->input->post('pelaksana');
+		$data['hasil'] = $this->input->post('hasil');
+		$data['keterangan'] = $this->input->post('keterangan');
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => 0)) + 1;
 		// Bolehkan album tidak ada gambar cover
-		if (!empty($lokasi_file))
-		{
-		  if (!CekGambar($_FILES['gambar'], $tipe_file))
-		  {
+		if (!empty($lokasi_file)) {
+			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
 				$_SESSION['success'] = -1;
 				return;
-		  }
-		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			}
+			$nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
 			UploadGallery($nama_file, "", $tipe_file);
 			$data['gambar'] = $nama_file;
 		}
 
-		if ($_SESSION['grup'] == 4)
-		{
+		if ($_SESSION['grup'] == 4) {
 			$data['enabled'] = 2;
 		}
 
@@ -133,35 +143,35 @@
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
-	public function update($id=0)
+	public function update($id = 0)
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
-		if (UploadError($_FILES['gambar']))
-		{
+		if (UploadError($_FILES['gambar'])) {
 			$_SESSION['success'] = -1;
 			return;
 		}
 
-	  $lokasi_file = $_FILES['gambar']['tmp_name'];
-	  $tipe_file = TipeFile($_FILES['gambar']);
+		$lokasi_file = $_FILES['gambar']['tmp_name'];
+		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
-		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
+		$data['nama'] = $this->input->post('nama'); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
+		$data['jenis'] = $this->input->post('jenis');
+		$data['pelaksana'] = $this->input->post('pelaksana');
+		$data['hasil'] = $this->input->post('hasil');
+		$data['keterangan'] = $this->input->post('keterangan');
 		// Kalau kosong, gambar tidak diubah
-		if (!empty($lokasi_file))
-		{
-		  if (!CekGambar($_FILES['gambar'], $tipe_file))
-		  {
+		if (!empty($lokasi_file)) {
+			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
 				$_SESSION['success'] = -1;
 				return;
-		  }
-		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			}
+			$nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
 			UploadGallery($nama_file, $data['old_gambar'], $tipe_file);
 			$data['gambar'] = $nama_file;
 		}
 
-		if ($_SESSION['grup'] == 4)
-		{
+		if ($_SESSION['grup'] == 4) {
 			$data['enabled'] = 2;
 		}
 
@@ -170,32 +180,28 @@
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
-	public function delete_gallery($id='', $semua=false)
+	public function delete_kegiatan($id = '', $semua = false)
 	{
 		if (!$semua) $this->session->success = 1;
 
 		$this->delete($id);
-		$sub_gallery = $this->db->select('id')->
-			where('parrent', $id)->
-			get('bpd_buku_kegiatan')->result_array();
-		foreach ($sub_gallery as $gallery)
-		{
+		$dokumentasi = $this->db->select('id')->where('parrent', $id)->get('bpd_buku_kegiatan')->result_array();
+		foreach ($dokumentasi as $gallery) {
 			$this->delete($gallery['id']);
 		}
 	}
 
-	public function delete_all_gallery()
+	public function delete_all_kegiatan()
 	{
 		$this->session->success = 1;
 
 		$id_cb = $_POST['id_cb'];
-		foreach ($id_cb as $id)
-		{
-			$this->delete_gallery($id, $semua=true);
+		foreach ($id_cb as $id) {
+			$this->delete_kegiatan($id, $semua = true);
 		}
 	}
 
-	public function delete($id='', $semua=false)
+	public function delete($id = '', $semua = false)
 	{
 		if (!$semua) $this->session->success = 1;
 		// Note:
@@ -203,11 +209,11 @@
 		// oleh gallery lain, karena ketika mengupload
 		// nama file nya belum diubah sesuai dengan
 		// judul gallery
-		$this->delete_gallery_image($id);
+		$this->delete_gambat_kegiatan($id);
 
 		$outp = $this->db->where('id', $id)->delete('bpd_buku_kegiatan');
 
-		status_sukses($outp, $gagal_saja=true); //Tampilkan Pesan
+		status_sukses($outp, $gagal_saja = true); //Tampilkan Pesan
 	}
 
 	public function delete_all()
@@ -215,34 +221,29 @@
 		$this->session->success = 1;
 
 		$id_cb = $_POST['id_cb'];
-		foreach ($id_cb as $id)
-		{
-			$this->delete($id, $semua=true);
+		foreach ($id_cb as $id) {
+			$this->delete($id, $semua = true);
 		}
 	}
 
-	public function delete_gallery_image($id)
+	public function delete_gambat_kegiatan($id)
 	{
-		$image = $this->db->select('gambar')->
-			get_where('bpd_buku_kegiatan', array('id'=>$id))->
-			row()->gambar;
+		$image = $this->db->select('gambar')->get_where('bpd_buku_kegiatan', array('id' => $id))->row()->gambar;
 		$prefix = array('kecil_', 'sedang_');
-		foreach ($prefix as $pref)
-		{
+		foreach ($prefix as $pref) {
 			if (is_file(FCPATH . LOKASI_GALERI . $pref . $image))
 				unlink(FCPATH . LOKASI_GALERI . $pref . $image);
 		}
 	}
 
-	public function gallery_lock($id='', $val=0)
+	public function kunci_kegiatan($id = '', $val = 0)
 	{
 		// Jangan kunci jika digunakan untuk slider
-		if ($val == 2)
-		{
+		if ($val == 2) {
 			$this->db
 				->group_start()
-					->where('slider <>', 1)
-					->or_where('slider IS NULL')
+				->where('slider <>', 1)
+				->or_where('slider IS NULL')
 				->group_end();
 		}
 		$outp = $this->db
@@ -252,10 +253,9 @@
 		status_sukses($outp); //Tampilkan Pesan
 	}
 
-	public function gallery_slider($id='', $val=0)
+	public function kegiatan_slider($id = '', $val = 0)
 	{
-		if ($val == 1)
-		{
+		if ($val == 1) {
 			// Hanya satu gallery yang boleh tampil di slider
 			$this->db->where('slider', 1)
 				->set('slider', 0)
@@ -268,7 +268,7 @@
 			->update('bpd_buku_kegiatan');
 	}
 
-	public function get_gallery($id=0)
+	public function get_kegiatan($id = 0)
 	{
 		$sql = "SELECT * FROM bpd_buku_kegiatan WHERE id = ?";
 		$query = $this->db->query($sql, $id);
@@ -290,10 +290,10 @@
 		return $slide_galeri;
 	}
 
-	public function paging2($gal=0, $p=1)
+	public function paging2($gal = 0, $p = 1)
 	{
-		$sql = "SELECT COUNT(*) AS jml " . $this->list_sub_gallery_sql();
-		$query = $this->db->query($sql,$gal);
+		$sql = "SELECT COUNT(*) AS jml " . $this->list_dokumentasi_sql();
+		$query = $this->db->query($sql, $gal);
 		$row = $query->row_array();
 		$jml_data = $row['jml'];
 
@@ -306,7 +306,7 @@
 		return $this->paging;
 	}
 
-	private function list_sub_gallery_sql()
+	private function list_dokumentasi_sql()
 	{
 		$sql = " FROM bpd_buku_kegiatan WHERE parrent = ? AND tipe = 2 ";
 		$sql .= $this->search_sql();
@@ -314,29 +314,40 @@
 		return $sql;
 	}
 
-	public function list_sub_gallery($gal=1, $o=0, $offset=0, $limit=500)
+	public function list_dokumentasi($gal = 1, $o = 0, $offset = 0, $limit = 500)
 	{
-		switch($o)
-		{
-			case 1: $order_sql = ' ORDER BY nama'; break;
-			case 2: $order_sql = ' ORDER BY nama DESC'; break;
-			case 3: $order_sql = ' ORDER BY enabled'; break;
-			case 4: $order_sql = ' ORDER BY enabled DESC'; break;
-			case 5: $order_sql = ' ORDER BY tgl_upload'; break;
-			case 6: $order_sql = ' ORDER BY tgl_upload DESC'; break;
-			default:$order_sql = ' ORDER BY urut';
+		switch ($o) {
+			case 1:
+				$order_sql = ' ORDER BY nama';
+				break;
+			case 2:
+				$order_sql = ' ORDER BY nama DESC';
+				break;
+			case 3:
+				$order_sql = ' ORDER BY enabled';
+				break;
+			case 4:
+				$order_sql = ' ORDER BY enabled DESC';
+				break;
+			case 5:
+				$order_sql = ' ORDER BY tgl_upload';
+				break;
+			case 6:
+				$order_sql = ' ORDER BY tgl_upload DESC';
+				break;
+			default:
+				$order_sql = ' ORDER BY urut';
 		}
 
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
 
-		$sql = "SELECT * " . $this->list_sub_gallery_sql();
+		$sql = "SELECT * " . $this->list_dokumentasi_sql();
 		$sql .= $order_sql;
 		$sql .= $paging_sql;
 		$query = $this->db->query($sql, $gal);
 		$data = $query->result_array();
 
-		for ($i=0; $i<count($data); $i++)
-		{
+		for ($i = 0; $i < count($data); $i++) {
 			$data[$i]['no'] = $i + 1;
 
 			if ($data[$i]['enabled'] == 1)
@@ -347,36 +358,32 @@
 		return $data;
 	}
 
-	public function insert_sub_gallery($parrent=0)
+	public function insert_dokumentasi($parrent = 0)
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
-		if (UploadError($_FILES['gambar']))
-		{
+		if (UploadError($_FILES['gambar'])) {
 			$_SESSION['success'] = -1;
 			return;
 		}
 
-	  $lokasi_file = $_FILES['gambar']['tmp_name'];
-	  $tipe_file = TipeFile($_FILES['gambar']);
+		$lokasi_file = $_FILES['gambar']['tmp_name'];
+		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
 		$data['urut'] = $this->urut_model->urut_max(array('parrent' => $parrent)) + 1;
 		// Bolehkan isi album tidak ada gambar
-		if (!empty($lokasi_file))
-		{
-		  if (!CekGambar($_FILES['gambar'], $tipe_file))
-		  {
+		if (!empty($lokasi_file)) {
+			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
 				$_SESSION['success'] = -1;
 				return;
-		  }
-		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
+			}
+			$nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
 			UploadGallery($nama_file, "", $tipe_file);
 			$data['gambar'] = $nama_file;
 		}
 
-		if ($_SESSION['grup'] == 4)
-		{
+		if ($_SESSION['grup'] == 4) {
 			$data['enabled'] = 2;
 		}
 
@@ -386,30 +393,27 @@
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
-	public function update_sub_gallery($id=0)
+	public function update_dokumentasi($id = 0)
 	{
 		$_SESSION['success'] = 1;
 		$_SESSION['error_msg'] = '';
-		if (UploadError($_FILES['gambar']))
-		{
+		if (UploadError($_FILES['gambar'])) {
 			$_SESSION['success'] = -1;
 			return;
 		}
 
-	  $lokasi_file = $_FILES['gambar']['tmp_name'];
-	  $tipe_file = TipeFile($_FILES['gambar']);
+		$lokasi_file = $_FILES['gambar']['tmp_name'];
+		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
 		// Kalau kosong, gambar tidak diubah
-		if (!empty($lokasi_file))
-		{
-		  if (!CekGambar($_FILES['gambar'], $tipe_file))
-		  {
+		if (!empty($lokasi_file)) {
+			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
 				$_SESSION['success'] = -1;
 				return;
-		  }
-		  $nama_file  = urlencode(generator(6)."_".$_FILES['gambar']['name']);
-			UploadGallery($nama_file,$data['old_gambar'], $tipe_file);
+			}
+			$nama_file  = urlencode(generator(6) . "_" . $_FILES['gambar']['name']);
+			UploadGallery($nama_file, $data['old_gambar'], $tipe_file);
 			$data['gambar'] = $nama_file;
 		}
 
@@ -421,10 +425,9 @@
 	// $arah:
 	//		1 - turun
 	// 		2 - naik
-	public function urut($id, $arah, $gallery='')
+	public function urut($id, $arah, $gallery = '')
 	{
-  	$subset = !empty($gallery) ? array('parrent' => $gallery) : array('parrent' => 0);
-  	$this->urut_model->urut($id, $arah, $subset);
+		$subset = !empty($gallery) ? array('parrent' => $gallery) : array('parrent' => 0);
+		$this->urut_model->urut($id, $arah, $subset);
 	}
 }
-?>

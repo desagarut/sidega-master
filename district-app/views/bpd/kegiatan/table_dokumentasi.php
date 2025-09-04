@@ -22,11 +22,11 @@
 				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<a href="<?= site_url("bpd_buku_kegiatan/form_sub_gallery/$bpd_buku_kegiatan") ?>" class="btn btn-social btn-box btn-success btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Album">
+							<a href="<?= site_url("bpd_buku_kegiatan/form_dokumentasi/$bpd_buku_kegiatan") ?>" class="btn btn-social btn-box btn-success btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Album">
 								<i class="fa fa-plus"></i> Tambah Dokumentasi
 							</a>
 							<?php if ($this->CI->cek_hak_akses('h')) : ?>
-								<a href="#confirm-delete" title="Hapus Data" onclick="deleteAllBox('mainform', '<?= site_url("bpd_buku_kegiatan/delete_all_sub_gallery/$bpd_buku_kegiatan") ?>')" class="btn btn-social btn-box btn-danger btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block hapus-terpilih"><i class='fa fa-trash-o'></i> Hapus Data Terpilih</a>
+								<a href="#confirm-delete" title="Hapus Data" onclick="deleteAllBox('mainform', '<?= site_url("bpd_buku_kegiatan/delete_all_dokumentasi/$bpd_buku_kegiatan") ?>')" class="btn btn-social btn-box btn-danger btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block hapus-terpilih"><i class='fa fa-trash-o'></i> Hapus Data Terpilih</a>
 							<?php endif; ?>
 							<a href="<?= site_url("bpd_buku_kegiatan") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Album">
 								<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Kegiatan
@@ -70,31 +70,31 @@
 																	<th>Aksi</th>
 																	<th>Gambar</th>
 																	<?php if ($o == 2) : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/1") ?>">Nama Gambar <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/1") ?>">Nama Gambar <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 1) : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/2") ?>">Nama Gambar <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/2") ?>">Nama Gambar <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/1") ?>">Nama Gambar <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/1") ?>">Nama Gambar <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
 																	<th>Deskripsi</th>
 																	<?php if ($o == 4) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 3) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
 																	<?php if ($o == 6) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 5) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
 																</tr>
 															</thead>
 															<tbody>
-																<?php foreach ($sub_gallery as $data) : ?>
+																<?php foreach ($table_dokumentasi as $data) : ?>
 																	<tr>
 																		<td><input type="checkbox" name="id_cb[]" value="<?= $data['id'] ?>" /></td>
 																		<td><?= $data['no'] ?></td>
@@ -102,14 +102,14 @@
 																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1/$sub[id]") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
 																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2/$sub[id]") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
 																			<br/>
-																			<a href="<?= site_url("bpd_buku_kegiatan/form_sub_gallery/$bpd_buku_kegiatan/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
+																			<a href="<?= site_url("bpd_buku_kegiatan/form_dokumentasi/$bpd_buku_kegiatan/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
 																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
 																				<?php if ($data['enabled'] == '2') : ?>
-																					<a href="<?= site_url("bpd_buku_kegiatan/gallery_lock/" . $data['id'] . "/$bpd_buku_kegiatan") ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Gambar"><i class="fa fa-lock">&nbsp;</i></a>
+																					<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id'] . "/$bpd_buku_kegiatan") ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Gambar"><i class="fa fa-lock">&nbsp;</i></a>
 																				<?php elseif ($data['enabled'] == '1') : ?>
-																					<a href="<?= site_url("bpd_buku_kegiatan/gallery_unlock/" . $data['id'] . "/$bpd_buku_kegiatan") ?>" class="btn bg-navy btn-box btn-sm" title="Non Aktifkan Gambar"><i class="fa fa-unlock"></i></a>
+																					<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id'] . "/$bpd_buku_kegiatan") ?>" class="btn bg-navy btn-box btn-sm" title="Non Aktifkan Gambar"><i class="fa fa-unlock"></i></a>
 																				<?php endif ?>
-																				<a href="#" data-href="<?= site_url("bpd_buku_kegiatan/delete_sub_gallery/$bpd_buku_kegiatan/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+																				<a href="#" data-href="<?= site_url("bpd_buku_kegiatan/delete_dokumentasi/$bpd_buku_kegiatan/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 																			<?php endif; ?>
 																		</td>
 																		<td class="padat">
@@ -136,7 +136,7 @@
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="dataTables_length">
-													<form id="paging" action="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan") ?>" method="post" class="form-horizontal">
+													<form id="paging" action="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan") ?>" method="post" class="form-horizontal">
 														<label>
 															Tampilkan
 															<select name="per_page" class="form-control input-sm" onchange="$('#paging').submit()">
@@ -155,19 +155,19 @@
 												<div class="dataTables_paginate paging_simple_numbers">
 													<ul class="pagination">
 														<?php if ($paging->start_link) : ?>
-															<li><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$paging->start_link/$o") ?>" aria-label="First"><span aria-hidden="true">Awal</span></a></li>
+															<li><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$paging->start_link/$o") ?>" aria-label="First"><span aria-hidden="true">Awal</span></a></li>
 														<?php endif; ?>
 														<?php if ($paging->prev) : ?>
-															<li><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$paging->prev/$o") ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+															<li><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$paging->prev/$o") ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 														<?php endif; ?>
 														<?php for ($i = $paging->start_link; $i <= $paging->end_link; $i++) : ?>
-															<li <?= jecho($p, $i, "class='active'") ?>><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$i/$o") ?>"><?= $i ?></a></li>
+															<li <?= jecho($p, $i, "class='active'") ?>><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$i/$o") ?>"><?= $i ?></a></li>
 														<?php endfor; ?>
 														<?php if ($paging->next) : ?>
-															<li><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$paging->next/$o") ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+															<li><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$paging->next/$o") ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 														<?php endif; ?>
 														<?php if ($paging->end_link) : ?>
-															<li><a href="<?= site_url("bpd_buku_kegiatan/sub_gallery/$bpd_buku_kegiatan/$paging->end_link/$o") ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a></li>
+															<li><a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$bpd_buku_kegiatan/$paging->end_link/$o") ?>" aria-label="Last"><span aria-hidden="true">Akhir</span></a></li>
 														<?php endif; ?>
 													</ul>
 												</div>
