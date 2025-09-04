@@ -33,7 +33,7 @@
 					</tr>
 					<tr>
 						<td align="center" >
-							<h4><u>DAFTAR PESERTA PROGRAM <?= strtoupper($peserta[0]["nama"]);?></u></h4>
+							<h4><u>DAFTAR PESERTA <?= strtoupper($peserta[0]["nama"]);?></u></h4>
 						</td>
 					</tr>
 					<tr>

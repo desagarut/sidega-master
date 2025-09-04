@@ -204,12 +204,6 @@ function bulan()
 	$bulan = array(1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember');
 	return $bulan;
 }
-
-function getBulan($bln)
-{
-	$bulan = bulan();
-	return $bulan[$bln];
-}
 /*
 function getBulan($bln)
 {
@@ -217,6 +211,12 @@ function getBulan($bln)
 	return $bulan[$bln];
 }
 */
+function getBulan(int $bln)
+{
+	$bulan = bulan();
+	return $bulan[(int)$bln];
+}
+
 function tahun(int $awal = 2018)
 {
 	$akhir = date('Y');

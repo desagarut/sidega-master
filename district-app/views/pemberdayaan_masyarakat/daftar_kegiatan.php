@@ -13,7 +13,7 @@
 			<div class="box box-info">
 				<div class="box-header with-border">
 					<a href="<?= site_url('pemberdayaan_masyarakat/form_kegiatan') ?>" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Kegiatan"><i class="fa fa-plus"></i> Tambah Kegiatan</a>
-					<a href="<?= site_url('pemberdayaan_masyarakat/panduan') ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Panduan Program"><i class="fa fa-question-circle"></i> Panduan</a>
+					<!--<a href="<?= site_url('pemberdayaan_masyarakat/panduan') ?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Panduan Program"><i class="fa fa-question-circle"></i> Panduan</a>-->
 				</div>
 				<div class="box-body">
 					<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">

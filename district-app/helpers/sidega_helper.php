@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 
-define("VERSION", '6.2.2');
-define('VERSI_DATABASE', '2023120301');
+define("VERSION", '6.3.0');
+define('VERSI_DATABASE', '2025090401');
 define("LOKASI_LOGO_DESA", 'instansi/logo/');
 define("LOKASI_ARSIP", 'instansi/arsip/');
 define("LOKASI_CONFIG_DESA", 'instansi/config/');

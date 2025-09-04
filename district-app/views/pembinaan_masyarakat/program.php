@@ -13,11 +13,10 @@
 					<div class="box-header with-border">
 						<?php if ($this->CI->cek_hak_akses('h')): ?>
                         <a href="<?=site_url('pembinaan_masyarakat/create')?>" class="btn btn-social btn-box bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Program Bantuan"><i class="fa fa-plus"></i> Tambah</a>
-						<a href="<?=site_url('pembinaan_masyarakat/impor')?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Impor Program Bantuan" data-target="#impor" data-remote="false" data-toggle="modal" data-backdrop="false" data-keyboard="false"><i class="fa fa-upload"></i> Impor</a>
 						<?php endif;?>
-                        <a href="<?=site_url('pembinaan_masyarakat/panduan')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Panduan"><i class="fa fa-question-circle"></i> Panduan</a>
+                        <!--<a href="<?=site_url('pembinaan_masyarakat/panduan')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Panduan"><i class="fa fa-question-circle"></i> Panduan</a>-->
 						<?php if ($tampil != 0): ?>
-							<a href="<?=site_url('pembinaan_masyarakat')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Program Bantuan"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Program Bantuan</a>
+							<a href="<?=site_url('pembinaan_masyarakat')?>" class="btn btn-social btn-box btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Program Pembinaan Kemasyarakatan"><i class="fa fa-arrow-circle-o-left"></i> Kembali Ke Daftar Program Pembinaan Kemasyarakatan</a>
 						<?php endif; ?>
 					</div>
 					<div class="box-body">

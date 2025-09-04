@@ -9,9 +9,9 @@ class Dokumen_sekretariat extends Admin_Controller {
 		$this->load->model('web_dokumen_model');
 		$this->load->model('referensi_model');
 		$this->modul_ini = 15;
-		$this->sub_modul_ini = 302;
+		$this->sub_modul_ini = 301;
 		$this->_list_session = ['filter', 'cari', 'jenis_peraturan'];
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 
 	}
 
@@ -54,7 +54,7 @@ class Dokumen_sekretariat extends Admin_Controller {
 			}
 		}
 
-		$this->set_minsidebar(1);
+		$this->set_minsidebar(0);
 		$data['main_content'] = 'dokumen/table_buku_umum';
 		$data['subtitle'] = ($kat == '3') ? "Buku Peraturan Desa" : "Buku Keputusan Kepala Desa";
 		$data['selected_nav'] = ($kat == '3') ? 'peraturan' : 'keputusan';
