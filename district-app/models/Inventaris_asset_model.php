@@ -17,7 +17,7 @@ class Inventaris_asset_model extends CI_Model
 		$this->db
 				->select('*')
 				->from('tweb_aset u')
-				->where('golongan',6);
+				->where('golongan',5);
 		$data = $this->db->get()->result_array();
 		return $data;
 	}

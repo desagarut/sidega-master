@@ -17,7 +17,7 @@ class Inventaris_tanah_Model extends CI_Model
 		$this->db
 				->select('*')
 				->from('tweb_aset u')
-				->where('golongan',2);
+				->where('golongan',1);
 		$data = $this->db->get()->result_array();
 		return $data;
 	}

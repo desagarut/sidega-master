@@ -17,7 +17,7 @@ class Inventaris_peralatan_model extends CI_Model
 		$this->db
 				->select('*')
 				->from('tweb_aset u')
-				->where('golongan',3);
+				->where('golongan',2);
 		$data = $this->db->get()->result_array();
 		return $data;
 	}
