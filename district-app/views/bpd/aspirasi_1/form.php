@@ -38,11 +38,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Administrasi BPD - Form Kegiatan</h1>
+		<h1>Administrasi BPD - Form Aspirasi Masyarakat</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('bpd_buku_kegiatan') ?>"><i class="fa fa-dashboard"></i> Daftar Kegiatan</a></li>
-			<li class="active">Form Kegiatan</li>
+			<li><a href="<?= site_url('bpd_buku_aspirasi') ?>"><i class="fa fa-dashboard"></i> Data Aspirasi Masyarakat</a></li>
+			<li class="active">Form</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -51,71 +51,56 @@
 				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<a href="<?= site_url("bpd_buku_kegiatan") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
-								<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Kegiatan
+							<a href="<?= site_url("bpd_buku_aspirasi") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
+								<i class="fa fa-arrow-circle-left "></i>Kembali ke Data Asprasi
 							</a>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
-								<label class="control-label col-sm-3" for="nama">Nama Kegiatan</label>
-								<div class="col-sm-9">
-									<input name="nama" class="form-control input-sm required" maxlength="100" type="text" value="<?= $bpd_buku_kegiatan['nama'] ?>"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="jenis">Jenis Kegiatan</label>
-								<div class="col-sm-9">
-									<input name="jenis" class="form-control input-sm required" maxlength="100" type="text" value="<?= $bpd_buku_kegiatan['jenis'] ?>"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="pelaksana">Pelaksana</label>
-								<div class="col-sm-9">
-									<input name="pelaksana" class="form-control input-sm required" maxlength="100" type="text" value="<?= $bpd_buku_kegiatan['pelaksana'] ?>"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="tanggal_kegiatan"  class="col-sm-3 control-label">Tanggal Kegiatan</label>
+								<label for="tanggal" class="col-sm-3 control-label">Tanggal</label>
 								<div class="col-sm-3 col-lg-2">
 									<div class="input-group input-group-sm">
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input title="Pilih Tanggal" id="tgl_mulai" class="form-control input-sm required" name="tgl_mulai" type="text" value="<?= $bpd_buku_kegiatan['tgl_mulai'] ?>"/>
-									</div>
-								</div>
-								<div class="col-sm-3 col-lg-2">
-									<div class="input-group input-group-sm">
-										<div class="input-group-addon">
-											<i class="fa fa-calendar"></i>
-										</div>
-										<input title="Pilih Tanggal" id="tgl_akhir" class="form-control input-sm required" name="tgl_akhir" type="text" value="<?= $bpd_buku_kegiatan['tgl_akhir'] ?>"/>
+										<input title="Pilih Tanggal" id="tgl_mulai" class="form-control input-sm required" name="tanggal" type="text" value="<?= $bpd_buku_aspirasi['tanggal'] ?>" />
 									</div>
 								</div>
 							</div>
-
 							<div class="form-group">
-								<label class="control-label col-sm-3" for="hasil">Agenda & Hasil Kegiatan</label>
+								<label class="control-label col-sm-3" for="nama">Nama / Lembaga Penyampai Aspirasi</label>
 								<div class="col-sm-9">
-									<textarea name="hasil" class="form-control input-sm required" style="height:350px;">
-									<?= $bpd_buku_kegiatan['hasil'] ?>
+									<input name="nama" class="form-control input-sm required" maxlength="100" type="text" value="<?= $bpd_buku_aspirasi['nama'] ?>"></input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="isi_aspirasi">Aspirasi Yang disampaikan</label>
+								<div class="col-sm-9">
+									<textarea name="isi_aspirasi" class="form-control input-sm required" style="height:350px;">
+									<?= $bpd_buku_kegiatan['isi_aspirasi'] ?>
 								</textarea>
 								</div>
 							</div>
-							<?php if ($bpd_buku_kegiatan['gambar']) : ?>
+							<div class="form-group">
+								<label class="control-label col-sm-3" for="tindaklanjut">Tindak lanjut</label>
+								<div class="col-sm-9">
+									<input name="tindaklanjut" class="form-control input-sm required" maxlength="100" type="text" value="<?= $bpd_buku_aspirasi['tindaklanjut'] ?>"></input>
+								</div>
+							</div>
+							<?php if ($bpd_buku_aspirasi['gambar']) : ?>
 								<div class="form-group">
 									<label class="control-label col-sm-3" for="gambar"></label>
 									<div class="col-sm-9">
-										<input type="hidden" name="old_gambar" value="<?= $bpd_buku_kegiatan['gambar'] ?>">
-										<img class="attachment-img img-responsive" style="width: 30%" src="<?= AmbilGaleri($bpd_buku_kegiatan['gambar'], 'kecil') ?>" alt="Gambar Album">
+										<input type="hidden" name="old_gambar" value="<?= $bpd_buku_aspirasi['gambar'] ?>">
+										<img class="attachment-img img-responsive" style="width: 30%" src="<?= AmbilGaleri($bpd_buku_aspirasi['gambar'], 'kecil') ?>" alt="Gambar Album">
 									</div>
 								</div>
 							<?php endif; ?>
 							<div class="form-group">
 								<label class="control-label col-sm-3" for="upload">Sampul Foto Kegiatan</label>
-								<div class="col-sm-9">
+								<div class="col-sm-3">
 									<div class="input-group input-group-sm">
-										<input type="text" class="form-control <?php !($bpd_buku_kegiatan['gambar']) and print('required') ?>" id="file_path">
+										<input type="text" class="form-control <?php !($bpd_buku_aspirasi['gambar']) and print('required') ?>" id="file_path">
 										<input id="file" type="file" class="hidden" name="gambar">
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-info btn-box" id="file_browser"><i class="fa fa-search"></i> Browse</button>
@@ -123,12 +108,6 @@
 									</div>
 									<?php $upload_mb = max_upload(); ?>
 									<p><label class="control-label">Batas maksimal pengunggahan berkas <strong><?= $upload_mb ?> MB.</strong></label></p>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-3" for="keterangan">Keterangan</label>
-								<div class="col-sm-9">
-									<input name="keterangan" class="form-control input-sm" maxlength="100" type="text" value="<?= $bpd_buku_kegiatan['keterangan'] ?>"></input>
 								</div>
 							</div>
 						</div>

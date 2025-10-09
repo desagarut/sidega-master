@@ -1,3 +1,4 @@
+<?php if ($this->CI->cek_hak_akses('b')) : ?>
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Pegawai Login</h3>
@@ -35,3 +36,4 @@
     </div>
   </div>
 </div>
+<?php endif; ?>

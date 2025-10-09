@@ -147,8 +147,10 @@
 													<tr>
 														<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']; ?>" /></td>
 														<td class="padat"><?= ($key + $paging->offset + 1); ?></td>
+														
 														<td class="aksi text-center">
 															<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn bg-purple btn-box btn-sm" title="Lihat Detail">Lihat</i></a><br />
+															<?php if ($this->CI->cek_hak_akses('u')) : ?>
 															<div class="btn-group">
 																<a href="#" class="btn btn-social bg-aqua btn-box btn-sm" data-toggle="dropdown" title="Lihat Detail">Aksi <i class="fa fa-arrow-circle-down"></i></a>
 																<ul class="dropdown-menu" role="menu">
@@ -156,9 +158,11 @@
 																		<a href="<?= site_url("penduduk/detail/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm"><i class="fa fa-list-ol"></i> Lihat Detail Biodata Penduduk</a>
 																	</li>
 																	<?php if ($data['status_dasar'] == 9) : ?>
+																		<?php if ($this->CI->cek_hak_akses('u')) : ?>
 																		<li>
 																			<a href="#" data-href="<?= site_url("penduduk/kembalikan_status/$p/$o/$data[id]"); ?>" class="btn btn-social btn-box btn-block btn-sm" data-remote="false" data-toggle="modal" data-target="#confirm-status"><i class="fa fa-undo"></i> Kembalikan ke Status HIDUP</a>
 																		</li>
+																		<?php endif; ?>
 																	<?php endif; ?>
 																	<?php if ($data['status_dasar'] == 1) : ?>
 																		<li>
@@ -167,8 +171,15 @@
 																			<?php endif; ?>
 																		</li>
 																		<li>
-																			<a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Lokasi <?= $data['nama'] ?> " data-title="Lokasi <?= $data['nama'] ?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>
-																			<!--<a href="<? //= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" title="Lokasi <? //= $data['nama'] ?> - <? //= strtoupper($data['dusun']); ?>, RW <? //= $data['rw']; ?> / RT <? //= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>-->
+																			<?php if ($this->CI->cek_hak_akses('u')) : ?>
+																				<a href="<?= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); ?>" data-remote="false" data-toggle="modal" data-target="#modalBox" title="Lokasi <?= $data['nama'] ?> " data-title="Lokasi <?= $data['nama'] ?> - <?= strtoupper($data['dusun']); ?>, RW <?= $data['rw']; ?> / RT <?= $data['rt']; ?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>
+																				<!--<a href="<? //= site_url("penduduk/ajax_penduduk_maps_google/$p/$o/$data[id]/0"); 
+																								?>" title="Lokasi <? //= $data['nama'] 
+																													?> - <? //= strtoupper($data['dusun']); 
+																																																?>, RW <? //= $data['rw']; 
+																																																							?> / RT <? //= $data['rt']; 
+																																																																	?>" class="btn btn-social btn-box btn-block btn-sm"><i class='fa fa-map-marker'></i> Lokasi Tempat Tinggal</a>-->
+																			<?php endif; ?>
 																		</li>
 																		<li>
 																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
@@ -192,7 +203,9 @@
 																	<?php endif; ?>
 																</ul>
 															</div>
+															<?php endif; ?>
 														</td>
+														
 														<td class="padat">
 															<div class="user-panel">
 																<div class="image2">

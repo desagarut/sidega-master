@@ -1,18 +1,9 @@
-<?php class Bpd_kegiatan_model extends MY_Model
+<?php class Bpd_buku_aspirasi_model extends MY_Model
 {
-
-	private $urut_model;
-
-	public function __construct()
-	{
-		parent::__construct();
-		require_once APPPATH . '/models/Urut_model.php';
-		$this->urut_model = new Urut_Model('bpd_buku_kegiatan');
-	}
 
 	public function autocomplete()
 	{
-		return $this->autocomplete_str('nama', 'bpd_buku_kegiatan');
+		return $this->autocomplete_str('nama', 'bpd_buku_aspirasi');
 	}
 
 	private function search_sql()
@@ -53,7 +44,7 @@
 
 	private function list_data_sql()
 	{
-		$sql = " FROM bpd_buku_kegiatan WHERE tipe = 0  ";
+		$sql = " FROM bpd_buku_aspirasi WHERE tipe = 0  ";
 		$sql .= $this->search_sql();
 		$sql .= $this->filter_sql();
 		return $sql;
@@ -74,14 +65,8 @@
 			case 4:
 				$order_sql = ' ORDER BY enabled DESC';
 				break;
-			case 5:
-				$order_sql = ' ORDER BY tgl_upload';
-				break;
-			case 6:
-				$order_sql = ' ORDER BY tgl_upload DESC';
-				break;
 			default:
-				$order_sql = ' ORDER BY urut';
+				$order_sql = ' ORDER BY tgl_upload';
 		}
 
 		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
@@ -119,16 +104,9 @@
 		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = $this->input->post('nama'); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
-		$data['jenis'] = $this->input->post('jenis');
-		$data['pelaksana'] = $this->input->post('pelaksana');
-		$data['tgl_mulai'] = $this->input->post('tgl_mulai');
-		$data['tgl_akhir'] = $this->input->post('tgl_akhir');
-
-		//$data['tgl_mulai'] = tgl_indo_in($data['tgl_mulai']);
-		//$data['tgl_akhir'] = tgl_indo_in($data['tgl_akhir']);
-		$data['hasil'] = $this->input->post('hasil');
-		$data['keterangan'] = $this->input->post('keterangan');
-		$data['urut'] = $this->urut_model->urut_max(array('parrent' => 0)) + 1;
+		$data['isi_aspirasi'] = $this->input->post('isi_aspirasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['tindaklanjut'] = $this->input->post('tindaklanjut');
 		// Bolehkan album tidak ada gambar cover
 		if (!empty($lokasi_file)) {
 			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
@@ -144,7 +122,7 @@
 			$data['enabled'] = 2;
 		}
 
-		$outp = $this->db->insert('bpd_buku_kegiatan', $data);
+		$outp = $this->db->insert('bpd_buku_aspirasi', $data);
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
@@ -161,15 +139,9 @@
 		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
 		$data['nama'] = $this->input->post('nama'); //pastikan nama album hanya berisi karakter yg diizinkan seperti pada nomor sk
-		$data['jenis'] = $this->input->post('jenis');
-		$data['pelaksana'] = $this->input->post('pelaksana');
-		$data['tgl_mulai'] = $this->input->post('tgl_mulai');
-		$data['tgl_akhir'] = $this->input->post('tgl_akhir');
-
-		//$data['tgl_mulai'] =  $this->input->post(tgl_indo_in($data['tgl_mulai']));
-		//$data['tgl_akhir'] =  $this->input->post(tgl_indo_in($data['tgl_akhir']));
-		$data['hasil'] = $this->input->post('hasil');
-		$data['keterangan'] = $this->input->post('keterangan');
+		$data['isi_aspirasi'] = $this->input->post('isi_aspirasi');
+		$data['tanggal'] = $this->input->post('tanggal');
+		$data['tindaklanjut'] = $this->input->post('tindaklanjut');
 		// Kalau kosong, gambar tidak diubah
 		if (!empty($lokasi_file)) {
 			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
@@ -186,28 +158,28 @@
 		}
 
 		unset($data['old_gambar']);
-		$outp = $this->db->where('id', $id)->update('bpd_buku_kegiatan', $data);
+		$outp = $this->db->where('id', $id)->update('bpd_buku_aspirasi', $data);
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
-	public function delete_kegiatan($id = '', $semua = false)
+	public function delete_aspirasi($id = '', $semua = false)
 	{
 		if (!$semua) $this->session->success = 1;
 
 		$this->delete($id);
-		$dokumentasi = $this->db->select('id')->where('parrent', $id)->get('bpd_buku_kegiatan')->result_array();
+		$dokumentasi = $this->db->select('id')->where('parrent', $id)->get('bpd_buku_aspirasi')->result_array();
 		foreach ($dokumentasi as $gallery) {
 			$this->delete($gallery['id']);
 		}
 	}
 
-	public function delete_all_kegiatan()
+	public function delete_all_aspirasi()
 	{
 		$this->session->success = 1;
 
 		$id_cb = $_POST['id_cb'];
 		foreach ($id_cb as $id) {
-			$this->delete_kegiatan($id, $semua = true);
+			$this->delete_aspirasi($id, $semua = true);
 		}
 	}
 
@@ -219,9 +191,9 @@
 		// oleh gallery lain, karena ketika mengupload
 		// nama file nya belum diubah sesuai dengan
 		// judul gallery
-		$this->delete_gambat_kegiatan($id);
+		$this->delete_gambar_aspirasi($id);
 
-		$outp = $this->db->where('id', $id)->delete('bpd_buku_kegiatan');
+		$outp = $this->db->where('id', $id)->delete('bpd_buku_aspirasi');
 
 		status_sukses($outp, $gagal_saja = true); //Tampilkan Pesan
 	}
@@ -236,9 +208,9 @@
 		}
 	}
 
-	public function delete_gambat_kegiatan($id)
+	public function delete_gambar_aspirasi($id)
 	{
-		$image = $this->db->select('gambar')->get_where('bpd_buku_kegiatan', array('id' => $id))->row()->gambar;
+		$image = $this->db->select('gambar')->get_where('bpd_buku_aspirasi', array('id' => $id))->row()->gambar;
 		$prefix = array('kecil_', 'sedang_');
 		foreach ($prefix as $pref) {
 			if (is_file(FCPATH . LOKASI_GALERI . $pref . $image))
@@ -246,58 +218,12 @@
 		}
 	}
 
-	public function kunci_kegiatan($id = '', $val = 0)
+	public function get_aspirasi($id = 0)
 	{
-		// Jangan kunci jika digunakan untuk slider
-		if ($val == 2) {
-			$this->db
-				->group_start()
-				->where('slider <>', 1)
-				->or_where('slider IS NULL')
-				->group_end();
-		}
-		$outp = $this->db
-			->where('id', $id)
-			->set('enabled', $val)
-			->update('bpd_buku_kegiatan');
-		status_sukses($outp); //Tampilkan Pesan
-	}
-
-	public function kegiatan_slider($id = '', $val = 0)
-	{
-		if ($val == 1) {
-			// Hanya satu gallery yang boleh tampil di slider
-			$this->db->where('slider', 1)
-				->set('slider', 0)
-				->update('bpd_buku_kegiatan');
-			// Aktifkan galeri kalau digunakan untuk slider
-			$this->db->set('enabled', 1);
-		}
-		$this->db->where('id', $id)
-			->set('slider', $val)
-			->update('bpd_buku_kegiatan');
-	}
-
-	public function get_kegiatan($id = 0)
-	{
-		$sql = "SELECT * FROM bpd_buku_kegiatan WHERE id = ?";
+		$sql = "SELECT * FROM bpd_buku_aspirasi WHERE id = ?";
 		$query = $this->db->query($sql, $id);
 		$data = $query->row_array();
 		return $data;
-	}
-
-	public function list_slide_galeri()
-	{
-		$gallery_slide_id = $this->db->select('id')
-			->where('slider', 1)
-			->limit(1)
-			->get('bpd_buku_kegiatan')->row()->id;
-		$slide_galeri = $this->db->select('id, nama as judul, gambar')
-			->where('parrent', $gallery_slide_id)
-			->where('tipe', 2)
-			->where('enabled', 1)
-			->get('bpd_buku_kegiatan')->result_array();
-		return $slide_galeri;
 	}
 
 	public function paging2($gal = 0, $p = 1)
@@ -318,7 +244,7 @@
 
 	private function list_dokumentasi_sql()
 	{
-		$sql = " FROM bpd_buku_kegiatan WHERE parrent = ? AND tipe = 2 ";
+		$sql = " FROM bpd_buku_aspirasi WHERE parrent = ? AND tipe = 2 ";
 		$sql .= $this->search_sql();
 		$sql .= $this->filter_sql();
 		return $sql;
@@ -339,14 +265,8 @@
 			case 4:
 				$order_sql = ' ORDER BY enabled DESC';
 				break;
-			case 5:
-				$order_sql = ' ORDER BY tgl_upload';
-				break;
-			case 6:
-				$order_sql = ' ORDER BY tgl_upload DESC';
-				break;
 			default:
-				$order_sql = ' ORDER BY urut';
+				$order_sql = ' ORDER BY tgl_upload';
 		}
 
 		$paging_sql = ' LIMIT ' . $offset . ',' . $limit;
@@ -380,8 +300,7 @@
 		$lokasi_file = $_FILES['gambar']['tmp_name'];
 		$tipe_file = TipeFile($_FILES['gambar']);
 		$data = [];
-		$data['nama'] = nomor_surat_keputusan($this->input->post('nama')); //pastikan nama album hanya berisi
-		$data['urut'] = $this->urut_model->urut_max(array('parrent' => $parrent)) + 1;
+		$data['nama'] = $this->input->post('nama'); //pastikan nama album hanya berisi
 		// Bolehkan isi album tidak ada gambar
 		if (!empty($lokasi_file)) {
 			if (!CekGambar($_FILES['gambar'], $tipe_file)) {
@@ -399,7 +318,7 @@
 
 		$data['parrent'] = $parrent;
 		$data['tipe'] = 2;
-		$outp = $this->db->insert('bpd_buku_kegiatan', $data);
+		$outp = $this->db->insert('bpd_buku_aspirasi', $data);
 		if (!$outp) $_SESSION['success'] = -1;
 	}
 
@@ -428,16 +347,7 @@
 		}
 
 		unset($data['old_gambar']);
-		$outp = $this->db->where('id', $id)->update('bpd_buku_kegiatan', $data);
+		$outp = $this->db->where('id', $id)->update('bpd_buku_aspirasi', $data);
 		if (!$outp) $_SESSION['success'] = -1;
-	}
-
-	// $arah:
-	//		1 - turun
-	// 		2 - naik
-	public function urut($id, $arah, $gallery = '')
-	{
-		$subset = !empty($gallery) ? array('parrent' => $gallery) : array('parrent' => 0);
-		$this->urut_model->urut($id, $arah, $subset);
 	}
 }

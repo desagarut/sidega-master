@@ -56,35 +56,36 @@
 														<table class="table table-bordered table-striped dataTable table-hover">
 															<thead class="bg-gray disabled color-palette">
 																<tr>
-																	<th><input type="checkbox" id="checkall" /></th>
-																	<th>No</th>
-																	<th>Aksi</th>
-																	<th>Hari/Tanggal</th>
-																	<th>Gambar</th>
+																	<th class="text-center"><input type="checkbox" id="checkall" /></th>
+																	<th class="text-center">No</th>
+																	<th class="text-center">Tanggal Kegiatan</th>
+																	<th>Foto Sampul Kegiatan</th>
 																	<?php if ($o == 2) : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/index/$p/1") ?>">Jenis Kegiatan <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/1") ?>">Jenis Kegiatan <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 1) : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/index/$p/2") ?>">Jenis Kegiatan <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/2") ?>">Jenis Kegiatan <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th><a href="<?= site_url("bpd_buku_kegiatan/index/$p/1") ?>">Jenis Kegiatan <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/1") ?>">Jenis Kegiatan <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
-																	<th>Pelaksana</th>
-																	<th>Agenda dan Hasil Kegiatan</th>
-																	<?php if ($o == 4) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
-																	<?php elseif ($o == 3) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
-																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
-																	<?php endif; ?>
+																	<th class="text-center">Pelaksana</th>
+																	<th class="text-center">Agenda dan Hasil Kegiatan</th>
 																	<?php if ($o == 6) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort-asc fa-sm'></i></a></th>
 																	<?php elseif ($o == 5) : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																		<th class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/6") ?>">Dimuat Pada <i class='fa fa-sort-desc fa-sm'></i></a></th>
 																	<?php else : ?>
-																		<th nowrap><a href="<?= site_url("bpd_buku_kegiatan/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/5") ?>">Dimuat Pada <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
-																	<th>Keterangan</th>
+																	<th class="text-center">Keterangan</th>
+																	<?php if ($o == 4) : ?>
+																		<th nowrap class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/3") ?>">Aktif <i class='fa fa-sort-asc fa-sm'></i></a></th>
+																	<?php elseif ($o == 3) : ?>
+																		<th class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/4") ?>">Aktif <i class='fa fa-sort-desc fa-sm'></i></a></th>
+																	<?php else : ?>
+																		<th class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
+																	<?php endif; ?>
+																	<th class="text-center">Aksi</th>
+
 																</tr>
 															</thead>
 															<tbody>
@@ -92,27 +93,7 @@
 																	<tr>
 																		<td><input type="checkbox" name="id_cb[]" value="<?= $data['id'] ?>" /></td>
 																		<td><?= $data['no'] ?></td>
-																		<td nowrap>
-																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i></a>
-																			<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2") ?>" class="btn bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i></a>
-																			<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Album"><i class="fa fa-bars"></i></a>
-																			<br />
-																			<a href="<?= site_url("bpd_buku_kegiatan/form/$p/$o/$data[id]") ?>" class="btn btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
-																			<?php if ($data['slider'] == '1') : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/slider_off/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i></a>
-																			<?php else : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/slider_on/" . $data['id']) ?>" class="btn bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i></a>
-																			<?php endif; ?>
-																			<?php if ($data['enabled'] == '2') : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i></a>
-																			<?php elseif ($data['enabled'] == '1') : ?>
-																				<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id']) ?>" class="btn bg-navy btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i></a>
-																			<?php endif ?>
-																			<?php if ($this->CI->cek_hak_akses('h')) : ?>
-																				<a href="#" data-href="<?= site_url("bpd_buku_kegiatan/delete/$p/$o/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-																			<?php endif; ?>
-																		</td>
-																		<td><?= $data['tanggal'] ?></td>
+																		<td class="text-center"><?= $data['tgl_mulai'] ?> - <?= $data['tgl_akhir'] ?></td>
 																		<td class="padat">
 																			<div class="user-panel">
 																				<div class="image1">
@@ -125,9 +106,46 @@
 																		</td>
 																		<td><?= $data['pelaksana'] ?></td>
 																		<td width="20%"><?= $data['hasil'] ?></td>
-																		<td width="5%"><?= $data['aktif'] ?></td>
 																		<td width="20%"><?= tgl_indo2($data['tgl_upload']) ?></td>
 																		<td width="20%"><?= $data['keterangan'] ?></td>
+																		<td width="5%"><?= $data['aktif'] ?></td>
+																		<td>
+																			<div class="btn-group-vertical">
+																				<a class="btn btn-social btn-box btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-arrow-circle-down'></i> Aksi </a>
+																				<ul class="dropdown-menu" role="menu">
+																					<li>
+																						<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$data[id]") ?>" class="btn btn-social bg-purple btn-box btn-sm" title="Dokumentasi Kegiatan"><i class="fa fa-bars"></i>Dokumentasi</a>
+																					</li>
+																					<li>
+																						<a href="<?= site_url("bpd_buku_kegiatan/form/$p/$o/$data[id]") ?>" class="btn btn-social btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i>Ubah</a>
+																					</li>
+																					<li>
+																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1") ?>" class="btn btn-social bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i>Turun</a>
+																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2") ?>" class="btn btn-social bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i>Naik</a>
+																					</li>
+
+																					<li>
+																						<?php if ($data['slider'] == '1') : ?>
+																							<a href="<?= site_url("bpd_buku_kegiatan/slider_off/" . $data['id']) ?>" class="btn btn-social bg-gray btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i>Keluarkan di Slider</a>
+																						<?php else : ?>
+																							<a href="<?= site_url("bpd_buku_kegiatan/slider_on/" . $data['id']) ?>" class="btn btn-social bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i>Tampilkan di Slider</a>
+																						<?php endif; ?>
+																					</li>
+																					<li>
+																						<?php if ($data['enabled'] == '2') : ?>
+																							<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i>Aktifkan</a>
+																						<?php elseif ($data['enabled'] == '1') : ?>
+																							<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social bg-navy btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i>Non Aktifkan</a>
+																						<?php endif ?>
+																					</li>
+																					<li>
+																						<?php if ($this->CI->cek_hak_akses('h')) : ?>
+																							<a href="#" data-href="<?= site_url("bpd_buku_kegiatan/delete/$p/$o/$data[id]") ?>" class="btn btn-social bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>Hapus</a>
+																						<?php endif; ?>
+																					</li>
+																				</ul>
+																			</div>
+																		</td>
 																	</tr>
 																<?php endforeach; ?>
 															</tbody>
