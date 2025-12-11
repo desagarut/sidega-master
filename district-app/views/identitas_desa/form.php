@@ -10,8 +10,8 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<div class="row">
-			<form id="mainform" action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal" id="validasi">
+		<form id="mainform" action="<?= $form_action; ?>" method="POST" enctype="multipart/form-data" class="form-horizontal" id="validasi">
+			<div class="row">
 				<div class="col-md-3">
 					<div class="box box-primary">
 						<div class="box-body box-profile">
@@ -273,7 +273,7 @@
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</section>
 </div>

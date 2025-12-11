@@ -1,6 +1,7 @@
-<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bpd_surat_keluar extends Admin_Controller {
+class Bpd_surat_keluar extends Admin_Controller
+{
 
 	public function __construct()
 	{
@@ -11,12 +12,11 @@ class Bpd_surat_keluar extends Admin_Controller {
 		$this->load->model('klasifikasi_model');
 		$this->load->model('config_model');
 		$this->load->model('bpd_model');
-
 		$this->load->model('penomoran_surat_model');
 		$this->modul_ini = 900;
 		$this->sub_modul_ini = 907;
+		$this->_set_page = ['20', '50', '100'];
 		$this->set_minsidebar(0);
-
 	}
 
 	public function clear($id = 0)
@@ -49,8 +49,7 @@ class Bpd_surat_keluar extends Admin_Controller {
 		$data['tahun_surat'] = $this->bpd_surat_keluar_model->list_tahun_surat();
 		$data['keyword'] = $this->bpd_surat_keluar_model->autocomplete();
 		$data['main_content'] = 'bpd/surat_keluar/table';
-		$data['subtitle'] = "Buku Agenda - Surat Keluar";
-		$data['selected_nav'] = 'agenda_keluar';
+		$data['subtitle'] = "Buku - Surat Keluar";
 		$this->set_minsidebar(0);
 
 		$this->load->view('header', $this->header);
@@ -66,13 +65,10 @@ class Bpd_surat_keluar extends Admin_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-		if ($id)
-		{
+		if ($id) {
 			$data['surat_keluar'] = $this->bpd_surat_keluar_model->get_surat_keluar($id);
 			$data['form_action'] = site_url("bpd_surat_keluar/update/$p/$o/$id");
-		}
-		else
-		{
+		} else {
 			$last_surat = $this->penomoran_surat_bpd_model->get_surat_terakhir('bpd_tbl_surat_keluar');
 			$data['surat_keluar']['nomor_urut'] = $last_surat['no_surat'] + 1;
 			$data['form_action'] = site_url("bpd_surat_keluar/insert");
@@ -83,7 +79,7 @@ class Bpd_surat_keluar extends Admin_Controller {
 		$namaFile = $berkas[0];
 		$ekstensiFile = explode('.', end($berkas));
 		$ekstensiFile = end($ekstensiFile);
-		$data['surat_keluar']['berkas_scan'] = $namaFile.'.'.$ekstensiFile;
+		$data['surat_keluar']['berkas_scan'] = $namaFile . '.' . $ekstensiFile;
 		$this->set_minsidebar(0);
 
 		$this->render('bpd/surat_keluar/form', $data);
@@ -139,7 +135,7 @@ class Bpd_surat_keluar extends Admin_Controller {
 
 	public function delete_all($p = 1, $o = 0)
 	{
-		$this->redirect_hak_akses('h',"bpd_surat_keluar/index/$p/$o");
+		$this->redirect_hak_akses('h', "bpd_surat_keluar/index/$p/$o");
 		$this->bpd_surat_keluar_model->delete_all();
 		redirect("bpd_surat_keluar/index/$p/$o");
 	}
@@ -202,7 +198,7 @@ class Bpd_surat_keluar extends Admin_Controller {
 			$hasil = false;
 		else
 			$hasil = $this->penomoran_surat_bpd_model->nomor_surat_duplikat('bpd_tbl_surat_keluar', $this->input->post('nomor_urut'));
-   	echo $hasil ? 'false' : 'true';
+		echo $hasil ? 'false' : 'true';
 	}
 
 	public function untuk_ekspedisi($p = 1, $o = 0, $id)

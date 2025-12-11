@@ -2170,7 +2170,7 @@ class User_model extends CI_Model
 				'beranda' => array('b'),
 				
 				// covid-19
-				'covid19' => array('b', 'u', 'h'),
+				//'covid19' => array('b', 'u', 'h'),
 
 				//Buku Administrasi BPD
 				'bpd_buku_anggota' => array('b', 'u', 'h'),
@@ -2178,9 +2178,9 @@ class User_model extends CI_Model
 				'bpd_buku_aspirasi' => array('b', 'u', 'h'),
 				'bpd_buku_inventaris' => array('b', 'u', 'h'),
 				'bpd_buku_peraturan' => array('b', 'u', 'h'),
-				'bpd_buku_surat_masuk' => array('b', 'u', 'h'),
-				'bpd_buku_surat_keluar' => array('b', 'u', 'h'),
-				'bpd_buku_ekspedisi' => array('b', 'u', 'h'),
+				'bpd_surat_masuk' => array('b', 'u', 'h'),
+				'bpd_surat_keluar' => array('b', 'u', 'h'),
+				'bpd_ekspedisi' => array('b', 'u', 'h'),
 				'bpd_buku_daftar_hadir' => array('b', 'u', 'h'),
 				'bpd_buku_tamu' => array('b', 'u', 'h'),
 
@@ -2203,7 +2203,7 @@ class User_model extends CI_Model
 				'laporan_rentan' => array('b'),
 
 				// input data analisis
-				'analisis_respon' => array('b'),
+				//'analisis_respon' => array('b'),
 
 				// bantuan
 				'program_bantuan' => array('b'),

@@ -40,7 +40,6 @@ class Bpd_buku_anggota extends Admin_Controller {
 		$data['keyword'] = $this->bpd_model->autocomplete();
 		$data['main_content'] = 'bpd/anggota/buku_anggota_bpd';
 		$data['subtitle'] = "Buku Anggota BPD";
-		$data['selected_nav'] = 'aparat';
 		$this->set_minsidebar(0);
 
 		$this->load->view('header', $this->header);

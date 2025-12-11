@@ -48,8 +48,7 @@ class Main extends CI_Controller {
 				case 15 : redirect('beranda'); break;
 				case 16 : redirect('web'); break;
 				case 17 : redirect('web'); break;
-				case 18:
-					redirect('beranda');
+				case 18 : redirect('web');
 					break;
 				default : redirect('insidega');
 			}
