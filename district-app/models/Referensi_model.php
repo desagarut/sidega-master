@@ -531,7 +531,7 @@ class Referensi_model extends CI_Model {
 
 	public function list_wajib_ktp()
 	{
-		$wajib_ktp = array_flip(unserialize(WAJIB_KTP));
+		$wajib_ktp = array_flip(unserialize('WAJIB_KTP'));
 		return $wajib_ktp;
 	}
 

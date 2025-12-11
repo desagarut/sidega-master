@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td align='center'>
-						<h3>BUKU ANGGOTA BPD</h3>
+						<h3>BUKU SURAT MASUK</h3>
 					</td>
 				</tr>
 				<tr>
@@ -64,61 +64,29 @@
 			<table class="border thick">
 				<thead>
 					<tr class="border thick">
-						<th width="3%">NO</th>
-						<th width="8%">FOTO</th>
-						<th width="10%">NAMA</th>
-						<th>JENIS KELAMIN</th>
-						<th>TEMPAT TANGGAL LAHIR</th>
-						<th>AGAMA</th>
-						<th>JABATAN</th>
-						<th>PENDIDIKAN TERAKHIR</th>
-						<th width="10%">NOMOR DAN TANGGAL KEPUTUSAN PENGANGKATAN</th>
-						<th width="10%">NOMOR DAN TANGGAL KEPUTUSAN PEMBERHENTIAN</th>
-						<th width="7%">KETERANGAN (Periode/Masa Jabatan)</th>
+						<th>No.</th>
+						<th>Tanggal Penerimaan</th>
+						<th>Nomor Surat</th>
+						<th>Tanggal Surat</th>
+						<th>Pengirim</th>
+						<th>Isi Singkat</th>
 					</tr>
-					<tr>
-						<th>1</th>
-						<th>2</th>
-						<th>3</th>
-						<th>4</th>
-						<th>5</th>
-						<th>6</th>
-						<th>7</th>
-						<th>8</th>
-						<th>9</th>
-						<th>10</th>
 				</thead>
 				<tbody>
 					<?php foreach ($main as $data): ?>
 						<tr>
-							<td align='center'><?= $data['no'] ?></td>
-							<td class="text-center">
-								<div class="user-panel">
-									<div class="image2">
-										<?php if ($data['foto']): ?>
-											<img src="<?= AmbilFoto($data['foto']) ?>" class="img-circle" style="width:50px; height:50px;" alt="User Image" />
-										<?php else: ?>
-											<img src="<?= base_url() ?>assets/files/user_pict/kuser.png" class="img-circle" style="width:50px; height:50px;" alt="User Image" />
-										<?php endif ?>
-									</div>
-								</div>
-							</td>
-							<td><?= $data['nama'] ?></td>
-							<td><?= $data['sex'] ?></td>
-							<td><?= $data['tempatlahir'] . ', ' . tgl_indo_out($data['tanggallahir']) ?></td>
-							<td><?= $data['agama'] ?></td>
-							<td><?= $data['jabatan'] ?></td>
-							<td><?= $data['pendidikan_kk'] ?></td>
-							<td><?= $data['pamong_nosk'] . ', ' . tgl_indo_out($data['pamong_tglsk']) ?></td>
-							<td><?= $data['pamong_nohenti'] . ', ' . tgl_indo_out($data['pamong_tglhenti']) ?></td>
-							<td><?= $data['pamong_masajab'] ?></td>
+							<td align="center"><?= $data['nomor_urut'] ?></td>
+							<td><?= tgl_indo($data['tanggal_penerimaan']) ?> </td>
+							<td><?= $data['nomor_surat'] ?></td>
+							<td><?= tgl_indo($data['tanggal_surat']) ?></td>
+							<td><?= $data['pengirim'] ?></td>
+							<td><?= $data['isi_singkat'] ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-			<?php include("district-app/views/bpd/anggota/blok_ttd_bpd.php"); ?>
+			<table>
+				<?php include("district-app/views/bpd/anggota/blok_ttd_bpd.php"); ?>
 		</div>
 	</div>
 </body>
-
-</html>

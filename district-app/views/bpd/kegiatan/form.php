@@ -112,8 +112,8 @@
 								</div>
 							<?php endif; ?>
 							<div class="form-group">
-								<label class="control-label col-sm-3" for="upload">Sampul Foto Kegiatan</label>
-								<div class="col-sm-9">
+								<label class="control-label col-sm-3" for="upload">Foto Sampul</label>
+								<div class="col-sm-3">
 									<div class="input-group input-group-sm">
 										<input type="text" class="form-control <?php !($bpd_buku_kegiatan['gambar']) and print('required') ?>" id="file_path">
 										<input id="file" type="file" class="hidden" name="gambar">
@@ -122,20 +122,20 @@
 										</span>
 									</div>
 									<?php $upload_mb = max_upload(); ?>
-									<p><label class="control-label">Batas maksimal pengunggahan berkas <strong><?= $upload_mb ?> MB.</strong></label></p>
+									<p><label class="control-label">Batas maksimal ukuran foto <strong><?= $upload_mb ?> MB.</strong></label></p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-3" for="keterangan">Keterangan</label>
+								<label class="control-label col-sm-3" for="keterangan">Deskripsi</label>
 								<div class="col-sm-9">
 									<input name="keterangan" class="form-control input-sm" maxlength="100" type="text" value="<?= $bpd_buku_kegiatan['keterangan'] ?>"></input>
 								</div>
 							</div>
 						</div>
-						<div class='box-footer'>
-							<div class='col-xs-12'>
-								<button type='reset' class='btn btn-social btn-box btn-danger btn-sm'><i class='fa fa-times'></i> Batal</button>
-								<button type='submit' class='btn btn-social btn-box btn-info btn-sm pull-right confirm'><i class='fa fa-check'></i> Simpan</button>
+						<div class="box-footer">
+							<div class="col-xs-12">
+								<button type="reset" class="btn btn-social btn-box btn-danger btn-sm"><i class="fa fa-times"></i> Batal</button>
+								<button type="submit" class="btn btn-social btn-box btn-info btn-sm pull-right confirm"><i class="fa fa-check"></i> Simpan</button>
 							</div>
 						</div>
 					</div>

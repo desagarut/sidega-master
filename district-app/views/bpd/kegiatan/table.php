@@ -58,6 +58,7 @@
 																<tr>
 																	<th class="text-center"><input type="checkbox" id="checkall" /></th>
 																	<th class="text-center">No</th>
+																	<th class="text-center">Aksi</th>
 																	<th class="text-center">Tanggal Kegiatan</th>
 																	<th>Foto Sampul Kegiatan</th>
 																	<?php if ($o == 2) : ?>
@@ -84,8 +85,6 @@
 																	<?php else : ?>
 																		<th class="text-center"><a href="<?= site_url("bpd_buku_kegiatan/index/$p/3") ?>">Aktif <i class='fa fa-sort fa-sm'></i></a></th>
 																	<?php endif; ?>
-																	<th class="text-center">Aksi</th>
-
 																</tr>
 															</thead>
 															<tbody>
@@ -93,49 +92,32 @@
 																	<tr>
 																		<td><input type="checkbox" name="id_cb[]" value="<?= $data['id'] ?>" /></td>
 																		<td><?= $data['no'] ?></td>
-																		<td class="text-center"><?= $data['tgl_mulai'] ?> - <?= $data['tgl_akhir'] ?></td>
-																		<td class="padat">
-																			<div class="user-panel">
-																				<div class="image1">
-																					<img class="img" style="width:100px; height:70px" alt="Gambar" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" />
-																				</div>
-																			</div>
-																		</td>
-																		<td>
-																			<label data-rel="popover" data-content="<img width=200 height=134 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>"><?= $data['nama'] ?></label>
-																		</td>
-																		<td><?= $data['pelaksana'] ?></td>
-																		<td width="20%"><?= $data['hasil'] ?></td>
-																		<td width="20%"><?= tgl_indo2($data['tgl_upload']) ?></td>
-																		<td width="20%"><?= $data['keterangan'] ?></td>
-																		<td width="5%"><?= $data['aktif'] ?></td>
 																		<td>
 																			<div class="btn-group-vertical">
-																				<a class="btn btn-social btn-box btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-arrow-circle-down'></i> Aksi </a>
+																				<a class="btn btn-social btn-box btn-success btn-sm" data-toggle="dropdown"><i class='fa fa-arrow-circle-down'></i>Pilih</a>
 																				<ul class="dropdown-menu" role="menu">
 																					<li>
-																						<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$data[id]") ?>" class="btn btn-social bg-purple btn-box btn-sm" title="Dokumentasi Kegiatan"><i class="fa fa-bars"></i>Dokumentasi</a>
+																						<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$data[id]") ?>" class="btn btn-social btn-box btn-sm" title="Dokumentasi Kegiatan"><i class="fa fa-bars"></i>Dokumentasi</a>
 																					</li>
 																					<li>
-																						<a href="<?= site_url("bpd_buku_kegiatan/form/$p/$o/$data[id]") ?>" class="btn btn-social btn-warning btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i>Ubah</a>
+																						<a href="<?= site_url("bpd_buku_kegiatan/form/$p/$o/$data[id]") ?>" class="btn btn-social btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i>Ubah</a>
 																					</li>
 																					<li>
-																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1") ?>" class="btn btn-social bg-olive btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i>Turun</a>
-																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2") ?>" class="btn btn-social bg-olive btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i>Naik</a>
+																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/1") ?>" class="btn btn-social btn-box btn-sm" title="Pindah Posisi Ke Bawah"><i class="fa fa-arrow-down"></i>Turun</a>
+																						<a href="<?= site_url("bpd_buku_kegiatan/urut/$data[id]/2") ?>" class="btn btn-social btn-box btn-sm" title="Pindah Posisi Ke Atas"><i class="fa fa-arrow-up"></i>Naik</a>
 																					</li>
-
 																					<li>
 																						<?php if ($data['slider'] == '1') : ?>
-																							<a href="<?= site_url("bpd_buku_kegiatan/slider_off/" . $data['id']) ?>" class="btn btn-social bg-gray btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i>Keluarkan di Slider</a>
+																							<a href="<?= site_url("bpd_buku_kegiatan/slider_off/" . $data['id']) ?>" class="btn btn-social btn-box btn-sm" title="Keluarkan Dari Slider"><i class="fa fa-play"></i>Keluarkan di Slider</a>
 																						<?php else : ?>
-																							<a href="<?= site_url("bpd_buku_kegiatan/slider_on/" . $data['id']) ?>" class="btn btn-social bg-gray btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i>Tampilkan di Slider</a>
+																							<a href="<?= site_url("bpd_buku_kegiatan/slider_on/" . $data['id']) ?>" class="btn btn-social btn-box btn-sm" title="Tampilkan Di Slider"><i class="fa fa-eject"></i>Tampilkan di Slider</a>
 																						<?php endif; ?>
 																					</li>
 																					<li>
 																						<?php if ($data['enabled'] == '2') : ?>
-																							<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social bg-navy btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i>Aktifkan</a>
+																							<a href="<?= site_url("bpd_buku_kegiatan/kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social btn-box btn-sm" title="Aktifkan Album"><i class="fa fa-lock"></i>Aktifkan</a>
 																						<?php elseif ($data['enabled'] == '1') : ?>
-																							<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social bg-navy btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i>Non Aktifkan</a>
+																							<a href="<?= site_url("bpd_buku_kegiatan/buka_kunci_kegiatan/" . $data['id']) ?>" class="btn btn-social btn-box btn-sm" title="Non Aktifkan Album"><i class="fa fa-unlock"></i>Non Aktifkan</a>
 																						<?php endif ?>
 																					</li>
 																					<li>
@@ -146,6 +128,28 @@
 																				</ul>
 																			</div>
 																		</td>
+																		<td class="text-center"><?= $data['tgl_mulai'] ?> - <?= $data['tgl_akhir'] ?></td>
+																		<td class="padat">
+																			<div class="user-panel">
+																				<!--<div class="image1">
+																					<img class="img" style="width:100px; height:70px" alt="Gambar" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" />
+																				</div> -->
+																				<?php if ($data['gambar']) : ?>
+																						<img class="img-fluid" style="width: 100%; height: 100%;" src="<?= AmbilGaleri($data['gambar'], 'kecil') ?>" alt="<?= $data['judul'] ?>">
+																				<?php else : ?>
+																						<img class="img-fluid" style="width: 100%; height: 100%;" src="<?= base_url() ?>themes/bodas/assets/img/noimage.png" alt="Belum Ada Gambar">
+																				<?php endif; ?>
+
+																			</div>
+																		</td>
+																		<td>
+																			<label data-rel="popover" data-content="<img width=200 height=134 src=<?= AmbilGaleri($data['gambar'], 'kecil') ?>>"><?= $data['nama'] ?></label>
+																		</td>
+																		<td><?= $data['pelaksana'] ?></td>
+																		<td width="20%"><?= $data['hasil'] ?></td>
+																		<td width="20%"><?= tgl_indo2($data['tgl_upload']) ?></td>
+																		<td width="20%"><?= $data['keterangan'] ?></td>
+																		<td width="5%"><?= $data['aktif'] ?></td>
 																	</tr>
 																<?php endforeach; ?>
 															</tbody>

@@ -24,23 +24,6 @@
 		});
 	});
 </script>
-<!--
-<style>
-	.input-sm {
-		padding: 4px 4px;
-	}
-
-	@media (max-width:780px) {
-		.btn-group-vertical {
-			display: block;
-		}
-	}
-
-	.table-responsive {
-		min-height: 400px;
-	}
-</style>
--->
 
 <div class="content-wrapper">
 	<section class="content-header">

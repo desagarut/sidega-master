@@ -142,7 +142,7 @@ class Bpd_model extends CI_Model {
 		return $data;
 	 }
 
-	public function get_data_kades($id = 0)
+	public function get_data_ketua_bpd($id = 0)
 	{
 		$sql = "SELECT u.*, p.nama as nama
 			FROM tweb_anggota_bpd u

@@ -33,7 +33,7 @@
 			<div class="col-md-4">
 				<?php $this->load->view('home/selamat_datang.php'); ?>
 				<?php $this->load->view('home/link_tupoksi.php'); ?>
-				<?php $this->load->view('home/umkm.php'); ?>
+				<?php $this->load->view('home/bpd.php'); ?>
 
 
 			</div>

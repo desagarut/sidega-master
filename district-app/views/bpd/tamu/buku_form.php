@@ -1,11 +1,10 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Administrasi BPD - Form Dokumentasi Kegiatan</h1>
+		<h1>BPD - Buku Tamu Form</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?= site_url('bpd_buku_kegiatan') ?>"><i class="fa fa-dashboard"></i> Daftar Kegiatan</a></li>
-			<li><a href='<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$album") ?>'><i class="fa fa-dashboard"></i> Dokumentasi</a></li>
-			<li class="active">Form Dokumentasi Kegiatan</li>
+			<li><a href="<?= site_url('bpd_buku_tamu') ?>"><i class="fa fa-dashboard"></i> Buku Tamu</a></li>
+			<li class="active">Form</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -14,31 +13,37 @@
 				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<a href="<?= site_url("bpd_buku_kegiatan/table_dokumentasi/$album") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
-								<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Kegiatan
+							<a href="<?= site_url("bpd_buku_tamu") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Artikel">
+								<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Buku Tamu
 							</a>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="nama">Nama Gambar</label>
+								<label class="control-label col-sm-4" for="nama">Nama Buku</label>
 								<div class="col-sm-6">
-									<input name="nama" class="form-control input-sm nomor_sk" maxlength="50" type="text" value="<?= $bpd_buku_kegiatan['nama'] ?>"></input>
+									<input name="nama" class="form-control input-sm required" maxlength="50" type="text" value="<?= $buku_tamu['nama'] ?>"></input>
 								</div>
 							</div>
-							<?php if ($bpd_buku_kegiatan['gambar']): ?>
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="tahun">Tahun</label>
+								<div class="col-sm-2">
+									<input name="tahun" class="form-control input-sm angka required" maxlength="4" type="text" value="<?= $buku_tamu['tahun'] ?>"></input>
+								</div>
+							</div>
+							<?php if ($buku_tamu['gambar']) : ?>
 								<div class="form-group">
-									<label class="control-label col-sm-4" for="nama"></label>
+									<label class="control-label col-sm-4" for="gambar"></label>
 									<div class="col-sm-6">
-										<input type="hidden" name="old_gambar" value="<?= $bpd_buku_kegiatan['gambar'] ?>">
-										<img class="attachment-img img-responsive img-circle" src="<?= AmbilGaleri($bpd_buku_kegiatan['gambar'], 'sedang') ?>" alt="Gambar Album">
+										<input type="hidden" name="old_gambar" value="<?= $buku_tamu['gambar'] ?>">
+										<img class="attachment-img img-responsive img-circle" src="<?= AmbilGaleri($buku_tamu['gambar'], 'sedang') ?>" alt="Gambar Album">
 									</div>
 								</div>
 							<?php endif; ?>
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="upload">Foto Dokumtasi</label>
+								<label class="control-label col-sm-4" for="upload">Sampul Buku</label>
 								<div class="col-sm-6">
 									<div class="input-group input-group-sm">
-										<input type="text" class="form-control <?php !($bpd_buku_kegiatan['gambar']) and print('required') ?>" id="file_path">
+										<input type="text" class="form-control <?php !($buku_tamu['gambar']) and print('required') ?>" id="file_path">
 										<input id="file" type="file" class="hidden" name="gambar">
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-info btn-box" id="file_browser"><i class="fa fa-search"></i> Browse</button>
