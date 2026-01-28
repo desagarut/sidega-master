@@ -122,8 +122,8 @@
 									<div class="form-group">
 										<input type="checkbox" id="checkbox" class="form-checkbox"> Tampilkan PIN
 									</div>
-									<div class="cf-turnstile" data-sitekey="0x4AAAAAACUYeHOFo92Kxjzr" data-theme="light" data-size="compact"></div>
-
+									<div class="cf-turnstile" data-sitekey="0x4AAAAAACUYeHOFo92Kxjzr" data-theme="light" data-size="flexible"></div>
+									<br />
 									<button type="submit" class="btn btn-block login-btn bg-info">MASUK</button>
 
 
@@ -206,13 +206,13 @@ $secret = '0x4AAAAAACUYeNJJzXAu5glJyGGLo6zUixs'; // dari Cloudflare
 
 // Kirim request verifikasi ke Cloudflare
 $response = file_get_contents("https://challenges.cloudflare.com/turnstile/v0/siteverify", false, stream_context_create([
-    'http' => [
-        'method' => 'POST',
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-        'content' => http_build_query([
-            'secret' => $secret,
-            'response' => $token,
-            'remoteip' => $_SERVER['REMOTE_ADDR']
-        ]),
-    ]
+	'http' => [
+		'method' => 'POST',
+		'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+		'content' => http_build_query([
+			'secret' => $secret,
+			'response' => $token,
+			'remoteip' => $_SERVER['REMOTE_ADDR']
+		]),
+	]
 ]));

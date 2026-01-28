@@ -38,14 +38,14 @@ function initMap() {
 	z-index: 1;
     width: 100%;
     height: 400px;
-    border: 1px solid #000;
+    border: 0px solid #000;
 	margin-top:auto;
   }
 </style>
 <section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-info">
+				<div class="card">
                     <div class='modal-body'>
                         <div class="row">
                             <div class="col-sm-12">

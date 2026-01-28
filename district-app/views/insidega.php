@@ -30,13 +30,11 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/able/assets/css/style.css">
 
 	<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
-	<!--<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>-->
 	<script type="text/javascript" src="<?= base_url() ?>assets/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?= base_url() ?>assets/js/validasi.js"></script>
 	<script type="text/javascript" src="<?= base_url() ?>assets/js/localization/messages_id.js"></script>
 	<script src="<?= base_url() ?>assets/able/assets/js/vendor-all.min.js"></script>
 	<script src="<?= base_url() ?>assets/able/assets/js/plugins/bootstrap.min.js"></script>
-	<!--<script src="<?= base_url() ?>assets/able/assets/js/ripple.js"></script>-->
 	<script src="<?= base_url() ?>assets/able/assets/js/pcoded.min.js"></script>
 
 	<?php require __DIR__ . '/head_tags.php' ?>
@@ -50,8 +48,8 @@
 	<div class="auth-wrapper">
 		<div class="auth-content">
 			<div class="card">
-				<div class="row align-items-center text-center">
-					<div class="col-md-8" style="padding-top:5px">
+				<div class="row text-center">
+					<div class="col-md-8" >
 						<?php $this->load->view('peta') ?>
 					</div>
 					<div class="col-md-4">
@@ -59,7 +57,7 @@
 							<div class="text-center">
 								<a href="<?= site_url('first'); ?>"><img src="<?= gambar_desa($header['logo']); ?>" alt="<?= $header['nama_desa'] ?>" class="img-responsive" style="max-width: 60px; max-height: 60px" /></a>
 							</div>
-							<h4 class="mb-2 f-w-300"><?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?></h4>
+							<h4 class="mb-4 f-w-300"><?= ucwords($this->setting->sebutan_desa) ?> <?= $header['nama_desa'] ?></h4>
 							<form id="validasi" class="login-form" action="<?= site_url('insidega/auth') ?>" method="post">
 								<?php if ($this->session->insidega_wait == 1) : ?>
 									<div class="error login-footer-top">
@@ -80,7 +78,8 @@
 										</div>
 										<hr />
 										<!-- Cloudflare Turnstile widget -->
-										<div class="cf-turnstile" data-sitekey="0x4AAAAAACUYeHOFo92Kxjzr" data-theme="light" data-size="compact"></div>
+										<div class="cf-turnstile" data-sitekey="0x4AAAAAACUYeHOFo92Kxjzr" data-theme="light" data-size="flexible"></div>
+										<br/>
 										<button type="submit" class="btn btn-block btn-success">MASUK</button>
 										<?php if ($this->session->insidega == -1 && $this->session->insidega_try < 4) : ?>
 											<div class="error">
