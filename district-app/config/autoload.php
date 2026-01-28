@@ -132,3 +132,5 @@ $autoload['language'] = [];
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = ['config_model', 'setting_model'];
+
+

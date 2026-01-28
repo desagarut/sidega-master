@@ -1,6 +1,7 @@
 <?php
 
-class Web_sosmed_model extends CI_Model {
+class Web_sosmed_model extends CI_Model
+{
 
 	public function __construct()
 	{
@@ -27,11 +28,10 @@ class Web_sosmed_model extends CI_Model {
 	{
 		$list_sosmed = $this->list_sosmed();
 
-		foreach ($list_sosmed as $list)
-		{
+		foreach ($list_sosmed as $list) {
 			$nama = str_replace(' ', '-', strtolower($list['nama']));
 
-			if($nama == $sosmed) return $list['id'];
+			if ($nama == $sosmed) return $list['id'];
 		}
 	}
 
@@ -42,8 +42,7 @@ class Web_sosmed_model extends CI_Model {
 		$data = $this->input->post();
 		$link = trim(strip_tags($this->input->post('link')));
 
-		switch ($id)
-		{
+		switch ($id) {
 			case '6':
 				$data['link'] = preg_replace('/[^A-Za-z0-9]/', '', $link);
 				break;
@@ -68,42 +67,45 @@ class Web_sosmed_model extends CI_Model {
 	{
 		if (empty($link)) return $link;
 
-		switch (true)
-		{
-			case ($id == 1 && $tipe == 1) :
+		switch (true) {
+			case ($id == 1 && $tipe == 1):
 				$link = 'https://web.facebook.com/' . $link;
 				break;
 
-			case ($id == 1 && $tipe == 2) :
+			case ($id == 1 && $tipe == 2):
 				$link = 'https://web.facebook.com/groups/' . $link;
 				break;
 
-			case ($id == 2) :
+			case ($id == 2):
 				$link = 'https://twitter.com/' . $link;
 				break;
 
-			case ($id == 4) :
+			case ($id == 4):
 				$link = 'https://www.youtube.com/channel/' . $link;
 				break;
 
-			case ($id == 5) :
+			case ($id == 5):
 				$link = 'https://www.instagram.com/' . $link . '/';
 				break;
 
-			case ($id == 6 && $tipe == 1) :
+			case ($id == 6 && $tipe == 1):
 				$link = 'https://api.whatsapp.com/send?phone=' . $link;
 				break;
 
-			case ($id == 6 && $tipe == 2) :
+			case ($id == 6 && $tipe == 2):
 				$link = 'https://chat.whatsapp.com/' . $link;
 				break;
 
-			case ($id == 7 && $tipe == 1) :
+			case ($id == 7 && $tipe == 1):
 				$link = 'https://t.me/' . $link;
 				break;
 
-			case ($id == 7 && $tipe == 2) :
+			case ($id == 7 && $tipe == 2):
 				$link = 'https://t.me/joinchat/' . $link;
+				break;
+
+			case ($id == 8 && $tipe == 1):
+				$link = 'https://www.tiktok.com/' . $link;
 				break;
 
 			default:
@@ -112,6 +114,4 @@ class Web_sosmed_model extends CI_Model {
 
 		return $link;
 	}
-
 }
-?>

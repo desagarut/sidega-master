@@ -546,12 +546,3 @@ $config['proxy_ips'] = '';
 //$config['server_pantau'] = 'https://pantau.desagarut.id';
 //$config['token_pantau']  = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6bnVsbCwidGltZXN0YW1wIjoxNjAzNDY2MjM5fQ.HVCNnMLokF2tgHwjQhSIYo6-2GNXB4-Kf28FSIeXnZw';
 //$config['server_layanan'] = 'https://layanan.desagarut.id';
-
-/*
-|--------------------------------------------------------------------------
-| URL Rilis
-|--------------------------------------------------------------------------
-|
-*/
-//$config['rilis_umum']    = 'https://api.github.com/repos/opensid/opensid/releases/latest';
-//$config['rilis_premium'] = 'https://api.github.com/repos/opensid/berputar/releases/latest';

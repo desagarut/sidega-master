@@ -79,6 +79,10 @@ class First extends Web_Controller
 		$this->load->model('inventaris_kontruksi_model');
 		$this->load->model('inventaris_peralatan_model');
 		$this->load->model('inventaris_tanah_model');
+
+		// update v 6.3.1
+		$this->load->model('web_sosmed_model');
+		//$this->load->library('recaptcha');
 	}
 
 	public function index($p = 1)
@@ -110,10 +114,13 @@ class First extends Web_Controller
 		$data['tukang'] = $this->first_tukang_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['wisata'] = $this->first_wisata_m->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 
+		// Update V 6.3.1
+		$data['sosmed'] = $this->web_sosmed_model->list_sosmed($data['paging']->offset, $data['paging']->per_page);
+
 		// Update Versi 5.7.0
 		// $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
 		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
-/*
+		/*
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input
 				? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
@@ -678,7 +685,6 @@ class First extends Web_Controller
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
 		$data['list_ref'] = $this->referensi_model->list_ref(STAT_PENDUDUK);
-		//$data['covid'] = $this->laporan_penduduk_model->list_data('covid');
 		$data['lokasi'] = $this->plan_lokasi_model->list_lokasi();
 		$data['garis'] = $this->plan_garis_model->list_garis();
 		$data['area'] = $this->plan_area_model->list_area();
@@ -984,9 +990,49 @@ class First extends Web_Controller
 		$data = $this->includes;
 
 		$data['main'] = $this->pamong_model->list_data();
-		//$data['main'] = $this->pamong_model->get_pamong($data);
 		$this->_get_common_data($data);
 		$this->set_template('layouts/pemerintahan_desa.tpl.php');
+
+		$this->load->view($this->template, $data);
+	}
+
+	public function bpd()
+	{
+		$this->load->model('bpd_model');
+
+		$data = $this->includes;
+
+		$data['bpd'] = $this->bpd_model->list_data();
+		$this->_get_common_data($data);
+		$this->set_template('layouts/bpd.tpl.php');
+
+		$this->load->view($this->template, $data);
+	}
+
+	public function media_sosial()
+	{
+		$this->load->model('config_model');
+
+		$data = $this->includes;
+
+		$data['main'] = $this->config_model->get_data();
+
+		$this->_get_common_data($data);
+		$this->set_template('layouts/mediasosial.tpl.php');
+
+		$this->load->view($this->template, $data);
+	}
+
+	public function lap_dumas()
+	{
+		$this->load->model('config_model');
+
+		$data = $this->includes;
+
+		$data['main'] = $this->config_model->get_data();
+
+		$this->_get_common_data($data);
+		$this->set_template('layouts/lap_dumas_daftar.tpl.php');
 
 		$this->load->view($this->template, $data);
 	}

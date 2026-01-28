@@ -82,4 +82,7 @@
 
     <!-- Template Stylesheet -->
     <link href="<?= base_url("$this->theme_folder/$this->theme/assets/css/style.css") ?>" rel="stylesheet">
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </head>

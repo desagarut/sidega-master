@@ -86,7 +86,10 @@ define("STAT_LAINNYA", serialize([
 	'informasi_publik' => 'Informasi Publik',
 	'peta' => 'Peta',
 	'status_idm' => 'Status IDM',
-	'data_analisis' => 'Data Analisis'
+	'data_analisis' => 'Data Analisis',
+	'media_sosial' => 'Media Sosial',
+	'bpd' => 'Badan Permusyawaratan Desa',
+	'lap_dumas' => 'Laporan Pengaduan Masyarakat'
 ]));
 
 // Jabatan Kelompok

@@ -83,7 +83,12 @@ class Config_model extends CI_Model {
 		$data['strategi'] = $post['strategi'];
 		$data['video'] = $post['video'];
 		$data['website_kecamatan'] = $post['website_kecamatan'];
-
+		$data['profil_youtube'] = $post['profil_youtube'];
+		$data['profil_facebook'] = $post['profil_facebook'];
+		$data['profil_instagram'] = $post['profil_instagram'];
+		$data['profil_twitter'] = $post['profil_twitter'];
+		$data['profil_tiktok'] = $post['profil_tiktok'];
+		
 		return $data;
 	}
 
