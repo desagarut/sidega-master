@@ -28,7 +28,7 @@
 <?php
 // Ambil token Turnstile dari form
 $token = $_POST['cf-turnstile-response'];
-$secret = 'SECRET_KEY_KAMU'; // dari Cloudflare
+$secret = '0x4AAAAAACUYeNJJzXAu5glJyGGLo6zUixs'; // dari Cloudflare
 
 // Kirim request verifikasi ke Cloudflare
 $response = file_get_contents("https://challenges.cloudflare.com/turnstile/v0/siteverify", false, stream_context_create([
@@ -43,3 +43,14 @@ $response = file_get_contents("https://challenges.cloudflare.com/turnstile/v0/si
     ]
 ]));
 
+$result = json_decode($response, true);
+
+if ($result['success']) {
+    // Lolos human check, proses login atau register
+    echo "Human Verified ✅";
+    // Proses login seperti biasa...
+} else {
+    // Gagal, kemungkinan bot atau error
+    echo "Verifikasi gagal ❌";
+}
+?>
