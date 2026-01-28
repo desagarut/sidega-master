@@ -48,11 +48,11 @@
 	<div class="auth-wrapper">
 		<div class="auth-content">
 			<div class="card">
-				<div class="row text-center">
-					<div class="col-md-8" >
+				<div class="row align-items-center text-center">
+					<div class="col-md-7" >
 						<?php $this->load->view('peta') ?>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="card-body">
 							<div class="text-center">
 								<a href="<?= site_url('first'); ?>"><img src="<?= gambar_desa($header['logo']); ?>" alt="<?= $header['nama_desa'] ?>" class="img-responsive" style="max-width: 60px; max-height: 60px" /></a>
