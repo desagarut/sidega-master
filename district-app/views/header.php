@@ -106,6 +106,9 @@
 			. get_dynamic_title_page_from_path();
 		?>
 	</title>
+
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </head>
 
 <body class="<?= $this->setting->warna_tema_admin; ?> sidebar-mini fixed <?php if ($minsidebar == 1) : ?>sidebar-collapse<?php endif ?>">

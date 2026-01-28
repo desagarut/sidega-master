@@ -43,14 +43,3 @@ $response = file_get_contents("https://challenges.cloudflare.com/turnstile/v0/si
     ]
 ]));
 
-$result = json_decode($response, true);
-
-if ($result['success']) {
-    // Lolos human check, proses login atau register
-    echo "Human Verified ✅";
-    // Proses login seperti biasa...
-} else {
-    // Gagal, kemungkinan bot atau error
-    echo "Verifikasi gagal ❌";
-}
-?>
