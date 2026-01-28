@@ -40,6 +40,9 @@
 	<script src="<?= base_url() ?>assets/able/assets/js/pcoded.min.js"></script>
 
 	<?php require __DIR__ . '/head_tags.php' ?>
+
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -76,6 +79,8 @@
 											<input type="checkbox" id="checkbox" class="form-checkbox"> Tampilkan kata sandi
 										</div>
 										<hr />
+										<!-- Cloudflare Turnstile widget -->
+										<div class="cf-turnstile" data-sitekey="0x4AAAAAACUYeHOFo92Kxjzr" data-theme="light" data-size="compact"></div>
 										<button type="submit" class="btn btn-block btn-success">MASUK</button>
 										<?php if ($this->session->insidega == -1 && $this->session->insidega_try < 4) : ?>
 											<div class="error">
@@ -90,6 +95,7 @@
 											</div>
 										<?php endif; ?>
 									<?php endif; ?>
+									<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 							</form>
 						</div>
 					</div>
@@ -140,3 +146,20 @@
 		}
 	});
 </script>
+<?php
+// Ambil token Turnstile dari form
+$token = $_POST['cf-turnstile-response'];
+$secret = '0x4AAAAAACUYeNJJzXAu5glJyGGLo6zUixs'; // dari Cloudflare
+
+// Kirim request verifikasi ke Cloudflare
+$response = file_get_contents("https://challenges.cloudflare.com/turnstile/v0/siteverify", false, stream_context_create([
+    'http' => [
+        'method' => 'POST',
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'content' => http_build_query([
+            'secret' => $secret,
+            'response' => $token,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ]),
+    ]
+]));
