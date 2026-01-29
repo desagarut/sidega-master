@@ -11,11 +11,11 @@
 				<div class="row g-2 p-4 shadow justify-content-center">
 					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="course-item">
-							<div class="position-relative overflow-hidden text-center" style="padding: 5px 5px 5px 5px; height: 100%">
+							<div class="position-relative overflow-hidden text-center" style="padding: 10px 10px 10px 10px; height: 100%">
 								<?php if ($data['foto']): ?>
-									<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:600px; width:auto" />
+									<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:auto; width:auto" />
 								<?php else: ?>
-									<img class="img-fluid" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" sstyle="object-fit: cover; height:600px; width:auto" />
+									<img class="img-fluid" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" sstyle="object-fit: cover; height:auto; width:auto" />
 								<?php endif ?>
 							</div>
 						</div>
