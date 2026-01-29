@@ -9,7 +9,7 @@
 	<div class="container-xxl py-5">
 		<div class="row">
 			<div class="col-lg-12 entries">
-			<?php $this->load->view($folder_themes . '/partials/pemerintahan_desa') ?>
+			<?php $this->load->view($folder_themes . '/partials/profil/pemerintahan_desa') ?>
 			</div>
 		</div>
 	</div>
