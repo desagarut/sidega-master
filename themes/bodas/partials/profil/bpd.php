@@ -12,7 +12,7 @@
 					<div class="course-item bg-info">
 						<div class="position-relative overflow-hidden text-center" style="padding: 5px 5px 5px 5px; height: 100%">
 							<?php if ($data['foto']): ?>
-								<img class="img-fluid" src="<?= $data['foto'] ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:600px; width:auto" />
+								<img class="img-fluid" src="<?= AmbilFoto($data['foto']) ?>" alt="<?= $data['nama'] ?>" style="object-fit: cover; height:600px; width:auto" />
 							<?php else: ?>
 								<img class="img-fluid" src="<?= base_url() ?>assets/files/user_pict/kuser.png" alt="<?= $data['nama'] ?>" sstyle="object-fit: cover; height:600px; width:auto" />
 							<?php endif ?>
