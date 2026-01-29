@@ -82,7 +82,7 @@ class First extends Web_Controller
 
 		// update v 6.3.1
 		$this->load->model('web_sosmed_model');
-		//$this->load->library('recaptcha');
+		$this->load->model('bpd_model');
 	}
 
 	public function index($p = 1)
@@ -116,6 +116,7 @@ class First extends Web_Controller
 
 		// Update V 6.3.1
 		$data['sosmed'] = $this->web_sosmed_model->list_sosmed($data['paging']->offset, $data['paging']->per_page);
+		$data['bpd'] = $this->bpd_model->list_data();
 
 		// Update Versi 5.7.0
 		// $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();

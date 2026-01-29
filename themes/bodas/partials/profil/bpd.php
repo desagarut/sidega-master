@@ -4,8 +4,6 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<h3 class="p-2 text-center">BADAN PERMUSYAWARATAN DESA </h3>
-
-
 		<?php foreach ($bpd as $data) : ?>
 			<div class="course-item p-4 wow fadeInUp" data-wow-delay="0.1s">
 				<div class="row g-2 p-4 shadow justify-content-center">
