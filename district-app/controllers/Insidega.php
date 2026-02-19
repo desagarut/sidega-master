@@ -13,22 +13,22 @@ class Insidega extends CI_Controller
 
 	public function index()
 	{
-		
+		// site key - Cloudflare Turnstile 
+		$data['site_key'] = '0x4AAAAAACUYeHOFo92Kxjzr';
+
 		$data_desa = $this->config_model->get_data();
 		$data['desa'] = $this->config_model->get_data();
 		$data['wil_ini'] = $data_desa;
 		$data['wilayah'] = ucwords($this->setting->sebutan_desa . " " . $data_desa['nama_desa']);
 		$data['nama_wilayah'] = ucwords($this->setting->sebutan_desa . " " . $data_desa['nama_desa']);
 
-		if (isset($_SESSION['insidega']) and 1 == $_SESSION['insidega'])
-		{
+		if (isset($_SESSION['insidega']) and 1 == $_SESSION['insidega']) {
 			redirect('main');
 		}
 		unset($_SESSION['balik_ke']);
 		$data['header'] = $this->config_model->get_data();
 		//Initialize Session ------------
-		if (!isset($_SESSION['insidega']))
-		{
+		if (!isset($_SESSION['insidega'])) {
 			// Belum ada session variable
 			$this->session->set_userdata('insidega', 0);
 			$this->session->set_userdata('insidega_try', 4);
@@ -47,36 +47,30 @@ class Insidega extends CI_Controller
 	public function auth()
 	{
 		$method = $this->input->method(TRUE);
-				$allow_method = ['POST'];
-		if(!in_array($method,$allow_method))
-		{
+		$allow_method = ['POST'];
+		if (!in_array($method, $allow_method)) {
 			redirect('insidega/login');
 		}
 		$this->user_model->insidega();
 
-		if ($_SESSION['insidega'] != 1)
-		{
+		if ($_SESSION['insidega'] != 1) {
 			// Gagal otentifikasi
 			redirect('insidega');
 		}
 
-		if (!$this->user_model->syarat_sandi() and !($this->session->user == 1 && $this->setting->demo_mode))
-		{
+		if (!$this->user_model->syarat_sandi() and !($this->session->user == 1 && $this->setting->demo_mode)) {
 			// Password tidak memenuhi syarat kecuali di website demo
 			redirect('user_setting/change_pwd');
 		}
 
 		$_SESSION['dari_login'] = '1';
 		// Notif bisa dipanggil sewaktu-waktu dan tidak digunakan untuk redirect
-		if (isset($_SESSION['request_uri']) and strpos($_SESSION['request_uri'], 'notif/') === FALSE)
-		{
+		if (isset($_SESSION['request_uri']) and strpos($_SESSION['request_uri'], 'notif/') === FALSE) {
 			// Lengkapi url supaya tidak diubah oleh redirect
 			$request_awal = $_SERVER['HTTP_ORIGIN'] . $_SESSION['request_uri'];
 			unset($_SESSION['request_uri']);
 			redirect($request_awal);
-		}
-		else
-		{
+		} else {
 			unset($_SESSION['request_uri']);
 			unset($this->session->fm_key);
 			$this->user_model->get_fm_key();
@@ -97,4 +91,26 @@ class Insidega extends CI_Controller
 		$this->index();
 	}
 
+	private function verifyTurnstile($token) {
+        $secret = 'YOUR_SECRET_KEY_DISINI';
+        $ip = $this->input->ip_address();
+
+        $data = array(
+            'secret' => $secret,
+            'response' => $token,
+            'remoteip' => $ip
+        );
+
+        // Gunakan cURL untuk mengirim permintaan POST
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://challenges.cloudflare.com");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($result);
+        return $response->success; // True jika valid
+    }
 }

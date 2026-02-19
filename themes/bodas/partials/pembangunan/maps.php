@@ -3,9 +3,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOKTzsvtw8j-TJI8dmJ228bXASq4C-S7U&callback=initMap&v=weekly" defer></script>
 
 <script>
-	<?php if (!empty($pembangunan->lat && !empty($pembangunan->lng))) : ?>
+	<?php if (!empty($detail_pembangunan['lat'] && !empty($detail_pembangunan['lng']))) : ?>
 		var center = {
-			lat: <?= $pembangunan->lat . ", lng: " . $pembangunan->lng; ?>
+			lat: <?= $detail_pembangunan['lat'] . ", lng: " . $detail_pembangunan['lng']; ?>
 		};
 	<?php else : ?>
 		var center = {
@@ -18,7 +18,7 @@
 		var mapOptions = {
 			zoom: 17,
 			center,
-			mapTypeId:google.maps.MapTypeId.HYBRID
+			mapTypeId: google.maps.MapTypeId.HYBRID
 		}
 		var map = new google.maps.Map(document.getElementById("map_lokasi"), mapOptions);
 
@@ -27,14 +27,14 @@
 			position: myLatlng,
 			map: map,
 			draggable: false,
-			title: '<?= $pembangunan->nama_program_kegiatan ?>',
+			title: '<?= $detail_pembangunan['nama_program_kegiatan'] ?>',
 			content: "Lokasi Program/Kegiatan",
 		});
 
 		var infowindow = new google.maps.InfoWindow({
-			content: "<div class='media text-center'> <?php if (is_file(LOKASI_GALERI . $pembangunan['foto'])) : ?><img src='<?= base_url() . LOKASI_GALERI . $pembangunan['foto'] ?>' width='150px' height='100px'><?php else : ?><img src='<?= base_url() ?>themes/bodas/assets/img/noimage.png' width='150px' height='100px'><?php endif; ?><br/> <p>Lokasi Kegiatan</p></div>",
+			content: "<div class='media text-center'> <?php if (is_file(LOKASI_GALERI . $detail_pembangunan['foto'])) : ?><img src='<?= base_url() . LOKASI_GALERI . $detail_pembangunan['foto'] ?>' width='150px' height='100px'><?php else : ?><img src='<?= base_url() ?>themes/bodas/assets/img/noimage.png' width='150px' height='100px'><?php endif; ?><br/> <p class='container mt-2'>Lokasi <?= strtolower($detail_pembangunan['nama_program_kegiatan']) ?></p></div>",
 			title: '<?= $pembangunan->nama_program_kegiatan ?>',
-			});
+		});
 		infowindow.open(map, marker);
 
 		marker.addListener('dragend', (e) => {
@@ -52,6 +52,6 @@
 	}
 </style>
 
-		<div class="col-sm-12">
-			<div id="map_lokasi"></div>
-		</div>
+<div class="col-sm-12">
+	<div id="map_lokasi"></div>
+</div>

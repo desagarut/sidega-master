@@ -50,7 +50,7 @@ class First extends Web_Controller
 		$this->load->model('plan_lokasi_model');
 		$this->load->model('plan_area_model');
 		$this->load->model('plan_garis_model');
-		$this->load->model('pembangunan_model');
+		//$this->load->model('pembangunan_model');
 		//$this->load->model('pembangunan_dokumentasi_model');
 		$this->load->model('pamong_model');
 		$this->load->model('penduduk_model');
@@ -120,7 +120,7 @@ class First extends Web_Controller
 
 		// Update Versi 5.7.0
 		// $data['pembangunan'] = $this->first_pembangunan_m->get_data('', 'semua')->limit($data['paging']->per_page, $data['paging']->offset)->order_by('p.tahun_anggaran', 'desc')->get()->result();
-		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
+		$data['kegiatan_pembangunan'] = $this->first_pembangunan_m->kegiatan_pembangunan($data['paging']->offset, $data['paging']->per_page);
 		/*
 		if ($this->setting->apbdes_footer) {
 			$data['transparansi'] = $this->setting->apbdes_manual_input
@@ -317,7 +317,7 @@ class First extends Web_Controller
 	}
 
 	//Update V.5.7.0
-	public function pembangunan($p = 1)
+	public function kegiatan_pembangunan($p = 1)
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
@@ -326,7 +326,7 @@ class First extends Web_Controller
 		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
 		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
 		$data['pages'] = range($data['start_paging'], $data['end_paging']);
-		$data['pembangunan'] = $this->first_pembangunan_m->pembangunan_show($data['paging']->offset, $data['paging']->per_page);
+		$data['kegiatan_pembangunan'] = $this->first_pembangunan_m->kegiatan_pembangunan($data['paging']->offset, $data['paging']->per_page);
 
 		$this->_get_common_data($data);
 
@@ -335,54 +335,22 @@ class First extends Web_Controller
 	}
 
 	// halaman rincian Pembangunan
-	public function pembangunan_detail($gal = 0, $p = 1)
+	public function pembangunan_detail($id)
 	{
 		$data = $this->includes;
-		$data['p'] = $p;
-		$data['gal'] = $gal;
-		$data['paging'] = $this->first_pembangunan_m->paging2($gal, $p);
-		$data['paging_range'] = 3;
-		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
-		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
-		$data['pages'] = range($data['start_paging'], $data['end_paging']);
 
-		$data['pembangunan_detail'] = $this->first_pembangunan_m->pembangunan_detail_show($gal, $data['paging']->offset, $data['paging']->per_page);
-		$data['pembangunan'] = $this->first_pembangunan_m->get_parrent($gal);
-		$data['mode'] = 1;
+		$data['detail_pembangunan'] = $this->first_pembangunan_m->detail_pembangunan($id);
+	//	$data['pembangunan'] = $this->first_pembangunan_m->kegiatan_pembangunan();
+	//	$data['anggota'] = $this->kelompok_model->list_anggota($id, $sub = 'anggota');
+
+		// Jika data pembangunan tidak tersedia
+		if ($data['detail_pembangunan'] == NULL) show_404();
 
 		$this->_get_common_data($data);
 
 		$this->set_template('layouts/pembangunan_detail.tpl.php');
 		$this->load->view($this->template, $data);
 	}
-
-	public function pembangunan_detail2($gal = 0, $p = 1, $o = 0)
-	{
-		$data = $this->includes;
-		$data['p'] = $p;
-		$data['o'] = $o;
-
-		if (isset($_POST['per_page']))
-			$_SESSION['per_page'] = $_POST['per_page'];
-		$data['per_page'] = $_SESSION['per_page'];
-
-		$data['paging'] = $this->first_toko_warga_m->paging2($gal, $p);
-		$data['produk_data'] = $this->first_toko_warga_m->list_produk($gal, $o, $data['paging']->offset, $data['paging']->per_page);
-		$data['gallery'] = $gal;
-		$data['sub'] = $this->first_toko_warga_m->get_toko($gal);
-
-		$data['rupiah'] = function ($angka) {
-			$hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
-			return $hasil_rupiah;
-		};
-
-		$this->_get_common_data($data);
-
-		$this->set_template('layouts/toko_warga_produk.tpl.php');
-		$this->load->view($this->template, $data);
-	}
-
-
 
 	public function statistik($stat = 0, $tipe = 0)
 	{

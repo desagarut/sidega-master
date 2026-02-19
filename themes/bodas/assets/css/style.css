@@ -168,7 +168,7 @@
 
 .header-carousel .owl-nav {
     position: absolute;
-    top: 50%;
+    top: 0%;
     right: 8%;
     transform: translateY(-50%);
     display: flex;

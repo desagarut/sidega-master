@@ -26,7 +26,7 @@
 										<thead>
 											<tr>
 												<th colspan="3">
-													<h5> POFILE BPD</h5>
+													<h5> PROFILE</h5>
 												</th>
 										</thead>
 										<tbody>

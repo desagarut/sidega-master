@@ -4,7 +4,7 @@
 <?php $this->load->view($folder_themes . '/partials/profil') ?>
 <?php $this->load->view($folder_themes . '/partials/team') ?>
 <?php $this->load->view($folder_themes . '/partials/berita') ?>
-<?php if ($pembangunan) $this->load->view($folder_themes . '/partials/pembangunan/front') ?>
+<?php if ($kegiatan_pembangunan) $this->load->view($folder_themes . '/partials/pembangunan/front') ?>
 <?php $this->load->view($folder_themes . '/partials/umkm') ?>
 <?php $this->load->view($folder_themes . '/partials/service') ?>
 <?php if ($w_gal)  $this->load->view($folder_themes . '/partials/gallery_front') ?>

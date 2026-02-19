@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 // Model ini digunakan untuk data referensi statis yg tidak disimpan pd database atau sebagai referensi global
 
 define("JENIS_PERATURAN_DESA", serialize([
@@ -44,28 +44,30 @@ define("LINK_TIPE", serialize([
 ]));
 
 // Statistik Penduduk
-define("STAT_PENDUDUK",
+define(
+	"STAT_PENDUDUK",
 	serialize([
 		'0' => 'Pendidikan Dalam KK',
-	'1' => 'Pekerjaan',
-	'2' => 'Status Perkawinan',
-	'3' => 'Agama',
-	'4' => 'Jenis Kelamin',
-	'hubungan_kk' => 'Hubungan Dalam KK',
-	'5' => 'Warga Negara',
-	'6' => 'Status Penduduk',
-	'7' => 'Golongan Darah',
-	'9' => 'Penyandang Cacat',
-	'10' => 'Penyakit Menahun',
-	'13' => 'Umur (Rentang)',
-	'14' => 'Pendidikan Sedang Ditempuh',
-	'15' => 'Umur (Kategori)',
-	'16' => 'Akseptor KB',
-	'17' => 'Akta Kelahiran',
-	'18' => 'Kepemilikan KTP',
-	'19' => 'Jenis Asuransi',
-	'covid' => 'Status Covid'
-]));
+		'1' => 'Pekerjaan',
+		'2' => 'Status Perkawinan',
+		'3' => 'Agama',
+		'4' => 'Jenis Kelamin',
+		'hubungan_kk' => 'Hubungan Dalam KK',
+		'5' => 'Warga Negara',
+		'6' => 'Status Penduduk',
+		'7' => 'Golongan Darah',
+		'9' => 'Penyandang Cacat',
+		'10' => 'Penyakit Menahun',
+		'13' => 'Umur (Rentang)',
+		'14' => 'Pendidikan Sedang Ditempuh',
+		'15' => 'Umur (Kategori)',
+		'16' => 'Akseptor KB',
+		'17' => 'Akta Kelahiran',
+		'18' => 'Kepemilikan KTP',
+		'19' => 'Jenis Asuransi',
+		'covid' => 'Status Covid'
+	])
+);
 
 // Statistik Keluarga
 define("STAT_KELUARGA", serialize([
@@ -87,6 +89,8 @@ define("STAT_LAINNYA", serialize([
 	'peta' => 'Peta',
 	'status_idm' => 'Status IDM',
 	'data_analisis' => 'Data Analisis',
+	'inventaris' => 'Inventaris Desa',
+	'kegiatan_pembangunan' => 'Kegiatan Pembangunan',
 	'media_sosial' => 'Media Sosial',
 	'bpd' => 'Badan Permusyawaratan Desa',
 	'lap_dumas' => 'Laporan Pengaduan Masyarakat'
@@ -165,9 +169,9 @@ define("STATUS_PEMBANGUNAN", serialize([
 ]));
 
 define("ISI_QR", serialize([
- 1 => 'Konfirmasi Validitasi Surat',
- 2 => 'Pilih Isi Data',
- 3 => 'Ketik Isi Manual',
+	1 => 'Konfirmasi Validitasi Surat',
+	2 => 'Pilih Isi Data',
+	3 => 'Ketik Isi Manual',
 ]));
 
 //--- Start Referensi Toko Warga
@@ -186,7 +190,7 @@ define("AREA_USAHA", serialize(array(
 	"Lingkungan Pemukiman Pinggir Jalan Raya" => "Lingkungan Pemukiman Pinggir Jalan Raya",
 	"Kawasan Pasar" => "Kawasan Pasar",
 	"Kawasan Pertokoan" => "Kawasan Pertokoan",
-	"Kawasan Mal / Super Mal"=> "Kawasan Mal / Super Mal",
+	"Kawasan Mal / Super Mal" => "Kawasan Mal / Super Mal",
 	"Lainnya" => "Lainnya"
 )));
 
@@ -504,7 +508,8 @@ define("PILIHAN_TANGGAPAN", serialize([
 
 
 
-class Referensi_model extends CI_Model {
+class Referensi_model extends CI_Model
+{
 
 	public function __construct()
 	{
@@ -515,14 +520,13 @@ class Referensi_model extends CI_Model {
 	{
 		$data = $this->list_data($tabel);
 		$list = [];
-		foreach ($data as $key => $value)
-		{
+		foreach ($data as $key => $value) {
 			$list[$value['id']] = $value['nama'];
 		}
 		return $list;
 	}
 
-	public function list_data($tabel, $kecuali='', $termasuk=null)
+	public function list_data($tabel, $kecuali = '', $termasuk = null)
 	{
 		if ($kecuali) $this->db->where("id NOT IN ($kecuali)");
 
@@ -576,15 +580,12 @@ class Referensi_model extends CI_Model {
 		$list_ref = unserialize($stat);
 		return $list_ref;
 	}
-	
+
 	public function impor_list_data($tabel, $tambahan = [], $kecuali = '', $termasuk = null)
-    {
-        $data = $this->list_data($tabel, $kecuali, $termasuk);
-        $data = array_flip(array_combine(array_column($data, 'id'), array_column($data, 'nama')));
+	{
+		$data = $this->list_data($tabel, $kecuali, $termasuk);
+		$data = array_flip(array_combine(array_column($data, 'id'), array_column($data, 'nama')));
 
-        return array_change_key_case(array_merge($data, $tambahan));
-    }
-
-
+		return array_change_key_case(array_merge($data, $tambahan));
+	}
 }
-?>

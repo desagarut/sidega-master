@@ -7,8 +7,8 @@
 			<h1 class="mb-5">Pembangunan</h1>
 		</div>
 		<div class="row g-4 owl-carousel testimonial-carousel">
-			<?php if ($pembangunan) : ?>
-				<?php foreach ($pembangunan as $data) : ?>
+			<?php if ($kegiatan_pembangunan) : ?>
+				<?php foreach ($kegiatan_pembangunan as $data) : ?>
 					<div class="col-md-12 wow fadeInUp testimonial-item text-center" data-wow-delay="0.1s">
 						<div class="team-item bg-light">
 							<div class="overflow-hidden" style="padding:10px 10px 10px 10px">
