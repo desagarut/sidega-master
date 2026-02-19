@@ -297,6 +297,35 @@
                   <td>:</td>
                   <td><?= $main['strategi']; ?></td>
                 </tr>
+                <tr>
+                  <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>
+                      SOSIAL MEDIA DESA</strong></th>
+                </tr>
+                <tr>
+                  <td>Video Playlist Youtube</td>
+                  <td>:</td>
+                  <td><?= $main['youtube']; ?></td>
+                </tr>
+                <tr>
+                  <td>Facebook Desa</td>
+                  <td>:</td>
+                  <td><?= $main['facebook']; ?></td>
+                </tr>
+                <tr>
+                  <td>Instagram Desa</td>
+                  <td>:</td>
+                  <td><?= $main['instagram']; ?></td>
+                </tr>
+                <tr>
+                  <td>Twitter Desa</td>
+                  <td>:</td>
+                  <td><?= $main['twitter']; ?></td>
+                </tr>
+                <tr>
+                  <td>Tiktok</td>
+                  <td>:</td>
+                  <td><?= $main['tiktok']; ?></td>
+                </tr>
               </tbody>
             </table>
           </div>

@@ -116,7 +116,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="channel_youtube">Video Youtube <?= $desa; ?></label>
+								<label class="col-sm-3 control-label" for="channel_youtube">Profil <?= $desa; ?> di Youtube</label>
 								<div class="col-sm-4">
 									<input id="video" name="video" class="form-control input-sm" maxlength="50" type="text" placeholder="contoh: 7APs5ZduJ-0" value="<?= $main["video"]; ?>"></input>
 									<small>Ex: https://www.youtube.com/watch?v=<strong style="color: red;">7APs5ZduJ-0</strong></small>
@@ -264,6 +264,30 @@
 								<label class="col-sm-3 control-label" for="strategi">Strategi <?= $desa; ?></label>
 								<div class="col-sm-8">
 									<textarea id="strategi" name="strategi" class="form-control input-sm" placeholder="strategi <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["strategi"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="youtube">Playlist Youtube <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="youtube" name="youtube" class="form-control input-sm" placeholder="Playlist youtube <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["youtube"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="facebook">Facebook <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="facebook" name="facebook" class="form-control input-sm" placeholder="Facebook <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["facebook"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="instagram">Instagram <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="instagram" name="instagram" class="form-control input-sm" placeholder="Instagram <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["instagram"]; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="tiktok">Tiktok <?= $desa; ?></label>
+								<div class="col-sm-8">
+									<textarea id="tiktok" name="tiktok" class="form-control input-sm" placeholder="Tiktok <?= $desa; ?>" rows="3" style="resize:auto;"><?= $main["tiktok"]; ?></textarea>
 								</div>
 							</div>
 						</div>
