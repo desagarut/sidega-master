@@ -2,7 +2,7 @@
 
 
 define("VERSION", '6.3.0');
-define('VERSI_DATABASE', '2025090401');
+define('VERSI_DATABASE', '2026020101');
 define("LOKASI_LOGO_DESA", 'instansi/logo/');
 define("LOKASI_ARSIP", 'instansi/arsip/');
 define("LOKASI_CONFIG_DESA", 'instansi/config/');
