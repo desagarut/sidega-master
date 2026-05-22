@@ -29,7 +29,7 @@ $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_arra
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 wow zoomIn bg-light" data-wow-delay="0.7s">
-                <?php $this->load->view($folder_themes . '/widgets/map_tentang') ?>
+                <?php $this->load->view($folder_themes . '/widgets/map_google') ?>
             </div>
             <div class="col-lg-12 col-md-12 wow zoomIn bg-light" data-wow-delay="0.3s" style="padding: 10px 10px 10px 10px;">
                 <div class="info-body custom-responsive-margin">

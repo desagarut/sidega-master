@@ -4,30 +4,29 @@
 <!--<script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v7.1/mapsJavaScriptAPI.js"></script>-->
 
 <script>
-    var LokasiKantorDesa
     var PetaDesa
-    var PetaDusun
+    var LokasiKantorDesa
+    var WilayahDusun
 
     function initMap() {
-        <?php if (!empty($desa['lat']) && !empty($desa['lng'])) : ?>
+        <?php if (!empty($desa['lat']) && !empty($desa['lng'])): ?>
             var center = {
                 lat: <?= $desa['lat'] ?>,
                 lng: <?= $desa['lng'] ?>
             }
-        <?php else : ?>
+        <?php else: ?>
             var center = {
                 lat: -7.229426071233562,
                 lng: 107.88959092620838
             }
         <?php endif; ?>
 
-        var zoom = 14
+        var zoom = 13
         //Jika posisi kantor desa belum ada, maka posisi peta akan menampilkan seluruh Indonesia
         PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), {
             center,
             zoom,
-            mapTypeId: google.maps.MapTypeId.HYBRID,
-            title: 'Wilayah Desa <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?>',
+            mapTypeId: google.maps.MapTypeId.HYBRID
         });
 
         LokasiKantorDesa = new google.maps.Marker({
@@ -35,10 +34,10 @@
             map: PetaDesa,
             title: 'Lokasi Kantor <?php echo ucwords($this->setting->sebutan_desa) . " " ?><?php echo ucwords($desa['nama_desa']) ?>',
             //animation: google.maps.Animation.BOUNCE,
+            content: "Tampilan Info Window",
         });
 
-
-        <?php if (!empty($desa['path'])) : ?>
+        <?php if (!empty($desa['path'])): ?>
             let polygon_desa = <?= $desa['path']; ?>;
 
             polygon_desa[0].map((arr, i) => {
@@ -52,11 +51,10 @@
             var batasWilayah = new google.maps.Polygon({
                 paths: polygon_desa,
                 strokeColor: '#c31b68',
-                strokeOpacity: 0.5,
+                strokeOpacity: 0.9,
                 strokeWeight: 3,
                 fillColor: '#fd7e14',
-                fillOpacity: 0.35,
-                title: 'Wilayah Desa <?php echo ucwords($this->setting->sebutan_desa); ?><?php echo ucwords($desa['nama_desa']) ?>',
+                fillOpacity: 0.25
             });
 
             batasWilayah.setMap(PetaDesa)
@@ -68,13 +66,39 @@
 
         <?php endif; ?>
 
+        <?php if (!empty($dusun_gis)): ?>
+            let polygon_dusun = <?= $dusun_gis; ?>;
+
+            polygon_dusun[0].map((arr, i) => {
+                polygon_dusun[i] = {
+                    lat: arr[0],
+                    lng: arr[1]
+                }
+            })
+
+            //Style polygon batas wilayah Dusun
+            var batasWilayahDusun = new google.maps.Polygon({
+                paths: polygon_dusun,
+                strokeColor: '#c31b68',
+                strokeOpacity: 1,
+                strokeWeight: 1,
+                fillColor: '#fd7e14',
+                fillOpacity: 0.5,
+            });
+
+            batasWilayahDusun.setMap(PetaDesa)
+        <?php endif; ?>
+
+        infowindow.open(map, kantorDesa);
+
     }
 </script>
 
 <!-- widget Peta Wilayah Kelurahan -->
 
-<div class="map-section">
+<div class="row">
     <div class="col-sm-12">
-        <div id="peta_wilayah_desa" style="height: 500px"></div>
+        <div id="peta_wilayah_desa" style="height: 350px"></div>
+        <input type="hidden" id="path" name="path" value="<?= $wil_ini['path'] ?>">
     </div>
 </div>
